@@ -1,0 +1,50 @@
+# File: Makefile
+# Project "ulib"
+# Copyright: © 2016 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
+#
+#
+
+CC=@CC@
+CFLAGS=@CFLAGS@ -D_POSIX_SOURCE
+LDFLAGS=@LDFLAGS@
+
+LIB=libulib.so
+PKGCONFIGFILE=ulib.pc
+
+MFILES = $(wildcard Classes/*.m) $(wildcard Classes/*/*.m)
+HFILES = version.h $(wildcard Classes/*.h) $(wildcard Classes/*/*.h)
+MOFILES  = $(MFILES:.m=.m.o)
+OFILES = $(MOFILES)
+
+INCLUDEDIRS=-I/usr/include/postgresql -I/usr/include/mysql-I/usr/include/libxml2 -I Classes/UniversalConfig -I Classes/UniversalHTTP -I Classes/UniversalJson -I Classes/UniversalLayers -I Classes/UniversalLog -I Classes/UniversalObject -I Classes/UniversalQueue -I Classes/UniversalRedis -I Classes/UniversalSocket -I Classes/UniversalUtilities -I Classes
+
+#
+# special compilation rule for this debug object so it can contain retain/release stuff
+#
+
+${LIB}: ${OFILES}
+	./make_version
+	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
+
+
+# this is the only file which should NOT be compiled with ARC
+Classes/UniversalObject/UMObjectDebug.m.o: Classes/UniversalObject/UMObjectDebug.m
+	${CC} -c ${CFLAGS} -x objective-c $<  ${INCLUDEDIRS} -o $@ -fno-objc-arc
+
+install: ${LIB}
+	-mkdir -p ${DESTDIR}/usr/local/lib/pkgconfig
+	-install -b -g root -o root -m 644 ${LIB} ${DESTDIR}/usr/local/lib/
+	-install -b -g root -o root -m 644 ${PKGCONFIGFILE} ${DESTDIR}/usr/local/lib/pkgconfig/
+	-mkdir -p ${DESTDIR}/usr/local/include/ulib
+	cp $(HFILES) ${DESTDIR}/usr/local/include/ulib
+
+clean:
+	rm -f $(LIB) $(OFILES)
+
+.SUFFIXES: .m.o .o .m .c
+
+%.m.o:	%.m
+	${CC} -c ${CFLAGS} -x objective-c -fobjc-arc $<  ${INCLUDEDIRS} -o $@
+
+
+

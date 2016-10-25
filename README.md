@@ -8,11 +8,10 @@ What ulib includes today is
 * Dealing with Config files. (UMConfig)
 * Provide a built in HTTP Server (UMHTTPServer)
 * Dealing with Layers of communication protocols (UMLayer) and their asynchronous tasks (UMLayerTask)
-* Dealing with Background tasks
-* Dealing with logging
-* Background tasks
-* Objects with a history of what changed
-* Synchronized Array and Dictionaries
+* Dealing with Background tasks (UMBackgrounder)
+* Dealing with logging (UMLogHandler)
+* Objects with a history of what changed (UM)
+* Synchronized Array and Dictionaries, Dictionaries with sorted keys
 * Task Queues and generic Queues
 * Network Sockets (TCP, UDP, SCTP) including SSL (using openSSL)
 * Micosecond timers, Locks, Timers, Througput counters
@@ -43,6 +42,5 @@ ulib is the base class of a family of libraries and applications .It gets used a
 * **smsproxy** a application implementing a HLR and MSC for receiving SMS on SS7 (commercial)
 * **cnam-server** a application implementing a SS7 API Server for all kinds of lookups. (commercial)
 
-
 #History
-Kannel (www.kannel.org) the open source SMS gateway has a library called gwlib. This library helps the  C programmer to deal  with lots of daily things such as lists, dictionaries, octet strings , socket connections, config files etc. While transferring my code to Objective-C 2.0 to get all the benefits of it such as much better management which solves a lot of bugs seen in early % of the bugs , a lot of these things already existed in the Foundation classes. (NSArray for lists, NSDictionary for dictionaries, NSSStrings & NSData for octet strings and their counterparts). However some classes such as HTTP servers and sockets had no similar replacement. The universal library was thus developed to extend 
+Kannel (www.kannel.org) the open source SMS gateway has a library called gwlib. This library helps the  C programmer to deal with lots of daily things such as lists, dictionaries, octet strings , socket connections, config files etc. While transiting most of my code to Objective-C 2.0 to make it much easier to deal with memory management 2.0 a lot of old stuff which gwlib provided is already existing in Foundation. ulib completed Foundation with the functionality which where not in Foundation but in gwlib. Over the years many other useful functionality got added which can be used by many applications I wrote.

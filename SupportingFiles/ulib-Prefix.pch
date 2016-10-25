@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'ulib' target in the 'ulib' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

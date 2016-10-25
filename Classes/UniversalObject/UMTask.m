@@ -1,0 +1,64 @@
+//
+//  UMTask.m
+//  ulib
+//
+//  Copyright: © 2016 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
+//
+//
+
+#import "UMTask.h"
+#import "UMLock.h"
+#import "UMBackgrounder.h"
+
+@implementation UMTask
+@synthesize name;
+@synthesize enableLogging;
+@synthesize sync;
+@synthesize synchronizeObject;
+
+- (UMTask *)initWithName:(NSString *)n
+{
+    self = [super init];
+    if(self)
+    {
+        self.name = n;
+    }
+    return self;
+}
+
+- (void)runOnBackgrounder:(UMBackgrounder *)bg
+{
+    @synchronized(self)
+    {
+        @autoreleasepool
+        {
+            ulib_set_thread_name([NSString stringWithFormat:@"%@ (executing: %@)",bg.name,self.name]);
+            if(enableLogging)
+            {
+                if(self.name==NULL)
+                {
+                    NSLog (@"self.name is NULL!");
+                }
+                NSLog(@"Task %@ execution on backgrounder %@",self.name,bg.name);
+            }
+            if((synchronizeObject) && (synchronizeObject!=self)) /* self is already synchronized */
+            {
+                @synchronized(synchronizeObject)
+                {
+                    [self main];
+                }
+            }
+            else
+            {
+                [self main];            
+            }
+        }
+    }
+}
+
+- (void)main
+{
+    NSLog(@"empty task");
+}
+
+@end

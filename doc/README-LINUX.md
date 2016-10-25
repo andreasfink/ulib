@@ -27,7 +27,12 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
 
     apt-get -y install build-essential git cmake llvm-4.0 clang-4.0 lldb-4.0 
 
-3. Install dependencies for gnustep and ulib
+3. link the "clang" and "clang++" names to the latest version
+
+    ln -s clang-4.0 /usr/bin/clang
+    ln -s clang++4.0 /usr/bin/clang++
+
+4. Install dependencies for gnustep and ulib
     apt-get install  \
         libkqueue0 libkqueue-dev  \
         libpthread-workqueue0 libpthread-workqueue-dev \
@@ -42,9 +47,11 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
         libavahi-common3 libavahi-common-dev libavahi-common-data \
         libgnutls-deb0-28 libgnutls28-dev \
         libgcrypt20 libgcrypt20-dev \
-        libtiff5 libtiff5-dev
+        libtiff5 libtiff5-dev \
+        libssl libssl-dev \
+        locales-all util-linux-locales
 
-4. Download the sourcecode of gnustep and libobjc2
+5. Download the sourcecode of gnustep and libobjc2
 
    wget ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-make-2.6.8.tar.gz
    wget ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-base-1.24.9.tar.gz
@@ -54,7 +61,7 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
    wget http://download.gna.org/gnustep/libobjc2-1.7.tar.bz2
 
 
-4. Setup your gnustep-make (small config for libobj2)
+6. Setup your gnustep-make (small config for libobj2)
 
    tar -xvzf gnustep-make-2.6.8.tar.gz
    cd gnustep-make-2.6.8
@@ -62,7 +69,7 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
    make install
    cd ..
 
-5. Compile libobjc2
+7. Compile libobjc2
 
    tar -xvjf libobjc2-1.7.tar.bz2
    cd libobjc2-1.7
@@ -72,15 +79,15 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
    make install
    cd ../..
 
-6. gnustep-make, part 2 (full config)
+8. gnustep-make, part 2 (full config)
 
     cd gnustep-make-2.6.8
-    ./configure CC=clang-4.0 CXX=clang++-4.0 --disable-importing-config-file \
+    ./configure CC=clang CXX=clang++ --disable-importing-config-file \
         --enable-debug-by-default --enable-objc-nonfragile-abi --with-layout=fhs
     make install
     cd ..
 
-7. gnustep-base
+9. gnustep-base
 
     tar -xvzf gnustep-base-1.24.9.tar.gz
     cd gnustep-base-1.24.9
@@ -92,34 +99,61 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
     ./configure --with-layout=fhs --with-zeroconf-api=avahi --enable-objc-nonfragile-abi
 
 
-    CC=clang-4.0 CXX=clang++-4.0 CFLAGS="-fblocks -fobjc-runtime=gnustep \
+    CC=clang CXX=clang++ CFLAGS="-fblocks -fobjc-runtime=gnustep \
         -DEXPOSE_classname_IVARS=1" ./configure --with-layout=fhs \
             --with-zeroconf-api=avahi --enable-objc-nonfragile-abi
     make
     make install
     cd ..
 
-8. gnustep-corebase-0.1
+10. gnustep-corebase-0.1
 
     tar -xvzf gnustep-corebase-0.1.tar.gz
     cd gnustep-corebase-0.1
-    ./configure CC=clang-4.0 CXX=clang++4.0 CFLAGS="-fblocks \
+    ./configure CC=clang CXX=clang++ CFLAGS="-fblocks \
         -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1" LD=gcc
     make
     make install
     cd ..
 
-9. ulib
+11. ulib
     git clone http://github.com/andreasfink/ulib
     cd ulib
+    ./configure
+    make
+    make install
+
+12. If you want X11 GUI support in GnuStep
+
+    apt-get install 
+        Xorg \
+        libfreetype6 libfreetype6-dev \
+        libpango1.0-dev \
+        libcairo2-dev \
+        libxt-dev \
+        libcups2-dev
+
+13.  gnustep-gui
+
+    tar -xvzf gnustep-gui-0.25.0.tar.gz
+    cd gnustep-gui-0.25.0
+    ./configure CC=clang CXX=clang++ CFLAGS="-fblocks \
+        -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1" LD=gcc
+    make
+    make install
+    cd ..
 
 
-/* here we start to need X11 stuff */
+13. gnustep-back
 
-    CC=clang-4.0 
-    CXX=clang++-4.0 \
-    CFLAGS="-fblocks -fobjc-runtime=gnustep \
-    -fobjc-arc  \
-    -DEXPOSE_classname_IVARS=1" \
-    LD=gcc \ 
-    ./configure --enable-objc-nonfragile-abi
+    tar -xvzf gnustep-back-0.25.0.tar.gz
+    cd gnustep-back-0.25.0
+    ./configure CC=clang CXX=clang++ CFLAGS="-fblocks \
+        -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1" LD=gcc
+    make
+    make install
+    cd ..
+
+LD=gcc \ 
+./configure --enable-objc-nonfragile-abi
+

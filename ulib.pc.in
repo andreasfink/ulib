@@ -1,0 +1,17 @@
+#ulib pkg-config source file
+# Copyright: © 2016 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
+
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Cflags: -I${includedir}  -DHAVE_OPENSSL=1
+Libs: -L${libdir} -lulib -lobjc -lavahi-client -lavahi-core -lavahi-common -lsctp
+
+Name: ulib
+Description: universal library
+Version: @VERSION@
+Requires: uuid libbsd
+
+

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A45A6F66B191E92DE71796A5F279EED37509D85F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8185A7EFCBEC0847BDC40BAB6D03D2132D388B9C" : 0,
+    "A45A6F66B191E92DE71796A5F279EED37509D85F" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "235CAF9C-9B68-4060-9EDF-748282032FF6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8185A7EFCBEC0847BDC40BAB6D03D2132D388B9C" : "..\/git\/ulib",
+    "A45A6F66B191E92DE71796A5F279EED37509D85F" : "ulib\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ulib",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ulib.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/afink:mind.66A@git.fink.org\/git\/ulib",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8185A7EFCBEC0847BDC40BAB6D03D2132D388B9C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/metropolis.fink.org\/git\/ulib.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A45A6F66B191E92DE71796A5F279EED37509D85F"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+Accept: text/plain, text/html
+Accept-Encoding: x-compress; x-zip
+Accept-Language: en
+User-Agent:  UMTestHTTPClient
+Host: localhost:8080
+Connection: keep-alive
+testing HTTP post content; this should be OK

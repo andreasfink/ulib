@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B365A7E9-80BC-4572-9B2D-E68B98B14168</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ulib</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5BDD7A0D-EFF6-4C5A-98B3-50AF9615243C</key>
+		<string>ssh://metropolis.fink.org/git/ulib.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ulib.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5BDD7A0D-EFF6-4C5A-98B3-50AF9615243C</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://metropolis.fink.org/git/ulib.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5BDD7A0D-EFF6-4C5A-98B3-50AF9615243C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5BDD7A0D-EFF6-4C5A-98B3-50AF9615243C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ulib-git</string>
+		</dict>
+	</array>
+</dict>
+</plist>

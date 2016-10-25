@@ -1,0 +1,12 @@
+
+Dependencies under Redhat
+
+yum install make libpng libpng-devel libtiff libtiff-devel libobjc libxml2 libxml2-devel \
+    libX11-devel libXt-devel libjpeg libjpeg-devel \
+    libpcap libuuid libuuid-devel avahi \
+    gnutls-devel gnutls libgcrypt libgcrypt-devel \
+    libicu-devel  libicu
+
+and of course you need llvm/clang in version 3.8 or newer
+
+

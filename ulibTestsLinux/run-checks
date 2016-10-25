@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# This script runs all the checks given in the command line. See the
+# README for more info.
+#
+
+echo "Starting Universal library linux tests"
+
+rm -f check.log check.log.new
+for prog in "$@"
+do
+        echo -n "Check: $prog..."
+        $prog 2> check.log.new
+        if test ! -s check.log.new
+        then
+                echo " OK."
+        else
+                echo " FAILURE!"
+                echo "Check: $prog" >> check.log
+                cat check.log.new >> check.log
+        fi
+        rm check.log.new
+done
+

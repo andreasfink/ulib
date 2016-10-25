@@ -1,0 +1,36 @@
+Notes for REDHAT RHEL6
+----------------------
+
+RHEL6 doesnt come with the header files for libpcap and libavahi so I had to copy them over. They are in glue.tar.gz
+Also some library files do not exist as library.so but only as library.so.1 or the like. so the glue.tar.gz does create symlinks.
+sctp.h is in /usr/include/linux instead of /usr/include/netinet so a symlink sets it correctly
+
+to unpack and copy into the / directory do:
+
+tar -xvzf glue.tar.gz
+cd glue
+find . -print | cpio -pdmuv /
+cd ..
+
+
+Also you need to edit /etc/ld.so.conf
+
+to include
+
+/usr/lib64
+/usr/local/lib
+
+and dont forget to run 
+
+ldconfig
+
+after building a library
+
+also set
+
+PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig:/usr/share/pkgconfig/
+
+somewhere in your profile so the packages are found with pkg-config.
+
+
+

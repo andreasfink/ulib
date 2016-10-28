@@ -1,4 +1,5 @@
-#ulib unde Linux
+ulib under Linux
+----------------
 
 To user ulib with Linux you need to build your own gnustep installation
 The ones shipped with the distributions is not supporting automatic 
@@ -7,7 +8,7 @@ reference counting because its using the old objc runtime.
 Here is how to get such a installation up and running under Debian 8
 
 
-1. Add the *clang/llvm* repositories
+1. Add the clang/llvm repositories
 ---------------------------------------
 
 create a file /etc/apt/sources.list.d/llvm.list with the following content
@@ -30,7 +31,7 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
 3. link the "clang" and "clang++" names to the latest version
 
     ln -s clang-4.0 /usr/bin/clang
-    ln -s clang++4.0 /usr/bin/clang++
+    ln -s clang++-4.0 /usr/bin/clang++
 
 4. Install dependencies for gnustep and ulib
     apt-get install  \
@@ -48,7 +49,8 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
         libgnutls-deb0-28 libgnutls28-dev \
         libgcrypt20 libgcrypt20-dev \
         libtiff5 libtiff5-dev \
-        libssl libssl-dev \
+        libssl1.0.0 libssl-dev \
+        libbsd0 libbsd-dev \
         locales-all util-linux-locales
 
 5. Download the sourcecode of gnustep and libobjc2
@@ -63,11 +65,14 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
 
 6. Setup your gnustep-make (small config for libobj2)
 
-   tar -xvzf gnustep-make-2.6.8.tar.gz
-   cd gnustep-make-2.6.8
-   CC=clang-4.0 ./configure --enable-objc-nonfragile-abi
-   make install
-   cd ..
+    tar -xvzf gnustep-make-2.6.8.tar.gz
+    cd gnustep-make-2.6.8
+    ./configure \
+        CC=clang \
+        CXX=clang++ \
+        --enable-objc-nonfragile-abi
+    make install
+    cd ..
 
 7. Compile libobjc2
 
@@ -75,15 +80,19 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
    cd libobjc2-1.7
    mkdir Build
    cd Build
-   cmake .. -DCMAKE_C_COMPILER=clang-4.0 -DCMAKE_CXX_COMPILER=clang++-4.0
+   cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
    make install
    cd ../..
 
 8. gnustep-make, part 2 (full config)
 
     cd gnustep-make-2.6.8
-    ./configure CC=clang CXX=clang++ --disable-importing-config-file \
-        --enable-debug-by-default --enable-objc-nonfragile-abi --with-layout=fhs
+    ./configure \
+        CC=clang \
+        CXX=clang++ \
+        --disable-importing-config-file \
+        --enable-objc-nonfragile-abi \
+        --with-layout=fhs
     make install
     cd ..
 
@@ -91,17 +100,13 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
 
     tar -xvzf gnustep-base-1.24.9.tar.gz
     cd gnustep-base-1.24.9
-    CC=clang-4.0 
-    CXX=clang++-4.0 \
-    CFLAGS="-fblocks -fobjc-runtime=gnustep \
-    -DEXPOSE_classname_IVARS=1" \
-    LD=gcc \ 
-    ./configure --with-layout=fhs --with-zeroconf-api=avahi --enable-objc-nonfragile-abi
-
-
-    CC=clang CXX=clang++ CFLAGS="-fblocks -fobjc-runtime=gnustep \
-        -DEXPOSE_classname_IVARS=1" ./configure --with-layout=fhs \
-            --with-zeroconf-api=avahi --enable-objc-nonfragile-abi
+    ./configure \
+        CC=clang \
+        CXX=clang++ \
+        CFLAGS="-fblocks -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1"\
+        --with-layout=fhs \
+        --with-zeroconf-api=avahi \
+        --enable-objc-nonfragile-abi 
     make
     make install
     cd ..
@@ -110,8 +115,11 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
 
     tar -xvzf gnustep-corebase-0.1.tar.gz
     cd gnustep-corebase-0.1
-    ./configure CC=clang CXX=clang++ CFLAGS="-fblocks \
-        -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1" LD=gcc
+    ./configure \
+        CC=clang \
+        CXX=clang++ \
+        CFLAGS="-fblocks -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1"\
+        LD=gcc
     make
     make install
     cd ..
@@ -119,11 +127,19 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
 11. ulib
     git clone http://github.com/andreasfink/ulib
     cd ulib
-    ./configure
+    ./configure --enable-debug
     make
     make install
+    cd ..
 
-12. If you want X11 GUI support in GnuStep
+12. webserver sample application
+    git clone http://github.com/andreasfink/webser
+    cd webser
+    ./configure --enable-debug
+    make
+    make install
+    
+13. If you want X11 GUI support in GnuStep
 
     apt-get install 
         Xorg \
@@ -137,8 +153,11 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
 
     tar -xvzf gnustep-gui-0.25.0.tar.gz
     cd gnustep-gui-0.25.0
-    ./configure CC=clang CXX=clang++ CFLAGS="-fblocks \
-        -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1" LD=gcc
+    ./configure \
+        CC=clang \
+        CXX=clang++ \
+        CFLAGS="-fblocks -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1"\
+        LD=gcc
     make
     make install
     cd ..
@@ -153,7 +172,4 @@ create a file /etc/apt/sources.list.d/llvm.list with the following content
     make
     make install
     cd ..
-
-LD=gcc \ 
-./configure --enable-objc-nonfragile-abi
 

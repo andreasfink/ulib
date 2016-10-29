@@ -8,7 +8,14 @@
 
 #import "UMObject.h"
 
-/* note: this object is not based on UMObject */
+/*!
+ @class UMSynchronizedDictionary
+ @brief A dictionary who's access is synchronized so it can be accessed from multiple threads
+
+ UMSynchronizedDictionary can be used like NSMutableDictionary (but its not a subclass of it).
+ To create a UMSynchronizedDictionary from a NSDictionary use the initWithDictionary initializer.
+ To create a NSMutableDictionary from UMSynchronizedDictionary, use mutableCopy method.
+ */
 
 @interface UMSynchronizedDictionary : UMObject
 {

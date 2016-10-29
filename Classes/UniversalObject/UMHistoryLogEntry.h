@@ -9,6 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "UMObject.h"
 
+
+/*!
+ @class UMHistoryLogEntry
+ @brief An entry into a UMHistoryLog
+
+ */
+
 @class UMHistoryLogEntry;
 
 @interface UMHistoryLogEntry : UMObject

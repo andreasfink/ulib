@@ -28,7 +28,9 @@
     oldValue = currentValue;
     currentValue = newValue;
     if(![currentValue isEqualToString:oldValue])
+    {
         isModified = YES;
+    }
 }
 
 - (NSString *)string

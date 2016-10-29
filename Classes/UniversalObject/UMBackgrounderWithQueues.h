@@ -11,6 +11,12 @@
 @class UMQueue;
 @class UMSleeper;
 
+/*!
+ @class UMBackgrounderWithQueues
+ @brief UMBackgrounderWithQueues is a slightly modified version of UMBackgrounderWithQueue
+ which instead of having a single queue, it can have multiple queues. Useful for priority queuing
+*/
+
 @interface UMBackgrounderWithQueues : UMBackgrounderWithQueue
 
 {

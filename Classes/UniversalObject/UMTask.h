@@ -9,6 +9,14 @@
 #import "UMObject.h"
 @class UMBackgrounder;
 
+/*!
+ @class UMTask
+ @brief A UMTask is a work task which can be executed in the background, thrown on to queues etc.
+    Usually the object is subclassed and the "main" method is being implemented to do something useful.
+    A UMTask can be synchronized to another object (the "synchronizeObject") have a name and 
+    can have logging.
+*/
+
 @interface UMTask : UMObject
 {
     NSString        *name;

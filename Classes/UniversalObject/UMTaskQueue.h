@@ -9,11 +9,11 @@
 #import "UMObject.h"
 
 
-/*
-
- UMTaskQueue is an object to deal with background queues
+/*!
+ @class UMTaskQueue
+ @brief UMTaskQueue is an object to deal with background queues
  It holds a bunch of UMBackgrounderWithQueue objecs which share a
- common queue where you can stuff UMBackgroundTask objects into.
+ common queue where you can stuff UMTask objects into.
 
  */
 

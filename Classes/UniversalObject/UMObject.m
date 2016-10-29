@@ -79,9 +79,20 @@ void umobject_disable_alloc_logging(void)
 static FILE *alloc_log;
 #endif
 
+/*!
+ @class UMObject
+ @brief The root object for ulib
+
+ UMObject is a replacement for NSObject. It allows a log handler to be attached,
+ getting instantiated from a config file and it has some debug variant UMObjectDebug
+ which allow to trace where objects get allocated and deallocated and it
+ has methods to run methods in background in another thread.
+ */
 @implementation UMObject
 
 @synthesize logFeed;
+
+
 
 
 - (void) addLogFromConfigGroup:(NSDictionary *)grp

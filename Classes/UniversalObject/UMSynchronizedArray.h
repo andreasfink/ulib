@@ -7,6 +7,15 @@
 
 #import "UMObject.h"
 
+/*!
+ @class UMSynchronizedArray
+ @brief An array who's access is synchronized so it can be accessed from multiple threads
+
+ UMSynchronizedArray can be used like NSMutableArray (but its not a subclass of it).
+ To create a UMSynchronizedArray from a NSArray use the initWithArray initializer.
+ To create a NSArray/NSMutableArray from UMSynchronizedArray, use mutableCopy method.
+ */
+
 @interface UMSynchronizedArray : UMObject
 {
     NSMutableArray *array;

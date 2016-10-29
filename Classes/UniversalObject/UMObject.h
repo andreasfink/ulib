@@ -36,11 +36,21 @@ BOOL umobject_object_stat_is_enabled(void);
 #define UMOBJECT_FLAG_HAS_MAGIC             0x01
 #define UMOBJECT_FLAG_LOG_RETAIN_RELEASE    0x02
 
+/*!
+ @class UMObject
+ @brief The root object for ulib
+
+ UMObject is a replacement for NSObject. It allows a log handler to be attached,
+ getting instantiated from a config file and it has some debug variant UMObjectDebug
+ which allow to trace where objects get allocated and deallocated and it
+ has methods to run methods in background in another thread.
+ */
+
 @interface UMObject : NSObject 
 {
-    uint32_t    umobject_flags;
-    char        *_magic;
-    UMLogFeed   *logFeed;
+    uint32_t    umobject_flags; /*!< internal flags to remember which options this object has */
+    char        *_magic;        /*!< c pointer to the class name which has instantiated this object. Only populated if UMOBJECT_USE_MAGIC is set to 1. Useful for debugging with a limited verison of lldb */
+    UMLogFeed   *logFeed;       /*!< The log feed this object can use to log anything */
 }
 
 @property (readwrite,strong) UMLogFeed *logFeed;

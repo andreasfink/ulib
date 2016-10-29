@@ -10,13 +10,16 @@
 @class UMHistoryLogEntry;
 #define MAX_UMHISTORY_LOG   10240
 
-@interface UMHistoryLog : UMObject /* can not be derivating from UMObject as it uses itself */
+/*!
+ @class UMHistoryLog
+ @brief A object to hold the last N log entries of something. N by default is 10240 but can be instantiated with different values. You can log to memory this way and display the last events
+
+ */
+
+@interface UMHistoryLog : UMObject
 {
     NSMutableArray  *entries;
-//    UMHistoryLogEntry *first;
-//    UMHistoryLogEntry *last;
     int max;
- //   int count;
 }
 
 - (UMHistoryLog *)init;

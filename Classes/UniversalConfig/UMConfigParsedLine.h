@@ -8,6 +8,12 @@
 
 #import "UMObject.h"
 
+/*!
+ @class UMConfigParsedLine
+ @brief  UMConfigParsedLine is a line in a config file. usedby UMConfig internally
+ 
+*/
+
 @interface UMConfigParsedLine : UMObject
 {
     NSString    *filename;

@@ -173,7 +173,6 @@
 		A602103E1D488A2F00211137 /* UMSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AC7E149AA4C30029E9CF /* UMSocket.m */; };
 		A602103F1D488A2F00211137 /* UMConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713055149B8B7C00E1A86A /* UMConfig.m */; };
 		A60210401D488A2F00211137 /* UMConfigGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713059149B8C2100E1A86A /* UMConfigGroup.m */; };
-		A60210411D488A2F00211137 /* UMConfigLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713065149B8D2B00E1A86A /* UMConfigLocation.m */; };
 		A60210421D488A2F00211137 /* UMConfigParsedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */; };
 		A60210451D488A2F00211137 /* NSMutableArray+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9AA16360B80002FA7CC /* NSMutableArray+UMHTTP.m */; };
 		A60210461D488A2F00211137 /* NSMutableString+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9AF16360C81002FA7CC /* NSMutableString+UMHTTP.m */; };
@@ -421,7 +420,6 @@
 		A60211421D488A2F00211137 /* UMLogLevel.h in Headers */ = {isa = PBXBuildFile; fileRef = A65112D61A33BD650090FC94 /* UMLogLevel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60211431D488A2F00211137 /* UMConfigGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = A6713058149B8C2100E1A86A /* UMConfigGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60211441D488A2F00211137 /* cmac.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46DF1D4608F0002BAA97 /* cmac.h */; };
-		A60211451D488A2F00211137 /* UMConfigLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = A6713064149B8D2B00E1A86A /* UMConfigLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60211461D488A2F00211137 /* UMConfigParsedLine.h in Headers */ = {isa = PBXBuildFile; fileRef = A69F08FF149D3A4C0009F272 /* UMConfigParsedLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60211471D488A2F00211137 /* err.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46F11D4608F0002BAA97 /* err.h */; };
 		A60211481D488A2F00211137 /* des.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46E51D4608F0002BAA97 /* des.h */; };
@@ -541,7 +539,6 @@
 		A60211C41D488A3D00211137 /* UMSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AC7E149AA4C30029E9CF /* UMSocket.m */; };
 		A60211C51D488A3D00211137 /* UMConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713055149B8B7C00E1A86A /* UMConfig.m */; };
 		A60211C61D488A3D00211137 /* UMConfigGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713059149B8C2100E1A86A /* UMConfigGroup.m */; };
-		A60211C71D488A3D00211137 /* UMConfigLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713065149B8D2B00E1A86A /* UMConfigLocation.m */; };
 		A60211C81D488A3D00211137 /* UMConfigParsedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */; };
 		A60211CB1D488A3D00211137 /* NSMutableArray+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9AA16360B80002FA7CC /* NSMutableArray+UMHTTP.m */; };
 		A60211CC1D488A3D00211137 /* NSMutableString+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9AF16360C81002FA7CC /* NSMutableString+UMHTTP.m */; };
@@ -787,7 +784,6 @@
 		A60212C81D488A3D00211137 /* UMLogLevel.h in Headers */ = {isa = PBXBuildFile; fileRef = A65112D61A33BD650090FC94 /* UMLogLevel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60212C91D488A3D00211137 /* UMConfigGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = A6713058149B8C2100E1A86A /* UMConfigGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60212CA1D488A3D00211137 /* cmac.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46DF1D4608F0002BAA97 /* cmac.h */; };
-		A60212CB1D488A3D00211137 /* UMConfigLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = A6713064149B8D2B00E1A86A /* UMConfigLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60212CC1D488A3D00211137 /* UMConfigParsedLine.h in Headers */ = {isa = PBXBuildFile; fileRef = A69F08FF149D3A4C0009F272 /* UMConfigParsedLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60212CD1D488A3D00211137 /* err.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46F11D4608F0002BAA97 /* err.h */; };
 		A60212CE1D488A3D00211137 /* des.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46E51D4608F0002BAA97 /* des.h */; };
@@ -907,7 +903,6 @@
 		A602134A1D488A5900211137 /* UMSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AC7E149AA4C30029E9CF /* UMSocket.m */; };
 		A602134B1D488A5900211137 /* UMConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713055149B8B7C00E1A86A /* UMConfig.m */; };
 		A602134C1D488A5900211137 /* UMConfigGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713059149B8C2100E1A86A /* UMConfigGroup.m */; };
-		A602134D1D488A5900211137 /* UMConfigLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713065149B8D2B00E1A86A /* UMConfigLocation.m */; };
 		A602134E1D488A5900211137 /* UMConfigParsedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */; };
 		A60213511D488A5900211137 /* NSMutableArray+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9AA16360B80002FA7CC /* NSMutableArray+UMHTTP.m */; };
 		A60213521D488A5900211137 /* NSMutableString+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9AF16360C81002FA7CC /* NSMutableString+UMHTTP.m */; };
@@ -1153,7 +1148,6 @@
 		A602144E1D488A5900211137 /* UMLogLevel.h in Headers */ = {isa = PBXBuildFile; fileRef = A65112D61A33BD650090FC94 /* UMLogLevel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A602144F1D488A5900211137 /* UMConfigGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = A6713058149B8C2100E1A86A /* UMConfigGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60214501D488A5900211137 /* cmac.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46DF1D4608F0002BAA97 /* cmac.h */; };
-		A60214511D488A5900211137 /* UMConfigLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = A6713064149B8D2B00E1A86A /* UMConfigLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60214521D488A5900211137 /* UMConfigParsedLine.h in Headers */ = {isa = PBXBuildFile; fileRef = A69F08FF149D3A4C0009F272 /* UMConfigParsedLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60214531D488A5900211137 /* err.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46F11D4608F0002BAA97 /* err.h */; };
 		A60214541D488A5900211137 /* des.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46E51D4608F0002BAA97 /* des.h */; };
@@ -1229,8 +1223,6 @@
 		A60C2D811A3F212E0090FC94 /* UMConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713055149B8B7C00E1A86A /* UMConfig.m */; };
 		A60C2D821A3F212E0090FC94 /* UMConfigParsedLine.h in Headers */ = {isa = PBXBuildFile; fileRef = A69F08FF149D3A4C0009F272 /* UMConfigParsedLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C2D831A3F212E0090FC94 /* UMConfigParsedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */; };
-		A60C2D841A3F212E0090FC94 /* UMConfigLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = A6713064149B8D2B00E1A86A /* UMConfigLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A60C2D851A3F212E0090FC94 /* UMConfigLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713065149B8D2B00E1A86A /* UMConfigLocation.m */; };
 		A60C2D861A3F212E0090FC94 /* UMConfigGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = A6713058149B8C2100E1A86A /* UMConfigGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C2D871A3F212E0090FC94 /* UMConfigGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713059149B8C2100E1A86A /* UMConfigGroup.m */; };
 		A60C2D911A3F213F0090FC94 /* UniversalHTTP.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC65149AA4AC0029E9CF /* UniversalHTTP.h */; };
@@ -1346,8 +1338,6 @@
 		A6713057149B8B7C00E1A86A /* UMConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713055149B8B7C00E1A86A /* UMConfig.m */; };
 		A671305A149B8C2100E1A86A /* UMConfigGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = A6713058149B8C2100E1A86A /* UMConfigGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A671305C149B8C2100E1A86A /* UMConfigGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713059149B8C2100E1A86A /* UMConfigGroup.m */; };
-		A6713066149B8D2B00E1A86A /* UMConfigLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = A6713064149B8D2B00E1A86A /* UMConfigLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6713068149B8D2B00E1A86A /* UMConfigLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713065149B8D2B00E1A86A /* UMConfigLocation.m */; };
 		A67AA9F61CF8BD0800211137 /* ulib_config.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A7A2431CF81EE600211137 /* ulib_config.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A67AA9F71CF8BD0C00211137 /* ulib_config.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A7A2431CF81EE600211137 /* ulib_config.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A67B5187191B5DB70090FC94 /* UMRedisCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = A67B5186191B5DB70090FC94 /* UMRedisCommand.m */; };
@@ -1575,11 +1565,9 @@
 		A6AC49911D460A8F002BAA97 /* ulib.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DB3E6F191E40770090FC94 /* ulib.m */; };
 		A6AC49B31D460ACF002BAA97 /* UMConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713055149B8B7C00E1A86A /* UMConfig.m */; };
 		A6AC49B41D460ACF002BAA97 /* UMConfigParsedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */; };
-		A6AC49B51D460ACF002BAA97 /* UMConfigLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713065149B8D2B00E1A86A /* UMConfigLocation.m */; };
 		A6AC49B61D460ACF002BAA97 /* UMConfigGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713059149B8C2100E1A86A /* UMConfigGroup.m */; };
 		A6AC49BB1D460AD1002BAA97 /* UMConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713055149B8B7C00E1A86A /* UMConfig.m */; };
 		A6AC49BC1D460AD1002BAA97 /* UMConfigParsedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */; };
-		A6AC49BD1D460AD1002BAA97 /* UMConfigLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713065149B8D2B00E1A86A /* UMConfigLocation.m */; };
 		A6AC49BE1D460AD1002BAA97 /* UMConfigGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713059149B8C2100E1A86A /* UMConfigGroup.m */; };
 		A6AC49EC1D460AEE002BAA97 /* NSDictionary+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9B916360D88002FA7CC /* NSDictionary+UMHTTP.m */; };
 		A6AC49ED1D460AEE002BAA97 /* NSMutableArray+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9AA16360B80002FA7CC /* NSMutableArray+UMHTTP.m */; };
@@ -2200,8 +2188,6 @@
 		A6713055149B8B7C00E1A86A /* UMConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMConfig.m; sourceTree = "<group>"; };
 		A6713058149B8C2100E1A86A /* UMConfigGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMConfigGroup.h; path = Classes/UniversalConfig/UMConfigGroup.h; sourceTree = SOURCE_ROOT; };
 		A6713059149B8C2100E1A86A /* UMConfigGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMConfigGroup.m; path = Classes/UniversalConfig/UMConfigGroup.m; sourceTree = SOURCE_ROOT; };
-		A6713064149B8D2B00E1A86A /* UMConfigLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMConfigLocation.h; path = Classes/UniversalConfig/UMConfigLocation.h; sourceTree = SOURCE_ROOT; };
-		A6713065149B8D2B00E1A86A /* UMConfigLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMConfigLocation.m; path = Classes/UniversalConfig/UMConfigLocation.m; sourceTree = SOURCE_ROOT; };
 		A677B75A19C804A10090FC94 /* Makefile.linux.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux.in; sourceTree = "<group>"; };
 		A67B5186191B5DB70090FC94 /* UMRedisCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMRedisCommand.m; sourceTree = "<group>"; };
 		A67B5189191B84A90090FC94 /* UMAverageDelay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMAverageDelay.m; sourceTree = "<group>"; };
@@ -2817,11 +2803,9 @@
 			children = (
 				A6971C8016356C0B004E9B50 /* UniversalConfig.h */,
 				A6713054149B8B7C00E1A86A /* UMConfig.h */,
-				A69F08FF149D3A4C0009F272 /* UMConfigParsedLine.h */,
 				A6713055149B8B7C00E1A86A /* UMConfig.m */,
+				A69F08FF149D3A4C0009F272 /* UMConfigParsedLine.h */,
 				A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */,
-				A6713064149B8D2B00E1A86A /* UMConfigLocation.h */,
-				A6713065149B8D2B00E1A86A /* UMConfigLocation.m */,
 				A6713058149B8C2100E1A86A /* UMConfigGroup.h */,
 				A6713059149B8C2100E1A86A /* UMConfigGroup.m */,
 			);
@@ -3703,7 +3687,6 @@
 				A60211421D488A2F00211137 /* UMLogLevel.h in Headers */,
 				A60211431D488A2F00211137 /* UMConfigGroup.h in Headers */,
 				A60211441D488A2F00211137 /* cmac.h in Headers */,
-				A60211451D488A2F00211137 /* UMConfigLocation.h in Headers */,
 				A60211461D488A2F00211137 /* UMConfigParsedLine.h in Headers */,
 				A60211471D488A2F00211137 /* err.h in Headers */,
 				A60211481D488A2F00211137 /* des.h in Headers */,
@@ -3975,7 +3958,6 @@
 				A60212C81D488A3D00211137 /* UMLogLevel.h in Headers */,
 				A60212C91D488A3D00211137 /* UMConfigGroup.h in Headers */,
 				A60212CA1D488A3D00211137 /* cmac.h in Headers */,
-				A60212CB1D488A3D00211137 /* UMConfigLocation.h in Headers */,
 				A60212CC1D488A3D00211137 /* UMConfigParsedLine.h in Headers */,
 				A60212CD1D488A3D00211137 /* err.h in Headers */,
 				A60212CE1D488A3D00211137 /* des.h in Headers */,
@@ -4247,7 +4229,6 @@
 				A602144E1D488A5900211137 /* UMLogLevel.h in Headers */,
 				A602144F1D488A5900211137 /* UMConfigGroup.h in Headers */,
 				A60214501D488A5900211137 /* cmac.h in Headers */,
-				A60214511D488A5900211137 /* UMConfigLocation.h in Headers */,
 				A60214521D488A5900211137 /* UMConfigParsedLine.h in Headers */,
 				A60214531D488A5900211137 /* err.h in Headers */,
 				A60214541D488A5900211137 /* des.h in Headers */,
@@ -4379,7 +4360,6 @@
 				A6CC4B4E1A3F249A0090FC94 /* UniversalJson.h in Headers */,
 				A60C2DDA1A3F214E0090FC94 /* UMLogFeed.h in Headers */,
 				A60C2DD01A3F214E0090FC94 /* UMLogLevel.h in Headers */,
-				A60C2D841A3F212E0090FC94 /* UMConfigLocation.h in Headers */,
 				A6020FCB1D4876E500211137 /* UniversalObject.h in Headers */,
 				A6020FC31D4876E500211137 /* UMObjectDebug.h in Headers */,
 				A6020FAE1D4876E500211137 /* NSData+UniversalObject.h in Headers */,
@@ -4641,7 +4621,6 @@
 				A65112D71A33BD650090FC94 /* UMLogLevel.h in Headers */,
 				A671305A149B8C2100E1A86A /* UMConfigGroup.h in Headers */,
 				A6AC47411D4608F0002BAA97 /* cmac.h in Headers */,
-				A6713066149B8D2B00E1A86A /* UMConfigLocation.h in Headers */,
 				A69F0901149D3A4C0009F272 /* UMConfigParsedLine.h in Headers */,
 				A6AC47771D4608F0002BAA97 /* err.h in Headers */,
 				A6AC47531D4608F0002BAA97 /* des.h in Headers */,
@@ -5105,7 +5084,6 @@
 				A602103E1D488A2F00211137 /* UMSocket.m in Sources */,
 				A602103F1D488A2F00211137 /* UMConfig.m in Sources */,
 				A60210401D488A2F00211137 /* UMConfigGroup.m in Sources */,
-				A60210411D488A2F00211137 /* UMConfigLocation.m in Sources */,
 				A60210421D488A2F00211137 /* UMConfigParsedLine.m in Sources */,
 				A60210451D488A2F00211137 /* NSMutableArray+UMHTTP.m in Sources */,
 				A60210461D488A2F00211137 /* NSMutableString+UMHTTP.m in Sources */,
@@ -5210,7 +5188,6 @@
 				A60211C41D488A3D00211137 /* UMSocket.m in Sources */,
 				A60211C51D488A3D00211137 /* UMConfig.m in Sources */,
 				A60211C61D488A3D00211137 /* UMConfigGroup.m in Sources */,
-				A60211C71D488A3D00211137 /* UMConfigLocation.m in Sources */,
 				A60211C81D488A3D00211137 /* UMConfigParsedLine.m in Sources */,
 				A60211CB1D488A3D00211137 /* NSMutableArray+UMHTTP.m in Sources */,
 				A60211CC1D488A3D00211137 /* NSMutableString+UMHTTP.m in Sources */,
@@ -5315,7 +5292,6 @@
 				A602134A1D488A5900211137 /* UMSocket.m in Sources */,
 				A602134B1D488A5900211137 /* UMConfig.m in Sources */,
 				A602134C1D488A5900211137 /* UMConfigGroup.m in Sources */,
-				A602134D1D488A5900211137 /* UMConfigLocation.m in Sources */,
 				A602134E1D488A5900211137 /* UMConfigParsedLine.m in Sources */,
 				A60213511D488A5900211137 /* NSMutableArray+UMHTTP.m in Sources */,
 				A60213521D488A5900211137 /* NSMutableString+UMHTTP.m in Sources */,
@@ -5442,7 +5418,6 @@
 				A6020FD21D4876E500211137 /* NSObject+HierarchicalDescription.m in Sources */,
 				A60C2E481A3F21730090FC94 /* UMJsonStreamWriterAccumulator.m in Sources */,
 				A60C2E501A3F21730090FC94 /* UMJsonWriter.m in Sources */,
-				A60C2D851A3F212E0090FC94 /* UMConfigLocation.m in Sources */,
 				A60C2E461A3F21730090FC94 /* UMJsonStreamWriter.m in Sources */,
 				A60C2D991A3F213F0090FC94 /* NSMutableArray+UMHTTP.m in Sources */,
 				A60C2E3C1A3F21730090FC94 /* UMJsonParser.m in Sources */,
@@ -5493,7 +5468,6 @@
 				A6AC498F1D460A8D002BAA97 /* ulib.m in Sources */,
 				A6AC4C201D460C1A002BAA97 /* UMJsonStreamWriterState.m in Sources */,
 				A6AC4AF51D460B6D002BAA97 /* NSString+UniversalObject.m in Sources */,
-				A6AC49B51D460ACF002BAA97 /* UMConfigLocation.m in Sources */,
 				A6AC49EC1D460AEE002BAA97 /* NSDictionary+UMHTTP.m in Sources */,
 				A6AC49F01D460AEE002BAA97 /* NSString+UMHTTP.m in Sources */,
 				A6AC4C231D460C1A002BAA97 /* UMJsonWriter.m in Sources */,
@@ -5598,7 +5572,6 @@
 				A6AC49911D460A8F002BAA97 /* ulib.m in Sources */,
 				A6AC4C3E1D460C1C002BAA97 /* UMJsonStreamWriterState.m in Sources */,
 				A6AC4B311D460B6E002BAA97 /* NSString+UniversalObject.m in Sources */,
-				A6AC49BD1D460AD1002BAA97 /* UMConfigLocation.m in Sources */,
 				A6AC4A061D460AEF002BAA97 /* NSDictionary+UMHTTP.m in Sources */,
 				A6AC4A0A1D460AEF002BAA97 /* NSString+UMHTTP.m in Sources */,
 				A6AC4C411D460C1C002BAA97 /* UMJsonWriter.m in Sources */,
@@ -5735,7 +5708,6 @@
 				A6D8AC89149AA4C30029E9CF /* UMSocket.m in Sources */,
 				A6713057149B8B7C00E1A86A /* UMConfig.m in Sources */,
 				A671305C149B8C2100E1A86A /* UMConfigGroup.m in Sources */,
-				A6713068149B8D2B00E1A86A /* UMConfigLocation.m in Sources */,
 				A69F0902149D3A4C0009F272 /* UMConfigParsedLine.m in Sources */,
 				A6DDD9AC16360B80002FA7CC /* NSMutableArray+UMHTTP.m in Sources */,
 				A6DDD9B116360C81002FA7CC /* NSMutableString+UMHTTP.m in Sources */,

@@ -10,6 +10,6 @@
 
 @interface NSNumber(HiearchicalDescription)
 
-- (NSString *)hierarchicalDescriptionWithPrefix:(NSString *)prefix;
+- (NSString *)hierarchicalDescriptionWithPrefix:(NSString *)prefix; /*!< convert a NSNumber to a string in a human readable fashion with identation (prefix) being properly handled */
 
 @end

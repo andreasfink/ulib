@@ -10,7 +10,7 @@
 
 @interface NSString (HierarchicalDescription)
 
-- (NSString *)hierarchicalDescriptionWithPrefix:(NSString *)prefix;
+- (NSString *)hierarchicalDescriptionWithPrefix:(NSString *)prefix;  /*!< convert a NSString to a string in a human readable fashion with identation (prefix) being properly handled */
 - (NSString *)increasePrefix;
 - (NSString *)removeFirstAndLastChar;
 

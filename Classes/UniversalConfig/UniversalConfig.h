@@ -11,7 +11,6 @@
 
 #import "UMConfig.h"
 #import "UMConfigParsedLine.h"
-#import "UMConfigLocation.h"
 #import "UMConfigGroup.h"
 
 #endif

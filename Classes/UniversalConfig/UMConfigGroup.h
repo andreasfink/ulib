@@ -8,6 +8,12 @@
 
 #import "UMObject.h"
 
+/*!
+@class UMConfigGroup
+@brief  UMConfigGroup is an object to hold the data of a single config file group section.
+
+*/
+
 @interface UMConfigGroup : UMObject
 {
     NSMutableDictionary *vars;

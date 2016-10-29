@@ -40,7 +40,6 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
         allowedSingleGroupNames = [[NSMutableDictionary alloc] init];
         allowedMultiGroupNames = [[NSMutableDictionary alloc] init];
     }
-    
     return self;
 }
 

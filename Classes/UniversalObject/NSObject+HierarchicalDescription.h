@@ -11,7 +11,7 @@
 
 @interface NSObject(HierarchicalDescription)
 
-- (NSString *)hierarchicalDescriptionWithPrefix:(NSString *)prefix;
+- (NSString *)hierarchicalDescriptionWithPrefix:(NSString *)prefix;  /*!< convert a NSOjbect to a string in a human readable fashion with identation (prefix) being properly handled */
 
 @end
 

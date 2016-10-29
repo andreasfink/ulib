@@ -9,13 +9,13 @@
 
 @interface NSData (UniversalObject) 
 
-- (NSString *) hexString;
-- (NSData *) hex;
-- (unsigned long) crc;
-- (NSData *)unhexedData;
+- (NSString *) hexString;   /*!< hex NSString representation of a NSData */
+- (NSData *) hex;           /*!< hex NSData representation of a NSData */
+- (unsigned long) crc;      /*!< calculate the CRC of a NSData */
+- (NSData *)unhexedData;    /*!< convert a NSData object of hex bytes into their binary version */
 @end
 
 @interface NSMutableData (UniversalObject)
-- (void) appendByte:(uint8_t)byte;
+- (void) appendByte:(uint8_t)byte; /*!< add  a single byte to a NSData object */
 
 @end

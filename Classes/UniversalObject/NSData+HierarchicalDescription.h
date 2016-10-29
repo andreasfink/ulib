@@ -10,7 +10,7 @@
 
 @interface NSData(HiearchicalDescription)
 
-- (NSString *)hierarchicalDescriptionWithPrefix:(NSString *)prefix;
+- (NSString *)hierarchicalDescriptionWithPrefix:(NSString *)prefix; /*!< convert a NSData to a string in a human readable fashion with identation (prefix) being properly handled */
 - (NSString *)stringForDumping;
 - (NSString *)dump;
 

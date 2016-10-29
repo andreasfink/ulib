@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['nonnullstring',['nonNullString',['../d7/dd8/interface_u_m_string_with_history.html#a8ca2a6539f2db72d9a0467ac7be4fe0e',1,'UMStringWithHistory']]]
+  ['getmultigroups_3a',['getMultiGroups:',['../d1/d7b/interface_u_m_config.html#a0edf998974e2cb16f61053917277542d',1,'UMConfig']]],
+  ['getsinglegroup_3a',['getSingleGroup:',['../d1/d7b/interface_u_m_config.html#a0b8e3e21487b2e6864628fac130de985',1,'UMConfig']]]
 ];

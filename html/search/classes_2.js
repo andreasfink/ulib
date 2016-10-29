@@ -7,7 +7,6 @@ var searchData=
   ['umbackgrounderwithqueues',['UMBackgrounderWithQueues',['../dd/d77/interface_u_m_backgrounder_with_queues.html',1,'']]],
   ['umconfig',['UMConfig',['../d1/d7b/interface_u_m_config.html',1,'']]],
   ['umconfiggroup',['UMConfigGroup',['../d3/d12/interface_u_m_config_group.html',1,'']]],
-  ['umconfiglocation',['UMConfigLocation',['../dd/d4b/interface_u_m_config_location.html',1,'']]],
   ['umconfigparsedline',['UMConfigParsedLine',['../d9/dc7/interface_u_m_config_parsed_line.html',1,'']]],
   ['umcrypto',['UMCrypto',['../dc/de6/interface_u_m_crypto.html',1,'']]],
   ['umdatawithhistory',['UMDataWithHistory',['../d8/d1d/interface_u_m_data_with_history.html',1,'']]],

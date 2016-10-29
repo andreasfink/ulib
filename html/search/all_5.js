@@ -1,27 +1,5 @@
 var searchData=
 [
-  ['nonnullstring',['nonNullString',['../d7/dd8/interface_u_m_string_with_history.html#a8ca2a6539f2db72d9a0467ac7be4fe0e',1,'UMStringWithHistory']]],
-  ['nsarray_28hierarchicaldescription_29',['NSArray(HierarchicalDescription)',['../db/d0d/category_n_s_array_07_hierarchical_description_08.html',1,'']]],
-  ['nsarray_28umjson_29',['NSArray(UMJson)',['../db/de2/category_n_s_array_07_u_m_json_08.html',1,'']]],
-  ['nsdata_28hiearchicaldescription_29',['NSData(HiearchicalDescription)',['../db/d01/category_n_s_data_07_hiearchical_description_08.html',1,'']]],
-  ['nsdata_28umsocket_29',['NSData(UMSocket)',['../df/d41/category_n_s_data_07_u_m_socket_08.html',1,'']]],
-  ['nsdata_28universalobject_29',['NSData(UniversalObject)',['../d9/daa/category_n_s_data_07_universal_object_08.html',1,'']]],
-  ['nsdate_28stringfunctions_29',['NSDate(stringFunctions)',['../d1/d56/category_n_s_date_07string_functions_08.html',1,'']]],
-  ['nsdictionary_28hiearchicaldescription_29',['NSDictionary(HiearchicalDescription)',['../d0/d00/category_n_s_dictionary_07_hiearchical_description_08.html',1,'']]],
-  ['nsdictionary_28umhttp_29',['NSDictionary(UMHTTP)',['../d4/ddb/category_n_s_dictionary_07_u_m_h_t_t_p_08.html',1,'']]],
-  ['nsdictionary_28umjson_29',['NSDictionary(UMJson)',['../d8/dcf/category_n_s_dictionary_07_u_m_json_08.html',1,'']]],
-  ['nsmutablearray_28httpheader_29',['NSMutableArray(HTTPHeader)',['../d2/de5/category_n_s_mutable_array_07_h_t_t_p_header_08.html',1,'']]],
-  ['nsmutabledata_28umhttp_29',['NSMutableData(UMHTTP)',['../d5/d72/category_n_s_mutable_data_07_u_m_h_t_t_p_08.html',1,'']]],
-  ['nsmutabledata_28umtestdata_29',['NSMutableData(UMTestData)',['../df/dbf/category_n_s_mutable_data_07_u_m_test_data_08.html',1,'']]],
-  ['nsmutabledata_28universalobject_29',['NSMutableData(UniversalObject)',['../d5/d74/category_n_s_mutable_data_07_universal_object_08.html',1,'']]],
-  ['nsmutablestring_28http_29',['NSMutableString(HTTP)',['../de/d21/category_n_s_mutable_string_07_h_t_t_p_08.html',1,'']]],
-  ['nsmutablestring_28umhttp_29',['NSMutableString(UMHTTP)',['../dc/d0f/category_n_s_mutable_string_07_u_m_h_t_t_p_08.html',1,'']]],
-  ['nsnumber_28hiearchicaldescription_29',['NSNumber(HiearchicalDescription)',['../d5/d5f/category_n_s_number_07_hiearchical_description_08.html',1,'']]],
-  ['nsobject_28hierarchicaldescription_29',['NSObject(HierarchicalDescription)',['../d4/d52/category_n_s_object_07_hierarchical_description_08.html',1,'']]],
-  ['nsobject_28umproxyforjson_29',['NSObject(UMProxyForJson)',['../d4/d17/category_n_s_object_07_u_m_proxy_for_json_08.html',1,'']]],
-  ['nsstring_28hierarchicaldescription_29',['NSString(HierarchicalDescription)',['../db/da1/category_n_s_string_07_hierarchical_description_08.html',1,'']]],
-  ['nsstring_28umhttp_29',['NSString(UMHTTP)',['../db/df7/category_n_s_string_07_u_m_h_t_t_p_08.html',1,'']]],
-  ['nsstring_28umjson_29',['NSString(UMJson)',['../dc/d75/category_n_s_string_07_u_m_json_08.html',1,'']]],
-  ['nsstring_28umsocket_29',['NSString(UMSocket)',['../da/d5b/category_n_s_string_07_u_m_socket_08.html',1,'']]],
-  ['nsstring_28universalobject_29',['NSString(UniversalObject)',['../de/d50/category_n_s_string_07_universal_object_08.html',1,'']]]
+  ['getmultigroups_3a',['getMultiGroups:',['../d1/d7b/interface_u_m_config.html#a0edf998974e2cb16f61053917277542d',1,'UMConfig']]],
+  ['getsinglegroup_3a',['getSingleGroup:',['../d1/d7b/interface_u_m_config.html#a0b8e3e21487b2e6864628fac130de985',1,'UMConfig']]]
 ];

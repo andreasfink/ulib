@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['releasedebug',['releaseDebug',['../d9/dba/interface_u_m_object_debug.html#a16a1ab5281d16633aeb1fdf86a6af04d',1,'UMObjectDebug']]],
-  ['retaindebug',['retainDebug',['../d9/dba/interface_u_m_object_debug.html#a4ab1327a93ba5348b5c80172562fc0ec',1,'UMObjectDebug']]]
+  ['loadfromstring_3a',['loadFromString:',['../d5/dc6/interface_u_m_date_with_history.html#a9e88d2080267f0ba7a1353480e7b60ab',1,'UMDateWithHistory::loadFromString:()'],['../d7/dd8/interface_u_m_string_with_history.html#a64d3c24d0a838b96f626230f0c3f98d9',1,'UMStringWithHistory::loadFromString:()']]],
+  ['logfeed',['logFeed',['../db/d5d/interface_u_m_object.html#a3b647cfc292d6453e1720fb4f9d19e89',1,'UMObject']]]
 ];

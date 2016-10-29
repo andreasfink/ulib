@@ -68,6 +68,11 @@ $(function() {
 <div class="title">UMConfig Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="../../d1/d7b/interface_u_m_config.html" title="UMConfig is an object to hold the data of config files. ">UMConfig</a> is an object to hold the data of config files.  
+ <a href="../../d1/d7b/interface_u_m_config.html#details">More...</a></p>
+
+<p><code>#import &lt;<a class="el" href="../../dc/df9/_u_m_config_8h_source.html">UMConfig.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for UMConfig:</div>
 <div class="dyncontent">
@@ -98,11 +103,9 @@ Instance Methods</h2></td></tr>
 <tr class="memitem:a53116f3da274caf9893fd7b13acf1186"><td class="memItemLeft" align="right" valign="top"><a id="a53116f3da274caf9893fd7b13acf1186"></a>
 (void)&#160;</td><td class="memItemRight" valign="bottom">- <b>disallowMultiGroup:</b></td></tr>
 <tr class="separator:a53116f3da274caf9893fd7b13acf1186"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b8e3e21487b2e6864628fac130de985"><td class="memItemLeft" align="right" valign="top"><a id="a0b8e3e21487b2e6864628fac130de985"></a>
-(NSDictionary *)&#160;</td><td class="memItemRight" valign="bottom">- <b>getSingleGroup:</b></td></tr>
+<tr class="memitem:a0b8e3e21487b2e6864628fac130de985"><td class="memItemLeft" align="right" valign="top">(NSDictionary *)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="../../d1/d7b/interface_u_m_config.html#a0b8e3e21487b2e6864628fac130de985">getSingleGroup:</a></td></tr>
 <tr class="separator:a0b8e3e21487b2e6864628fac130de985"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0edf998974e2cb16f61053917277542d"><td class="memItemLeft" align="right" valign="top"><a id="a0edf998974e2cb16f61053917277542d"></a>
-(NSArray *)&#160;</td><td class="memItemRight" valign="bottom">- <b>getMultiGroups:</b></td></tr>
+<tr class="memitem:a0edf998974e2cb16f61053917277542d"><td class="memItemLeft" align="right" valign="top">(NSArray *)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="../../d1/d7b/interface_u_m_config.html#a0edf998974e2cb16f61053917277542d">getMultiGroups:</a></td></tr>
 <tr class="separator:a0edf998974e2cb16f61053917277542d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05a1339db541c005ac40d36bb5ea755b"><td class="memItemLeft" align="right" valign="top"><a id="a05a1339db541c005ac40d36bb5ea755b"></a>
 (<a class="el" href="../../d9/dc7/interface_u_m_config_parsed_line.html">UMConfigParsedLine</a> *)&#160;</td><td class="memItemRight" valign="bottom">- <b>parseSingeLine:file:line:</b></td></tr>
@@ -173,6 +176,62 @@ NSMutableDictionary *&#160;</td><td class="memItemRight" valign="bottom"><b>allo
 <tr class="memitem:a3b647cfc292d6453e1720fb4f9d19e89 inherit pro_attribs_interface_u_m_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d94/interface_u_m_log_feed.html">UMLogFeed</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d5d/interface_u_m_object.html#a3b647cfc292d6453e1720fb4f9d19e89">logFeed</a></td></tr>
 <tr class="separator:a3b647cfc292d6453e1720fb4f9d19e89 inherit pro_attribs_interface_u_m_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="../../d1/d7b/interface_u_m_config.html" title="UMConfig is an object to hold the data of config files. ">UMConfig</a> is an object to hold the data of config files. </p>
+<p>config files are having the following syntax:</p>
+<h1>commented out lines are starting with a hash</h1>
+<h1>a group starts with a group statement and ends with a empty line</h1>
+<p>include "some-other-config-file"</p>
+<p>group = config-group name param = value param2 = value2</p>
+<p>group = group2 param = value param2 = value2</p>
+<p>Which groups are valid and read is defined while reading. The individal parameters then end up in a dictionary.</p>
+<p>You define also if a group can be defined only once or multiple times.</p>
+<p>Typical usage sequence:</p>
+<p><a class="el" href="../../d1/d7b/interface_u_m_config.html" title="UMConfig is an object to hold the data of config files. ">UMConfig</a> *config = [[<a class="el" href="../../d1/d7b/interface_u_m_config.html" title="UMConfig is an object to hold the data of config files. ">UMConfig</a> alloc]initWithFileName:"myconfig.conf"];
+ [config allowSingleGroup:@"main"];
+ [config allowSingleGroup:@"subsection"];
+ [config disallowSingleGroup:@"no-longer-supported-subsection"];
+ [config allowMultiGroup:@"multisection"]; [config read];</p>
+<p>groups which are in the config file but not defined are simply skipped if they are in the disallowed definition it throws an exception instead. </p>
+</div><h2 class="groupheader">Method Documentation</h2>
+<a id="a0edf998974e2cb16f61053917277542d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0edf998974e2cb16f61053917277542d">&sect;&nbsp;</a></span>getMultiGroups:()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (NSArray *) getMultiGroups: </td>
+          <td></td>
+          <td class="paramtype">(NSString *)&#160;</td>
+          <td class="paramname"><em>name</em></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>return an NSArray of NSDictionary's of a group of the config section group which can occur multiple times </p>
+
+</div>
+</div>
+<a id="a0b8e3e21487b2e6864628fac130de985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b8e3e21487b2e6864628fac130de985">&sect;&nbsp;</a></span>getSingleGroup:()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (NSDictionary *) getSingleGroup: </td>
+          <td></td>
+          <td class="paramtype">(NSString *)&#160;</td>
+          <td class="paramname"><em>name</em></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>return a NSDictionary of a group of the config section group </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Classes/UniversalConfig/<a class="el" href="../../dc/df9/_u_m_config_8h_source.html">UMConfig.h</a></li>
 <li>Classes/UniversalConfig/UMConfig.m</li>

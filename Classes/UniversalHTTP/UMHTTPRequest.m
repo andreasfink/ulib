@@ -8,6 +8,7 @@
 #import "UMHTTPRequest.h"
 #import "NSMutableArray+UMHTTP.h"
 #import "NSMutableString+UMHTTP.h"
+#import "NSString+UMHTTP.h"
 #import "UMSleeper.h"
 #import "UMHTTPCookie.h"
 #import "UMJsonWriter.h"
@@ -32,6 +33,8 @@
 @synthesize responseCookies;
 @synthesize params;
 @synthesize timeoutDelegate;
+@synthesize authUsername;
+@synthesize authPassword;
 
 - (id) init
 {
@@ -88,6 +91,10 @@
     responseCode = HTTP_RESPONSE_CODE_NOT_FOUND;
 }
 
+- (void) setRequireAuthentication
+{
+    responseCode = HTTP_RESPONSE_CODE_UNAUTHORIZED;
+}
 
 - (void) extractGetParams
 {
@@ -155,6 +162,22 @@
 		requestHeaders = [[NSMutableDictionary alloc]init];
     }
 	[requestHeaders setObject:value forKey:name];
+
+    if([name isEqualToString:@"Authorization"])
+    {
+        if([value hasPrefix:@"Basic "])
+        {
+            NSString *auth = [value substringFromIndex:6];
+            NSData *auth2 = [auth decodeBase64];
+            NSString *user_and_pass = [[NSString alloc]initWithData:auth2 encoding:NSUTF8StringEncoding];
+            NSArray *parts = [user_and_pass componentsSeparatedByString:@":"];
+            if([parts count]==2)
+            {
+                self.authUsername = parts[0];
+                self.authPassword = parts[1];
+            }
+        }
+    }
     if([name isEqualToString:@"Cookie"])
     {
         value = [value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -532,8 +555,8 @@
 
 - (void)setNotAuthorizedForRealm:(NSString *)realm
 {
+    [self setResponseCode:HTTP_RESPONSE_CODE_UNAUTHORIZED];
     [self setResponseHeader:@"WWW-Authenticate" withValue:[NSString stringWithFormat:@"Basic real=\"%@\"",realm]];
-
     NSString *text =
         @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\r\n"
         @"<HTML><HEAD>\r\n"
@@ -545,8 +568,7 @@
         @"requested.  Either you supplied the wrong\r\n"
         @"credentials (e.g., bad password), or your\r\n"
         @"browser doesn\'t understand how to supply\r\n";
-    [self setContentType:@"text/html; charset=UTF-8"];
-    [self setResponseData:[text dataUsingEncoding:NSUTF8StringEncoding]];
+    [self setResponseHtmlString:text];
 }
 
 - (void)makeAsync

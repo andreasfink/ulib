@@ -6,6 +6,8 @@
 //
 
 #import "NSString+UMHTTP.h"
+#include <openssl/bio.h>
+#include <openssl/evp.h>
 
 
 static inline int nibbleToInt(const char a)
@@ -106,4 +108,38 @@ static inline int nibbleToInt(const char a)
     return out;
 }
 
+
+- (NSData *)decodeBase64
+{
+
+    return [[NSData alloc]initWithBase64EncodedString:self
+                                              options:NSDataBase64DecodingIgnoreUnknownCharacters];
+#if 0
+    NSString *decode = [self stringByAppendingString:@"\n"];
+    NSData *data = [decode dataUsingEncoding:NSASCIIStringEncoding];
+
+    // Construct an OpenSSL context
+    BIO *command = BIO_new(BIO_f_base64());
+    BIO *context = BIO_new_mem_buf((void *)[data bytes], [data length]);
+
+    // Tell the context to encode base64
+    context = BIO_push(command, context);
+
+    // Encode all the data
+    NSMutableData *outputData = [NSMutableData data];
+
+#define BUFFSIZE 256
+    int len;
+    char inbuf[BUFFSIZE];
+    while ((len = BIO_read(context, inbuf, BUFFSIZE)) > 0)
+    {
+        [outputData appendBytes:inbuf length:len];
+    }
+
+    BIO_free_all(context);
+    [data self]; // extend GC lifetime of data to here
+
+    return outputData;
+#endif
+}
 @end

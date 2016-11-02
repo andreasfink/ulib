@@ -13,5 +13,5 @@
 - (NSArray *)splitByFirstCharacter:(unichar)uc;
 - (NSString *)urldecode;
 - (NSData *)urldecodeData;
-
+- (NSData *)decodeBase64;
 @end

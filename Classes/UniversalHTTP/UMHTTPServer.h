@@ -9,6 +9,7 @@
 #import "UMObject.h"
 
 #import "UMHTTPServerAuthorizeResult.h"
+#import "UMHTTPAuthenticationStatus.h"
 #import "UMSocketDefs.h"
 #include <sys/types.h>
 #include <netinet/in.h>
@@ -19,17 +20,6 @@
 
 #define	UMHTTP_DEFAULT_PORT	8080
 
-/* the implementation is like this:
- 
-1. There is a mainListener thread running doing nothing else than listening on the port.
-   If there is a new connection coming in, it is creating a connection object, add it to the connections array
-   and fires of a listenerThread to sit on the tcp stream;
-
-2. the connectionListener thread does sit on the socket and constantly reads. If there is a complete request
-   which came in, it will pass it on to requests queue and calls the delegate for http processing. After he's done
-   the response is being sent and the connection might be closed depending of its HTTP/1.1 or HTTP/1.0.
-
-*/
 typedef enum UMHTTPServerStatus
 {
 	UMHTTPServerStatus_notRunning = 0,
@@ -45,8 +35,8 @@ typedef enum UMHTTPServerStatus
 - (UMHTTPServerAuthorizeResult)	httpAuthorizeConnection:(UMSocket *)sock;
 @end
 
-@protocol UMHTTPServerAuthorizeUrlDelegate <NSObject>
-- (void) httpAuthorizeUrl:(UMHTTPRequest *)req;
+@protocol UMHTTPServerAuthenticateRequestDelegate <NSObject>
+- (UMHTTPAuthenticationStatus) httpAuthenticateRequest:(UMHTTPRequest *)req realm:(NSString **)realm;
 @end
 
 @protocol UMHTTPServerHttpOptionsDelegate <NSObject>
@@ -88,13 +78,34 @@ typedef enum UMHTTPServerStatus
 @class UMSleeper;
 @class UMHTTPPageHandler;
 
+/*!
+ @class UMHTTPServer
+ @brief  UMHTTPServer is a builtin webserver
+
+ to start a webserver, instantiate UMHTTPServer and initialize it with initWithPort:. 
+ Set its httpGetPostDelegate to a object which will respond to the web requests and simply call the method start.
+*/
+
+/*
+  the implementation is like this:
+
+ 1. There is a mainListener thread running doing nothing else than listening on the port.
+ If there is a new connection coming in, it is creating a connection object, add it to the connections array
+ and fires of a listenerThread to sit on the tcp stream;
+
+ 2. the connectionListener thread does sit on the socket and constantly reads. If there is a complete request
+ which came in, it will pass it on to requests queue and calls the delegate for http processing. After he's done
+ the response is being sent and the connection might be closed depending of its HTTP/1.1 or HTTP/1.0.
+
+*/
+
 @interface UMHTTPServer : UMObject
 {
 	UMSocket			*listenerSocket;		/* this is the main listener socket */
 
-	NSMutableArray		*connections;			/* list of UMHTTPConnection objects containing the corresponding reading sockets */
-	NSMutableArray		*terminatedConnections;	/* list of UMHTTPConnection objects containing the corresponding reading sockets */
-	NSString			*serverName;			/* WebServer HTTP Server: name */
+	NSMutableArray		*connections;			/*!< list of UMHTTPConnection objects containing the corresponding reading sockets */
+	NSMutableArray		*terminatedConnections;	/*!< list of UMHTTPConnection objects containing the corresponding reading sockets */
+	NSString			*serverName;			/*!< WebServer HTTP Server: name */
 
 	NSLock				*lock;
     NSLock              *sslLock;
@@ -114,8 +125,8 @@ typedef enum UMHTTPServerStatus
 	// the delegates for authorisation
 	//
 	
-	id	<UMHTTPServerAuthorizeConnectionDelegate>	authorizeConnectionDelegate;
-	id	<UMHTTPServerAuthorizeUrlDelegate>			authorizeUrlDelegate;
+	id	<UMHTTPServerAuthorizeConnectionDelegate>	authorizeConnectionDelegate; /*!< this delegate gets called upon a new incoming connection to verify if the calling IP is allowed to connect. */
+	id	<UMHTTPServerAuthenticateRequestDelegate>	authenticateRequestDelegate;
 
 	//
 	// delegates for HTTP methods
@@ -144,7 +155,7 @@ typedef enum UMHTTPServerStatus
 // the delegates for authorisation
 //
 @property(readwrite, strong)	id	<UMHTTPServerAuthorizeConnectionDelegate>	authorizeConnectionDelegate;
-@property(readwrite, strong)	id	<UMHTTPServerAuthorizeUrlDelegate>			authorizeUrlDelegate;
+@property(readwrite, strong)	id	<UMHTTPServerAuthenticateRequestDelegate>	authenticateRequestDelegate;
 
 //
 // delegates for HTTP methods
@@ -193,6 +204,7 @@ typedef enum UMHTTPServerStatus
 
 - (void) setPrivateKeyFile:(NSString *)filename;
 - (void) setCertificateFile:(NSString *)filename;
+- (UMHTTPAuthenticationStatus) httpAuthenticateRequest:(UMHTTPRequest *) req realm:(NSString **)realm;
 @end
 
 

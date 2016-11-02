@@ -26,7 +26,7 @@
 
 
 @synthesize authorizeConnectionDelegate;
-@synthesize authorizeUrlDelegate;
+@synthesize authenticateRequestDelegate;
 
 /* HTTP methods accordings to RFC2616 */
 @synthesize httpOptionsDelegate;
@@ -44,7 +44,6 @@
 @synthesize enableSSL;
 
 /***/
-
 
 @synthesize listenerSocket;
 
@@ -481,6 +480,17 @@ Connection: close
 
 }
 
+- (UMHTTPAuthenticationStatus) httpAuthenticateRequest:(UMHTTPRequest *) req realm:(NSString **)realm
+{
+    if(authenticateRequestDelegate)
+    {
+        if([authenticateRequestDelegate respondsToSelector:@selector(httpAuthenticateRequest:realm:)])
+        {
+            return [authenticateRequestDelegate httpAuthenticateRequest:req realm:realm];
+        }
+    }
+    return UMHTTP_AUTHENTICATION_STATUS_NOT_REQUESTED;
+}
 @end
 
 

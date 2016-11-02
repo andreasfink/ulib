@@ -264,7 +264,25 @@
 	}
 	else
 	{
-		if([method isEqual:@"GET"])
+        NSString *realm=@"realm";
+
+        if([method isEqual:@"GET"])
+        {
+            [req extractGetParams];
+        }
+
+        if(req.authenticationStatus == UMHTTP_AUTHENTICATION_STATUS_UNTESTED)
+        {
+            req.authenticationStatus =  [server httpAuthenticateRequest:req realm:&realm];
+        }
+
+        if(req.authenticationStatus == UMHTTP_AUTHENTICATION_STATUS_FAILED)
+        {
+            [req setNotAuthorizedForRealm:realm];
+            [req setResponseCode:HTTP_RESPONSE_CODE_UNAUTHORIZED];
+            [req setResponseHtmlString:[NSString stringWithFormat:@"Unknown method '%@'",method]];
+        }
+        else if([method isEqual:@"GET"])
         {
 			[server httpGet:req];
         }

@@ -9,7 +9,7 @@
 
 #import "UMObject.h"
 #import "UMHTTPResponseCode.h"
-
+#import "UMHTTPAuthenticationStatus.h"
 
 #define DEFAULT_UMHTTP_SERVER_TIMEOUT       90
 
@@ -22,13 +22,14 @@
 @class UMSleeper;
 @class UMHTTPCookie;
 
-typedef enum UMHTTPAuthenticationStatus
-{
-    UMHTTP_AUTHENTICATION_STATUS_UNTESTED,
-    UMHTTP_AUTHENTICATION_STATUS_FAILED,
-    UMHTTP_AUTHENTICATION_STATUS_PASSED,
-    UMHTTP_AUTHENTICATION_STATUS_NOT_REQUESTED,
-} UMHTTPAuthenticationStatus;
+
+/*!
+ @class UMHTTPRequest
+ @brief  UMHTTPRequest represents a single http page request.
+
+ A UMHTTPRequest is passed to a delegate of a UMHTTPServer.
+ params is filled with the params passed on the URL (get) or in the body (post)
+ */
 
 @interface UMHTTPRequest : UMObject
 {
@@ -50,6 +51,8 @@ typedef enum UMHTTPAuthenticationStatus
     NSMutableDictionary *requestCookies;
     NSMutableDictionary *responseCookies;
     NSDate              *completionTimeout;
+    NSString            *authUsername;
+    NSString            *authPassword;
     
     id<UMHTTPRequest_TimeoutProtocol>    timeoutDelegate;
 
@@ -77,6 +80,9 @@ typedef enum UMHTTPAuthenticationStatus
 @property (readwrite,strong) NSMutableDictionary		*responseCookies;
 @property (readonly,strong) NSDictionary               *params;
 @property (readonly,strong) id<UMHTTPRequest_TimeoutProtocol>    timeoutDelegate;
+@property (readwrite,strong) NSString            *authUsername;
+@property (readwrite,strong) NSString            *authPassword;
+
 
 
 //- (id) initWithRequest:(CFHTTPMessageRef)req connection:(UMHTTPConnection *)conn;
@@ -84,6 +90,7 @@ typedef enum UMHTTPAuthenticationStatus
 - (UMHTTPConnection *) connection;
 //- (void) setResponse:(CFHTTPMessageRef)value;
 - (void) setNotFound;
+- (void) setRequireAuthentication;
 - (void) extractGetParams;
 - (void) extractPutParams;
 - (void) extractPostParams;
@@ -100,6 +107,7 @@ typedef enum UMHTTPAuthenticationStatus
 - (void) setResponseCssString:(NSString *)content;
 - (void) setResponseJsonString:(NSString *)content;
 - (void) setResponseJsonObject:(id)content;
+- (void)setNotAuthorizedForRealm:(NSString *)realm;
 - (void)setContentType:(NSString *)ct;
 - (NSString *)description;
 - (NSString *)authenticationStatusAsString;

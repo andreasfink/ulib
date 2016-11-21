@@ -111,10 +111,10 @@ static inline int nibbleToInt(const char a)
 
 - (NSData *)decodeBase64
 {
-
+#ifdef __APPLE__
     return [[NSData alloc]initWithBase64EncodedString:self
                                               options:NSDataBase64DecodingIgnoreUnknownCharacters];
-#if 0
+#else
     NSString *decode = [self stringByAppendingString:@"\n"];
     NSData *data = [decode dataUsingEncoding:NSASCIIStringEncoding];
 

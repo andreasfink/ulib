@@ -173,15 +173,16 @@ now you can continue building
 12. ulib
     git clone http://github.com/andreasfink/ulib
     cd ulib
-    ./configure --enable-debug
+    ./configure
     make
     make install
+    ldconfig
     cd ..
 
 13. webserver sample application
-    git clone http://github.com/andreasfink/webser
-    cd webser
-    ./configure --enable-debug
+    git clone http://github.com/andreasfink/webserver
+    cd webserver
+    ./configure
     make
     make install
     

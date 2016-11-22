@@ -89,18 +89,8 @@ this links in the latest LLVM compiler version.
     wget ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-back-0.25.0.tar.gz
     wget ftp://ftp.gnustep.org/pub/gnustep/libs/gnustep-corebase-0.1.tar.gz
     wget http://download.gna.org/gnustep/libobjc2-1.7.tar.bz2
-    wget https://cmake.org/files/v3.7/cmake-3.7.0.tar.gz
 
-
-7. install cmake-3.7  (version 3.0.2 which gets installed with debian gives you some scripting error with llvm)
-
-    tar -xvzf cmake-3.7.0.tar.gz
-    cd /cmake-3.7.0.
-    CC=clang CXX=clang++ ./configure
-    make
-    make install
-
-6. Setup your gnustep-make (small inital config to bootstrap libobj2)
+7. Setup your gnustep-make (small inital config to bootstrap libobj2)
 
     tar -xvzf gnustep-make-2.6.8.tar.gz
     cd gnustep-make-2.6.8
@@ -109,7 +99,7 @@ this links in the latest LLVM compiler version.
     cd ..
 
 
-7. Prepare libobjc2
+8. Prepare libobjc2
 
    tar -xvjf libobjc2-1.7.tar.bz2
    cd libobjc2-1.7
@@ -140,7 +130,7 @@ now you can continue building
     make install
     cd ../..
 
-8. gnustep-make, part 2 (full config)
+9. gnustep-make, part 2 (full config)
 
     cd gnustep-make-2.6.8
     ./configure \
@@ -152,7 +142,7 @@ now you can continue building
     make install
     cd ..
 
-9. gnustep-base
+10. gnustep-base
 
     tar -xvzf gnustep-base-1.24.9.tar.gz
     cd gnustep-base-1.24.9
@@ -167,7 +157,7 @@ now you can continue building
     make install
     cd ..
 
-10. gnustep-corebase-0.1
+11. gnustep-corebase-0.1
 
     tar -xvzf gnustep-corebase-0.1.tar.gz
     cd gnustep-corebase-0.1
@@ -180,7 +170,7 @@ now you can continue building
     make install
     cd ..
 
-11. ulib
+12. ulib
     git clone http://github.com/andreasfink/ulib
     cd ulib
     ./configure --enable-debug
@@ -188,14 +178,14 @@ now you can continue building
     make install
     cd ..
 
-12. webserver sample application
+13. webserver sample application
     git clone http://github.com/andreasfink/webser
     cd webser
     ./configure --enable-debug
     make
     make install
     
-13. If you want X11 GUI support in GnuStep
+14. If you want X11 GUI support in GnuStep
 
     apt-get install 
         Xorg \
@@ -205,7 +195,7 @@ now you can continue building
         libxt-dev \
         libcups2-dev
 
-13.  gnustep-gui
+14.  gnustep-gui
 
     tar -xvzf gnustep-gui-0.25.0.tar.gz
     cd gnustep-gui-0.25.0
@@ -219,7 +209,7 @@ now you can continue building
     cd ..
 
 
-13. gnustep-back
+15. gnustep-back
 
     tar -xvzf gnustep-back-0.25.0.tar.gz
     cd gnustep-back-0.25.0

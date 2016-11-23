@@ -1225,7 +1225,7 @@
 		A60C2D831A3F212E0090FC94 /* UMConfigParsedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */; };
 		A60C2D861A3F212E0090FC94 /* UMConfigGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = A6713058149B8C2100E1A86A /* UMConfigGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C2D871A3F212E0090FC94 /* UMConfigGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A6713059149B8C2100E1A86A /* UMConfigGroup.m */; };
-		A60C2D911A3F213F0090FC94 /* UniversalHTTP.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC65149AA4AC0029E9CF /* UniversalHTTP.h */; };
+		A60C2D911A3F213F0090FC94 /* UniversalHTTP.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC65149AA4AC0029E9CF /* UniversalHTTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C2D921A3F213F0090FC94 /* NSString+UMHTTP.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC58149AA4AC0029E9CF /* NSString+UMHTTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C2D931A3F213F0090FC94 /* NSString+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AC59149AA4AC0029E9CF /* NSString+UMHTTP.m */; };
 		A60C2D941A3F213F0090FC94 /* NSMutableString+UMHTTP.h in Headers */ = {isa = PBXBuildFile; fileRef = A6DDD9AE16360C81002FA7CC /* NSMutableString+UMHTTP.h */; };
@@ -1972,6 +1972,10 @@
 		A6D8AD61149AC8870029E9CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D8AB0C149A769B0029E9CF /* Foundation.framework */; };
 		A6D94B2C193CA70E0090FC94 /* UMSynchronizedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D94B2A193CA70E0090FC94 /* UMSynchronizedArray.m */; };
 		A6DB3E70191E40770090FC94 /* ulib.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DB3E6F191E40770090FC94 /* ulib.m */; };
+		A6DC79281DE5766F003BBA67 /* UMHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = A6DC79261DE5766F003BBA67 /* UMHTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6DC79291DE5766F003BBA67 /* UMHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DC79271DE5766F003BBA67 /* UMHTTPClient.m */; };
+		A6DC792C1DE576D5003BBA67 /* UMHTTPClientRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6DC792A1DE576D5003BBA67 /* UMHTTPClientRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6DC792D1DE576D5003BBA67 /* UMHTTPClientRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DC792B1DE576D5003BBA67 /* UMHTTPClientRequest.m */; };
 		A6DDD9AB16360B80002FA7CC /* NSMutableArray+UMHTTP.h in Headers */ = {isa = PBXBuildFile; fileRef = A6DDD9A916360B80002FA7CC /* NSMutableArray+UMHTTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6DDD9AC16360B80002FA7CC /* NSMutableArray+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9AA16360B80002FA7CC /* NSMutableArray+UMHTTP.m */; };
 		A6DDD9AD16360B80002FA7CC /* NSMutableArray+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9AA16360B80002FA7CC /* NSMutableArray+UMHTTP.m */; };
@@ -2532,6 +2536,10 @@
 		A6D8AC7E149AA4C30029E9CF /* UMSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSocket.m; sourceTree = "<group>"; tabWidth = 5; };
 		A6D94B2A193CA70E0090FC94 /* UMSynchronizedArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSynchronizedArray.m; sourceTree = "<group>"; };
 		A6DB3E6F191E40770090FC94 /* ulib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ulib.m; sourceTree = "<group>"; };
+		A6DC79261DE5766F003BBA67 /* UMHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPClient.h; sourceTree = "<group>"; };
+		A6DC79271DE5766F003BBA67 /* UMHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPClient.m; sourceTree = "<group>"; };
+		A6DC792A1DE576D5003BBA67 /* UMHTTPClientRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPClientRequest.h; sourceTree = "<group>"; };
+		A6DC792B1DE576D5003BBA67 /* UMHTTPClientRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPClientRequest.m; sourceTree = "<group>"; };
 		A6DDD91F1635F83E002FA7CC /* ulib-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ulib-Prefix.pch"; sourceTree = "<group>"; };
 		A6DDD9A916360B80002FA7CC /* NSMutableArray+UMHTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+UMHTTP.h"; sourceTree = "<group>"; };
 		A6DDD9AA16360B80002FA7CC /* NSMutableArray+UMHTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+UMHTTP.m"; sourceTree = "<group>"; };
@@ -3439,6 +3447,10 @@
 				A6D8AC63149AA4AC0029E9CF /* UMHTTPURLHandler.h */,
 				A6D8AC64149AA4AC0029E9CF /* UMHTTPURLHandler.m */,
 				A6D8AC65149AA4AC0029E9CF /* UniversalHTTP.h */,
+				A6DC79261DE5766F003BBA67 /* UMHTTPClient.h */,
+				A6DC79271DE5766F003BBA67 /* UMHTTPClient.m */,
+				A6DC792A1DE576D5003BBA67 /* UMHTTPClientRequest.h */,
+				A6DC792B1DE576D5003BBA67 /* UMHTTPClientRequest.m */,
 			);
 			path = UniversalHTTP;
 			sourceTree = "<group>";
@@ -4470,6 +4482,7 @@
 				A6AC49251D4608FC002BAA97 /* ts.h in Headers */,
 				A6AC47AD1D4608F0002BAA97 /* pem2.h in Headers */,
 				A6EF4A531B0A2D720090FC94 /* UMObjectDebug.h in Headers */,
+				A6DC792C1DE576D5003BBA67 /* UMHTTPClientRequest.h in Headers */,
 				A6AC47291D4608F0002BAA97 /* asn1_mac.h in Headers */,
 				A6AC48E31D4608FC002BAA97 /* pem.h in Headers */,
 				A6971C8216356C0B004E9B50 /* UniversalConfig.h in Headers */,
@@ -4478,6 +4491,7 @@
 				A6AC47711D4608F0002BAA97 /* ecdsa.h in Headers */,
 				A6AC478C1D4608F0002BAA97 /* md4.h in Headers */,
 				A6AC48921D4608FC002BAA97 /* dh.h in Headers */,
+				A6DC79281DE5766F003BBA67 /* UMHTTPClient.h in Headers */,
 				A6AC47C51D4608F0002BAA97 /* rsa.h in Headers */,
 				A6AC48621D4608FC002BAA97 /* asn1_mac.h in Headers */,
 				A6D8AC75149AA4AC0029E9CF /* UniversalHTTP.h in Headers */,
@@ -5685,6 +5699,7 @@
 				A6D8AB54149A77D10029E9CF /* UMStringWithHistory.m in Sources */,
 				A6D8AB69149A77E70029E9CF /* UMLogBuffered.m in Sources */,
 				A6D8AB6C149A77E70029E9CF /* UMLogConsole.m in Sources */,
+				A6DC792D1DE576D5003BBA67 /* UMHTTPClientRequest.m in Sources */,
 				A695A3F71AF60E8600854472 /* UMFileTrackingInfo.m in Sources */,
 				A6D8AB6F149A77E70029E9CF /* UMLogDestination.m in Sources */,
 				A6D8AB72149A77E70029E9CF /* UMLogEntry.m in Sources */,
@@ -5696,6 +5711,7 @@
 				A6C84D6819F785DD0090FC94 /* UMLockEvent.m in Sources */,
 				A6D8AB88149A78100029E9CF /* UMLayer.m in Sources */,
 				A6C789501B4A8EE00090FC94 /* UMDateTimeStuff.m in Sources */,
+				A6DC79291DE5766F003BBA67 /* UMHTTPClient.m in Sources */,
 				A6D8AB8B149A78100029E9CF /* UMLayerTask.m in Sources */,
 				A616351A1A0C0E0400074D29 /* UMTaskQueue.m in Sources */,
 				A6D8AB97149A783A0029E9CF /* UMQueue.m in Sources */,

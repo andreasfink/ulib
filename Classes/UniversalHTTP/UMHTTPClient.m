@@ -1,0 +1,46 @@
+//
+//  UMHTTPClient.m
+//  ulib
+//
+//  Created by Andreas Fink on 23.11.16.
+//  Copyright © 2016 Andreas Fink. All rights reserved.
+//
+
+#import "UMHTTPClient.h"
+
+@implementation UMHTTPClient
+
+- (void)addPendingSession:(UMHTTPClientRequest *)creq
+{
+    [pendingOutgoingRequests addObject:creq];
+}
+
+- (void)removePendingSession:(UMHTTPClientRequest *)creq
+{
+    [pendingOutgoingRequests removeObject:creq];
+}
+
+- (void)startRequest:(UMHTTPClientRequest *)creq
+{
+    [self addPendingSession:creq];
+    creq.client = self;
+
+    creq.urlCon = [[NSURLConnection alloc]initWithRequest:creq.theRequest
+                                  delegate:creq
+                           startImmediately:YES];
+}
+
+- (NSString *)simpleSynchronousRequest:(UMHTTPClientRequest *)req
+{
+    NSError *err = NULL;
+    NSString *html = [NSString stringWithContentsOfURL:req.url
+                                              encoding:NSUTF8StringEncoding
+                                                 error:&err];
+    if(err)
+    {
+        NSLog(@"Error %@ while loading URL %@",err,req.urlString);
+    }
+    return html;
+}
+
+@end

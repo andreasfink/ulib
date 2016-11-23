@@ -39,3 +39,5 @@ typedef enum
 #import "UMHTTPCookie.h"
 #import "UMHTTPPageRef.h"
 #import "UMHTTPPageCache.h"
+#import "UMHTTPClient.h"
+#import "UMHTTPClientRequest.h"

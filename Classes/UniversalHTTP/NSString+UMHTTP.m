@@ -120,7 +120,7 @@ static inline int nibbleToInt(const char a)
 
     // Construct an OpenSSL context
     BIO *command = BIO_new(BIO_f_base64());
-    BIO *context = BIO_new_mem_buf((void *)[data bytes], [data length]);
+    BIO *context = BIO_new_mem_buf((void *)[data bytes],(int)[data length]);
 
     // Tell the context to encode base64
     context = BIO_push(command, context);

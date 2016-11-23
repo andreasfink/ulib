@@ -200,7 +200,6 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
     NSMutableDictionary *currentGroup = NULL;
     
     NSCharacterSet *whitespace  = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-    NSCharacterSet *equalsign   = [NSCharacterSet characterSetWithCharactersInString:@"="];
     NSCharacterSet *quotes      = [NSCharacterSet characterSetWithCharactersInString:@"\""];
     
     singleGroups = [[NSMutableDictionary alloc]init];

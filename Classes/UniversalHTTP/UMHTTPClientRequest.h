@@ -6,7 +6,7 @@
 //  Copyright © 2016 Andreas Fink. All rights reserved.
 //
 
-#import <ulib/ulib.h>
+#include "UMObject.h"
 
 @class UMHTTPClient;
 

@@ -35,7 +35,7 @@
         }
         else
         {
-            policy = NSURLRequestReloadIgnoringLocalCacheData;
+            policy = NSURLRequestReloadIgnoringCacheData;
         }
         theRequest = [NSMutableURLRequest requestWithURL:url
                                              cachePolicy:policy

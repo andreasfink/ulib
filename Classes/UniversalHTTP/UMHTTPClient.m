@@ -7,6 +7,7 @@
 //
 
 #import "UMHTTPClient.h"
+#import "UMHTTPClientRequest.h"
 
 @implementation UMHTTPClient
 
@@ -25,9 +26,14 @@
     [self addPendingSession:creq];
     creq.client = self;
 
+#ifdef LINUX
+    creq.urlCon = [[NSURLConnection alloc]initWithRequest:creq.theRequest
+                                  delegate:creq];
+#else
     creq.urlCon = [[NSURLConnection alloc]initWithRequest:creq.theRequest
                                   delegate:creq
                            startImmediately:YES];
+#endif
 }
 
 - (NSString *)simpleSynchronousRequest:(UMHTTPClientRequest *)req

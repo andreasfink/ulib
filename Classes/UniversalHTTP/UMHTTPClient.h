@@ -6,7 +6,7 @@
 //  Copyright © 2016 Andreas Fink. All rights reserved.
 //
 
-#import <ulib/ulib.h>
+#import "UMObject.h"
 #import "UMSynchronizedArray.h"
 
 @class UMHTTPClientRequest;

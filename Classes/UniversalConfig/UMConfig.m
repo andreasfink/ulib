@@ -236,9 +236,9 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
             /* a comment line we can skip */
             continue;
         }
-        
-        NSArray *parts = [line componentsSeparatedByCharactersInSet:equalsign];
-        if([parts count] < 2)
+
+        NSRange r = [line rangeOfString:@"="];
+        if(r.length==0)
         {
             @throw([NSException exceptionWithName:@"config"
                                            reason:[NSString stringWithFormat:
@@ -246,9 +246,11 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
                                                    item.filename,item.lineNumber,item.content]
                                          userInfo:@{@"backtrace": UMBacktrace(NULL,0) }]);
         }
-        
-        NSString *part1 = [[parts objectAtIndex:0] stringByTrimmingCharactersInSet:whitespace];
-        NSString *part2 = [[parts objectAtIndex:1] stringByTrimmingCharactersInSet:whitespace];
+
+        NSString *part1 = [line substringToIndex:r.location];
+        NSString *part2 = [line substringFromIndex:r.location+1];
+        part1 = [part1 stringByTrimmingCharactersInSet:whitespace];
+        part2 = [part2 stringByTrimmingCharactersInSet:whitespace];
         part2 = [part2 stringByTrimmingCharactersInSet:quotes];
         if([part1 isEqualToString:@"group"])
         {

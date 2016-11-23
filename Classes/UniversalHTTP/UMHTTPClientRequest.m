@@ -41,5 +41,6 @@
                                              cachePolicy:policy
                                          timeoutInterval:timeout];
     }
+    return self;
 }
 @end

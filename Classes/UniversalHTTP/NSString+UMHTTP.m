@@ -116,8 +116,28 @@ static inline int nibbleToInt(const char a)
     {
         allowedInUrl = [NSCharacterSet characterSetWithCharactersInString:@"!$&'()*,-.0123456789:;=ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"];
     }
-    NSString *escapedString = [self stringByAddingPercentEncodingWithAllowedCharacters:allowedInUrl];
-    return escapedString;
+
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    const char *bytes = data.bytes;
+
+    NSMutableString *out = [[NSMutableString alloc]init];
+    NSInteger i;
+    NSInteger len = [data length];
+    for(i=0;i<len;i++)
+    {
+        NSString *s;
+
+        unsigned char c = bytes[i];
+        if([allowedInUrl characterIsMember:(unichar)c])
+        {
+            [out appendFormat:@"%c",c];
+        }
+        else
+        {
+            [out appendFormat:@"%%%02x",(int)c];
+        }
+    }
+    return out;
 }
 
 - (NSData *)decodeBase64

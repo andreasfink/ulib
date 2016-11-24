@@ -125,8 +125,6 @@ static inline int nibbleToInt(const char a)
     NSInteger len = [data length];
     for(i=0;i<len;i++)
     {
-        NSString *s;
-
         unsigned char c = bytes[i];
         if([allowedInUrl characterIsMember:(unichar)c])
         {

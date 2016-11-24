@@ -110,9 +110,13 @@ static inline int nibbleToInt(const char a)
 
 - (NSString *) urlencode
 {
-    NSString *escapedString = [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-    escapedString = [escapedString stringByReplacingOccurrencesOfString:@"+" withString:@"%2b"];
-    escapedString = [escapedString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    static NSCharacterSet *allowedInUrl;
+
+    if(allowedInUrl == NULL)
+    {
+        allowedInUrl = [NSCharacterSet characterSetWithCharactersInString:@"!$&'()*,-.0123456789:;=ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"];
+    }
+    NSString *escapedString = [self stringByAddingPercentEncodingWithAllowedCharacters:allowedInUrl];
     return escapedString;
 }
 

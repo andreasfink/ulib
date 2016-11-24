@@ -108,6 +108,13 @@ static inline int nibbleToInt(const char a)
     return out;
 }
 
+- (NSString *) urlencode
+{
+    NSString *escapedString = [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+    escapedString = [escapedString stringByReplacingOccurrencesOfString:@"+" withString:@"%2b"];
+    escapedString = [escapedString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    return escapedString;
+}
 
 - (NSData *)decodeBase64
 {

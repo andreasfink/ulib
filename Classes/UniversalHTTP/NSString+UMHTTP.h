@@ -13,5 +13,6 @@
 - (NSArray *)splitByFirstCharacter:(unichar)uc;
 - (NSString *)urldecode;
 - (NSData *)urldecodeData;
+- (NSString *) urlencode;
 - (NSData *)decodeBase64;
 @end

@@ -49,4 +49,13 @@
     return html;
 }
 
+- (void)simpleASynchronousRequest:(UMHTTPClientRequest *)req
+{
+
+    [self runSelectorInBackground:@selector(simpleSynchronousRequest:)
+                       withObject:req
+                             file:__FILE__
+                             line:__LINE__
+                         function:__func__];
+}
 @end

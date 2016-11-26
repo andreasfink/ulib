@@ -58,9 +58,9 @@
 @property(readwrite,strong) UMHistoryLog *layerHistory;
 
 
-- (void)queueFromLower:(UMTask *)task;
-- (void)queueFromUpper:(UMTask *)task;
-- (void)queueFromAdmin:(UMTask *)task;
+- (void)queueFromLower:(UMLayerTask *)task;
+- (void)queueFromUpper:(UMLayerTask *)task;
+- (void)queueFromAdmin:(UMLayerTask *)task;
 - (void)queueFromLowerWithPriority:(UMLayerTask *)task;
 - (void)queueFromUpperWithPriority:(UMLayerTask *)task;
 

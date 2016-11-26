@@ -111,10 +111,12 @@ static inline int nibbleToInt(const char a)
 - (NSString *) urlencode
 {
     static NSCharacterSet *allowedInUrl;
-
-    if(allowedInUrl == NULL)
+    @synchronized(self)
     {
-        allowedInUrl = [NSCharacterSet characterSetWithCharactersInString:@"!$&'()*,-.0123456789:;=ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"];
+        if(allowedInUrl == NULL)
+        {
+            allowedInUrl = [NSCharacterSet characterSetWithCharactersInString:@"!$&'()*,-.0123456789:;=ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"];
+        }
     }
 
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];

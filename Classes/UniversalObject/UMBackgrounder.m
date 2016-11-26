@@ -64,15 +64,9 @@
                 int s = [control_sleeper sleep:1000000 wakeOn:UMSleeper_StartupCompletedSignal]; /* 1s */
                 if(s==UMSleeper_StartupCompletedSignal)
                 {
-                    break;
+                    return;
                 }
                 i++;
-            }
-            if((runningStatus == UMBackgrounder_startingUp) && (i> 100))
-            {
-                /* it didnt start successfully in 10 seconds. Something is VERY ODD */
-                NSLog(@"startBackgroundTask: failed. Background task did not start up in 10 seconds");
-                runningStatus = UMBackgrounder_notRunning;
             }
         }
     }

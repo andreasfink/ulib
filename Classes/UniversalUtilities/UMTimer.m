@@ -53,18 +53,24 @@
 
 - (void)start
 {
-    self.isRunning = YES;
-    UMMicroSec now  = [UMThroughputCounter microsecondTime];
-    expiryTime = now + duration;
-    [[UMTimerBackgrounder sharedInstance]addTimer:self];
+    @synchronized(self)
+    {
+        self.isRunning = YES;
+        UMMicroSec now  = [UMThroughputCounter microsecondTime];
+        expiryTime = now + duration;
+        [[UMTimerBackgrounder sharedInstance]addTimer:self];
+    }
 
 }
 
 - (void) stop
 {
-    self.isRunning = NO;
-    expiryTime = 0;
-    [[UMTimerBackgrounder sharedInstance]removeTimer:self];
+    @synchronized(self)
+    {
+        self.isRunning = NO;
+        expiryTime = 0;
+        [[UMTimerBackgrounder sharedInstance]removeTimer:self];
+    }
 }
 
 - (BOOL)isExpired
@@ -75,10 +81,13 @@
 
 - (BOOL)isExpired:(UMMicroSec)now
 {
-    lastChecked = now;
-    if(now > expiryTime)
+    @synchronized(self)
     {
-        return YES;
+        lastChecked = now;
+        if(now > expiryTime)
+        {
+            return YES;
+        }
     }
     return NO;
 }
@@ -86,7 +95,10 @@
 
 - (UMMicroSec)timeLeft:(UMMicroSec)now
 {
-    return expiryTime - now;
+    @synchronized(self)
+    {
+        return expiryTime - now;
+    }
 }
 
 - (void)fire

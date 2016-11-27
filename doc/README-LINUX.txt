@@ -51,7 +51,8 @@ this links in the latest LLVM compiler version.
 
 
 5. Install dependencies for gnustep and ulib
-    apt-get install  \
+    apt-get install \
+        cmake \
         libkqueue0 libkqueue-dev  \
         libpthread-workqueue0 libpthread-workqueue-dev \
         libblocksruntime0 libblocksruntime-dev \
@@ -188,7 +189,7 @@ now you can continue building
     
 14. If you want X11 GUI support in GnuStep
 
-    apt-get install 
+    apt-get install \
         Xorg \
         libfreetype6 libfreetype6-dev \
         libpango1.0-dev \

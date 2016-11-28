@@ -80,6 +80,7 @@ this links in the latest LLVM compiler version.
         libcairo2-dev \
         libxt-dev \
         libgl1-mesa-dev \
+        libpcap-dev \
         gobjc
 
 6. Download the sourcecode of gnustep and libobjc2 and cmake
@@ -160,6 +161,8 @@ now you can continue building
     make install
     cd ..
 
+(for debug version use "make debug=yes" instead of "make")
+
 11. gnustep-corebase-0.1
 
     tar -xvzf gnustep-corebase-0.1.tar.gz
@@ -223,3 +226,15 @@ now you can continue building
     make install
     cd ..
 
+
+16. For universalSS7 the following dependency is also needed
+
+	wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
+	tar -xvzf libiconv-1.14.tar.gz
+	cd libiconv-1.14
+	./configure
+	make
+	make install
+	cd ..
+	
+	

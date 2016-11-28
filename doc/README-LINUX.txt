@@ -127,9 +127,11 @@ now you can continue building
 
     mkdir Build
     cd Build
-    cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+    cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DBUILD_STATIC_LIBOBJC=1  
     make install
     cd ../..
+
+(you can add -DCMAKE_BUILD_TYPE=Debug )
 
 9. gnustep-make, part 2 (full config)
 

@@ -34,7 +34,7 @@ this links in the latest LLVM compiler version.
 4. link the "clang" and "clang++" names to the latest 4.0 version
 
     pushd /usr/bin
-    for F in pp-trace scan-build scan-view clang clang++ clang-tidy clang-tblgen clang-query clang-check clang-apply-replacements c-index-test
+    for F in pp-trace scan-build scan-view clang clang++ clang-tidy clang-tblgen clang-query clang-check clang-apply-replacements c-index-test lldb
     do
         rm $F
         ln -s $F-4.0 $F

@@ -2187,29 +2187,71 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     {
         return NULL;
     }
-    if([addr isEqualToString:@"0.0.0.0"])
+    else if([addr isEqualToString:@"0.0.0.0"])
     {
         return @"ipv4:0.0.0.0";
     }
-    if([addr length]==0)
+    else if([addr length]==0)
     {
         return @"ipv6:[::]";
     }
 
-    if([addr isEqualToString:@"::1"])
+    else if(([addr isEqualToString:@"::1"]) || ([addr isEqualToString:@"ipv6[::1]"]))
     {
         return @"ipv6:localhost";
     }
 
-    if([addr isEqualToString:@"127.0.0.1"] || [addr isEqualToString:@"::ffff:127.0.0.1"])
+    else if(
+            [addr isEqualToString:@"127.0.0.1"] ||
+            [addr isEqualToString:@"::ffff:127.0.0.1"] ||
+            [addr isEqualToString:@"ipv4:127.0.0.1"] ||
+            [addr isEqualToString:@"ipv6:[::ffff:127.0.0.1]"])
     {
         return @"ipv4:localhost";
+    }
+
+    else if ([addr hasPrefix:@"ipv4:"])
+    {
+        addr = [addr substringFromIndex:5];
+        NSArray *a = [addr componentsSeparatedByString:@"."];
+        if([a count]==4)
+        {
+            int a1 = [[a objectAtIndex:0] intValue];
+            int a2 = [[a objectAtIndex:1] intValue];
+            int a3 = [[a objectAtIndex:2] intValue];
+            int a4 = [[a objectAtIndex:3] intValue];
+            a1 = a1 % 256;
+            a2 = a2 % 256;
+            a3 = a3 % 256;
+            a4 = a4 % 256;
+            return [NSString stringWithFormat:@"ipv4:%d.%d.%d.%d",a1,a2,a3,a4];
+        }
+    }
+    else if ([addr hasPrefix:@"ipv6:"])
+    {
+        addr = [addr substringFromIndex:5];
+        if([addr length]>7)
+        {
+            if([[addr substringToIndex:7]isEqualToString:@"::ffff:"])
+            {
+                return [NSString stringWithFormat:@"ipv4:%@",[addr substringFromIndex:7]];
+            }
+        }
+        return [NSString stringWithFormat:@"ipv6:[%@]", addr];
     }
 
     NSArray *a = [addr componentsSeparatedByString:@"."];
     if([a count]==4)
     {
-        return [NSString stringWithFormat:@"ipv4:%@",addr];
+        int a1 = [[a objectAtIndex:0] intValue];
+        int a2 = [[a objectAtIndex:1] intValue];
+        int a3 = [[a objectAtIndex:2] intValue];
+        int a4 = [[a objectAtIndex:3] intValue];
+        a1 = a1 % 256;
+        a2 = a2 % 256;
+        a3 = a3 % 256;
+        a4 = a4 % 256;
+        return [NSString stringWithFormat:@"ipv4:%d.%d.%d.%d",a1,a2,a3,a4];
     }
     else
     {

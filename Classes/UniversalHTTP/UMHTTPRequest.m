@@ -115,11 +115,6 @@
 	[self extractParams:requestDataString];
 }
 
-//- (NSDictionary *)params
-//{
-//    return [[NSDictionary alloc]initWithDictionary:params];
-//}
-
 - (NSMutableDictionary *)paramsMutableCopy
 {
     return [[NSMutableDictionary alloc]initWithDictionary:params];

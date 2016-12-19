@@ -64,7 +64,7 @@ case "$host" in
 
     ARCH="-arch x86_64"
     CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude -I/usr/local/mysqlclient/include -I/usr/local/postgresclient/include ${ARCH}"
-    LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework CoreFoundation -framework Security"
+    LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security"
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"
     LIBTOOL="libtool -static -o"

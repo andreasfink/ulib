@@ -22,4 +22,7 @@ NSString *sqlEscapeNSString(NSString *input);
 - (NSString *)hexString;                            /*!< convert string to hex string */
 - (BOOL)hasCaseInsensitiveSuffix:(NSString *)s;     /*!< does it end with this suffix in a case insensitive way */
 - (BOOL)hasCaseInsensitivePrefix:(NSString *)p;     /*!< does it start with this prefix in a case insensitive way */
+
+- (BOOL)isEqualToStringCaseInsensitive:(NSString *)aString;
+
 @end

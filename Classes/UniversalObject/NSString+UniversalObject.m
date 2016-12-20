@@ -256,5 +256,12 @@ NSString *sqlEscapeNSString(NSString *input)
     return NO;
 }
 
+- (BOOL)isEqualToStringCaseInsensitive:(NSString *)b
+{
+    NSString *a = [self lowercaseString];
+    b = [b lowercaseString];
+    return [a isEqualToString:b];
+}
+
 @end
 

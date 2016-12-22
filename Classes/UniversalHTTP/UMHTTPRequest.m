@@ -573,14 +573,20 @@
 
 - (void)makeAsyncWithTimeout:(NSTimeInterval)timeoutInSeconds
 {
-    awaitingCompletion = YES;
-    completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
+    @synchronized (self)
+    {
+        awaitingCompletion = YES;
+        completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
+    }
 }
 
 - (void)resumePendingRequest
 {
-    awaitingCompletion = NO;
-    [sleeper wakeUp];
+    @synchronized (self)
+    {
+        awaitingCompletion = NO;
+        [sleeper wakeUp];
+    }
 }
 
 
@@ -591,16 +597,37 @@
         sleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
     }
 
-    while(awaitingCompletion==YES)
+    BOOL a;
+    @synchronized (self)
+    {
+        a = awaitingCompletion;
+    }
+
+    while(a==YES)
     {
         [sleeper sleep:100000LL]; /* sleep 100ms = 100'000µs or until being woken up */
-        if([[NSDate date]compare:completionTimeout] != NSOrderedAscending)
+        NSDate *d;
+        @synchronized (self)
+        {
+            d =completionTimeout;
+        }
+        if([[NSDate date]compare:d] != NSOrderedAscending)
         {
             [timeoutDelegate httpRequestTimeout:self];
-            awaitingCompletion = NO;
+            @synchronized (self)
+            {
+                awaitingCompletion = NO;
+            }
+        }
+        @synchronized (self)
+        {
+            a = awaitingCompletion;
         }
     }
-    awaitingCompletion = NO;
+    @synchronized (self)
+    {
+        awaitingCompletion = NO;
+    }
     sleeper = NULL;
 }
 

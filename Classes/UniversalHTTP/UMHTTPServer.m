@@ -134,9 +134,20 @@
 
 		[sleeper reset];
 
-		while(status == UMHTTPServerStatus_startingUp)
+        UMHTTPServerStatus	s;
+        @synchronized (self)
+        {
+            s = status;
+
+        }
+
+		while(s == UMHTTPServerStatus_startingUp)
         {
 			[sleeper sleep:100000];/* wait 100ms */
+            @synchronized (self)
+            {
+                s = status;
+            }
         }
 
 	    if( status == UMHTTPServerStatus_running )
@@ -265,8 +276,10 @@
 				}
 			}
 		}
-        
-		status = UMHTTPServerStatus_shutDown;
+        @synchronized(self)
+        {
+            status = UMHTTPServerStatus_shutDown;
+        }
         [listenerSocket unpublish];
 		[listenerSocket close];
 		listenerRunning = NO;

@@ -27,6 +27,7 @@
 + (instancetype)synchronizedSortedDictionary;
 + (instancetype)synchronizedSortedDictionaryWithDictionary:(NSDictionary *)xd;
 - (id)objectAtIndex:(NSUInteger)index;
+- (id)keyAtIndex:(NSUInteger)index;
 - (id)objectForKeyedSubscript:(id)key;
 - (void)removeObjectForKey:(id)aKey;
 - (void)addObject:(id)o forKey:(id)key;

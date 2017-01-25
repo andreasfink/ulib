@@ -99,6 +99,17 @@
     return NULL;
 }
 
+- (id)keyAtIndex:(NSUInteger)index
+{
+    @synchronized(self)
+    {
+        id key = sortIndex[index];
+        return key;
+    }
+    return NULL;
+}
+
+
 - (NSArray *)allKeys
 {
     @synchronized(self)

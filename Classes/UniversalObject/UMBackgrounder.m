@@ -47,9 +47,9 @@
     
     @synchronized(self)
     {
-        if(runningStatus == UMBackgrounder_notRunning)
+        if(self.runningStatus == UMBackgrounder_notRunning)
         {
-            runningStatus = UMBackgrounder_startingUp;
+            self.runningStatus = UMBackgrounder_startingUp;
 
             [self runSelectorInBackground:@selector(backgroundTask)
                                withObject:NULL
@@ -81,26 +81,26 @@
 {
     @synchronized(self)
     {
-        if(runningStatus != UMBackgrounder_running)
+        if(self.runningStatus != UMBackgrounder_running)
         {
             return;
         }
         
-        runningStatus = UMBackgrounder_shuttingDown;
+        self.runningStatus = UMBackgrounder_shuttingDown;
         int i=0;
       
         [workSleeper wakeUp:UMSleeper_ShutdownOrderSignal];
-        while((runningStatus == UMBackgrounder_shuttingDown) && (i<= 100))
+        while((self.runningStatus == UMBackgrounder_shuttingDown) && (i<= 100))
         {
             i++;
             [control_sleeper sleep:UMSLEEPER_DEFAULT_SLEEP_TIME wakeOn:UMSleeper_ShutdownCompletedSignal]; /* 500ms */
         }
-        if((runningStatus == UMBackgrounder_shuttingDown) && (i> 100))
+        if((self.runningStatus == UMBackgrounder_shuttingDown) && (i> 100))
         {
             /* it didnt start successfully in 10 seconds. Something is VERY ODD */
             NSLog(@"shutdownBackgroundTask: failed. Background task did not shut down within 10 seconds");
         }
-        runningStatus = UMBackgrounder_notRunning;
+        self.runningStatus = UMBackgrounder_notRunning;
     }
 }
 
@@ -112,7 +112,7 @@
     {
         ulib_set_thread_name(self.name);
     }
-    if(runningStatus != UMBackgrounder_startingUp)
+    if(self.runningStatus != UMBackgrounder_startingUp)
     {
         return;
     }
@@ -120,7 +120,7 @@
     {
         self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
     }
-   runningStatus = UMBackgrounder_running;
+   self.runningStatus = UMBackgrounder_running;
 
     [control_sleeper wakeUp:UMSleeper_StartupCompletedSignal];
 
@@ -129,7 +129,7 @@
         NSLog(@"%@: started up successfully",self.name);
     }
     [self backgroundInit];
-    while((runningStatus == UMBackgrounder_running) && (mustQuit==NO))
+    while((self.runningStatus == UMBackgrounder_running) && (mustQuit==NO))
     {
         /* waiting for work */
         long long sleepTime = UMSLEEPER_DEFAULT_SLEEP_TIME;
@@ -168,7 +168,7 @@
         NSLog(@"%@: shutting down",self.name);
     }
     [self backgroundExit];
-    runningStatus = UMBackgrounder_notRunning;
+    self.runningStatus = UMBackgrounder_notRunning;
     self.workSleeper = NULL;
     [control_sleeper wakeUp:UMSleeper_ShutdownCompletedSignal];
 }

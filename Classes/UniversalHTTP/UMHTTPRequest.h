@@ -80,8 +80,9 @@
 @property (readwrite,strong) NSMutableDictionary		*responseCookies;
 @property (readonly,strong) NSDictionary               *params;
 @property (readonly,strong) id<UMHTTPRequest_TimeoutProtocol>    timeoutDelegate;
-@property (readwrite,strong) NSString            *authUsername;
-@property (readwrite,strong) NSString            *authPassword;
+@property (readwrite,strong) NSString                   *authUsername;
+@property (readwrite,strong) NSString                   *authPassword;
+@property (readwrite,strong,atomic)NSDate               *completionTimeout;
 
 
 

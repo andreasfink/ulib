@@ -576,7 +576,7 @@
     @synchronized (self)
     {
         awaitingCompletion = YES;
-        completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
+        self.completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
     }
 }
 
@@ -609,7 +609,7 @@
         NSDate *d;
         @synchronized (self)
         {
-            d =completionTimeout;
+            d =self.completionTimeout;
         }
         if([[NSDate date]compare:d] != NSOrderedAscending)
         {

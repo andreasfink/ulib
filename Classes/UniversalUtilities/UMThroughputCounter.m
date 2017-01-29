@@ -213,6 +213,11 @@ end:
 			(double)[self getSpeedForMicroseconds: 1200000000ULL]];
 }
 
+- (NSString *)description
+{
+    return [self getSpeedStringTriple];
+}
+
 - (void)clear
 {
 	[self fillWithInt: 0];

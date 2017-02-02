@@ -12,6 +12,6 @@ Libs: -L${libdir} -lulib -lobjc -lavahi-client -lavahi-core -lavahi-common -lsct
 Name: ulib
 Description: universal library
 Version: @VERSION@
-Requires: uuid libbsd
+Requires: uuid
 
 

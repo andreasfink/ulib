@@ -57,10 +57,29 @@ distributions
         python-dev swig \
         libedit-dev libeditline0  libeditline-dev libreadline6 libreadline6-dev readline-common \
         binfmt-support libtinfo-dev \
-        bison flex m4
+        bison flex m4 wget
+
+now install the latest clang-5.0
+        wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key > /tmp/llvm-snapshot.gpg.key
+        apt-key add /tmp/llvm-snapshot.gpg.key
+        apt-get update
+        apt-get install clang-5.0 llvm-5.0 lldb-5.0
+        cd /usr/bin/
+        for BINARY in  bugpoint c-index-test clang clang++ clang-apply-replacements clang-change-namespace clang-check clang-cl clang-cpp clang-import-test clang-include-fixer clang-offload-bundler clang-query clang-rename clang-reorder-fields clang-tblgen find-all-symbols llc lldb lldb-5.0.0 lldb-argdumper lldb-mi lldb-mi-5.0.0 lldb-server lldb-server-5.0.0 lli lli-child-target llvm-ar llvm-as llvm-bcanalyzer llvm-cat llvm-config llvm-cov llvm-c-test llvm-cxxdump llvm-cxxfilt llvm-diff llvm-dis llvm-dsymutil llvm-dwarfdump llvm-dwp llvm-extract llvm-lib llvm-link llvm-lto2 llvm-lto llvm-mc llvm-mcmarkup llvm-modextract llvm-nm llvm-objdump llvm-opt-report llvm-pdbdump llvm-PerfectShuffle llvm-profdata llvm-ranlib llvm-readobj llvm-rtdyld llvm-size llvm-split llvm-stress llvm-strings llvm-symbolizer llvm-tblgen llvm-xray modularize obj2yaml opt sancov sanstats scan-build scan-view verify-uselistorder yaml2obj yaml-bench
+        do
+            if [ -L "$BINARY" ]
+            then
+                if [ -L "$BINARY-5.0" ]
+                then
+                    rm "$BINARY"
+                    ln -s "$BINARY-5.0" "$BINARY"
+                fi
+            fi
+         fi
+         done
 
 
-  Debian8 only:			apt-get install libgnutls-deb0-28  libcups2-dev  locales-all libicu52\
+  Debian8 only:			apt-get install libgnutls-deb0-28  libcups2-dev  locales-all libicu52
   Ubuntu14 only:		apt-get install locales libicu52
   Ubuntu16 only:		apt-get install locales libicu55
   

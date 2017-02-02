@@ -17,6 +17,7 @@
 @synthesize name;
 @synthesize workSleeper;
 @synthesize enableLogging;
+@synthesize runningStatus;
 
 - (UMBackgrounder *)init
 {

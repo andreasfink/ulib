@@ -75,9 +75,11 @@ now install the latest clang-5.0
                     ln -s "$BINARY-5.0" "$BINARY"
                 fi
             fi
-         fi
          done
-
+         
+         export CC=clang
+         export CXX=clang++
+         
 
   Debian8 only:			apt-get install libgnutls-deb0-28  libcups2-dev  locales-all libicu52
   Ubuntu14 only:		apt-get install locales libicu52
@@ -235,7 +237,7 @@ And you might want to check your PATH variable as /usr/local/bin might not be in
 
     tar -xvzf gnustep-make-2.6.8.tar.gz
     cd gnustep-make-2.6.8
-    CC=clang CXX=clang++  ./configure --enable-objc-nonfragile-abi
+    CC=clang CXX=clang++  ./configure --enable-objc-arc -enable-objc-nonfragile-abi
     make install
     cd ..
 
@@ -273,15 +275,20 @@ And you might want to check your PATH variable as /usr/local/bin might not be in
 (you can add -DCMAKE_BUILD_TYPE=Debug but this will drastically increase build time and binary sizes.
 And if you installed a clang compiler yourself, make sure the path is set to find it or modify the -DCMAKE_C_COMPILER / -DCMAKE_CXX_COMPILER options accordingly.
 
+
+--enable-objc-arc --enable-objc-nonfragile-abi 
+
 6. gnustep-make, part 2 (full config)
 
     cd gnustep-make-2.6.8
     ./configure \
         CC=clang \
         CXX=clang++ \
+        CFLAGS=-fobjc-arc \
         --disable-importing-config-file \
         --enable-objc-nonfragile-abi \
-        --with-layout=fhs
+        --enable-objc-arc \
+        --with-layout=fhs 
     make install
     cd ..
 
@@ -292,10 +299,8 @@ And if you installed a clang compiler yourself, make sure the path is set to fin
     ./configure \
         CC=clang \
         CXX=clang++ \
-        CFLAGS="-fblocks -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1"\
-        --with-layout=fhs \
-        --with-zeroconf-api=avahi \
-        --enable-objc-nonfragile-abi 
+        CFLAGS="-fblocks  -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1"\
+        --with-zeroconf-api=avahi
     make
     make install
     ldconfig

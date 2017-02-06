@@ -105,21 +105,24 @@ static void socket_set_blocking(int fd, int blocking)
 }
 - (void) terminate
 {
-    if(pipefds[RXPIPE]>=0)
+    @synchronized(self)
     {
-        TRACK_FILE_CLOSE(pipefds[RXPIPE]);
-        close(pipefds[RXPIPE]);
+        if(pipefds[RXPIPE])
+        {
+            TRACK_FILE_CLOSE(pipefds[RXPIPE]);
+            close(pipefds[RXPIPE]);
+            pipefds[RXPIPE] = -1;
+        }
+        if(pipefds[TXPIPE]>=0)
+        {
+            TRACK_FILE_CLOSE(pipefds[TXPIPE]);
+            close(pipefds[TXPIPE]);
+            pipefds[TXPIPE] = -1;
+        }
         pipefds[RXPIPE] = -1;
-    }
-    if(pipefds[TXPIPE]>=0)
-    {
-        TRACK_FILE_CLOSE(pipefds[TXPIPE]);
-        close(pipefds[TXPIPE]);
         pipefds[TXPIPE] = -1;
+        isPrepared = NO;
     }
-    pipefds[RXPIPE] = -1;
-    pipefds[TXPIPE] = -1;
-    isPrepared = NO;
 }
 
 
@@ -250,14 +253,17 @@ static void flushpipe(int fd)
 
 - (void) wakeUp:(UMSleeper_Signal)signal
 {
-    if(pipefds[RXPIPE] > 0)
+    @synchronized (self)
     {
-        uint8_t bytes[4];
-        bytes[0] = (signal & 0xFF000000 ) >> 24;
-        bytes[1] = (signal & 0x00FF0000 ) >> 16;
-        bytes[2] = (signal & 0x0000FF00 ) >> 8;
-        bytes[3] = (signal & 0x000000FF ) >> 0;
-        write(pipefds[TXPIPE], &bytes,4);
+        if(pipefds[RXPIPE] > 0)
+        {
+            uint8_t bytes[4];
+            bytes[0] = (signal & 0xFF000000 ) >> 24;
+            bytes[1] = (signal & 0x00FF0000 ) >> 16;
+            bytes[2] = (signal & 0x0000FF00 ) >> 8;
+            bytes[3] = (signal & 0x000000FF ) >> 0;
+            write(pipefds[TXPIPE], &bytes,4);
+        }
     }
 }
 

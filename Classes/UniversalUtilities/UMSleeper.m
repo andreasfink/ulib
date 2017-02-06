@@ -101,30 +101,20 @@ static void socket_set_blocking(int fd, int blocking)
 
 - (void) dealloc
 {
-    [self terminate];
-}
-- (void) terminate
-{
-    @synchronized(self)
+    if(pipefds[RXPIPE] >=0)
     {
-        if(pipefds[RXPIPE])
-        {
-            TRACK_FILE_CLOSE(pipefds[RXPIPE]);
-            close(pipefds[RXPIPE]);
-            pipefds[RXPIPE] = -1;
-        }
-        if(pipefds[TXPIPE]>=0)
-        {
-            TRACK_FILE_CLOSE(pipefds[TXPIPE]);
-            close(pipefds[TXPIPE]);
-            pipefds[TXPIPE] = -1;
-        }
-        pipefds[RXPIPE] = -1;
-        pipefds[TXPIPE] = -1;
-        isPrepared = NO;
+        TRACK_FILE_CLOSE(pipefds[RXPIPE]);
+        close(pipefds[RXPIPE]);
     }
+    if(pipefds[TXPIPE]>=0)
+    {
+        TRACK_FILE_CLOSE(pipefds[TXPIPE]);
+        close(pipefds[TXPIPE]);
+    }
+    pipefds[RXPIPE] = -1;
+    pipefds[TXPIPE] = -1;
+    isPrepared = NO;
 }
-
 
 
 #ifdef INFTIM

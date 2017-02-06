@@ -30,7 +30,6 @@ typedef int32_t UMSleeper_Signal; /* note Sleeper signal is a bitmask */
 
 - (UMSleeper *)initFromFile:(const char *)file line:(long)line function:(const char *)function;
 - (void) prepare;
-- (void) terminate;
 - (void) dealloc;
 - (int) sleep:(UMMicroSec) microseconds wakeOn:(UMSleeper_Signal)sig;	/* returns signal number (1-0xFFFF) if signal was received, 0 on timer epxiry, -1 on error  */
 - (int) sleep:(UMMicroSec) microseconds;	/* returns returns signal number (1-0xFFFF)if interrupted, 0 if timer expired */

@@ -73,11 +73,6 @@
     }
 }
 
-- (void) dealloc
-{
-    [control_sleeper terminate];
-}
-
 - (void)shutdownBackgroundTask
 {
     @synchronized(self)

@@ -37,19 +37,21 @@ static void socket_set_blocking(int fd, int blocking)
 #define	TXPIPE 1
 
 @implementation UMSleeper
+@synthesize rxpipe;
+@synthesize txpipe;
+@synthesize isPrepared;
 
 - (UMSleeper *)initFromFile:(const char *)file line:(long)line function:(const char *)function
 {
     self = [super init];
     if(self)
     {
-        isPrepared = NO;
+        self.isPrepared = NO;
         ifile = file;
         iline = line;
         ifunction = function;
     }
     return self;
-    
 }
 
 - (UMSleeper *)init
@@ -59,12 +61,16 @@ static void socket_set_blocking(int fd, int blocking)
 
 - (void) prepare
 {
+    if(self.isPrepared==YES)
+    {
+        return;
+    }
+
     @synchronized (self)
     {
-        if(isPrepared==YES)
-        {
-            return;
-        }
+        int pipefds[2];
+        pipefds[0] = -1;
+        pipefds[1] = -1;
         if(pipe(pipefds)< 0)
         {
             int eno = errno;
@@ -83,37 +89,43 @@ static void socket_set_blocking(int fd, int blocking)
             }
             return;
         }
+        self.rxpipe=pipefds[RXPIPE];
+        self.txpipe=pipefds[TXPIPE];
         if(ifile)
         {
-            TRACK_FILE_PIPE_FLF(pipefds[RXPIPE],@"rxpipe",ifile,iline,ifunction);
-            TRACK_FILE_PIPE_FLF(pipefds[TXPIPE],@"txpipe",ifile,iline,ifunction);
+            TRACK_FILE_PIPE_FLF(self.rxpipe,@"rxpipe",ifile,iline,ifunction);
+            TRACK_FILE_PIPE_FLF(self.txpipe,@"txpipe",ifile,iline,ifunction);
         }
         else
         {
-            TRACK_FILE_PIPE(pipefds[RXPIPE],@"rxpipe");
-            TRACK_FILE_PIPE(pipefds[TXPIPE],@"txpipe");
+            TRACK_FILE_PIPE(self.rxpipe,@"rxpipe");
+            TRACK_FILE_PIPE(self.txpipe,@"txpipe");
         }
-        socket_set_blocking(pipefds[RXPIPE], 0);
-        socket_set_blocking(pipefds[TXPIPE], 0);
-        isPrepared = YES;
+        socket_set_blocking(self.rxpipe, 0);
+        socket_set_blocking(self.txpipe, 0);
+        self.isPrepared = YES;
     }
 }
 
 - (void) dealloc
 {
-    if(pipefds[RXPIPE] >=0)
+    if(self.isPrepared==NO)
     {
-        TRACK_FILE_CLOSE(pipefds[RXPIPE]);
-        close(pipefds[RXPIPE]);
+        return;
     }
-    if(pipefds[TXPIPE]>=0)
+    if(self.rxpipe >=0)
     {
-        TRACK_FILE_CLOSE(pipefds[TXPIPE]);
-        close(pipefds[TXPIPE]);
+        TRACK_FILE_CLOSE(self.rxpipe);
+        close(self.rxpipe);
     }
-    pipefds[RXPIPE] = -1;
-    pipefds[TXPIPE] = -1;
-    isPrepared = NO;
+    if(self.txpipe>=0)
+    {
+        TRACK_FILE_CLOSE(self.txpipe);
+        close(self.txpipe);
+    }
+    self.rxpipe = -1;
+    self.txpipe = -1;
+    self.isPrepared = NO;
 }
 
 
@@ -137,7 +149,7 @@ static void flushpipe(int fd)
 - (int) sleep:(UMMicroSec) microseconds wakeOn:(UMSleeper_Signal)sig;	/* returns signal value if signal was received, 0 on timer epxiry, -1 on error  */
 {
     struct pollfd pollfd[2];
-    int pollresult = 0;
+    int pollresult;
     int wait_time;
     long long start_time = [UMThroughputCounter microsecondTime];
     long long end_time = start_time + microseconds;
@@ -155,11 +167,12 @@ static void flushpipe(int fd)
 #endif
     
     [self prepare];
-    if(pipefds[RXPIPE] < 0)
+    if(self.rxpipe < 0)
     {
         return -1;
     }
 
+    pollresult = 0;
     while(pollresult == 0)
     {
         now = [UMThroughputCounter microsecondTime];
@@ -171,7 +184,7 @@ static void flushpipe(int fd)
         {
 
             memset(&pollfd,0x00,sizeof(pollfd));
-            pollfd[0].fd = pipefds[RXPIPE];
+            pollfd[0].fd = self.rxpipe;
             pollfd[0].events = events;
             pollfd[0].revents = 0;
             pollresult = poll(pollfd, 1, (int)POLL_NOTIMEOUT);
@@ -188,7 +201,7 @@ static void flushpipe(int fd)
                 {
                     wait_time = (int)remaining/1000; /* poll wants miliseconds */
                     memset(&pollfd,0x00,sizeof(pollfd));
-                    pollfd[0].fd = pipefds[RXPIPE];
+                    pollfd[0].fd = self.rxpipe;
                     pollfd[0].events = events;
                     pollfd[0].revents = 0;
                     
@@ -200,7 +213,7 @@ static void flushpipe(int fd)
                     remaining = remaining - SLICE_TIME;
                     wait_time = (int)SLICE_TIME / 1000000;
                     memset(&pollfd,0x00,sizeof(pollfd));
-                    pollfd[0].fd = pipefds[RXPIPE];
+                    pollfd[0].fd = self.rxpipe;
                     pollfd[0].events = events;
                     pollfd[0].revents = 0;
                     pollresult = poll(&pollfd[0], 1, wait_time);
@@ -213,7 +226,7 @@ static void flushpipe(int fd)
             UMSleeper_Signal signalToRead=0xFE;
             ssize_t bytes;
             uint8_t buffer[4];
-            bytes = read(pipefds[RXPIPE], &buffer, 4);
+            bytes = read(self.rxpipe, &buffer, 4);
             if(bytes == 4)
             {
                 signalToRead = (buffer[0] << 24) | (buffer[1] << 16) | (buffer[2] <<8) | buffer[3];
@@ -235,9 +248,9 @@ static void flushpipe(int fd)
 
 - (void) reset
 {
-    if(isPrepared)
+    if(self.isPrepared)
     {
-        flushpipe(pipefds[RXPIPE]);
+        flushpipe(self.rxpipe);
     }
 }
 
@@ -245,14 +258,14 @@ static void flushpipe(int fd)
 {
     @synchronized (self)
     {
-        if(pipefds[RXPIPE] > 0)
+        if(self.rxpipe > 0)
         {
             uint8_t bytes[4];
             bytes[0] = (signal & 0xFF000000 ) >> 24;
             bytes[1] = (signal & 0x00FF0000 ) >> 16;
             bytes[2] = (signal & 0x0000FF00 ) >> 8;
             bytes[3] = (signal & 0x000000FF ) >> 0;
-            write(pipefds[TXPIPE], &bytes,4);
+            write(self.txpipe, &bytes,4);
         }
     }
 }

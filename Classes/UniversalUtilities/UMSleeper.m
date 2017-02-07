@@ -256,17 +256,15 @@ static void flushpipe(int fd)
 
 - (void) wakeUp:(UMSleeper_Signal)signal
 {
-    @synchronized (self)
+    if(self.txpipe >= 0)
     {
-        if(self.rxpipe > 0)
-        {
-            uint8_t bytes[4];
-            bytes[0] = (signal & 0xFF000000 ) >> 24;
-            bytes[1] = (signal & 0x00FF0000 ) >> 16;
-            bytes[2] = (signal & 0x0000FF00 ) >> 8;
-            bytes[3] = (signal & 0x000000FF ) >> 0;
-            write(self.txpipe, &bytes,4);
-        }
+        uint8_t bytes[4];
+        bytes[0] = (signal & 0xFF000000 ) >> 24;
+        bytes[1] = (signal & 0x00FF0000 ) >> 16;
+        bytes[2] = (signal & 0x0000FF00 ) >> 8;
+        bytes[3] = (signal & 0x000000FF ) >> 0;
+        write(self.txpipe, &bytes,4);
+        flushpipe(self.txpipe);
     }
 }
 

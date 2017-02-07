@@ -37,6 +37,8 @@
         control_sleeper = [[UMSleeper alloc]initFromFile:__FILE__
                                                     line:__LINE__
                                                 function:__func__];
+        [control_sleeper prepare];
+        [ws prepare];
         self.workSleeper = ws;
     }
     return self;

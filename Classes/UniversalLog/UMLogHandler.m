@@ -121,17 +121,20 @@
 
 - (UMLogLevel)level
 {
-    UMLogLevel minLevel = UMLOG_PANIC;
-    UMLogDestination *dst;
-    
-    for (dst in logDestinations)
+    @synchronized (self)
     {
-        if(dst.level < minLevel)
+        UMLogLevel minLevel = UMLOG_PANIC;
+        UMLogDestination *dst;
+        
+        for (dst in logDestinations)
         {
-            minLevel = dst.level;
+            if(dst.level < minLevel)
+            {
+                minLevel = dst.level;
+            }
         }
+        return dst.level;
     }
-    return dst.level;
 }
 
 @end

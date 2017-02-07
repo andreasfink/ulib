@@ -53,7 +53,7 @@ BOOL umobject_object_stat_is_enabled(void);
     UMLogFeed   *logFeed;       /*!< The log feed this object can use to log anything */
 }
 
-@property (readwrite,strong) UMLogFeed *logFeed;
+@property (readwrite,strong,atomic) UMLogFeed *logFeed;
 
 //@property (readonly,retain) NSString *name;
 

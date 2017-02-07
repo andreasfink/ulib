@@ -12,5 +12,6 @@
 #import "UMConfig.h"
 #import "UMConfigParsedLine.h"
 #import "UMConfigGroup.h"
+#import "NSDictionary+UniversalConfig.h"
 
 #endif

@@ -56,6 +56,7 @@
 
 @property(readwrite,assign) BOOL        enable;
 @property(readwrite,strong) UMHistoryLog *layerHistory;
+@property(readwrite,assign,atomic)      UMLogLevel logLevel;
 
 
 - (void)queueFromLower:(UMLayerTask *)task;

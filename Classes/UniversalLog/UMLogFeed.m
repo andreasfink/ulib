@@ -51,7 +51,7 @@
 
 - (UMLogLevel)level
 {
-    return handler.level;
+    return self.handler.level;
 }
 
 - (void) debug:		(int)err withText:(NSString *)txt

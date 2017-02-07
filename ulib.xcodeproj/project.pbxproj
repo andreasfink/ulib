@@ -1794,6 +1794,8 @@
 		A6AC4C5E1D460CA0002BAA97 /* libssl-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6AC47221D4608F0002BAA97 /* libssl-ios.a */; };
 		A6ACC11B1D344C4E00211137 /* UMSynchronizedSortedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ACC1191D344C4E00211137 /* UMSynchronizedSortedDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6ACC11C1D344C4E00211137 /* UMSynchronizedSortedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A6ACC11A1D344C4E00211137 /* UMSynchronizedSortedDictionary.m */; };
+		A6BEA3241E49AC4F00A130B7 /* NSDictionary+UniversalConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = A6BEA3221E49AC4F00A130B7 /* NSDictionary+UniversalConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6BEA3251E49AC4F00A130B7 /* NSDictionary+UniversalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BEA3231E49AC4F00A130B7 /* NSDictionary+UniversalConfig.m */; };
 		A6C173D21AB835640090FC94 /* NSDate+stringFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A6C173D01AB835640090FC94 /* NSDate+stringFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6C173D61AB835640090FC94 /* NSDate+stringFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C173D11AB835640090FC94 /* NSDate+stringFunctions.m */; };
 		A6C29FB8149B9B6700750CE9 /* config-syntax-definition.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6C29FB7149B9B6700750CE9 /* config-syntax-definition.plist */; };
@@ -2402,6 +2404,8 @@
 		A6AC49611D4609B8002BAA97 /* libulib-ios-static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libulib-ios-static.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6ACC1191D344C4E00211137 /* UMSynchronizedSortedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSynchronizedSortedDictionary.h; sourceTree = "<group>"; };
 		A6ACC11A1D344C4E00211137 /* UMSynchronizedSortedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSynchronizedSortedDictionary.m; sourceTree = "<group>"; };
+		A6BEA3221E49AC4F00A130B7 /* NSDictionary+UniversalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UniversalConfig.h"; sourceTree = "<group>"; };
+		A6BEA3231E49AC4F00A130B7 /* NSDictionary+UniversalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UniversalConfig.m"; sourceTree = "<group>"; };
 		A6C173D01AB835640090FC94 /* NSDate+stringFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+stringFunctions.h"; sourceTree = "<group>"; };
 		A6C173D11AB835640090FC94 /* NSDate+stringFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+stringFunctions.m"; sourceTree = "<group>"; };
 		A6C29FB7149B9B6700750CE9 /* config-syntax-definition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "config-syntax-definition.plist"; sourceTree = "<group>"; };
@@ -2823,6 +2827,8 @@
 			isa = PBXGroup;
 			children = (
 				A6971C8016356C0B004E9B50 /* UniversalConfig.h */,
+				A6BEA3221E49AC4F00A130B7 /* NSDictionary+UniversalConfig.h */,
+				A6BEA3231E49AC4F00A130B7 /* NSDictionary+UniversalConfig.m */,
 				A6713054149B8B7C00E1A86A /* UMConfig.h */,
 				A6713055149B8B7C00E1A86A /* UMConfig.m */,
 				A69F08FF149D3A4C0009F272 /* UMConfigParsedLine.h */,
@@ -4717,6 +4723,7 @@
 				A6AC48F81D4608FC002BAA97 /* rc4.h in Headers */,
 				A695A3FA1AF62AD100854472 /* UMFileTracker.h in Headers */,
 				A61F7D561A2CB4F70090FC94 /* UMLayerUserProtocol.h in Headers */,
+				A6BEA3241E49AC4F00A130B7 /* NSDictionary+UniversalConfig.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5690,6 +5697,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6D8AB51149A77D10029E9CF /* UMObject.m in Sources */,
+				A6BEA3251E49AC4F00A130B7 /* NSDictionary+UniversalConfig.m in Sources */,
 				A6D8AB4B149A77D10029E9CF /* UMHistoryLog.m in Sources */,
 				A69AB265182BC060001D0FE8 /* UMHTTPCookie.m in Sources */,
 				A6D8AB4E149A77D10029E9CF /* UMIntegerWithHistory.m in Sources */,

@@ -31,6 +31,8 @@
 
 @synthesize layerHistory;
 
+@synthesize logLevel;
+
 - (void)queueFromLower:(UMLayerTask *)job
 {
     if(job==NULL)

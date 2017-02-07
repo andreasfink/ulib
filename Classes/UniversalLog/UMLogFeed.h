@@ -16,11 +16,11 @@
 	int			copyToConsole;
 }
 
-@property (readwrite,strong) UMLogHandler *handler;
-@property (readwrite,strong) NSString	*section;
-@property (readwrite,strong) NSString	*subsection;
-@property (readwrite,strong) NSString	*name;
-@property (readwrite,assign) int		copyToConsole;
+@property (readwrite,strong,atomic) UMLogHandler *handler;
+@property (readwrite,strong,atomic) NSString	*section;
+@property (readwrite,strong,atomic) NSString	*subsection;
+@property (readwrite,strong,atomic) NSString	*name;
+@property (readwrite,assign,atomic) int		copyToConsole;
 
 
 - (UMLogFeed *) copyWithZone:(NSZone *)zone;

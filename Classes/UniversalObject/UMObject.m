@@ -271,9 +271,9 @@ static FILE *alloc_log;
         UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
         ts.selector = aSelector;
         ts.obj      = anArgument;
-        ts.file = fil;
-        ts.line = lin;
-        ts.func =fun;
+        ts.file     = fil;
+        ts.line     = lin;
+        ts.func     = fun;
 
         [NSThread detachNewThreadSelector:@selector(threadStarter:)
                                  toTarget:self

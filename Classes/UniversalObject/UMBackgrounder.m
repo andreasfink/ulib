@@ -44,8 +44,11 @@
 
 - (void)startBackgroundTask
 {
-    NSAssert(control_sleeper !=NULL,@"not initialized control_sleeper");
-    
+    if(control_sleeper == NULL)
+    {
+        @throw([NSException exceptionWithName:@"NOT_INITIALIZED" reason:@"control sleeper in UMBackgrounder is not initialized" userInfo:NULL]);
+    }
+
     @synchronized(self)
     {
         if(self.runningStatus == UMBackgrounder_notRunning)
@@ -62,7 +65,7 @@
             int i=0;
             while(i<= 10)
             {
-                int s = [control_sleeper sleep:1000000 wakeOn:UMSleeper_StartupCompletedSignal]; /* 1s */
+                int s = [control_sleeper sleep:1000000L wakeOn:UMSleeper_StartupCompletedSignal]; /* 1s */
                 if(s==UMSleeper_StartupCompletedSignal)
                 {
                     return;

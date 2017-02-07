@@ -35,6 +35,7 @@
 @synthesize timeoutDelegate;
 @synthesize authUsername;
 @synthesize authPassword;
+@synthesize completionTimeout;
 
 - (id) init
 {

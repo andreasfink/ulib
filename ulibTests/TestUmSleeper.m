@@ -43,7 +43,9 @@
 - (void)taskSleep
 {
     runningStatus = running;
-    UMSleeper *sleeper = [[UMSleeper alloc] init];
+    UMSleeper *sleeper = [[UMSleeper alloc]initFromFile:__FILE__
+                                                   line:__LINE__
+                                               function:__func__];
     [sleeper sleep:SLEEP_TIME];
     [sleeper terminate];
     @synchronized(self)
@@ -56,7 +58,9 @@
 - (void)setUp
 {
     [super setUp];
-    wakeWaiter = [[UMSleeper alloc] init];
+    wakeWaiter = [[UMSleeper alloc]initFromFile:__FILE__
+                                           line:__LINE__
+                                       function:__func__];
 }
 
 - (void)tearDown

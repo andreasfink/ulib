@@ -44,6 +44,7 @@
         workerThreads = [[NSMutableArray alloc]init];
         int i;
         self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
+        [self.workSleeper prepare];
         for(i=0;i<workerThreadCount;i++)
         {
             NSString *newName = [NSString stringWithFormat:@"%@[%d]",n,i];
@@ -74,6 +75,7 @@
         workerThreads = [[NSMutableArray alloc]init];
         int i;
         self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
+        [self.workSleeper prepare];
         for(i=0;i<workerThreadCount;i++)
         {
             NSString *newName = [NSString stringWithFormat:@"%@[%d]",n,i];

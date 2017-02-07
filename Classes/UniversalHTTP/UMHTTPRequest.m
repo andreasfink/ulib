@@ -596,6 +596,7 @@
     if(sleeper == NULL)
     {
         sleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
+        [sleeper prepare];
     }
 
     BOOL a;

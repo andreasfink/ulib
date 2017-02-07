@@ -72,6 +72,7 @@
         listenerSocket = [[UMSocket alloc] initWithType:type];
         [listenerSocket setLocalPort:port];
         sleeper		= [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
+        [sleeper prepare];
         connections = [[NSMutableArray alloc] init];
         terminatedConnections = [[NSMutableArray alloc]init];
         lock		= [[NSLock alloc] init];

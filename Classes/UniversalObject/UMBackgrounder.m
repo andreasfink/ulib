@@ -120,6 +120,7 @@
     if(workSleeper==NULL)
     {
         self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
+        [self.workSleeper prepare];
     }
    self.runningStatus = UMBackgrounder_running;
 

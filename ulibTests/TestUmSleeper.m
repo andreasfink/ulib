@@ -47,7 +47,7 @@
                                                    line:__LINE__
                                                function:__func__];
     [sleeper sleep:SLEEP_TIME];
-    [sleeper terminate];
+    sleeper = NULL;
     @synchronized(self)
     {
         mustQuit = YES;
@@ -65,7 +65,7 @@
 
 - (void)tearDown
 {
-    [wakeWaiter terminate];
+    wakeWaiter = NULL;
     [super tearDown];
 }
 

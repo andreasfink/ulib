@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andreas Fink. All rights reserved.
 //
 
-#import <foundation/foundation.h>
+#import <Foundation/Foundation.h>
 
 
 @interface NSDictionary (UniversalConfig)

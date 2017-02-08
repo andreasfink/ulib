@@ -289,7 +289,7 @@
             [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EHOSTUNREACH The destination address specified an unreachable host.",location]];
             break;
         case EADDRNOTAVAIL:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EADDRNOTAVAIL The specified address is not available from the local machine.",location]];
+            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EADDRNOTAVAIL The specified address is not available from the local machine..",location]];
             break;
         case EADDRINUSE:
             [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EADDRINUSE The specified address is already in use.",location]];

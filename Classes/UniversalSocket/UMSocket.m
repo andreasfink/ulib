@@ -567,11 +567,10 @@ static int SSL_smart_shutdown(SSL *ssl)
 	memset(&sa,0x00,sizeof(sa));
 	sa.sin_family			= AF_INET;
 #ifdef	HAS_SOCKADDR_LEN
-	sa.sin_len				= sizeof(struct sockaddr_in);
+	sa.sin_len			= sizeof(struct sockaddr_in);
 #endif
-	sa.sin_port				= htons(requestedLocalPort);
+	sa.sin_port			= htons(requestedLocalPort);
 	sa.sin_addr.s_addr		= htonl(INADDR_ANY);
-
 	memset(&sa6,0x00,sizeof(sa6));
 	sa6.sin6_family			= AF_INET6;
 #ifdef	HAS_SOCKADDR_LEN

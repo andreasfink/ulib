@@ -86,7 +86,7 @@
 @property(readwrite,assign)		UMSocketStatus		status;
 @property(readwrite,assign)		in_port_t			requestedLocalPort;
 @property(readwrite,assign)		in_port_t			requestedRemotePort;
-@property(readwrite,assign)		int					sock;
+@property(readwrite,assign,atomic)		int					sock;
 
 @property(readwrite,assign)		int					isBound;
 @property(readwrite,assign)		int					isListening;
@@ -97,7 +97,7 @@
 @property(readonly,assign)		int					isNonBlocking;
 @property(readwrite,strong)		id					reportDelegate;;
 @property(readwrite,strong)		NSString *name;
-@property(readwrite,assign)     int                 hasSocket;
+@property(readwrite,assign,atomic)     int                 hasSocket;
 @property(readwrite,strong)		NSString *advertizeName;
 @property(readwrite,strong)		NSString *advertizeType;
 @property(readwrite,strong)		NSString *advertizeDomain;

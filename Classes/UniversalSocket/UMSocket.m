@@ -360,7 +360,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         peer_certificate = NULL;
     }
 */
-    if((hasSocket != 0) && (_sock >= 0))
+    if((self.hasSocket != 0) && (self.sock >= 0))
     {
         NSLog(@"deallocating a connection which has an open socket");
         TRACK_FILE_CLOSE(_sock);

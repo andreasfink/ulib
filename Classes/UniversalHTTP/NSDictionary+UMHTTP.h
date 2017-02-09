@@ -3,7 +3,7 @@
 //  ulib
 //
 //  Created by Andreas Fink on 23.10.12.
-//  Copyright: © 2016 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
+//  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
 #ifndef NSDictionary_UMHTTP_h

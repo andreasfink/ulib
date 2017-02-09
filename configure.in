@@ -1,6 +1,6 @@
 dnl /* ==================================================================== 
 dnl  * Project "ulib"
-dnl  * Copyright: © 2016 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
+dnl  * Copyright: © 2017 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
 dnl  * ====================================================================
 dnl  */ 
 
@@ -19,7 +19,7 @@ AC_SUBST(SHELL)
 AC_CONFIG_AUX_DIR(.)
 AC_SET_TERMINAL_SEQUENCES()
 
-COPYRIGHT="Copyright 2015 Andreas Fink"
+COPYRIGHT="Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved."
 PROJECT_NAME="ulib"
 CONFIG_DEFINE="ULIB_CONFIG"
 

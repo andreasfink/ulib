@@ -3,7 +3,7 @@
 //  ulib
 //
 //  Created by Aarno Syvänen on 20.04.12.
-//  Copyright (c) Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved
+//  //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
 #import "UMTestCase.h"

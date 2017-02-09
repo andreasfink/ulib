@@ -3,7 +3,7 @@
 //  ulib
 //
 //  Created by Andreas Fink on 07.11.13.
-//  Copyright: © 2016 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
+//  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -2,8 +2,7 @@
 //  TestUMLogFeed.h
 //  ulib
 //
-//  Created by Aarno Syvänen on 20.04.12.
-//  Copyright (c) 2012 Aliosanus GmbH. All rights reserved.
+//  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
 #import <XCTest/XCTest.h>

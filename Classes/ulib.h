@@ -3,7 +3,7 @@
 //  ulib
 //
 //  Created by Andreas Fink on 16.12.2011.
-//  Copyright: © 2016 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
+//  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
 #ifndef ULIB_H
 #define ULIB_H 1

@@ -3,7 +3,7 @@
 //  ulib
 //
 //  Created by Andreas Fink on 07.02.17.
-//  Copyright © 2017 Andreas Fink. All rights reserved.
+//  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
 #import "NSDictionary+UniversalConfig.h"

@@ -55,7 +55,7 @@
     NSString            *authUsername;
     NSString            *authPassword;
     
-    id<UMHTTPRequest_TimeoutProtocol>    timeoutDelegate;
+    id<UMHTTPRequest_TimeoutProtocol>    _timeoutDelegate;
 
 }
 
@@ -79,7 +79,7 @@
 @property (readwrite,strong) NSMutableDictionary        *requestCookies;
 @property (readwrite,strong) NSMutableDictionary		*responseCookies;
 @property (readonly,strong) NSDictionary               *params;
-@property (readonly,strong) id<UMHTTPRequest_TimeoutProtocol>    timeoutDelegate;
+@property (readwrite,strong,atomic) id<UMHTTPRequest_TimeoutProtocol>    timeoutDelegate;
 @property (readwrite,strong) NSString                   *authUsername;
 @property (readwrite,strong) NSString                   *authPassword;
 
@@ -126,6 +126,7 @@
 - (UMHTTPCookie *)getCookie:(NSString *)name;
 - (void)makeAsync;
 - (void)makeAsyncWithTimeout:(NSTimeInterval)timeoutInSeconds;
+- (void)makeAsyncWithTimeout:(NSTimeInterval)timeoutInSeconds delegate:(id<UMHTTPRequest_TimeoutProtocol>)callback;
 - (void)resumePendingRequest;
 - (void)sleepUntilCompleted;
 - (void)redirect:(NSString *)newPath;

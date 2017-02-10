@@ -569,11 +569,15 @@
 
 - (void)makeAsyncWithTimeout:(NSTimeInterval)timeoutInSeconds
 {
-    @synchronized (self)
-    {
-        self.awaitingCompletion = YES;
-        self.completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
-    }
+    self.awaitingCompletion = YES;
+    self.completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
+}
+
+- (void)makeAsyncWithTimeout:(NSTimeInterval)timeoutInSeconds delegate:(id<UMHTTPRequest_TimeoutProtocol>)callback
+{
+    self.timeoutDelegate = callback;
+    self.awaitingCompletion = YES;
+    self.completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
 }
 
 - (void)resumePendingRequest
@@ -603,6 +607,7 @@
         {
             self.awaitingCompletion = NO;
             [timeoutDelegate httpRequestTimeout:self];
+            timeoutDelegate = NULL;
         }
     }
     sleeper = NULL;

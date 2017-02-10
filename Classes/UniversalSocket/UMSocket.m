@@ -152,15 +152,14 @@ static int SSL_smart_shutdown(SSL *ssl)
 @synthesize connectedRemotePort;
 //@synthesize sock;
 @synthesize isBound;
-@synthesize isListening;
-@synthesize isConnecting;
-@synthesize isConnected;
+//@synthesize isListening;
+//@synthesize isConnecting;
+//@synthesize isConnected;
 @synthesize receiveBuffer;
 @synthesize lastError;
-@synthesize isNonBlocking;
+//@synthesize isNonBlocking;
 @synthesize reportDelegate;
 @synthesize name;
-@synthesize hasSocket;
 @synthesize advertizeName;
 @synthesize advertizeType;
 @synthesize advertizeDomain;
@@ -201,7 +200,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (void)setSock:(int)s
 {
-    if((hasSocket) && (_sock >=0))
+    if((self.hasSocket) && (_sock >=0))
     {
         TRACK_FILE_CLOSE(_sock);
         close(_sock);
@@ -211,7 +210,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 #endif
     }
     _sock=s;
-    hasSocket=1;
+    self.hasSocket=1;
 }
 
 + (NSString *)statusDescription:(UMSocketStatus)s;
@@ -520,7 +519,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         }
         if(_sock >=0)
         {
-            hasSocket=1;
+            self.hasSocket=1;
             cryptoStream.fileDescriptor = _sock;
         }
         receiveBuffer = [[NSMutableData alloc] init];
@@ -652,12 +651,12 @@ err:
 	int err;
 	
 	[self reportStatus:@"caling listen()"];
-	if (isListening == 1)
+	if (self.isListening == 1)
 	{
 		[self reportStatus:@"- already listening"];
 		return UMSocketError_already_listening;
 	}
-	isListening = 0;
+	self.isListening = 0;
 
 	err = listen(_sock,backlog);
     
@@ -667,7 +666,7 @@ err:
          int eno = errno;
          return [UMSocket umerrFromErrno:eno];
      }
-	isListening = 1;
+	self.isListening = 1;
 	[self reportStatus:@"isListening=1"];
 	return UMSocketError_no_error;
 }
@@ -756,10 +755,10 @@ err:
     NSString *address;
     int resolved;
     
-    if((_sock < 0) || (!hasSocket))
+    if((_sock < 0) || (!self.hasSocket))
     {
-        isConnecting = 0;
-        isConnected = 0;
+        self.isConnecting = 0;
+        self.isConnected = 0;
         return  [UMSocket umerrFromErrno:EBADF];
     }
     
@@ -783,8 +782,8 @@ err:
     if (!address)
     {
         NSLog(@"[UMSocket connect] EADDRNOTAVAIL (address not resolved) during connect");
-        isConnecting = 0;
-        isConnected = 0;
+        self.isConnecting = 0;
+        self.isConnected = 0;
         return UMSocketError_address_not_available;
     }
     
@@ -802,13 +801,13 @@ err:
     else
     {
         NSLog(@"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
-        isConnecting = 0;
-        isConnected = 0;
+        self.isConnecting = 0;
+        self.isConnected = 0;
         return UMSocketError_address_not_available;
     }
     
     direction = direction | UMSOCKET_DIRECTION_OUTBOUND;
-    isConnecting = 1;
+    self.isConnecting = 1;
     
     [self reportStatus:@"calling connect()"];
     if(ip_version==6)
@@ -827,14 +826,14 @@ err:
     if(err)
     {
         
-        isConnecting = 0;
-        isConnected = 0;
+        self.isConnecting = 0;
+        self.isConnected = 0;
         //		goto err;
     }
     else
     {
-        isConnecting = 0;
-        isConnected = 1;
+        self.isConnecting = 0;
+        self.isConnected = 1;
         status = UMSOCKET_STATUS_IS;
         NSString *msg = [NSString stringWithFormat:@"socket %d isConnected=1",_sock];
         [self reportStatus:msg];
@@ -863,9 +862,9 @@ err:
 //   newsock.hasSocket=0;
 
      newsock.isBound=isBound;
-	newsock.isListening=isListening;
-	newsock.isConnecting=isConnecting;
-	newsock.isConnected=isConnected;	
+	newsock.isListening=self.isListening;
+	newsock.isConnecting=self.isConnecting;
+	newsock.isConnected=self.isConnected;
 	return newsock;
 }
 
@@ -1034,42 +1033,48 @@ err:
 
 - (void) switchToNonBlocking
 {
-	int flags;
-	if(isNonBlocking == 0)
-	{
-		flags = fcntl(_sock, F_GETFL, 0);
-		fcntl(_sock, F_SETFL, flags  | O_NONBLOCK);
+    @synchronized (self)
+    {
+        int flags;
+        if(_isNonBlocking == 0)
+        {
+            flags = fcntl(_sock, F_GETFL, 0);
+            fcntl(_sock, F_SETFL, flags  | O_NONBLOCK);
 #ifdef SCTP_IN_KERNEL
-         if(type == UMSOCKET_TYPE_SCTP)
-		{
-              flags = 1;
-              setsockopt(sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
-		}
-          else
+            if(type == UMSOCKET_TYPE_SCTP)
+            {
+                flags = 1;
+                setsockopt(sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
+            }
+            else
 #endif
-        if (type==UMSOCKET_TYPE_USCTP)
-          {
+                if (type==UMSOCKET_TYPE_USCTP)
+                {
 #ifdef SCTP_IN_USERSPACE
-             if(usrsctp_setsockopt)
-             {
-                 flags = 1;
-                 usrsctp_setsockopt(sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
-             }
+                    if(usrsctp_setsockopt)
+                    {
+                        flags = 1;
+                        usrsctp_setsockopt(sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
+                    }
 #endif
-         }
-		isNonBlocking = 1;
-	}
+                }
+            _isNonBlocking = 1;
+        }
+    }
 }
 
 - (void) switchToBlocking
 {
-	int flags;
-	if(isNonBlocking)
-	{
-		flags = fcntl(_sock, F_GETFL, 0);
-		fcntl(_sock, F_SETFL, flags  & ~O_NONBLOCK);
-		isNonBlocking = 0;
-	}
+    @synchronized (self)
+    {
+        int flags;
+        if(_isNonBlocking)
+        {
+            flags = fcntl(_sock, F_GETFL, 0);
+            fcntl(_sock, F_SETFL, flags  & ~O_NONBLOCK);
+            _isNonBlocking = 0;
+        }
+    }
 }
 
 - (void) setIsNonBlocking:(int)i
@@ -1087,7 +1092,7 @@ err:
 - (UMSocketError) close
 {
     UMSocketError err = UMSocketError_no_error;
-    if((hasSocket == 0) || (_sock < 0))
+    if((self.hasSocket == 0) || (_sock < 0))
     {
         return err;
     }
@@ -1104,9 +1109,9 @@ err:
     }
     
     _sock=-1;
-    hasSocket=0;
+    self.hasSocket=0;
     status = UMSOCKET_STATUS_OOS;
-    isConnected = 0;
+    self.isConnected = 0;
     return err;
 }
 
@@ -1128,17 +1133,17 @@ err:
         case UMSOCKET_TYPE_TCP4ONLY:
         case UMSOCKET_TYPE_TCP6ONLY:
         case UMSOCKET_TYPE_TCP:
-            if((_sock < 0) || (hasSocket ==0))
+            if((_sock < 0) || (self.hasSocket ==0))
             {
-                isConnecting = 0;
-                isConnected = 0;
+                self.isConnecting = 0;
+                self.isConnected = 0;
                 return [UMSocket umerrFromErrno:EBADF];
             }
             
-            if(!isConnected)
+            if(!self.isConnected)
             {
-                isConnecting = 0;
-                isConnected = 0;
+                self.isConnecting = 0;
+                self.isConnected = 0;
                 return [UMSocket umerrFromErrno:ECONNREFUSED];
             }
             
@@ -1212,18 +1217,18 @@ err:
 		case UMSOCKET_TYPE_TCP6ONLY:
 		case UMSOCKET_TYPE_TCP:
 			
-               if((_sock < 0) || (hasSocket ==0))
+               if((_sock < 0) || (self.hasSocket ==0))
 			{
-				isConnecting = 0;
-				isConnected = 0;
+				self.isConnecting = 0;
+				self.isConnected = 0;
 				return [UMSocket umerrFromErrno:EBADF];
 				
 			}
 			
-			if(!isConnected)
+			if(!self.isConnected)
 			{
-				isConnecting = 0;
-				isConnected = 0;
+				self.isConnecting = 0;
+				self.isConnected = 0;
 				return [UMSocket umerrFromErrno:EINVAL];
 			}		
 			

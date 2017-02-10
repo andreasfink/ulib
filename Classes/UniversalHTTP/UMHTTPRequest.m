@@ -599,7 +599,7 @@
         [sleeper sleep:100000LL]; /* sleep 100ms = 100'000µs or until being woken up */
         NSDate *expiry = self.completionTimeout;
         NSDate *now = [NSDate date];
-        if((expiry == NULL) || ([now compare:expiry] == NSOrderedDescending))
+        if((expiry == NULL) || ([now compare:expiry] == NSOrderedDescending))
         {
             self.awaitingCompletion = NO;
             [timeoutDelegate httpRequestTimeout:self];

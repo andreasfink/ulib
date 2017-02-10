@@ -150,14 +150,9 @@ static int SSL_smart_shutdown(SSL *ssl)
 @synthesize requestedRemotePort;
 @synthesize connectedLocalPort;
 @synthesize connectedRemotePort;
-//@synthesize sock;
 @synthesize isBound;
-//@synthesize isListening;
-//@synthesize isConnecting;
-//@synthesize isConnected;
 @synthesize receiveBuffer;
 @synthesize lastError;
-//@synthesize isNonBlocking;
 @synthesize reportDelegate;
 @synthesize name;
 @synthesize advertizeName;
@@ -677,7 +672,7 @@ err:
 #if defined(TARGET_OS_WATCH)
     return UMSocketError_not_supported_operation;
 #else
-    if(!isListening)
+    if(!self.isListening)
     {
         return UMSocketError_not_listening;
     }

@@ -94,7 +94,7 @@
 @property(readwrite,assign,atomic)		int					isConnected;
 @property(readwrite,strong)		NSMutableData *		receiveBuffer;
 @property(readwrite,strong)		NSString *          lastError;
-@property(readwrite,assign,atomic)		int					isNonBlocking;
+@property(readwrite,assign)		int					isNonBlocking;
 @property(readwrite,strong)		id					reportDelegate;
 @property(readwrite,strong)		NSString *name;
 @property(readwrite,assign,atomic)     int                 hasSocket;

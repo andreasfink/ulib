@@ -33,6 +33,9 @@
 
 @interface UMHTTPRequest : UMObject
 {
+    NSDate              *_completionTimeout;
+    BOOL                _awaitingCompletion; /* set to YES if data is returned later */
+
 	UMHTTPConnection	*connection;
 	NSString			*method;
 	NSString			*protocolVersion;
@@ -46,20 +49,18 @@
 	NSDictionary		*params;
 	UMHTTPResponseCode	responseCode;
     UMHTTPAuthenticationStatus authenticationStatus;
-    BOOL                _awaitingCompletion; /* set to YES if data is returned later */
     UMSleeper           *sleeper;  /* wake up this sleeper once data is returned by calling resumePendingRequest */
     NSMutableDictionary *requestCookies;
     NSMutableDictionary *responseCookies;
-    NSDate              *_completionTimeout;
     NSString            *authUsername;
     NSString            *authPassword;
     
     id<UMHTTPRequest_TimeoutProtocol>    timeoutDelegate;
 
-@private
-//    CFHTTPMessageRef	request;
-//    CFHTTPMessageRef	response;
 }
+
+@property (readwrite,strong,atomic)NSDate               *completionTimeout;
+@property (readwrite,assign,atomic) BOOL                awaitingCompletion;
 
 @property (readwrite,strong) UMHTTPConnection			*connection;
 //@property (readonly,assign) CFHTTPMessageRef			request;
@@ -75,14 +76,12 @@
 @property (readwrite,strong) NSData						*responseData;
 @property (readwrite,assign) UMHTTPResponseCode			responseCode;
 @property (readwrite,assign) UMHTTPAuthenticationStatus authenticationStatus;
-@property (readwrite,assign,atomic) BOOL                awaitingCompletion;
 @property (readwrite,strong) NSMutableDictionary        *requestCookies;
 @property (readwrite,strong) NSMutableDictionary		*responseCookies;
 @property (readonly,strong) NSDictionary               *params;
 @property (readonly,strong) id<UMHTTPRequest_TimeoutProtocol>    timeoutDelegate;
 @property (readwrite,strong) NSString                   *authUsername;
 @property (readwrite,strong) NSString                   *authPassword;
-@property (readwrite,strong,atomic)NSDate               *completionTimeout;
 
 
 

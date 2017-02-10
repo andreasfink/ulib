@@ -28,14 +28,12 @@
 @synthesize responseHeaders;
 @synthesize responseCode;
 @synthesize authenticationStatus;
-@synthesize awaitingCompletion;
 @synthesize requestCookies;
 @synthesize responseCookies;
 @synthesize params;
 @synthesize timeoutDelegate;
 @synthesize authUsername;
 @synthesize authPassword;
-@synthesize completionTimeout;
 
 - (id) init
 {
@@ -43,7 +41,7 @@
     if(self)
 	{
         responseCode=HTTP_RESPONSE_CODE_OK;
-        awaitingCompletion = NO;
+        self.awaitingCompletion = NO;
         responseHeaders = [[NSMutableDictionary alloc]init];
 
     }
@@ -83,7 +81,7 @@
 	    [desc appendFormat:@"params were %@\n", params];
 	[desc appendFormat:@"response code was %@\n", [self responseCodeAsString]];
     [desc appendFormat:@"authentication status was %@\n", [self authenticationStatusAsString]];
-    [desc appendFormat:@"awaitingCompletion %@\n", (awaitingCompletion ? @"YES" : @"NO")];
+    [desc appendFormat:@"awaitingCompletion %@\n", (self.awaitingCompletion ? @"YES" : @"NO")];
     [desc appendFormat:@"sleeper %@\n", (sleeper ? @"SET" : @"NULL")];    
     [desc appendString:@"UMHTTPRequest dump ends\n"];
     return desc;
@@ -573,7 +571,7 @@
 {
     @synchronized (self)
     {
-        awaitingCompletion = YES;
+        self.awaitingCompletion = YES;
         self.completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
     }
 }
@@ -582,7 +580,7 @@
 {
     @synchronized (self)
     {
-        awaitingCompletion = NO;
+        self.awaitingCompletion = NO;
         [sleeper wakeUp];
     }
 }
@@ -596,36 +594,16 @@
         [sleeper prepare];
     }
 
-    BOOL a;
-    @synchronized (self)
-    {
-        a = awaitingCompletion;
-    }
-
-    while(a==YES)
+    while(self.awaitingCompletion)
     {
         [sleeper sleep:100000LL]; /* sleep 100ms = 100'000µs or until being woken up */
-        NSDate *d;
-        @synchronized (self)
+        NSDate *expiry = self.completionTimeout;
+        NSDate *now = [NSDate date];
+        if((expiry == NULL) || ([now compare:expiry] == NSOrderedDescending))
         {
-            d =self.completionTimeout;
-        }
-        if([[NSDate date]compare:d] != NSOrderedAscending)
-        {
+            self.awaitingCompletion = NO;
             [timeoutDelegate httpRequestTimeout:self];
-            @synchronized (self)
-            {
-                awaitingCompletion = NO;
-            }
         }
-        @synchronized (self)
-        {
-            a = awaitingCompletion;
-        }
-    }
-    @synchronized (self)
-    {
-        awaitingCompletion = NO;
     }
     sleeper = NULL;
 }

@@ -11,7 +11,7 @@
 #import "UMHTTPResponseCode.h"
 #import "UMHTTPAuthenticationStatus.h"
 
-#define DEFAULT_UMHTTP_SERVER_TIMEOUT       90
+#define DEFAULT_UMHTTP_SERVER_TIMEOUT       90.0
 
 @class UMHTTPRequest;
 @protocol UMHTTPRequest_TimeoutProtocol<NSObject>
@@ -46,11 +46,11 @@
 	NSDictionary		*params;
 	UMHTTPResponseCode	responseCode;
     UMHTTPAuthenticationStatus authenticationStatus;
-    BOOL                awaitingCompletion; /* set to YES if data is returned later */
+    BOOL                _awaitingCompletion; /* set to YES if data is returned later */
     UMSleeper           *sleeper;  /* wake up this sleeper once data is returned by calling resumePendingRequest */
     NSMutableDictionary *requestCookies;
     NSMutableDictionary *responseCookies;
-    NSDate              *completionTimeout;
+    NSDate              *_completionTimeout;
     NSString            *authUsername;
     NSString            *authPassword;
     
@@ -75,7 +75,7 @@
 @property (readwrite,strong) NSData						*responseData;
 @property (readwrite,assign) UMHTTPResponseCode			responseCode;
 @property (readwrite,assign) UMHTTPAuthenticationStatus authenticationStatus;
-@property (readwrite,assign) BOOL                       awaitingCompletion;
+@property (readwrite,assign,atomic) BOOL                awaitingCompletion;
 @property (readwrite,strong) NSMutableDictionary        *requestCookies;
 @property (readwrite,strong) NSMutableDictionary		*responseCookies;
 @property (readonly,strong) NSDictionary               *params;

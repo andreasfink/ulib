@@ -264,7 +264,6 @@ static void flushpipe(int fd)
         bytes[2] = (signal & 0x0000FF00 ) >> 8;
         bytes[3] = (signal & 0x000000FF ) >> 0;
         write(self.txpipe, &bytes,4);
-        flushpipe(self.txpipe);
     }
 }
 

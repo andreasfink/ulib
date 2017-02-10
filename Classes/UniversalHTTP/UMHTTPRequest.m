@@ -287,7 +287,6 @@
 - (void)setResponseTypeCss
 {
     [self setResponseHeader:@"Content-Type" withValue:@"text/css"];
-    
 }
 
 - (void)setResponseTypePng

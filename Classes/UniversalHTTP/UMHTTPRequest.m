@@ -44,6 +44,8 @@
 	{
         responseCode=HTTP_RESPONSE_CODE_OK;
         awaitingCompletion = NO;
+        responseHeaders = [[NSMutableDictionary alloc]init];
+
     }
     return self;
 }
@@ -268,10 +270,6 @@
 
 - (void) setResponseHeader:(NSString *)name withValue:(NSString *)value
 {
-	if(responseHeaders==nil)
-    {
-		responseHeaders = [[NSMutableDictionary alloc]init];
-    }
 	[responseHeaders setObject:value forKey:name];
 }
 

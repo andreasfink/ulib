@@ -2410,8 +2410,8 @@
 		A6ACC11A1D344C4E00211137 /* UMSynchronizedSortedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSynchronizedSortedDictionary.m; sourceTree = "<group>"; };
 		A6AE665B1E5197FE005F3617 /* UMHTTPTask_ReadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPTask_ReadRequest.h; sourceTree = "<group>"; };
 		A6AE665C1E5197FE005F3617 /* UMHTTPTask_ReadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPTask_ReadRequest.m; sourceTree = "<group>"; };
-		A6AE665F1E51980E005F3617 /* UMHTTPTask_ProcessRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMHTTPTask_ProcessRequest.h; path = ../../UMHTTPTask_ProcessRequest.h; sourceTree = "<group>"; };
-		A6AE66601E51980E005F3617 /* UMHTTPTask_ProcessRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMHTTPTask_ProcessRequest.m; path = ../../UMHTTPTask_ProcessRequest.m; sourceTree = "<group>"; };
+		A6AE665F1E51980E005F3617 /* UMHTTPTask_ProcessRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPTask_ProcessRequest.h; sourceTree = "<group>"; };
+		A6AE66601E51980E005F3617 /* UMHTTPTask_ProcessRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPTask_ProcessRequest.m; sourceTree = "<group>"; };
 		A6BEA3221E49AC4F00A130B7 /* NSDictionary+UniversalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UniversalConfig.h"; sourceTree = "<group>"; };
 		A6BEA3231E49AC4F00A130B7 /* NSDictionary+UniversalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UniversalConfig.m"; sourceTree = "<group>"; };
 		A6C173D01AB835640090FC94 /* NSDate+stringFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+stringFunctions.h"; sourceTree = "<group>"; };

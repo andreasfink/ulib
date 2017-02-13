@@ -263,12 +263,6 @@
 	NSString *protocolVersion = [req protocolVersion];
     NSString *connectionValue = [req connectionValue];
     NSString *method = [req method];
-    NSData *resp;
-#ifdef SENTEST
-    NSString *contentType;
-    NSString *contentLength;
-    NSMutableArray *logHeaders;
-#endif
     
 	if([protocolVersion isEqual:@"HTTP/1.0"])
     {

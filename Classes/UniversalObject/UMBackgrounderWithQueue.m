@@ -65,11 +65,19 @@
             {
                 NSLog(@"%@: got task %@",self.name,task);
             }
-            @synchronized(task.synchronizeObject)
+            @autoreleasepool
             {
-                [readLock unlock];
-                @autoreleasepool
+                if(task.synchronizeObject)
                 {
+                    @synchronized(task.synchronizeObject)
+                    {
+                        [readLock unlock];
+                        [task runOnBackgrounder:self];
+                    }
+                }
+                else
+                {
+                    [readLock unlock];
                     [task runOnBackgrounder:self];
                 }
             }

@@ -37,6 +37,8 @@
     if(self)
     {
         self.queues = q;
+        sharedQueue = YES;
+        readLock = [[UMLock alloc]init];
     }
     return self;
 }

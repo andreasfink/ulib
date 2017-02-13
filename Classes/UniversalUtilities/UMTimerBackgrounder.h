@@ -17,6 +17,6 @@
 
 - (void)addTimer:(UMTimer *)t;
 - (void)removeTimer:(UMTimer *)t;
-+(UMTimerBackgrounder *)sharedInstance;
++ (UMTimerBackgrounder *)sharedInstance;
 
 @end

@@ -13,17 +13,6 @@
 #include <time.h>
 @implementation UMTimer
 
-@synthesize isRunning;
-@synthesize startTime;
-@synthesize lastChecked;
-@synthesize expiryTime;
-@synthesize duration;
-@synthesize name;
-
-@synthesize objectToCall;
-@synthesize selectorToCall;
-@synthesize parameter;
-
 - (UMTimer *)initWithTarget:(id)target selector:(SEL)selector
 {
     return [self initWithTarget:target selector:selector object:NULL duration:0 name:NULL repeats:NO];
@@ -35,17 +24,16 @@
     if(self)
     {
         UMMicroSec now  = [UMThroughputCounter microsecondTime];
-        isRunning = NO;
-        startTime = now;
-        lastChecked = now;
-        expiryTime = 0;
-        duration = dur;
-        name = @"";
-        objectToCall = target;
-        selectorToCall = selector;
-        parameter = object;
-        name = n;
-        repeats = r;
+        _isRunning = NO;
+        _startTime = now;
+        _lastChecked = now;
+        _expiryTime = 0;
+        _duration = dur;
+        _objectToCall = target;
+        _selectorToCall = selector;
+        _parameter = object;
+        _name = n;
+        _repeats = r;
     }
     return self;
 }
@@ -53,24 +41,17 @@
 
 - (void)start
 {
-    @synchronized(self)
-    {
-        self.isRunning = YES;
-        UMMicroSec now  = [UMThroughputCounter microsecondTime];
-        expiryTime = now + duration;
-        [[UMTimerBackgrounder sharedInstance]addTimer:self];
-    }
-
+    self.isRunning = YES;
+    UMMicroSec now  = [UMThroughputCounter microsecondTime];
+    self.expiryTime = now + self.duration;
+    [[UMTimerBackgrounder sharedInstance]addTimer:self];
 }
 
 - (void) stop
 {
-    @synchronized(self)
-    {
-        self.isRunning = NO;
-        expiryTime = 0;
-        [[UMTimerBackgrounder sharedInstance]removeTimer:self];
-    }
+    self.isRunning = NO;
+    self.expiryTime = 0;
+    [[UMTimerBackgrounder sharedInstance]removeTimer:self];
 }
 
 - (BOOL)isExpired
@@ -81,13 +62,10 @@
 
 - (BOOL)isExpired:(UMMicroSec)now
 {
-    @synchronized(self)
+    self.lastChecked = now;
+    if(now > self.expiryTime)
     {
-        lastChecked = now;
-        if(now > expiryTime)
-        {
-            return YES;
-        }
+        return YES;
     }
     return NO;
 }
@@ -97,14 +75,14 @@
 {
     @synchronized(self)
     {
-        return expiryTime - now;
+        return self.expiryTime - now;
     }
 }
 
 - (void)fire
 {
     /* we issue the callback */
-    if(repeats)
+    if(self.repeats)
     {
         [self start];
     }
@@ -112,7 +90,7 @@
     {
         [self stop];
     }
-    [objectToCall runSelectorInBackground:selectorToCall withObject:parameter];
+    [self.objectToCall runSelectorInBackground:self.selectorToCall withObject:self.parameter];
 }
 
 @end

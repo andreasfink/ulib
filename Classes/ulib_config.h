@@ -37,7 +37,7 @@
 /* #undef HAVE_GETOPT_IN_STDIO_H */
 
 /* Define if you have a declaration for getopt(3) in <unistd.h>. */
-#define HAVE_GETOPT_IN_UNISTD_H 1
+/* #undef HAVE_GETOPT_IN_UNISTD_H */
 
 /* Define if you have getopt_long(3). */
 #define HAVE_GETOPT_LONG 1
@@ -85,7 +85,7 @@
 #define HAVE_SYS_SOCKET_H 1
 
 /* Define if you have the <sys/sockio.h> header file. */
-#define HAVE_SYS_SOCKIO_H 1
+/* #undef HAVE_SYS_SOCKIO_H */
 
 /* Define if you have the <net/if.h> header file. */
 #define HAVE_NET_IF_H 1
@@ -97,7 +97,7 @@
 #define HAVE_LIBM 1
 
 /* Define if you have the nsl library (-lnsl).  */
-/* #undef HAVE_LIBNSL */
+#define HAVE_LIBNSL 1
 
 /* Define if you have the pthread library (-lpthread).  */
 /* #undef HAVE_LIBPTHREAD */
@@ -127,7 +127,7 @@
 #define HAVE_BACKTRACE 1
 
 /* Define for various gethostbyname_r functions */
-/* #undef HAVE_FUNC_GETHOSTBYNAME_R_6 */
+#define HAVE_FUNC_GETHOSTBYNAME_R_6 1
 /* #undef HAVE_FUNC_GETHOSTBYNAME_R_5 */
 /* #undef HAVE_FUNC_GETHOSTBYNAME_R_3 */
 
@@ -146,10 +146,10 @@
 #define HAVE_OPENSSL 1
 
 /* define if we have common crypto installed */
-#define HAVE_COMMONCRYPTO 1
+/* #undef HAVE_COMMONCRYPTO */
 
 /* if sockadd.sin_len is existing */
-#define HAVE_SOCKADDR_SIN_LEN 1
+/* #undef HAVE_SOCKADDR_SIN_LEN */
 #ifdef	HAVE_SOCKADDR_SIN_LEN
 #define	HAVE_SIN_LEN HAVE_SOCKADDR_SIN_LEN
 #endif

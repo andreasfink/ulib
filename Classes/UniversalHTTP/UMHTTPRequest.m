@@ -273,6 +273,10 @@
 
 - (void) setResponseHeader:(NSString *)name withValue:(NSString *)value
 {
+    if(value == NULL)
+    {
+        value = @"";
+    }
 	[responseHeaders setObject:value forKey:name];
 }
 

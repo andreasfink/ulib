@@ -306,46 +306,50 @@
             [req setResponseCode:HTTP_RESPONSE_CODE_UNAUTHORIZED];
             [req setResponseHtmlString:[NSString stringWithFormat:@"Unknown method '%@'",method]];
         }
-        else if([method isEqual:@"GET"])
+        else
         {
-			[server httpGet:req];
+            if([method isEqual:@"GET"])
+            {
+                [server httpGet:req];
+            }
+            else if([method isEqual:@"POST"])
+            {
+                [server httpPost:req];
+            }
+            else if([method isEqual:@"HEAD"])
+            {
+                [server httpHead:req];
+            }
+            else if([method isEqual:@"PUT"])
+            {
+                [server httpPut:req];
+            }
+            else if([method isEqual:@"DELETE"])
+            {
+                [server httpDelete:req];
+            }
+            else if([method isEqual:@"TRACE"])
+            {
+                [server httpTrace:req];
+            }
+            else if([method isEqual:@"CONNECT"])
+            {
+                [server httpConnect:req];
+            }
+            else if([method isEqual:@"OPTIONS"])
+            {
+                [server httpOptions:req];
+            }
+            else
+            {
+                [req setResponseCode:HTTP_RESPONSE_CODE_BAD_REQUEST];
+                [req setResponseHtmlString:[NSString stringWithFormat:@"Unknown method '%@'",method]];
+                return;
+            }
         }
-		else if([method isEqual:@"POST"])
-        {
-			[server httpPost:req];
-        }
-		else if([method isEqual:@"HEAD"])
-        {
-			[server httpHead:req];
-        }
-		else if([method isEqual:@"PUT"])
-        {
-			[server httpPut:req];
-        }
-		else if([method isEqual:@"DELETE"])
-        {
-			[server httpDelete:req];
-		}
-        else if([method isEqual:@"TRACE"])
-		{
-            [server httpTrace:req];
-        }
-		else if([method isEqual:@"CONNECT"])
-        {
-			[server httpConnect:req];
-        }
-		else if([method isEqual:@"OPTIONS"])
-        {
-			[server httpOptions:req];
-        }
-		else
-		{
-			[req setResponseCode:HTTP_RESPONSE_CODE_BAD_REQUEST];
-            [req setResponseHtmlString:[NSString stringWithFormat:@"Unknown method '%@'",method]];
-			return;
-		}
         if(req.awaitingCompletion == YES) /*async callback */
         {
+            req.connection = self;
             [server.pendingRequests addObject:req];
         }
         else

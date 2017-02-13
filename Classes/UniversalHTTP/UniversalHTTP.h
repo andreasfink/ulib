@@ -41,3 +41,6 @@ typedef enum
 #import "UMHTTPPageCache.h"
 #import "UMHTTPClient.h"
 #import "UMHTTPClientRequest.h"
+
+#import "UMHTTPTask_ReadRequest.h"
+#import "UMHTTPTask_ProcessRequest.h"

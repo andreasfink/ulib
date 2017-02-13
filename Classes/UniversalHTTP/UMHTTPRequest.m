@@ -6,17 +6,22 @@
 //
 
 #import "UMHTTPRequest.h"
+#import "UMHTTPConnection.h"
+#import "UMHTTPServer.h"
+#import "UMSocket.h"
 #import "NSMutableArray+UMHTTP.h"
 #import "NSMutableString+UMHTTP.h"
 #import "NSString+UMHTTP.h"
 #import "UMSleeper.h"
 #import "UMHTTPCookie.h"
 #import "UMJsonWriter.h"
+#import "UMHTTPTask_ReadRequest.h"
+#import "UMTaskQueue.h"
+#import "UMSynchronizedArray.h"
+
 @implementation UMHTTPRequest
 
 @synthesize connection;
-//@synthesize request;
-//@synthesize response;
 @synthesize method;
 @synthesize protocolVersion;
 @synthesize connectionValue;
@@ -582,35 +587,20 @@
 
 - (void)resumePendingRequest
 {
+
     @synchronized (self)
     {
         self.awaitingCompletion = NO;
-        [sleeper wakeUp];
+        [self finishRequest];
+        self.connection = NULL;
     }
 }
 
 
 - (void)sleepUntilCompleted
 {
-    if(sleeper == NULL)
-    {
-        sleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
-        [sleeper prepare];
-    }
-
-    while(self.awaitingCompletion)
-    {
-        [sleeper sleep:100000LL]; /* sleep 100ms = 100'000µs or until being woken up */
-        NSDate *expiry = self.completionTimeout;
-        NSDate *now = [NSDate date];
-        if((expiry == NULL) || ([now compare:expiry] == NSOrderedDescending))
-        {
-            self.awaitingCompletion = NO;
-            [timeoutDelegate httpRequestTimeout:self];
-            timeoutDelegate = NULL;
-        }
-    }
-    sleeper = NULL;
+    self.awaitingCompletion  = YES;
+    [connection.server.pendingRequests addObject:self];
 }
 
 - (void)redirect:(NSString *)newPath
@@ -621,4 +611,24 @@
     self.responseCode = HTTP_RESPONSE_CODE_TEMPORARY_REDIRECT;
 }
 
+- (void)finishRequest
+{
+    [connection.server.pendingRequests removeObject:self];
+
+    NSString *serverName = connection.server.serverName;
+
+    [self setResponseHeader:@"Server" withValue:serverName];
+    NSData *resp = [self extractResponse];
+    [connection.socket sendData:resp];
+    if(connection.mustClose)
+    {
+        [connection terminate];
+    }
+    else
+    {
+        UMHTTPTask_ReadRequest *task = [[UMHTTPTask_ReadRequest alloc]initWithConnection:connection];
+        [connection.server.taskQueue queueTask:task];
+    }
+
+}
 @end

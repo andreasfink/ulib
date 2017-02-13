@@ -17,7 +17,8 @@
 @class UMHTTPRequest;
 @class UMSocket;
 @class UMHTTPConnection;
-
+@class UMTaskQueue;
+@class UMSynchronizedArray;
 #define	UMHTTP_DEFAULT_PORT	8080
 
 typedef enum UMHTTPServerStatus
@@ -120,7 +121,7 @@ typedef enum UMHTTPServerStatus
     int                 receivePollTimeoutMs;
     NSString            *advertizeName;
     BOOL                enableSSL;
-	
+    UMTaskQueue         *_taskQueue;
 	//
 	// the delegates for authorisation
 	//
@@ -146,6 +147,8 @@ typedef enum UMHTTPServerStatus
 
     NSString *certFile;
     NSData *certFileData;
+
+    UMSynchronizedArray *pendingRequests;
 }
 
 @property(readwrite,strong)		NSString *serverName;
@@ -175,12 +178,14 @@ typedef enum UMHTTPServerStatus
 
 @property(readonly)				UMSocket	*listenerSocket;
 @property(readwrite,assign)     BOOL    enableSSL;
-
+@property(readwrite,strong,atomic)     UMTaskQueue *taskQueue;
+@property(readwrite,strong,atomic)      UMSynchronizedArray *pendingRequests;
 
 - (id)init;
 - (id)initWithPort:(in_port_t) port;
 - (id)initWithPort:(in_port_t) port socketType:(UMSocketType) type;
 - (id)initWithPort:(in_port_t)port socketType:(UMSocketType)type ssl:(BOOL)doSSL sslKeyFile:(NSString *)keyFile sslCertFile:(NSString *)certFile;
+- (id) initWithPort:(in_port_t)port socketType:(UMSocketType)type ssl:(BOOL)doSSL sslKeyFile:(NSString *)sslKeyFile sslCertFile:(NSString *)sslCertFile taskQueue:(UMTaskQueue *)tq;
 
 - (UMSocketError) start;
 - (void) mainListener;

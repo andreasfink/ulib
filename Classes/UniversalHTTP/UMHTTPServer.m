@@ -18,7 +18,9 @@
 #import "UMConfig.h"
 #endif
 #import "UMLock.h"
-
+#import "UMTaskQueue.h"
+#import "UMHTTPTask_ReadRequest.h"
+#import "UMSynchronizedArray.h"
 @implementation UMHTTPServer
 
 @synthesize	serverName;
@@ -42,6 +44,7 @@
 @synthesize name;
 @synthesize advertizeName;
 @synthesize enableSSL;
+@synthesize pendingRequests;
 
 /***/
 
@@ -64,6 +67,11 @@
 
 - (id) initWithPort:(in_port_t)port socketType:(UMSocketType)type ssl:(BOOL)doSSL sslKeyFile:(NSString *)sslKeyFile sslCertFile:(NSString *)sslCertFile
 {
+    return [self initWithPort:port socketType:type ssl:doSSL sslKeyFile:sslKeyFile sslCertFile:sslCertFile  taskQueue:NULL];
+}
+
+- (id) initWithPort:(in_port_t)port socketType:(UMSocketType)type ssl:(BOOL)doSSL sslKeyFile:(NSString *)sslKeyFile sslCertFile:(NSString *)sslCertFile taskQueue:(UMTaskQueue *)tq
+{
     self = [super init];
     if(self)
     {	
@@ -81,6 +89,24 @@
         receivePollTimeoutMs = 500;
         serverName = @"UMHTTPServer 1.0";
         enableSSL = doSSL;
+        if(tq)
+        {
+            _taskQueue = tq;
+        }
+        else
+        {
+            NSString *tqname;
+            if(doSSL)
+            {
+                tqname = @"HTTPS_TaskQueue";
+            }
+            else
+            {
+                tqname = @"HTTP_TaskQueue";
+            }
+            _taskQueue = [[UMTaskQueue alloc]initWithNumberOfThreads:ulib_cpu_count() name:tqname enableLogging:NO];
+            [_taskQueue start];
+        }
         if(doSSL)
         {
             if(sslKeyFile)
@@ -92,6 +118,7 @@
                 [self setCertificateFile:sslCertFile];
             }
         }
+        pendingRequests = [[UMSynchronizedArray alloc]init];
     }
     return self;
 }
@@ -239,14 +266,10 @@
                             {
                                 [connections addObject:con];
                             }
-                            
-                            [con runSelectorInBackground:@selector(connectionListener)
-                                              withObject:NULL
-                                                    file:__FILE__
-                                                    line:__LINE__
-                                                function:__func__];
-//                            [NSThread detachNewThreadSelector:@selector(connectionListener) toTarget:con withObject:nil];
-						    con = nil;
+
+                            UMHTTPTask_ReadRequest *task = [[UMHTTPTask_ReadRequest alloc]initWithConnection:con];
+                            [_taskQueue queueTask:task];
+                            con = nil;
                         }
 					    else
 					    {

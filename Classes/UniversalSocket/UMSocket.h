@@ -94,7 +94,6 @@
 @property(readwrite,assign,atomic)		int					isConnected;
 @property(readwrite,strong)		NSMutableData *		receiveBuffer;
 @property(readwrite,strong)		NSString *          lastError;
-@property(readwrite,assign)		int					isNonBlocking;
 @property(readwrite,strong)		id					reportDelegate;
 @property(readwrite,strong)		NSString *name;
 @property(readwrite,assign,atomic)     int                 hasSocket;
@@ -152,6 +151,7 @@
 - (void) reportStatus: (NSString *)str;
 - (void) switchToNonBlocking;
 - (void) switchToBlocking;
+- (BOOL) isNonBlocking;
 - (void) setIsNonBlocking:(int)i;
 - (UMSocket *) copyWithZone:(NSZone *)zone;
 - (void) setLocalPort:(in_port_t) port;

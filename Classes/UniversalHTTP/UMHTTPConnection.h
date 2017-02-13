@@ -26,7 +26,6 @@ typedef enum UMHTTPConnectionRequestSection
 @interface UMHTTPConnection : UMObject
 {
 	int				timeout;
-    UMHTTPRequest	*currentRequest;
 @private
 	__weak UMHTTPServer	*server;
 	UMSocket		*socket;
@@ -42,13 +41,13 @@ typedef enum UMHTTPConnectionRequestSection
 @property (readwrite,assign)	BOOL            mustClose;
 @property (readwrite,assign)	int				timeout;
 @property (readwrite,strong)	NSDate			*lastActivity;
-@property (readwrite,strong)    UMHTTPRequest	*currentRequest;
+@property (readwrite,strong,atomic)    UMHTTPRequest	*currentRequest;
 
 
 - (UMHTTPConnection *) initWithSocket:(UMSocket *)socket server:(UMHTTPServer *)server;
 - (NSString *)description;
 - (void) connectionListener;
-- (int)  checkForIncomingData:(NSMutableData *)appendToMe;
+- (int) checkForIncomingData:(NSMutableData *)appendToMe requestCompleted:(BOOL *)complete;
 - (void) processHTTPRequest:(UMHTTPRequest *)request;
 - (void) terminate;
 //- (void) addLogFromConfigFile:(NSString *)file withSection:(NSString *)section withSubsection:(NSString *)subsection withName:(NSString *)name;

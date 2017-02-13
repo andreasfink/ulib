@@ -1062,13 +1062,20 @@ err:
 {
     @synchronized (self)
     {
-        int flags;
         if(_isNonBlocking)
         {
-            flags = fcntl(_sock, F_GETFL, 0);
+            int flags = fcntl(_sock, F_GETFL, 0);
             fcntl(_sock, F_SETFL, flags  & ~O_NONBLOCK);
             _isNonBlocking = 0;
         }
+    }
+}
+
+- (BOOL)isNonBlocking
+{
+    @synchronized(self)
+    {
+        return _isNonBlocking;
     }
 }
 

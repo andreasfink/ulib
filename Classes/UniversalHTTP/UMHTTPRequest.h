@@ -36,7 +36,7 @@
     NSDate              *_completionTimeout;
     BOOL                _awaitingCompletion; /* set to YES if data is returned later */
 
-	UMHTTPConnection	*connection;
+	UMHTTPConnection	*connection; /* we own the connection while processing it */
 	NSString			*method;
 	NSString			*protocolVersion;
     NSString			*connectionValue;
@@ -56,13 +56,14 @@
     NSString            *authPassword;
     
     id<UMHTTPRequest_TimeoutProtocol>    _timeoutDelegate;
+    BOOL                _mustClose; /* if set, it means after answering this request the connection shall close */
 
 }
 
 @property (readwrite,strong,atomic)NSDate               *completionTimeout;
 @property (readwrite,assign,atomic) BOOL                awaitingCompletion;
 
-@property (readwrite,strong) UMHTTPConnection			*connection;
+@property (readwrite,strong,atomic) UMHTTPConnection			*connection;
 //@property (readonly,assign) CFHTTPMessageRef			request;
 //@property (readonly,assign) CFHTTPMessageRef			response;
 @property (readwrite,strong) NSString					*protocolVersion;
@@ -82,6 +83,8 @@
 @property (readwrite,strong,atomic) id<UMHTTPRequest_TimeoutProtocol>    timeoutDelegate;
 @property (readwrite,strong) NSString                   *authUsername;
 @property (readwrite,strong) NSString                   *authPassword;
+@property (readwrite,assign,atomic)     BOOL                mustClose;
+
 
 
 
@@ -132,4 +135,6 @@
 - (void)redirect:(NSString *)newPath;
 - (void)setRequestCookie:(UMHTTPCookie *)cookie;
 - (void)setResponseCookie:(UMHTTPCookie *)cookie;
+- (void)finishRequest;
+
 @end

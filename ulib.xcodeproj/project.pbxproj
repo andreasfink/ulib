@@ -1794,6 +1794,10 @@
 		A6AC4C5E1D460CA0002BAA97 /* libssl-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6AC47221D4608F0002BAA97 /* libssl-ios.a */; };
 		A6ACC11B1D344C4E00211137 /* UMSynchronizedSortedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = A6ACC1191D344C4E00211137 /* UMSynchronizedSortedDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6ACC11C1D344C4E00211137 /* UMSynchronizedSortedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A6ACC11A1D344C4E00211137 /* UMSynchronizedSortedDictionary.m */; };
+		A6AE665D1E5197FE005F3617 /* UMHTTPTask_ReadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AE665B1E5197FE005F3617 /* UMHTTPTask_ReadRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6AE665E1E5197FE005F3617 /* UMHTTPTask_ReadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AE665C1E5197FE005F3617 /* UMHTTPTask_ReadRequest.m */; };
+		A6AE66611E51980E005F3617 /* UMHTTPTask_ProcessRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AE665F1E51980E005F3617 /* UMHTTPTask_ProcessRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6AE66621E51980E005F3617 /* UMHTTPTask_ProcessRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AE66601E51980E005F3617 /* UMHTTPTask_ProcessRequest.m */; };
 		A6BEA3241E49AC4F00A130B7 /* NSDictionary+UniversalConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = A6BEA3221E49AC4F00A130B7 /* NSDictionary+UniversalConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6BEA3251E49AC4F00A130B7 /* NSDictionary+UniversalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BEA3231E49AC4F00A130B7 /* NSDictionary+UniversalConfig.m */; };
 		A6C173D21AB835640090FC94 /* NSDate+stringFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = A6C173D01AB835640090FC94 /* NSDate+stringFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2404,6 +2408,10 @@
 		A6AC49611D4609B8002BAA97 /* libulib-ios-static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libulib-ios-static.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6ACC1191D344C4E00211137 /* UMSynchronizedSortedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSynchronizedSortedDictionary.h; sourceTree = "<group>"; };
 		A6ACC11A1D344C4E00211137 /* UMSynchronizedSortedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSynchronizedSortedDictionary.m; sourceTree = "<group>"; };
+		A6AE665B1E5197FE005F3617 /* UMHTTPTask_ReadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPTask_ReadRequest.h; sourceTree = "<group>"; };
+		A6AE665C1E5197FE005F3617 /* UMHTTPTask_ReadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPTask_ReadRequest.m; sourceTree = "<group>"; };
+		A6AE665F1E51980E005F3617 /* UMHTTPTask_ProcessRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMHTTPTask_ProcessRequest.h; path = ../../UMHTTPTask_ProcessRequest.h; sourceTree = "<group>"; };
+		A6AE66601E51980E005F3617 /* UMHTTPTask_ProcessRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMHTTPTask_ProcessRequest.m; path = ../../UMHTTPTask_ProcessRequest.m; sourceTree = "<group>"; };
 		A6BEA3221E49AC4F00A130B7 /* NSDictionary+UniversalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UniversalConfig.h"; sourceTree = "<group>"; };
 		A6BEA3231E49AC4F00A130B7 /* NSDictionary+UniversalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UniversalConfig.m"; sourceTree = "<group>"; };
 		A6C173D01AB835640090FC94 /* NSDate+stringFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+stringFunctions.h"; sourceTree = "<group>"; };
@@ -3421,6 +3429,10 @@
 		A6D8AC55149AA4AB0029E9CF /* UniversalHTTP */ = {
 			isa = PBXGroup;
 			children = (
+				A6AE665B1E5197FE005F3617 /* UMHTTPTask_ReadRequest.h */,
+				A6AE665C1E5197FE005F3617 /* UMHTTPTask_ReadRequest.m */,
+				A6AE665F1E51980E005F3617 /* UMHTTPTask_ProcessRequest.h */,
+				A6AE66601E51980E005F3617 /* UMHTTPTask_ProcessRequest.m */,
 				A6DDD9B816360D88002FA7CC /* NSDictionary+UMHTTP.h */,
 				A6DDD9B916360D88002FA7CC /* NSDictionary+UMHTTP.m */,
 				A6DDD9A916360B80002FA7CC /* NSMutableArray+UMHTTP.h */,
@@ -4458,6 +4470,7 @@
 				A6AC477A1D4608F0002BAA97 /* evp.h in Headers */,
 				A6AC48BC1D4608FC002BAA97 /* krb5_asn.h in Headers */,
 				A6AC48E91D4608FC002BAA97 /* pkcs12.h in Headers */,
+				A6AE66611E51980E005F3617 /* UMHTTPTask_ProcessRequest.h in Headers */,
 				A6A7A23F1CF7511F00211137 /* UMSSLCertificate.h in Headers */,
 				A6A143F7149B4F5000B007D0 /* ulib.h in Headers */,
 				A615D9181B4D6CF300854472 /* UMHistoryLogEntry.h in Headers */,
@@ -4714,6 +4727,7 @@
 				A6AC47591D4608F0002BAA97 /* dh.h in Headers */,
 				A6AC48A11D4608FC002BAA97 /* ebcdic.h in Headers */,
 				A6AC48C51D4608FC002BAA97 /* md4.h in Headers */,
+				A6AE665D1E5197FE005F3617 /* UMHTTPTask_ReadRequest.h in Headers */,
 				A6AC476E1D4608F0002BAA97 /* ecdh.h in Headers */,
 				A6AC48FE1D4608FC002BAA97 /* rsa.h in Headers */,
 				A67D3DE81AF9FF2B0090FC94 /* NSString+UMJson.h in Headers */,
@@ -4881,7 +4895,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Andreas Fink (andreas@fink.org)";
 				TargetAttributes = {
 					A60210041D488A2F00211137 = {
@@ -5696,6 +5710,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6AE66621E51980E005F3617 /* UMHTTPTask_ProcessRequest.m in Sources */,
 				A6D8AB51149A77D10029E9CF /* UMObject.m in Sources */,
 				A6BEA3251E49AC4F00A130B7 /* NSDictionary+UniversalConfig.m in Sources */,
 				A6D8AB4B149A77D10029E9CF /* UMHistoryLog.m in Sources */,
@@ -5718,6 +5733,7 @@
 				A638ECFA194F607300E09643 /* UMLock.m in Sources */,
 				A6C84D6819F785DD0090FC94 /* UMLockEvent.m in Sources */,
 				A6D8AB88149A78100029E9CF /* UMLayer.m in Sources */,
+				A6AE665E1E5197FE005F3617 /* UMHTTPTask_ReadRequest.m in Sources */,
 				A6C789501B4A8EE00090FC94 /* UMDateTimeStuff.m in Sources */,
 				A6DC79291DE5766F003BBA67 /* UMHTTPClient.m in Sources */,
 				A6D8AB8B149A78100029E9CF /* UMLayerTask.m in Sources */,
@@ -5913,7 +5929,7 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
@@ -5954,7 +5970,7 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
@@ -5995,7 +6011,7 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
@@ -6035,7 +6051,7 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
@@ -6075,7 +6091,7 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
@@ -6116,7 +6132,7 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
@@ -6468,7 +6484,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
@@ -6505,7 +6521,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;

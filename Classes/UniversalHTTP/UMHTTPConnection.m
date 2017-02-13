@@ -16,6 +16,11 @@
 #import "NSDictionary+UMHTTP.h"
 #import "UMLogFeed.h"
 #import "UMLock.h"
+#import "UMHTTPTask_ProcessRequest.h"
+#import "UMHTTPTask_ReadRequest.h"
+#import "UMSynchronizedArray.h"
+
+#import "UMTaskQueue.h"
 
 #include <poll.h>
 
@@ -61,6 +66,13 @@
 	[socket close];
 }
 
+
+/* this takes a socket and reads a HTTP header and readas a request */
+/* returning NULL means socket closed and terminated */
+/* returning an object means that object now owns the connection. Once it is processed it is in charge of
+    writing the answer, closing the socket or calling startHttpConnection 
+ again for reading the next request */
+
 - (void) connectionListener
 {
 	UMSocketError err;
@@ -80,6 +92,8 @@
     {
         ulib_set_thread_name([NSString stringWithFormat:@"[UMHTTPConnection connectionListener] %@",socket.description]);
     }
+
+    BOOL completeRequestReceived = NO;
 	while(mustClose == NO)
 	{
         if (!socket)
@@ -107,13 +121,20 @@
             {
                 mustClose = YES;
             }
-            if( [self checkForIncomingData:appendToMe] != 0)
+            if( [self checkForIncomingData:appendToMe requestCompleted:&completeRequestReceived] != 0)
             {
                 mustClose = YES;
             }
-            if(pollResult == UMSocketError_has_data_and_hup)
+            else
             {
-                mustClose = YES;
+                if(pollResult == UMSocketError_has_data_and_hup)
+                {
+                    mustClose = YES;
+                }
+                else
+                {
+                    break;
+                }
             }
         }
         else
@@ -121,20 +142,27 @@
             mustClose = YES;
         }
 	}
-	mustClose = YES;
-	/* we're done with this thread so we must release our pool */
-	/* tell the server process to terminate and release us */
-	[server connectionDone:self];
+    if(completeRequestReceived)
+    {
+        UMHTTPTask_ProcessRequest *pr = [[UMHTTPTask_ProcessRequest alloc]initWithRequest:currentRequest connection:self];
+        [server.taskQueue queueTask:pr];
+    }
+    else
+    {
+        mustClose = YES;
+        /* we're done with this thread so we must release our pool */
+        /* tell the server process to terminate and release us */
+        [server connectionDone:self];
+    }
 }
 
 
 /* returns error if it should exit */
-- (int) checkForIncomingData:(NSMutableData *)appendToMe;
+- (int) checkForIncomingData:(NSMutableData *)appendToMe requestCompleted:(BOOL *)complete
 {
 	const char *ptr = [appendToMe bytes];
 	size_t n	= [appendToMe length];
 	char *eol;
-	
 	if(cSection != UMHTTPConnectionRequestSectionData)
 	{
 		while((eol = memchr(ptr,'\n',n)))
@@ -152,7 +180,6 @@
 				break;
 			}
 
-
 			if(cSection==UMHTTPConnectionRequestSectionFirstLine)
 			{
                NSArray *lineItems = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
@@ -165,11 +192,11 @@
 				NSString *met = [[lineItems objectAtIndex:0]stringByTrimmingCharactersInSet:whitespace];
 				NSString *path = [[lineItems objectAtIndex:1] stringByTrimmingCharactersInSet:whitespace];
 				NSString *protocol = [[lineItems objectAtIndex:2] stringByTrimmingCharactersInSet:whitespace];
-                self.currentRequest =[[UMHTTPRequest alloc]init];
-				[currentRequest setMethod:met];
-				[currentRequest setPath:path];
-				[currentRequest setProtocolVersion:protocol];
-                [currentRequest setConnection:self];
+                currentRequest =[[UMHTTPRequest alloc]init];
+				currentRequest.method = met;
+				currentRequest.path = path;
+				currentRequest.protocolVersion = protocol;
+                currentRequest.connection = self;
 				cSection=UMHTTPConnectionRequestSectionHeaderLine;
 				continue;
 			}
@@ -207,9 +234,12 @@
 			[appendToMe replaceBytesInRange:NSMakeRange(0,n) withBytes:nil length:0];
 			[currentRequest setRequestData:data];
             [self setLastActivity: [NSDate date]];
-            [self processHTTPRequest:currentRequest];
-            self.currentRequest = NULL; /* we are done with the request. this will let the object be released */
-            
+
+            currentRequest.mustClose = mustClose;
+            if(complete)
+            {
+                *complete = YES;
+            }
             if(mustClose == YES)
             {
                 cSection = UMHTTPConnectionRequestSectionErrorOrClose;
@@ -322,26 +352,12 @@
 		}
         if(req.awaitingCompletion == YES) /*async callback */
         {
-            [req sleepUntilCompleted];
+            [server.pendingRequests addObject:req];
         }
-        [req setResponseHeader:@"Server" withValue:[server serverName]];
-        resp = [req extractResponse];
-        [socket sendData:resp];
-        
-#ifdef SENTEST
-        /* Sen test log parsing requires separator "\r\n". */
-        NSString *subsection = @"sentest";
-        NSString *msg = [NSString stringWithFormat:@"sent %@ reply headers %@\r\n", method, [req responseHeaders]];
-        [logFeed debug:0 inSubsection:subsection withText:msg];
-        
-        logHeaders = [[req requestHeaders] toArray];
-        contentType = [logHeaders findFirstWithName:@"Content-Type"];
-        contentLength = [logHeaders findFirstWithName:@"Content-Length"];
-        NSString *logItem = [[req requestHeaders] logDescription];
-        NSString *url = [req path];
-        NSString *msg1 = [NSString stringWithFormat:@"Test HTTP: received %@ request headers %@ with url %@ and version %@ and content type %@ and content length %@ fend \r\n", method ? method : @"GET", logItem, url ? url : @"not specified", protocolVersion ? protocolVersion : @"HTTP/1.1", contentType ? contentType : @"text/plain;charset=UTF-8", contentLength ? contentLength : @"0"];
-        [logFeed debug:0 inSubsection:subsection withText:msg1];
-#endif
+        else
+        {
+            [req finishRequest];
+        }
 	}
 }
 

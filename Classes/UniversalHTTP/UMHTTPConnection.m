@@ -304,7 +304,8 @@
         {
             [req setNotAuthorizedForRealm:realm];
             [req setResponseCode:HTTP_RESPONSE_CODE_UNAUTHORIZED];
-            [req setResponseHtmlString:[NSString stringWithFormat:@"Unknown method '%@'",method]];
+            [req setResponseHtmlString:@"Authentication failed"];
+            req.awaitingCompletion = NO;
         }
         else
         {

@@ -28,7 +28,6 @@
 
 @synthesize	server;
 @synthesize	socket;
-@synthesize	mustClose;
 @synthesize	timeout;
 @synthesize	lastActivity;
 @synthesize currentRequest;
@@ -82,7 +81,7 @@
 	lastActivity = [[NSDate alloc]init];
     cSection = UMHTTPConnectionRequestSectionFirstLine;
 
-	mustClose = NO;
+	self.mustClose = NO;
     if(socket.useSSL)
     {
         ulib_set_thread_name([NSString stringWithFormat:@"[UMHTTPConnection connectionListener] %@ (with SSL)",socket.description]);
@@ -94,7 +93,7 @@
     }
 
     BOOL completeRequestReceived = NO;
-	while(mustClose == NO)
+	while(self.mustClose == NO)
 	{
         if (!socket)
         {
@@ -109,7 +108,7 @@
             NSTimeInterval idleTime = [now timeIntervalSinceDate:lastActivity];
             if(idleTime > 30)
             {
-                mustClose = YES;
+                self.mustClose = YES;
             }
             continue;
         }
@@ -119,27 +118,35 @@
             err = [socket receiveEverythingTo:&appendToMe];
             if(err != UMSocketError_no_error)
             {
-                mustClose = YES;
+                self.mustClose = YES;
             }
+
             if( [self checkForIncomingData:appendToMe requestCompleted:&completeRequestReceived] != 0)
             {
-                mustClose = YES;
+                self.mustClose = YES;
             }
             else
             {
                 if(pollResult == UMSocketError_has_data_and_hup)
                 {
-                    mustClose = YES;
+                    self.mustClose = YES;
                 }
                 else
                 {
-                    break;
+                    if(completeRequestReceived==NO)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
         }
         else
         {
-            mustClose = YES;
+            self.mustClose = YES;
         }
 	}
     if(completeRequestReceived)
@@ -147,9 +154,8 @@
         UMHTTPTask_ProcessRequest *pr = [[UMHTTPTask_ProcessRequest alloc]initWithRequest:currentRequest connection:self];
         [server.taskQueue queueTask:pr];
     }
-    else
+    if (self.mustClose)
     {
-        mustClose = YES;
         /* we're done with this thread so we must release our pool */
         /* tell the server process to terminate and release us */
         [server connectionDone:self];
@@ -163,12 +169,14 @@
 	const char *ptr = [appendToMe bytes];
 	size_t n	= [appendToMe length];
 	char *eol;
+    NSString *line = NULL;
+
 	if(cSection != UMHTTPConnectionRequestSectionData)
 	{
 		while((eol = memchr(ptr,'\n',n)))
 		{
 			NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-			NSString *line = [[NSString alloc]initWithBytes:ptr length:eol-ptr encoding:NSUTF8StringEncoding];
+			line = [[NSString alloc]initWithBytes:ptr length:eol-ptr encoding:NSUTF8StringEncoding];
 			size_t removeLen = eol-ptr+1;
 			[appendToMe replaceBytesInRange:NSMakeRange(0,removeLen) withBytes:nil length:0];
 			n -= removeLen;
@@ -200,29 +208,29 @@
 				cSection=UMHTTPConnectionRequestSectionHeaderLine;
 				continue;
 			}
-			
-            NSArray *lineItems = [line splitByFirstCharacter:':'];
-
-//			NSArray *lineItems = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":"]];
-			if([lineItems count] != 2)
-			{
-				NSLog(@"HTTP header line '%@' doesnt have exactly 2 items <header>:<value>",line);
-				cSection = UMHTTPConnectionRequestSectionErrorOrClose;
-				return -1;
-			}
-
-			NSString *header = [[lineItems objectAtIndex:0]stringByTrimmingCharactersInSet:whitespace];
-			NSString *value = [[lineItems objectAtIndex:1] stringByTrimmingCharactersInSet:whitespace];
-			[currentRequest setRequestHeader:header withValue:value];
-			if([header isEqual:@"Content-Length"])
-			{
-				awaitingBytes = [value intValue];
-			}
-            else if ([header isEqual:@"Connection"])
+			else
             {
-                [currentRequest setConnectionValue:value];
+                /* header lines */
+                NSArray *lineItems = [line splitByFirstCharacter:':'];
+                if([lineItems count] != 2)
+                {
+                    NSLog(@"HTTP header line '%@' doesnt have exactly 2 items <header>:<value>",line);
+                    cSection = UMHTTPConnectionRequestSectionErrorOrClose;
+                    return -1;
+                }
+
+                NSString *header = [[lineItems objectAtIndex:0]stringByTrimmingCharactersInSet:whitespace];
+                NSString *value = [[lineItems objectAtIndex:1] stringByTrimmingCharactersInSet:whitespace];
+                [currentRequest setRequestHeader:header withValue:value];
+                if([header isEqual:@"Content-Length"])
+                {
+                    awaitingBytes = [value intValue];
+                }
+                else if ([header isEqual:@"Connection"])
+                {
+                    [currentRequest setConnectionValue:value];
+                }
             }
-            
 			continue;
 		}
 	}
@@ -235,12 +243,12 @@
 			[currentRequest setRequestData:data];
             [self setLastActivity: [NSDate date]];
 
-            currentRequest.mustClose = mustClose;
+            currentRequest.mustClose = self.mustClose;
             if(complete)
             {
                 *complete = YES;
             }
-            if(mustClose == YES)
+            if(self.mustClose == YES)
             {
                 cSection = UMHTTPConnectionRequestSectionErrorOrClose;
             }
@@ -252,7 +260,7 @@
 		}
         else
         {
-
+            NSLog(@"if(@ >= awaitingBytes) = NO");
         }
 	}
     return 0;
@@ -266,18 +274,18 @@
     
 	if([protocolVersion isEqual:@"HTTP/1.0"])
     {
-		mustClose = YES;
+		self.mustClose = YES;
     }
     
     if([connectionValue isEqual:@"close"])
     {
-		mustClose = YES;
+		self.mustClose = YES;
     }
     
     if (!protocolVersion || !(([protocolVersion isEqual:@"HTTP/1.1"]) || ([protocolVersion isEqual:@"HTTP/1.0"])))
 	{
 		[req setResponseCode:505];
-		mustClose = YES;
+		self.mustClose = YES;
         return;
     }
 	

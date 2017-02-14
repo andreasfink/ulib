@@ -197,7 +197,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 {
     @synchronized(self)
     {
-        if((self.hasSocket) && (_sock >=0))
+        if((_hasSocket) && (_sock >=0))
         {
             TRACK_FILE_CLOSE(_sock);
             close(_sock);
@@ -207,7 +207,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     #endif
         }
         _sock=s;
-        self.hasSocket=1;
+        _hasSocket=1;
     }
 }
 
@@ -361,12 +361,13 @@ static int SSL_smart_shutdown(SSL *ssl)
         peer_certificate = NULL;
     }
 */
-    if((self.hasSocket != 0) && (self.sock >= 0))
+    if((_hasSocket != 0) && (_sock >= 0))
     {
         NSLog(@"deallocating a connection which has an open socket");
         TRACK_FILE_CLOSE(_sock);
         close(_sock);
         _sock = -1;
+        _hasSocket = 0;
     }
 }
 
@@ -755,70 +756,79 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) connect
 {
+    struct sockaddr_in	sa;
+    struct sockaddr_in6	sa6;
+    char addr[256];
+    int err;
+    ip_version = 0;
+    NSString *address;
+    int resolved;
+
     @synchronized(self)
     {
-        struct sockaddr_in	sa;
-        struct sockaddr_in6	sa6;
-        char addr[256];
-        int err;
-        ip_version = 0;
-        NSString *address;
-        int resolved;
-
-        if((_sock < 0) || (!self.hasSocket))
+        if((_sock < 0) || (!_hasSocket))
         {
-            self.isConnecting = 0;
-            self.isConnected = 0;
+            _isConnecting = 0;
+            _isConnected = 0;
             return  [UMSocket umerrFromErrno:EBADF];
         }
-
-        memset(&sa,0x00,sizeof(sa));
-        sa.sin_family		= AF_INET;
+    }
+    memset(&sa,0x00,sizeof(sa));
+    sa.sin_family		= AF_INET;
 #ifdef	HAS_SOCKADDR_LEN
-        sa.sin_len			= sizeof(struct sockaddr_in);
+    sa.sin_len			= sizeof(struct sockaddr_in);
 #endif
-        sa.sin_port         = htons(requestedRemotePort);
+    sa.sin_port         = htons(requestedRemotePort);
 
-        memset(&sa6,0x00,sizeof(sa6));
-        sa6.sin6_family			= AF_INET6;
+    memset(&sa6,0x00,sizeof(sa6));
+    sa6.sin6_family			= AF_INET6;
 #ifdef	HAS_SOCKADDR_LEN
-        sa6.sin6_len        = sizeof(struct sockaddr_in6);
+    sa6.sin6_len        = sizeof(struct sockaddr_in6);
 #endif
-        sa6.sin6_port       = htons(requestedRemotePort);
+    sa6.sin6_port       = htons(requestedRemotePort);
 
-        while((resolved = [remoteHost resolved]) == 0)
-            usleep(50000);
-        address = [remoteHost address:(UMSocketType)type];
-        if (!address)
+    while((resolved = [remoteHost resolved]) == 0)
+    {
+        usleep(50000);
+    }
+    address = [remoteHost address:(UMSocketType)type];
+    if (!address)
+    {
+        NSLog(@"[UMSocket connect] EADDRNOTAVAIL (address not resolved) during connect");
+        @synchronized(self)
         {
-            NSLog(@"[UMSocket connect] EADDRNOTAVAIL (address not resolved) during connect");
-            self.isConnecting = 0;
-            self.isConnected = 0;
-            return UMSocketError_address_not_available;
+            _isConnecting = 0;
+            _isConnected = 0;
         }
+        return UMSocketError_address_not_available;
+    }
 
-        [address getCString:addr maxLength:255 encoding:NSUTF8StringEncoding];
-        //	inet_aton(addr, &sa.sin_addr);
+    [address getCString:addr maxLength:255 encoding:NSUTF8StringEncoding];
+    //	inet_aton(addr, &sa.sin_addr);
 
-        if( inet_pton(AF_INET6, addr, &sa6.sin6_addr) == 1)
+    if( inet_pton(AF_INET6, addr, &sa6.sin6_addr) == 1)
+    {
+        ip_version = 6;
+    }
+    else if(inet_pton(AF_INET, addr, &sa.sin_addr) == 1)
+    {
+        ip_version = 4;
+    }
+    else
+    {
+        NSLog(@"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
+        @synchronized(self)
         {
-            ip_version = 6;
+            _isConnecting = 0;
+            _isConnected = 0;
         }
-        else if(inet_pton(AF_INET, addr, &sa.sin_addr) == 1)
-        {
-            ip_version = 4;
-        }
-        else
-        {
-            NSLog(@"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
-            self.isConnecting = 0;
-            self.isConnected = 0;
-            return UMSocketError_address_not_available;
-        }
+        return UMSocketError_address_not_available;
+    }
 
-        direction = direction | UMSOCKET_DIRECTION_OUTBOUND;
-        self.isConnecting = 1;
-
+    direction = direction | UMSOCKET_DIRECTION_OUTBOUND;
+    @synchronized(self)
+    {
+        _isConnecting = 1;
         [self reportStatus:@"calling connect()"];
         if(ip_version==6)
         {
@@ -836,21 +846,23 @@ static int SSL_smart_shutdown(SSL *ssl)
         if(err)
         {
 
-            self.isConnecting = 0;
-            self.isConnected = 0;
+            _isConnecting = 0;
+            _isConnected = 0;
             //		goto err;
         }
         else
         {
-            self.isConnecting = 0;
-            self.isConnected = 1;
+            _isConnecting = 0;
+            _isConnected = 1;
             status = UMSOCKET_STATUS_IS;
             NSString *msg = [NSString stringWithFormat:@"socket %d isConnected=1",_sock];
             [self reportStatus:msg];
             return 0;
         }
+
         //err:
         int eno = errno;
+
         NSLog(@"[UMSocket connect] failed with errno %d (name %@)", eno, name);
         return [UMSocket umerrFromErrno:eno];
     }
@@ -859,7 +871,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 - (UMSocket *) copyWithZone:(NSZone *)zone
 {
     UMSocket *newsock = [[UMSocket alloc]init];
-    
+
     newsock.type = type;
     newsock.direction =  direction;
     newsock.status=status;

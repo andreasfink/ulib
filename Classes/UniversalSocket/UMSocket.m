@@ -195,17 +195,20 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (void)setSock:(int)s
 {
-    if((self.hasSocket) && (_sock >=0))
+    @synchronized(self)
     {
-        TRACK_FILE_CLOSE(_sock);
-        close(_sock);
-#if !defined(TARGET_OS_WATCH)
-        [netService stop];
-        netService=NULL;
-#endif
+        if((self.hasSocket) && (_sock >=0))
+        {
+            TRACK_FILE_CLOSE(_sock);
+            close(_sock);
+    #if !defined(TARGET_OS_WATCH)
+            [netService stop];
+            netService=NULL;
+    #endif
+        }
+        _sock=s;
+        self.hasSocket=1;
     }
-    _sock=s;
-    self.hasSocket=1;
 }
 
 + (NSString *)statusDescription:(UMSocketStatus)s;
@@ -335,7 +338,10 @@ static int SSL_smart_shutdown(SSL *ssl)
     NSString* l5 = [NSString localizedStringWithFormat:@"Remote Host:          %@", remoteHostDesc ? remoteHostDesc : @"none available"];
     NSString* l6 = [NSString localizedStringWithFormat:@"Local Port:           %d", connectedLocalPort];
     NSString* l7 = [NSString localizedStringWithFormat:@"Remote Port:          %d", connectedRemotePort];
-    NSString* l8 = [NSString localizedStringWithFormat:@"Socket:               %d", _sock];
+    @synchronized (self)
+    {
+        NSString* l8 = [NSString localizedStringWithFormat:@"Socket:               %d", _sock];
+    }
     return [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n",l0,l1,l2,l3,l4,l5,l6,l7,l8];
 }
 
@@ -532,103 +538,106 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) bind
 {
-    int eno = 0;
+    @synchronized (self)
+    {
+        int eno = 0;
 #ifdef	SCTP_SUPPORTED
-	NSArray				*localAddresses = NULL;
-	NSMutableArray			*useableLocalAddresses;
+        NSArray				*localAddresses = NULL;
+        NSMutableArray			*useableLocalAddresses;
 #endif
-	struct sockaddr_in	sa;
-	struct sockaddr_in6	sa6;
+        struct sockaddr_in	sa;
+        struct sockaddr_in6	sa6;
 #ifdef  SCTP_SUPPORTED
-	int i;
-	NSString	*ipAddr;
-	char	addressString[256];
-	int		err;
+        int i;
+        NSString	*ipAddr;
+        char	addressString[256];
+        int		err;
 #endif
-	[self reportStatus:@"bind()"];
+        [self reportStatus:@"bind()"];
 
-	if (isBound == 1)
-	{
-		[self reportStatus:@"- already bound"];
-		return UMSocketError_already_bound;
-	}
+        if (isBound == 1)
+        {
+            [self reportStatus:@"- already bound"];
+            return UMSocketError_already_bound;
+        }
 
-	localHost				= [[UMHost alloc] initWithLocalhost];
+        localHost				= [[UMHost alloc] initWithLocalhost];
 #ifdef	SCTP_SUPPORTED
-	localAddresses			= [localHost addresses];
-	useableLocalAddresses	= [[NSMutableArray alloc] init];
+        localAddresses			= [localHost addresses];
+        useableLocalAddresses	= [[NSMutableArray alloc] init];
 #endif
-	memset(&sa,0x00,sizeof(sa));
-	sa.sin_family			= AF_INET;
+        memset(&sa,0x00,sizeof(sa));
+        sa.sin_family			= AF_INET;
 #ifdef	HAS_SOCKADDR_LEN
-	sa.sin_len			= sizeof(struct sockaddr_in);
+        sa.sin_len			= sizeof(struct sockaddr_in);
 #endif
-	sa.sin_port			= htons(requestedLocalPort);
-	sa.sin_addr.s_addr		= htonl(INADDR_ANY);
-	memset(&sa6,0x00,sizeof(sa6));
-	sa6.sin6_family			= AF_INET6;
+        sa.sin_port			= htons(requestedLocalPort);
+        sa.sin_addr.s_addr		= htonl(INADDR_ANY);
+        memset(&sa6,0x00,sizeof(sa6));
+        sa6.sin6_family			= AF_INET6;
 #ifdef	HAS_SOCKADDR_LEN
-	sa6.sin6_len			= sizeof(struct sockaddr_in);
+        sa6.sin6_len			= sizeof(struct sockaddr_in);
 #endif
-	sa6.sin6_port			= htons(requestedLocalPort);
-	sa6.sin6_addr			= in6addr_any;
-	
-	switch(type)
-	{
+        sa6.sin6_port			= htons(requestedLocalPort);
+        sa6.sin6_addr			= in6addr_any;
+
+        switch(type)
+        {
 #ifdef	SCTP_SUPPORTED
-		case UMSOCKET_TYPE_SCTP:
-			for(i=0;i< [localAddresses count];i++)
-			{
-				memset(&sa,0x00,sizeof(sa));
-				sa.sin_family   = AF_INET;
+            case UMSOCKET_TYPE_SCTP:
+                for(i=0;i< [localAddresses count];i++)
+                {
+                    memset(&sa,0x00,sizeof(sa));
+                    sa.sin_family   = AF_INET;
 #ifdef	HAS_SOCKADDR_LEN
-				sa.sin_len  = sizeof(struct sockaddr_in);
+                    sa.sin_len  = sizeof(struct sockaddr_in);
 #endif
-				sa.sin_port = htons(requestedLocalPort);
+                    sa.sin_port = htons(requestedLocalPort);
 
-				ipAddr = [localAddresses objectAtIndex:i];
-				[ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
+                    ipAddr = [localAddresses objectAtIndex:i];
+                    [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
 
-				inet_aton(addressString, &sa.sin_addr);
-				err = sctp_bindx(sock, (struct sockaddr *)&sa,1,SCTP_BINDX_ADD_ADDR);
-				if(!err)
-				{
-					[useableLocalAddresses addObject:ipAddr];
-				}
-			}
-			
-			if( [useableLocalAddresses count] == 0)
-			{
-				return UMSocketError_sctp_bindx_failed_for_all;
-			}
-			break;
+                    inet_aton(addressString, &sa.sin_addr);
+                    err = sctp_bindx(sock, (struct sockaddr *)&sa,1,SCTP_BINDX_ADD_ADDR);
+                    if(!err)
+                    {
+                        [useableLocalAddresses addObject:ipAddr];
+                    }
+                }
+
+                if( [useableLocalAddresses count] == 0)
+                {
+                    return UMSocketError_sctp_bindx_failed_for_all;
+                }
+                break;
 #endif
-		case UMSOCKET_TYPE_TCP4ONLY:
-		case UMSOCKET_TYPE_UDP4ONLY:
-			if(bind(_sock,(struct sockaddr *)&sa,sizeof(sa)) != 0)
-               {
-                   eno = errno;
-                   goto err;
-               }
-			break;
-		case UMSOCKET_TYPE_TCP6ONLY:
-		case UMSOCKET_TYPE_UDP6ONLY:
-		case UMSOCKET_TYPE_TCP:
-		case UMSOCKET_TYPE_UDP:
-			if(bind(_sock,(struct sockaddr *)&sa6,sizeof(sa6)) != 0)
-               {
-                   eno = errno;
-                   goto err;
-               }
-			break;
-		default:
-			return [UMSocket umerrFromErrno:EAFNOSUPPORT];
-	}
-	isBound = 1;
-	[self reportStatus:@"isBound=1"];
-	return UMSocketError_no_error;
-err:
-	return [UMSocket umerrFromErrno:eno];
+            case UMSOCKET_TYPE_TCP4ONLY:
+            case UMSOCKET_TYPE_UDP4ONLY:
+                if(bind(_sock,(struct sockaddr *)&sa,sizeof(sa)) != 0)
+                {
+                    eno = errno;
+                    goto err;
+                }
+                break;
+            case UMSOCKET_TYPE_TCP6ONLY:
+            case UMSOCKET_TYPE_UDP6ONLY:
+            case UMSOCKET_TYPE_TCP:
+            case UMSOCKET_TYPE_UDP:
+                if(bind(_sock,(struct sockaddr *)&sa6,sizeof(sa6)) != 0)
+                {
+                    eno = errno;
+                    goto err;
+                }
+                break;
+            default:
+                return [UMSocket umerrFromErrno:EAFNOSUPPORT];
+        }
+        isBound = 1;
+        [self reportStatus:@"isBound=1"];
+        return UMSocketError_no_error;
+    err:
+        return [UMSocket umerrFromErrno:eno];
+    }
 }
 
 - (UMSocketError) openAsync
@@ -643,27 +652,30 @@ err:
 
 - (UMSocketError) listen: (int) backlog
 {
-	int err;
-	
-	[self reportStatus:@"caling listen()"];
-	if (self.isListening == 1)
-	{
-		[self reportStatus:@"- already listening"];
-		return UMSocketError_already_listening;
-	}
-	self.isListening = 0;
+    @synchronized(self)
+    {
+        int err;
 
-	err = listen(_sock,backlog);
-    
-	direction = direction | UMSOCKET_DIRECTION_INBOUND;
-	if(err)
-     {
-         int eno = errno;
-         return [UMSocket umerrFromErrno:eno];
-     }
-	self.isListening = 1;
-	[self reportStatus:@"isListening=1"];
-	return UMSocketError_no_error;
+        [self reportStatus:@"caling listen()"];
+        if (self.isListening == 1)
+        {
+            [self reportStatus:@"- already listening"];
+            return UMSocketError_already_listening;
+        }
+        self.isListening = 0;
+
+        err = listen(_sock,backlog);
+
+        direction = direction | UMSOCKET_DIRECTION_INBOUND;
+        if(err)
+        {
+            int eno = errno;
+            return [UMSocket umerrFromErrno:eno];
+        }
+        self.isListening = 1;
+        [self reportStatus:@"isListening=1"];
+        return UMSocketError_no_error;
+    }
 }
 
 
@@ -742,102 +754,105 @@ err:
 
 - (UMSocketError) connect
 {
-    struct sockaddr_in	sa;
-    struct sockaddr_in6	sa6;
-    char addr[256];
-    int err;
-    ip_version = 0;
-    NSString *address;
-    int resolved;
-    
-    if((_sock < 0) || (!self.hasSocket))
+    @synchronized(self)
     {
-        self.isConnecting = 0;
-        self.isConnected = 0;
-        return  [UMSocket umerrFromErrno:EBADF];
-    }
-    
-    memset(&sa,0x00,sizeof(sa));
-    sa.sin_family		= AF_INET;
+        struct sockaddr_in	sa;
+        struct sockaddr_in6	sa6;
+        char addr[256];
+        int err;
+        ip_version = 0;
+        NSString *address;
+        int resolved;
+
+        if((_sock < 0) || (!self.hasSocket))
+        {
+            self.isConnecting = 0;
+            self.isConnected = 0;
+            return  [UMSocket umerrFromErrno:EBADF];
+        }
+
+        memset(&sa,0x00,sizeof(sa));
+        sa.sin_family		= AF_INET;
 #ifdef	HAS_SOCKADDR_LEN
-    sa.sin_len			= sizeof(struct sockaddr_in);
+        sa.sin_len			= sizeof(struct sockaddr_in);
 #endif
-    sa.sin_port         = htons(requestedRemotePort);
-    
-    memset(&sa6,0x00,sizeof(sa6));
-    sa6.sin6_family			= AF_INET6;
+        sa.sin_port         = htons(requestedRemotePort);
+
+        memset(&sa6,0x00,sizeof(sa6));
+        sa6.sin6_family			= AF_INET6;
 #ifdef	HAS_SOCKADDR_LEN
-    sa6.sin6_len        = sizeof(struct sockaddr_in6);
+        sa6.sin6_len        = sizeof(struct sockaddr_in6);
 #endif
-    sa6.sin6_port       = htons(requestedRemotePort);
-    
-    while((resolved = [remoteHost resolved]) == 0)
-        usleep(50000);
-    address = [remoteHost address:(UMSocketType)type];
-    if (!address)
-    {
-        NSLog(@"[UMSocket connect] EADDRNOTAVAIL (address not resolved) during connect");
-        self.isConnecting = 0;
-        self.isConnected = 0;
-        return UMSocketError_address_not_available;
+        sa6.sin6_port       = htons(requestedRemotePort);
+
+        while((resolved = [remoteHost resolved]) == 0)
+            usleep(50000);
+        address = [remoteHost address:(UMSocketType)type];
+        if (!address)
+        {
+            NSLog(@"[UMSocket connect] EADDRNOTAVAIL (address not resolved) during connect");
+            self.isConnecting = 0;
+            self.isConnected = 0;
+            return UMSocketError_address_not_available;
+        }
+
+        [address getCString:addr maxLength:255 encoding:NSUTF8StringEncoding];
+        //	inet_aton(addr, &sa.sin_addr);
+
+        if( inet_pton(AF_INET6, addr, &sa6.sin6_addr) == 1)
+        {
+            ip_version = 6;
+        }
+        else if(inet_pton(AF_INET, addr, &sa.sin_addr) == 1)
+        {
+            ip_version = 4;
+        }
+        else
+        {
+            NSLog(@"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
+            self.isConnecting = 0;
+            self.isConnected = 0;
+            return UMSocketError_address_not_available;
+        }
+
+        direction = direction | UMSOCKET_DIRECTION_OUTBOUND;
+        self.isConnecting = 1;
+
+        [self reportStatus:@"calling connect()"];
+        if(ip_version==6)
+        {
+            err = connect(_sock, (struct sockaddr *)&sa6, sizeof(sa6));
+        }
+        else if(ip_version==4)
+        {
+            err = connect(_sock, (struct sockaddr *)&sa, sizeof(sa));
+        }
+        else
+        {
+            UMAssert(0,@"[UMSocket connect]: IPversion is not 6 neither 4");
+            err = 0;
+        }
+        if(err)
+        {
+
+            self.isConnecting = 0;
+            self.isConnected = 0;
+            //		goto err;
+        }
+        else
+        {
+            self.isConnecting = 0;
+            self.isConnected = 1;
+            status = UMSOCKET_STATUS_IS;
+            NSString *msg = [NSString stringWithFormat:@"socket %d isConnected=1",_sock];
+            [self reportStatus:msg];
+            return 0;
+        }
+        //err:
+        int eno = errno;
+        NSLog(@"[UMSocket connect] failed with errno %d (name %@)", eno, name);
+        return [UMSocket umerrFromErrno:eno];
     }
-    
-    [address getCString:addr maxLength:255 encoding:NSUTF8StringEncoding];
-    //	inet_aton(addr, &sa.sin_addr);
-    
-    if( inet_pton(AF_INET6, addr, &sa6.sin6_addr) == 1)
-    {
-        ip_version = 6;
-    }
-    else if(inet_pton(AF_INET, addr, &sa.sin_addr) == 1)
-    {
-        ip_version = 4;
-    }
-    else
-    {
-        NSLog(@"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
-        self.isConnecting = 0;
-        self.isConnected = 0;
-        return UMSocketError_address_not_available;
-    }
-    
-    direction = direction | UMSOCKET_DIRECTION_OUTBOUND;
-    self.isConnecting = 1;
-    
-    [self reportStatus:@"calling connect()"];
-    if(ip_version==6)
-    {
-        err = connect(_sock, (struct sockaddr *)&sa6, sizeof(sa6));
-    }
-    else if(ip_version==4)
-    {
-        err = connect(_sock, (struct sockaddr *)&sa, sizeof(sa));
-    }
-    else
-    {
-        UMAssert(0,@"[UMSocket connect]: IPversion is not 6 neither 4");
-        err = 0;
-    }
-    if(err)
-    {
-        
-        self.isConnecting = 0;
-        self.isConnected = 0;
-        //		goto err;
-    }
-    else
-    {
-        self.isConnecting = 0;
-        self.isConnected = 1;
-        status = UMSOCKET_STATUS_IS;
-        NSString *msg = [NSString stringWithFormat:@"socket %d isConnected=1",_sock];
-        [self reportStatus:msg];
-        return 0;
-    }
-    //err:
-    int eno = errno;
-    NSLog(@"[UMSocket connect] failed with errno %d (name %@)", eno, name);
-    return [UMSocket umerrFromErrno:eno];
 }
 
 - (UMSocket *) copyWithZone:(NSZone *)zone
@@ -893,137 +908,147 @@ err:
 
 - (void) doInitReceiveBuffer
 {
-    receiveBuffer = [[NSMutableData alloc] init];
-    receivebufpos = 0;
+    @synchronized (self)
+    {
+        receiveBuffer = [[NSMutableData alloc] init];
+        receivebufpos = 0;
+    }
 }
 
 - (void) deleteFromReceiveBuffer:(NSUInteger)bytes
 {
-    long len;
-    
-    if (bytes > (len = [receiveBuffer length]))
+    @synchronized (self)
     {
-        bytes = (unsigned int)len;
-    }
-    [receiveBuffer replaceBytesInRange:NSMakeRange(0, bytes) withBytes:nil length:0];
-    receivebufpos -= bytes;
-    if (receivebufpos < 0)
-    {
-        receivebufpos = 0;
+        long len;
+
+        if (bytes > (len = [receiveBuffer length]))
+        {
+            bytes = (unsigned int)len;
+        }
+        [receiveBuffer replaceBytesInRange:NSMakeRange(0, bytes) withBytes:nil length:0];
+        receivebufpos -= bytes;
+        if (receivebufpos < 0)
+        {
+            receivebufpos = 0;
+        }
     }
 }
 
 - (UMSocket *) accept:(UMSocketError *)ret
 {
-    int		newsock = -1;
-    UMSocket *newcon =NULL;
-    NSString *remoteAddress=@"";
-    in_port_t remotePort=0;
-    int eno=0;
-    
-
-    if( (type == UMSOCKET_TYPE_TCP4ONLY) ||
-       (type == UMSOCKET_TYPE_UDP4ONLY) ||
-       (type == UMSOCKET_TYPE_SCTP4ONLY))
+    @synchronized (self)
     {
-        struct	sockaddr_in		sa4;
-        socklen_t slen4 = sizeof(sa4);
-        
-        
-#ifdef FINK_DEBUG
-        NSLog(@"accept ipv4 on %d",_sock);
-#endif
-        newsock = accept(_sock,(struct sockaddr *)&sa4,&slen4);
-        eno = errno;
-#ifdef FINK_DEBUG
-        NSLog(@"returned  %d, errno=%d",newsock,eno);
-#endif
-        if(newsock >=0)
+
+        int		newsock = -1;
+        UMSocket *newcon =NULL;
+        NSString *remoteAddress=@"";
+        in_port_t remotePort=0;
+        int eno=0;
+
+
+        if( (type == UMSOCKET_TYPE_TCP4ONLY) ||
+           (type == UMSOCKET_TYPE_UDP4ONLY) ||
+           (type == UMSOCKET_TYPE_SCTP4ONLY))
         {
-            char hbuf[NI_MAXHOST];
-            char sbuf[NI_MAXSERV];
-            if (getnameinfo((struct sockaddr *)&sa4, slen4, hbuf, sizeof(hbuf), sbuf,
-                            sizeof(sbuf), NI_NUMERICHOST | NI_NUMERICSERV))
-            {
-                remoteAddress = @"ipv4:0.0.0.0";
-                remotePort = sa4.sin_port;
-            }
-            else
-            {
-                remoteAddress = @(hbuf);
-                remoteAddress = [NSString stringWithFormat:@"ipv4:%@", remoteAddress];
-                remotePort = sa4.sin_port;
-            }
-            TRACK_FILE_SOCKET(newsock,remoteAddress);
+            struct	sockaddr_in		sa4;
+            socklen_t slen4 = sizeof(sa4);
 
-            newcon.cryptoStream.fileDescriptor = newsock;
+
+#ifdef FINK_DEBUG
+            NSLog(@"accept ipv4 on %d",_sock);
+#endif
+            newsock = accept(_sock,(struct sockaddr *)&sa4,&slen4);
+            eno = errno;
+#ifdef FINK_DEBUG
+            NSLog(@"returned  %d, errno=%d",newsock,eno);
+#endif
+            if(newsock >=0)
+            {
+                char hbuf[NI_MAXHOST];
+                char sbuf[NI_MAXSERV];
+                if (getnameinfo((struct sockaddr *)&sa4, slen4, hbuf, sizeof(hbuf), sbuf,
+                                sizeof(sbuf), NI_NUMERICHOST | NI_NUMERICSERV))
+                {
+                    remoteAddress = @"ipv4:0.0.0.0";
+                    remotePort = sa4.sin_port;
+                }
+                else
+                {
+                    remoteAddress = @(hbuf);
+                    remoteAddress = [NSString stringWithFormat:@"ipv4:%@", remoteAddress];
+                    remotePort = sa4.sin_port;
+                }
+                TRACK_FILE_SOCKET(newsock,remoteAddress);
+
+                newcon.cryptoStream.fileDescriptor = newsock;
+            }
         }
-    }
-    else
-    {
-        struct	sockaddr_in6		sa6;
-        socklen_t slen6 = sizeof(sa6);
+        else
+        {
+            struct	sockaddr_in6		sa6;
+            socklen_t slen6 = sizeof(sa6);
 
 #ifdef FINK_DEBUG
-        NSLog(@"accept ipv4 on %d",_sock);
+            NSLog(@"accept ipv4 on %d",_sock);
 #endif
-        newsock = accept(_sock,(struct sockaddr *)&sa6,&slen6);
-        eno = errno;
+            newsock = accept(_sock,(struct sockaddr *)&sa6,&slen6);
+            eno = errno;
 
 #ifdef FINK_DEBUG
-        NSLog(@"returned  %d, errno=%d",newsock,eno);
+            NSLog(@"returned  %d, errno=%d",newsock,eno);
 #endif
 
+            if(newsock >= 0)
+            {
+                char hbuf[NI_MAXHOST], sbuf[NI_MAXSERV];
+                if (getnameinfo((struct sockaddr *)&sa6, slen6, hbuf, sizeof(hbuf), sbuf,
+                                sizeof(sbuf), NI_NUMERICHOST | NI_NUMERICSERV))
+                {
+                    remoteAddress = @"ipv6:[::]";
+                    remotePort = sa6.sin6_port;
+                }
+                else
+                {
+                    remoteAddress = @(hbuf);
+                    remotePort = sa6.sin6_port;
+                }
+                /* this is a IPv4 style address packed into IPv6 */
+
+                remoteAddress = [UMSocket unifyIP:remoteAddress];
+                TRACK_FILE_SOCKET(newsock,remoteAddress);
+
+            }
+        }
         if(newsock >= 0)
         {
-            char hbuf[NI_MAXHOST], sbuf[NI_MAXSERV];
-            if (getnameinfo((struct sockaddr *)&sa6, slen6, hbuf, sizeof(hbuf), sbuf,
-                            sizeof(sbuf), NI_NUMERICHOST | NI_NUMERICSERV))
-            {
-                remoteAddress = @"ipv6:[::]";
-                remotePort = sa6.sin6_port;
-            }
-            else
-            {
-                remoteAddress = @(hbuf);
-                remotePort = sa6.sin6_port;
-            }
-            /* this is a IPv4 style address packed into IPv6 */
+            newcon = [[UMSocket alloc]init];
+            newcon.type = type;
+            newcon.direction =  direction;
+            newcon.status=status;
+            newcon.localHost = localHost;
+            newcon.remoteHost = remoteHost;
+            newcon.requestedLocalPort=requestedLocalPort;
+            newcon.requestedRemotePort=requestedRemotePort;
+            newcon.cryptoStream = [[UMCrypto alloc]initWithRelatedSocket:newcon];
+            newcon.isBound=NO;
+            newcon.isListening=NO;
+            newcon.isConnecting=NO;
+            newcon.isConnected=YES;
+            [newcon setSock: newsock];
+            [newcon switchToNonBlocking];
+            [newcon doInitReceiveBuffer];
+            newcon.connectedRemoteAddress = remoteAddress;
+            newcon.connectedRemotePort = remotePort;
+            newcon.useSSL = useSSL;
+            [newcon updateName];
+            [self reportStatus:@"accept () successful"];
             
-            remoteAddress = [UMSocket unifyIP:remoteAddress];
-            TRACK_FILE_SOCKET(newsock,remoteAddress);
-
+            /* TODO: start SSL if required here */
+            return newcon;
         }
+        *ret = [UMSocket umerrFromErrno:eno];
+        return nil;
     }
-    if(newsock >= 0)
-    {
-        newcon = [[UMSocket alloc]init];
-        newcon.type = type;
-        newcon.direction =  direction;
-        newcon.status=status;
-        newcon.localHost = localHost;
-        newcon.remoteHost = remoteHost;
-        newcon.requestedLocalPort=requestedLocalPort;
-        newcon.requestedRemotePort=requestedRemotePort;
-        newcon.cryptoStream = [[UMCrypto alloc]initWithRelatedSocket:newcon];
-        newcon.isBound=NO;
-        newcon.isListening=NO;
-        newcon.isConnecting=NO;
-        newcon.isConnected=YES;
-        [newcon setSock: newsock];
-        [newcon switchToNonBlocking];
-        [newcon doInitReceiveBuffer];
-        newcon.connectedRemoteAddress = remoteAddress;
-        newcon.connectedRemotePort = remotePort;
-        newcon.useSSL = useSSL;
-        [newcon updateName];
-        [self reportStatus:@"accept () successful"];
-        
-        /* TODO: start SSL if required here */
-        return newcon;
-    }
-    *ret = [UMSocket umerrFromErrno:eno];
-    return nil;
 }
 
 - (void) switchToNonBlocking
@@ -1070,7 +1095,7 @@ err:
         }
     }
 }
-
+/*
 - (BOOL)isNonBlocking
 {
     @synchronized(self)
@@ -1090,31 +1115,35 @@ err:
 		[self switchToBlocking];
      }
 }
+*/
 
 - (UMSocketError) close
 {
-    UMSocketError err = UMSocketError_no_error;
-    if((self.hasSocket == 0) || (_sock < 0))
+    @synchronized (self)
     {
-        return err;
-    }
+        UMSocketError err = UMSocketError_no_error;
+        if((self.hasSocket == 0) || (_sock < 0))
+        {
+            return err;
+        }
 #ifdef FINK_DEBUG
-    NSLog(@"closing socket %d",_sock);
+        NSLog(@"closing socket %d",_sock);
 #endif
 
-    TRACK_FILE_CLOSE(_sock);
-    int res = close(_sock);
-    if (res)
-    {
-        int eno = errno;
-        err = [UMSocket umerrFromErrno:eno];
+        TRACK_FILE_CLOSE(_sock);
+        int res = close(_sock);
+        if (res)
+        {
+            int eno = errno;
+            err = [UMSocket umerrFromErrno:eno];
+        }
+
+        _sock=-1;
+        self.hasSocket=0;
+        status = UMSOCKET_STATUS_OOS;
+        self.isConnected = 0;
+        return err;
     }
-    
-    _sock=-1;
-    self.hasSocket=0;
-    status = UMSOCKET_STATUS_OOS;
-    self.isConnected = 0;
-    return err;
 }
 
 - (UMSocketError)  sendBytes:(void *)bytes length:(ssize_t)length
@@ -1135,20 +1164,23 @@ err:
         case UMSOCKET_TYPE_TCP4ONLY:
         case UMSOCKET_TYPE_TCP6ONLY:
         case UMSOCKET_TYPE_TCP:
+            @synchronized (self)
+        {
+
             if((_sock < 0) || (self.hasSocket ==0))
             {
                 self.isConnecting = 0;
                 self.isConnected = 0;
                 return [UMSocket umerrFromErrno:EBADF];
             }
-            
+
             if(!self.isConnected)
             {
                 self.isConnecting = 0;
                 self.isConnected = 0;
                 return [UMSocket umerrFromErrno:ECONNREFUSED];
             }
-            
+
             i = [cryptoStream writeBytes:bytes length:length errorCode:&eno];
             if (i != length)
             {
@@ -1156,6 +1188,7 @@ err:
                 [logFeed info:0 inSubsection:@"Universal socket" withText:msg];
                 return [UMSocket umerrFromErrno:eno];
             }
+        }
             break;
         default:
             return UMSocketError_not_supported_operation;
@@ -1218,7 +1251,9 @@ err:
 		case UMSOCKET_TYPE_TCP4ONLY:
 		case UMSOCKET_TYPE_TCP6ONLY:
 		case UMSOCKET_TYPE_TCP:
-			
+             @synchronized (self)
+         {
+
                if((_sock < 0) || (self.hasSocket ==0))
 			{
 				self.isConnecting = 0;
@@ -1240,6 +1275,7 @@ err:
 			{
 				return [UMSocket umerrFromErrno:eno];
 			}
+         }
 			break;
 		default:
 			return [UMSocket umerrFromErrno:EAFNOSUPPORT];
@@ -1291,17 +1327,19 @@ err:
     events |= POLLRDHUP;
 #endif
 
+    @synchronized (self)
+    {
+        memset(pollfds,0,sizeof(pollfds));
+        pollfds[0].fd = _sock;
+        pollfds[0].events = events;
 
-    memset(pollfds,0,sizeof(pollfds));
-    pollfds[0].fd = _sock;
-    pollfds[0].events = events;
-    
 
-//    UMAssert(timeoutInMs>0,@"timeout should be larger than 0");
-    UMAssert(timeoutInMs<200000,@"timeout should be smaller than 20seconds");
-    
-    errno = 99;
-    ret1 = poll(pollfds, 1, timeoutInMs);
+        //    UMAssert(timeoutInMs>0,@"timeout should be larger than 0");
+        UMAssert(timeoutInMs<200000,@"timeout should be smaller than 20seconds");
+
+        errno = 99;
+        ret1 = poll(pollfds, 1, timeoutInMs);
+    }
     if (ret1 < 0)
     {
         eno = errno;
@@ -1592,7 +1630,10 @@ err:
     memset(&sa_remote_in6,0x00,sizeof(sa_remote_in6));
     
     len = sizeof(sa_local);
-    getsockname(_sock, &sa_local, &len);
+    @synchronized (self)
+    {
+        getsockname(_sock, &sa_local, &len);
+    }
     switch(sa_local.sa_family)
     {
         case AF_INET:

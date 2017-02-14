@@ -151,8 +151,8 @@
 - (void) reportStatus: (NSString *)str;
 - (void) switchToNonBlocking;
 - (void) switchToBlocking;
-- (BOOL) isNonBlocking;
-- (void) setIsNonBlocking:(int)i;
+//- (BOOL) isNonBlocking;
+//- (void) setIsNonBlocking:(int)i;
 - (UMSocket *) copyWithZone:(NSZone *)zone;
 - (void) setLocalPort:(in_port_t) port;
 - (UMSocketError) receiveToBufferWithBufferLimit: (int) max;

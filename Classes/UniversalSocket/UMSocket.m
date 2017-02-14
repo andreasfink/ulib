@@ -338,9 +338,10 @@ static int SSL_smart_shutdown(SSL *ssl)
     NSString* l5 = [NSString localizedStringWithFormat:@"Remote Host:          %@", remoteHostDesc ? remoteHostDesc : @"none available"];
     NSString* l6 = [NSString localizedStringWithFormat:@"Local Port:           %d", connectedLocalPort];
     NSString* l7 = [NSString localizedStringWithFormat:@"Remote Port:          %d", connectedRemotePort];
+    NSString* l8;
     @synchronized (self)
     {
-        NSString* l8 = [NSString localizedStringWithFormat:@"Socket:               %d", _sock];
+        l8 = [NSString localizedStringWithFormat:@"Socket:               %d", _sock];
     }
     return [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n",l0,l1,l2,l3,l4,l5,l6,l7,l8];
 }

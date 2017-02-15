@@ -19,13 +19,15 @@ distributions
 	Centos 6 (amd64)
 	Centos 7 (amd64)
 
+
 1. Install depenencies
 --------------------------
+(run as root or use sudo in front)
 
   Debian & Ubuntu & Raspbian
   --------------------------
 
-  apt-get install build-essential \
+  apt-get install build-essential git subversion ninja \
         libkqueue0 libkqueue-dev  \
         libpthread-workqueue0 libpthread-workqueue-dev \
         libblocksruntime0 libblocksruntime-dev \
@@ -59,31 +61,12 @@ distributions
         binfmt-support libtinfo-dev \
         bison flex m4 wget
 
-now install the latest clang-5.0
-        wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key > /tmp/llvm-snapshot.gpg.key
-        apt-key add /tmp/llvm-snapshot.gpg.key
-        apt-get update
-        apt-get install clang-5.0 llvm-5.0 lldb-5.0
-        cd /usr/bin/
-        for BINARY in  bugpoint c-index-test clang clang++ clang-apply-replacements clang-change-namespace clang-check clang-cl clang-cpp clang-import-test clang-include-fixer clang-offload-bundler clang-query clang-rename clang-reorder-fields clang-tblgen find-all-symbols llc lldb lldb-5.0.0 lldb-argdumper lldb-mi lldb-mi-5.0.0 lldb-server lldb-server-5.0.0 lli lli-child-target llvm-ar llvm-as llvm-bcanalyzer llvm-cat llvm-config llvm-cov llvm-c-test llvm-cxxdump llvm-cxxfilt llvm-diff llvm-dis llvm-dsymutil llvm-dwarfdump llvm-dwp llvm-extract llvm-lib llvm-link llvm-lto2 llvm-lto llvm-mc llvm-mcmarkup llvm-modextract llvm-nm llvm-objdump llvm-opt-report llvm-pdbdump llvm-PerfectShuffle llvm-profdata llvm-ranlib llvm-readobj llvm-rtdyld llvm-size llvm-split llvm-stress llvm-strings llvm-symbolizer llvm-tblgen llvm-xray modularize obj2yaml opt sancov sanstats scan-build scan-view verify-uselistorder yaml2obj yaml-bench
-        do
-            if [ -L "$BINARY" ]
-            then
-                if [ -L "$BINARY-5.0" ]
-                then
-                    rm "$BINARY"
-                    ln -s "$BINARY-5.0" "$BINARY"
-                fi
-            fi
-         done
-         
-         export CC=clang
-         export CXX=clang++
-         
-
-  Debian8 only:			apt-get install libgnutls-deb0-28  libcups2-dev  locales-all libicu52
-  Ubuntu14 only:		apt-get install locales libicu52
-  Ubuntu16 only:		apt-get install locales libicu55
+Debian8 only:		
+    apt-get install libgnutls-deb0-28  libcups2-dev  locales-all libicu52
+Ubuntu14 only:		
+    apt-get install locales libicu52
+Ubuntu16 only:		
+    apt-get install locales libicu55
   
     Centos6 / Redhat Enterprise Server 6
     ------------------------------------
@@ -115,8 +98,7 @@ now install the latest clang-5.0
         libedit libedit-devel readline-static readline-devel \
         ncurses-devel ncurses-libs ncurses \
         cmake3
-
-
+        
 manual compile and install on centos:
 
   First we need some newer version of the autotools
@@ -172,6 +154,7 @@ manual compile and install on centos:
         https://github.com/nickhutchinson/libdispatch
 
 
+
 2a. Add the clang/llvm repositories and install a recent version of clang
 -------------------------------------------------------------------------
 (for Debian/Ubunut)
@@ -180,40 +163,19 @@ manual compile and install on centos:
     deb http://llvm.org/apt/jessie/ llvm-toolchain-jessie main
     deb-src http://llvm.org/apt/jessie/ llvm-toolchain-jessie main
 
-this links in the latest LLVM compiler version.
-(Somewhere around version 3.5 is the minimum, I tested with clang version 4.0.0-svn285499-1~exp1)
+this links in the latest LLVM compiler repository.
 
-
-. Import the key from the keyserver and update your repository index.
-(run it with sudo in front if you are not root)
+    Import the key from the keyserver and update your repository index.
 
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 15CF4D18AF4F7421
+    wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key > /tmp/llvm-snapshot.gpg.key
+    apt-key add /tmp/llvm-snapshot.gpg.key
     apt-get update
 
+now we can install the latest clang-5.0
 
-2a.2: Install the clang compiler and the lldb debugger in version 4.0 
+     apt-get -y install build-essential git llvm-5.0 clang-5.0 lldb-5.0 libclang-5.0-dev
 
-    apt-get -y install build-essential git llvm-4.0 clang-4.0 lldb-4.0 libclang-4.0-dev
-
-2a.3: link the "clang" and "clang++" names to the latest 4.0 version
-
-    pushd /usr/bin
-    for F in pp-trace scan-build scan-view clang clang++ clang-tidy clang-tblgen clang-query clang-check clang-apply-replacements c-index-test lldb
-    do
-        rm $F
-        ln -s $F-4.0 $F
-    done
-    popd
-    
-    pushd /usr/lib
-    ln -s llvm-4.0 llvm
-    popd
-    
-    pushd /usr/share
-    ln -s llvm-4.0 llvm
-    popd
-    
-    
 
 2b: For CentOS 6, we have to compile clang.
 -------------------------------------------
@@ -224,7 +186,41 @@ Note: you need to use "cmake3" wherever it says "cmake"
 And you might want to check your PATH variable as /usr/local/bin might not be in it.
 
 
+2.1 create symlinks
+-------------------
+ The tools are now named clang-5.0, clang++-5.0 etc.
+ We wantt o access them by names which are not version specific so we create symlinks
+ 
+    cd /usr/bin/
+    for BINARY in  bugpoint c-index-test clang clang++ clang-apply-replacements clang-change-namespace clang-check clang-cl clang-cpp clang-import-test clang-include-fixer clang-offload-bundler clang-query clang-rename clang-reorder-fields clang-tblgen find-all-symbols llc lldb lldb-5.0.0 lldb-argdumper lldb-mi lldb-mi-5.0.0 lldb-server lldb-server-5.0.0 lli lli-child-target llvm-ar llvm-as llvm-bcanalyzer llvm-cat llvm-config llvm-cov llvm-c-test llvm-cxxdump llvm-cxxfilt llvm-diff llvm-dis llvm-dsymutil llvm-dwarfdump llvm-dwp llvm-extract llvm-lib llvm-link llvm-lto2 llvm-lto llvm-mc llvm-mcmarkup llvm-modextract llvm-nm llvm-objdump llvm-opt-report llvm-pdbdump llvm-PerfectShuffle llvm-profdata llvm-ranlib llvm-readobj llvm-rtdyld llvm-size llvm-split llvm-stress llvm-strings llvm-symbolizer llvm-tblgen llvm-xray modularize obj2yaml opt sancov sanstats scan-build scan-view verify-uselistorder yaml2obj yaml-bench
+    do
+    if [ -L "$BINARY-5.0" ]
+    then
+        if [ -L "$BINARY" ]
+        then
+           rm "$BINARY"
+        fi
+        ln -s "$BINARY-5.0" "$BINARY"
+    fi
+    done
+         
+    export CC=clang
+    export CXX=clang++
+    export PATH=/usr/local/bin:$PATH
+
+
+
+
 3. Download the sourcecode of gnustep and libobjc2 and cmake
+
+
+git clone https://github.com/nickhutchinson/libdispatch.git
+svn co http://svn.gna.org/svn/gnustep/modules/core
+svn co http://svn.gna.org/svn/gnustep/libs/libobjc2/trunk     libobjc2
+svn co http://svn.gna.org/svn/gnustep/tools/make/trunk        gnumake
+svn co http://svn.gna.org/svn/gnustep/libs/gscoredata core/gscoredata
+svn co http://svn.gna.org/svn/gnustep/libs/sqlclient/trunk core/sqlclient
+
 
     wget ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-make-2.6.8.tar.gz
     wget ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-base-1.24.9.tar.gz
@@ -300,7 +296,7 @@ And if you installed a clang compiler yourself, make sure the path is set to fin
         CC=clang \
         CXX=clang++ \
         CFLAGS="-fblocks  -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1"\
-        --with-zeroconf-api=avahi
+        --disable-mixedabi --with-zeroconf-api=avahi
     make
     make install
     ldconfig

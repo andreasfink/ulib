@@ -195,20 +195,17 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (void)setSock:(int)s
 {
-    @synchronized(self)
+    if((self.hasSocket) && (_sock >=0))
     {
-        if((_hasSocket) && (_sock >=0))
-        {
-            TRACK_FILE_CLOSE(_sock);
-            close(_sock);
-    #if !defined(TARGET_OS_WATCH)
-            [netService stop];
-            netService=NULL;
-    #endif
-        }
-        _sock=s;
-        _hasSocket=1;
+        TRACK_FILE_CLOSE(_sock);
+        close(_sock);
+#if !defined(TARGET_OS_WATCH)
+        [netService stop];
+        netService=NULL;
+#endif
     }
+    _sock=s;
+    self.hasSocket=1;
 }
 
 + (NSString *)statusDescription:(UMSocketStatus)s;

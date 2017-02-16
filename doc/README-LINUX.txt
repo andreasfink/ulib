@@ -59,7 +59,7 @@ distributions
         python-dev swig \
         libedit-dev libeditline0  libeditline-dev libreadline6 libreadline6-dev readline-common \
         binfmt-support libtinfo-dev \
-        bison flex m4 wget
+        bison flex m4 wget subversion git
 
 Debian8 only:		
     apt-get install libgnutls-deb0-28  libcups2-dev  locales-all libicu52
@@ -207,118 +207,77 @@ And you might want to check your PATH variable as /usr/local/bin might not be in
     export CC=clang
     export CXX=clang++
     export PATH=/usr/local/bin:$PATH
-
+    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 
 
 
 3. Download the sourcecode of gnustep and libobjc2 and cmake
 
+    mkdir gnustep
+    cd gnustep
+    git clone https://github.com/gnustep/scripts
+    git clone https://github.com/gnustep/make
+    git clone https://github.com/gnustep/libobjc2
+    git clone https://github.com/gnustep/base
+    git clone https://github.com/gnustep/corebase
+    git clone https://github.com/gnustep/gui
+	./scripts/install-dependencies
+	cd ..
+	
+	
+4. install gnustep-make
 
-git clone https://github.com/nickhutchinson/libdispatch.git
-svn co http://svn.gna.org/svn/gnustep/modules/core
-svn co http://svn.gna.org/svn/gnustep/libs/libobjc2/trunk     libobjc2
-svn co http://svn.gna.org/svn/gnustep/tools/make/trunk        gnumake
-svn co http://svn.gna.org/svn/gnustep/libs/gscoredata core/gscoredata
-svn co http://svn.gna.org/svn/gnustep/libs/sqlclient/trunk core/sqlclient
+    cd gnustep/make
+    export CC=clang
+    export CXX=clang++
+    export OBJCFLAGS="-DEXPOSE_classname_IVARS=1"
+    ./configure --with-layout=fhs \
+            --disable-importing-config-file \
+            --enable-native-objc-exceptions \
+            -enable-objc-nonfragile-abi \
+            --enable-objc-arc \
+            --with-library-combo=ng-gnu-gnu
+     make install
+     source /usr/local/etc/GNUstep/GNUstep.conf
+     cd ../..
+     
 
+5. install libobjc2 runtime
 
-    wget ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-make-2.6.8.tar.gz
-    wget ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-base-1.24.9.tar.gz
-    wget ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-gui-0.25.0.tar.gz
-    wget ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-back-0.25.0.tar.gz
-    wget ftp://ftp.gnustep.org/pub/gnustep/libs/gnustep-corebase-0.1.tar.gz
-    wget http://download.gna.org/gnustep/libobjc2-1.7.tar.bz2
-
-4. Setup your gnustep-make (small inital config to bootstrap libobj2)
-
-    tar -xvzf gnustep-make-2.6.8.tar.gz
-    cd gnustep-make-2.6.8
-    CC=clang CXX=clang++  ./configure --enable-objc-arc -enable-objc-nonfragile-abi
-    make install
-    cd ..
-
-
-5. Prepare libobjc2
-
-   tar -xvjf libobjc2-1.7.tar.bz2
-   cd libobjc2-1.7
+    cd gnustep/libobjc2
     mkdir Build
     cd Build
-    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ 
+    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+    make
+    make install
+    cd ../../..
+    ldconfig
+
+(gnustep/libobjc2/ivar.c line 61, remove the assert)
+
+6. install gnustep-base
+
+    cd gnustep/base
+    ./configure CFLAGS="-DEXPOSE_classname_IVARS=1"
+
+    make
+    make install
+    cd ../..
+    ldconfig
+
+(for debug version use "make debug=yes" instead of "make")
+
+
+
+7. install gnustep-corebase
+
+    cd gnustep/corebase
+    ./configure
+    make
     make install
     cd ../..
 
 
-	if cmake spills out some errors try ediit the file opts/CMakeLists.txt and comment out the following lines
-
-    #find_package(LLVM)
-    #include(AddLLVM)
-    ...
-    #add_llvm_loadable_module( libGNUObjCRuntime
-    #  ClassIMPCache.cpp
-    #  ClassMethodInliner.cpp
-    #  IvarPass.cpp
-    #  ObjectiveCOpts.cpp
-    #  TypeFeedbackDrivenInliner.cpp
-    #  ClassLookupCache.cpp
-    #  IMPCacher.cpp
-    #  LoopIMPCachePass.cpp
-    #  TypeFeedback.cpp
-    #)
-   
-	now you can continue building
-
-(you can add -DCMAKE_BUILD_TYPE=Debug but this will drastically increase build time and binary sizes.
-And if you installed a clang compiler yourself, make sure the path is set to find it or modify the -DCMAKE_C_COMPILER / -DCMAKE_CXX_COMPILER options accordingly.
-
-
---enable-objc-arc --enable-objc-nonfragile-abi 
-
-6. gnustep-make, part 2 (full config)
-
-    cd gnustep-make-2.6.8
-    ./configure \
-        CC=clang \
-        CXX=clang++ \
-        CFLAGS=-fobjc-arc \
-        --disable-importing-config-file \
-        --enable-objc-nonfragile-abi \
-        --enable-objc-arc \
-        --with-layout=fhs 
-    make install
-    cd ..
-
-10. gnustep-base
-
-    tar -xvzf gnustep-base-1.24.9.tar.gz
-    cd gnustep-base-1.24.9
-    ./configure \
-        CC=clang \
-        CXX=clang++ \
-        CFLAGS="-fblocks  -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1"\
-        --disable-mixedabi --with-zeroconf-api=avahi
-    make
-    make install
-    ldconfig
-    cd ..
-
-(for debug version use "make debug=yes" instead of "make")
-If it fails telling you that objc/objc.h is present but can not be compiled, check for the header /usr/include/unistd.h and replace __block in it with __xblock as __block is now a reserved word)
-On centos6 you also need to get a newer version of libiuc from http://download.icu-project.org/files/icu4j/58.2/icu4j-58_2.tgz and compile it
-
-11. gnustep-corebase-0.1
-
-    tar -xvzf gnustep-corebase-0.1.tar.gz
-    cd gnustep-corebase-0.1
-    ./configure \
-        CC=clang \
-        CXX=clang++ \
-        CFLAGS="-fblocks -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1"\
-        LD=gcc
-    make
-    make install
-    ldconfig
-    cd ..
 
 12. ulib
     git clone http://github.com/andreasfink/ulib

@@ -36,7 +36,7 @@
 + (NSString *) getMacAddr: (char *)ifname;
 + (NSMutableArray *)getMacAddrs;
 + (long long) milisecondClock;
-
++ (uint32_t) random:(uint32_t)upperBound;
 @end
 
 NSString *UMBacktrace(void **stack_frames, size_t size);

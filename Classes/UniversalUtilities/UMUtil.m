@@ -9,6 +9,8 @@
 
 #ifndef	LINUX
 #include <libkern/OSByteOrder.h>
+#else
+#include <bsd/stdlib.h>
 #endif
 #include <arpa/inet.h>
 
@@ -25,7 +27,6 @@
 #include <net/if_dl.h>
 #endif
 #include <ifaddrs.h>
-
 
 
 /* TODO: find correct endianness for Linux. Currently we assume i386 arch only */
@@ -651,6 +652,11 @@ end:
     
 	return (unsigned long long)tp.tv_sec * 1000ULL + ((unsigned long long)tp.tv_usec/1000ULL);
     
+}
+
++ (uint32_t)  random:(uint32_t)upperBound
+{
+    return arc4random_uniform(upperBound);
 }
 
 @end

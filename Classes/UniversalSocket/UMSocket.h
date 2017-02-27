@@ -166,6 +166,9 @@
 - (UMSocketError) receiveData:(NSData **)toData fromAddress:(NSString **)address fromPort:(int *)port;
 - (UMSocketError) sendData:(NSData *)data toAddress:(NSString *)address toPort:(int)port;
 - (UMSocketError) receive:(long)bytes to:(NSData **)receivedData;
+- (UMSocketError) receiveSingleChar:(unsigned char *)cptr;
+- (UMSocketError) writeSingleChar:(unsigned char)c;
+
 - (void) setEvent: (int) event;
 + (UMSocketError) umerrFromErrno:(int)e;
 //+ (UMSocketError) umerrFromSSL:(int)SSL_error;

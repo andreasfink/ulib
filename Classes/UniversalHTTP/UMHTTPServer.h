@@ -210,6 +210,7 @@ typedef enum UMHTTPServerStatus
 - (void) setPrivateKeyFile:(NSString *)filename;
 - (void) setCertificateFile:(NSString *)filename;
 - (UMHTTPAuthenticationStatus) httpAuthenticateRequest:(UMHTTPRequest *) req realm:(NSString **)realm;
+
 @end
 
 

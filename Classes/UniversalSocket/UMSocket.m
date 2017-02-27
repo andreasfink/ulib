@@ -1414,6 +1414,46 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
 }
 
+
+
+- (UMSocketError) writeSingleChar:(unsigned char)c
+{
+    int eno = 0;
+    ssize_t actualWrittenBytes = [cryptoStream writeBytes:&c length:1 errorCode:&eno];
+    if(eno)
+    {
+        return [UMSocket umerrFromErrno:eno];
+    }
+    return UMSocketError_no_error;
+}
+
+- (UMSocketError) receiveSingleChar:(unsigned char *)cptr
+{
+    UMSocketError ret;
+    int eno = 0;
+    ssize_t actualReadBytes = [cryptoStream readBytes:cptr length:1 errorCode:&eno];
+    if (actualReadBytes < 0)
+    {
+        if (eno != EAGAIN)
+        {
+            return [UMSocket umerrFromErrno:eno];
+        }
+        else
+        {
+            return UMSocketError_try_again;
+        }
+    }
+    else if (actualReadBytes == 0)
+    {
+        return UMSocketError_no_data;
+    }
+    if(actualReadBytes == 1)
+    {
+        return UMSocketError_has_data;
+    }
+    return UMSocketError_no_error;
+}
+
 - (UMSocketError) receiveEverythingTo:(NSData **)toData
 {
     UMSocketError ret;

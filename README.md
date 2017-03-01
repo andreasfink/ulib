@@ -26,7 +26,7 @@ ulib is the base class of a family of libraries and applications .It gets used a
 * **ulibasn1**  a library to make it easier to deal with ASN.1 encoded objects.
 * **ulibsmpp** a library to deal with the SMPP protocol
 * **ulibsctp** a library to extend ulib with SCTP specific sockets 
-* **ulibm2pa** a library implementing the SS7 MTP2 protocol 
+* **ulibm2pa** a library implementing the SS7 M2PA protocol (MTP2 over IP)
 * **ulibmtp3** a library implementing the SS7 MTP3 and M3UA protocols
 * **ulibsccp** a library implementing the SS7 SCCP protocol
 * **ulibgt** a library implementing SS7 SCCP Global Title handling

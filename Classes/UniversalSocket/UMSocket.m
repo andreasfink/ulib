@@ -1419,7 +1419,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 - (UMSocketError) writeSingleChar:(unsigned char)c
 {
     int eno = 0;
-    ssize_t actualWrittenBytes = [cryptoStream writeBytes:&c length:1 errorCode:&eno];
+    [cryptoStream writeBytes:&c length:1 errorCode:&eno];
     if(eno)
     {
         return [UMSocket umerrFromErrno:eno];
@@ -1429,7 +1429,6 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) receiveSingleChar:(unsigned char *)cptr
 {
-    UMSocketError ret;
     int eno = 0;
     ssize_t actualReadBytes = [cryptoStream readBytes:cptr length:1 errorCode:&eno];
     if (actualReadBytes < 0)

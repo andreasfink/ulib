@@ -76,7 +76,8 @@ Ubuntu16 only:
         libxml2 libxml2-devel \
         libffi libffi-devel \
         icu libicu libicu-devel \
-        libbsd libbsd-devel
+        libbsd libbsd-devel \
+        avahi avahi-devel \
         uuid uuid-devel \
         avahi avahi-devel avahi-libs avahi-ui-devel \
         gnutls gnutls-devel \

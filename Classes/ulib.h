@@ -20,6 +20,7 @@
 #import "UniversalUtilities.h"
 #import "UniversalRedis.h"
 #import "UMFileTrackingMacros.h"
+#import "UniversalTokenizer.h"
 
 @interface ulib : NSObject
 {

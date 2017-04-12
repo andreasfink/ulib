@@ -469,10 +469,13 @@ error:
         
         /* scheme */
         if (ssl)
+        {
             os = [NSMutableString stringWithString:@"https://"];
+        }
         else
+        {
             os = [NSMutableString stringWithString:@"http://"];
-        
+        }
         /* credentials, if any */
         if (username && password) {
             [os appendString:username];

@@ -161,8 +161,8 @@ manual compile and install on centos:
 (for Debian/Ubunut)
 2a.1: create a file /etc/apt/sources.list.d/llvm.list with the following content
 
-    deb http://llvm.org/apt/jessie/ llvm-toolchain-jessie main
-    deb-src http://llvm.org/apt/jessie/ llvm-toolchain-jessie main
+    deb http://llvm.org/apt/jessie/ llvm-toolchain-jessie-4.0 main
+    deb-src http://llvm.org/apt/jessie/ llvm-toolchain-jessie-4.0 main
 
 this links in the latest LLVM compiler repository.
 
@@ -173,9 +173,9 @@ this links in the latest LLVM compiler repository.
     apt-key add /tmp/llvm-snapshot.gpg.key
     apt-get update
 
-now we can install the latest clang-5.0
+now we can install the latest clang-4.0
 
-     apt-get -y install build-essential git llvm-5.0 clang-5.0 lldb-5.0 libclang-5.0-dev
+     apt-get -y install build-essential git llvm-4.0 clang-4.0 lldb-4.0 libclang-4.0-dev
 
 
 2b: For CentOS 6, we have to compile clang.
@@ -189,19 +189,19 @@ And you might want to check your PATH variable as /usr/local/bin might not be in
 
 2.1 create symlinks
 -------------------
- The tools are now named clang-5.0, clang++-5.0 etc.
+ The tools are now named clang-4.0, clang++-4.0 etc.
  We wantt o access them by names which are not version specific so we create symlinks
  
     cd /usr/bin/
     for BINARY in  bugpoint c-index-test clang clang++ clang-apply-replacements clang-change-namespace clang-check clang-cl clang-cpp clang-import-test clang-include-fixer clang-offload-bundler clang-query clang-rename clang-reorder-fields clang-tblgen find-all-symbols llc lldb lldb-5.0.0 lldb-argdumper lldb-mi lldb-mi-5.0.0 lldb-server lldb-server-5.0.0 lli lli-child-target llvm-ar llvm-as llvm-bcanalyzer llvm-cat llvm-config llvm-cov llvm-c-test llvm-cxxdump llvm-cxxfilt llvm-diff llvm-dis llvm-dsymutil llvm-dwarfdump llvm-dwp llvm-extract llvm-lib llvm-link llvm-lto2 llvm-lto llvm-mc llvm-mcmarkup llvm-modextract llvm-nm llvm-objdump llvm-opt-report llvm-pdbdump llvm-PerfectShuffle llvm-profdata llvm-ranlib llvm-readobj llvm-rtdyld llvm-size llvm-split llvm-stress llvm-strings llvm-symbolizer llvm-tblgen llvm-xray modularize obj2yaml opt sancov sanstats scan-build scan-view verify-uselistorder yaml2obj yaml-bench
     do
-    if [ -L "$BINARY-5.0" ]
+    if [ -L "$BINARY-4.0" ]
     then
         if [ -L "$BINARY" ]
         then
            rm "$BINARY"
         fi
-        ln -s "$BINARY-5.0" "$BINARY"
+        ln -s "$BINARY-4.0" "$BINARY"
     fi
     done
          
@@ -261,7 +261,7 @@ And you might want to check your PATH variable as /usr/local/bin might not be in
     cd gnustep/base
     ./configure CFLAGS="-DEXPOSE_classname_IVARS=1"
 
-    make
+    make -j8
     make install
     cd ../..
     ldconfig
@@ -274,7 +274,7 @@ And you might want to check your PATH variable as /usr/local/bin might not be in
 
     cd gnustep/corebase
     ./configure
-    make
+    make -j8
     make install
     cd ../..
 

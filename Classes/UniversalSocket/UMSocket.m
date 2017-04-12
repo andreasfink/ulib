@@ -2547,7 +2547,6 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 - (void)startTLS
 {
     [UMSocket initSSL];
-    
     /*
      * make sure the socket is non-blocking while we do SSL_connect
      */
@@ -2598,10 +2597,22 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     if(i<0)
     {
         int ssl_error = SSL_get_error((SSL *)ssl,i);
-        if(ssl_error != SSL_ERROR_WANT_READ)
+        if((ssl_error != SSL_ERROR_WANT_READ) && (ssl_error != SSL_ERROR_WANT_WRITE))
         {
             NSLog(@"ssl_error=%d during SSL_do_handshake",ssl_error);
         }
+       if(ssl_error == SSL_ERROR_SSL)
+       {
+           long e = -1;
+           while(e!=0)
+           {
+               e = ERR_get_error();
+               if(e)
+               {
+                    NSLog(@"SSL: %s",ERR_reason_error_string(e));
+               }
+           }
+       }
     }
     sslActive = YES;
     cryptoStream.enable=sslActive;
@@ -2626,9 +2637,9 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         SSL_library_init();
         SSLeay_add_ssl_algorithms();
         SSL_load_error_strings();
-        global_server_ssl_context = SSL_CTX_new(TLSv1_2_server_method());
-        global_client_ssl_context = SSL_CTX_new(TLSv1_2_client_method());
-        
+        global_server_ssl_context = SSL_CTX_new(SSLv23_server_method()); //TLSv1_2_server_method());
+        global_client_ssl_context = SSL_CTX_new(SSLv23_client_method()); //TLSv1_2_client_method());
+
         SSL_CTX_set_mode(global_client_ssl_context,
                              SSL_MODE_ENABLE_PARTIAL_WRITE | SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER);
         SSL_CTX_set_mode(global_server_ssl_context,

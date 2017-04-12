@@ -237,7 +237,18 @@ typedef enum _run_status {
  * URL is used. It can be nil, in which case none is used and thus there
  * is no ssl authentication.´
  */
--(UMTestHTTPClient *) startRequestWithMethod:(int)method withCaller:(UMHTTPCaller *)caller withURL:(NSString *)url withHeaders:(NSMutableArray *)headers withBody:(NSString *)body followRedirections:(int) follow withId:(void *)hid withCertificate:(NSString *)certkeyfile withHost:(NSString *)host withPort:(long)port withUsername:(NSString *)username withPassword:(NSString *)password;
+-(UMTestHTTPClient *) startRequestWithMethod:(int)method
+                                  withCaller:(UMHTTPCaller *)caller
+                                     withURL:(NSString *)url
+                                 withHeaders:(NSMutableArray *)headers
+                                    withBody:(NSString *)body
+                          followRedirections:(int) follow
+                                      withId:(void *)hid
+                             withCertificate:(NSString *)certkeyfile
+                                    withHost:(NSString *)host
+                                    withPort:(long)port
+                                withUsername:(NSString *)username
+                                withPassword:(NSString *)password;
 
 /*
  * Get the result of a GET or a POST request. Returns either the id pointer

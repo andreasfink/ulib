@@ -184,7 +184,13 @@ typedef enum UMHTTPServerStatus
 - (id)init;
 - (id)initWithPort:(in_port_t) port;
 - (id)initWithPort:(in_port_t) port socketType:(UMSocketType) type;
-- (id)initWithPort:(in_port_t)port socketType:(UMSocketType)type ssl:(BOOL)doSSL sslKeyFile:(NSString *)keyFile sslCertFile:(NSString *)certFile;
+
+- (id)initWithPort:(in_port_t)port
+        socketType:(UMSocketType)type
+               ssl:(BOOL)doSSL
+        sslKeyFile:(NSString *)keyFile
+       sslCertFile:(NSString *)certFile;
+
 - (id) initWithPort:(in_port_t)port socketType:(UMSocketType)type ssl:(BOOL)doSSL sslKeyFile:(NSString *)sslKeyFile sslCertFile:(NSString *)sslCertFile taskQueue:(UMTaskQueue *)tq;
 
 - (UMSocketError) start;

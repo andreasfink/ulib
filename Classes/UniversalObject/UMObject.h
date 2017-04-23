@@ -50,7 +50,7 @@ BOOL umobject_object_stat_is_enabled(void);
 {
     uint32_t    umobject_flags; /*!< internal flags to remember which options this object has */
     char        *_magic;        /*!< c pointer to the class name which has instantiated this object. Only populated if UMOBJECT_USE_MAGIC is set to 1. Useful for debugging with a limited verison of lldb */
-    UMLogFeed   *logFeed;       /*!< The log feed this object can use to log anything */
+    UMLogFeed   *logFeed;       /*!< The log feed this object can use to log anything related to this UMObject */
 }
 
 @property (readwrite,strong,atomic) UMLogFeed *logFeed;
@@ -88,18 +88,14 @@ BOOL umobject_object_stat_is_enabled(void);
                         logdir:(NSString *)logdir;
 
 - (id) init;
-
 - (NSString *) descriptionWithPrefix:(NSString *)prefix;
-
 - (void)runSelectorInBackground:(SEL)aSelector
                      withObject:(id)anArgument;
-
 - (void)runSelectorInBackground:(SEL)aSelector
                      withObject:(id)anArgument
                            file:(const char *)fil
                            line:(long)lin
                        function:(const char *)fun;
-
 - (void)runSelectorInBackground:(SEL)aSelector;
 
 @end

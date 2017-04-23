@@ -1215,6 +1215,11 @@
 		A60214991D488AB900211137 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A63B00821D0050A500211137 /* libssl.a */; };
 		A60214EC1D488DAD00211137 /* libcrypto-watchos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A60214EA1D488DAD00211137 /* libcrypto-watchos.a */; };
 		A60214ED1D488DAD00211137 /* libssl-watchos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A60214EB1D488DAD00211137 /* libssl-watchos.a */; };
+		A603429A1EA9B27900706C21 /* UMPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = A60342981EA9B27900706C21 /* UMPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A603429B1EA9B27900706C21 /* UMPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = A60342991EA9B27900706C21 /* UMPlugin.m */; };
+		A603429E1EA9B4E700706C21 /* UniversalPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = A603429C1EA9B4E700706C21 /* UniversalPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A60342A21EA9B6C900706C21 /* UMPluginHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = A60342A01EA9B6C900706C21 /* UMPluginHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A60342A31EA9B6C900706C21 /* UMPluginHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A60342A11EA9B6C900706C21 /* UMPluginHandler.m */; };
 		A60C2D6D1A3F20E90090FC94 /* ulib.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A143F5149B4F5000B007D0 /* ulib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C2D6F1A3F20ED0090FC94 /* ulib.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DB3E6F191E40770090FC94 /* ulib.m */; };
 		A60C2D711A3F20F00090FC94 /* UMAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = A6538C74189B9A8C00B25A07 /* UMAssert.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2054,6 +2059,8 @@
 		A6CC4BF61A3F25450090FC94 /* UMTaskQueueMulti.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4BB51A3F25450090FC94 /* UMTaskQueueMulti.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6CC4BF91A3F25450090FC94 /* UniversalObject.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4BB61A3F25450090FC94 /* UniversalObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6CF25C01A0C06C200F362FA /* UMTask.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CF25BE1A0C06C200F362FA /* UMTask.m */; };
+		A6CFD4561EAC85700002564E /* UMPluginDirectory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CFD4541EAC85700002564E /* UMPluginDirectory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6CFD4571EAC85700002564E /* UMPluginDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CFD4551EAC85700002564E /* UMPluginDirectory.m */; };
 		A6D42E431D2F8BC900211137 /* UMRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D42E411D2F8BC900211137 /* UMRegex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6D42E441D2F8BC900211137 /* UMRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D42E411D2F8BC900211137 /* UMRegex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6D42E461D2F8BC900211137 /* UMRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D42E421D2F8BC900211137 /* UMRegex.m */; };
@@ -2317,6 +2324,11 @@
 		A60214E91D488D8200211137 /* x509v3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		A60214EA1D488DAD00211137 /* libcrypto-watchos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcrypto-watchos.a"; path = "libs/watchos/openssl1.0.2h/lib/libcrypto-watchos.a"; sourceTree = SOURCE_ROOT; };
 		A60214EB1D488DAD00211137 /* libssl-watchos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libssl-watchos.a"; path = "libs/watchos/openssl1.0.2h/lib/libssl-watchos.a"; sourceTree = SOURCE_ROOT; };
+		A60342981EA9B27900706C21 /* UMPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMPlugin.h; path = Classes/UniversalPlugin/UMPlugin.h; sourceTree = SOURCE_ROOT; };
+		A60342991EA9B27900706C21 /* UMPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMPlugin.m; path = Classes/UniversalPlugin/UMPlugin.m; sourceTree = SOURCE_ROOT; };
+		A603429C1EA9B4E700706C21 /* UniversalPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalPlugin.h; sourceTree = "<group>"; };
+		A60342A01EA9B6C900706C21 /* UMPluginHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMPluginHandler.h; sourceTree = "<group>"; };
+		A60342A11EA9B6C900706C21 /* UMPluginHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMPluginHandler.m; sourceTree = "<group>"; };
 		A610866B163530F700D0D9C6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A615D9161B4D6CF300854472 /* UMHistoryLogEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHistoryLogEntry.h; sourceTree = "<group>"; };
 		A615D9171B4D6CF300854472 /* UMHistoryLogEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHistoryLogEntry.m; sourceTree = "<group>"; };
@@ -2649,6 +2661,8 @@
 		A6CC4BB51A3F25450090FC94 /* UMTaskQueueMulti.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTaskQueueMulti.h; sourceTree = "<group>"; };
 		A6CC4BB61A3F25450090FC94 /* UniversalObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalObject.h; sourceTree = "<group>"; };
 		A6CF25BE1A0C06C200F362FA /* UMTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTask.m; sourceTree = "<group>"; };
+		A6CFD4541EAC85700002564E /* UMPluginDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMPluginDirectory.h; sourceTree = "<group>"; };
+		A6CFD4551EAC85700002564E /* UMPluginDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMPluginDirectory.m; sourceTree = "<group>"; };
 		A6D42E411D2F8BC900211137 /* UMRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMRegex.h; sourceTree = "<group>"; };
 		A6D42E421D2F8BC900211137 /* UMRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMRegex.m; sourceTree = "<group>"; };
 		A6D42E491D2F9C5F00211137 /* UMRegexMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMRegexMatch.h; sourceTree = "<group>"; };
@@ -2953,6 +2967,20 @@
 				A60214E91D488D8200211137 /* x509v3.h */,
 			);
 			path = openssl;
+			sourceTree = "<group>";
+		};
+		A60342971EA9B23E00706C21 /* UniversalPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				A603429C1EA9B4E700706C21 /* UniversalPlugin.h */,
+				A60342981EA9B27900706C21 /* UMPlugin.h */,
+				A60342991EA9B27900706C21 /* UMPlugin.m */,
+				A60342A01EA9B6C900706C21 /* UMPluginHandler.h */,
+				A60342A11EA9B6C900706C21 /* UMPluginHandler.m */,
+				A6CFD4541EAC85700002564E /* UMPluginDirectory.h */,
+				A6CFD4551EAC85700002564E /* UMPluginDirectory.m */,
+			);
+			path = UniversalPlugin;
 			sourceTree = "<group>";
 		};
 		A637FFA31DBEDFE7000A6A21 /* doc */ = {
@@ -3468,6 +3496,7 @@
 				A6D8AC76149AA4C20029E9CF /* UniversalSocket */,
 				A6D8AB99149A786E0029E9CF /* UniversalUtilities */,
 				A6827AF616AD217D0035FEEC /* UniversalJson */,
+				A60342971EA9B23E00706C21 /* UniversalPlugin */,
 				A6F1E316187D43EA00AD2F85 /* UniversalRedis */,
 			);
 			path = Classes;
@@ -4822,6 +4851,7 @@
 				A6AC49041D4608FC002BAA97 /* seed.h in Headers */,
 				A6AC486B1D4608FC002BAA97 /* blowfish.h in Headers */,
 				A6AC48B31D4608FC002BAA97 /* evp.h in Headers */,
+				A603429E1EA9B4E700706C21 /* UniversalPlugin.h in Headers */,
 				A6AC473E1D4608F0002BAA97 /* cast.h in Headers */,
 				A6CC4B441A3F249A0090FC94 /* UMJsonTokeniser.h in Headers */,
 				A6D42E431D2F8BC900211137 /* UMRegex.h in Headers */,
@@ -4891,6 +4921,7 @@
 				A6CC4B7A1A3F24C70090FC94 /* UMUUID.h in Headers */,
 				A6AC47921D4608F0002BAA97 /* mdc2.h in Headers */,
 				A6AC487D1D4608FC002BAA97 /* cms.h in Headers */,
+				A6CFD4561EAC85700002564E /* UMPluginDirectory.h in Headers */,
 				A6CC4B621A3F24C70090FC94 /* UMLockEvent.h in Headers */,
 				A6CC4BB71A3F25450090FC94 /* NSArray+HierarchicalDescription.h in Headers */,
 				A6CC4BDB1A3F25450090FC94 /* UMDateWithHistory.h in Headers */,
@@ -4918,10 +4949,12 @@
 				A6AC47381D4608F0002BAA97 /* buffer.h in Headers */,
 				A6AC48DD1D4608FC002BAA97 /* opensslv.h in Headers */,
 				A6AC47F21D4608F0002BAA97 /* ui.h in Headers */,
+				A603429A1EA9B27900706C21 /* UMPlugin.h in Headers */,
 				A6AC48FB1D4608FC002BAA97 /* ripemd.h in Headers */,
 				A6AC486E1D4608FC002BAA97 /* bn.h in Headers */,
 				A666EF011E89BB17004804CB /* UMSyntaxContext.h in Headers */,
 				A6AC477D1D4608F0002BAA97 /* hmac.h in Headers */,
+				A60342A21EA9B6C900706C21 /* UMPluginHandler.h in Headers */,
 				A6AC475C1D4608F0002BAA97 /* dsa.h in Headers */,
 				A6AC47621D4608F0002BAA97 /* dtls1.h in Headers */,
 				A6AC47561D4608F0002BAA97 /* des_old.h in Headers */,
@@ -6040,6 +6073,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6AE66621E51980E005F3617 /* UMHTTPTask_ProcessRequest.m in Sources */,
+				A603429B1EA9B27900706C21 /* UMPlugin.m in Sources */,
 				A6D8AB51149A77D10029E9CF /* UMObject.m in Sources */,
 				A6BEA3251E49AC4F00A130B7 /* NSDictionary+UniversalConfig.m in Sources */,
 				A6D8AB4B149A77D10029E9CF /* UMHistoryLog.m in Sources */,
@@ -6073,6 +6107,7 @@
 				A6D8ABA8149A786E0029E9CF /* UMReadWriteLock.m in Sources */,
 				A6D8ABAB149A786E0029E9CF /* UMSleeper.m in Sources */,
 				A6D8ABAE149A786E0029E9CF /* UMThroughputCounter.m in Sources */,
+				A60342A31EA9B6C900706C21 /* UMPluginHandler.m in Sources */,
 				A6D8ABB1149A786E0029E9CF /* UMUtil.m in Sources */,
 				A666EEE21E89BB17004804CB /* UMScanner.m in Sources */,
 				A62A7E2B18AAD20D00EA8A2A /* UMHTTPPageRef.m in Sources */,
@@ -6128,6 +6163,7 @@
 				A6827B1A16AD217D0035FEEC /* UMJsonStreamParserAccumulator.m in Sources */,
 				A6827B1D16AD217D0035FEEC /* UMJsonStreamParserAdapter.m in Sources */,
 				A6827B2016AD217D0035FEEC /* UMJsonStreamParserState.m in Sources */,
+				A6CFD4571EAC85700002564E /* UMPluginDirectory.m in Sources */,
 				A67D3DE51AF9FF1D0090FC94 /* NSArray+UMJson.m in Sources */,
 				A6827B2316AD217D0035FEEC /* UMJsonStreamWriter.m in Sources */,
 				A6827B2616AD217D0035FEEC /* UMJsonStreamWriterAccumulator.m in Sources */,

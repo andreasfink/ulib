@@ -59,7 +59,13 @@ distributions
         python-dev swig \
         libedit-dev libeditline0  libeditline-dev libreadline6 libreadline6-dev readline-common \
         binfmt-support libtinfo-dev \
-        bison flex m4 wget  gobjc-4.9
+        bison flex m4 wget \
+        gobjc-4.9 gobjc++-4.9 \
+        libicns1    libicns-dev \
+        libxslt1.1  libxslt1-dev \
+        libxft2 libxft-dev \
+        libflite1 flite1-dev \
+        libgif4 libwings2 libwraster3 libwutil3 libxmu6 libxpm4 wmaker-common
 
 Debian8 only:		
     apt-get install libgnutls-deb0-28  libcups2-dev  locales-all libicu52

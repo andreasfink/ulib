@@ -6,7 +6,8 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/ulib.h>
+#import "UMObject.h"
+#import "UMSynchronizedSortedDictionary.h"
 
 @interface UMPluginDirectory : UMObject
 {

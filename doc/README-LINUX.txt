@@ -167,8 +167,8 @@ manual compile and install on centos:
 (for Debian/Ubunut)
 2a.1: create a file /etc/apt/sources.list.d/llvm.list with the following content
 
-    deb http://llvm.org/apt/jessie/ llvm-toolchain-jessie-4.0 main
-    deb-src http://llvm.org/apt/jessie/ llvm-toolchain-jessie-4.0 main
+    deb http://apt.llvm.org/jessie/ llvm-toolchain-jessie-4.0 main
+    deb-src http://apt.llvm.org/jessie/ llvm-toolchain-jessie-4.0 main
 
 this links in the latest LLVM compiler repository.
 

@@ -29,8 +29,8 @@
 
     if((sslKeyFile==NULL) || (sslCertFile==NULL))
     {
-        @throw([NSException exceptionWithName:@"HTTPS_CERTIFICATE_MISSING" reason:@"call initWithPort:sslKeyFile:sslCertFile:sslCertFile and not init on UMHTTPSServer"
-                                     userInfo:NULL ]);
+        NSLog(@"HTTPS_CERTIFICATE_MISSING");
+        return NULL;
     }
     self = [super initWithPort:port
                     socketType:UMSOCKET_TYPE_TCP

@@ -2602,7 +2602,6 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         NSLog(@"SSL_do_handshake returns %d",i);
         if(i==1)
         {
-            NSLog(@"**SUCCESS**");
             break;
         }
         else if(i<=0)
@@ -2613,7 +2612,6 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
             {
                 continue;
             }
-            NSLog(@"**SSL_FAILURE**");
             if(ssl_error == SSL_ERROR_SSL)
             {
                 long e = -1;
@@ -2623,8 +2621,6 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
                     if(e)
                     {
                         NSLog(@"SSL: %s",ERR_reason_error_string(e));
-                        NSLog(@"      in lib %s",ERR_lib_error_string(e));
-                        NSLog(@"     ERR_func_error_string: %s",ERR_func_error_string(e));
                     }
                 }
                 break;
@@ -2636,17 +2632,20 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
             break;
         }
     }
-    
+
     if(SSL_get_verify_result(ssl) != X509_V_OK)
     {
         NSLog(@"SSL_get_verify_result() failed"); /* Handle the failed verification */
     }
-    /* set to  non blocking IO after the handshake */
-    BIO_set_nbio(SSL_get_rbio((SSL *)ssl), 1);
-    BIO_set_nbio(SSL_get_wbio((SSL *)ssl), 1);
+    else
+    {
+        /* set to  non blocking IO after the handshake */
+        BIO_set_nbio(SSL_get_rbio((SSL *)ssl), 1);
+        BIO_set_nbio(SSL_get_wbio((SSL *)ssl), 1);
 
-    sslActive = YES;
-    cryptoStream.enable=sslActive;
+        sslActive = YES;
+        cryptoStream.enable=sslActive;
+    }
 }
 
 - (int) fileDescriptor

@@ -85,13 +85,15 @@
     if(socket.useSSL)
     {
         ulib_set_thread_name([NSString stringWithFormat:@"[UMHTTPConnection connectionListener] %@ (with SSL)",socket.description]);
-        [socket startTLS];
+        if(socket.sslActive==NO)
+        {
+            [socket startTLS];
+        }
     }
     else
     {
         ulib_set_thread_name([NSString stringWithFormat:@"[UMHTTPConnection connectionListener] %@",socket.description]);
     }
-
     BOOL completeRequestReceived = NO;
 	while(self.mustClose == NO)
 	{

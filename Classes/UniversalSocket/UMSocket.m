@@ -76,6 +76,7 @@ static void crypto_threadid_callback(CRYPTO_THREADID *ctid);
 
 static SSL_CTX *global_client_ssl_context = NULL;
 static SSL_CTX *global_server_ssl_context = NULL;
+static SSL_CTX *global_generic_ssl_context = NULL;
 
 typedef struct CRYPTO_dynlock_value
 {
@@ -2554,6 +2555,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 
     ssl = (void *)SSL_new(global_server_ssl_context);
     ERR_clear_error();
+
     if (serverSideCertFilename != NULL)
     {
         SSL_use_certificate_file((SSL *)ssl, serverSideCertFilename.UTF8String,SSL_FILETYPE_PEM);
@@ -2580,9 +2582,9 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         NSLog(@"SSL: OpenSSL: %.256s", ERR_error_string(ERR_get_error(), NULL));
         return;
     }
-
-    BIO_set_nbio(SSL_get_rbio((SSL *)ssl), 1);
-    BIO_set_nbio(SSL_get_wbio((SSL *)ssl), 1);
+    /* set to  blocking IO during the handshake */
+    BIO_set_nbio(SSL_get_rbio((SSL *)ssl), 0);
+    BIO_set_nbio(SSL_get_wbio((SSL *)ssl), 0);
 
     if(direction == UMSOCKET_DIRECTION_INBOUND)
     {
@@ -2592,28 +2594,57 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     {
         SSL_set_connect_state((SSL *)ssl);
     }
-    
-    int i = SSL_do_handshake((SSL *)ssl);
-    if(i<0)
+
+
+    while(1)
     {
-        int ssl_error = SSL_get_error((SSL *)ssl,i);
-        if((ssl_error != SSL_ERROR_WANT_READ) && (ssl_error != SSL_ERROR_WANT_WRITE))
+        int i = SSL_do_handshake((SSL *)ssl);
+        NSLog(@"SSL_do_handshake returns %d",i);
+        if(i==1)
         {
-            NSLog(@"ssl_error=%d during SSL_do_handshake",ssl_error);
+            NSLog(@"**SUCCESS**");
+            break;
         }
-       if(ssl_error == SSL_ERROR_SSL)
-       {
-           long e = -1;
-           while(e!=0)
-           {
-               e = ERR_get_error();
-               if(e)
-               {
-                    NSLog(@"SSL: %s",ERR_reason_error_string(e));
-               }
-           }
-       }
+        else if(i<=0)
+        {
+
+            int ssl_error = SSL_get_error((SSL *)ssl,i);
+            if((ssl_error == SSL_ERROR_WANT_READ) || (ssl_error == SSL_ERROR_WANT_WRITE))
+            {
+                continue;
+            }
+            NSLog(@"**SSL_FAILURE**");
+            if(ssl_error == SSL_ERROR_SSL)
+            {
+                long e = -1;
+                while(e!=0)
+                {
+                    e = ERR_get_error();
+                    if(e)
+                    {
+                        NSLog(@"SSL: %s",ERR_reason_error_string(e));
+                        NSLog(@"      in lib %s",ERR_lib_error_string(e));
+                        NSLog(@"     ERR_func_error_string: %s",ERR_func_error_string(e));
+                    }
+                }
+                break;
+            }
+            break;
+        }
+        else
+        {
+            break;
+        }
     }
+    
+    if(SSL_get_verify_result(ssl) != X509_V_OK)
+    {
+        NSLog(@"SSL_get_verify_result() failed"); /* Handle the failed verification */
+    }
+    /* set to  non blocking IO after the handshake */
+    BIO_set_nbio(SSL_get_rbio((SSL *)ssl), 1);
+    BIO_set_nbio(SSL_get_wbio((SSL *)ssl), 1);
+
     sslActive = YES;
     cryptoStream.enable=sslActive;
 }
@@ -2637,14 +2668,25 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         SSL_library_init();
         SSLeay_add_ssl_algorithms();
         SSL_load_error_strings();
-        global_server_ssl_context = SSL_CTX_new(SSLv23_server_method()); //TLSv1_2_server_method());
-        global_client_ssl_context = SSL_CTX_new(SSLv23_client_method()); //TLSv1_2_client_method());
+        global_generic_ssl_context = SSL_CTX_new(TLSv1_2_method()); //TLSv1_2_server_method());
+        global_server_ssl_context = SSL_CTX_new(TLSv1_2_server_method()); //TLSv1_2_server_method());
+        global_client_ssl_context = SSL_CTX_new(TLSv1_2_client_method()); //TLSv1_2_client_method());
+
+        SSL_CTX_set_mode(global_generic_ssl_context,
+                         SSL_MODE_ENABLE_PARTIAL_WRITE
+                         | SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER
+                         | SSL_MODE_AUTO_RETRY);
 
         SSL_CTX_set_mode(global_client_ssl_context,
-                             SSL_MODE_ENABLE_PARTIAL_WRITE | SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER);
+                        SSL_MODE_ENABLE_PARTIAL_WRITE
+                         | SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER
+                         | SSL_MODE_AUTO_RETRY );
+
         SSL_CTX_set_mode(global_server_ssl_context,
-                         SSL_MODE_ENABLE_PARTIAL_WRITE | SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER);
-    
+                         SSL_MODE_ENABLE_PARTIAL_WRITE
+                         | SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER
+                         | SSL_MODE_AUTO_RETRY);
+
         if (!SSL_CTX_set_default_verify_paths(global_server_ssl_context))
         {
             @throw ([NSException exceptionWithName:@"PANIC"

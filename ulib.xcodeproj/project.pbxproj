@@ -1323,6 +1323,8 @@
 		A638ECFA194F607300E09643 /* UMLock.m in Sources */ = {isa = PBXBuildFile; fileRef = A638ECF8194F607300E09643 /* UMLock.m */; };
 		A63B00851D0050A500211137 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A63B00811D0050A500211137 /* libcrypto.a */; };
 		A63B00881D0050A500211137 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A63B00821D0050A500211137 /* libssl.a */; };
+		A63BF72A1EB931F300340D18 /* UMHTTPSServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A63BF7281EB931F300340D18 /* UMHTTPSServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A63BF72B1EB931F300340D18 /* UMHTTPSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = A63BF7291EB931F300340D18 /* UMHTTPSServer.m */; };
 		A6419BA51A2DE3740090FC94 /* UMTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BA11A2DE3740090FC94 /* UMTimer.m */; };
 		A6419BA61A2DE3740090FC94 /* UMTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BA11A2DE3740090FC94 /* UMTimer.m */; };
 		A6419BA71A2DE3740090FC94 /* UMTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BA11A2DE3740090FC94 /* UMTimer.m */; };
@@ -2348,6 +2350,8 @@
 		A638ECF8194F607300E09643 /* UMLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMLock.m; sourceTree = "<group>"; };
 		A63B00811D0050A500211137 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = libs/osx/openssl1.0.2h/lib/libcrypto.a; sourceTree = SOURCE_ROOT; };
 		A63B00821D0050A500211137 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = libs/osx/openssl1.0.2h/lib/libssl.a; sourceTree = SOURCE_ROOT; };
+		A63BF7281EB931F300340D18 /* UMHTTPSServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPSServer.h; sourceTree = "<group>"; };
+		A63BF7291EB931F300340D18 /* UMHTTPSServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPSServer.m; sourceTree = "<group>"; };
 		A6419BA11A2DE3740090FC94 /* UMTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTimer.m; sourceTree = "<group>"; };
 		A6419BAA1A2DE8040090FC94 /* UMTimerBackgrounder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTimerBackgrounder.m; sourceTree = "<group>"; };
 		A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMMicroSec.m; sourceTree = "<group>"; };
@@ -3688,6 +3692,8 @@
 				A67C388A16B2C2C300C9DA95 /* UMHTTPResponseCode.h */,
 				A6D8AC60149AA4AC0029E9CF /* UMHTTPServer.h */,
 				A6D8AC61149AA4AC0029E9CF /* UMHTTPServer.m */,
+				A63BF7281EB931F300340D18 /* UMHTTPSServer.h */,
+				A63BF7291EB931F300340D18 /* UMHTTPSServer.m */,
 				A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthorizeResult.h */,
 				A6D8AC63149AA4AC0029E9CF /* UMHTTPURLHandler.h */,
 				A6D8AC64149AA4AC0029E9CF /* UMHTTPURLHandler.m */,
@@ -5013,6 +5019,7 @@
 				A6CC4B3E1A3F249A0090FC94 /* UMJsonStreamWriterAccumulator.h in Headers */,
 				A6CC4B921A3F24E50090FC94 /* UMSocketDefs.h in Headers */,
 				A6AC485C1D4608FC002BAA97 /* aes.h in Headers */,
+				A63BF72A1EB931F300340D18 /* UMHTTPSServer.h in Headers */,
 				A6AC48BF1D4608FC002BAA97 /* kssl.h in Headers */,
 				A6CC4B2C1A3F249A0090FC94 /* UMJsonParser.h in Headers */,
 				A6AC48E61D4608FC002BAA97 /* pem2.h in Headers */,
@@ -6176,6 +6183,7 @@
 				A6419BB71A2DF2FD0090FC94 /* UMMicroSec.m in Sources */,
 				A6F1E320187D448700AD2F85 /* UMRedisSession.m in Sources */,
 				A6A7A2381CF71D7D00211137 /* UMPKI.m in Sources */,
+				A63BF72B1EB931F300340D18 /* UMHTTPSServer.m in Sources */,
 				A6827B2C16AD217D0035FEEC /* UMJsonTokeniser.m in Sources */,
 				A6827B2F16AD217D0035FEEC /* UMJsonUTF8Stream.m in Sources */,
 				A666EF421E89BB17004804CB /* UMTokenizer.m in Sources */,

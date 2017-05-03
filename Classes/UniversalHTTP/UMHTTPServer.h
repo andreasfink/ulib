@@ -112,7 +112,7 @@ typedef enum UMHTTPServerStatus
     NSLock              *sslLock;
 	UMSleeper			*sleeper;
 
-	UMHTTPServerStatus	status;
+	UMHTTPServerStatus	_status;
 	UMSocketError		lastErr;
 	BOOL				listenerRunning;
 	NSMutableDictionary *getPostDict;
@@ -152,7 +152,7 @@ typedef enum UMHTTPServerStatus
 }
 
 @property(readwrite,strong)		NSString *serverName;
-@property(readwrite,assign)		UMHTTPServerStatus  status;
+@property(readwrite,assign,atomic)		UMHTTPServerStatus  status;
 
 //
 // the delegates for authorisation

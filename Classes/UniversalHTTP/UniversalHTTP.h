@@ -22,6 +22,7 @@ typedef enum
 
 #import "UMHTTPConnection.h"
 #import "UMHTTPServer.h"
+#import "UMHTTPSServer.h"
 #import "UMHTTPPageHandler.h"
 #import "NSString+UMHTTP.h"
 #import "NSMutableString+UMHTTP.h"

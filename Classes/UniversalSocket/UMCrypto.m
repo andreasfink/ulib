@@ -490,6 +490,7 @@
         SSL_library_init();
         SSL_load_error_strings();
         ERR_load_crypto_strings();
+        OpenSSL_add_all_algorithms();
         BIO *bio = BIO_new(BIO_s_mem());
         pem_private_key = malloc(RSA_KEY_LEN);
         pem_public_key = malloc(RSA_KEY_LEN);

@@ -20,6 +20,7 @@ typedef enum
 @class UMHTTPRequest;
 @class UMHTTPPageHandler;
 
+#import "UMHTTPAuthenticationStatus.h"
 #import "UMHTTPConnection.h"
 #import "UMHTTPServer.h"
 #import "UMHTTPSServer.h"

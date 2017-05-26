@@ -6868,7 +6868,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
@@ -6892,7 +6892,7 @@
 					"$(PROJECT_DIR)/libs/ios/openssl1.0.2h/lib",
 					"$(PROJECT_DIR)/libs/tvos/openssl1.0.2h/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -6929,7 +6929,7 @@
 					"$(PROJECT_DIR)/libs/ios/openssl1.0.2h/lib",
 					"$(PROJECT_DIR)/libs/tvos/openssl1.0.2h/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;

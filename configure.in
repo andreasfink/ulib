@@ -26,6 +26,10 @@ CONFIG_DEFINE="ULIB_CONFIG"
 dnl Check version number.
 VERSION=`head -n 1 VERSION`
 
+MAJORVER=`echo $VERSION | cut -f1 -d.`
+MINORVER=`echo $VERSION | cut -f2 -d.`
+REVISION=`echo $VERSION | cut -f3 -d.`
+
 dnl Set user who runs ./configure
 CUSER=`id -un`
 AC_SUBST(VERSION)
@@ -461,6 +465,9 @@ AC_SUBST(PROJECT_NAME)
 AC_SUBST(HAVE_OPENSSL_AS_FRAMEWORK)
 AC_SUBST(HAVE_OPENSSL)
 AC_SUBST(HAVE_COMMON_CRYPTO)
+AC_SUBST(MAJORVER)
+AC_SUBST(MINORVER)
+AC_SUBST(REVISION)
 
 AC_CONFIG_SECTION([Generating output files]) 
 AC_CONFIG_FILES([Makefile.osx])

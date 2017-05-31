@@ -7,8 +7,11 @@
 CC=@CC@
 CFLAGS=@CFLAGS@ -D_POSIX_SOURCE
 LDFLAGS=@LDFLAGS@
+MAJORVER=@MAJORVER@
+MINORVER=@MINORVER@
+REVISION=@REVISION@
 
-LIB=libulib.so
+IB=libulib.so
 PKGCONFIGFILE=ulib.pc
 
 MFILES = $(wildcard Classes/*.m) $(wildcard Classes/*/*.m)
@@ -33,7 +36,16 @@ Classes/UniversalObject/UMObjectDebug.m.o: Classes/UniversalObject/UMObjectDebug
 
 install: ${LIB}
 	-mkdir -p ${DESTDIR}/usr/local/lib/pkgconfig
-	-install -b -g root -o root -m 644 ${LIB} ${DESTDIR}/usr/local/lib/
+	rm -f ${LIB}.${MAJORVER}.${MINORVER}.${REVISION}
+	rm -f ${LIB}.${MAJORVER}.${MINORVER}
+	rm -f ${LIB}.${MAJORVER}
+	rm -f ${LIB}
+	-install -b -g root -o root -m 644 ${LIB} ${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}	
+	ln -s ${LIB}.${MAJORVER}.${MINORVER}.${REVISION} ${LIB}.${MAJORVER}.${MINORVER}
+	ln -s ${LIB}.${MAJORVER}.${MINORVER} ${LIB}.${MAJORVER}
+	ln -s ${LIB} ${LIB}.${MAJORVER}
+	cd ${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}
+	-ln -s ${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION} 
 	-install -b -g root -o root -m 644 ${PKGCONFIGFILE} ${DESTDIR}/usr/local/lib/pkgconfig/
 	-mkdir -p ${DESTDIR}/usr/local/include/ulib
 	cp $(HFILES) ${DESTDIR}/usr/local/include/ulib

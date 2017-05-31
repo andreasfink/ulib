@@ -622,6 +622,9 @@ ac_includes_default="\
 
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+REVISION
+MINORVER
+MAJORVER
 HAVE_COMMON_CRYPTO
 HAVE_OPENSSL
 HAVE_OPENSSL_AS_FRAMEWORK
@@ -2419,6 +2422,10 @@ PROJECT_NAME="ulib"
 CONFIG_DEFINE="ULIB_CONFIG"
 
 VERSION=`head -n 1 VERSION`
+
+MAJORVER=`echo $VERSION | cut -f1 -d.`
+MINORVER=`echo $VERSION | cut -f2 -d.`
+REVISION=`echo $VERSION | cut -f3 -d.`
 
 CUSER=`id -un`
 
@@ -5327,6 +5334,9 @@ fi
 
 
 ./make_version
+
+
+
 
 
 

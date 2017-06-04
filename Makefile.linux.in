@@ -11,7 +11,7 @@ MAJORVER=@MAJORVER@
 MINORVER=@MINORVER@
 REVISION=@REVISION@
 
-IB=libulib.so
+LIB=libulib.so
 PKGCONFIGFILE=ulib.pc
 
 MFILES = $(wildcard Classes/*.m) $(wildcard Classes/*/*.m)

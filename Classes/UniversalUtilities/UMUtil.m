@@ -659,6 +659,11 @@ end:
     return arc4random_uniform(upperBound);
 }
 
++ (uint32_t)  random
+{
+    return arc4random_uniform(UINT_MAX);
+}
+
 @end
 
 extern NSString *ulib_get_thread_name(pthread_t thread);

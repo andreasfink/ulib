@@ -11,7 +11,7 @@ MAJORVER=@MAJORVER@
 MINORVER=@MINORVER@
 REVISION=@REVISION@
 
-LIB=libulib.so
+LIB=lib@PROJECT_NAME@.@SHARED_LIBRARY_EXTENSION@
 PKGCONFIGFILE=ulib.pc
 
 MFILES = $(wildcard Classes/*.m) $(wildcard Classes/*/*.m)

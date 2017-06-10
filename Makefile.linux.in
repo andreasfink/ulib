@@ -35,7 +35,8 @@ Classes/UniversalObject/UMObjectDebug.m.o: Classes/UniversalObject/UMObjectDebug
 	${CC} -c ${CFLAGS} -x objective-c $<  ${INCLUDEDIRS} -o $@ -fno-objc-arc
 
 install: ${LIB}
-	mkdir -p ${DESTDIR}/usr/local/lib/pkgconfig
+	mkdir -p "${DESTDIR}/usr/local/lib/pkgconfig"
+	mkdir -p "${DESTDIR}/usr/local/include/ulib"
 	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"
 	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}"
 	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
@@ -45,8 +46,7 @@ install: ${LIB}
 	ln -s "${LIB}.${MAJORVER}.${MINORVER}"             "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
 	ln -s "${LIB}.${MAJORVER}"                         "${DESTDIR}/usr/local/lib/${LIB}"
 	install -b -g root -o root -m 644 ${PKGCONFIGFILE} ${DESTDIR}/usr/local/lib/pkgconfig/
-	mkdir -p ${DESTDIR}/usr/local/include/ulib
-	cp $(HFILES) ${DESTDIR}/usr/local/include/ulib
+	cp $(HFILES) "${DESTDIR}/usr/local/include/ulib"
 	ldconfig
 
 clean:

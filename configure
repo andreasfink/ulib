@@ -622,6 +622,10 @@ ac_includes_default="\
 
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+SHARED_LIBRARY_EXTENSION
+REVISION
+MINORVER
+MAJORVER
 HAVE_COMMON_CRYPTO
 HAVE_OPENSSL
 HAVE_OPENSSL_AS_FRAMEWORK
@@ -2419,6 +2423,9 @@ PROJECT_NAME="ulib"
 CONFIG_DEFINE="ULIB_CONFIG"
 
 VERSION=`head -n 1 VERSION`
+MAJORVER=`echo $VERSION | cut -f1 -d.`
+MINORVER=`echo $VERSION | cut -f2 -d.`
+REVISION=`echo $VERSION | cut -f3 -d.`
 
 CUSER=`id -un`
 
@@ -2558,7 +2565,7 @@ case "$host" in
 	CFLAGS="$CFLAGS -fasm-blocks -fblocks -fstrict-aliasing -fobjc-arc -fobjc-runtime=gnustep"
 	CFLAGS="$CFLAGS -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0"
 	CFLAGS="$CFLAGS -fpascal-strings"
-
+	SHARED_LIBRARY_EXTENSION="so"
 	if [ -x /usr/local/bin/gnustep-config ]
 	then
 		CFLAGS="$CFLAGS `/usr/local/bin/gnustep-config --objc-flags`"
@@ -5327,6 +5334,10 @@ fi
 
 
 ./make_version
+
+
+
+
 
 
 

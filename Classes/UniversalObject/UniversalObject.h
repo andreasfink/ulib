@@ -21,7 +21,6 @@
 #import "NSNumber+HierarchicalDescription.h"
 #import "NSObject+HierarchicalDescription.h"
 #import "NSString+HierarchicalDescription.h"
-#import "NSString+UniversalObject.h"
 #import "NSDate+stringFunctions.h"
 #import "UMIntegerWithHistory.h"
 #import "UMStringWithHistory.h"

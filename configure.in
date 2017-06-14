@@ -25,6 +25,9 @@ CONFIG_DEFINE="ULIB_CONFIG"
 
 dnl Check version number.
 VERSION=`head -n 1 VERSION`
+MAJORVER=`echo $VERSION | cut -f1 -d.`
+MINORVER=`echo $VERSION | cut -f2 -d.`
+REVISION=`echo $VERSION | cut -f3 -d.`
 
 dnl Set user who runs ./configure
 CUSER=`id -un`
@@ -89,7 +92,7 @@ case "$host" in
 	CFLAGS="$CFLAGS -fasm-blocks -fblocks -fstrict-aliasing -fobjc-arc -fobjc-runtime=gnustep"
 	CFLAGS="$CFLAGS -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0"
 	CFLAGS="$CFLAGS -fpascal-strings"
-
+	SHARED_LIBRARY_EXTENSION="so"
 	if [[ -x /usr/local/bin/gnustep-config ]] 
 	then
 		CFLAGS="$CFLAGS `/usr/local/bin/gnustep-config --objc-flags`"
@@ -461,6 +464,10 @@ AC_SUBST(PROJECT_NAME)
 AC_SUBST(HAVE_OPENSSL_AS_FRAMEWORK)
 AC_SUBST(HAVE_OPENSSL)
 AC_SUBST(HAVE_COMMON_CRYPTO)
+AC_SUBST(MAJORVER)
+AC_SUBST(MINORVER)
+AC_SUBST(REVISION)
+AC_SUBST(SHARED_LIBRARY_EXTENSION)
 
 AC_CONFIG_SECTION([Generating output files]) 
 AC_CONFIG_FILES([Makefile.osx])

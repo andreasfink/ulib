@@ -26,7 +26,7 @@ NSString *UMTimeStampDTfromTime(time_t current)
 
 time_t UMTimeFromTimestampDT(NSString *timestamp)
 {
-    char ts[256];
+    char ts[21];
     struct tm trec;
     
     if(timestamp==NULL)
@@ -46,7 +46,7 @@ time_t UMTimeFromTimestampDT(NSString *timestamp)
         return 0;
     }
     
-    strncpy(ts, timestamp.UTF8String,255),
+    strncpy(ts, timestamp.UTF8String,21);
     ts[20] = '\0';
     
     sscanf(ts,"%04d-%02d-%02d %02d:%02d:%02d",

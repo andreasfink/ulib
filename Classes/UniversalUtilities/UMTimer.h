@@ -39,8 +39,14 @@
 @property(readwrite,assign,atomic) SEL                 selectorToCall;
 @property(readwrite,strong,atomic) id                  parameter;
 
-- (UMTimer *)initWithTarget:(id)target selector:(SEL)selector object:(id)object duration:(UMMicroSec)dur name:(NSString *)n repeats:(BOOL)rep;
-- (UMTimer *)initWithTarget:(id)target selector:(SEL)selector;
+- (UMTimer *)initWithTarget:(id)target
+                   selector:(SEL)selector
+                     object:(id)object
+                   duration:(UMMicroSec)dur
+                       name:(NSString *)n repeats:(BOOL)rep;
+
+- (UMTimer *)initWithTarget:(id)target
+                   selector:(SEL)selector;
 
 - (BOOL)isExpired;
 - (BOOL)isExpired:(UMMicroSec)now;

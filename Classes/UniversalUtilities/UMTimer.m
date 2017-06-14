@@ -15,10 +15,20 @@
 
 - (UMTimer *)initWithTarget:(id)target selector:(SEL)selector
 {
-    return [self initWithTarget:target selector:selector object:NULL duration:0 name:NULL repeats:NO];
+    return [self initWithTarget:target
+                       selector:selector
+                         object:NULL
+                       duration:0
+                           name:NULL
+                        repeats:NO];
 }
 
-- (UMTimer *)initWithTarget:(id)target selector:(SEL)selector object:(id)object duration:(UMMicroSec)dur name:(NSString *)n repeats:(BOOL)r;
+- (UMTimer *)initWithTarget:(id)target
+                   selector:(SEL)selector
+                     object:(id)object
+                   duration:(UMMicroSec)dur
+                       name:(NSString *)n
+                    repeats:(BOOL)r;
 {
     self =[super init];
     if(self)

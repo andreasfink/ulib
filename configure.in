@@ -28,7 +28,7 @@ VERSION=`head -n 1 VERSION`
 MAJORVER=`echo $VERSION | cut -f1 -d.`
 MINORVER=`echo $VERSION | cut -f2 -d.`
 REVISION=`echo $VERSION | cut -f3 -d.`
-
+ 
 dnl Set user who runs ./configure
 CUSER=`id -un`
 AC_SUBST(VERSION)
@@ -64,7 +64,6 @@ case "$host" in
     #
     UR="`uname -r | cut -f1 -d.`"
     DONE=0
-
     ARCH="-arch x86_64"
     CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude -I/usr/local/mysqlclient/include -I/usr/local/postgresclient/include ${ARCH}"
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security"
@@ -81,7 +80,14 @@ case "$host" in
   *-linux-*)
 	CC=clang
 	CXX=clang++
-        CFLAGS="$CFLAGS -std=c99 -fPIC -DLINUX -D_BSD_SOURCE -D_POSIX_SOURCE"
+	CFLAGS="$CFLAGS -std=c99 -fPIC -DLINUX"
+	DEBIAN_VERSION=`cat /etc/debian_version | cut -f1 -d.`
+	if [[ "$DEBIAN_VERSION" == "8" ]]
+	then
+        CFLAGS="$CFLAGS -D_BSD_SOURCE -D_POSIX_SOURCE"
+    else
+        CFLAGS="$CFLAGS -D_DEFAULT_SOURCE -D_POSIX_SOURCE"
+	fi
 	CFLAGS="$CFLAGS  -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties"
 	CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
 	CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"

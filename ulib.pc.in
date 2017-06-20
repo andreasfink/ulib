@@ -7,11 +7,11 @@ libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 
 Cflags: -I${includedir}  -DHAVE_OPENSSL=1
-Libs: -L${libdir} -l:libulib.@SHARED_LIBRARY_EXTENSION@.@MAJORVER@.@MINORVER@ -lobjc -lavahi-client -lavahi-core -lavahi-common -lsctp -lgnustep-base -lssl -lcrypto -lbsd -luuid
+Libs: -L${libdir} -l:libulib.@SHARED_LIBRARY_EXTENSION@.@MAJORVER@.@MINORVER@ -lobjc -lavahi-client -lavahi-core -lavahi-common -lsctp -lgnustep-base -lbsd -luuid
 
 Name: ulib
 Description: universal library
 Version: @VERSION@
-Requires: 
+Requires: openssl 
 
 

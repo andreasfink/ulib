@@ -623,6 +623,7 @@ ac_includes_default="\
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
 SHARED_LIBRARY_EXTENSION
+STATIC_LIBS
 REVISION
 MINORVER
 MAJORVER
@@ -2548,7 +2549,7 @@ case "$host" in
     UR="`uname -r | cut -f1 -d.`"
     DONE=0
     ARCH="-arch x86_64"
-    CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude -I/usr/local/mysqlclient/include -I/usr/local/postgresclient/include ${ARCH}"
+    CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security"
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"
@@ -2592,15 +2593,10 @@ case "$host" in
 		CFLAGS="$CFLAGS `/usr/bin/gnustep-config --objc-flags`"
 	    LDFLAGS="$LDFLAGS `/usr/bin/gnustep-config --base-libs --objc-libs`"
     fi
-# we now use statically linked OpenSSL 1.0.2h
-	if [ -d libs/`./distro.sh` ]
-	then
-	    CFLAGS="$CFLAGS -DHAVE_OPENSSL=1 -I libs/`./distro.sh`/openssl1.0.2h/include"
-	    LDFLAGS="-L libs/`./distro.sh`/openssl1.0.2h/libs -lcrypto -lssl"
-	fi
-#	CFLAGS="$CFLAGS `pkg-config --cflags openssl`"
-#	LDFLAGS="$LDFLAGS `pkg-config --libs openssl`"
-        $as_echo "#define HAVE_OPENSSL 1" >>confdefs.h
+    CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
+    CFLAGS="$CFLAGS `pkg-config --cflags libssl libcrypto`"
+    LDFLAGS="$LDFLAGS `pkg-config --libs libssl libcrypto`"
+    $as_echo "#define HAVE_OPENSSL 1" >>confdefs.h
 
 	;;
 
@@ -5352,6 +5348,7 @@ fi
 
 
 ./make_version
+
 
 
 

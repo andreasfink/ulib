@@ -166,5 +166,14 @@
     return json;
 }
 
+
+- (UMSynchronizedSortedDictionary *)copyWithZone:(NSZone *)zone
+{
+    UMSynchronizedSortedDictionary *cpy = [[UMSynchronizedSortedDictionary allocWithZone:zone]init];
+    cpy->underlyingDictionary = [underlyingDictionary copy];
+    cpy->sortIndex = [sortIndex copy];
+    return cpy;
+}
+
 @end
 

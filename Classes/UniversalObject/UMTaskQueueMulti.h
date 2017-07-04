@@ -14,7 +14,7 @@
  @brief UMTaskQueueMulti is an object to deal with background queues
  It holds a bunch of UMBackgrounderWithQueue objecs which share a
  common queue where you can stuff UMTask objects into. In comparison to UMTaskQueue
- a UMTaskQueueMulti has multiple priority queues.
+ a UMTaskQueueMulti has multiple priority queues instead of only one queue.
 
  */
 

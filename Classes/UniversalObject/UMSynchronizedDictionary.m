@@ -105,5 +105,10 @@
     return d;
 }
 
-
+- (UMSynchronizedDictionary *)copyWithZone:(NSZone *)zone
+{
+    UMSynchronizedDictionary *cpy = [[UMSynchronizedDictionary allocWithZone:zone]init];
+    cpy->underlyingDictionary = [underlyingDictionary copy];
+    return cpy;
+}
 @end

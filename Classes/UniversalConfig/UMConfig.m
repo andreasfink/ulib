@@ -24,7 +24,6 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 @synthesize fileName;
 @synthesize singleGroups;
 
-
 - (UMConfig *)initWithFileName:(NSString *)file
 {
     if (!file)
@@ -46,7 +45,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 - (NSString *)description
 {
     NSMutableString *desc;
-    
+
     desc = [NSMutableString stringWithString:@"configuration file dump starts\n"];
     [desc appendFormat:@"configuration file was %@\n", fileName];
     [desc appendFormat:@"it has single groups %@\n", singleGroups];

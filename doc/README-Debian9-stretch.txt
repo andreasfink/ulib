@@ -1,4 +1,4 @@
-ulib under Debian9-Strech
+ulib under Debian9-Stretch
 -------------------------
 
 To user ulib with Linux you need to build your own gnustep installation
@@ -7,27 +7,7 @@ reference counting because its using the old objc runtime which does not support
 ARC.
 
 
-Here is how to get such a installation up and running under the following 
-distributions
-
-	Debian 8 (i386)
-	Debian 8 (amd64)
-	Debian 8 (armhf) / Raspbian
-	Ubuntu 14.04.5 LTS (i386)
-	Ubuntu 14.04.5 LTS (amd64)
-	Ubuntu 16.04.1 LTS (i386)
-	Ubuntu 16.04.1 LTS (amd64)
-	Centos 6 (i386)
-	Centos 6 (amd64)
-	Centos 7 (amd64)
-
-
-
-libgnustep-base1.24
-libgnustep-base-dev
-clang
-libssl1.0-dev
-
+Here is how to get such a installation up and running under Debian 9 (codename Stretch)
 
 1. Install depenencies
 --------------------------

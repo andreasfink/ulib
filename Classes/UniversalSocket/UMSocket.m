@@ -2757,6 +2757,8 @@ static void dyn_lock_function(int mode, struct CRYPTO_dynlock_value *l, const ch
 static void dyn_destroy_function(struct CRYPTO_dynlock_value *l, const char *file, int line)
 {
     UMLock *lck =  (__bridge_transfer UMLock *)l->umlock_ptr;
+#pragma unused(lck)
     l->umlock_ptr = NULL;
+
     lck = NULL;
 }

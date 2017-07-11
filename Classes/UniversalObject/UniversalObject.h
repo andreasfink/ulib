@@ -9,7 +9,6 @@
 
 #import "UMAssert.h"
 #import "UMObject.h"
-#import "UMObjectDebug.h"
 
 #import "NSData+UniversalObject.h"
 #import "NSString+UniversalObject.h"

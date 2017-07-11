@@ -72,7 +72,6 @@
 		A6020FC01D4876E500211137 /* UMHistoryLogEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A615D9161B4D6CF300854472 /* UMHistoryLogEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6020FC11D4876E500211137 /* UMIntegerWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4BAF1A3F25450090FC94 /* UMIntegerWithHistory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6020FC21D4876E500211137 /* UMObject.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4BB01A3F25450090FC94 /* UMObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6020FC31D4876E500211137 /* UMObjectDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EF4A511B0A2D720090FC94 /* UMObjectDebug.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6020FC41D4876E500211137 /* UMStringWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4BB11A3F25450090FC94 /* UMStringWithHistory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6020FC51D4876E500211137 /* UMSynchronizedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4BB21A3F25450090FC94 /* UMSynchronizedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6020FC61D4876E500211137 /* UMSynchronizedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = A65727451B1869AA00854472 /* UMSynchronizedDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -103,7 +102,6 @@
 		A6020FDF1D4876E500211137 /* UMHistoryLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A615D9171B4D6CF300854472 /* UMHistoryLogEntry.m */; };
 		A6020FE01D4876E500211137 /* UMIntegerWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB45149A77D10029E9CF /* UMIntegerWithHistory.m */; };
 		A6020FE11D4876E500211137 /* UMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB47149A77D10029E9CF /* UMObject.m */; };
-		A6020FE21D4876E500211137 /* UMObjectDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EF4A521B0A2D720090FC94 /* UMObjectDebug.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A6020FE31D4876E500211137 /* UMStringWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB49149A77D10029E9CF /* UMStringWithHistory.m */; };
 		A6020FE41D4876E500211137 /* UMSynchronizedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D94B2A193CA70E0090FC94 /* UMSynchronizedArray.m */; };
 		A6020FE51D4876E500211137 /* UMSynchronizedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A65727461B1869AA00854472 /* UMSynchronizedDictionary.m */; };
@@ -118,7 +116,6 @@
 		A60210091D488A2F00211137 /* UMHTTPCookie.m in Sources */ = {isa = PBXBuildFile; fileRef = A69AB263182BC060001D0FE8 /* UMHTTPCookie.m */; };
 		A602100A1D488A2F00211137 /* UMIntegerWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB45149A77D10029E9CF /* UMIntegerWithHistory.m */; };
 		A602100B1D488A2F00211137 /* UMHistoryLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A615D9171B4D6CF300854472 /* UMHistoryLogEntry.m */; };
-		A602100C1D488A2F00211137 /* UMObjectDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EF4A521B0A2D720090FC94 /* UMObjectDebug.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A602100D1D488A2F00211137 /* UMBackgrounderWithQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF84071A0BCA2C0090FC94 /* UMBackgrounderWithQueue.m */; };
 		A602100E1D488A2F00211137 /* UMStringWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB49149A77D10029E9CF /* UMStringWithHistory.m */; };
 		A602100F1D488A2F00211137 /* UMLogBuffered.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB59149A77E70029E9CF /* UMLogBuffered.m */; };
@@ -246,7 +243,6 @@
 		A60210921D488A2F00211137 /* pkcs7.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC47051D4608F0002BAA97 /* pkcs7.h */; };
 		A60210941D488A2F00211137 /* ts.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC48511D4608FC002BAA97 /* ts.h */; };
 		A60210951D488A2F00211137 /* pem2.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC47031D4608F0002BAA97 /* pem2.h */; };
-		A60210961D488A2F00211137 /* UMObjectDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EF4A511B0A2D720090FC94 /* UMObjectDebug.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60210971D488A2F00211137 /* asn1_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46D71D4608F0002BAA97 /* asn1_mac.h */; };
 		A60210981D488A2F00211137 /* pem.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC483B1D4608FC002BAA97 /* pem.h */; };
 		A60210991D488A2F00211137 /* UniversalConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = A6971C8016356C0B004E9B50 /* UniversalConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -484,7 +480,6 @@
 		A602118F1D488A3D00211137 /* UMHTTPCookie.m in Sources */ = {isa = PBXBuildFile; fileRef = A69AB263182BC060001D0FE8 /* UMHTTPCookie.m */; };
 		A60211901D488A3D00211137 /* UMIntegerWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB45149A77D10029E9CF /* UMIntegerWithHistory.m */; };
 		A60211911D488A3D00211137 /* UMHistoryLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A615D9171B4D6CF300854472 /* UMHistoryLogEntry.m */; };
-		A60211921D488A3D00211137 /* UMObjectDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EF4A521B0A2D720090FC94 /* UMObjectDebug.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A60211931D488A3D00211137 /* UMBackgrounderWithQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF84071A0BCA2C0090FC94 /* UMBackgrounderWithQueue.m */; };
 		A60211941D488A3D00211137 /* UMStringWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB49149A77D10029E9CF /* UMStringWithHistory.m */; };
 		A60211951D488A3D00211137 /* UMLogBuffered.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB59149A77E70029E9CF /* UMLogBuffered.m */; };
@@ -610,7 +605,6 @@
 		A60212181D488A3D00211137 /* pkcs7.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC47051D4608F0002BAA97 /* pkcs7.h */; };
 		A602121A1D488A3D00211137 /* ts.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC48511D4608FC002BAA97 /* ts.h */; };
 		A602121B1D488A3D00211137 /* pem2.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC47031D4608F0002BAA97 /* pem2.h */; };
-		A602121C1D488A3D00211137 /* UMObjectDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EF4A511B0A2D720090FC94 /* UMObjectDebug.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A602121D1D488A3D00211137 /* asn1_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46D71D4608F0002BAA97 /* asn1_mac.h */; };
 		A602121E1D488A3D00211137 /* pem.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC483B1D4608FC002BAA97 /* pem.h */; };
 		A602121F1D488A3D00211137 /* UniversalConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = A6971C8016356C0B004E9B50 /* UniversalConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -848,7 +842,6 @@
 		A60213151D488A5900211137 /* UMHTTPCookie.m in Sources */ = {isa = PBXBuildFile; fileRef = A69AB263182BC060001D0FE8 /* UMHTTPCookie.m */; };
 		A60213161D488A5900211137 /* UMIntegerWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB45149A77D10029E9CF /* UMIntegerWithHistory.m */; };
 		A60213171D488A5900211137 /* UMHistoryLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A615D9171B4D6CF300854472 /* UMHistoryLogEntry.m */; };
-		A60213181D488A5900211137 /* UMObjectDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EF4A521B0A2D720090FC94 /* UMObjectDebug.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A60213191D488A5900211137 /* UMBackgrounderWithQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF84071A0BCA2C0090FC94 /* UMBackgrounderWithQueue.m */; };
 		A602131A1D488A5900211137 /* UMStringWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB49149A77D10029E9CF /* UMStringWithHistory.m */; };
 		A602131B1D488A5900211137 /* UMLogBuffered.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB59149A77E70029E9CF /* UMLogBuffered.m */; };
@@ -974,7 +967,6 @@
 		A602139E1D488A5900211137 /* pkcs7.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC47051D4608F0002BAA97 /* pkcs7.h */; };
 		A60213A01D488A5900211137 /* ts.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC48511D4608FC002BAA97 /* ts.h */; };
 		A60213A11D488A5900211137 /* pem2.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC47031D4608F0002BAA97 /* pem2.h */; };
-		A60213A21D488A5900211137 /* UMObjectDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EF4A511B0A2D720090FC94 /* UMObjectDebug.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60213A31D488A5900211137 /* asn1_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46D71D4608F0002BAA97 /* asn1_mac.h */; };
 		A60213A41D488A5900211137 /* pem.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC483B1D4608FC002BAA97 /* pem.h */; };
 		A60213A51D488A5900211137 /* UniversalConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = A6971C8016356C0B004E9B50 /* UniversalConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1296,12 +1288,11 @@
 		A60C2E4E1A3F21730090FC94 /* UMJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A6827B0C16AD217D0035FEEC /* UMJsonUTF8Stream.m */; };
 		A60C2E501A3F21730090FC94 /* UMJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A6827B0E16AD217D0035FEEC /* UMJsonWriter.m */; };
 		A60C2E601A3F217B0090FC94 /* UMRedisCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = A67B5186191B5DB70090FC94 /* UMRedisCommand.m */; };
-		A60C4C961EF7FE59007C203A /* UMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB47149A77D10029E9CF /* UMObject.m */; };
+		A60C4C961EF7FE59007C203A /* UMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB47149A77D10029E9CF /* UMObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A60C4C971EF7FE59007C203A /* UMHistoryLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB43149A77D10029E9CF /* UMHistoryLog.m */; };
 		A60C4C981EF7FE59007C203A /* UMHTTPCookie.m in Sources */ = {isa = PBXBuildFile; fileRef = A69AB263182BC060001D0FE8 /* UMHTTPCookie.m */; };
 		A60C4C991EF7FE59007C203A /* UMIntegerWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB45149A77D10029E9CF /* UMIntegerWithHistory.m */; };
 		A60C4C9A1EF7FE59007C203A /* UMHistoryLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A615D9171B4D6CF300854472 /* UMHistoryLogEntry.m */; };
-		A60C4C9B1EF7FE59007C203A /* UMObjectDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EF4A521B0A2D720090FC94 /* UMObjectDebug.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A60C4C9C1EF7FE59007C203A /* UMScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = A666EEC51E89BB17004804CB /* UMScanner.m */; };
 		A60C4C9D1EF7FE59007C203A /* UMBackgrounderWithQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF84071A0BCA2C0090FC94 /* UMBackgrounderWithQueue.m */; };
 		A60C4C9E1EF7FE59007C203A /* UMStringWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB49149A77D10029E9CF /* UMStringWithHistory.m */; };
@@ -1442,7 +1433,6 @@
 		A60C4D291EF7FE59007C203A /* UniversalTokenizer.h in Headers */ = {isa = PBXBuildFile; fileRef = A666EF561E89BBA6004804CB /* UniversalTokenizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4D2A1EF7FE59007C203A /* ts.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC48511D4608FC002BAA97 /* ts.h */; };
 		A60C4D2B1EF7FE59007C203A /* pem2.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC47031D4608F0002BAA97 /* pem2.h */; };
-		A60C4D2C1EF7FE59007C203A /* UMObjectDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EF4A511B0A2D720090FC94 /* UMObjectDebug.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4D2D1EF7FE59007C203A /* asn1_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC46D71D4608F0002BAA97 /* asn1_mac.h */; };
 		A60C4D2E1EF7FE59007C203A /* pem.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AC483B1D4608FC002BAA97 /* pem.h */; };
 		A60C4D2F1EF7FE59007C203A /* UniversalConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = A6971C8016356C0B004E9B50 /* UniversalConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1989,7 +1979,6 @@
 		A6AC4AC51D460B6B002BAA97 /* UMHistoryLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A615D9171B4D6CF300854472 /* UMHistoryLogEntry.m */; };
 		A6AC4AC61D460B6B002BAA97 /* UMIntegerWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB45149A77D10029E9CF /* UMIntegerWithHistory.m */; };
 		A6AC4AC71D460B6B002BAA97 /* UMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB47149A77D10029E9CF /* UMObject.m */; };
-		A6AC4AC81D460B6B002BAA97 /* UMObjectDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EF4A521B0A2D720090FC94 /* UMObjectDebug.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A6AC4AC91D460B6B002BAA97 /* UMStringWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB49149A77D10029E9CF /* UMStringWithHistory.m */; };
 		A6AC4ACA1D460B6B002BAA97 /* UMSynchronizedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D94B2A193CA70E0090FC94 /* UMSynchronizedArray.m */; };
 		A6AC4ACB1D460B6B002BAA97 /* UMSynchronizedSortedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A6ACC11A1D344C4E00211137 /* UMSynchronizedSortedDictionary.m */; };
@@ -2018,7 +2007,6 @@
 		A6AC4B001D460B6D002BAA97 /* UMHistoryLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A615D9171B4D6CF300854472 /* UMHistoryLogEntry.m */; };
 		A6AC4B011D460B6D002BAA97 /* UMIntegerWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB45149A77D10029E9CF /* UMIntegerWithHistory.m */; };
 		A6AC4B021D460B6D002BAA97 /* UMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB47149A77D10029E9CF /* UMObject.m */; };
-		A6AC4B031D460B6D002BAA97 /* UMObjectDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EF4A521B0A2D720090FC94 /* UMObjectDebug.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A6AC4B041D460B6D002BAA97 /* UMStringWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB49149A77D10029E9CF /* UMStringWithHistory.m */; };
 		A6AC4B051D460B6D002BAA97 /* UMSynchronizedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D94B2A193CA70E0090FC94 /* UMSynchronizedArray.m */; };
 		A6AC4B061D460B6D002BAA97 /* UMSynchronizedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A65727461B1869AA00854472 /* UMSynchronizedDictionary.m */; };
@@ -2048,7 +2036,6 @@
 		A6AC4B3C1D460B6E002BAA97 /* UMHistoryLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A615D9171B4D6CF300854472 /* UMHistoryLogEntry.m */; };
 		A6AC4B3D1D460B6E002BAA97 /* UMIntegerWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB45149A77D10029E9CF /* UMIntegerWithHistory.m */; };
 		A6AC4B3E1D460B6E002BAA97 /* UMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB47149A77D10029E9CF /* UMObject.m */; };
-		A6AC4B3F1D460B6E002BAA97 /* UMObjectDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EF4A521B0A2D720090FC94 /* UMObjectDebug.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A6AC4B401D460B6E002BAA97 /* UMStringWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB49149A77D10029E9CF /* UMStringWithHistory.m */; };
 		A6AC4B411D460B6E002BAA97 /* UMSynchronizedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D94B2A193CA70E0090FC94 /* UMSynchronizedArray.m */; };
 		A6AC4B421D460B6E002BAA97 /* UMSynchronizedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A65727461B1869AA00854472 /* UMSynchronizedDictionary.m */; };
@@ -2850,8 +2837,6 @@
 		A6DF84071A0BCA2C0090FC94 /* UMBackgrounderWithQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBackgrounderWithQueue.m; sourceTree = "<group>"; };
 		A6EB479F1A35C73A0090FC94 /* UMBackgrounderWithQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBackgrounderWithQueues.m; sourceTree = "<group>"; };
 		A6EB47A71A35C9530090FC94 /* UMTaskQueueMulti.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTaskQueueMulti.m; sourceTree = "<group>"; };
-		A6EF4A511B0A2D720090FC94 /* UMObjectDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMObjectDebug.h; sourceTree = "<group>"; };
-		A6EF4A521B0A2D720090FC94 /* UMObjectDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMObjectDebug.m; sourceTree = "<group>"; };
 		A6F1E31C187D448700AD2F85 /* UMRedisSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMRedisSession.m; sourceTree = "<group>"; };
 		A6F1E329187D935600AD2F85 /* UMRedisStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMRedisStatus.m; path = ../Classes/UniversalRedis/UMRedisStatus.m; sourceTree = "<group>"; };
 		A6F48CF31AF71F4E00854472 /* UMFileTrackingMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFileTrackingMacros.h; sourceTree = "<group>"; };
@@ -3653,8 +3638,6 @@
 				A6D8AB45149A77D10029E9CF /* UMIntegerWithHistory.m */,
 				A6CC4BB01A3F25450090FC94 /* UMObject.h */,
 				A6D8AB47149A77D10029E9CF /* UMObject.m */,
-				A6EF4A511B0A2D720090FC94 /* UMObjectDebug.h */,
-				A6EF4A521B0A2D720090FC94 /* UMObjectDebug.m */,
 				A6CC4BB11A3F25450090FC94 /* UMStringWithHistory.h */,
 				A6D8AB49149A77D10029E9CF /* UMStringWithHistory.m */,
 				A6CC4BB21A3F25450090FC94 /* UMSynchronizedArray.h */,
@@ -3900,7 +3883,6 @@
 				A60210941D488A2F00211137 /* ts.h in Headers */,
 				A60210951D488A2F00211137 /* pem2.h in Headers */,
 				A60C4E4E1EF80095007C203A /* UMPluginHandler.h in Headers */,
-				A60210961D488A2F00211137 /* UMObjectDebug.h in Headers */,
 				A60210971D488A2F00211137 /* asn1_mac.h in Headers */,
 				A60210981D488A2F00211137 /* pem.h in Headers */,
 				A60210991D488A2F00211137 /* UniversalConfig.h in Headers */,
@@ -4196,7 +4178,6 @@
 				A602121A1D488A3D00211137 /* ts.h in Headers */,
 				A602121B1D488A3D00211137 /* pem2.h in Headers */,
 				A60C4E541EF80096007C203A /* UMPluginHandler.h in Headers */,
-				A602121C1D488A3D00211137 /* UMObjectDebug.h in Headers */,
 				A602121D1D488A3D00211137 /* asn1_mac.h in Headers */,
 				A602121E1D488A3D00211137 /* pem.h in Headers */,
 				A602121F1D488A3D00211137 /* UniversalConfig.h in Headers */,
@@ -4492,7 +4473,6 @@
 				A60213A01D488A5900211137 /* ts.h in Headers */,
 				A60213A11D488A5900211137 /* pem2.h in Headers */,
 				A60C4E5A1EF80097007C203A /* UMPluginHandler.h in Headers */,
-				A60213A21D488A5900211137 /* UMObjectDebug.h in Headers */,
 				A60213A31D488A5900211137 /* asn1_mac.h in Headers */,
 				A60213A41D488A5900211137 /* pem.h in Headers */,
 				A60213A51D488A5900211137 /* UniversalConfig.h in Headers */,
@@ -4788,7 +4768,6 @@
 				A60C4D2A1EF7FE59007C203A /* ts.h in Headers */,
 				A60C4D2B1EF7FE59007C203A /* pem2.h in Headers */,
 				A60C4E481EF80094007C203A /* UMPluginHandler.h in Headers */,
-				A60C4D2C1EF7FE59007C203A /* UMObjectDebug.h in Headers */,
 				A60C4D2D1EF7FE59007C203A /* asn1_mac.h in Headers */,
 				A60C4D2E1EF7FE59007C203A /* pem.h in Headers */,
 				A60C4D2F1EF7FE59007C203A /* UniversalConfig.h in Headers */,
@@ -5122,7 +5101,6 @@
 				A60C2DD01A3F214E0090FC94 /* UMLogLevel.h in Headers */,
 				A6020FCB1D4876E500211137 /* UniversalObject.h in Headers */,
 				A666EF411E89BB17004804CB /* UMTokenizer.h in Headers */,
-				A6020FC31D4876E500211137 /* UMObjectDebug.h in Headers */,
 				A6020FAE1D4876E500211137 /* NSData+UniversalObject.h in Headers */,
 				A6020FB21D4876E500211137 /* NSObject+HierarchicalDescription.h in Headers */,
 				A6020FC21D4876E500211137 /* UMObject.h in Headers */,
@@ -5532,7 +5510,6 @@
 				A60210091D488A2F00211137 /* UMHTTPCookie.m in Sources */,
 				A602100A1D488A2F00211137 /* UMIntegerWithHistory.m in Sources */,
 				A602100B1D488A2F00211137 /* UMHistoryLogEntry.m in Sources */,
-				A602100C1D488A2F00211137 /* UMObjectDebug.m in Sources */,
 				A666EEE31E89BB17004804CB /* UMScanner.m in Sources */,
 				A602100D1D488A2F00211137 /* UMBackgrounderWithQueue.m in Sources */,
 				A602100E1D488A2F00211137 /* UMStringWithHistory.m in Sources */,
@@ -5657,7 +5634,6 @@
 				A602118F1D488A3D00211137 /* UMHTTPCookie.m in Sources */,
 				A60211901D488A3D00211137 /* UMIntegerWithHistory.m in Sources */,
 				A60211911D488A3D00211137 /* UMHistoryLogEntry.m in Sources */,
-				A60211921D488A3D00211137 /* UMObjectDebug.m in Sources */,
 				A666EEE41E89BB17004804CB /* UMScanner.m in Sources */,
 				A60211931D488A3D00211137 /* UMBackgrounderWithQueue.m in Sources */,
 				A60211941D488A3D00211137 /* UMStringWithHistory.m in Sources */,
@@ -5782,7 +5758,6 @@
 				A60213151D488A5900211137 /* UMHTTPCookie.m in Sources */,
 				A60213161D488A5900211137 /* UMIntegerWithHistory.m in Sources */,
 				A60213171D488A5900211137 /* UMHistoryLogEntry.m in Sources */,
-				A60213181D488A5900211137 /* UMObjectDebug.m in Sources */,
 				A666EEE51E89BB17004804CB /* UMScanner.m in Sources */,
 				A60213191D488A5900211137 /* UMBackgrounderWithQueue.m in Sources */,
 				A602131A1D488A5900211137 /* UMStringWithHistory.m in Sources */,
@@ -5907,7 +5882,6 @@
 				A60C4C981EF7FE59007C203A /* UMHTTPCookie.m in Sources */,
 				A60C4C991EF7FE59007C203A /* UMIntegerWithHistory.m in Sources */,
 				A60C4C9A1EF7FE59007C203A /* UMHistoryLogEntry.m in Sources */,
-				A60C4C9B1EF7FE59007C203A /* UMObjectDebug.m in Sources */,
 				A60C4C9C1EF7FE59007C203A /* UMScanner.m in Sources */,
 				A60C4C9D1EF7FE59007C203A /* UMBackgrounderWithQueue.m in Sources */,
 				A60C4C9E1EF7FE59007C203A /* UMStringWithHistory.m in Sources */,
@@ -6054,7 +6028,6 @@
 				A6020FCD1D4876E500211137 /* NSData+HierarchicalDescription.m in Sources */,
 				A60C4E631EF80098007C203A /* UMPluginDirectory.m in Sources */,
 				A60C2D9B1A3F213F0090FC94 /* NSDictionary+UMHTTP.m in Sources */,
-				A6020FE21D4876E500211137 /* UMObjectDebug.m in Sources */,
 				A6020FE41D4876E500211137 /* UMSynchronizedArray.m in Sources */,
 				A60C2E4A1A3F21730090FC94 /* UMJsonStreamWriterState.m in Sources */,
 				A6020FE51D4876E500211137 /* UMSynchronizedDictionary.m in Sources */,
@@ -6186,7 +6159,6 @@
 				A6AC4A461D460B1C002BAA97 /* UMLogFile.m in Sources */,
 				A6AC4B7C1D460BB5002BAA97 /* UMPKI.m in Sources */,
 				A6AC4AF01D460B6D002BAA97 /* NSDate+stringFunctions.m in Sources */,
-				A6AC4B031D460B6D002BAA97 /* UMObjectDebug.m in Sources */,
 				A6AC4C171D460C1A002BAA97 /* NSDictionary+UMJson.m in Sources */,
 				A6BEA6F11EF95028007C203A /* NSDictionary+UniversalConfig.m in Sources */,
 				A666EF471E89BB17004804CB /* UMTokenizer.m in Sources */,
@@ -6307,7 +6279,6 @@
 				A6AC4A581D460B1D002BAA97 /* UMLogFile.m in Sources */,
 				A6AC4B8C1D460BB6002BAA97 /* UMPKI.m in Sources */,
 				A6AC4B2C1D460B6E002BAA97 /* NSDate+stringFunctions.m in Sources */,
-				A6AC4B3F1D460B6E002BAA97 /* UMObjectDebug.m in Sources */,
 				A6AC4C351D460C1C002BAA97 /* NSDictionary+UMJson.m in Sources */,
 				A6BEA6F21EF95029007C203A /* NSDictionary+UniversalConfig.m in Sources */,
 				A666EF481E89BB17004804CB /* UMTokenizer.m in Sources */,
@@ -6470,7 +6441,6 @@
 				A6AC4AC31D460B6B002BAA97 /* UMFileTrackingInfo.m in Sources */,
 				A67C389516B2D53000C9DA95 /* UMDataWithHistory.m in Sources */,
 				A67C389716B2D53000C9DA95 /* UMDateWithHistory.m in Sources */,
-				A6AC4AC81D460B6B002BAA97 /* UMObjectDebug.m in Sources */,
 				224F13EF1732958300D7D864 /* UMLogHandler.m in Sources */,
 				224F13F01732958800D7D864 /* UMLogFile.m in Sources */,
 				224F13F11732958D00D7D864 /* UMLogFeed.m in Sources */,

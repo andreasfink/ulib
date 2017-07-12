@@ -41,6 +41,20 @@
 	return self;
 }
 
+- (UMLogHandler *)initWithConsoleLogLevel:(UMLogLevel)clevel
+{
+    self = [super init];
+    if(self)
+    {
+        logDestinations = [[NSMutableArray alloc] init];
+        lock = [[NSLock alloc]init];
+        console = [[UMLogConsole alloc] init];
+        console.level = clevel;
+        [self addLogDestination:console];
+    }
+    return self;
+}
+
 - (void) addLogDestination:(UMLogDestination *)dst
 {
     [lock lock];

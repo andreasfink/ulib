@@ -23,6 +23,7 @@
 
 - (UMLogHandler *) init;
 - (UMLogHandler *) initWithConsole;
+- (UMLogHandler *)initWithConsoleLogLevel:(UMLogLevel)clevel;
 - (void) addLogDestination:(UMLogDestination *)dst;
 - (void) removeLogDestination:(UMLogDestination *)dst;
 - (void) logAnEntry:(UMLogEntry *)logEntry;

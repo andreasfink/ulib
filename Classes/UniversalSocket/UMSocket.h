@@ -61,7 +61,7 @@
     NSString            *serverSideKeyFilename;
     NSData              *serverSideCertData;
     NSData              *serverSideKeyData;
-
+    BOOL                _isInPollCall;
     void                *ssl;
 
 @private
@@ -80,6 +80,7 @@
 @property(readwrite,strong)		NSString			*connectedRemoteAddress;
 @property(readwrite,assign)		in_port_t			connectedLocalPort;
 @property(readwrite,assign)		in_port_t			connectedRemotePort;
+@property(readwrite,atomic,assign)  BOOL isInPollCall;
 
 @property(readwrite,assign)		UMSocketType		type;
 @property(readwrite,assign)		UMSocketConnectionDirection	direction;
@@ -136,6 +137,7 @@
 - (UMSocketError)  waitDataAvailable;
 - (UMSocketError)  dataIsAvailable;
 - (UMSocketError)  dataIsAvailable:(int)timeoutInMs;
++ (NSArray *)dataIsAvailableOnSockets:(NSArray *)inputSockets timeoutMs:(int)timeoutMs err:(UMSocketError *) err;
 - (void) updateName;
 - (UMSocketError)  sendBytes:(void *)bytes length:(ssize_t)length;
 - (UMSocketError)  sendCString:(char *)str;

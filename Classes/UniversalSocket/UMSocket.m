@@ -1416,6 +1416,126 @@ static int SSL_smart_shutdown(SSL *ssl)
 }
 
 
++ (NSArray *)dataIsAvailableOnSockets:(NSArray *)inputSockets
+                            timeoutMs:(int)timeoutInMs
+                                  err:(UMSocketError *)err
+{
+    NSMutableArray *returnArray = [[NSMutableArray alloc]init];
+    NSInteger n = inputSockets.count;
+    struct pollfd *pollfds = calloc(inputSockets.count,sizeof(struct pollfd));
+    
+    UMAssert(timeoutInMs<200000,@"timeout should be smaller than 20seconds");
+
+    int ret1;
+    int ret2;
+    int eno = 0;
+    
+    int events = POLLIN | POLLPRI | POLLERR | POLLHUP | POLLNVAL;
+    
+#ifdef POLLRDBAND
+    events |= POLLRDBAND;
+#endif
+    
+#ifdef POLLRDHUP
+    events |= POLLRDHUP;
+#endif
+    
+    for(NSInteger i=0;i<n;i++)
+    {
+        UMSocket *s = inputSockets[i];
+        pollfds[i].fd = s.sock;
+        pollfds[i].events = events;
+        s.isInPollCall = YES;
+    }
+    errno = 99;
+    ret1 = poll(pollfds, 1, timeoutInMs);
+    
+    if (ret1 < 0)
+    {
+        eno = errno;
+        /* error condition */
+        if (eno == EINTR)
+        {
+            *err = [UMSocket umerrFromErrno:eno];
+            free(pollfds);
+            return [NSArray array];
+        }
+    }
+    else if (ret1 == 0)
+    {
+        *err = UMSocketError_no_data;
+        free(pollfds);
+        return [NSArray array];
+    }
+    else
+    {
+        eno = errno;
+        *err = [UMSocket umerrFromErrno:eno];
+    /* we have some event to handle. */
+        for(NSInteger i=0;i<n;i++)
+        {
+            UMSocket *s = inputSockets[i];
+            s.isInPollCall = NO;
+            ret2 = pollfds[i].revents;
+            if(ret2 & POLLERR)
+            {
+                [returnArray addObject: @{ @"socket":s,
+                                           @"data": @NO,
+                                           @"hup" : @NO,
+                                           @"error" : @([UMSocket umerrFromErrno:eno])}];
+            }
+            else if(ret2 & POLLHUP)
+            {
+                [returnArray addObject: @{ @"socket":s,
+                                           @"data": @YES,
+                                           @"hup" : @YES,
+                                           @"error" : @(0)}];
+
+            }
+#ifdef POLLRDHUP
+            else if(ret2 & POLLRDHUP)
+            {
+                [returnArray addObject: @{ @"socket":s,
+                                           @"data": @YES,
+                                           @"hup" : @YES,
+                                           @"error" : @(0)}];
+            }
+#endif
+            else if(ret2 & POLLNVAL)
+            {
+                [returnArray addObject: @{ @"socket":s,
+                                           @"data": @NO,
+                                           @"hup" : @NO,
+                                           @"error" : @([UMSocket umerrFromErrno:eno])}];
+            }
+#ifdef POLLRDBAND
+            else if(ret2 & POLLRDBAND)
+            {
+                [returnArray addObject: @{ @"socket":s,
+                                           @"data" : @YES,
+                                           @"hup" : @NO,
+                                           @"error" : @(0)}];
+            }
+#endif
+            else if(ret2 & POLLIN)
+            {
+                [returnArray addObject: @{ @"socket":s,
+                                           @"data" : @YES,
+                                           @"hup" : @NO,
+                                           @"error" : @(0)}];
+            }
+            else if(ret2 & POLLPRI)
+            {
+                [returnArray addObject: @{ @"socket":s,
+                                           @"data" : @YES,
+                                           @"hup" : @NO,
+                                           @"error" : @(0)}];
+            }
+        }
+    }
+    free(pollfds);
+    return returnArray;
+}
 
 - (UMSocketError) writeSingleChar:(unsigned char)c
 {

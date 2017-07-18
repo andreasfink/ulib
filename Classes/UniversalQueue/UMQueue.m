@@ -41,6 +41,16 @@
     }
 }
 
+- (void)insertFirst:(id)obj
+{
+    if(obj)
+    {
+        [self lock];
+        [queue insertObject:obj atIndex:0];
+        [self unlock];
+    }
+}
+
 
 - (void)appendUnique:(id)obj
 {

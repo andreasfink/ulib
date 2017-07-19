@@ -72,6 +72,7 @@
 #endif
     NSString            *advertizeName;
     NSString            *advertizeDomain;
+    id   __weak         _friend;
 }
 
 @property(readwrite,strong)		UMHost				*localHost;
@@ -81,6 +82,7 @@
 @property(readwrite,assign)		in_port_t			connectedLocalPort;
 @property(readwrite,assign)		in_port_t			connectedRemotePort;
 @property(readwrite,atomic,assign)  BOOL isInPollCall;
+@property(readwrite,weak)		id friend;
 
 @property(readwrite,assign)		UMSocketType		type;
 @property(readwrite,assign)		UMSocketConnectionDirection	direction;

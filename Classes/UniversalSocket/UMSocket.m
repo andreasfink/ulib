@@ -1176,30 +1176,30 @@ static int SSL_smart_shutdown(SSL *ssl)
         case UMSOCKET_TYPE_TCP6ONLY:
         case UMSOCKET_TYPE_TCP:
             @synchronized (self)
-        {
-
-            if((_sock < 0) || (self.hasSocket ==0))
             {
-                self.isConnecting = 0;
-                self.isConnected = 0;
-                return [UMSocket umerrFromErrno:EBADF];
-            }
 
-            if(!self.isConnected)
-            {
-                self.isConnecting = 0;
-                self.isConnected = 0;
-                return [UMSocket umerrFromErrno:ECONNREFUSED];
-            }
+                if((_sock < 0) || (self.hasSocket ==0))
+                {
+                    self.isConnecting = 0;
+                    self.isConnected = 0;
+                    return [UMSocket umerrFromErrno:EBADF];
+                }
 
-            i = [cryptoStream writeBytes:bytes length:length errorCode:&eno];
-            if (i != length)
-            {
-                NSString *msg = [NSString stringWithFormat:@"[UMSocket: sendBytes] socket %d (status %d) returns %d errno = %d",_sock,status, [UMSocket umerrFromErrno:eno],eno];
-                [logFeed info:0 inSubsection:@"Universal socket" withText:msg];
-                return [UMSocket umerrFromErrno:eno];
+                if(!self.isConnected)
+                {
+                    self.isConnecting = 0;
+                    self.isConnected = 0;
+                    return [UMSocket umerrFromErrno:ECONNREFUSED];
+                }
+
+                i = [cryptoStream writeBytes:bytes length:length errorCode:&eno];
+                if (i != length)
+                {
+                    NSString *msg = [NSString stringWithFormat:@"[UMSocket: sendBytes] socket %d (status %d) returns %d errno = %d",_sock,status, [UMSocket umerrFromErrno:eno],eno];
+                    [logFeed info:0 inSubsection:@"Universal socket" withText:msg];
+                    return [UMSocket umerrFromErrno:eno];
+                }
             }
-        }
             break;
         default:
             return UMSocketError_not_supported_operation;

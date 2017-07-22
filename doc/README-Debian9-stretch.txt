@@ -107,7 +107,7 @@ Here is how to get such a installation up and running under Debian 9 (codename S
 5. install libobjc2 runtime
 
 edit the file gnustep/libobjc2/associate.m and 
-comment out  around line 247 this annoying verbose fprintf line:
+comment out  around line 250 this annoying verbose fprintf line:
 
        //fprintf(stderr, "Deallocating dtable %p\n", hiddenClass->dtable);
 

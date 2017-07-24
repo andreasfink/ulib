@@ -43,7 +43,8 @@
                    selector:(SEL)selector
                      object:(id)object
                    duration:(UMMicroSec)dur
-                       name:(NSString *)n repeats:(BOOL)rep;
+                       name:(NSString *)n
+                    repeats:(BOOL)rep;
 
 - (UMTimer *)initWithTarget:(id)target
                    selector:(SEL)selector;

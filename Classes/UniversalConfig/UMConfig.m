@@ -149,10 +149,15 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 - (NSArray *)readFromFile
 {
-    return [self readFromFile:fileName];
+    return [self readFromFile:fileName andAppend:_configAppend];
 }
 
 - (NSArray *)readFromFile:(NSString *)fn
+{
+    return [self readFromFile:fn andAppend:_configAppend];
+}
+
+- (NSArray *)readFromFile:(NSString *)fn andAppend:(NSString *)append
 {
     NSError *err = NULL;
     
@@ -168,6 +173,10 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
     NSString *configFile = [NSString stringWithContentsOfFile:filename
                                                      encoding:NSUTF8StringEncoding
                                                         error:&err];
+    if(_configAppend)
+    {
+        configFile = [NSString stringWithFormat:@"%@%@",configFile,_configAppend];
+    }
     if(err)
     {
         @throw([NSException exceptionWithName:@"config"
@@ -192,7 +201,6 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 #endif
     return config;
 }
-
 
 - (void)read
 {

@@ -144,6 +144,9 @@
 /* define if we have any version of openssl  */
 #undef HAVE_OPENSSL
 
+/* define if we have TLS_method() */
+#undef HAVE_TLS_METHOD
+
 /* define if we have common crypto installed */
 #undef HAVE_COMMONCRYPTO
 

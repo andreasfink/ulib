@@ -2787,14 +2787,14 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         SSL_library_init();
         SSLeay_add_ssl_algorithms();
         SSL_load_error_strings();
-#ifdef  LINUX
-        global_generic_ssl_context = SSL_CTX_new(TLS_method()); //TLSv1_2_server_method());
-        global_server_ssl_context = SSL_CTX_new(TLS_server_method()); //TLSv1_2_server_method());
-        global_client_ssl_context = SSL_CTX_new(TLS_client_method()); //TLSv1_2_client_method());
+#ifdef  HAS_TLS_METHOD
+        global_generic_ssl_context = SSL_CTX_new(TLS_method()); 
+        global_server_ssl_context = SSL_CTX_new(TLS_server_method());
+        global_client_ssl_context = SSL_CTX_new(TLS_client_method());
 #else
-        global_generic_ssl_context = SSL_CTX_new(TLSv1_2_method()); //TLSv1_2_server_method());
-        global_server_ssl_context = SSL_CTX_new(TLSv1_2_server_method()); //TLSv1_2_server_method());
-        global_client_ssl_context = SSL_CTX_new(TLSv1_2_client_method()); //TLSv1_2_client_method());
+        global_generic_ssl_context = SSL_CTX_new(TLSv1_2_method()); 
+        global_server_ssl_context = SSL_CTX_new(TLSv1_2_server_method());
+        global_client_ssl_context = SSL_CTX_new(TLSv1_2_client_method()) ;
 #endif
 
         SSL_CTX_set_mode(global_generic_ssl_context,

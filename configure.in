@@ -347,6 +347,8 @@ AC_CHECK_FUNC(gethostbyname_r, [ AC_FUNC_WHICH_GETHOSTBYNAME_R ], [
     AC_MSG_ERROR([Couldnot find gethostbyname_r nor gethostbyname functions])])]
 )
 
+dnl Checking if we have new TLS_method() or the older TLSv12_method()
+AC_CHECK_FUNC(TLS_method, [AC_DEFINE(HAVE_TLS_METHOD)],[])
 
 dnl Macro to find out which pthread_setname_np variant can be used if any 
 dnl

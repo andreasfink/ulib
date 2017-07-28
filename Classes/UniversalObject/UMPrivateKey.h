@@ -9,5 +9,9 @@
 #import "UMObject.h"
 
 @interface UMPrivateKey : UMObject
-
+{
+    NSData *_pem_key;
+    void *_pkey; /* this is actually EVP_PKEY * but we dont want to require to
+                  include ssl headers on applications which use ulib */
+}
 @end

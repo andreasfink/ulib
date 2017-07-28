@@ -21,38 +21,7 @@ static int password_read_callback(char *buf, int size, int rwflag, void *u);
 
 - (UMPublicKey *)initWithFilename:(NSString *)filename
 {
-    return [self initWithFilename:filename password:NULL];
-}
-
-- (UMPublicKey *)initWithFilename:(NSString *)filename password:(NSString *)password
-{
-    self = [super init];
-    if(self)
-    {
-        FILE * fp = fopen(filename.UTF8String,"rb");
-        if(fp == NULL)
-        {
-            NSString *s = [NSString stringWithFormat:@"File '%s' can not be opened for reading. Error %d",filename.UTF8String,errno];
-            @throw([NSException exceptionWithName:@"FILE_READ_ERROR" reason:s userInfo:NULL]);
-        }
-
-        EVP_PKEY *_pkey2 = EVP_PKEY_new();
-        if(_pkey2 == NULL)
-        {
-            NSString *s = [NSString stringWithFormat:@"EVP_PKEY_new() returns NULL, Error=%ld",ERR_get_error()];
-            @throw([NSException exceptionWithName:@"MEMORY_ALLOC_FAIL" reason:s userInfo:NULL]);
-        }
-        if(password.length > 0)
-        {
-            _pkey = (void *)PEM_read_PrivateKey(fp, &_pkey2,password_read_callback,(void *)password.UTF8String);
-        }
-        else
-        {
-            _pkey = (void *)PEM_read_PrivateKey(fp, &_pkey2,NULL,NULL);
-        }
-        fclose(fp);
-    }
-    return self;
+    return [self initWithData:[NSData dataWithContentsOfFile:filename]];
 }
 
 
@@ -67,11 +36,6 @@ static int password_read_callback(char *buf, int size, int rwflag, void *u);
 
 
 - (UMPublicKey *)initWithData:(NSData *)data
-{
-    return [self initWithData:data password:NULL];
-}
-
-- (UMPublicKey *)initWithData:(NSData *)data  password:(NSString *)password
 {
     self = [super init];
     if(self)
@@ -89,11 +53,7 @@ static int password_read_callback(char *buf, int size, int rwflag, void *u);
             NSString *s = [NSString stringWithFormat:@"RSA_new() returns NULL, Error=%ld",ERR_get_error()];
             @throw([NSException exceptionWithName:@"MEMORY_ALLOC_FAIL" reason:s userInfo:NULL]);
         }
-        if(password.length > 0)
-        {
-            _pkey = (void *)PEM_read_bio_PrivateKey(bufio, &_pkey2,password_read_callback,(void *)password.UTF8String);
-        }
-        else
+        b2i_PublicKey(<#const unsigned char **in#>, <#long length#>)
         {
             _pkey = (void *)PEM_read_bio_PrivateKey(bufio, &_pkey2,NULL,NULL);
         }

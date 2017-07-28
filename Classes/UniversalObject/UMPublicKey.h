@@ -18,8 +18,6 @@
 
 - (UMPublicKey *)initWithFilename:(NSString *)filename;
 - (UMPublicKey *)initWithData:(NSData *)filename;
-- (UMPublicKey *)initWithFilename:(NSString *)filename password:(NSString *)password;
-- (UMPublicKey *)initWithData:(NSData *)filename  password:(NSString *)password;
 
 
 @end

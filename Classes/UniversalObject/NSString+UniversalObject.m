@@ -263,5 +263,36 @@ NSString *sqlEscapeNSString(NSString *input)
     return [a isEqualToString:b];
 }
 
+- (NSData *)sha1
+{
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    return [data sha1];
+}
+
+- (NSData *)sha224
+{
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    return [data sha224];
+}
+
+- (NSData *)sha256
+{
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    return [data sha256];
+}
+
+- (NSData *)sha384
+{
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    return [data sha384];
+}
+
+- (NSData *)sha512
+{
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    return [data sha512];
+}
+
+
 @end
 

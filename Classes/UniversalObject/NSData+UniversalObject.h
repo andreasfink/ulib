@@ -13,6 +13,12 @@
 - (NSData *) hex;           /*!< hex NSData representation of a NSData */
 - (unsigned long) crc;      /*!< calculate the CRC of a NSData */
 - (NSData *)unhexedData;    /*!< convert a NSData object of hex bytes into their binary version */
+- (NSData *)sha1;           /*!< calculates the sha1 hash of the data */
+- (NSData *)sha224;         /*!< calculates the sha224 hash of the data */
+- (NSData *)sha256;         /*!< calculates the sha256 hash of the data */
+- (NSData *)sha384;         /*!< calculates the sha384 hash of the data */
+- (NSData *)sha512;         /*!< calculates the sha512 hash of the data */
+
 @end
 
 @interface NSMutableData (UniversalObject)

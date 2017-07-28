@@ -12,6 +12,7 @@
 #endif
 #include <sys/types.h>
 #include <unistd.h>
+#include <openssl/sha.h>
 
 #import "stdint.h"
 
@@ -164,6 +165,43 @@ static inline int nibbleToInt(const char a)
 	return crcv;
 }
 
+-(NSData *)sha1
+{
+    unsigned char obuf[SHA_DIGEST_LENGTH];
+    SHA1(self.bytes, self.length, obuf);
+    return [NSData dataWithBytes:obuf length:SHA_DIGEST_LENGTH];
+}
+
+- (NSData *)sha224
+{
+    unsigned char obuf[SHA224_DIGEST_LENGTH];
+    SHA224(self.bytes, self.length, obuf);
+    return [NSData dataWithBytes:obuf length:SHA224_DIGEST_LENGTH];
+}
+
+
+- (NSData *)sha256
+{
+    unsigned char obuf[SHA256_DIGEST_LENGTH];
+    SHA256(self.bytes, self.length, obuf);
+    return [NSData dataWithBytes:obuf length:SHA256_DIGEST_LENGTH];
+}
+
+
+- (NSData *)sha384
+{
+    unsigned char obuf[SHA384_DIGEST_LENGTH];
+    SHA384(self.bytes, self.length, obuf);
+    return [NSData dataWithBytes:obuf length:SHA384_DIGEST_LENGTH];
+}
+
+
+- (NSData *)sha512
+{
+    unsigned char obuf[SHA512_DIGEST_LENGTH];
+    SHA512(self.bytes, self.length, obuf);
+    return [NSData dataWithBytes:obuf length:SHA512_DIGEST_LENGTH];
+}
 
 @end
 

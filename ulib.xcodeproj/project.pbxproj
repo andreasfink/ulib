@@ -1203,6 +1203,12 @@
 		A60214971D488AA000211137 /* libssl-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6AC485B1D4608FC002BAA97 /* libssl-tvOS.a */; };
 		A60214EC1D488DAD00211137 /* libcrypto-watchos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A60214EA1D488DAD00211137 /* libcrypto-watchos.a */; };
 		A60214ED1D488DAD00211137 /* libssl-watchos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A60214EB1D488DAD00211137 /* libssl-watchos.a */; };
+		A607CE031F2A9A46006A832B /* UMPublicKey.h in Headers */ = {isa = PBXBuildFile; fileRef = A607CE011F2A9A46006A832B /* UMPublicKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A607CE041F2A9A46006A832B /* UMPublicKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A607CE021F2A9A46006A832B /* UMPublicKey.m */; };
+		A607CE071F2A9A55006A832B /* UMPrivateKey.h in Headers */ = {isa = PBXBuildFile; fileRef = A607CE051F2A9A55006A832B /* UMPrivateKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A607CE081F2A9A55006A832B /* UMPrivateKey.m in Sources */ = {isa = PBXBuildFile; fileRef = A607CE061F2A9A55006A832B /* UMPrivateKey.m */; };
+		A607CE0B1F2A9A60006A832B /* UMKeypair.h in Headers */ = {isa = PBXBuildFile; fileRef = A607CE091F2A9A60006A832B /* UMKeypair.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A607CE0C1F2A9A60006A832B /* UMKeypair.m in Sources */ = {isa = PBXBuildFile; fileRef = A607CE0A1F2A9A60006A832B /* UMKeypair.m */; };
 		A60C2D6D1A3F20E90090FC94 /* ulib.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A143F5149B4F5000B007D0 /* ulib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C2D6F1A3F20ED0090FC94 /* ulib.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DB3E6F191E40770090FC94 /* ulib.m */; };
 		A60C2D711A3F20F00090FC94 /* UMAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = A6538C74189B9A8C00B25A07 /* UMAssert.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2416,6 +2422,12 @@
 		A603429C1EA9B4E700706C21 /* UniversalPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalPlugin.h; sourceTree = "<group>"; };
 		A60342A01EA9B6C900706C21 /* UMPluginHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMPluginHandler.h; sourceTree = "<group>"; };
 		A60342A11EA9B6C900706C21 /* UMPluginHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMPluginHandler.m; sourceTree = "<group>"; };
+		A607CE011F2A9A46006A832B /* UMPublicKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMPublicKey.h; sourceTree = "<group>"; };
+		A607CE021F2A9A46006A832B /* UMPublicKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMPublicKey.m; sourceTree = "<group>"; };
+		A607CE051F2A9A55006A832B /* UMPrivateKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMPrivateKey.h; sourceTree = "<group>"; };
+		A607CE061F2A9A55006A832B /* UMPrivateKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMPrivateKey.m; sourceTree = "<group>"; };
+		A607CE091F2A9A60006A832B /* UMKeypair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMKeypair.h; sourceTree = "<group>"; };
+		A607CE0A1F2A9A60006A832B /* UMKeypair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMKeypair.m; sourceTree = "<group>"; };
 		A60C4E241EF7FE59007C203A /* ulib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ulib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A60C4E251EF7FE59007C203A /* ulibios copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ulibios copy-Info.plist"; path = "/Users/afink/development/git/ulib/ulibios copy-Info.plist"; sourceTree = "<absolute>"; };
 		A610866B163530F700D0D9C6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -3601,6 +3613,12 @@
 				A6D8AC4A149A95E20029E9CF /* NSData+UniversalObject.m */,
 				A6C173D01AB835640090FC94 /* NSDate+stringFunctions.h */,
 				A6C173D11AB835640090FC94 /* NSDate+stringFunctions.m */,
+				A607CE011F2A9A46006A832B /* UMPublicKey.h */,
+				A607CE021F2A9A46006A832B /* UMPublicKey.m */,
+				A607CE051F2A9A55006A832B /* UMPrivateKey.h */,
+				A607CE061F2A9A55006A832B /* UMPrivateKey.m */,
+				A607CE091F2A9A60006A832B /* UMKeypair.h */,
+				A607CE0A1F2A9A60006A832B /* UMKeypair.m */,
 				A6CC4BA31A3F25450090FC94 /* NSDictionary+HierarchicalDescription.h */,
 				A6D8ABD8149A94920029E9CF /* NSDictionary+HierarchicalDescription.m */,
 				A6CC4BA41A3F25450090FC94 /* NSNumber+HierarchicalDescription.h */,
@@ -4884,6 +4902,7 @@
 				A60C4D9B1EF7FE59007C203A /* UMIntegerWithHistory.h in Headers */,
 				A60C4D9C1EF7FE59007C203A /* UMPKI.h in Headers */,
 				A60C4D9D1EF7FE59007C203A /* UMBackgrounder.h in Headers */,
+				A607CE0B1F2A9A60006A832B /* UMKeypair.h in Headers */,
 				A60C4D9E1EF7FE59007C203A /* UMDataWithHistory.h in Headers */,
 				A60C4D9F1EF7FE59007C203A /* ui.h in Headers */,
 				A60C4DA01EF7FE59007C203A /* UMTaskQueueMulti.h in Headers */,
@@ -4905,6 +4924,7 @@
 				A60C4DB01EF7FE59007C203A /* e_os2.h in Headers */,
 				A60C4DB11EF7FE59007C203A /* srp.h in Headers */,
 				A60C4DB21EF7FE59007C203A /* UMUUID.h in Headers */,
+				A607CE071F2A9A55006A832B /* UMPrivateKey.h in Headers */,
 				A60C4DB31EF7FE59007C203A /* mdc2.h in Headers */,
 				A60C4DB41EF7FE59007C203A /* cms.h in Headers */,
 				A60C4DB51EF7FE59007C203A /* UMLockEvent.h in Headers */,
@@ -5011,6 +5031,7 @@
 				A60C4E161EF7FE59007C203A /* ecdh.h in Headers */,
 				A60C4E171EF7FE59007C203A /* rsa.h in Headers */,
 				A60C4E181EF7FE59007C203A /* NSString+UMJson.h in Headers */,
+				A607CE031F2A9A46006A832B /* UMPublicKey.h in Headers */,
 				A60C4E191EF7FE59007C203A /* UMFileTrackingMacros.h in Headers */,
 				A60C4E1A1EF7FE59007C203A /* pkcs12.h in Headers */,
 				A60C4E1B1EF7FE59007C203A /* UMQueueNull.h in Headers */,
@@ -5881,6 +5902,8 @@
 				A60C4C971EF7FE59007C203A /* UMHistoryLog.m in Sources */,
 				A60C4C981EF7FE59007C203A /* UMHTTPCookie.m in Sources */,
 				A60C4C991EF7FE59007C203A /* UMIntegerWithHistory.m in Sources */,
+				A607CE041F2A9A46006A832B /* UMPublicKey.m in Sources */,
+				A607CE0C1F2A9A60006A832B /* UMKeypair.m in Sources */,
 				A60C4C9A1EF7FE59007C203A /* UMHistoryLogEntry.m in Sources */,
 				A60C4C9C1EF7FE59007C203A /* UMScanner.m in Sources */,
 				A60C4C9D1EF7FE59007C203A /* UMBackgrounderWithQueue.m in Sources */,
@@ -5931,6 +5954,7 @@
 				A60C4CC61EF7FE59007C203A /* NSDictionary+UMJson.m in Sources */,
 				A60C4CC71EF7FE59007C203A /* NSString+HierarchicalDescription.m in Sources */,
 				A60C4CC81EF7FE59007C203A /* UMDoubleWithHistory.m in Sources */,
+				A607CE081F2A9A55006A832B /* UMPrivateKey.m in Sources */,
 				A60C4CC91EF7FE59007C203A /* NSData+UniversalObject.m in Sources */,
 				A60C4CCA1EF7FE59007C203A /* NSString+UniversalObject.m in Sources */,
 				A60C4CCB1EF7FE59007C203A /* NSString+UMHTTP.m in Sources */,

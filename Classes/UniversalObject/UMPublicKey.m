@@ -53,7 +53,7 @@ static int password_read_callback(char *buf, int size, int rwflag, void *u);
             NSString *s = [NSString stringWithFormat:@"RSA_new() returns NULL, Error=%ld",ERR_get_error()];
             @throw([NSException exceptionWithName:@"MEMORY_ALLOC_FAIL" reason:s userInfo:NULL]);
         }
-        b2i_PublicKey(<#const unsigned char **in#>, <#long length#>)
+// what about?        b2i_PublicKey(<#const unsigned char **in#>, <#long length#>)
         {
             _pkey = (void *)PEM_read_bio_PrivateKey(bufio, &_pkey2,NULL,NULL);
         }

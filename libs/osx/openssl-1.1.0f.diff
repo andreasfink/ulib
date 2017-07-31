@@ -1,0 +1,7 @@
+openssl-1.1.0f/crypto/bio/bss_dgram.c
+24,25c24
+< #  include <netinet/sctp.h>
+---
+> #  include "/Library/Frameworks/sctp.framework/Versions/A/Headers/sctp.h"
+> # define MSG_NOTIFICATION 0x80000 /* yosemite and up */
+

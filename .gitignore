@@ -12,7 +12,7 @@ config.status
 stamp-h1
 autom4te.cache
 Classes/ulib_config.h
-
+/libs/osx/openssl-1.1.0f/
 
 #########################
 # .gitignore file for Xcode4 and Xcode5 Source projects

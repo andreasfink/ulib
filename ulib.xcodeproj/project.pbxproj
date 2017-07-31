@@ -1682,8 +1682,6 @@
 		A60C4E1D1EF7FE59007C203A /* UMFileTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = A695A3F81AF62AD100854472 /* UMFileTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4E1E1EF7FE59007C203A /* UMLayerUserProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A61F7D551A2CB4F70090FC94 /* UMLayerUserProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4E201EF7FE59007C203A /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = A6019BAB1AC15C0D00854472 /* VERSION */; };
-		A60C4E261EF7FED4007C203A /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A63B00811D0050A500211137 /* libcrypto.a */; };
-		A60C4E271EF7FED4007C203A /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A63B00821D0050A500211137 /* libssl.a */; };
 		A60C4E281EF80024007C203A /* UMHTTPTask_ProcessRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AE665F1E51980E005F3617 /* UMHTTPTask_ProcessRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4E291EF80029007C203A /* UMHTTPTask_ProcessRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AE665F1E51980E005F3617 /* UMHTTPTask_ProcessRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4E2A1EF80029007C203A /* UMHTTPTask_ProcessRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6AE665F1E51980E005F3617 /* UMHTTPTask_ProcessRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1749,8 +1747,6 @@
 		A62A7E2C18AAD20D00EA8A2A /* UMHTTPPageRef.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A7E2718AAD20D00EA8A2A /* UMHTTPPageRef.m */; };
 		A62A7E3118AAD6AD00EA8A2A /* UMHTTPPageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = A62A7E2E18AAD6AD00EA8A2A /* UMHTTPPageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62A7E3418AAD6AD00EA8A2A /* UMHTTPPageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A7E2F18AAD6AD00EA8A2A /* UMHTTPPageCache.m */; };
-		A63B00851D0050A500211137 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A63B00811D0050A500211137 /* libcrypto.a */; };
-		A63B00881D0050A500211137 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A63B00821D0050A500211137 /* libssl.a */; };
 		A6419BA61A2DE3740090FC94 /* UMTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BA11A2DE3740090FC94 /* UMTimer.m */; };
 		A6419BA71A2DE3740090FC94 /* UMTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BA11A2DE3740090FC94 /* UMTimer.m */; };
 		A6419BAF1A2DE8040090FC94 /* UMTimerBackgrounder.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BAA1A2DE8040090FC94 /* UMTimerBackgrounder.m */; };
@@ -1758,6 +1754,156 @@
 		A6419BB81A2DF2FD0090FC94 /* UMMicroSec.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */; };
 		A6419BB91A2DF2FD0090FC94 /* UMMicroSec.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */; };
 		A657274C1B1869AA00854472 /* UMSynchronizedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A65727461B1869AA00854472 /* UMSynchronizedDictionary.m */; };
+		A663A5021F2F16D000A3A0AA /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A663A5001F2F16D000A3A0AA /* libcrypto.a */; };
+		A663A5031F2F16D000A3A0AA /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A663A5001F2F16D000A3A0AA /* libcrypto.a */; };
+		A663A5041F2F16D000A3A0AA /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A663A5011F2F16D000A3A0AA /* libssl.a */; };
+		A663A5051F2F16D000A3A0AA /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A663A5011F2F16D000A3A0AA /* libssl.a */; };
+		A663A5501F2F18F600A3A0AA /* aes.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5071F2F18F600A3A0AA /* aes.h */; };
+		A663A5511F2F18F600A3A0AA /* aes.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5071F2F18F600A3A0AA /* aes.h */; };
+		A663A5521F2F18F600A3A0AA /* asn1.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5081F2F18F600A3A0AA /* asn1.h */; };
+		A663A5531F2F18F600A3A0AA /* asn1.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5081F2F18F600A3A0AA /* asn1.h */; };
+		A663A5541F2F18F600A3A0AA /* asn1_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5091F2F18F600A3A0AA /* asn1_mac.h */; };
+		A663A5551F2F18F600A3A0AA /* asn1_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5091F2F18F600A3A0AA /* asn1_mac.h */; };
+		A663A5561F2F18F600A3A0AA /* asn1t.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A50A1F2F18F600A3A0AA /* asn1t.h */; };
+		A663A5571F2F18F600A3A0AA /* asn1t.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A50A1F2F18F600A3A0AA /* asn1t.h */; };
+		A663A5581F2F18F600A3A0AA /* async.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A50B1F2F18F600A3A0AA /* async.h */; };
+		A663A5591F2F18F600A3A0AA /* async.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A50B1F2F18F600A3A0AA /* async.h */; };
+		A663A55A1F2F18F600A3A0AA /* bio.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A50C1F2F18F600A3A0AA /* bio.h */; };
+		A663A55B1F2F18F600A3A0AA /* bio.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A50C1F2F18F600A3A0AA /* bio.h */; };
+		A663A55C1F2F18F600A3A0AA /* blowfish.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A50D1F2F18F600A3A0AA /* blowfish.h */; };
+		A663A55D1F2F18F600A3A0AA /* blowfish.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A50D1F2F18F600A3A0AA /* blowfish.h */; };
+		A663A55E1F2F18F600A3A0AA /* bn.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A50E1F2F18F600A3A0AA /* bn.h */; };
+		A663A55F1F2F18F600A3A0AA /* bn.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A50E1F2F18F600A3A0AA /* bn.h */; };
+		A663A5601F2F18F600A3A0AA /* buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A50F1F2F18F600A3A0AA /* buffer.h */; };
+		A663A5611F2F18F600A3A0AA /* buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A50F1F2F18F600A3A0AA /* buffer.h */; };
+		A663A5621F2F18F600A3A0AA /* camellia.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5101F2F18F600A3A0AA /* camellia.h */; };
+		A663A5631F2F18F600A3A0AA /* camellia.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5101F2F18F600A3A0AA /* camellia.h */; };
+		A663A5641F2F18F600A3A0AA /* cast.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5111F2F18F600A3A0AA /* cast.h */; };
+		A663A5651F2F18F600A3A0AA /* cast.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5111F2F18F600A3A0AA /* cast.h */; };
+		A663A5661F2F18F600A3A0AA /* cmac.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5121F2F18F600A3A0AA /* cmac.h */; };
+		A663A5671F2F18F600A3A0AA /* cmac.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5121F2F18F600A3A0AA /* cmac.h */; };
+		A663A5681F2F18F600A3A0AA /* cms.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5131F2F18F600A3A0AA /* cms.h */; };
+		A663A5691F2F18F600A3A0AA /* cms.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5131F2F18F600A3A0AA /* cms.h */; };
+		A663A56A1F2F18F600A3A0AA /* comp.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5141F2F18F600A3A0AA /* comp.h */; };
+		A663A56B1F2F18F600A3A0AA /* comp.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5141F2F18F600A3A0AA /* comp.h */; };
+		A663A56C1F2F18F600A3A0AA /* conf.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5151F2F18F600A3A0AA /* conf.h */; };
+		A663A56D1F2F18F600A3A0AA /* conf.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5151F2F18F600A3A0AA /* conf.h */; };
+		A663A56E1F2F18F600A3A0AA /* conf_api.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5161F2F18F600A3A0AA /* conf_api.h */; };
+		A663A56F1F2F18F600A3A0AA /* conf_api.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5161F2F18F600A3A0AA /* conf_api.h */; };
+		A663A5701F2F18F600A3A0AA /* crypto.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5171F2F18F600A3A0AA /* crypto.h */; };
+		A663A5711F2F18F600A3A0AA /* crypto.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5171F2F18F600A3A0AA /* crypto.h */; };
+		A663A5721F2F18F600A3A0AA /* ct.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5181F2F18F600A3A0AA /* ct.h */; };
+		A663A5731F2F18F600A3A0AA /* ct.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5181F2F18F600A3A0AA /* ct.h */; };
+		A663A5741F2F18F600A3A0AA /* des.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5191F2F18F600A3A0AA /* des.h */; };
+		A663A5751F2F18F600A3A0AA /* des.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5191F2F18F600A3A0AA /* des.h */; };
+		A663A5761F2F18F600A3A0AA /* dh.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A51A1F2F18F600A3A0AA /* dh.h */; };
+		A663A5771F2F18F600A3A0AA /* dh.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A51A1F2F18F600A3A0AA /* dh.h */; };
+		A663A5781F2F18F600A3A0AA /* dsa.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A51B1F2F18F600A3A0AA /* dsa.h */; };
+		A663A5791F2F18F600A3A0AA /* dsa.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A51B1F2F18F600A3A0AA /* dsa.h */; };
+		A663A57A1F2F18F600A3A0AA /* dtls1.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A51C1F2F18F600A3A0AA /* dtls1.h */; };
+		A663A57B1F2F18F600A3A0AA /* dtls1.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A51C1F2F18F600A3A0AA /* dtls1.h */; };
+		A663A57C1F2F18F600A3A0AA /* e_os2.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A51D1F2F18F600A3A0AA /* e_os2.h */; };
+		A663A57D1F2F18F600A3A0AA /* e_os2.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A51D1F2F18F600A3A0AA /* e_os2.h */; };
+		A663A57E1F2F18F600A3A0AA /* ebcdic.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A51E1F2F18F600A3A0AA /* ebcdic.h */; };
+		A663A57F1F2F18F600A3A0AA /* ebcdic.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A51E1F2F18F600A3A0AA /* ebcdic.h */; };
+		A663A5801F2F18F600A3A0AA /* ec.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A51F1F2F18F600A3A0AA /* ec.h */; };
+		A663A5811F2F18F600A3A0AA /* ec.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A51F1F2F18F600A3A0AA /* ec.h */; };
+		A663A5821F2F18F600A3A0AA /* ecdh.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5201F2F18F600A3A0AA /* ecdh.h */; };
+		A663A5831F2F18F600A3A0AA /* ecdh.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5201F2F18F600A3A0AA /* ecdh.h */; };
+		A663A5841F2F18F600A3A0AA /* ecdsa.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5211F2F18F600A3A0AA /* ecdsa.h */; };
+		A663A5851F2F18F600A3A0AA /* ecdsa.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5211F2F18F600A3A0AA /* ecdsa.h */; };
+		A663A5861F2F18F600A3A0AA /* engine.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5221F2F18F600A3A0AA /* engine.h */; };
+		A663A5871F2F18F600A3A0AA /* engine.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5221F2F18F600A3A0AA /* engine.h */; };
+		A663A5881F2F18F600A3A0AA /* err.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5231F2F18F600A3A0AA /* err.h */; };
+		A663A5891F2F18F600A3A0AA /* err.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5231F2F18F600A3A0AA /* err.h */; };
+		A663A58A1F2F18F600A3A0AA /* evp.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5241F2F18F600A3A0AA /* evp.h */; };
+		A663A58B1F2F18F600A3A0AA /* evp.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5241F2F18F600A3A0AA /* evp.h */; };
+		A663A58C1F2F18F600A3A0AA /* hmac.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5251F2F18F600A3A0AA /* hmac.h */; };
+		A663A58D1F2F18F600A3A0AA /* hmac.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5251F2F18F600A3A0AA /* hmac.h */; };
+		A663A58E1F2F18F600A3A0AA /* idea.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5261F2F18F600A3A0AA /* idea.h */; };
+		A663A58F1F2F18F600A3A0AA /* idea.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5261F2F18F600A3A0AA /* idea.h */; };
+		A663A5901F2F18F600A3A0AA /* kdf.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5271F2F18F600A3A0AA /* kdf.h */; };
+		A663A5911F2F18F600A3A0AA /* kdf.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5271F2F18F600A3A0AA /* kdf.h */; };
+		A663A5921F2F18F600A3A0AA /* lhash.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5281F2F18F600A3A0AA /* lhash.h */; };
+		A663A5931F2F18F600A3A0AA /* lhash.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5281F2F18F600A3A0AA /* lhash.h */; };
+		A663A5941F2F18F600A3A0AA /* md2.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5291F2F18F600A3A0AA /* md2.h */; };
+		A663A5951F2F18F600A3A0AA /* md2.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5291F2F18F600A3A0AA /* md2.h */; };
+		A663A5961F2F18F600A3A0AA /* md4.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A52A1F2F18F600A3A0AA /* md4.h */; };
+		A663A5971F2F18F600A3A0AA /* md4.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A52A1F2F18F600A3A0AA /* md4.h */; };
+		A663A5981F2F18F600A3A0AA /* md5.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A52B1F2F18F600A3A0AA /* md5.h */; };
+		A663A5991F2F18F600A3A0AA /* md5.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A52B1F2F18F600A3A0AA /* md5.h */; };
+		A663A59A1F2F18F600A3A0AA /* mdc2.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A52C1F2F18F600A3A0AA /* mdc2.h */; };
+		A663A59B1F2F18F600A3A0AA /* mdc2.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A52C1F2F18F600A3A0AA /* mdc2.h */; };
+		A663A59C1F2F18F600A3A0AA /* modes.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A52D1F2F18F600A3A0AA /* modes.h */; };
+		A663A59D1F2F18F600A3A0AA /* modes.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A52D1F2F18F600A3A0AA /* modes.h */; };
+		A663A59E1F2F18F600A3A0AA /* obj_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A52E1F2F18F600A3A0AA /* obj_mac.h */; };
+		A663A59F1F2F18F600A3A0AA /* obj_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A52E1F2F18F600A3A0AA /* obj_mac.h */; };
+		A663A5A01F2F18F600A3A0AA /* objects.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A52F1F2F18F600A3A0AA /* objects.h */; };
+		A663A5A11F2F18F600A3A0AA /* objects.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A52F1F2F18F600A3A0AA /* objects.h */; };
+		A663A5A21F2F18F600A3A0AA /* ocsp.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5301F2F18F600A3A0AA /* ocsp.h */; };
+		A663A5A31F2F18F600A3A0AA /* ocsp.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5301F2F18F600A3A0AA /* ocsp.h */; };
+		A663A5A41F2F18F600A3A0AA /* opensslconf.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5311F2F18F600A3A0AA /* opensslconf.h */; };
+		A663A5A51F2F18F600A3A0AA /* opensslconf.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5311F2F18F600A3A0AA /* opensslconf.h */; };
+		A663A5A61F2F18F600A3A0AA /* opensslv.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5321F2F18F600A3A0AA /* opensslv.h */; };
+		A663A5A71F2F18F600A3A0AA /* opensslv.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5321F2F18F600A3A0AA /* opensslv.h */; };
+		A663A5A81F2F18F600A3A0AA /* ossl_typ.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5331F2F18F600A3A0AA /* ossl_typ.h */; };
+		A663A5A91F2F18F600A3A0AA /* ossl_typ.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5331F2F18F600A3A0AA /* ossl_typ.h */; };
+		A663A5AA1F2F18F600A3A0AA /* pem.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5341F2F18F600A3A0AA /* pem.h */; };
+		A663A5AB1F2F18F600A3A0AA /* pem.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5341F2F18F600A3A0AA /* pem.h */; };
+		A663A5AC1F2F18F600A3A0AA /* pem2.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5351F2F18F600A3A0AA /* pem2.h */; };
+		A663A5AD1F2F18F600A3A0AA /* pem2.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5351F2F18F600A3A0AA /* pem2.h */; };
+		A663A5AE1F2F18F600A3A0AA /* pkcs12.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5361F2F18F600A3A0AA /* pkcs12.h */; };
+		A663A5AF1F2F18F600A3A0AA /* pkcs12.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5361F2F18F600A3A0AA /* pkcs12.h */; };
+		A663A5B01F2F18F600A3A0AA /* pkcs7.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5371F2F18F600A3A0AA /* pkcs7.h */; };
+		A663A5B11F2F18F600A3A0AA /* pkcs7.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5371F2F18F600A3A0AA /* pkcs7.h */; };
+		A663A5B21F2F18F600A3A0AA /* rand.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5381F2F18F600A3A0AA /* rand.h */; };
+		A663A5B31F2F18F600A3A0AA /* rand.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5381F2F18F600A3A0AA /* rand.h */; };
+		A663A5B41F2F18F600A3A0AA /* rc2.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5391F2F18F600A3A0AA /* rc2.h */; };
+		A663A5B51F2F18F600A3A0AA /* rc2.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5391F2F18F600A3A0AA /* rc2.h */; };
+		A663A5B61F2F18F600A3A0AA /* rc4.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A53A1F2F18F600A3A0AA /* rc4.h */; };
+		A663A5B71F2F18F600A3A0AA /* rc4.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A53A1F2F18F600A3A0AA /* rc4.h */; };
+		A663A5B81F2F18F600A3A0AA /* rc5.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A53B1F2F18F600A3A0AA /* rc5.h */; };
+		A663A5B91F2F18F600A3A0AA /* rc5.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A53B1F2F18F600A3A0AA /* rc5.h */; };
+		A663A5BA1F2F18F600A3A0AA /* ripemd.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A53C1F2F18F600A3A0AA /* ripemd.h */; };
+		A663A5BB1F2F18F600A3A0AA /* ripemd.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A53C1F2F18F600A3A0AA /* ripemd.h */; };
+		A663A5BC1F2F18F600A3A0AA /* rsa.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A53D1F2F18F600A3A0AA /* rsa.h */; };
+		A663A5BD1F2F18F600A3A0AA /* rsa.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A53D1F2F18F600A3A0AA /* rsa.h */; };
+		A663A5BE1F2F18F600A3A0AA /* safestack.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A53E1F2F18F600A3A0AA /* safestack.h */; };
+		A663A5BF1F2F18F600A3A0AA /* safestack.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A53E1F2F18F600A3A0AA /* safestack.h */; };
+		A663A5C01F2F18F600A3A0AA /* seed.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A53F1F2F18F600A3A0AA /* seed.h */; };
+		A663A5C11F2F18F600A3A0AA /* seed.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A53F1F2F18F600A3A0AA /* seed.h */; };
+		A663A5C21F2F18F600A3A0AA /* sha.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5401F2F18F600A3A0AA /* sha.h */; };
+		A663A5C31F2F18F600A3A0AA /* sha.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5401F2F18F600A3A0AA /* sha.h */; };
+		A663A5C41F2F18F600A3A0AA /* srp.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5411F2F18F600A3A0AA /* srp.h */; };
+		A663A5C51F2F18F600A3A0AA /* srp.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5411F2F18F600A3A0AA /* srp.h */; };
+		A663A5C61F2F18F600A3A0AA /* srtp.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5421F2F18F600A3A0AA /* srtp.h */; };
+		A663A5C71F2F18F600A3A0AA /* srtp.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5421F2F18F600A3A0AA /* srtp.h */; };
+		A663A5C81F2F18F600A3A0AA /* ssl.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5431F2F18F600A3A0AA /* ssl.h */; };
+		A663A5C91F2F18F600A3A0AA /* ssl.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5431F2F18F600A3A0AA /* ssl.h */; };
+		A663A5CA1F2F18F600A3A0AA /* ssl2.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5441F2F18F600A3A0AA /* ssl2.h */; };
+		A663A5CB1F2F18F600A3A0AA /* ssl2.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5441F2F18F600A3A0AA /* ssl2.h */; };
+		A663A5CC1F2F18F600A3A0AA /* ssl3.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5451F2F18F600A3A0AA /* ssl3.h */; };
+		A663A5CD1F2F18F600A3A0AA /* ssl3.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5451F2F18F600A3A0AA /* ssl3.h */; };
+		A663A5CE1F2F18F600A3A0AA /* stack.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5461F2F18F600A3A0AA /* stack.h */; };
+		A663A5CF1F2F18F600A3A0AA /* stack.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5461F2F18F600A3A0AA /* stack.h */; };
+		A663A5D01F2F18F600A3A0AA /* symhacks.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5471F2F18F600A3A0AA /* symhacks.h */; };
+		A663A5D11F2F18F600A3A0AA /* symhacks.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5471F2F18F600A3A0AA /* symhacks.h */; };
+		A663A5D21F2F18F600A3A0AA /* tls1.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5481F2F18F600A3A0AA /* tls1.h */; };
+		A663A5D31F2F18F600A3A0AA /* tls1.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5481F2F18F600A3A0AA /* tls1.h */; };
+		A663A5D41F2F18F600A3A0AA /* ts.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5491F2F18F600A3A0AA /* ts.h */; };
+		A663A5D51F2F18F600A3A0AA /* ts.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A5491F2F18F600A3A0AA /* ts.h */; };
+		A663A5D61F2F18F600A3A0AA /* txt_db.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A54A1F2F18F600A3A0AA /* txt_db.h */; };
+		A663A5D71F2F18F600A3A0AA /* txt_db.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A54A1F2F18F600A3A0AA /* txt_db.h */; };
+		A663A5D81F2F18F600A3A0AA /* ui.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A54B1F2F18F600A3A0AA /* ui.h */; };
+		A663A5D91F2F18F600A3A0AA /* ui.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A54B1F2F18F600A3A0AA /* ui.h */; };
+		A663A5DA1F2F18F600A3A0AA /* whrlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A54C1F2F18F600A3A0AA /* whrlpool.h */; };
+		A663A5DB1F2F18F600A3A0AA /* whrlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A54C1F2F18F600A3A0AA /* whrlpool.h */; };
+		A663A5DC1F2F18F600A3A0AA /* x509.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A54D1F2F18F600A3A0AA /* x509.h */; };
+		A663A5DD1F2F18F600A3A0AA /* x509.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A54D1F2F18F600A3A0AA /* x509.h */; };
+		A663A5DE1F2F18F600A3A0AA /* x509_vfy.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A54E1F2F18F600A3A0AA /* x509_vfy.h */; };
+		A663A5DF1F2F18F600A3A0AA /* x509_vfy.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A54E1F2F18F600A3A0AA /* x509_vfy.h */; };
+		A663A5E01F2F18F600A3A0AA /* x509v3.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A54F1F2F18F600A3A0AA /* x509v3.h */; };
+		A663A5E11F2F18F600A3A0AA /* x509v3.h in Headers */ = {isa = PBXBuildFile; fileRef = A663A54F1F2F18F600A3A0AA /* x509v3.h */; };
 		A666EED91E89BB17004804CB /* UMCommandActionProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A666EEC31E89BB17004804CB /* UMCommandActionProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A666EEDA1E89BB17004804CB /* UMCommandActionProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A666EEC31E89BB17004804CB /* UMCommandActionProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A666EEDB1E89BB17004804CB /* UMCommandActionProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A666EEC31E89BB17004804CB /* UMCommandActionProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2461,6 +2607,81 @@
 		A6538C74189B9A8C00B25A07 /* UMAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMAssert.h; sourceTree = "<group>"; };
 		A65727451B1869AA00854472 /* UMSynchronizedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSynchronizedDictionary.h; sourceTree = "<group>"; };
 		A65727461B1869AA00854472 /* UMSynchronizedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSynchronizedDictionary.m; sourceTree = "<group>"; };
+		A663A5001F2F16D000A3A0AA /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		A663A5011F2F16D000A3A0AA /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		A663A5071F2F18F600A3A0AA /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
+		A663A5081F2F18F600A3A0AA /* asn1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn1.h; sourceTree = "<group>"; };
+		A663A5091F2F18F600A3A0AA /* asn1_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn1_mac.h; sourceTree = "<group>"; };
+		A663A50A1F2F18F600A3A0AA /* asn1t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn1t.h; sourceTree = "<group>"; };
+		A663A50B1F2F18F600A3A0AA /* async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = async.h; sourceTree = "<group>"; };
+		A663A50C1F2F18F600A3A0AA /* bio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bio.h; sourceTree = "<group>"; };
+		A663A50D1F2F18F600A3A0AA /* blowfish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blowfish.h; sourceTree = "<group>"; };
+		A663A50E1F2F18F600A3A0AA /* bn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bn.h; sourceTree = "<group>"; };
+		A663A50F1F2F18F600A3A0AA /* buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buffer.h; sourceTree = "<group>"; };
+		A663A5101F2F18F600A3A0AA /* camellia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camellia.h; sourceTree = "<group>"; };
+		A663A5111F2F18F600A3A0AA /* cast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cast.h; sourceTree = "<group>"; };
+		A663A5121F2F18F600A3A0AA /* cmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cmac.h; sourceTree = "<group>"; };
+		A663A5131F2F18F600A3A0AA /* cms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cms.h; sourceTree = "<group>"; };
+		A663A5141F2F18F600A3A0AA /* comp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = comp.h; sourceTree = "<group>"; };
+		A663A5151F2F18F600A3A0AA /* conf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conf.h; sourceTree = "<group>"; };
+		A663A5161F2F18F600A3A0AA /* conf_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conf_api.h; sourceTree = "<group>"; };
+		A663A5171F2F18F600A3A0AA /* crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypto.h; sourceTree = "<group>"; };
+		A663A5181F2F18F600A3A0AA /* ct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ct.h; sourceTree = "<group>"; };
+		A663A5191F2F18F600A3A0AA /* des.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = des.h; sourceTree = "<group>"; };
+		A663A51A1F2F18F600A3A0AA /* dh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dh.h; sourceTree = "<group>"; };
+		A663A51B1F2F18F600A3A0AA /* dsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dsa.h; sourceTree = "<group>"; };
+		A663A51C1F2F18F600A3A0AA /* dtls1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dtls1.h; sourceTree = "<group>"; };
+		A663A51D1F2F18F600A3A0AA /* e_os2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e_os2.h; sourceTree = "<group>"; };
+		A663A51E1F2F18F600A3A0AA /* ebcdic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ebcdic.h; sourceTree = "<group>"; };
+		A663A51F1F2F18F600A3A0AA /* ec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ec.h; sourceTree = "<group>"; };
+		A663A5201F2F18F600A3A0AA /* ecdh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ecdh.h; sourceTree = "<group>"; };
+		A663A5211F2F18F600A3A0AA /* ecdsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ecdsa.h; sourceTree = "<group>"; };
+		A663A5221F2F18F600A3A0AA /* engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = engine.h; sourceTree = "<group>"; };
+		A663A5231F2F18F600A3A0AA /* err.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = err.h; sourceTree = "<group>"; };
+		A663A5241F2F18F600A3A0AA /* evp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = evp.h; sourceTree = "<group>"; };
+		A663A5251F2F18F600A3A0AA /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmac.h; sourceTree = "<group>"; };
+		A663A5261F2F18F600A3A0AA /* idea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = idea.h; sourceTree = "<group>"; };
+		A663A5271F2F18F600A3A0AA /* kdf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kdf.h; sourceTree = "<group>"; };
+		A663A5281F2F18F600A3A0AA /* lhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lhash.h; sourceTree = "<group>"; };
+		A663A5291F2F18F600A3A0AA /* md2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md2.h; sourceTree = "<group>"; };
+		A663A52A1F2F18F600A3A0AA /* md4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md4.h; sourceTree = "<group>"; };
+		A663A52B1F2F18F600A3A0AA /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		A663A52C1F2F18F600A3A0AA /* mdc2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mdc2.h; sourceTree = "<group>"; };
+		A663A52D1F2F18F600A3A0AA /* modes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = modes.h; sourceTree = "<group>"; };
+		A663A52E1F2F18F600A3A0AA /* obj_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = obj_mac.h; sourceTree = "<group>"; };
+		A663A52F1F2F18F600A3A0AA /* objects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objects.h; sourceTree = "<group>"; };
+		A663A5301F2F18F600A3A0AA /* ocsp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ocsp.h; sourceTree = "<group>"; };
+		A663A5311F2F18F600A3A0AA /* opensslconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslconf.h; sourceTree = "<group>"; };
+		A663A5321F2F18F600A3A0AA /* opensslv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslv.h; sourceTree = "<group>"; };
+		A663A5331F2F18F600A3A0AA /* ossl_typ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ossl_typ.h; sourceTree = "<group>"; };
+		A663A5341F2F18F600A3A0AA /* pem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pem.h; sourceTree = "<group>"; };
+		A663A5351F2F18F600A3A0AA /* pem2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pem2.h; sourceTree = "<group>"; };
+		A663A5361F2F18F600A3A0AA /* pkcs12.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pkcs12.h; sourceTree = "<group>"; };
+		A663A5371F2F18F600A3A0AA /* pkcs7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pkcs7.h; sourceTree = "<group>"; };
+		A663A5381F2F18F600A3A0AA /* rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rand.h; sourceTree = "<group>"; };
+		A663A5391F2F18F600A3A0AA /* rc2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rc2.h; sourceTree = "<group>"; };
+		A663A53A1F2F18F600A3A0AA /* rc4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rc4.h; sourceTree = "<group>"; };
+		A663A53B1F2F18F600A3A0AA /* rc5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rc5.h; sourceTree = "<group>"; };
+		A663A53C1F2F18F600A3A0AA /* ripemd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ripemd.h; sourceTree = "<group>"; };
+		A663A53D1F2F18F600A3A0AA /* rsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rsa.h; sourceTree = "<group>"; };
+		A663A53E1F2F18F600A3A0AA /* safestack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = safestack.h; sourceTree = "<group>"; };
+		A663A53F1F2F18F600A3A0AA /* seed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = seed.h; sourceTree = "<group>"; };
+		A663A5401F2F18F600A3A0AA /* sha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha.h; sourceTree = "<group>"; };
+		A663A5411F2F18F600A3A0AA /* srp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = srp.h; sourceTree = "<group>"; };
+		A663A5421F2F18F600A3A0AA /* srtp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = srtp.h; sourceTree = "<group>"; };
+		A663A5431F2F18F600A3A0AA /* ssl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssl.h; sourceTree = "<group>"; };
+		A663A5441F2F18F600A3A0AA /* ssl2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssl2.h; sourceTree = "<group>"; };
+		A663A5451F2F18F600A3A0AA /* ssl3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssl3.h; sourceTree = "<group>"; };
+		A663A5461F2F18F600A3A0AA /* stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack.h; sourceTree = "<group>"; };
+		A663A5471F2F18F600A3A0AA /* symhacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = symhacks.h; sourceTree = "<group>"; };
+		A663A5481F2F18F600A3A0AA /* tls1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tls1.h; sourceTree = "<group>"; };
+		A663A5491F2F18F600A3A0AA /* ts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ts.h; sourceTree = "<group>"; };
+		A663A54A1F2F18F600A3A0AA /* txt_db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = txt_db.h; sourceTree = "<group>"; };
+		A663A54B1F2F18F600A3A0AA /* ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ui.h; sourceTree = "<group>"; };
+		A663A54C1F2F18F600A3A0AA /* whrlpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = whrlpool.h; sourceTree = "<group>"; };
+		A663A54D1F2F18F600A3A0AA /* x509.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509.h; sourceTree = "<group>"; };
+		A663A54E1F2F18F600A3A0AA /* x509_vfy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509_vfy.h; sourceTree = "<group>"; };
+		A663A54F1F2F18F600A3A0AA /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		A666EEC31E89BB17004804CB /* UMCommandActionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMCommandActionProtocol.h; path = UniversalTokenizer/UMCommandActionProtocol.h; sourceTree = "<group>"; };
 		A666EEC41E89BB17004804CB /* UMScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMScanner.h; path = UniversalTokenizer/UMScanner.h; sourceTree = "<group>"; };
 		A666EEC51E89BB17004804CB /* UMScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMScanner.m; path = UniversalTokenizer/UMScanner.m; sourceTree = "<group>"; };
@@ -2896,8 +3117,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A60C4E261EF7FED4007C203A /* libcrypto.a in Frameworks */,
-				A60C4E271EF7FED4007C203A /* libssl.a in Frameworks */,
+				A663A5021F2F16D000A3A0AA /* libcrypto.a in Frameworks */,
+				A663A5041F2F16D000A3A0AA /* libssl.a in Frameworks */,
 				A60C4D061EF7FE59007C203A /* Foundation.framework in Frameworks */,
 				A60C4D071EF7FE59007C203A /* Security.framework in Frameworks */,
 			);
@@ -2907,8 +3128,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A63B00851D0050A500211137 /* libcrypto.a in Frameworks */,
-				A63B00881D0050A500211137 /* libssl.a in Frameworks */,
+				A663A5051F2F16D000A3A0AA /* libssl.a in Frameworks */,
+				A663A5031F2F16D000A3A0AA /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3124,6 +3345,114 @@
 			path = libs/osx/openssl1.0.2h/include/openssl;
 			sourceTree = SOURCE_ROOT;
 		};
+		A663A4FD1F2F164700A3A0AA /* openssl1.1.0f */ = {
+			isa = PBXGroup;
+			children = (
+				A663A4FF1F2F166700A3A0AA /* include */,
+				A663A4FE1F2F165A00A3A0AA /* libs */,
+			);
+			name = openssl1.1.0f;
+			sourceTree = "<group>";
+		};
+		A663A4FE1F2F165A00A3A0AA /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				A663A5001F2F16D000A3A0AA /* libcrypto.a */,
+				A663A5011F2F16D000A3A0AA /* libssl.a */,
+			);
+			name = libs;
+			path = "openssl-1.1.0f-binary/usr/local/lib";
+			sourceTree = "<group>";
+		};
+		A663A4FF1F2F166700A3A0AA /* include */ = {
+			isa = PBXGroup;
+			children = (
+				A663A5061F2F18F600A3A0AA /* openssl */,
+			);
+			name = include;
+			path = "openssl-1.1.0f-binary/usr/local/include";
+			sourceTree = "<group>";
+		};
+		A663A5061F2F18F600A3A0AA /* openssl */ = {
+			isa = PBXGroup;
+			children = (
+				A663A5071F2F18F600A3A0AA /* aes.h */,
+				A663A5081F2F18F600A3A0AA /* asn1.h */,
+				A663A5091F2F18F600A3A0AA /* asn1_mac.h */,
+				A663A50A1F2F18F600A3A0AA /* asn1t.h */,
+				A663A50B1F2F18F600A3A0AA /* async.h */,
+				A663A50C1F2F18F600A3A0AA /* bio.h */,
+				A663A50D1F2F18F600A3A0AA /* blowfish.h */,
+				A663A50E1F2F18F600A3A0AA /* bn.h */,
+				A663A50F1F2F18F600A3A0AA /* buffer.h */,
+				A663A5101F2F18F600A3A0AA /* camellia.h */,
+				A663A5111F2F18F600A3A0AA /* cast.h */,
+				A663A5121F2F18F600A3A0AA /* cmac.h */,
+				A663A5131F2F18F600A3A0AA /* cms.h */,
+				A663A5141F2F18F600A3A0AA /* comp.h */,
+				A663A5151F2F18F600A3A0AA /* conf.h */,
+				A663A5161F2F18F600A3A0AA /* conf_api.h */,
+				A663A5171F2F18F600A3A0AA /* crypto.h */,
+				A663A5181F2F18F600A3A0AA /* ct.h */,
+				A663A5191F2F18F600A3A0AA /* des.h */,
+				A663A51A1F2F18F600A3A0AA /* dh.h */,
+				A663A51B1F2F18F600A3A0AA /* dsa.h */,
+				A663A51C1F2F18F600A3A0AA /* dtls1.h */,
+				A663A51D1F2F18F600A3A0AA /* e_os2.h */,
+				A663A51E1F2F18F600A3A0AA /* ebcdic.h */,
+				A663A51F1F2F18F600A3A0AA /* ec.h */,
+				A663A5201F2F18F600A3A0AA /* ecdh.h */,
+				A663A5211F2F18F600A3A0AA /* ecdsa.h */,
+				A663A5221F2F18F600A3A0AA /* engine.h */,
+				A663A5231F2F18F600A3A0AA /* err.h */,
+				A663A5241F2F18F600A3A0AA /* evp.h */,
+				A663A5251F2F18F600A3A0AA /* hmac.h */,
+				A663A5261F2F18F600A3A0AA /* idea.h */,
+				A663A5271F2F18F600A3A0AA /* kdf.h */,
+				A663A5281F2F18F600A3A0AA /* lhash.h */,
+				A663A5291F2F18F600A3A0AA /* md2.h */,
+				A663A52A1F2F18F600A3A0AA /* md4.h */,
+				A663A52B1F2F18F600A3A0AA /* md5.h */,
+				A663A52C1F2F18F600A3A0AA /* mdc2.h */,
+				A663A52D1F2F18F600A3A0AA /* modes.h */,
+				A663A52E1F2F18F600A3A0AA /* obj_mac.h */,
+				A663A52F1F2F18F600A3A0AA /* objects.h */,
+				A663A5301F2F18F600A3A0AA /* ocsp.h */,
+				A663A5311F2F18F600A3A0AA /* opensslconf.h */,
+				A663A5321F2F18F600A3A0AA /* opensslv.h */,
+				A663A5331F2F18F600A3A0AA /* ossl_typ.h */,
+				A663A5341F2F18F600A3A0AA /* pem.h */,
+				A663A5351F2F18F600A3A0AA /* pem2.h */,
+				A663A5361F2F18F600A3A0AA /* pkcs12.h */,
+				A663A5371F2F18F600A3A0AA /* pkcs7.h */,
+				A663A5381F2F18F600A3A0AA /* rand.h */,
+				A663A5391F2F18F600A3A0AA /* rc2.h */,
+				A663A53A1F2F18F600A3A0AA /* rc4.h */,
+				A663A53B1F2F18F600A3A0AA /* rc5.h */,
+				A663A53C1F2F18F600A3A0AA /* ripemd.h */,
+				A663A53D1F2F18F600A3A0AA /* rsa.h */,
+				A663A53E1F2F18F600A3A0AA /* safestack.h */,
+				A663A53F1F2F18F600A3A0AA /* seed.h */,
+				A663A5401F2F18F600A3A0AA /* sha.h */,
+				A663A5411F2F18F600A3A0AA /* srp.h */,
+				A663A5421F2F18F600A3A0AA /* srtp.h */,
+				A663A5431F2F18F600A3A0AA /* ssl.h */,
+				A663A5441F2F18F600A3A0AA /* ssl2.h */,
+				A663A5451F2F18F600A3A0AA /* ssl3.h */,
+				A663A5461F2F18F600A3A0AA /* stack.h */,
+				A663A5471F2F18F600A3A0AA /* symhacks.h */,
+				A663A5481F2F18F600A3A0AA /* tls1.h */,
+				A663A5491F2F18F600A3A0AA /* ts.h */,
+				A663A54A1F2F18F600A3A0AA /* txt_db.h */,
+				A663A54B1F2F18F600A3A0AA /* ui.h */,
+				A663A54C1F2F18F600A3A0AA /* whrlpool.h */,
+				A663A54D1F2F18F600A3A0AA /* x509.h */,
+				A663A54E1F2F18F600A3A0AA /* x509_vfy.h */,
+				A663A54F1F2F18F600A3A0AA /* x509v3.h */,
+			);
+			path = openssl;
+			sourceTree = "<group>";
+		};
 		A666EF551E89BB1F004804CB /* UniversalTokenizer */ = {
 			isa = PBXGroup;
 			children = (
@@ -3221,6 +3550,7 @@
 		A682E4AA1AA7CB4100854472 /* osx */ = {
 			isa = PBXGroup;
 			children = (
+				A663A4FD1F2F164700A3A0AA /* openssl1.1.0f */,
 				A63B007E1D00507B00211137 /* openssl1.0.2h */,
 			);
 			name = osx;
@@ -4749,23 +5079,30 @@
 			files = (
 				A60C4D091EF7FE59007C203A /* evp.h in Headers */,
 				A60C4D0A1EF7FE59007C203A /* krb5_asn.h in Headers */,
+				A663A5A21F2F18F600A3A0AA /* ocsp.h in Headers */,
 				A60C4D0B1EF7FE59007C203A /* pkcs12.h in Headers */,
 				A60C4D0C1EF7FE59007C203A /* UMSSLCertificate.h in Headers */,
+				A663A5CC1F2F18F600A3A0AA /* ssl3.h in Headers */,
 				A60C4D0D1EF7FE59007C203A /* ulib.h in Headers */,
 				A6BEA7081EF950BB007C203A /* UMHTTPClient.h in Headers */,
 				A60C4D0E1EF7FE59007C203A /* UMHistoryLogEntry.h in Headers */,
 				A60C4D0F1EF7FE59007C203A /* UMLogBuffered.h in Headers */,
+				A663A5601F2F18F600A3A0AA /* buffer.h in Headers */,
 				A60C4D101EF7FE59007C203A /* UMLogConsole.h in Headers */,
+				A663A5B61F2F18F600A3A0AA /* rc4.h in Headers */,
 				A60C4D111EF7FE59007C203A /* crypto.h in Headers */,
 				A60C4D121EF7FE59007C203A /* UMLogDestination.h in Headers */,
+				A663A5AA1F2F18F600A3A0AA /* pem.h in Headers */,
 				A60C4E411EF80073007C203A /* UniversalPlugin.h in Headers */,
 				A60C4D131EF7FE59007C203A /* UMLogEntry.h in Headers */,
+				A663A5681F2F18F600A3A0AA /* cms.h in Headers */,
 				A60C4D141EF7FE59007C203A /* UMLogFeed.h in Headers */,
 				A60C4D151EF7FE59007C203A /* UMLogFile.h in Headers */,
 				A60C4D161EF7FE59007C203A /* bn.h in Headers */,
 				A60C4D171EF7FE59007C203A /* opensslconf.h in Headers */,
 				A60C4D181EF7FE59007C203A /* ossl_typ.h in Headers */,
 				A60C4D191EF7FE59007C203A /* camellia.h in Headers */,
+				A663A5BA1F2F18F600A3A0AA /* ripemd.h in Headers */,
 				A60C4D1A1EF7FE59007C203A /* UMLogHandler.h in Headers */,
 				A60C4D1B1EF7FE59007C203A /* UniversalLog.h in Headers */,
 				A60C4D1C1EF7FE59007C203A /* UMLayer.h in Headers */,
@@ -4786,11 +5123,17 @@
 				A60C4D2A1EF7FE59007C203A /* ts.h in Headers */,
 				A60C4D2B1EF7FE59007C203A /* pem2.h in Headers */,
 				A60C4E481EF80094007C203A /* UMPluginHandler.h in Headers */,
+				A663A5981F2F18F600A3A0AA /* md5.h in Headers */,
 				A60C4D2D1EF7FE59007C203A /* asn1_mac.h in Headers */,
+				A663A57E1F2F18F600A3A0AA /* ebcdic.h in Headers */,
+				A663A58E1F2F18F600A3A0AA /* idea.h in Headers */,
 				A60C4D2E1EF7FE59007C203A /* pem.h in Headers */,
 				A60C4D2F1EF7FE59007C203A /* UniversalConfig.h in Headers */,
 				A60C4D301EF7FE59007C203A /* ecdh.h in Headers */,
+				A663A5E01F2F18F600A3A0AA /* x509v3.h in Headers */,
+				A663A5721F2F18F600A3A0AA /* ct.h in Headers */,
 				A60C4D311EF7FE59007C203A /* txt_db.h in Headers */,
+				A663A5AC1F2F18F600A3A0AA /* pem2.h in Headers */,
 				A60C4D321EF7FE59007C203A /* ecdsa.h in Headers */,
 				A60C4D331EF7FE59007C203A /* md4.h in Headers */,
 				A60C4D341EF7FE59007C203A /* dh.h in Headers */,
@@ -4802,15 +5145,18 @@
 				A60C4D3A1EF7FE59007C203A /* x509_vfy.h in Headers */,
 				A60C4D3B1EF7FE59007C203A /* aes.h in Headers */,
 				A60C4D3C1EF7FE59007C203A /* err.h in Headers */,
+				A663A5BE1F2F18F600A3A0AA /* safestack.h in Headers */,
 				A6BEA6FB1EF95093007C203A /* UMHTTPSServer.h in Headers */,
 				A60C4D3D1EF7FE59007C203A /* UMSynchronizedDictionary.h in Headers */,
 				A60C4D3E1EF7FE59007C203A /* lhash.h in Headers */,
 				A60C4D3F1EF7FE59007C203A /* UniversalLayers.h in Headers */,
 				A60C4D401EF7FE59007C203A /* NSString+UMHTTP.h in Headers */,
 				A60C4D411EF7FE59007C203A /* UMHTTPConnection.h in Headers */,
+				A663A5661F2F18F600A3A0AA /* cmac.h in Headers */,
 				A60C4D421EF7FE59007C203A /* ocsp.h in Headers */,
 				A60C4D431EF7FE59007C203A /* UMHTTPPageHandler.h in Headers */,
 				A60C4D441EF7FE59007C203A /* UMHTTPRequest.h in Headers */,
+				A663A5C81F2F18F600A3A0AA /* ssl.h in Headers */,
 				A60C4D451EF7FE59007C203A /* UMSleeper.h in Headers */,
 				A60C4D461EF7FE59007C203A /* ebcdic.h in Headers */,
 				A60C4D471EF7FE59007C203A /* UMHTTPServer.h in Headers */,
@@ -4820,15 +5166,19 @@
 				A60C4D4B1EF7FE59007C203A /* ssl3.h in Headers */,
 				A60C4D4C1EF7FE59007C203A /* x509_vfy.h in Headers */,
 				A60C4D4D1EF7FE59007C203A /* crypto.h in Headers */,
+				A663A5AE1F2F18F600A3A0AA /* pkcs12.h in Headers */,
 				A60C4D4E1EF7FE59007C203A /* UMRedisCommand.h in Headers */,
+				A663A5521F2F18F600A3A0AA /* asn1.h in Headers */,
 				A60C4D4F1EF7FE59007C203A /* modes.h in Headers */,
 				A60C4D501EF7FE59007C203A /* ec.h in Headers */,
 				A60C4D511EF7FE59007C203A /* NSString+HierarchicalDescription.h in Headers */,
+				A663A5A01F2F18F600A3A0AA /* objects.h in Headers */,
 				A60C4D521EF7FE59007C203A /* rc2.h in Headers */,
 				A60C4D531EF7FE59007C203A /* cmac.h in Headers */,
 				A60C4D541EF7FE59007C203A /* srtp.h in Headers */,
 				A60C4D551EF7FE59007C203A /* NSData+UMSocket.h in Headers */,
 				A60C4D561EF7FE59007C203A /* asn1t.h in Headers */,
+				A663A59E1F2F18F600A3A0AA /* obj_mac.h in Headers */,
 				A60C4D571EF7FE59007C203A /* UniversalUtilities.h in Headers */,
 				A60C4D581EF7FE59007C203A /* opensslv.h in Headers */,
 				A60C4D591EF7FE59007C203A /* bio.h in Headers */,
@@ -4836,23 +5186,33 @@
 				A60C4D5B1EF7FE59007C203A /* pqueue.h in Headers */,
 				A60C4D5C1EF7FE59007C203A /* UniversalObject.h in Headers */,
 				A60C4D5D1EF7FE59007C203A /* md5.h in Headers */,
+				A663A58C1F2F18F600A3A0AA /* hmac.h in Headers */,
 				A60C4D5E1EF7FE59007C203A /* UMRedisStatus.h in Headers */,
 				A60C4D5F1EF7FE59007C203A /* ssl2.h in Headers */,
 				A60C4E2D1EF80039007C203A /* UMHTTPTask_ReadRequest.h in Headers */,
+				A663A5741F2F18F600A3A0AA /* des.h in Headers */,
+				A663A5A61F2F18F600A3A0AA /* opensslv.h in Headers */,
 				A60C4D601EF7FE59007C203A /* modes.h in Headers */,
+				A663A5881F2F18F600A3A0AA /* err.h in Headers */,
 				A60C4D611EF7FE59007C203A /* UMStringWithHistory.h in Headers */,
 				A60C4D621EF7FE59007C203A /* ssl2.h in Headers */,
+				A663A5821F2F18F600A3A0AA /* ecdh.h in Headers */,
 				A60C4D631EF7FE59007C203A /* UMDoubleWithHistory.h in Headers */,
 				A60C4D641EF7FE59007C203A /* dtls1.h in Headers */,
+				A663A57C1F2F18F600A3A0AA /* e_os2.h in Headers */,
+				A663A55C1F2F18F600A3A0AA /* blowfish.h in Headers */,
 				A60C4D651EF7FE59007C203A /* UMThroughputCounter.h in Headers */,
+				A663A55A1F2F18F600A3A0AA /* bio.h in Headers */,
 				A60C4D661EF7FE59007C203A /* pkcs7.h in Headers */,
 				A60C4D671EF7FE59007C203A /* ssl.h in Headers */,
 				A60C4D681EF7FE59007C203A /* UMSyntaxToken_Number.h in Headers */,
+				A663A5DA1F2F18F600A3A0AA /* whrlpool.h in Headers */,
 				A60C4D691EF7FE59007C203A /* UniversalQueue.h in Headers */,
 				A60C4D6A1EF7FE59007C203A /* UMJsonStreamParserAccumulator.h in Headers */,
 				A60C4D6B1EF7FE59007C203A /* seed.h in Headers */,
 				A60C4D6C1EF7FE59007C203A /* blowfish.h in Headers */,
 				A60C4D6D1EF7FE59007C203A /* evp.h in Headers */,
+				A663A5D61F2F18F600A3A0AA /* txt_db.h in Headers */,
 				A60C4D6E1EF7FE59007C203A /* UMSyntaxToken.h in Headers */,
 				A60C4D6F1EF7FE59007C203A /* cast.h in Headers */,
 				A60C4D701EF7FE59007C203A /* UMJsonTokeniser.h in Headers */,
@@ -4864,10 +5224,12 @@
 				A60C4D761EF7FE59007C203A /* conf.h in Headers */,
 				A60C4D771EF7FE59007C203A /* NSData+HierarchicalDescription.h in Headers */,
 				A60C4D781EF7FE59007C203A /* UMLock.h in Headers */,
+				A663A5C21F2F18F600A3A0AA /* sha.h in Headers */,
 				A60C4D791EF7FE59007C203A /* UMTask.h in Headers */,
 				A60C4D7A1EF7FE59007C203A /* UMCommandActionProtocol.h in Headers */,
 				A60C4D7B1EF7FE59007C203A /* NSString+UniversalObject.h in Headers */,
 				A60C4D7C1EF7FE59007C203A /* NSData+UniversalObject.h in Headers */,
+				A663A5D41F2F18F600A3A0AA /* ts.h in Headers */,
 				A60C4D7D1EF7FE59007C203A /* UMAverageDelay.h in Headers */,
 				A60C4D7E1EF7FE59007C203A /* ripemd.h in Headers */,
 				A60C4D7F1EF7FE59007C203A /* des_old.h in Headers */,
@@ -4878,19 +5240,26 @@
 				A60C4D841EF7FE59007C203A /* md5.h in Headers */,
 				A60C4D851EF7FE59007C203A /* UMSyntaxToken_Const.h in Headers */,
 				A60C4D861EF7FE59007C203A /* asn1t.h in Headers */,
+				A663A5BC1F2F18F600A3A0AA /* rsa.h in Headers */,
 				A60C4D871EF7FE59007C203A /* UMSocket.h in Headers */,
 				A60C4D881EF7FE59007C203A /* UMMicroSec.h in Headers */,
 				A60C4D891EF7FE59007C203A /* e_os2.h in Headers */,
+				A663A5941F2F18F600A3A0AA /* md2.h in Headers */,
 				A60C4D8A1EF7FE59007C203A /* bio.h in Headers */,
 				A60C4D8B1EF7FE59007C203A /* UMJsonUTF8Stream.h in Headers */,
 				A60C4D8C1EF7FE59007C203A /* krb5_asn.h in Headers */,
+				A663A59C1F2F18F600A3A0AA /* modes.h in Headers */,
 				A60C4D8D1EF7FE59007C203A /* UMJsonWriter.h in Headers */,
+				A663A5961F2F18F600A3A0AA /* md4.h in Headers */,
 				A60C4D8E1EF7FE59007C203A /* UMScannerChar.h in Headers */,
+				A663A5D01F2F18F600A3A0AA /* symhacks.h in Headers */,
 				A60C4D8F1EF7FE59007C203A /* stack.h in Headers */,
 				A60C4D901EF7FE59007C203A /* asn1.h in Headers */,
 				A60C4D911EF7FE59007C203A /* rc4.h in Headers */,
+				A663A5841F2F18F600A3A0AA /* ecdsa.h in Headers */,
 				A60C4D921EF7FE59007C203A /* UMRegexMatch.h in Headers */,
 				A60C4D931EF7FE59007C203A /* UMTimerBackgrounder.h in Headers */,
+				A663A56A1F2F18F600A3A0AA /* comp.h in Headers */,
 				A60C4D941EF7FE59007C203A /* UMSynchronizedArray.h in Headers */,
 				A60C4D951EF7FE59007C203A /* idea.h in Headers */,
 				A60C4D961EF7FE59007C203A /* UMTaskQueue.h in Headers */,
@@ -4901,16 +5270,21 @@
 				A6BEA6E71EF95013007C203A /* NSDictionary+UniversalConfig.h in Headers */,
 				A60C4D9B1EF7FE59007C203A /* UMIntegerWithHistory.h in Headers */,
 				A60C4D9C1EF7FE59007C203A /* UMPKI.h in Headers */,
+				A663A5541F2F18F600A3A0AA /* asn1_mac.h in Headers */,
+				A663A57A1F2F18F600A3A0AA /* dtls1.h in Headers */,
 				A60C4D9D1EF7FE59007C203A /* UMBackgrounder.h in Headers */,
 				A607CE0B1F2A9A60006A832B /* UMKeypair.h in Headers */,
 				A60C4D9E1EF7FE59007C203A /* UMDataWithHistory.h in Headers */,
 				A60C4D9F1EF7FE59007C203A /* ui.h in Headers */,
 				A60C4DA01EF7FE59007C203A /* UMTaskQueueMulti.h in Headers */,
+				A663A5701F2F18F600A3A0AA /* crypto.h in Headers */,
 				A60C4DA11EF7FE59007C203A /* UMSyntaxToken_Name.h in Headers */,
 				A60C4DA21EF7FE59007C203A /* rc2.h in Headers */,
 				A60C4DA31EF7FE59007C203A /* des.h in Headers */,
 				A60C4DA41EF7FE59007C203A /* UMSyntaxContext.h in Headers */,
+				A663A5B01F2F18F600A3A0AA /* pkcs7.h in Headers */,
 				A60C4DA51EF7FE59007C203A /* UMBackgrounderWithQueue.h in Headers */,
+				A663A56C1F2F18F600A3A0AA /* conf.h in Headers */,
 				A60C4DA61EF7FE59007C203A /* ossl_typ.h in Headers */,
 				A60C4DA71EF7FE59007C203A /* asn1.h in Headers */,
 				A60C4DA81EF7FE59007C203A /* sha.h in Headers */,
@@ -4918,6 +5292,7 @@
 				A60C4DAA1EF7FE59007C203A /* UMJsonStreamParser.h in Headers */,
 				A60C4DAB1EF7FE59007C203A /* NSDictionary+UMJson.h in Headers */,
 				A60C4DAC1EF7FE59007C203A /* txt_db.h in Headers */,
+				A663A5C61F2F18F600A3A0AA /* srtp.h in Headers */,
 				A60C4DAD1EF7FE59007C203A /* NSNumber+HierarchicalDescription.h in Headers */,
 				A60C4DAE1EF7FE59007C203A /* ssl.h in Headers */,
 				A60C4DAF1EF7FE59007C203A /* comp.h in Headers */,
@@ -4925,15 +5300,18 @@
 				A60C4DB11EF7FE59007C203A /* srp.h in Headers */,
 				A60C4DB21EF7FE59007C203A /* UMUUID.h in Headers */,
 				A607CE071F2A9A55006A832B /* UMPrivateKey.h in Headers */,
+				A663A5621F2F18F600A3A0AA /* camellia.h in Headers */,
 				A60C4DB31EF7FE59007C203A /* mdc2.h in Headers */,
 				A60C4DB41EF7FE59007C203A /* cms.h in Headers */,
 				A60C4DB51EF7FE59007C203A /* UMLockEvent.h in Headers */,
 				A60C4DB61EF7FE59007C203A /* NSArray+HierarchicalDescription.h in Headers */,
 				A60C4DB71EF7FE59007C203A /* UMDateWithHistory.h in Headers */,
 				A60C4DB81EF7FE59007C203A /* UMBackgrounderWithQueues.h in Headers */,
+				A663A5501F2F18F600A3A0AA /* aes.h in Headers */,
 				A60C4DB91EF7FE59007C203A /* ts.h in Headers */,
 				A60C4DBA1EF7FE59007C203A /* NSDictionary+HierarchicalDescription.h in Headers */,
 				A60C4E281EF80024007C203A /* UMHTTPTask_ProcessRequest.h in Headers */,
+				A663A58A1F2F18F600A3A0AA /* evp.h in Headers */,
 				A60C4DBB1EF7FE59007C203A /* UMTokenizerWord.h in Headers */,
 				A60C4DBC1EF7FE59007C203A /* UMHistoryLog.h in Headers */,
 				A60C4DBD1EF7FE59007C203A /* UMHTTPURLHandler.h in Headers */,
@@ -4944,13 +5322,17 @@
 				A60C4DC21EF7FE59007C203A /* conf_api.h in Headers */,
 				A60C4DC31EF7FE59007C203A /* mdc2.h in Headers */,
 				A60C4DC41EF7FE59007C203A /* NSMutableArray+UMHTTP.h in Headers */,
+				A663A5DE1F2F18F600A3A0AA /* x509_vfy.h in Headers */,
 				A60C4DC51EF7FE59007C203A /* dso.h in Headers */,
 				A60C4DC61EF7FE59007C203A /* cast.h in Headers */,
 				A60C4DC71EF7FE59007C203A /* NSMutableString+UMHTTP.h in Headers */,
 				A60C4DC81EF7FE59007C203A /* dsa.h in Headers */,
 				A60C4DC91EF7FE59007C203A /* camellia.h in Headers */,
+				A663A5761F2F18F600A3A0AA /* dh.h in Headers */,
 				A60C4DCA1EF7FE59007C203A /* NSMutableData+UMHTTP.h in Headers */,
 				A60C4DCB1EF7FE59007C203A /* objects.h in Headers */,
+				A663A5781F2F18F600A3A0AA /* dsa.h in Headers */,
+				A663A59A1F2F18F600A3A0AA /* mdc2.h in Headers */,
 				A6BEA7151EF950D1007C203A /* UMHTTPClientRequest.h in Headers */,
 				A60C4DCC1EF7FE59007C203A /* rand.h in Headers */,
 				A60C4DCD1EF7FE59007C203A /* buffer.h in Headers */,
@@ -4963,18 +5345,23 @@
 				A60C4DD31EF7FE59007C203A /* dsa.h in Headers */,
 				A60C4DD41EF7FE59007C203A /* dtls1.h in Headers */,
 				A60C4DD51EF7FE59007C203A /* des_old.h in Headers */,
+				A663A5CA1F2F18F600A3A0AA /* ssl2.h in Headers */,
 				A60C4DD61EF7FE59007C203A /* ssl3.h in Headers */,
 				A60C4DD71EF7FE59007C203A /* ocsp.h in Headers */,
 				A60C4DD81EF7FE59007C203A /* UMQueue.h in Headers */,
+				A663A5861F2F18F600A3A0AA /* engine.h in Headers */,
 				A60C4DD91EF7FE59007C203A /* NSDictionary+UMHTTP.h in Headers */,
 				A60C4DDA1EF7FE59007C203A /* ulib_config.h in Headers */,
 				A60C4E461EF80094007C203A /* UMPlugin.h in Headers */,
 				A60C4DDB1EF7FE59007C203A /* opensslconf.h in Headers */,
 				A60C4DDC1EF7FE59007C203A /* NSData+UMLog.h in Headers */,
+				A663A55E1F2F18F600A3A0AA /* bn.h in Headers */,
 				A60C4DDD1EF7FE59007C203A /* obj_mac.h in Headers */,
+				A663A5C01F2F18F600A3A0AA /* seed.h in Headers */,
 				A60C4DDE1EF7FE59007C203A /* UMLogLevel.h in Headers */,
 				A60C4DDF1EF7FE59007C203A /* UMConfigGroup.h in Headers */,
 				A60C4DE01EF7FE59007C203A /* cmac.h in Headers */,
+				A663A5B81F2F18F600A3A0AA /* rc5.h in Headers */,
 				A60C4DE11EF7FE59007C203A /* UMConfigParsedLine.h in Headers */,
 				A60C4DE21EF7FE59007C203A /* err.h in Headers */,
 				A60C4DE31EF7FE59007C203A /* des.h in Headers */,
@@ -4984,6 +5371,7 @@
 				A60C4DE71EF7FE59007C203A /* blowfish.h in Headers */,
 				A60C4DE81EF7FE59007C203A /* UMTokenizer.h in Headers */,
 				A60C4DE91EF7FE59007C203A /* pem.h in Headers */,
+				A663A5901F2F18F600A3A0AA /* kdf.h in Headers */,
 				A60C4DEA1EF7FE59007C203A /* comp.h in Headers */,
 				A60C4DEB1EF7FE59007C203A /* UniversalSocket.h in Headers */,
 				A60C4DEC1EF7FE59007C203A /* UMUtil.h in Headers */,
@@ -4992,12 +5380,15 @@
 				A60C4DEF1EF7FE59007C203A /* x509v3.h in Headers */,
 				A60C4DF01EF7FE59007C203A /* ui_compat.h in Headers */,
 				A60C4DF11EF7FE59007C203A /* UMHTTPCookie.h in Headers */,
+				A663A5A41F2F18F600A3A0AA /* opensslconf.h in Headers */,
 				A60C4DF21EF7FE59007C203A /* ssl23.h in Headers */,
+				A663A5B41F2F18F600A3A0AA /* rc2.h in Headers */,
 				A60C4DF31EF7FE59007C203A /* lhash.h in Headers */,
 				A60C4DF41EF7FE59007C203A /* objects.h in Headers */,
 				A60C4DF51EF7FE59007C203A /* UMSynchronizedSortedDictionary.h in Headers */,
 				A60C4DF61EF7FE59007C203A /* UMHost.h in Headers */,
 				A60C4DF71EF7FE59007C203A /* UMHTTPResponseCode.h in Headers */,
+				A663A5641F2F18F600A3A0AA /* cast.h in Headers */,
 				A60C4DF81EF7FE59007C203A /* seed.h in Headers */,
 				A60C4DF91EF7FE59007C203A /* UMHTTPPageCache.h in Headers */,
 				A60C4DFA1EF7FE59007C203A /* UMHTTPPageRef.h in Headers */,
@@ -5006,11 +5397,15 @@
 				A60C4DFD1EF7FE59007C203A /* UMJsonStreamWriter.h in Headers */,
 				A60C4DFE1EF7FE59007C203A /* safestack.h in Headers */,
 				A60C4DFF1EF7FE59007C203A /* x509.h in Headers */,
+				A663A5DC1F2F18F600A3A0AA /* x509.h in Headers */,
 				A60C4E001EF7FE59007C203A /* ssl23.h in Headers */,
+				A663A5CE1F2F18F600A3A0AA /* stack.h in Headers */,
 				A60C4E011EF7FE59007C203A /* conf.h in Headers */,
 				A60C4E021EF7FE59007C203A /* srp.h in Headers */,
+				A663A5A81F2F18F600A3A0AA /* ossl_typ.h in Headers */,
 				A60C4E031EF7FE59007C203A /* UMJsonStreamParserState.h in Headers */,
 				A60C4E041EF7FE59007C203A /* obj_mac.h in Headers */,
+				A663A5D21F2F18F600A3A0AA /* tls1.h in Headers */,
 				A60C4E051EF7FE59007C203A /* NSArray+UMJson.h in Headers */,
 				A60C4E061EF7FE59007C203A /* x509.h in Headers */,
 				A60C4E071EF7FE59007C203A /* symhacks.h in Headers */,
@@ -5024,20 +5419,28 @@
 				A60C4E0F1EF7FE59007C203A /* UMJsonStreamWriterState.h in Headers */,
 				A60C4E101EF7FE59007C203A /* sha.h in Headers */,
 				A60C4E111EF7FE59007C203A /* UMFileTrackingInfo.h in Headers */,
+				A663A5921F2F18F600A3A0AA /* lhash.h in Headers */,
+				A663A5B21F2F18F600A3A0AA /* rand.h in Headers */,
+				A663A5801F2F18F600A3A0AA /* ec.h in Headers */,
 				A60C4E121EF7FE59007C203A /* NSDate+stringFunctions.h in Headers */,
 				A60C4E131EF7FE59007C203A /* dh.h in Headers */,
 				A60C4E141EF7FE59007C203A /* ebcdic.h in Headers */,
+				A663A5D81F2F18F600A3A0AA /* ui.h in Headers */,
 				A60C4E151EF7FE59007C203A /* md4.h in Headers */,
 				A60C4E161EF7FE59007C203A /* ecdh.h in Headers */,
+				A663A5561F2F18F600A3A0AA /* asn1t.h in Headers */,
 				A60C4E171EF7FE59007C203A /* rsa.h in Headers */,
 				A60C4E181EF7FE59007C203A /* NSString+UMJson.h in Headers */,
 				A607CE031F2A9A46006A832B /* UMPublicKey.h in Headers */,
 				A60C4E191EF7FE59007C203A /* UMFileTrackingMacros.h in Headers */,
 				A60C4E1A1EF7FE59007C203A /* pkcs12.h in Headers */,
+				A663A5581F2F18F600A3A0AA /* async.h in Headers */,
 				A60C4E1B1EF7FE59007C203A /* UMQueueNull.h in Headers */,
 				A60C4E1C1EF7FE59007C203A /* rc4.h in Headers */,
 				A60C4E1D1EF7FE59007C203A /* UMFileTracker.h in Headers */,
 				A60C4E1E1EF7FE59007C203A /* UMLayerUserProtocol.h in Headers */,
+				A663A5C41F2F18F600A3A0AA /* srp.h in Headers */,
+				A663A56E1F2F18F600A3A0AA /* conf_api.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5047,7 +5450,9 @@
 			files = (
 				A666EF111E89BB17004804CB /* UMSyntaxToken_Const.h in Headers */,
 				A666EEDC1E89BB17004804CB /* UMCommandActionProtocol.h in Headers */,
+				A663A5531F2F18F600A3A0AA /* asn1.h in Headers */,
 				A67D3DED1AFA01C70090FC94 /* NSString+UMJson.h in Headers */,
+				A663A5AF1F2F18F600A3A0AA /* pkcs12.h in Headers */,
 				A6020FC91D4876E500211137 /* UMTaskQueue.h in Headers */,
 				A60C2D6D1A3F20E90090FC94 /* ulib.h in Headers */,
 				A60C2DCF1A3F214E0090FC94 /* UniversalLog.h in Headers */,
@@ -5055,22 +5460,40 @@
 				A6AC4B551D460B96002BAA97 /* UMPKI.h in Headers */,
 				A6020FB51D4876E500211137 /* UMBackgrounder.h in Headers */,
 				A6CC4B721A3F24C70090FC94 /* UMTimer.h in Headers */,
+				A663A5791F2F18F600A3A0AA /* dsa.h in Headers */,
+				A663A55B1F2F18F600A3A0AA /* bio.h in Headers */,
 				A6CC4B111A3F24680090FC94 /* UMRedisCommand.h in Headers */,
+				A663A5711F2F18F600A3A0AA /* crypto.h in Headers */,
+				A663A59B1F2F18F600A3A0AA /* mdc2.h in Headers */,
+				A663A5A31F2F18F600A3A0AA /* ocsp.h in Headers */,
+				A663A5A51F2F18F600A3A0AA /* opensslconf.h in Headers */,
+				A663A5D71F2F18F600A3A0AA /* txt_db.h in Headers */,
+				A663A5731F2F18F600A3A0AA /* ct.h in Headers */,
 				A60C2DE01A3F214E0090FC94 /* NSData+UMLog.h in Headers */,
+				A663A5591F2F18F600A3A0AA /* async.h in Headers */,
 				A6BEA6FA1EF9507C007C203A /* UMHTTPAuthenticationStatus.h in Headers */,
 				A6CC4B871A3F24E50090FC94 /* NSData+UMSocket.h in Headers */,
+				A663A59D1F2F18F600A3A0AA /* modes.h in Headers */,
 				A60C2DA61A3F213F0090FC94 /* UMHTTPURLHandler.h in Headers */,
 				A6020FB71D4876E500211137 /* UMBackgrounderWithQueues.h in Headers */,
 				A60C2DC41A3F21450090FC94 /* UMLayerUserProtocol.h in Headers */,
 				A6BEA7191EF950D4007C203A /* UMHTTPClientRequest.h in Headers */,
 				A60C2DDE1A3F214E0090FC94 /* UMLogHandler.h in Headers */,
 				A6CC4B7E1A3F24C70090FC94 /* UniversalUtilities.h in Headers */,
+				A663A58F1F2F18F600A3A0AA /* idea.h in Headers */,
+				A663A5991F2F18F600A3A0AA /* md5.h in Headers */,
+				A663A5C91F2F18F600A3A0AA /* ssl.h in Headers */,
+				A663A5AD1F2F18F600A3A0AA /* pem2.h in Headers */,
+				A663A5B51F2F18F600A3A0AA /* rc2.h in Headers */,
 				A60C2D9A1A3F213F0090FC94 /* NSDictionary+UMHTTP.h in Headers */,
 				A6CC4B141A3F24680090FC94 /* UMRedisSession.h in Headers */,
 				A666EF4D1E89BB17004804CB /* UMTokenizerWord.h in Headers */,
 				A6CC4B171A3F24680090FC94 /* UMRedisStatus.h in Headers */,
+				A663A5B71F2F18F600A3A0AA /* rc4.h in Headers */,
+				A663A56F1F2F18F600A3A0AA /* conf_api.h in Headers */,
 				A6CC4B6F1A3F24C70090FC94 /* UMThroughputCounter.h in Headers */,
 				A6020FC51D4876E500211137 /* UMSynchronizedArray.h in Headers */,
+				A663A59F1F2F18F600A3A0AA /* obj_mac.h in Headers */,
 				A6FFFC811B9D73F900C331B0 /* NSString+UMSocket.h in Headers */,
 				A666EF821E89CDBB004804CB /* UMSyntaxToken_Digits.h in Headers */,
 				A62A7E3118AAD6AD00EA8A2A /* UMHTTPPageCache.h in Headers */,
@@ -5082,38 +5505,59 @@
 				A666EF051E89BB17004804CB /* UMSyntaxContext.h in Headers */,
 				A6020FB81D4876E500211137 /* UMDataWithHistory.h in Headers */,
 				A6020FAD1D4876E500211137 /* NSData+HierarchicalDescription.h in Headers */,
+				A663A5611F2F18F600A3A0AA /* buffer.h in Headers */,
+				A663A5BF1F2F18F600A3A0AA /* safestack.h in Headers */,
+				A663A5851F2F18F600A3A0AA /* ecdsa.h in Headers */,
 				A6020FBB1D4876E500211137 /* UMDoubleWithHistory.h in Headers */,
 				A6CC4B1A1A3F24680090FC94 /* UniversalRedis.h in Headers */,
 				A6CC4B451A3F249A0090FC94 /* UMJsonTokeniser.h in Headers */,
 				A6020FB61D4876E500211137 /* UMBackgrounderWithQueue.h in Headers */,
+				A663A5671F2F18F600A3A0AA /* cmac.h in Headers */,
 				A6CC4B361A3F249A0090FC94 /* UMJsonStreamParserAdapter.h in Headers */,
 				A60C2D801A3F212E0090FC94 /* UMConfig.h in Headers */,
 				A60C2D921A3F213F0090FC94 /* NSString+UMHTTP.h in Headers */,
 				A6020FBC1D4876E500211137 /* UMFileTracker.h in Headers */,
 				A666EEF91E89BB17004804CB /* UMSyntaxAction.h in Headers */,
+				A663A5C51F2F18F600A3A0AA /* srp.h in Headers */,
+				A663A5D31F2F18F600A3A0AA /* tls1.h in Headers */,
 				A62A7E2918AAD20D00EA8A2A /* UMHTTPPageRef.h in Headers */,
+				A663A5951F2F18F600A3A0AA /* md2.h in Headers */,
 				A6020FC01D4876E500211137 /* UMHistoryLogEntry.h in Headers */,
 				A6CC4B8A1A3F24E50090FC94 /* UMCrypto.h in Headers */,
+				A663A5B11F2F18F600A3A0AA /* pkcs7.h in Headers */,
 				A67AA9F71CF8BD0C00211137 /* ulib_config.h in Headers */,
 				A60C2D911A3F213F0090FC94 /* UniversalHTTP.h in Headers */,
 				A6CC4B601A3F24C70090FC94 /* UMLock.h in Headers */,
+				A663A55F1F2F18F600A3A0AA /* bn.h in Headers */,
+				A663A5A11F2F18F600A3A0AA /* objects.h in Headers */,
+				A663A5C31F2F18F600A3A0AA /* sha.h in Headers */,
 				A60C2DA81A3F213F0090FC94 /* UMHTTPCookie.h in Headers */,
 				A6CC4B5D1A3F24C70090FC94 /* UMAverageDelay.h in Headers */,
+				A663A5811F2F18F600A3A0AA /* ec.h in Headers */,
+				A663A5831F2F18F600A3A0AA /* ecdh.h in Headers */,
 				A6CC4B901A3F24E50090FC94 /* UMSocket.h in Headers */,
 				A60C2DDC1A3F214E0090FC94 /* UMLogFile.h in Headers */,
 				A60C4E601EF80098007C203A /* UMPluginHandler.h in Headers */,
 				A6020FB01D4876E500211137 /* NSDictionary+HierarchicalDescription.h in Headers */,
 				A6020FCA1D4876E500211137 /* UMTaskQueueMulti.h in Headers */,
+				A663A5AB1F2F18F600A3A0AA /* pem.h in Headers */,
 				A6CC4B661A3F24C70090FC94 /* UMMicroSec.h in Headers */,
+				A663A56D1F2F18F600A3A0AA /* conf.h in Headers */,
+				A663A5931F2F18F600A3A0AA /* lhash.h in Headers */,
 				A6CC4B481A3F249A0090FC94 /* UMJsonUTF8Stream.h in Headers */,
 				A6AC49791D460A49002BAA97 /* UMRegexMatch.h in Headers */,
 				A60C4E5E1EF80098007C203A /* UMPlugin.h in Headers */,
+				A663A5B31F2F18F600A3A0AA /* rand.h in Headers */,
 				A6CC4B6C1A3F24C70090FC94 /* UMSleeper.h in Headers */,
+				A663A5DB1F2F18F600A3A0AA /* whrlpool.h in Headers */,
 				A6CC4B4B1A3F249A0090FC94 /* UMJsonWriter.h in Headers */,
 				A6CC4B751A3F24C70090FC94 /* UMTimerBackgrounder.h in Headers */,
+				A663A5631F2F18F600A3A0AA /* camellia.h in Headers */,
 				A60C2D961A3F213F0090FC94 /* NSMutableData+UMHTTP.h in Headers */,
 				A6CC4B9B1A3F24FC0090FC94 /* UMQueue.h in Headers */,
+				A663A58B1F2F18F600A3A0AA /* evp.h in Headers */,
 				A60C2D7F1A3F212E0090FC94 /* UniversalConfig.h in Headers */,
+				A663A5CB1F2F18F600A3A0AA /* ssl2.h in Headers */,
 				A6020FB91D4876E500211137 /* UMDateTimeStuff.h in Headers */,
 				A666EF1D1E89BB17004804CB /* UMSyntaxToken_Name.h in Headers */,
 				A6020FC41D4876E500211137 /* UMStringWithHistory.h in Headers */,
@@ -5124,35 +5568,57 @@
 				A666EF411E89BB17004804CB /* UMTokenizer.h in Headers */,
 				A6020FAE1D4876E500211137 /* NSData+UniversalObject.h in Headers */,
 				A6020FB21D4876E500211137 /* NSObject+HierarchicalDescription.h in Headers */,
+				A663A5C71F2F18F600A3A0AA /* srtp.h in Headers */,
 				A6020FC21D4876E500211137 /* UMObject.h in Headers */,
 				A6020FB41D4876E500211137 /* NSString+UniversalObject.h in Headers */,
 				A6CC4B301A3F249A0090FC94 /* UMJsonStreamParser.h in Headers */,
 				A60C4E451EF80076007C203A /* UniversalPlugin.h in Headers */,
 				A60C4E2C1EF8002B007C203A /* UMHTTPTask_ProcessRequest.h in Headers */,
 				A6CC4B961A3F24E50090FC94 /* UniversalSocket.h in Headers */,
+				A663A5891F2F18F600A3A0AA /* err.h in Headers */,
 				A6020FBA1D4876E500211137 /* UMDateWithHistory.h in Headers */,
+				A663A57F1F2F18F600A3A0AA /* ebcdic.h in Headers */,
+				A663A5DD1F2F18F600A3A0AA /* x509.h in Headers */,
 				A6020FBE1D4876E500211137 /* UMFileTrackingMacros.h in Headers */,
 				A6BEA70C1EF950BD007C203A /* UMHTTPClient.h in Headers */,
+				A663A5751F2F18F600A3A0AA /* des.h in Headers */,
+				A663A5971F2F18F600A3A0AA /* md4.h in Headers */,
 				A6020FBD1D4876E500211137 /* UMFileTrackingInfo.h in Headers */,
 				A60C2DA41A3F213F0090FC94 /* UMHTTPServerAuthorizeResult.h in Headers */,
+				A663A58D1F2F18F600A3A0AA /* hmac.h in Headers */,
+				A663A5511F2F18F600A3A0AA /* aes.h in Headers */,
+				A663A5BD1F2F18F600A3A0AA /* rsa.h in Headers */,
+				A663A5871F2F18F600A3A0AA /* engine.h in Headers */,
+				A663A55D1F2F18F600A3A0AA /* blowfish.h in Headers */,
 				A6020FB11D4876E500211137 /* NSNumber+HierarchicalDescription.h in Headers */,
 				A60C2D9E1A3F213F0090FC94 /* UMHTTPPageHandler.h in Headers */,
 				A60C2DC31A3F21450090FC94 /* UniversalLayers.h in Headers */,
 				A67D3DF61AFA01DF0090FC94 /* NSDictionary+UMJson.h in Headers */,
+				A663A5BB1F2F18F600A3A0AA /* ripemd.h in Headers */,
+				A663A5D11F2F18F600A3A0AA /* symhacks.h in Headers */,
 				A60C2DD61A3F214E0090FC94 /* UMLogDestination.h in Headers */,
 				A60C2DC51A3F21450090FC94 /* UMLayer.h in Headers */,
+				A663A5B91F2F18F600A3A0AA /* rc5.h in Headers */,
+				A663A5E11F2F18F600A3A0AA /* x509v3.h in Headers */,
+				A663A5A71F2F18F600A3A0AA /* opensslv.h in Headers */,
 				A6CC4B7B1A3F24C70090FC94 /* UMUUID.h in Headers */,
+				A663A5551F2F18F600A3A0AA /* asn1_mac.h in Headers */,
 				A60C2D861A3F212E0090FC94 /* UMConfigGroup.h in Headers */,
+				A663A5CF1F2F18F600A3A0AA /* stack.h in Headers */,
+				A663A5D51F2F18F600A3A0AA /* ts.h in Headers */,
 				A6BEA6FF1EF95096007C203A /* UMHTTPSServer.h in Headers */,
 				A6CC4B781A3F24C70090FC94 /* UMUtil.h in Headers */,
 				A60C2DD21A3F214E0090FC94 /* UMLogBuffered.h in Headers */,
 				A666EF5C1E89BBA6004804CB /* UniversalTokenizer.h in Headers */,
 				A6CC4B631A3F24C70090FC94 /* UMLockEvent.h in Headers */,
+				A663A56B1F2F18F600A3A0AA /* comp.h in Headers */,
 				A6A7A2401CF7511F00211137 /* UMSSLCertificate.h in Headers */,
 				A60C2DC71A3F21450090FC94 /* UMLayerTask.h in Headers */,
 				A6CC4B8D1A3F24E50090FC94 /* UMHost.h in Headers */,
 				A67D3DEA1AFA01BB0090FC94 /* NSArray+UMJson.h in Headers */,
+				A663A5DF1F2F18F600A3A0AA /* x509_vfy.h in Headers */,
 				A60C2DA01A3F213F0090FC94 /* UMHTTPRequest.h in Headers */,
+				A663A5D91F2F18F600A3A0AA /* ui.h in Headers */,
 				A6020FAF1D4876E500211137 /* NSDate+stringFunctions.h in Headers */,
 				A60C2D821A3F212E0090FC94 /* UMConfigParsedLine.h in Headers */,
 				A6CC4B691A3F24C70090FC94 /* UMReadWriteLock.h in Headers */,
@@ -5161,26 +5627,36 @@
 				A684B4271AB8FF4500854472 /* UMQueueNull.h in Headers */,
 				A60C2D981A3F213F0090FC94 /* NSMutableArray+UMHTTP.h in Headers */,
 				A6020FC81D4876E500211137 /* UMTask.h in Headers */,
+				A663A5691F2F18F600A3A0AA /* cms.h in Headers */,
 				A6CC4B391A3F249A0090FC94 /* UMJsonStreamParserState.h in Headers */,
 				A666EF291E89BB17004804CB /* UMSyntaxToken_Number.h in Headers */,
 				A6C954A01DC95B190036AC39 /* NSData+UMHTTP.h in Headers */,
 				A6CC4B3F1A3F249A0090FC94 /* UMJsonStreamWriterAccumulator.h in Headers */,
 				A6CC4B931A3F24E50090FC94 /* UMSocketDefs.h in Headers */,
 				A60C2DD81A3F214E0090FC94 /* UMLogEntry.h in Headers */,
+				A663A5651F2F18F600A3A0AA /* cast.h in Headers */,
+				A663A5A91F2F18F600A3A0AA /* ossl_typ.h in Headers */,
 				A60C2DD41A3F214E0090FC94 /* UMLogConsole.h in Headers */,
 				A6CC4B2D1A3F249A0090FC94 /* UMJsonParser.h in Headers */,
+				A663A5C11F2F18F600A3A0AA /* seed.h in Headers */,
 				A6020FC71D4876E500211137 /* UMSynchronizedSortedDictionary.h in Headers */,
 				A6020FAC1D4876E500211137 /* NSArray+HierarchicalDescription.h in Headers */,
 				A60C2DA51A3F213F0090FC94 /* UMHTTPResponseCode.h in Headers */,
+				A663A5771F2F18F600A3A0AA /* dh.h in Headers */,
+				A663A5CD1F2F18F600A3A0AA /* ssl3.h in Headers */,
 				A60C4E621EF80098007C203A /* UMPluginDirectory.h in Headers */,
 				A60C2DA21A3F213F0090FC94 /* UMHTTPServer.h in Headers */,
+				A663A57D1F2F18F600A3A0AA /* e_os2.h in Headers */,
 				A666EEE11E89BB17004804CB /* UMScanner.h in Headers */,
 				A6CC4B421A3F249A0090FC94 /* UMJsonStreamWriterState.h in Headers */,
 				A666EEED1E89BB17004804CB /* UMScannerChar.h in Headers */,
 				A666EF351E89BB17004804CB /* UMSyntaxToken.h in Headers */,
 				A60C2D9C1A3F213F0090FC94 /* UMHTTPConnection.h in Headers */,
 				A60C2D711A3F20F00090FC94 /* UMAssert.h in Headers */,
+				A663A5571F2F18F600A3A0AA /* asn1t.h in Headers */,
+				A663A57B1F2F18F600A3A0AA /* dtls1.h in Headers */,
 				A60C2D941A3F213F0090FC94 /* NSMutableString+UMHTTP.h in Headers */,
+				A663A5911F2F18F600A3A0AA /* kdf.h in Headers */,
 				A6D42E441D2F8BC900211137 /* UMRegex.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6770,6 +7246,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
 					"$(PROJECT_DIR)/libs/ios/openssl1.0.2h/lib",
 					"$(PROJECT_DIR)/libs/tvos/openssl1.0.2h/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0f-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -6810,6 +7287,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
 					"$(PROJECT_DIR)/libs/ios/openssl1.0.2h/lib",
 					"$(PROJECT_DIR)/libs/tvos/openssl1.0.2h/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0f-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -6844,6 +7322,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libressl/osx/lib",
 					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0f-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
@@ -6875,6 +7354,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libressl/osx/lib",
 					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0f-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.$(PRODUCT_NAME:rfc1034identifier)";

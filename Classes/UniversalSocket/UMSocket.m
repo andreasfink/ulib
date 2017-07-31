@@ -771,6 +771,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             return  [UMSocket umerrFromErrno:EBADF];
         }
     }
+
     memset(&sa,0x00,sizeof(sa));
     sa.sin_family		= AF_INET;
 #ifdef	HAS_SOCKADDR_LEN
@@ -823,6 +824,25 @@ static int SSL_smart_shutdown(SSL *ssl)
         return UMSocketError_address_not_available;
     }
 
+    if((_family==AF_INET6) && (ip_version==4))
+    {
+        /* we have a IPV6 socket but the remote addres is in IPV4 format so we must use the IPv6 representation of it */
+        NSString *ipv4_in_ipv6 =[NSString stringWithFormat:@"::ffff:%@",address];
+        if( inet_pton(AF_INET6, ipv4_in_ipv6.UTF8String, &sa6.sin6_addr) == 1)
+        {
+            ip_version = 6;
+        }
+        else
+        {
+            NSLog(@"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
+            @synchronized(self)
+            {
+                _isConnecting = 0;
+                _isConnected = 0;
+            }
+            return UMSocketError_address_not_available;
+        }
+    }
     direction = direction | UMSOCKET_DIRECTION_OUTBOUND;
     @synchronized(self)
     {
@@ -1119,7 +1139,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 {
 	if(i)
      {
-		[self switchToNonBlocking];
+		[self switchToNonBlock
      }
 	else
      {

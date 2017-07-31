@@ -159,6 +159,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 - (NSArray *)readFromFile:(NSString *)fn andAppend:(NSString *)append
 {
+    BOOL errIgnore = NO;
     NSError *err = NULL;
     
     NSString *fullPath  = [fn stringByStandardizingPath];
@@ -175,14 +176,30 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
                                                         error:&err];
     if(_configAppend)
     {
-        configFile = [NSString stringWithFormat:@"%@%@",configFile,_configAppend];
+        if((configFile==NULL) && (_configAppend.length > 0))
+        {
+            /* if the config file can not be found but command line options are passed via configAppend, we ignore the error */
+            errIgnore = YES;
+            configFile = _configAppend;
+        }
+        else
+        {
+            configFile = [NSString stringWithFormat:@"%@%@",configFile,_configAppend];
+        }
     }
     if(err)
     {
-        @throw([NSException exceptionWithName:@"config"
-                                       reason:[NSString stringWithFormat:@"Can not read file %@. Error %@",fn,err]
-                                     userInfo:@{@"backtrace": UMBacktrace(NULL,0) }]);
-
+        NSString *s = [NSString stringWithFormat:@"Can not read file %@. Error %@",fn,err];
+        if(errIgnore == YES)
+        {
+            NSLog(@"%@",s);
+        }
+        else
+        {
+            @throw([NSException exceptionWithName:@"config"
+                                           reason:s
+                                         userInfo:@{@"backtrace": UMBacktrace(NULL,0) }]);
+        }
     }
     
     NSArray *lines = [configFile componentsSeparatedByString:@"\n"];

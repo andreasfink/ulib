@@ -51,36 +51,28 @@ void umobject_disable_alloc_logging(void)
 
 @interface UMObjectThreadStarter : NSObject
 {
-    SEL         selector;
-    id          obj;
-    const char *file;
-    long        line;
-    const char *func;
+    SEL         _selector;
+    id          _obj;
+    const char *_file;
+    long        _line;
+    const char *_func;
 }
 
-@property(readwrite,assign) SEL selector;
-@property(readwrite,strong) id  obj;
-@property(readwrite,assign) const char *file;
-@property(readwrite,assign) long        line;
-@property(readwrite,assign) const char *func;
+@property(readwrite,assign,atomic) SEL selector;
+@property(readwrite,strong,atomic) id  obj;
+@property(readwrite,assign,atomic) const char *file;
+@property(readwrite,assign,atomic) long        line;
+@property(readwrite,assign,atomic) const char *func;
 @end
 
 @implementation UMObjectThreadStarter
 
-@synthesize selector;
-@synthesize obj;
-@synthesize file;
-@synthesize line;
-@synthesize func;
 - (void)dealloc
 {
-    [obj release];
+    [_obj release];
     [super dealloc];
 }
 @end
-
-
-
 
 #ifdef DEBUG_TRACK_ALLOCATION
 static FILE *alloc_log;
@@ -265,10 +257,14 @@ static FILE *alloc_log;
 
 - (void)threadStarter:(UMObjectThreadStarter *)ts
 {
+    SEL sel = ts.selector;
+    id  obj = [ts.obj retain];
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    [self performSelector:ts.selector withObject:ts.obj];
+    [self performSelector:sel withObject:obj];
 #pragma clang diagnostic pop
+    [obj release];
 }
 
 - (void)runSelectorInBackground:(SEL)aSelector
@@ -403,20 +399,26 @@ BOOL umobject_object_stat_is_enabled(void)
 - (id)retain
 {
     [super retain];
-    ulib_retain_counter++;
-    if(umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
+    @synchronized(self)
     {
-        [self retainDebug];
+        ulib_retain_counter++;
+        if(umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
+        {
+            [self retainDebug];
+        }
     }
     return self;
 }
 
 - (oneway void)release
 {
-    ulib_retain_counter--;
-    if(umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
+    @synchronized(self)
     {
-        [self releaseDebug];
+        ulib_retain_counter--;
+        if(umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
+        {
+            [self releaseDebug];
+        }
     }
     [super release];
 }

@@ -1447,7 +1447,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         pollfds[i].events = events;
         s.isInPollCall = YES;
     }
-    errno = 99;
+    errno = 0;
     ret1 = poll(pollfds, 1, timeoutInMs);
     
     if (ret1 < 0)
@@ -1469,9 +1469,8 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
     else
     {
-        eno = errno;
-        *err = [UMSocket umerrFromErrno:eno];
-    /* we have some event to handle. */
+        *err = 0;
+        /* we have some event to handle. */
         for(NSInteger i=0;i<n;i++)
         {
             UMSocket *s = inputSockets[i];

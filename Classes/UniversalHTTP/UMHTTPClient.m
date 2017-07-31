@@ -30,6 +30,9 @@
     creq.urlCon = [[NSURLConnection alloc]initWithRequest:creq.theRequest
                                   delegate:creq];
 #else
+/* note: this triggers a depreciated waring under recent MacOS X versions.
+ However we have to stick to this as Gnustep doesnt know NSURLSession yet */
+    
     creq.urlCon = [[NSURLConnection alloc]initWithRequest:creq.theRequest
                                   delegate:creq
                            startImmediately:YES];

@@ -754,83 +754,70 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) connect
 {
-    struct sockaddr_in	sa;
-    struct sockaddr_in6	sa6;
-    char addr[256];
-    int err;
-    ip_version = 0;
-    NSString *address;
-    int resolved;
-
     @synchronized(self)
     {
-        if((_sock < 0) || (!_hasSocket))
+        struct sockaddr_in	sa;
+        struct sockaddr_in6	sa6;
+        char addr[256];
+        int err;
+        ip_version = 0;
+        NSString *address;
+        int resolved;
+
+        if(self.isConnected)
         {
-            _isConnecting = 0;
-            _isConnected = 0;
-            return  [UMSocket umerrFromErrno:EBADF];
+            NSLog(@"connecting an already connected socket!?");
         }
-    }
-
-    memset(&sa,0x00,sizeof(sa));
-    sa.sin_family		= AF_INET;
-#ifdef	HAS_SOCKADDR_LEN
-    sa.sin_len			= sizeof(struct sockaddr_in);
-#endif
-    sa.sin_port         = htons(requestedRemotePort);
-
-    memset(&sa6,0x00,sizeof(sa6));
-    sa6.sin6_family			= AF_INET6;
-#ifdef	HAS_SOCKADDR_LEN
-    sa6.sin6_len        = sizeof(struct sockaddr_in6);
-#endif
-    sa6.sin6_port       = htons(requestedRemotePort);
-
-    while((resolved = [remoteHost resolved]) == 0)
-    {
-        usleep(50000);
-    }
-    address = [remoteHost address:(UMSocketType)type];
-    if (!address)
-    {
-        NSLog(@"[UMSocket connect] EADDRNOTAVAIL (address not resolved) during connect");
         @synchronized(self)
         {
-            _isConnecting = 0;
-            _isConnected = 0;
+            if((_sock < 0) || (!_hasSocket))
+            {
+                _isConnecting = 0;
+                self.isConnected = NO;
+                return  [UMSocket umerrFromErrno:EBADF];
+            }
         }
-        return UMSocketError_address_not_available;
-    }
 
-    [address getCString:addr maxLength:255 encoding:NSUTF8StringEncoding];
-    //	inet_aton(addr, &sa.sin_addr);
+        memset(&sa,0x00,sizeof(sa));
+        sa.sin_family		= AF_INET;
+#ifdef	HAS_SOCKADDR_LEN
+        sa.sin_len			= sizeof(struct sockaddr_in);
+#endif
+        sa.sin_port         = htons(requestedRemotePort);
 
-    if( inet_pton(AF_INET6, addr, &sa6.sin6_addr) == 1)
-    {
-        ip_version = 6;
-    }
-    else if(inet_pton(AF_INET, addr, &sa.sin_addr) == 1)
-    {
-        ip_version = 4;
-    }
-    else
-    {
-        NSLog(@"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
-        @synchronized(self)
+        memset(&sa6,0x00,sizeof(sa6));
+        sa6.sin6_family			= AF_INET6;
+#ifdef	HAS_SOCKADDR_LEN
+        sa6.sin6_len        = sizeof(struct sockaddr_in6);
+#endif
+        sa6.sin6_port       = htons(requestedRemotePort);
+
+        while((resolved = [remoteHost resolved]) == 0)
         {
-            _isConnecting = 0;
-            _isConnected = 0;
+            usleep(50000);
         }
-        return UMSocketError_address_not_available;
-    }
+        address = [remoteHost address:(UMSocketType)type];
+        if (!address)
+        {
+            NSLog(@"[UMSocket connect] EADDRNOTAVAIL (address not resolved) during connect");
+            @synchronized(self)
+            {
+                _isConnecting = 0;
+                self.isConnected = NO;
+            }
+            return UMSocketError_address_not_available;
+        }
 
-    if((_family==AF_INET6) && (ip_version==4))
-    {
-        /* we have a IPV6 socket but the remote addres is in IPV4 format so we must use the IPv6 representation of it */
-        NSString *ipv4_in_ipv6 =[NSString stringWithFormat:@"::ffff:%@",address];
-        if( inet_pton(AF_INET6, ipv4_in_ipv6.UTF8String, &sa6.sin6_addr) == 1)
+        [address getCString:addr maxLength:255 encoding:NSUTF8StringEncoding];
+        //	inet_aton(addr, &sa.sin_addr);
+
+        if( inet_pton(AF_INET6, addr, &sa6.sin6_addr) == 1)
         {
             ip_version = 6;
+        }
+        else if(inet_pton(AF_INET, addr, &sa.sin_addr) == 1)
+        {
+            ip_version = 4;
         }
         else
         {
@@ -838,51 +825,71 @@ static int SSL_smart_shutdown(SSL *ssl)
             @synchronized(self)
             {
                 _isConnecting = 0;
-                _isConnected = 0;
+                self.isConnected = NO;
             }
             return UMSocketError_address_not_available;
         }
-    }
-    direction = direction | UMSOCKET_DIRECTION_OUTBOUND;
-    @synchronized(self)
-    {
-        _isConnecting = 1;
-        [self reportStatus:@"calling connect()"];
-        if(ip_version==6)
-        {
-            err = connect(_sock, (struct sockaddr *)&sa6, sizeof(sa6));
-        }
-        else if(ip_version==4)
-        {
-            err = connect(_sock, (struct sockaddr *)&sa, sizeof(sa));
-        }
-        else
-        {
-            UMAssert(0,@"[UMSocket connect]: IPversion is not 6 neither 4");
-            err = 0;
-        }
-        if(err)
-        {
 
-            _isConnecting = 0;
-            _isConnected = 0;
-            //		goto err;
-        }
-        else
+        if((_family==AF_INET6) && (ip_version==4))
         {
-            _isConnecting = 0;
-            _isConnected = 1;
-            status = UMSOCKET_STATUS_IS;
-            NSString *msg = [NSString stringWithFormat:@"socket %d isConnected=1",_sock];
-            [self reportStatus:msg];
-            return 0;
+            /* we have a IPV6 socket but the remote addres is in IPV4 format so we must use the IPv6 representation of it */
+            NSString *ipv4_in_ipv6 =[NSString stringWithFormat:@"::ffff:%@",address];
+            if( inet_pton(AF_INET6, ipv4_in_ipv6.UTF8String, &sa6.sin6_addr) == 1)
+            {
+                ip_version = 6;
+            }
+            else
+            {
+                NSLog(@"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
+                @synchronized(self)
+                {
+                    _isConnecting = 0;
+                    self.isConnected = NO;
+                }
+                return UMSocketError_address_not_available;
+            }
         }
+        direction = direction | UMSOCKET_DIRECTION_OUTBOUND;
+        @synchronized(self)
+        {
+            _isConnecting = 1;
+            [self reportStatus:@"calling connect()"];
+            if(ip_version==6)
+            {
+                err = connect(_sock, (struct sockaddr *)&sa6, sizeof(sa6));
+            }
+            else if(ip_version==4)
+            {
+                err = connect(_sock, (struct sockaddr *)&sa, sizeof(sa));
+            }
+            else
+            {
+                UMAssert(0,@"[UMSocket connect]: IPversion is not 6 neither 4");
+                err = 0;
+            }
+            if(err)
+            {
 
-        //err:
-        int eno = errno;
-
-        NSLog(@"[UMSocket connect] failed with errno %d (name %@)", eno, name);
-        return [UMSocket umerrFromErrno:eno];
+                _isConnecting = 0;
+                self.isConnected = NO;
+                //		goto err;
+            }
+            else
+            {
+                _isConnecting = 0;
+                self.isConnected = YES;
+                status = UMSOCKET_STATUS_IS;
+                NSString *msg = [NSString stringWithFormat:@"socket %d isConnected=1",_sock];
+                [self reportStatus:msg];
+                return 0;
+            }
+            
+            //err:
+            int eno = errno;
+            
+            NSLog(@"[UMSocket connect] failed with errno %d (%s)", eno, strerror(eno));
+            return [UMSocket umerrFromErrno:eno];
+        }
     }
 }
 

@@ -42,7 +42,7 @@
 	int					_isBound;
 	int					_isListening;
 	int					_isConnecting;
-	int					_isConnected;
+	BOOL                _isConnected;
 	int					_isNonBlocking;
     int                 _hasSocket;
 	NSString			*device;
@@ -94,7 +94,7 @@
 @property(readwrite,assign,atomic)		int					isBound;
 @property(readwrite,assign,atomic)		int					isListening;
 @property(readwrite,assign,atomic)		int					isConnecting;
-@property(readwrite,assign,atomic)		int					isConnected;
+@property(readwrite,assign,atomic)		BOOL	isConnected;
 @property(readwrite,strong)		NSMutableData *		receiveBuffer;
 @property(readwrite,strong)		NSString *          lastError;
 @property(readwrite,strong)		id					reportDelegate;

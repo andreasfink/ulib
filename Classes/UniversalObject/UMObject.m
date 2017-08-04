@@ -216,7 +216,7 @@ static FILE *alloc_log;
 {
     if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
-        NSLog(@"Dealloc [%p] rc=%d",self,ulib_retain_counter);
+        NSLog(@"Dealloc [%p] rc=%d",self,self.ulib_retain_counter);
     }
     if(alloc_file)
     {
@@ -399,7 +399,7 @@ BOOL umobject_object_stat_is_enabled(void)
 - (id)retain
 {
     [super retain];
-    ulib_retain_counter++;
+    self.ulib_retain_counter++;
     if(umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
             [self retainDebug];
@@ -409,7 +409,7 @@ BOOL umobject_object_stat_is_enabled(void)
 
 - (oneway void)release
 {
-    ulib_retain_counter--;
+    self.ulib_retain_counter--;
     if(umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
         [self releaseDebug];
@@ -421,7 +421,7 @@ BOOL umobject_object_stat_is_enabled(void)
 {
     if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
-        NSLog(@"Retain [%p] rc=%d",self,ulib_retain_counter);
+        NSLog(@"Retain [%p] rc=%d",self,self.ulib_retain_counter);
         NSLog(@"Called from %@",UMBacktrace(NULL,0));
     }
 }
@@ -431,7 +431,7 @@ BOOL umobject_object_stat_is_enabled(void)
 {
     if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
-        NSLog(@"Release [%p] rc=%d",self,ulib_retain_counter);
+        NSLog(@"Release [%p] rc=%d",self,self.ulib_retain_counter);
         NSLog(@"Called from %@",UMBacktrace(NULL,0));
     }
 }

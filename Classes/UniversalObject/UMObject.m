@@ -399,26 +399,20 @@ BOOL umobject_object_stat_is_enabled(void)
 - (id)retain
 {
     [super retain];
-    @synchronized(self)
+    ulib_retain_counter++;
+    if(umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
-        ulib_retain_counter++;
-        if(umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
-        {
             [self retainDebug];
-        }
     }
     return self;
 }
 
 - (oneway void)release
 {
-    @synchronized(self)
+    ulib_retain_counter--;
+    if(umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
-        ulib_retain_counter--;
-        if(umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
-        {
-            [self releaseDebug];
-        }
+        [self releaseDebug];
     }
     [super release];
 }

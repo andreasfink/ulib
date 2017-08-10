@@ -63,7 +63,7 @@ Here is how to get such a installation up and running under Debian 9 (codename S
         libfreetype6 libfreetype6-dev \
         libpango1.0-dev \
         libcairo2-dev \
-        libxt-dev 
+        libxt-dev libssl-dev
 
     export CC=clang
     export CXX=clang++

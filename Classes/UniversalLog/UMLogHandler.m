@@ -57,45 +57,56 @@
 
 - (void) addLogDestination:(UMLogDestination *)dst
 {
-    [lock lock];
-	[logDestinations addObject: dst];
-    [lock unlock];
+    @synchronized(self)
+    {
+        //[lock lock];
+        [logDestinations addObject: dst];
+        //[lock unlock];
+    }
 }
 
 - (void) removeLogDestination:(UMLogDestination *)dst
 {
-	NSUInteger i;
-
-    [lock lock];
-	i = [logDestinations indexOfObject: dst];
-	if (i == NSNotFound)
+    @synchronized(self)
     {
-		return;
+
+        NSUInteger i;
+
+        //[lock lock];
+        i = [logDestinations indexOfObject: dst];
+        if (i == NSNotFound)
+        {
+            [lock unlock];
+            return;
+        }
+        [logDestinations removeObjectAtIndex:i];
+        //[lock unlock];
     }
-    [logDestinations removeObjectAtIndex:i];
-    [lock unlock];
 }
 
 - (void) logAnEntry:(UMLogEntry *)logEntry
-{	
-	UMLogDestination *dst = nil;
+{
+    @synchronized(self)
+    {
+        UMLogDestination *dst = nil;
 
-	[lock lock];
-	for ( dst in logDestinations )
-	{
-		[dst unlockedLogAnEntry:logEntry];
-	}
-	[lock unlock];
+        //[lock lock];
+        for ( dst in logDestinations )
+        {
+            [dst unlockedLogAnEntry:logEntry];
+        }
+        //[lock unlock];
+    }
 }
 
 - (void) unlockedLogAnEntry:(UMLogEntry *)logEntry
-{	
-	UMLogDestination *dst;
+{
+    UMLogDestination *dst;
     
-	for ( dst in logDestinations )
-	{
-		[dst unlockedLogAnEntry:logEntry];
-	}
+    for ( dst in logDestinations )
+    {
+        [dst unlockedLogAnEntry:logEntry];
+    }
 }
 
 - (void) log:(UMLogLevel) level section:(NSString *)section subsection:(NSString *)subsection name:(NSString *)name text:(NSString *)message errorCode:(int)err
@@ -114,23 +125,26 @@
 
 - (NSString *)description
 {
-    NSMutableString *s = [[NSMutableString alloc]init];
-    [s appendFormat:@"%@\n", [super description]];
-    if(console)
+    @synchronized (self)
     {
-        [s appendFormat:@" Logs to Console: %@\n",[console oneLineDescription]];
-    }
+        NSMutableString *s = [[NSMutableString alloc]init];
+        [s appendFormat:@"%@\n", [super description]];
+        if(console)
+        {
+            [s appendFormat:@" Logs to Console: %@\n",[console oneLineDescription]];
+        }
 
-    UMLogDestination *logDestination;
-    [lock lock];
-    for(logDestination in logDestinations)
-    {
-        if(logDestination == console)
-            continue;
-        [s appendFormat:@" Logs to: %@\n", [logDestination oneLineDescription]];
+        UMLogDestination *logDestination;
+        //[lock lock];
+        for(logDestination in logDestinations)
+        {
+            if(logDestination == console)
+                continue;
+            [s appendFormat:@" Logs to: %@\n", [logDestination oneLineDescription]];
+        }
+        //[lock unlock];
+        return s;
     }
-    [lock unlock];
-    return s;
 }
 
 - (UMLogLevel)level

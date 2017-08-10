@@ -48,7 +48,11 @@
 {
     @autoreleasepool
     {
-        [receiver.logFeed debug:0 inSubsection:@"exec" withText:self.name];
+        if(receiver.logLevel <= UMLOG_DEBUG)
+        {
+            NSString *s = self.name;
+            [receiver.logFeed debug:0 inSubsection:@"exec" withText:s];
+        }
         if(requiresSynchronisation)
         {
             @synchronized(receiver)

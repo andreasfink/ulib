@@ -14,7 +14,7 @@
 {
 	NSMutableArray	*logDestinations;
 	UMLogConsole	*console;
-	NSLock			*lock;
+//	NSLock			*lock;
 }
 
 @property	(readwrite,strong)		NSMutableArray	*logDestinations;

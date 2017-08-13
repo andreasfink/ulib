@@ -361,7 +361,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 */
     if((_hasSocket != 0) && (_sock >= 0))
     {
-        NSLog(@"deallocating a connection which has an open socket");
+        fprintf(stderr,"deallocating a connection which has an open socket");
         TRACK_FILE_CLOSE(_sock);
         close(_sock);
         _sock = -1;
@@ -498,18 +498,18 @@ static int SSL_smart_shutdown(SSL *ssl)
                 case UMSOCKET_TYPE_TCP6ONLY:
                 case UMSOCKET_TYPE_TCP4ONLY:
                 case UMSOCKET_TYPE_TCP:
-                    NSLog(@"[UMSocket: init] socket(IPPROTO_TCP) returns %d errno = %d",_sock,eno);
+                    fprintf(stderr,"[UMSocket: init] socket(IPPROTO_TCP) returns %d errno = %d",_sock,eno);
                     break;
                 case UMSOCKET_TYPE_UDP6ONLY:
                 case UMSOCKET_TYPE_UDP4ONLY:
                 case UMSOCKET_TYPE_UDP:
-                    NSLog(@"[UMSocket: init] socket(IPPROTO_UDP) returns %d errno = %d",_sock,eno);
+                    fprintf(stderr,"[UMSocket: init] socket(IPPROTO_UDP) returns %d errno = %d",_sock,eno);
                     break;
 #ifdef	SCTP_IN_KERNEL
                 case UMSOCKET_TYPE_SCTP4ONLY:
                 case UMSOCKET_TYPE_SCTP6ONLY:
                 case UMSOCKET_TYPE_SCTP:
-                    NSLog(@"[UMSocket: init] socket(IPPROTO_SCTP) returns %d errno = %d",_sock,eno);
+                    fprintf(stderr,"[UMSocket: init] socket(IPPROTO_SCTP) returns %d errno = %d",_sock,eno);
                     break;
 #endif
                     
@@ -529,7 +529,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             if(setsockopt(_sock, SOL_SOCKET, SO_REUSEADDR, (char *) &reuse,sizeof(reuse)) == -1)
             {
                 eno = errno;
-                NSLog(@"[UMSocket: init] setsockopt(SO_REUSEADDR) sets errno to %d",eno);
+                fprintf(stderr,"[UMSocket: init] setsockopt(SO_REUSEADDR) sets errno to %d",eno);
             }
         }
     }
@@ -741,7 +741,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (void)netService:(NSNetService *)sender didNotPublish:(NSDictionary *)errorDict
 {
-    NSLog(@"netService:didNotPublish:%@",errorDict);
+    fprintf(stderr,"netService:didNotPublish:%@",errorDict);
 
 }
 
@@ -766,7 +766,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
         if(self.isConnected)
         {
-            NSLog(@"connecting an already connected socket!?");
+            fprintf(stderr,"connecting an already connected socket!?");
         }
         @synchronized(self)
         {
@@ -799,7 +799,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         address = [remoteHost address:(UMSocketType)type];
         if (!address)
         {
-            NSLog(@"[UMSocket connect] EADDRNOTAVAIL (address not resolved) during connect");
+            fprintf(stderr,"[UMSocket connect] EADDRNOTAVAIL (address not resolved) during connect");
             @synchronized(self)
             {
                 _isConnecting = 0;
@@ -821,7 +821,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         }
         else
         {
-            NSLog(@"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
+            fprintf(stderr,"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
             @synchronized(self)
             {
                 _isConnecting = 0;
@@ -840,7 +840,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             }
             else
             {
-                NSLog(@"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
+                fprintf(stderr,"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
                 @synchronized(self)
                 {
                     _isConnecting = 0;
@@ -887,7 +887,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             //err:
             int eno = errno;
             
-            NSLog(@"[UMSocket connect] failed with errno %d (%s)", eno, strerror(eno));
+            fprintf(stderr,"[UMSocket connect] failed with errno %d (%s)", eno, strerror(eno));
             return [UMSocket umerrFromErrno:eno];
         }
     }
@@ -993,12 +993,12 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 
 #ifdef FINK_DEBUG
-            NSLog(@"accept ipv4 on %d",_sock);
+            fprintf(stderr,"accept ipv4 on %d",_sock);
 #endif
             newsock = accept(_sock,(struct sockaddr *)&sa4,&slen4);
             eno = errno;
 #ifdef FINK_DEBUG
-            NSLog(@"returned  %d, errno=%d",newsock,eno);
+            fprintf(stderr,"returned  %d, errno=%d",newsock,eno);
 #endif
             if(newsock >=0)
             {
@@ -1027,13 +1027,13 @@ static int SSL_smart_shutdown(SSL *ssl)
             socklen_t slen6 = sizeof(sa6);
 
 #ifdef FINK_DEBUG
-            NSLog(@"accept ipv4 on %d",_sock);
+            fprintf(stderr,"accept ipv4 on %d",_sock);
 #endif
             newsock = accept(_sock,(struct sockaddr *)&sa6,&slen6);
             eno = errno;
 
 #ifdef FINK_DEBUG
-            NSLog(@"returned  %d, errno=%d",newsock,eno);
+            fprintf(stderr,"returned  %d, errno=%d",newsock,eno);
 #endif
 
             if(newsock >= 0)
@@ -1165,7 +1165,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             return err;
         }
 #ifdef FINK_DEBUG
-        NSLog(@"closing socket %d",_sock);
+        fprintf(stderr,"closing socket %d",_sock);
 #endif
 
         TRACK_FILE_CLOSE(_sock);
@@ -1307,7 +1307,6 @@ static int SSL_smart_shutdown(SSL *ssl)
 				return [UMSocket umerrFromErrno:EINVAL];
 			}		
 			
-			NSLog(@"Sending: %@",data);
 			i =	[cryptoStream writeBytes: [data bytes] length:[data length]  errorCode:&eno];
 			if (i != [data length])
 			{
@@ -1402,7 +1401,6 @@ static int SSL_smart_shutdown(SSL *ssl)
         eno = errno;
         /* we have some event to handle. */
         ret2 = pollfds[0].revents;
-        //NSLog(@"revents are %d", ret2);
         if(ret2 & POLLERR)
         {
             return [UMSocket umerrFromErrno:eno];
@@ -1697,85 +1695,85 @@ static int SSL_smart_shutdown(SSL *ssl)
 	switch(err)
 	{
 		case EACCES:
-			NSLog(@"Error: %d EACCES %@",err,errString);
+			frpintf(stderr,"Error: %d EACCES %s",err,errString.UTF8String);
 			break;
 		case EADDRINUSE:
-			NSLog(@"Error: %d EADDRINUSE %@",err,errString);
+			frpintf(stderr,"Error: %d EADDRINUSE %s",err,errString.UTF8String);
 			break;
 		case EADDRNOTAVAIL:
-			NSLog(@"Error: %d EADDRNOTAVAIL %@",err,errString);
+			frpintf(stderr,"Error: %d EADDRNOTAVAIL %s",err,errString.UTF8String);
 			break;
 		case EAFNOSUPPORT:
-			NSLog(@"Error: %d EAFNOSUPPORT %@",err,errString);
+			frpintf(stderr,"Error: %d EAFNOSUPPORT %s",err,errString.UTF8String);
 			break;
 		case EALREADY:
-			NSLog(@"Error: %d EALREADY %@",err,errString);
+			frpintf(stderr,"Error: %d EALREADY %s",err,errString.UTF8String);
 			break;
 		case EBADF:
-			NSLog(@"Error: %d EBADF %@",err,errString);
+			frpintf(stderr,"Error: %d EBADF %s",err,errString.UTF8String);
 			break;
 		case ECONNREFUSED:
-			NSLog(@"Error: %d ECONNREFUSED %@",err,errString);
+			frpintf(stderr,"Error: %d ECONNREFUSED %s",err,errString.UTF8String);
 			break;
 		case EHOSTUNREACH:
-			NSLog(@"Error: %d EHOSTUNREACH %@",err,errString);
+			frpintf(stderr,"Error: %d EHOSTUNREACH %s",err,errString.UTF8String);
 			break;
 		case EINPROGRESS:
-			NSLog(@"Error: %d EINPROGRESS %@",err,errString);
+			frpintf(stderr,"Error: %d EINPROGRESS %s",err,errString.UTF8String);
 			break;
 		case EINTR:
-			NSLog(@"Error: %d EINTR %@",err,errString);
+			frpintf(stderr,"Error: %d EINTR %s",err,errString.UTF8String);
 			break;
 		case EINVAL:
-			NSLog(@"Error: %d EINVAL %@",err,errString);
+			frpintf(stderr,"Error: %d EINVAL %s",err,errString.UTF8String);
 			break;
 		case EISCONN:
-			NSLog(@"Error: %d EISCONN %@",err,errString);
+			frpintf(stderr,"Error: %d EISCONN %s",err,errString.UTF8String);
 			break;
 		case ENETDOWN:
-			NSLog(@"Error: %d ENETDOWN %@",err,errString);
+			frpintf(stderr,"Error: %d ENETDOWN %s",err,errString.UTF8String);
 			break;
 		case ENETUNREACH:
-			NSLog(@"Error: %d ENETUNREACH %@",err,errString);
+			frpintf(stderr,"Error: %d ENETUNREACH %s",err,errString.UTF8String);
 			break;
 		case ENOBUFS:
-			NSLog(@"Error: %d ENOBUFS %@",err,errString);
+			frpintf(stderr,"Error: %d ENOBUFS %s",err,errString.UTF8String);
 			break;
 		case ENOTSOCK:
-			NSLog(@"Error: %d ENOTSOCK %@",err,errString);
+			frpintf(stderr,"Error: %d ENOTSOCK %s",err,errString.UTF8String);
 			break;
 		case EOPNOTSUPP:
-			NSLog(@"Error: %d EOPNOTSUPP %@",err,errString);
+			frpintf(stderr,"Error: %d EOPNOTSUPP %s",err,errString.UTF8String);
 			break;
 		case EPROTOTYPE:
-			NSLog(@"Error: %d EPROTOTYPE %@",err,errString);
+			frpintf(stderr,"Error: %d EPROTOTYPE %s",err,errString.UTF8String);
 			break;
 		case ETIMEDOUT:
-			NSLog(@"Error: %d ETIMEDOUT %@",err,errString);
+			fprintf(stderr,"Error: %d ETIMEDOUT %s",err,errString.UTF8String);
 			break;
 		case EIO:
-			NSLog(@"Error: %d EIO %@",err,errString);
+			fprintf(stderr,"Error: %d EIO %s",err,errString.UTF8String);
 			break;
 		case ELOOP:
-			NSLog(@"Error: %d ELOOP %@",err,errString);
+			fprintf(stderr,"Error: %d ELOOP %s",err,errString.UTF8String);
 			break;
 		case ENAMETOOLONG:
-			NSLog(@"Error: %d ENAMETOOLONG %@",err,errString);
+			fprintf(stderr,"Error: %d ENAMETOOLONG %s",err,errString.UTF8String);
 			break;
 		case ENOENT:
-			NSLog(@"Error: %d ENOENT %@",err,errString);
+			fprintf(stderr,"Error: %d ENOENT %s",err,errString.UTF8String);
 			break;
 		case ENOTDIR:
-			NSLog(@"Error: %d ENOTDIR %@",err,errString);
+			fprintf(stderr,"Error: %d ENOTDIR %s",err,errString.UTF8String);
 			break;
 		case ENOTCONN:
-			NSLog(@"Error: %d ENOTCONN %@",err,errString);
+			fprintf(stderr,"Error: %d ENOTCONN %s",err,errString.UTF8String);
 			break;
 		case EAGAIN:
-			NSLog(@"Error: %d EAGAIN %@",err,errString);
+			fprintf(stderr,"Error: %d EAGAIN %s",err,errString.UTF8String);
 			break;
 		default:
-			NSLog(@"Error: %d %@",err,errString);
+			fprintf(stderr,"Error: %d %s",err,errString.UTF8String);
 			break;
 	}
 }
@@ -1969,7 +1967,6 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (void) setEvent: (int) event
 {
-	NSLog(@"%@: poll event %d",[self description],event);
 	lastPollEvent = event;
 }
 
@@ -2125,7 +2122,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             }
             else
             {
-                NSLog(@"we have socket err %d set error %d", errno, eno);
+                fprintf(stderr,"we have socket err %d set error %d", errno, eno);
                 sErr = [UMSocket umerrFromErrno:eno];
                 return sErr;
             }
@@ -2135,7 +2132,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         pos = [receiveBuffer rangeOfData_dd:eol startingFrom:receivebufpos];
         if (pos.location == NSNotFound)
         {
-            NSLog(@"we have no eol");
+            fprintf(stderr,"we have no eol");
             return UMSocketError_no_error;
         }
     }
@@ -2169,7 +2166,6 @@ static int SSL_smart_shutdown(SSL *ssl)
     /* skip heading spaces */
     if(receivebufpos > 0)
     {
-        NSLog(@"receivebufpos was %ld, remove heading",(long)receivebufpos);
         /* remove heading */
         [receiveBuffer replaceBytesInRange:NSMakeRange(0, receivebufpos) withBytes:nil length:0];
         receivebufpos = 0;
@@ -2212,13 +2208,11 @@ static int SSL_smart_shutdown(SSL *ssl)
             if (eno == EINTR || eno == EAGAIN || eno == EWOULDBLOCK)
             {
                 usleep(10000);
-                NSLog(@"[UMsocket receive:to:] timeout");
                 return UMSocketError_try_again;
             }
             else
             {
                 sErr = [UMSocket umerrFromErrno:eno];
-                NSLog(@"[UMsocket receive:to:] error: %@", [UMSocket getSocketErrorString:sErr]);
                 return sErr;
             }
         }
@@ -2309,11 +2303,10 @@ static int SSL_smart_shutdown(SSL *ssl)
         case EHOSTDOWN:
             return UMSocketError_host_down;
         default:
-            
-            NSLog(@"Unknown errno code %d",e);
+            fprintf(stderr,"Unknown errno code %d",e);
             break;
     }
-	return UMSocketError_not_known;
+    return UMSocketError_not_known;
 }
 
 + (NSString *) getSocketErrorString:(UMSocketError)e
@@ -2725,7 +2718,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     if (0==SSL_set_fd((SSL *)ssl, _sock))
     {
         /* SSL_set_fd failed, log error */
-        NSLog(@"SSL: OpenSSL: %.256s", ERR_error_string(ERR_get_error(), NULL));
+        fprintf(stderr,"SSL: OpenSSL: %.256s", ERR_error_string(ERR_get_error(), NULL));
         return;
     }
     /* set to  blocking IO during the handshake */
@@ -2745,7 +2738,6 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     while(1)
     {
         int i = SSL_do_handshake((SSL *)ssl);
-        NSLog(@"SSL_do_handshake returns %d",i);
         if(i==1)
         {
             break;
@@ -2766,7 +2758,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
                     e = ERR_get_error();
                     if(e)
                     {
-                        NSLog(@"SSL: %s",ERR_reason_error_string(e));
+                        //NSLog(@"SSL: %s",ERR_reason_error_string(e));
                     }
                 }
                 break;
@@ -2781,7 +2773,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 
     if(SSL_get_verify_result(ssl) != X509_V_OK)
     {
-        NSLog(@"SSL_get_verify_result() failed"); /* Handle the failed verification */
+        //NSLog(@"SSL_get_verify_result() failed"); /* Handle the failed verification */
     }
     else
     {

@@ -1695,58 +1695,58 @@ static int SSL_smart_shutdown(SSL *ssl)
 	switch(err)
 	{
 		case EACCES:
-			frpintf(stderr,"Error: %d EACCES %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EACCES %s",err,errString.UTF8String);
 			break;
 		case EADDRINUSE:
-			frpintf(stderr,"Error: %d EADDRINUSE %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EADDRINUSE %s",err,errString.UTF8String);
 			break;
 		case EADDRNOTAVAIL:
-			frpintf(stderr,"Error: %d EADDRNOTAVAIL %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EADDRNOTAVAIL %s",err,errString.UTF8String);
 			break;
 		case EAFNOSUPPORT:
-			frpintf(stderr,"Error: %d EAFNOSUPPORT %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EAFNOSUPPORT %s",err,errString.UTF8String);
 			break;
 		case EALREADY:
-			frpintf(stderr,"Error: %d EALREADY %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EALREADY %s",err,errString.UTF8String);
 			break;
 		case EBADF:
-			frpintf(stderr,"Error: %d EBADF %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EBADF %s",err,errString.UTF8String);
 			break;
 		case ECONNREFUSED:
-			frpintf(stderr,"Error: %d ECONNREFUSED %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d ECONNREFUSED %s",err,errString.UTF8String);
 			break;
 		case EHOSTUNREACH:
-			frpintf(stderr,"Error: %d EHOSTUNREACH %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EHOSTUNREACH %s",err,errString.UTF8String);
 			break;
 		case EINPROGRESS:
-			frpintf(stderr,"Error: %d EINPROGRESS %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EINPROGRESS %s",err,errString.UTF8String);
 			break;
 		case EINTR:
-			frpintf(stderr,"Error: %d EINTR %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EINTR %s",err,errString.UTF8String);
 			break;
 		case EINVAL:
-			frpintf(stderr,"Error: %d EINVAL %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EINVAL %s",err,errString.UTF8String);
 			break;
 		case EISCONN:
-			frpintf(stderr,"Error: %d EISCONN %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EISCONN %s",err,errString.UTF8String);
 			break;
 		case ENETDOWN:
-			frpintf(stderr,"Error: %d ENETDOWN %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d ENETDOWN %s",err,errString.UTF8String);
 			break;
 		case ENETUNREACH:
-			frpintf(stderr,"Error: %d ENETUNREACH %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d ENETUNREACH %s",err,errString.UTF8String);
 			break;
 		case ENOBUFS:
-			frpintf(stderr,"Error: %d ENOBUFS %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d ENOBUFS %s",err,errString.UTF8String);
 			break;
 		case ENOTSOCK:
-			frpintf(stderr,"Error: %d ENOTSOCK %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d ENOTSOCK %s",err,errString.UTF8String);
 			break;
 		case EOPNOTSUPP:
-			frpintf(stderr,"Error: %d EOPNOTSUPP %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EOPNOTSUPP %s",err,errString.UTF8String);
 			break;
 		case EPROTOTYPE:
-			frpintf(stderr,"Error: %d EPROTOTYPE %s",err,errString.UTF8String);
+			fprintf(stderr,"Error: %d EPROTOTYPE %s",err,errString.UTF8String);
 			break;
 		case ETIMEDOUT:
 			fprintf(stderr,"Error: %d ETIMEDOUT %s",err,errString.UTF8String);

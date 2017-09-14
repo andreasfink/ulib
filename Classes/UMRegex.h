@@ -21,12 +21,9 @@
 
 @property(readwrite,strong) NSString *rule;
 
-
 - (UMRegex *)initWithString:(NSString *)r flags:(int)cflags;
-
-/* returns an array of UMRegexMatch objects: */
 - (NSArray *)regexExec:(NSString *)string
-             maxMatch:(int)max
-                flags:(int)eflags;
+              maxMatch:(int)max
+                 flags:(int)eflags;
 
 @end

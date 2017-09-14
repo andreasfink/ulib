@@ -57,7 +57,7 @@
 
 -(NSArray *)regexExec:(NSString *)string
              maxMatch:(int)max
-                flags:(int)eflags;
+                flags:(int)eflags
 {
     if(string==NULL)
     {

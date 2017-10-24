@@ -759,7 +759,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (void)netService:(NSNetService *)sender didNotPublish:(NSDictionary *)errorDict
 {
-    fprintf(stderr,"netService:didNotPublish:%@",errorDict);
+    fprintf(stderr,"netService:didNotPublish:%s",errorDict.description.UTF8String);
 
 }
 

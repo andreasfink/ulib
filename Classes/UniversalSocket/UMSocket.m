@@ -557,8 +557,10 @@ static int SSL_smart_shutdown(SSL *ssl)
             [self reportStatus:@"- already bound"];
             return UMSocketError_already_bound;
         }
-
-        localHost				= [[UMHost alloc] initWithLocalhost];
+        if(localHost == NULL)
+        {
+            localHost				= [[UMHost alloc] initWithLocalhost];
+        }
         localAddresses			= [localHost addresses];
         useableLocalAddresses	= [[NSMutableArray alloc] init];
 
@@ -616,9 +618,9 @@ static int SSL_smart_shutdown(SSL *ssl)
                 if(localAddresses.count > 0)
                 {
                     ipAddr = [localAddresses objectAtIndex:0];
+                    ipAddr = [UMSocket deunifyIp:ipAddr];
                     [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
                     inet_aton(addressString, &sa.sin_addr);
-                    
                 }
                 if(bind(_sock,(struct sockaddr *)&sa,sizeof(sa)) != 0)
                 {
@@ -635,6 +637,7 @@ static int SSL_smart_shutdown(SSL *ssl)
                 if(localAddresses.count > 0)
                 {
                     ipAddr = [localAddresses objectAtIndex:0];
+                    ipAddr = [UMSocket deunifyIp:ipAddr];
                     [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
                     inet_pton(AF_INET6,addressString, &sa6.sin6_addr);
 
@@ -2521,33 +2524,53 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     return [NSString stringWithFormat:@"ipv4:%@",addr];
 }
 
++(NSString *)deunifyIp:(NSString *)addr
+{
+    return [UMSocket deunifyIp:addr type:NULL];
+}
+
 +(NSString *)deunifyIp:(NSString *)addr type:(int *)t
 {
     if([addr isEqualToString:@"ipv6:[::]"])
     {
-        *t = 6;
+        if(t)
+        {
+            *t = 6;
+        }
         return @"::";
     }
     if([addr isEqualToString:@"ipv6:localhost"])
     {
-        *t = 6;
+        if(t)
+        {
+            *t = 6;
+        }
         return @"localhost";
     }
     if([addr isEqualToString:@"ipv4:localhost"])
     {
-        *t = 4;
+        if(t)
+        {
+            *t = 4;
+        }
         return @"localhost";
     }
 
     NSString *addrtype =   [addr substringToIndex:4];
     if([addrtype isEqualToString:@"ipv4"])
     {
-        *t = 4;
+        if(t)
+        {
+            *t = 4;
+        }
         NSInteger start = 5;
         NSInteger len = [addr length] - start;
         if(len < 1)
         {
-            *t = 0;
+            if(t)
+            {
+                *t = 0;
+            }
             return @"";
         }
         return [addr substringWithRange:NSMakeRange(start,len)];
@@ -2555,7 +2578,10 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     
     else if([addrtype isEqualToString:@"ipv6"])  /* format: ipv6:[xxx:xxx:xxx...:xxxx] */
     {
-        *t = 6;
+        if(t)
+        {
+            *t = 6;
+        }
         NSInteger start = 5;
         NSInteger len = [addr length] -1 - start;
         if(len < 1)
@@ -2567,7 +2593,10 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     }
     else
     {
-        *t = 0;
+        if(t)
+        {
+            *t = 0;
+        }
         return @"";
     }
 }

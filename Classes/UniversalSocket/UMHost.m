@@ -101,20 +101,23 @@
                 NSLog(@"UMhost: problem with getnameinfo");
                 continue;
             }
-            NSString *s = @(ip);
+            NSString *unifiedIp =  [UMSocket unifyIP:@(ip)];
+
             if(permittedAddresses)
             {
                 for(NSString *permittedIp in permittedAddresses)
                 {
-                    if([s isEqualToString:permittedIp])
+
+                    /* UNIFY /DEUNIFY */
+                    if([unifiedIp isEqualToString:permittedIp])
                     {
-                        [self addAddress:s];
+                        [self addAddress:unifiedIp];
                     }
                 }
             }
             else
             {
-                [self addAddress:s];
+                [self addAddress:unifiedIp];
             }
         }
         freeifaddrs (ifptr);

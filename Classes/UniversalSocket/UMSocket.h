@@ -192,6 +192,7 @@
 
 
 +(NSString *)unifyIP:(NSString *)addr;
++(NSString *)deunifyIp:(NSString *)addr;
 +(NSString *)deunifyIp:(NSString *)addr type:(int *)t;
 -(void)startTLS;
 

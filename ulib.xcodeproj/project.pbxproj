@@ -2343,6 +2343,7 @@
 		A6BEA7201EF950E5007C203A /* UMHTTPClientRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DC792B1DE576D5003BBA67 /* UMHTTPClientRequest.m */; };
 		A6BEA7211EF950E6007C203A /* UMHTTPClientRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DC792B1DE576D5003BBA67 /* UMHTTPClientRequest.m */; };
 		A6C29FB8149B9B6700750CE9 /* config-syntax-definition.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6C29FB7149B9B6700750CE9 /* config-syntax-definition.plist */; };
+		A6C2EAAF1F9F80C9005E38B1 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C2EAAE1F9F80C9005E38B1 /* sctp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A6C9549A1DC95AFD0036AC39 /* NSData+UMHTTP.h in Headers */ = {isa = PBXBuildFile; fileRef = A6C954961DC95AF00036AC39 /* NSData+UMHTTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6C9549B1DC95AFD0036AC39 /* NSData+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C954971DC95AF00036AC39 /* NSData+UMHTTP.m */; };
 		A6C9549C1DC95AFE0036AC39 /* NSData+UMHTTP.h in Headers */ = {isa = PBXBuildFile; fileRef = A6C954961DC95AF00036AC39 /* NSData+UMHTTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2919,6 +2920,7 @@
 		A6C173D01AB835640090FC94 /* NSDate+stringFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+stringFunctions.h"; sourceTree = "<group>"; };
 		A6C173D11AB835640090FC94 /* NSDate+stringFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+stringFunctions.m"; sourceTree = "<group>"; };
 		A6C29FB7149B9B6700750CE9 /* config-syntax-definition.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "config-syntax-definition.plist"; sourceTree = "<group>"; };
+		A6C2EAAE1F9F80C9005E38B1 /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = ../../../../../Library/Frameworks/sctp.framework; sourceTree = "<group>"; };
 		A6C7894D1B4A8EE00090FC94 /* UMDateTimeStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMDateTimeStuff.h; sourceTree = "<group>"; };
 		A6C7894E1B4A8EE00090FC94 /* UMDateTimeStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMDateTimeStuff.m; sourceTree = "<group>"; };
 		A6C84D6619F785DD0090FC94 /* UMLockEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMLockEvent.m; sourceTree = "<group>"; };
@@ -3121,6 +3123,7 @@
 				A663A5041F2F16D000A3A0AA /* libssl.a in Frameworks */,
 				A60C4D061EF7FE59007C203A /* Foundation.framework in Frameworks */,
 				A60C4D071EF7FE59007C203A /* Security.framework in Frameworks */,
+				A6C2EAAF1F9F80C9005E38B1 /* sctp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3830,6 +3833,7 @@
 		A6D8AB06149A769B0029E9CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6C2EAAE1F9F80C9005E38B1 /* sctp.framework */,
 				A610866B163530F700D0D9C6 /* Security.framework */,
 				A6D8AB0C149A769B0029E9CF /* Foundation.framework */,
 			);

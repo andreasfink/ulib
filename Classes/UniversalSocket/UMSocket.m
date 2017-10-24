@@ -33,12 +33,14 @@
 typedef unsigned long (*CRYPTO_CALLBACK_PTR)(void);
 static void crypto_threadid_callback(CRYPTO_THREADID *ctid);
 
-//#define SCTP_IN_KERNEL 1
-//#define SCTP_IN_USERSPACE 1
-//#define FINK_DEBUG  1
+#define SCTP_IN_KERNEL  1
 
 #ifdef SCTP_IN_KERNEL
+#ifdef __APPLE__
+#include "/Library/Frameworks/sctp.framework/Headers/sctp.h"
+#else
 #include <netinet/sctp.h>
+#endif
 //#include <netinet/sctp_uio.h>
 #endif
 
@@ -386,7 +388,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     self = [super init];
     if (self)
     {
-        int reuse = 1;
+        char reuse = 1;
         int eno = 0;
         rx_crypto_enable = 0;
         tx_crypto_enable = 0;
@@ -470,18 +472,18 @@ static int SSL_smart_shutdown(SSL *ssl)
                 _sock = socket(_family,SOCK_STREAM, IPPROTO_SCTP);
                 eno = errno;
                 TRACK_FILE_SOCKET(_sock,@"sctp");
-                if(sock < 0)
+                if(_sock < 0)
                 {
                     if(eno==EAFNOSUPPORT)
                     {
                         _family=AF_INET;
-                        sock = socket(_family,SOCK_STREAM, IPPROTO_SCTP);
+                        _sock = socket(_family,SOCK_STREAM, IPPROTO_SCTP);
                         eno = errno;
                         TRACK_FILE_SOCKET(_sock,@"sctp");
-                        if(sock!=-1)
+                        if(_sock!=-1)
                         {
                             int flags = 1;
-                            setsockopt(sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
+                            setsockopt(_sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
                         }
                     }
                 }
@@ -541,18 +543,13 @@ static int SSL_smart_shutdown(SSL *ssl)
     @synchronized (self)
     {
         int eno = 0;
-#ifdef	SCTP_SUPPORTED
         NSArray				*localAddresses = NULL;
-        NSMutableArray			*useableLocalAddresses;
-#endif
+        NSMutableArray            *useableLocalAddresses;
         struct sockaddr_in	sa;
         struct sockaddr_in6	sa6;
-#ifdef  SCTP_SUPPORTED
-        int i;
-        NSString	*ipAddr;
-        char	addressString[256];
-        int		err;
-#endif
+        NSString    *ipAddr;
+        char    addressString[256];
+
         [self reportStatus:@"bind()"];
 
         if (isBound == 1)
@@ -562,10 +559,9 @@ static int SSL_smart_shutdown(SSL *ssl)
         }
 
         localHost				= [[UMHost alloc] initWithLocalhost];
-#ifdef	SCTP_SUPPORTED
         localAddresses			= [localHost addresses];
         useableLocalAddresses	= [[NSMutableArray alloc] init];
-#endif
+
         memset(&sa,0x00,sizeof(sa));
         sa.sin_family			= AF_INET;
 #ifdef	HAS_SOCKADDR_LEN
@@ -585,6 +581,8 @@ static int SSL_smart_shutdown(SSL *ssl)
         {
 #ifdef	SCTP_SUPPORTED
             case UMSOCKET_TYPE_SCTP:
+            {
+                int i;
                 for(i=0;i< [localAddresses count];i++)
                 {
                     memset(&sa,0x00,sizeof(sa));
@@ -598,7 +596,7 @@ static int SSL_smart_shutdown(SSL *ssl)
                     [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
 
                     inet_aton(addressString, &sa.sin_addr);
-                    err = sctp_bindx(sock, (struct sockaddr *)&sa,1,SCTP_BINDX_ADD_ADDR);
+                    int err = sctp_bindx(_sock, (struct sockaddr *)&sa,1,SCTP_BINDX_ADD_ADDR);
                     if(!err)
                     {
                         [useableLocalAddresses addObject:ipAddr];
@@ -610,25 +608,45 @@ static int SSL_smart_shutdown(SSL *ssl)
                     return UMSocketError_sctp_bindx_failed_for_all;
                 }
                 break;
+            }
 #endif
             case UMSOCKET_TYPE_TCP4ONLY:
             case UMSOCKET_TYPE_UDP4ONLY:
+            {
+                if(localAddresses.count > 0)
+                {
+                    ipAddr = [localAddresses objectAtIndex:0];
+                    [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
+                    inet_aton(addressString, &sa.sin_addr);
+                    
+                }
                 if(bind(_sock,(struct sockaddr *)&sa,sizeof(sa)) != 0)
                 {
                     eno = errno;
                     goto err;
                 }
+            }
                 break;
             case UMSOCKET_TYPE_TCP6ONLY:
             case UMSOCKET_TYPE_UDP6ONLY:
             case UMSOCKET_TYPE_TCP:
             case UMSOCKET_TYPE_UDP:
+            {
+                if(localAddresses.count > 0)
+                {
+                    ipAddr = [localAddresses objectAtIndex:0];
+                    [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
+                    inet_pton(AF_INET6,addressString, &sa6.sin6_addr);
+
+                    
+                }
                 if(bind(_sock,(struct sockaddr *)&sa6,sizeof(sa6)) != 0)
                 {
                     eno = errno;
                     goto err;
                 }
                 break;
+            }
             default:
                 return [UMSocket umerrFromErrno:EAFNOSUPPORT];
         }
@@ -1102,7 +1120,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             if(type == UMSOCKET_TYPE_SCTP)
             {
                 flags = 1;
-                setsockopt(sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
+                setsockopt(_sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
             }
             else
 #endif

@@ -41,9 +41,12 @@
     }
     /* we log to the sending task that it send it.
      the receiving log is before executing it */
-    [job.sender.logFeed debug:0
-                 inSubsection:@"txup"
-                     withText:job.name];
+    if(job.sender.logLevel <= UMLOG_DEBUG)
+    {
+        [job.sender.logFeed debug:0
+                     inSubsection:@"txup"
+                         withText:job.name];
+    }
     [taskQueue queueTask:job toQueueNumber:UMLAYER_LOWER_QUEUE];
 }
 
@@ -53,9 +56,13 @@
     {
         return;
     }
-    [job.sender.logFeed debug:0
-                 inSubsection:@"txdown"
-                     withText:job.name];
+    if(job.sender.logLevel <= UMLOG_DEBUG)
+    {
+
+        [job.sender.logFeed debug:0
+                     inSubsection:@"txdown"
+                         withText:job.name];
+    }
     [taskQueue queueTask:job toQueueNumber:UMLAYER_UPPER_QUEUE];
 }
 
@@ -68,9 +75,12 @@
 
     /* we log to the sending task that it send it.
      the receiving log is before executing it */
-    [job.sender.logFeed debug:0
-                 inSubsection:@"txup"
-                     withText:job.name];
+    if(job.sender.logLevel <= UMLOG_DEBUG)
+    {
+        [job.sender.logFeed debug:0
+                     inSubsection:@"txup"
+                         withText:job.name];
+    }
     [taskQueue queueTask:job toQueueNumber:UMLAYER_LOWER_PRIORITY_QUEUE];
 }
 
@@ -80,18 +90,23 @@
     {
         return;
     }
-
-    [job.sender.logFeed debug:0
-                 inSubsection:@"txdown"
-                     withText:job.name];
+    if(job.sender.logLevel <= UMLOG_DEBUG)
+    {
+        [job.sender.logFeed debug:0
+                     inSubsection:@"txdown"
+                         withText:job.name];
+    }
     [taskQueue queueTask:job toQueueNumber:UMLAYER_UPPER_PRIORITY_QUEUE];
 }
 
 - (void)queueFromAdmin:(UMLayerTask *)job
 {
-    [job.sender.logFeed debug:0
-                 inSubsection:@"txadmin"
-                     withText:job.name];
+    if(job.sender.logLevel <= UMLOG_DEBUG)
+    {
+        [job.sender.logFeed debug:0
+                     inSubsection:@"txadmin"
+                         withText:job.name];
+    }
     [taskQueue queueTask:job toQueueNumber:UMLAYER_ADMIN_QUEUE];
 }
 

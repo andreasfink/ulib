@@ -6,10 +6,13 @@
 //
 //
 
+#import "UMLogLevel.h"
+
 @class UMLogFeed;
 
 @protocol UMLayerUserProtocol<NSObject>
 
 - (UMLogFeed *)logFeed;
+- (UMLogLevel)logLevel;
 
 @end

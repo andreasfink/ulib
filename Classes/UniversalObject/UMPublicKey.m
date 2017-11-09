@@ -15,7 +15,7 @@
 #include <openssl/bio.h>
 #include <openssl/err.h>
 
-static int password_read_callback(char *buf, int size, int rwflag, void *u);
+//static int password_read_callback(char *buf, int size, int rwflag, void *u);
 
 @implementation UMPublicKey
 
@@ -62,7 +62,7 @@ static int password_read_callback(char *buf, int size, int rwflag, void *u);
     return self;
 }
 
-
+#if 0
 /* The default passphrase callback is sometimes inappropriate (for example in a GUI
  application) so an alternative can be supplied. The callback routine has the
  following form:
@@ -94,4 +94,6 @@ static int password_read_callback(char *buf, int size, int rwflag, void *u)
 password callback function:
         int cb(char *buf, int size, int rwflag, void *u);
 */
+#endif
+
 @end

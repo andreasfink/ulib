@@ -73,9 +73,33 @@ NSString *sqlEscapeNSString(NSString *input)
 	return s;
 }
 
+- (NSString *)onlyHex
+{
+    NSMutableString *onlyHexChars = [[NSMutableString alloc]init];
+    NSUInteger n= self.length;
+    NSUInteger i;
+    for(i=0;i<n;i++)
+    {
+        unichar c = [self characterAtIndex:i];
+        if((c >='0') && (c<='9'))
+        {
+            [onlyHexChars appendFormat:@"%c",(char)c];
+        }
+        else if((c >='A') && (c<='F'))
+        {
+            [onlyHexChars appendFormat:@"%c",(char)c];
+        }
+        else if((c >='a') && (c<='F'))
+        {
+            [onlyHexChars appendFormat:@"%c",(char)c-'a'+'A'];
+        }
+    }
+    return onlyHexChars;
+}
+
 - (NSData *)unhexedData
 {
-	NSData *d =[self dataUsingEncoding:NSUTF8StringEncoding];
+	NSData *d = [[self onlyHex] dataUsingEncoding:NSUTF8StringEncoding];
 	NSData *result = [d unhexedData];
 	return result;
 }

@@ -12,6 +12,7 @@ NSString *sqlEscapeNSString(NSString *input);
 @interface NSString (UniversalObject)
 - (NSString *)sqlEscaped;   /*!< escape characters for SQL */
 - (NSData *) unhexedData;   /*!< convert a hex string to NSData */
+- (NSString *)onlyHex;      /*!< filters the string to only include hex chars and converts to uppercase */
 - (NSString *)cquoted;      /*!< enquote C style */
 - (NSString *)printable;    /*!< only printable chars please */
 - (NSString *)fileNameRelativeToPath:(NSString *)path;
@@ -22,7 +23,6 @@ NSString *sqlEscapeNSString(NSString *input);
 - (NSString *)hexString;                            /*!< convert string to hex string */
 - (BOOL)hasCaseInsensitiveSuffix:(NSString *)s;     /*!< does it end with this suffix in a case insensitive way */
 - (BOOL)hasCaseInsensitivePrefix:(NSString *)p;     /*!< does it start with this prefix in a case insensitive way */
-
 - (BOOL)isEqualToStringCaseInsensitive:(NSString *)aString;
 - (NSData *)sha1;
 @end

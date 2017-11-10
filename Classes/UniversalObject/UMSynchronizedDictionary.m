@@ -32,6 +32,8 @@
     return self;
 }
 
+
+
 + (instancetype)synchronizedDictionary
 {
     UMSynchronizedDictionary *sd = [[UMSynchronizedDictionary alloc]init];
@@ -45,7 +47,7 @@
 
 - (NSUInteger)count
 {
-    @synchronized(self)
+    @synchronized(underlyingDictionary)
     {
         NSUInteger cnt  = [underlyingDictionary count];
         return cnt;
@@ -57,7 +59,7 @@
 {
     if(key)
     {
-        @synchronized(self)
+        @synchronized(underlyingDictionary)
         {
             [underlyingDictionary setObject:anObject forKey:key];
         }
@@ -68,7 +70,7 @@
 {
     if(key)
     {
-        @synchronized(self)
+        @synchronized(underlyingDictionary)
         {
             return [underlyingDictionary objectForKey:key];
         }
@@ -78,7 +80,7 @@
 
 - (NSArray *)allKeys
 {
-    @synchronized(self)
+    @synchronized(underlyingDictionary)
     {
         return [underlyingDictionary allKeys];
     }
@@ -86,9 +88,9 @@
 
 - (void)removeObjectForKey:(id)aKey
 {
-    @synchronized(self)
+    if(aKey)
     {
-        if(aKey)
+        @synchronized(underlyingDictionary)
         {
             [underlyingDictionary removeObjectForKey:aKey];
         }
@@ -98,7 +100,7 @@
 - (NSMutableDictionary *)mutableCopy
 {
     NSMutableDictionary *d;
-    @synchronized(self)
+    @synchronized(underlyingDictionary)
     {
         d = [underlyingDictionary mutableCopy];
     }
@@ -107,8 +109,10 @@
 
 - (UMSynchronizedDictionary *)copyWithZone:(NSZone *)zone
 {
-    UMSynchronizedDictionary *cpy = [[UMSynchronizedDictionary allocWithZone:zone]init];
-    cpy->underlyingDictionary = [underlyingDictionary copy];
-    return cpy;
+    @synchronized(underlyingDictionary)
+    {
+        UMSynchronizedDictionary *cpy = [[UMSynchronizedDictionary allocWithZone:zone] initWithDictionary:underlyingDictionary];
+        return cpy;
+    }
 }
 @end

@@ -20,7 +20,7 @@
 /* Important: THIS FILE MUST BE COMPILED WITH -fno-objc-arc  !*/
 
 static NSFileHandle *alloc_file = NULL;
-static NSMutableDictionary *object_stat;
+static NSMutableDictionary *object_stat = NULL;
 extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 void umobject_enable_alloc_logging(const char *f)

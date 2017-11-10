@@ -166,9 +166,8 @@ static FILE *alloc_log;
     {
         @autoreleasepool
         {
-            NSString *m = [[self class] description];
-
 #ifdef UMOBJECT_USE_MAGIC
+            NSString *m = [[self class] description];
             size_t l = strlen(m.UTF8String);
             _magic = calloc(l+1,1);
             if(_magic)

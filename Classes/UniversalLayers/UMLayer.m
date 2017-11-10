@@ -391,5 +391,9 @@
     {
         logLevel = [config[@"log-level"] intValue];
     }
+    else
+    {
+        logLevel = UMLOG_MAJOR;
+    }
 }
 @end

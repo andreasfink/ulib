@@ -2586,7 +2586,10 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         NSInteger len = [addr length] -1 - start;
         if(len < 1)
         {
-            *t = 0;
+            if(t)
+            {
+                *t = 0;
+            }
             return NULL;
         }
         return [addr substringWithRange:NSMakeRange(start,len)];

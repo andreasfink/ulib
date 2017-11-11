@@ -6,7 +6,7 @@
 //
 
 #import "UMSynchronizedDictionary.h"
-
+#import "UMMutex.h"
 /*!
  @class UMSynchronizedSortedDictionary
  @brief UMSynchronizedSortedDictionary is like UMSynchronizedDictionary but it keeps the sequence of the entries in the order they where added. Useful for dictionaries which have a natural order
@@ -20,6 +20,7 @@
 @interface UMSynchronizedSortedDictionary : UMSynchronizedDictionary
 {
     NSMutableArray *sortIndex;
+    UMMutex *_mutex;
 }
 
 @property (readonly,strong) NSMutableArray *sortIndex;

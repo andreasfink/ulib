@@ -217,6 +217,7 @@ static FILE *alloc_log;
     {
         NSLog(@"Dealloc [%p] rc=%d",self,self.ulib_retain_counter);
     }
+
     if(alloc_file)
     {
         NSString *m = [[self class] description];
@@ -269,15 +270,12 @@ static FILE *alloc_log;
 - (void)runSelectorInBackground:(SEL)aSelector
                      withObject:(id)anArgument
 {
-    @synchronized(self)
-    {
-        UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
-        ts.selector = aSelector;
-        ts.obj      = anArgument;
-        [NSThread detachNewThreadSelector:@selector(threadStarter:)
-                                 toTarget:self
-                               withObject:ts];
-    }
+    UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
+    ts.selector = aSelector;
+    ts.obj      = anArgument;
+    [NSThread detachNewThreadSelector:@selector(threadStarter:)
+                             toTarget:self
+                           withObject:ts];
 }
 
 - (void)runSelectorInBackground:(SEL)aSelector
@@ -286,42 +284,32 @@ static FILE *alloc_log;
                            line:(long)lin
                        function:(const char *)fun
 {
-    @synchronized(self)
-    {
-        UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
-        ts.selector = aSelector;
-        ts.obj      = anArgument;
-        ts.file     = fil;
-        ts.line     = lin;
-        ts.func     = fun;
+    UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
+    ts.selector = aSelector;
+    ts.obj      = anArgument;
+    ts.file     = fil;
+    ts.line     = lin;
+    ts.func     = fun;
 
-        [NSThread detachNewThreadSelector:@selector(threadStarter:)
-                                 toTarget:self
-                               withObject:ts];
-    }
+    [NSThread detachNewThreadSelector:@selector(threadStarter:)
+                             toTarget:self
+                           withObject:ts];
 }
 
 - (void)runSelectorInBackground:(SEL)aSelector
 {
-    @synchronized(self)
-    {
-       UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
-        ts.selector = aSelector;
-        ts.obj      = nil;
-        
-        [NSThread detachNewThreadSelector:@selector(threadStarter:)
-                                 toTarget:self
-                               withObject:ts];
-    }
-}
+   UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
+    ts.selector = aSelector;
+    ts.obj      = nil;
 
+    [NSThread detachNewThreadSelector:@selector(threadStarter:)
+                             toTarget:self
+                           withObject:ts];
+}
 
 - (NSString *) descriptionWithPrefix:(NSString *)prefix
 {
-    @synchronized(self)
-    {
-        return [[self description]prefixLines:prefix];
-    }
+    return [[self description]prefixLines:prefix];
 }
 
 
@@ -440,6 +428,8 @@ BOOL umobject_object_stat_is_enabled(void)
 {
     umobject_flags |= UMOBJECT_FLAG_LOG_RETAIN_RELEASE;
 }
+
+
 @end
 
 

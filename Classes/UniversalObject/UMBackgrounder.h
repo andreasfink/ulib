@@ -25,6 +25,7 @@
  */
 
 #import "UMObject.h"
+#import "UMMutex.h"
 
 @class UMSleeper;
 
@@ -45,6 +46,7 @@ typedef enum UMBackgrounder_runningStatus
     UMSleeper *control_sleeper; /* feedback from the backgrounder */
     UMSleeper *workSleeper;    /* messages to the backgrounder */
     BOOL enableLogging;
+    UMMutex *_startStopLock;
 }
 
 @property(readwrite,strong) NSString *name;

@@ -62,25 +62,23 @@
         for(i=0;i<n;i++)
         {
             UMTask *task = NULL;
-            @synchronized(queues)
-            {
-                [readLock lock];
-                UMQueue *thisQueue = [queues objectAtIndex:i];
-                task = [thisQueue getFirst];
-                [readLock unlock];
-            }
+
+            [queue lock];
+            [readLock lock];
+            UMQueue *thisQueue = [queues objectAtIndex:i];
+            task = [thisQueue getFirst];
+            [readLock unlock];
+            [queue unlock];
+
             if(task)
             {
-                @synchronized(task)
+                if(enableLogging)
                 {
-                    if(enableLogging)
-                    {
-                        NSLog(@"%@: got task %@ on queue %d",self.name,task,(int)i);
-                    }
-                    @autoreleasepool
-                    {
-                        [task runOnBackgrounder:self];
-                    }
+                    NSLog(@"%@: got task %@ on queue %d",self.name,task,(int)i);
+                }
+                @autoreleasepool
+                {
+                    [task runOnBackgrounder:self];
                 }
                 ulib_set_thread_name([NSString stringWithFormat:@"%@ (idle)",self.name]);
                 return 1;

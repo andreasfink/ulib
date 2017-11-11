@@ -7,6 +7,7 @@
 
 #import "UMLogDestination.h"
 #import "UMLogConsole.h"
+#import "UMMutex.h"
 
 @class UMLogConsole, UMLogHandler, UMLogDestination;
 
@@ -14,7 +15,9 @@
 {
 	NSMutableArray	*logDestinations;
 	UMLogConsole	*console;
-//	NSLock			*lock;
+
+    UMMutex *_logDestinationsLock;
+
 }
 
 @property	(readwrite,strong)		NSMutableArray	*logDestinations;

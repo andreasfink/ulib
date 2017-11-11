@@ -25,6 +25,7 @@
     {
         logDestinations = [[NSMutableArray alloc] init];
         lock = [[NSLock alloc]init];
+        _logDestinationsLock = [[UMMutex alloc]init];
     }	return self;
 }
 
@@ -36,6 +37,7 @@
         logDestinations = [[NSMutableArray alloc] init];
         lock = [[NSLock alloc]init];
         console = [[UMLogConsole alloc] init];
+        _logDestinationsLock = [[UMMutex alloc]init];
         [self addLogDestination:console];
     }
 	return self;
@@ -57,52 +59,40 @@
 
 - (void) addLogDestination:(UMLogDestination *)dst
 {
-    @synchronized(self)
-    {
-        //[lock lock];
-        [logDestinations addObject: dst];
-        //[lock unlock];
-    }
+    [_logDestinationsLock lock];
+    [logDestinations addObject: dst];
+    [_logDestinationsLock unlock];
 }
 
 - (void) removeLogDestination:(UMLogDestination *)dst
 {
-    @synchronized(self)
+    NSUInteger i;
+
+    [_logDestinationsLock lock];
+    i = [logDestinations indexOfObject: dst];
+    if (i != NSNotFound)
     {
-
-        NSUInteger i;
-
-        //[lock lock];
-        i = [logDestinations indexOfObject: dst];
-        if (i == NSNotFound)
-        {
-            [lock unlock];
-            return;
-        }
         [logDestinations removeObjectAtIndex:i];
-        //[lock unlock];
     }
+    [_logDestinationsLock unlock];
 }
 
 - (void) logAnEntry:(UMLogEntry *)logEntry
 {
-    @synchronized(self)
-    {
-        UMLogDestination *dst = nil;
+    [_logDestinationsLock lock];
+    NSArray *dsts  = [logDestinations copy];
+    [_logDestinationsLock unlock];
 
-        //[lock lock];
-        for ( dst in logDestinations )
-        {
-            [dst unlockedLogAnEntry:logEntry];
-        }
-        //[lock unlock];
+    UMLogDestination *dst = nil;
+    for ( dst in dsts )
+    {
+        [dst unlockedLogAnEntry:logEntry];
     }
 }
 
 - (void) unlockedLogAnEntry:(UMLogEntry *)logEntry
 {
     UMLogDestination *dst;
-    
     for ( dst in logDestinations )
     {
         [dst unlockedLogAnEntry:logEntry];
@@ -125,44 +115,46 @@
 
 - (NSString *)description
 {
-    @synchronized (self)
-    {
-        NSMutableString *s = [[NSMutableString alloc]init];
-        [s appendFormat:@"%@\n", [super description]];
-        if(console)
-        {
-            [s appendFormat:@" Logs to Console: %@\n",[console oneLineDescription]];
-        }
+    [_logDestinationsLock lock];
+    NSArray *dsts  = [logDestinations copy];
+    [_logDestinationsLock unlock];
 
-        UMLogDestination *logDestination;
-        //[lock lock];
-        for(logDestination in logDestinations)
-        {
-            if(logDestination == console)
-                continue;
-            [s appendFormat:@" Logs to: %@\n", [logDestination oneLineDescription]];
-        }
-        //[lock unlock];
-        return s;
+    NSMutableString *s = [[NSMutableString alloc]init];
+    [s appendFormat:@"%@\n", [super description]];
+    if(console)
+    {
+         [s appendFormat:@" Logs to Console: %@\n",[console oneLineDescription]];
     }
+
+    UMLogDestination *logDestination;
+    for(logDestination in dsts)
+    {
+        if(logDestination == console)
+        {
+            continue;
+        }
+        [s appendFormat:@" Logs to: %@\n", [logDestination oneLineDescription]];
+    }
+    return s;
 }
 
 - (UMLogLevel)level
 {
-    @synchronized (self)
-    {
-        UMLogLevel minLevel = UMLOG_PANIC;
-        UMLogDestination *dst;
+    [_logDestinationsLock lock];
+    NSArray *dsts  = [logDestinations copy];
+    [_logDestinationsLock unlock];
+
+    UMLogLevel minLevel = UMLOG_PANIC;
+    UMLogDestination *dst;
         
-        for (dst in logDestinations)
+    for (dst in dsts)
+    {
+        if(dst.level < minLevel)
         {
-            if(dst.level < minLevel)
-            {
-                minLevel = dst.level;
-            }
+            minLevel = dst.level;
         }
-        return dst.level;
     }
+    return minLevel;
 }
 
 @end

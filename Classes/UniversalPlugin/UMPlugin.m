@@ -31,19 +31,13 @@
 
 - (NSArray *)config
 {
-    @synchronized (self)
-    {
-        return [_config copy];
-    }
+    return [_config copy];
 }
 
 - (void)setConfig:(NSArray *)cfg
 {
-    @synchronized (self)
-    {
-        _config = cfg;
-        [self configUpdate];
-    }
+    _config = cfg;
+    [self configUpdate];
 }
 
 

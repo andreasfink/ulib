@@ -580,6 +580,7 @@
 {
     self.awaitingCompletion = YES;
     self.completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
+    _pendingRequestLock = [[UMMutex alloc]init];
 }
 
 - (void)makeAsyncWithTimeout:(NSTimeInterval)timeoutInSeconds delegate:(id<UMHTTPRequest_TimeoutProtocol>)callback
@@ -587,19 +588,20 @@
     self.timeoutDelegate = callback;
     self.awaitingCompletion = YES;
     self.completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
+    _pendingRequestLock = [[UMMutex alloc]init];
 }
 
 - (void)resumePendingRequest
 {
-
-    @synchronized (self)
+    [_pendingRequestLock lock];
+    if(self.connection) /* we cant do the work twice */
     {
         self.awaitingCompletion = NO;
         [self finishRequest];
         self.connection = NULL;
     }
+    [_pendingRequestLock unlock];
 }
-
 
 - (void)sleepUntilCompleted
 {

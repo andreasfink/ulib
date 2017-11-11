@@ -6,7 +6,7 @@
 //
 
 #import "UMObject.h"
-
+#import "UMMutex.h"
 /*!
  @class UMSynchronizedArray
  @brief An array who's access is synchronized so it can be accessed from multiple threads
@@ -19,6 +19,7 @@
 @interface UMSynchronizedArray : UMObject
 {
     NSMutableArray *array;
+    UMMutex *_mutex;
 }
 
 @property (readonly,strong) NSMutableArray *array;
@@ -41,6 +42,7 @@
 - (NSString *)stringLines;
 - (void)addPrintableString:(NSString *)s;
 - (void)removeObject:(id)obj;
+- (id)removeFirst;
 
 
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx;

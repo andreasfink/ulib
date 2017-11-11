@@ -17,3 +17,7 @@
 #import "UMMicroSec.h"
 #import "UMTimer.h"
 #import "UMTimerBackgrounder.h"
+#import "UMMutex.h"
+#import "UMAtomicCounter.h"
+#import "UMAtomicDate.h"
+

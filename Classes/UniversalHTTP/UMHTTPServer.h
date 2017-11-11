@@ -11,6 +11,9 @@
 #import "UMHTTPServerAuthorizeResult.h"
 #import "UMHTTPAuthenticationStatus.h"
 #import "UMSocketDefs.h"
+#import "UMSynchronizedArray.h"
+#import "UMMutex.h"
+
 #include <sys/types.h>
 #include <netinet/in.h>
 
@@ -104,8 +107,8 @@ typedef enum UMHTTPServerStatus
 {
 	UMSocket			*listenerSocket;		/* this is the main listener socket */
 
-	NSMutableArray		*connections;			/*!< list of UMHTTPConnection objects containing the corresponding reading sockets */
-	NSMutableArray		*terminatedConnections;	/*!< list of UMHTTPConnection objects containing the corresponding reading sockets */
+	UMSynchronizedArray		*connections;			/*!< list of UMHTTPConnection objects containing the corresponding reading sockets */
+	UMSynchronizedArray		*terminatedConnections;	/*!< list of UMHTTPConnection objects containing the corresponding reading sockets */
 	NSString			*serverName;			/*!< WebServer HTTP Server: name */
 
 	NSLock				*lock;
@@ -149,6 +152,7 @@ typedef enum UMHTTPServerStatus
     NSData *certFileData;
 
     UMSynchronizedArray *pendingRequests;
+    UMMutex *_connectionsLock;
 }
 
 @property(readwrite,strong)		NSString *serverName;

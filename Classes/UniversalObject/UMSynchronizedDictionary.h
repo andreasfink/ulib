@@ -7,7 +7,7 @@
 //
 
 #import "UMObject.h"
-
+#import "UMMutex.h"
 /*!
  @class UMSynchronizedDictionary
  @brief A dictionary who's access is synchronized so it can be accessed from multiple threads
@@ -20,6 +20,7 @@
 @interface UMSynchronizedDictionary : UMObject
 {
     NSMutableDictionary *underlyingDictionary;
+    UMMutex *mutex;
 }
 
 @property (readonly,strong) NSMutableDictionary *dict;

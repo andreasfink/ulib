@@ -65,9 +65,12 @@ static void socket_set_blocking(int fd, int blocking)
     {
         return;
     }
-
     @synchronized (self)
     {
+        if(self.isPrepared==YES)
+        {
+            return;
+        }
         int pipefds[2];
         pipefds[0] = -1;
         pipefds[1] = -1;

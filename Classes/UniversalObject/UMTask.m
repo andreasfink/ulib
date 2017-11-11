@@ -14,7 +14,6 @@
 @synthesize name;
 @synthesize enableLogging;
 @synthesize sync;
-@synthesize synchronizeObject;
 
 - (UMTask *)initWithName:(NSString *)n
 {
@@ -22,40 +21,53 @@
     if(self)
     {
         self.name = n;
+        _runMutex = [[UMMutex alloc]init];
     }
     return self;
 }
 
 - (void)runOnBackgrounder:(UMBackgrounder *)bg
 {
-    @synchronized(self)
+    [_runMutex lock];
+    @try
     {
-        @autoreleasepool
+        ulib_set_thread_name([NSString stringWithFormat:@"%@ (executing: %@)",bg.name,self.name]);
+        if(enableLogging)
         {
-            ulib_set_thread_name([NSString stringWithFormat:@"%@ (executing: %@)",bg.name,self.name]);
-            if(enableLogging)
+            if(self.name==NULL)
             {
-                if(self.name==NULL)
-                {
-                    NSLog (@"self.name is NULL!");
-                }
-                NSLog(@"Task %@ execution on backgrounder %@",self.name,bg.name);
+                NSLog (@"self.name is NULL!");
             }
-            if((synchronizeObject) && (synchronizeObject!=self)) /* self is already synchronized */
+            NSLog(@"Task %@ execution on backgrounder %@",self.name,bg.name);
+        }
+        if(_synchronizeMutex)
+        {
+            [_synchronizeMutex lock];
+            [self main];
+            [_synchronizeMutex unlock];
+        }
+        else
+        {
+            if((_synchronizeObject) && (_synchronizeObject!=self)) /* self is already synchronized */
             {
-                @synchronized(synchronizeObject)
+                @synchronized(_synchronizeObject)
                 {
                     [self main];
                 }
             }
             else
             {
-                [self main];            
+                [self main];
             }
         }
     }
-    synchronizeObject=NULL; /* we need to break the link to the synchronized object as it might hold us
+    @finally
+    {
+        [_runMutex unlock];
+    }
+    _synchronizeObject=NULL; /* we need to break the link to the synchronized object as it might hold us
                              otherwise we might never get released from memory */
+    _retainObject = NULL;
 }
 
 - (void)main

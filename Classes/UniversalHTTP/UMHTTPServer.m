@@ -80,8 +80,8 @@
         [listenerSocket setLocalPort:port];
         sleeper		= [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
         [sleeper prepare];
-        connections = [[NSMutableArray alloc] init];
-        terminatedConnections = [[NSMutableArray alloc]init];
+        connections = [[UMSynchronizedArray alloc] init];
+        terminatedConnections = [[UMSynchronizedArray alloc]init];
         lock		= [[NSLock alloc] init];
         sslLock     = [[NSLock alloc]init];
         name =  @"unnamed";
@@ -250,10 +250,7 @@
                         {
                             
                             UMHTTPConnection *con = [[UMHTTPConnection alloc] initWithSocket:clientSocket server:self];
-                            @synchronized(self)
-                            {
-                                [connections addObject:con];
-                            }
+                            [connections addObject:con];
 
                             UMHTTPTask_ReadRequest *task = [[UMHTTPTask_ReadRequest alloc]initWithConnection:con];
                             [_taskQueue queueTask:task];
@@ -280,18 +277,15 @@
             /* maintenance work */
 			while ([terminatedConnections count] > 0)
 			{
- 				@synchronized(self)
+                UMHTTPConnection *con = [terminatedConnections removeFirst];
+                if(con==NULL)
                 {
-                    UMHTTPConnection *con = [terminatedConnections objectAtIndex:0];
-                    [con terminate];
-                    [terminatedConnections removeObjectAtIndex:0];
-				}
+                    break;
+                }
+                [con terminate];
 			}
 		}
-        @synchronized(self)
-        {
-            self.status = UMHTTPServerStatus_shutDown;
-        }
+        self.status = UMHTTPServerStatus_shutDown;
         [listenerSocket unpublish];
 		[listenerSocket close];
 		listenerRunning = NO;

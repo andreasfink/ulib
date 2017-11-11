@@ -26,42 +26,43 @@
         }
         size = s;
         counters = [[NSMutableArray alloc]init];
+        _mutex = [[UMMutex alloc]init];
     }
     return self;
 }
 
 - (void) appendNumber:(NSNumber *)nr
 {
-    @synchronized(self)
+    [_mutex lock];
+    [counters addObject:nr];
+    NSInteger i = [counters count];
+    while(i > size)
     {
-        [counters addObject:nr];
-        NSInteger i = [counters count];
-        while(i > size)
-        {
-            [counters removeObjectAtIndex:0];
-            i--;
-        }
+        [counters removeObjectAtIndex:0];
+        i--;
     }
+    [_mutex unlock];
 }
 
 - (double) averageValue
 {
-    @synchronized(self)
-    {
-        double value = 0.0;
-        int count = 0;
+    double value = 0.0;
+    int count = 0;
 
-        for(NSNumber *nr in counters)
-        {
-            value += [nr doubleValue];
-            count++;
-        }
-        if(count==0)
-        {
-            return 0.00;
-        }
-        return (value/count);
+    [_mutex lock];
+    for(NSNumber *nr in counters)
+    {
+        value += [nr doubleValue];
+        count++;
     }
+    [_mutex unlock];
+
+    if(count==0)
+    {
+        return 0.00;
+    }
+
+    return (value/count);
 }
 
 - (NSString *)description
@@ -69,22 +70,22 @@
     NSMutableString *s = [[NSMutableString alloc]init];
     double avg = 0.0;
     int count = 0;
-    @synchronized(self)
+    double sum = 0.0;
+    [_mutex lock];
+    for(NSNumber *nr in counters)
     {
-        double sum = 0.0;
-        for(NSNumber *nr in counters)
-        {
-            sum += [nr doubleValue];
-            count++;
-        }
-        if(count==0)
-        {
-            avg = 0.00;
-        }
-        else
-        {
-            avg = (sum/count);
-        }
+        sum += [nr doubleValue];
+        count++;
+    }
+    [_mutex unlock];
+
+    if(count==0)
+    {
+        avg = 0.00;
+    }
+    else
+    {
+        avg = (sum/count);
     }
     [s appendFormat:@"UMAverageDelay(count=%d,average=%lf)",count,avg];
     return s;

@@ -6,7 +6,12 @@
 //
 //
 
+#include <pthread.h>
 #import "UMSynchronizedDictionary.h"
+
+#define SYNC_LOCK()
+
+#define SYNC_ENDLOCK
 
 @implementation UMSynchronizedDictionary
 
@@ -18,6 +23,7 @@
     if(self)
     {
         underlyingDictionary = [[NSMutableDictionary alloc] init];
+        mutex = [[UMMutex alloc]init];
     }
     return self;
 }
@@ -28,6 +34,7 @@
     if(self)
     {
         underlyingDictionary = [sd mutableCopy];
+        mutex = [[UMMutex alloc]init];
     }
     return self;
 }
@@ -47,11 +54,10 @@
 
 - (NSUInteger)count
 {
-    @synchronized(underlyingDictionary)
-    {
-        NSUInteger cnt  = [underlyingDictionary count];
-        return cnt;
-    }
+    [mutex lock];
+    NSUInteger cnt  = [underlyingDictionary count];
+    [mutex unlock];
+    return cnt;
 }
 
 
@@ -59,60 +65,58 @@
 {
     if(key)
     {
-        @synchronized(underlyingDictionary)
-        {
-            [underlyingDictionary setObject:anObject forKey:key];
-        }
+        [mutex lock];
+        [underlyingDictionary setObject:anObject forKey:key];
+        [mutex unlock];
     }
 }
 
 - (id)objectForKeyedSubscript:(id)key
 {
+    id returnValue = NULL;
     if(key)
     {
-        @synchronized(underlyingDictionary)
-        {
-            return [underlyingDictionary objectForKey:key];
-        }
+        [mutex lock];
+        returnValue = [underlyingDictionary objectForKey:key];
+        [mutex unlock];
     }
-    return NULL;
+    return returnValue;
 }
 
 - (NSArray *)allKeys
 {
-    @synchronized(underlyingDictionary)
-    {
-        return [underlyingDictionary allKeys];
-    }
+    NSArray *a;
+    [mutex lock];
+    a = [underlyingDictionary allKeys];
+    [mutex unlock];
+    return a;
 }
 
 - (void)removeObjectForKey:(id)aKey
 {
     if(aKey)
     {
-        @synchronized(underlyingDictionary)
-        {
-            [underlyingDictionary removeObjectForKey:aKey];
-        }
+        [mutex lock];
+        [underlyingDictionary removeObjectForKey:aKey];
+        [mutex unlock];
     }
 }
 
 - (NSMutableDictionary *)mutableCopy
 {
     NSMutableDictionary *d;
-    @synchronized(underlyingDictionary)
-    {
-        d = [underlyingDictionary mutableCopy];
-    }
+    [mutex lock];
+    d = [underlyingDictionary mutableCopy];
+    [mutex unlock];
     return d;
 }
 
 - (UMSynchronizedDictionary *)copyWithZone:(NSZone *)zone
 {
-    @synchronized(underlyingDictionary)
-    {
-        UMSynchronizedDictionary *cpy = [[UMSynchronizedDictionary allocWithZone:zone] initWithDictionary:underlyingDictionary];
-        return cpy;
-    }
+    UMSynchronizedDictionary *cpy;
+    [mutex lock];
+    cpy = [[UMSynchronizedDictionary allocWithZone:zone] initWithDictionary:underlyingDictionary];
+    [mutex unlock];
+    return cpy;
 }
 @end

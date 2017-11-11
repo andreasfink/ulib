@@ -8,6 +8,7 @@
 #import "UMObject.h"
 #import "UMCrypto.h"
 #import "UMSocketDefs.h"
+#import "UMMutex.h"
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -73,6 +74,8 @@
     NSString            *advertizeName;
     NSString            *advertizeDomain;
     id   __weak         _friend;
+    UMMutex             *_controlLock;
+    UMMutex             *_dataLock;
 }
 
 @property(readwrite,strong)		UMHost				*localHost;

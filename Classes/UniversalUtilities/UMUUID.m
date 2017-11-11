@@ -32,25 +32,23 @@
     }
 
     NSString *uniqueId = NULL;
-    @synchronized(self)
-    {
-        time_t              now;
-        struct tm           trec;
-        
-        
-        time(&now);
-        gmtime_r(&now, &trec);
-        trec.tm_mon++;
-        uniqueId =  [NSString stringWithFormat:@"%04d%02d%02d-%02d%02d%02d-%s",
-                     trec.tm_year+1900,
-                     trec.tm_mon,
-                     trec.tm_mday,
-                     trec.tm_hour,
-                     trec.tm_min,
-                     trec.tm_sec,
-                     uuid_string2];
-    }
-    
+
+    time_t              now;
+    struct tm           trec;
+
+
+    time(&now);
+    gmtime_r(&now, &trec);
+    trec.tm_mon++;
+    uniqueId =  [NSString stringWithFormat:@"%04d%02d%02d-%02d%02d%02d-%s",
+                 trec.tm_year+1900,
+                 trec.tm_mon,
+                 trec.tm_mday,
+                 trec.tm_hour,
+                 trec.tm_min,
+                 trec.tm_sec,
+                 uuid_string2];
+
     uuid_clear(uu);
     return uniqueId;
 }

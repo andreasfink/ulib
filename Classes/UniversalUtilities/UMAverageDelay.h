@@ -6,11 +6,12 @@
 //
 
 #import "UMObject.h"
-
+#import "UMMutex.h"
 @interface UMAverageDelay : UMObject
 {
     int size;
     NSMutableArray *counters;
+    UMMutex *_mutex;
 }
 
 - (UMAverageDelay *)init;

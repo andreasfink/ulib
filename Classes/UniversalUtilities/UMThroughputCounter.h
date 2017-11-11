@@ -7,7 +7,7 @@
 
 #import "UMObject.h"
 #import "UMMicroSec.h"
-
+#import "UMMutex.h"
 #include <time.h>
 #include <sys/time.h>
 
@@ -22,6 +22,7 @@
 	uint32_t            *cells;
 	UMMicroSec          endTime;	/* time in MicroSeconds */
 	long long           endIndex;   /* time in index counters (MicroSeconds / resolution */
+    UMMutex             *_mutex;
 }
 
 - (UMThroughputCounter *)init;

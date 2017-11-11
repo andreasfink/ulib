@@ -7,6 +7,8 @@
 //
 
 #import "UMObject.h"
+#import "UMMutex.h"
+
 @class UMBackgrounder;
 
 /*!
@@ -22,12 +24,19 @@
     NSString        *name;
     BOOL            enableLogging;
     BOOL            sync;
-    id              synchronizeObject;
+    id              _synchronizeObject; /* DEPRECIATED */
+    UMMutex         *_synchronizeMutex; /* preferred */
+    id              _retainObject; /* object to hold until task ends */
+    UMMutex         *_runMutex;
 }
 @property(strong)   NSString *name;
 @property(assign)   BOOL enableLogging;
 @property(assign)   BOOL sync;
-@property(strong)   id synchronizeObject;
+@property(strong)   id synchronizeObject;   /* DEPRECIATED */
+@property(readwrite,strong)   UMMutex   *synchronizeMutex; /* preferred */
+@property(strong)   id retainObject;
+@property(readwrite,strong)   UMMutex   *runMutex; /* preferred */
+
 
 
 - (UMTask *)initWithName:(NSString *)name;

@@ -68,19 +68,8 @@
             }
             @autoreleasepool
             {
-                if(task.synchronizeObject)
-                {
-                    @synchronized(task.synchronizeObject)
-                    {
-                        [readLock unlock];
-                        [task runOnBackgrounder:self];
-                    }
-                }
-                else
-                {
-                    [readLock unlock];
-                    [task runOnBackgrounder:self];
-                }
+                [readLock unlock];
+                [task runOnBackgrounder:self];
             }
             ulib_set_thread_name([NSString stringWithFormat:@"%@ (idle)",self.name]);
             return 1;

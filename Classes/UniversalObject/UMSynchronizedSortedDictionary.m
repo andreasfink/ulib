@@ -51,83 +51,82 @@
 
 - (void)setObject:(id)anObject forKeyedSubscript:(id<NSCopying>)key
 {
-    if(key)
+    if(!key)
     {
-        @synchronized(self)
+        return;
+    }
+    [_mutex lock];
+    if (underlyingDictionary[key] == NULL)
+    {
+        if(anObject)
         {
-            if (underlyingDictionary[key] == NULL)
-            {
-                if(anObject)
-                {
-                    [underlyingDictionary setObject:anObject forKey:key];
-                    [sortIndex addObject:key];
-                }
-            }
-            else
-            {
-                if(anObject)
-                {
-                    [underlyingDictionary setObject:anObject forKey:key];
-                }
-            }
+            [underlyingDictionary setObject:anObject forKey:key];
+            [sortIndex addObject:key];
         }
     }
+    else
+    {
+        if(anObject)
+        {
+            [underlyingDictionary setObject:anObject forKey:key];
+        }
+    }
+    [_mutex unlock];
 }
 
 - (id)objectForKeyedSubscript:(id)key
 {
-    if(key)
+    if(!key)
     {
-        @synchronized(self)
-        {
-            return [underlyingDictionary objectForKey:key];
-        }
+        return NULL;
     }
-    return NULL;
+    [_mutex lock];
+    id r = [underlyingDictionary objectForKey:key];
+    [_mutex unlock];
+    return r;
 }
 
 - (id)objectAtIndex:(NSUInteger)index
 {
-    @synchronized(self)
+    id r = NULL;
+    [_mutex lock];
+    id key = sortIndex[index];
+    if(key)
     {
-        id key = sortIndex[index];
-        if(key)
-        {
-            return [underlyingDictionary objectForKey:key];
-        }
+        r = [underlyingDictionary objectForKey:key];
     }
-    return NULL;
+    [_mutex unlock];
+    return r;
 }
 
 - (id)keyAtIndex:(NSUInteger)index
 {
-    @synchronized(self)
-    {
-        id key = sortIndex[index];
-        return key;
-    }
-    return NULL;
+    id key = NULL;
+    [_mutex lock];
+    key = sortIndex[index];
+    [_mutex unlock];
+    return key;
 }
 
 
 - (NSArray *)allKeys
 {
-    @synchronized(self)
-    {
-        return [sortIndex copy];
-    }
+    [_mutex lock];
+    NSArray *r = [sortIndex copy];
+    [_mutex unlock];
+    return r;
 }
 
 - (void)removeObjectForKey:(id)aKey
 {
-    @synchronized(self)
+    if(!aKey)
     {
-        if(aKey)
-        {
-            [underlyingDictionary removeObjectForKey:aKey];
-            [sortIndex removeObjectIdenticalTo:aKey];
-        }
+        return;
     }
+    [_mutex lock];
+    [underlyingDictionary removeObjectForKey:aKey];
+    [sortIndex removeObjectIdenticalTo:aKey];
+    [_mutex unlock];
 }
 
 
@@ -142,7 +141,6 @@
 }
 - (NSString *)description
 {
-    
     NSMutableString *s = [[NSMutableString alloc]init];
     [s appendFormat:@"UMSynchronizedSortedDictionary {\n"];
     for(id key in sortIndex)

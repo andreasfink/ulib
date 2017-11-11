@@ -10,6 +10,7 @@
 #import "UMObject.h"
 #import "UMHTTPResponseCode.h"
 #import "UMHTTPAuthenticationStatus.h"
+#import "UMMutex.h"
 
 #define DEFAULT_UMHTTP_SERVER_TIMEOUT       90.0
 
@@ -57,6 +58,7 @@
     
     id<UMHTTPRequest_TimeoutProtocol>    _timeoutDelegate;
     BOOL                _mustClose; /* if set, it means after answering this request the connection shall close */
+    UMMutex             *_pendingRequestLock;
 
 }
 

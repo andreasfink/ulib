@@ -51,7 +51,8 @@
         @throw([NSException exceptionWithName:@"NOT_INITIALIZED" reason:@"control sleeper in UMBackgrounder is not initialized" userInfo:NULL]);
     }
 
-    @synchronized(self)
+    [_startStopLock lock];
+    @try
     {
         if(self.runningStatus == UMBackgrounder_notRunning)
         {
@@ -62,8 +63,6 @@
                                      file:__FILE__
                                      line:__LINE__
                                  function:__func__];
-
-//            [NSThread detachNewThreadSelector:@selector(backgroundTask) toTarget:self withObject:NULL];
             int i=0;
             while(i<= 10)
             {
@@ -76,11 +75,16 @@
             }
         }
     }
+    @finally
+    {
+        [_startStopLock unlock];
+    }
 }
 
 - (void)shutdownBackgroundTask
 {
-    @synchronized(self)
+    [_startStopLock lock];
+    @try
     {
         if(self.runningStatus != UMBackgrounder_running)
         {
@@ -102,6 +106,10 @@
             NSLog(@"shutdownBackgroundTask: failed. Background task did not shut down within 10 seconds");
         }
         self.runningStatus = UMBackgrounder_notRunning;
+    }
+    @finally
+    {
+        [_startStopLock unlock];
     }
 }
 

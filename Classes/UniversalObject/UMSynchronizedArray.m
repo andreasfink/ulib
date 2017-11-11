@@ -20,6 +20,7 @@
     if(self)
     {
         array = [[NSMutableArray alloc]init];
+        _mutex = [[UMMutex alloc]init];
     }
     return self;
 }
@@ -55,20 +56,18 @@
 
 - (NSUInteger)count
 {
-    @synchronized(self)
-    {
-        NSUInteger cnt = [array count];
-        return cnt;
-    }
+    [_mutex lock];
+    NSUInteger cnt = [array count];
+    [_mutex unlock];
+    return cnt;
 }
 
 
 - (void)addObject:(id)anObject
 {
-    @synchronized(self)
-    {
-        [array addObject:anObject];
-    }
+    [_mutex lock];
+    [array addObject:anObject];
+    [_mutex unlock];
 }
 
 - (void)addPrintableString:(NSString *)s
@@ -90,90 +89,96 @@
                                                 }
                 ]);
     }
-    @synchronized(self)
-    {
-        [array insertObject:anObject atIndex:index];
-    }
+    [_mutex lock];
+    [array insertObject:anObject atIndex:index];
+    [_mutex unlock];
 }
 
 - (void)removeLastObject
 {
-    @synchronized(self)
-    {
-        [array removeLastObject];
-    }
+    [_mutex lock];
+    [array removeLastObject];
+    [_mutex unlock];
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index
 {
-    @synchronized(self)
-    {
-        [array removeObjectAtIndex:index];
-    }
+    [_mutex lock];
+    [array removeObjectAtIndex:index];
+    [_mutex unlock];
 }
 
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject
 {
-    @synchronized(self)
-    {
-        [array setObject:anObject atIndexedSubscript:index];
-        ////array[index] = anObject;
-    }
+    [_mutex lock];
+    [array setObject:anObject atIndexedSubscript:index];
+    [_mutex unlock];
 }
 
 - (id)objectAtIndex:(NSUInteger)index
 {
-    id obj;
-    @synchronized(self)
+    id obj = NULL;
+    [_mutex lock];
+    if(index < [array count])
     {
-        if(index >= [array count])
-        {
-            return NULL;
-        }
         obj = [array objectAtIndex:index];
     }
+    [_mutex unlock];
+    return obj;
+}
+
+
+- (id)removeFirst
+{
+    id obj = NULL;
+    [_mutex lock];
+    if(array.count>0)
+    {
+        obj = [array objectAtIndex:0];
+        [array removeObjectAtIndex:0];
+    }
+    [_mutex unlock];
     return obj;
 }
 
 - (NSString *)stringLines
 {
     NSString *s;
-    @synchronized(self)
-    {
-        s = [array componentsJoinedByString:@"\n"];
-    }
+    [_mutex lock];
+    s = [array componentsJoinedByString:@"\n"];
+    [_mutex unlock];
     return s;
 }
 
 - (void)removeObject:(id)obj
 {
-    @synchronized(self)
-    {
-        [array removeObject:obj];
-    }
+    [_mutex lock];
+    [array removeObject:obj];
+    [_mutex unlock];
 }
 
 
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx
 {
-    @synchronized(self)
-    {
-        [array setObject:obj atIndexedSubscript:idx];
-    }
+    [_mutex lock];
+    [array setObject:obj atIndexedSubscript:idx];
+    [_mutex unlock];
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)idx
 {
-    return [self objectAtIndex:idx];
+    [_mutex lock];
+    id r = [self objectAtIndex:idx];
+    [_mutex unlock];
+    return r;
 }
 
 - (NSMutableArray *)mutableCopy
 {
     NSMutableArray *a;
-    @synchronized(self)
-    {
-        a = [array mutableCopy];
-    }
+    [_mutex lock];
+    a = [array mutableCopy];
+    [_mutex unlock];
     return a;
 }
 
@@ -182,29 +187,32 @@
 {
     if(arr)
     {
-        @synchronized (self)
+        [_mutex lock];
+        for (id o in arr)
         {
-            for (id o in arr)
-            {
-                [array addObject:o];
-            }
+            [array addObject:o];
         }
+        [_mutex unlock];
     }
 }
 
 - (NSString *)jsonString;
 {
-    @synchronized (self)
+    NSString *json;
+    [_mutex lock];
+    @try
     {
-
         UMJsonWriter *writer = [[UMJsonWriter alloc] init];
-        NSString *json = [writer stringWithObject:array];
+        json = [writer stringWithObject:array];
         if (!json)
         {
             NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
         }
-        
-        return json;
     }
+    @finally
+    {
+        [_mutex unlock];
+    }
+    return json;
 }
 @end

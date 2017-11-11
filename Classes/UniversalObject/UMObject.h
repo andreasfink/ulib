@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "UMMutex.h"
 #define MAGIC_SIZE  64
 
 @class UMHistoryLog, UMConfig, UMLogFeed, UMLogHandler;
@@ -52,6 +52,7 @@ BOOL umobject_object_stat_is_enabled(void);
     char        *_magic;        /*!< c pointer to the class name which has instantiated this object. Only populated if UMOBJECT_USE_MAGIC is set to 1. Useful for debugging with a limited verison of lldb */
     UMLogFeed   *logFeed;       /*!< The log feed this object can use to log anything related to this UMObject */
     int _ulib_retain_counter;
+    UMMutex *_backgroundLock;
 }
 
 @property (readwrite,strong,atomic) UMLogFeed *logFeed;

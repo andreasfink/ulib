@@ -87,16 +87,13 @@
 
 - (void)increaseBy:(uint32_t)count
 {
-    @synchronized(self)
-    {
-        UMMicroSec nowTime;
-        long long nowIndex;
+    UMMicroSec nowTime = [UMThroughputCounter microsecondTime];
 
-        nowTime = [UMThroughputCounter microsecondTime];
-        nowIndex = nowTime/resolution;
-        [self timeShiftByIndex: nowTime/resolution];
-        cells[nowIndex % cellCount] += count;
-    }
+    [_mutex lock];
+    long long nowIndex = nowTime/resolution;
+    [self timeShiftByIndex: nowIndex];
+    cells[nowIndex % cellCount] += count;
+    [_mutex unlock];
 }
 
 
@@ -135,34 +132,33 @@ end:
 
 - (long long) getCountForMicroseconds: (UMMicroSec)microsecondDuration;
 {
-    @synchronized(self)
+    long long startIndex;
+    UMMicroSec nowTime;
+    long long nowIndex;
+    long long indexCount;
+    long long result;
+    long long i;
+
+    nowTime  = [UMThroughputCounter microsecondTime];
+
+    [_mutex lock];
+    nowIndex = nowTime/resolution;
+    [self timeShiftByIndex: nowIndex];
+    indexCount = microsecondDuration/resolution;
+    if(indexCount >= cellCount)
     {
-        long long startIndex;
-        UMMicroSec nowTime;
-        long long nowIndex;
-        long long indexCount;
-        long long result;
-        long long i;
-
-        nowTime  = [UMThroughputCounter microsecondTime];
-        nowIndex = nowTime/resolution;
-        
-        [self timeShiftByIndex: nowIndex];
-
-        indexCount = microsecondDuration/resolution;
-        if(indexCount >= cellCount)
-        {
-            indexCount = cellCount-1;
-        }
-        startIndex = nowIndex - 1 - indexCount;
-
-        result = 0;
-        for ( i = startIndex; i < (nowIndex -1); i++ )
-        {
-            result += cells[i % cellCount];
-        }
-        return result;
+        indexCount = cellCount-1;
     }
+    startIndex = nowIndex - 1 - indexCount;
+
+    result = 0;
+    for ( i = startIndex; i < (nowIndex -1); i++ )
+    {
+        result += cells[i % cellCount];
+    }
+    [_mutex unlock];
+
+    return result;
 }
 
 

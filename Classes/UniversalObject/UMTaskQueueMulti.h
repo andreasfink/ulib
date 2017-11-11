@@ -28,6 +28,7 @@
     BOOL            enableLogging;
     NSString        *name;
     NSArray         *queues;
+    UMMutex         *_queuesLock;
     UMSleeper       *workSleeper;
     NSMutableArray  *workerThreads; /* UMBackgrounderWithQueues objects */
 }

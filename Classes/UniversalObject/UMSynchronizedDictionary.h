@@ -17,7 +17,7 @@
  To create a NSMutableDictionary from UMSynchronizedDictionary, use mutableCopy method.
  */
 
-@interface UMSynchronizedDictionary : UMObject
+@interface UMSynchronizedDictionary : UMObject<NSCopying>
 {
     NSMutableDictionary *underlyingDictionary;
     UMMutex *mutex;

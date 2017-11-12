@@ -111,7 +111,7 @@
     return d;
 }
 
-- (UMSynchronizedDictionary *)copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(nullable NSZone *)zone
 {
     UMSynchronizedDictionary *cpy;
     [mutex lock];

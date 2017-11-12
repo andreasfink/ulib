@@ -16,7 +16,7 @@
  To create a NSArray/NSMutableArray from UMSynchronizedArray, use mutableCopy method.
  */
 
-@interface UMSynchronizedArray : UMObject
+@interface UMSynchronizedArray : UMObject<NSCopying>
 {
     NSMutableArray  *_array;
     UMMutex         *_mutex;
@@ -49,6 +49,7 @@
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
 - (NSMutableArray *)mutableCopy;
 - (void)appendArray:(NSArray *)app;
+- (NSArray *)arrayCopy;
 
 @end
 

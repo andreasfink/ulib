@@ -213,11 +213,19 @@
     return json;
 }
 
--(UMSynchronizedArray *)copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(nullable NSZone *)zone
 {
     [_mutex lock];
     UMSynchronizedArray *sa = [[UMSynchronizedArray allocWithZone:zone]initWithArray:_array];
     [_mutex unlock];
     return sa;
+}
+
+- (NSArray *)arrayCopy
+{
+    [_mutex lock];
+    NSArray *a = [_array copy];
+    [_mutex unlock];
+    return a;
 }
 @end

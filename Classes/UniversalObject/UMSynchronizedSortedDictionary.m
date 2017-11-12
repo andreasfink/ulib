@@ -165,7 +165,7 @@
 }
 
 
-- (UMSynchronizedSortedDictionary *)copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(nullable NSZone *)zone
 {
     UMSynchronizedSortedDictionary *cpy = [[UMSynchronizedSortedDictionary allocWithZone:zone]init];
     cpy->underlyingDictionary = [underlyingDictionary copy];

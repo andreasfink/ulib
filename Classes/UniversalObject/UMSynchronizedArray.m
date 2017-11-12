@@ -12,14 +12,12 @@
 
 @implementation UMSynchronizedArray
 
-@synthesize array;
-
 - (id)init
 {
     self = [super init];
     if(self)
     {
-        array = [[NSMutableArray alloc]init];
+        _array = [[NSMutableArray alloc]init];
         _mutex = [[UMMutex alloc]init];
     }
     return self;
@@ -30,8 +28,7 @@
     self = [super init];
     if(self)
     {
-        array = [[NSMutableArray alloc]init];
-        [array setArray:arr];
+        _array = [arr mutableCopy];
     }
     return self;
 }
@@ -57,7 +54,7 @@
 - (NSUInteger)count
 {
     [_mutex lock];
-    NSUInteger cnt = [array count];
+    NSUInteger cnt = [_array count];
     [_mutex unlock];
     return cnt;
 }
@@ -66,7 +63,7 @@
 - (void)addObject:(id)anObject
 {
     [_mutex lock];
-    [array addObject:anObject];
+    [_array addObject:anObject];
     [_mutex unlock];
 }
 
@@ -90,28 +87,28 @@
                 ]);
     }
     [_mutex lock];
-    [array insertObject:anObject atIndex:index];
+    [_array insertObject:anObject atIndex:index];
     [_mutex unlock];
 }
 
 - (void)removeLastObject
 {
     [_mutex lock];
-    [array removeLastObject];
+    [_array removeLastObject];
     [_mutex unlock];
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index
 {
     [_mutex lock];
-    [array removeObjectAtIndex:index];
+    [_array removeObjectAtIndex:index];
     [_mutex unlock];
 }
 
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject
 {
     [_mutex lock];
-    [array setObject:anObject atIndexedSubscript:index];
+    [_array setObject:anObject atIndexedSubscript:index];
     [_mutex unlock];
 }
 
@@ -119,9 +116,9 @@
 {
     id obj = NULL;
     [_mutex lock];
-    if(index < [array count])
+    if(index < [_array count])
     {
-        obj = [array objectAtIndex:index];
+        obj = [_array objectAtIndex:index];
     }
     [_mutex unlock];
     return obj;
@@ -132,10 +129,10 @@
 {
     id obj = NULL;
     [_mutex lock];
-    if(array.count>0)
+    if(_array.count>0)
     {
-        obj = [array objectAtIndex:0];
-        [array removeObjectAtIndex:0];
+        obj = [_array objectAtIndex:0];
+        [_array removeObjectAtIndex:0];
     }
     [_mutex unlock];
     return obj;
@@ -145,7 +142,7 @@
 {
     NSString *s;
     [_mutex lock];
-    s = [array componentsJoinedByString:@"\n"];
+    s = [_array componentsJoinedByString:@"\n"];
     [_mutex unlock];
     return s;
 }
@@ -153,7 +150,7 @@
 - (void)removeObject:(id)obj
 {
     [_mutex lock];
-    [array removeObject:obj];
+    [_array removeObject:obj];
     [_mutex unlock];
 }
 
@@ -161,7 +158,7 @@
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx
 {
     [_mutex lock];
-    [array setObject:obj atIndexedSubscript:idx];
+    [_array setObject:obj atIndexedSubscript:idx];
     [_mutex unlock];
 }
 
@@ -177,7 +174,7 @@
 {
     NSMutableArray *a;
     [_mutex lock];
-    a = [array mutableCopy];
+    a = [_array mutableCopy];
     [_mutex unlock];
     return a;
 }
@@ -190,7 +187,7 @@
         [_mutex lock];
         for (id o in arr)
         {
-            [array addObject:o];
+            [_array addObject:o];
         }
         [_mutex unlock];
     }
@@ -203,7 +200,7 @@
     @try
     {
         UMJsonWriter *writer = [[UMJsonWriter alloc] init];
-        json = [writer stringWithObject:array];
+        json = [writer stringWithObject:_array];
         if (!json)
         {
             NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
@@ -214,5 +211,13 @@
         [_mutex unlock];
     }
     return json;
+}
+
+-(UMSynchronizedArray *)copyWithZone:(NSZone *)zone
+{
+    [_mutex lock];
+    UMSynchronizedArray *sa = [[UMSynchronizedArray allocWithZone:zone]initWithArray:_array];
+    [_mutex unlock];
+    return sa;
 }
 @end

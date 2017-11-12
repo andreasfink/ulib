@@ -18,8 +18,8 @@
 
 @interface UMSynchronizedArray : UMObject
 {
-    NSMutableArray *array;
-    UMMutex *_mutex;
+    NSMutableArray  *_array;
+    UMMutex         *_mutex;
 }
 
 @property (readonly,strong) NSMutableArray *array;

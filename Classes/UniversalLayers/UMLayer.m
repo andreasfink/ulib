@@ -388,18 +388,10 @@
     {
         enable = [cfg[@"enable"]boolValue];
     }
-    else
-    {
-        enable = YES;
-    }
 
     if(cfg[@"log-level"])
     {
         logLevel = [cfg[@"log-level"]intValue];
-    }
-    else
-    {
-        logLevel = UMLOG_MAJOR;
     }
 }
 

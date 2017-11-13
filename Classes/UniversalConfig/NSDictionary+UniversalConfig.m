@@ -13,56 +13,21 @@
 
 - (BOOL)configEnabledWithYesDefault
 {
-    NSArray *keys = [self allKeys];
-    for(id key in keys)
+    if(self[@"enable"] == NULL)
     {
-        if([key isEqualToStringCaseInsensitive:@"enable"])
-        {
-            id entry = self[key];
-            if(entry == NULL)
-            {
-                return YES;
-            }
-            return [entry boolValue];
-        }
+        return YES;
     }
-    return YES;
+    return [self[@"enable"] boolValue];
 }
 
 - (NSString *)configName
 {
-    NSArray *keys = [self allKeys];
-    for(id key in keys)
-    {
-        if([key isEqualToStringCaseInsensitive:@"name"])
-        {
-            id entry = self[key];
-            if(entry == NULL)
-            {
-                return NULL;
-            }
-            return [entry stringValue];
-        }
-    }
-    return NULL;
+    return [self[@"name"] stringValue];
 }
 
 - (NSString *)configEntry:(NSString *)index
 {
-    NSArray *keys = [self allKeys];
-    for(id key in keys)
-    {
-        if([key isEqualToStringCaseInsensitive:index])
-        {
-            id entry = self[key];
-            if(entry == NULL)
-            {
-                return NULL;
-            }
-            return [entry stringValue];
-        }
-    }
-    return NULL;
+    return [self[index] stringValue];
 }
 
 @end

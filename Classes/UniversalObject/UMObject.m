@@ -98,7 +98,12 @@ static FILE *alloc_log;
                      toHandler:(UMLogHandler *)handler
                         logdir:(NSString *)logdir
 {
-        [self addLogFromConfigGroup:grp toHandler:handler sectionName:[grp objectForKey:@"group"] subSectionName:NULL configOption:@"log-file" logdir:logdir];
+        [self addLogFromConfigGroup:grp
+                          toHandler:handler
+                        sectionName:[grp objectForKey:@"group"]
+                     subSectionName:NULL
+                       configOption:@"log-file"
+                             logdir:logdir];
 }
 
 - (void) addLogFromConfigGroup:(NSDictionary *)grp

@@ -15,6 +15,7 @@
 #import "UMLogFeed.h"
 #import "UMLayerTask.h"
 #import "UMLayerUserProtocol.h"
+#import "NSString+UniversalObject.h"
 
 @implementation UMLayer
 
@@ -377,23 +378,29 @@
     /* we should add some log file options here somehow */
 }
 
-- (void)readLayerConfig:(NSDictionary *)config
+- (void)readLayerConfig:(NSDictionary *)cfg
 {
-    if(config[@"name"])
+    if(cfg[@"name"])
     {
-        layerName = config[@"name"];
+        layerName = [cfg[@"name"]stringValue];
     }
-    if(config[@"enable"])
+    if(cfg[@"enable"])
     {
-        enable = [config[@"enable"] boolValue];
+        enable = [cfg[@"enable"]boolValue];
     }
-    if(config[@"log-level"])
+    else
     {
-        logLevel = [config[@"log-level"] intValue];
+        enable = YES;
+    }
+
+    if(cfg[@"log-level"])
+    {
+        logLevel = [cfg[@"log-level"]intValue];
     }
     else
     {
         logLevel = UMLOG_MAJOR;
     }
 }
+
 @end

@@ -273,6 +273,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
         NSString *part1 = [line substringToIndex:r.location];
         NSString *part2 = [line substringFromIndex:r.location+1];
         part1 = [part1 stringByTrimmingCharactersInSet:whitespace];
+        part1 = [part1 lowercaseString];
         part2 = [part2 stringByTrimmingCharactersInSet:whitespace];
         part2 = [part2 stringByTrimmingCharactersInSet:quotes];
         if([part1 isEqualToString:@"group"])

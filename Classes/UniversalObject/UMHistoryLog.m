@@ -24,6 +24,7 @@
     {
         entries = [[NSMutableArray alloc] init];
         max = maxlines;
+        _lock =[[UMMutex alloc]init];
         //count = 0;
     }
     return self;
@@ -64,48 +65,46 @@
 
 - (void)addLogEntry:(NSString *)log
 {
-    @synchronized(self)
-    {
-        UMHistoryLogEntry *e = [[UMHistoryLogEntry alloc] initWithLog:log];
-        [entries addObject:e];
-        [self trim];
-    }
+    [_lock lock];
+    UMHistoryLogEntry *e = [[UMHistoryLogEntry alloc] initWithLog:log];
+    [entries addObject:e];
+    [self trim];
+    [_lock unlock];
 }
 
 - (NSArray *)getLogArrayWithOrder:(BOOL)forward
 {
-    @synchronized(self)
-    {
-        NSMutableArray *output = [[NSMutableArray alloc]init];
-        NSInteger count = [entries count];
-        NSInteger position;
-        NSInteger direction;
-        
-        if(forward)
-        {
-            position = 0;
-            direction = 1;
-        }
-        else
-        {
-            position = count -1;
-            direction = -1;
+    [_lock lock];
+    NSMutableArray *output = [[NSMutableArray alloc]init];
+    NSInteger count = [entries count];
+    NSInteger position;
+    NSInteger direction;
 
-        }
-        
-        while(count--)
-        {
-            UMHistoryLogEntry *entry = entries[position];
-            NSString *line = entry.log;
-            if([line length]>0)
-            {
-                [output addObject:line];
-            }
-            
-            position = position + direction;
-        }
-        return output;
+    if(forward)
+    {
+        position = 0;
+        direction = 1;
     }
+    else
+    {
+        position = count -1;
+        direction = -1;
+
+    }
+
+    while(count--)
+    {
+        UMHistoryLogEntry *entry = entries[position];
+        NSString *line = entry.log;
+        if([line length]>0)
+        {
+            [output addObject:line];
+        }
+
+        position = position + direction;
+    }
+    [_lock unlock];
+    return output;
 }
 
 - (void)addObject:(id)entry

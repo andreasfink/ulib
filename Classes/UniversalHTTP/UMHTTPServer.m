@@ -325,14 +325,13 @@
 
 - (void)connectionDone:(UMHTTPConnection *)con
 {
-	@synchronized(self)
-	{
-        if(con)
-        {
-            [connections removeObject:con];
-            [terminatedConnections addObject:con];
-        }
-	}
+    if(con)
+    {
+        [_connectionsLock lock];
+        [connections removeObject:con];
+        [terminatedConnections addObject:con];
+        [_connectionsLock unlock];
+    }
 }
 
 /* calling the delegates */

@@ -94,8 +94,8 @@
 
 - (NSArray *)tokensFromChars:(NSArray *)chars
 {
-    @synchronized(self) /* FIXME: is this really needing a synchronized ? */
-    {
+    //@synchronized(self) /* FIXME: is this really needing a synchronized ? */
+    //{
         [self reset];
         NSInteger len = chars.count;
 
@@ -137,7 +137,7 @@
         NSArray *result = _lines;
         _lines = [[NSMutableArray alloc]init];
         return result;
-    }
+    //}
 }
 
 @end

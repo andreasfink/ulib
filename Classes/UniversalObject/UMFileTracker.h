@@ -33,6 +33,7 @@
 @interface UMFileTracker : UMObject
 {
     NSMutableDictionary *fileTrackingInfos;
+    UMMutex *_lock;
 }
 
 - (void)add:(UMFileTrackingInfo *)info;

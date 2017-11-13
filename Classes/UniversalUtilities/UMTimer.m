@@ -83,10 +83,7 @@
 
 - (UMMicroSec)timeLeft:(UMMicroSec)now
 {
-    @synchronized(self)
-    {
-        return self.expiryTime - now;
-    }
+    return self.expiryTime - now;
 }
 
 - (void)fire

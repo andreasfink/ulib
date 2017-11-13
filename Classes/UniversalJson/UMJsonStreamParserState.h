@@ -13,6 +13,7 @@
 #import "UMJsonStreamParser.h"
 
 @interface UMJsonStreamParserState : UMObject
+
 + (id)sharedInstance;
 
 - (BOOL)parser:(UMJsonStreamParser*)parser shouldAcceptToken:(UMjson_token_t)token;

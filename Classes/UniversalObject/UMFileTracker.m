@@ -45,50 +45,45 @@ static UMFileTracker *_global_file_tracker = nil;
 
 - (void)add:(UMFileTrackingInfo *)info
 {
-    @synchronized(self)
-    {
-        NSString *key = info.key;
-        UMAssert(key != NULL,@"key can not be null");
-        fileTrackingInfos[key] = info;
-    }
+    NSString *key = info.key;
+    UMAssert(key != NULL,@"key can not be null");
+    [_lock lock];
+    fileTrackingInfos[key] = info;
+    [_lock unlock];
 }
 
 - (UMFileTrackingInfo *)infoForFdes:(int)fdes
 {
-    @synchronized(self)
-    {
-        NSString *key = [UMFileTracker keyFromFdes:fdes];
-        UMAssert(key != NULL,@"key can not be null");
-        UMFileTrackingInfo *ti = fileTrackingInfos[key];
-        return ti;
-    }
+    NSString *key = [UMFileTracker keyFromFdes:fdes];
+    UMAssert(key != NULL,@"key can not be null");
+    [_lock lock];
+    UMFileTrackingInfo *ti = fileTrackingInfos[key];
+    [_lock unlock];
+    return ti;
 }
 
 - (UMFileTrackingInfo *)infoForFile:(FILE *)f
 {
-    @synchronized(self)
-    {
-        NSString *key = [UMFileTracker keyFromFILE:f];
-        UMFileTrackingInfo *ti = fileTrackingInfos[key];
-        return ti;
-    }
+    NSString *key = [UMFileTracker keyFromFILE:f];
+    [_lock lock];
+    UMFileTrackingInfo *ti = fileTrackingInfos[key];
+    [_lock unlock];
+    return ti;
 }
 
 
 - (void) closeFdes:(int)fdes
 {
-    @synchronized(self)
-    {
-        [fileTrackingInfos removeObjectForKey:[UMFileTracker keyFromFdes:fdes]];
-    }
+    [_lock lock];
+    [fileTrackingInfos removeObjectForKey:[UMFileTracker keyFromFdes:fdes]];
+    [_lock unlock];
 }
 
 - (void) closeFILE:(FILE *)f
 {
-    @synchronized(self)
-    {
-        [fileTrackingInfos removeObjectForKey:[UMFileTracker keyFromFILE:f]];
-    }
+    [_lock lock];
+    [fileTrackingInfos removeObjectForKey:[UMFileTracker keyFromFILE:f]];
+    [_lock unlock];
 }
 
 + (NSString *)keyFromFdes:(int)fdes
@@ -103,23 +98,23 @@ static UMFileTracker *_global_file_tracker = nil;
 
 - (NSString *)description
 {
-    @synchronized(self)
-    {
-        struct rlimit r;
+    [_lock lock];
 
-        NSMutableString *s = [[NSMutableString alloc]init];
-        [s appendFormat:@"UMFileTracker: %@\n",[super description]];
-        NSUInteger count = [fileTrackingInfos count];
-        [s appendFormat:@"Current Count: %ld\n",(long)count];
-        getrlimit(RLIMIT_NOFILE, &r);
-        [s appendFormat:@"Current open number of files limit: %ld\n",(long)r.rlim_cur];
-        int i =0;
-        for (NSString *key in fileTrackingInfos)
-        {
-            UMFileTrackingInfo *ti = fileTrackingInfos[key];
-            [s appendString: [ti descriptionWithIndex:++i]];
-        }
-        return s;
+    struct rlimit r;
+
+    NSMutableString *s = [[NSMutableString alloc]init];
+    [s appendFormat:@"UMFileTracker: %@\n",[super description]];
+    NSUInteger count = [fileTrackingInfos count];
+    [s appendFormat:@"Current Count: %ld\n",(long)count];
+    getrlimit(RLIMIT_NOFILE, &r);
+    [s appendFormat:@"Current open number of files limit: %ld\n",(long)r.rlim_cur];
+    int i =0;
+    for (NSString *key in fileTrackingInfos)
+    {
+        UMFileTrackingInfo *ti = fileTrackingInfos[key];
+        [s appendString: [ti descriptionWithIndex:++i]];
     }
+    [_lock unlock];
+    return s;
 }
 @end

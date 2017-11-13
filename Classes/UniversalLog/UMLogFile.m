@@ -293,7 +293,8 @@ error:
     }
     
     NSData * newLineData = [lineDelimiter dataUsingEncoding:NSUTF8StringEncoding];
-    @synchronized(self)
+    [self lock];
+    @try
     {
         [fileHandler seekToFileOffset:currentOffset];
         currentData = [[NSMutableData alloc] init];
@@ -354,7 +355,10 @@ error:
             }
         }
     }
-
+    @finally
+    {
+        [self unlock];
+    }
     NSString * line = [[NSString alloc] initWithData:currentData encoding:NSUTF8StringEncoding];
     *ret = 1;
     return line;

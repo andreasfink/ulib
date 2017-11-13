@@ -37,6 +37,7 @@
         locationFile = file;
         locationLine = line;
         locationFunction = func;
+        _lock = [[UMMutex alloc] init];
     }
     return self;
 }
@@ -94,45 +95,43 @@
 
 - (NSString *)descriptionWithIndex:(int)index
 {
-    @synchronized(self)
+    [_lock lock];
+    NSMutableString *s = [[NSMutableString alloc]init];
+    switch(type)
     {
-        NSMutableString *s = [[NSMutableString alloc]init];
-        switch(type)
-        {
-            case UMFileTrackingInfo_typeFDES:
-                [s appendFormat:@"FDES:%d\r\n",fdes];
-                break;
-            case UMFileTrackingInfo_typeFILE:
-                [s appendFormat:@"FILE:%p\r\n",f];
-                break;
-            case UMFileTrackingInfo_typePIPE:
-                [s appendFormat:@"PIPE:%d\r\n",fdes];
-                break;
-            case UMFileTrackingInfo_typeSOCKET:
-                [s appendFormat:@"SOCKET:%d\r\n",fdes];
-                break;
-        }
-        [s appendFormat:@"%d:%@:%ld:%@\r\n",index,locationFile,(long)locationLine,locationFunction];
-        if(_history)
-        {
-            NSArray *logEntries = [_history getLogArrayWithOrder:YES];
-            for(NSString *entry in logEntries)
-            {
-                [s appendFormat:@"    %@\r\n",entry];
-            }
-        }
-        return s;
+        case UMFileTrackingInfo_typeFDES:
+            [s appendFormat:@"FDES:%d\r\n",fdes];
+            break;
+        case UMFileTrackingInfo_typeFILE:
+            [s appendFormat:@"FILE:%p\r\n",f];
+            break;
+        case UMFileTrackingInfo_typePIPE:
+            [s appendFormat:@"PIPE:%d\r\n",fdes];
+            break;
+        case UMFileTrackingInfo_typeSOCKET:
+            [s appendFormat:@"SOCKET:%d\r\n",fdes];
+            break;
     }
+    [s appendFormat:@"%d:%@:%ld:%@\r\n",index,locationFile,(long)locationLine,locationFunction];
+    if(_history)
+    {
+        NSArray *logEntries = [_history getLogArrayWithOrder:YES];
+        for(NSString *entry in logEntries)
+        {
+            [s appendFormat:@"    %@\r\n",entry];
+        }
+    }
+    [_lock unlock];
+    return s;
 }
 
 - (void)addLog:(NSString *)message  file:(const char *)file
                                     line:(long)line
                                     func:(const char *)func
 {
-    @synchronized(self)
-    {
-        [self addObjectHistory:message.UTF8String file:file line:line function:func];
-    }
+    [_lock lock];
+    [self addObjectHistory:message.UTF8String file:file line:line function:func];
+    [_lock unlock];
 }
 
 - (void)addObjectHistory:(const char *)message
@@ -140,11 +139,10 @@
                     line:(long)line
                 function:(const char *)func
 {
-    @synchronized(self)
-    {
-        NSString *s = [NSString stringWithFormat:@"%08lX file:%s, line:%ld, func.%s: %s",(unsigned long)self,file,line,func,message];
-        [_history addLogEntry:s];
-    }
+    [_lock lock];
+    NSString *s = [NSString stringWithFormat:@"%08lX file:%s, line:%ld, func.%s: %s",(unsigned long)self,file,line,func,message];
+    [_history addLogEntry:s];
+    [_lock unlock];
 }
 
 @end

@@ -20,6 +20,7 @@
 {
     NSMutableArray  *entries;
     int max;
+    UMMutex *_lock;
 }
 
 - (UMHistoryLog *)init;

@@ -139,6 +139,7 @@
         lowerQueueThroughput = [[UMThroughputCounter alloc]init];
         upperQueueThroughput = [[UMThroughputCounter alloc]init];
         adminQueueThroughput = [[UMThroughputCounter alloc]init];
+        logLevel = UMLOG_MAJOR;
     }
     return self;
 }

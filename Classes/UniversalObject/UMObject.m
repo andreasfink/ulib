@@ -127,11 +127,15 @@ static FILE *alloc_log;
     [self addLogFromConfigGroup:grp toHandler:handler sectionName:sec subSectionName:ss configOption:configOption logdir:NULL];
 }
 
-- (void) addLogFromConfigGroup:(NSDictionary *)grp toHandler:(UMLogHandler *)handler sectionName:(NSString *)sec subSectionName:(NSString *)ss configOption:(NSString *)configOption logdir:(NSString *)logdir
+- (void) addLogFromConfigGroup:(NSDictionary *)grp
+                     toHandler:(UMLogHandler *)handler
+                   sectionName:(NSString *)sec
+                subSectionName:(NSString *)ss
+                  configOption:(NSString *)configOption
+                        logdir:(NSString *)logdir
 {
     @autoreleasepool
     {
-
         NSString *logFileName;
         UMLogFile *dst;
 

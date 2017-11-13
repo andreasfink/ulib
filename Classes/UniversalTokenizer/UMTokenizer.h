@@ -22,6 +22,7 @@
     NSMutableArray *_words;
     NSMutableArray *_lines;
     BOOL    _positionSet;
+    UMMutex *_lock;
 }
 
 - (NSArray *)tokensFromChars:(NSArray *)chars;

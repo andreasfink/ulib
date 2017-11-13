@@ -21,6 +21,7 @@
         _comment     = [NSCharacterSet characterSetWithCharactersInString:@"!#"];
         _endOfLine   = [NSCharacterSet characterSetWithCharactersInString:@"\r\n"];
         _digits      = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        _lock = [[UMMutex alloc]init];
         [self reset];
     }
     return self;
@@ -94,50 +95,49 @@
 
 - (NSArray *)tokensFromChars:(NSArray *)chars
 {
-    //@synchronized(self) /* FIXME: is this really needing a synchronized ? */
-    //{
-        [self reset];
-        NSInteger len = chars.count;
-
-        for(NSInteger i=0;i<len;i++)
+    [_lock lock];
+    [self reset];
+    NSInteger len = chars.count;
+    
+    for(NSInteger i=0;i<len;i++)
+    {
+        UMScannerChar *sc = chars[i];
+        unichar chr = sc.character;
+        
+        if([_endOfLine characterIsMember:chr])
         {
-            UMScannerChar *sc = chars[i];
-            unichar chr = sc.character;
-
-            if([_endOfLine characterIsMember:chr])
-            {
-                [self pushWord];
-                [self pushLine];
-                continue;
-            }
-
-            if(_inCommentLine)
-            {
-                [self pushChar:sc];
-                continue;
-            }
-
-            if([_comment characterIsMember:chr])
-            {
-                [self pushWord];
-                [self pushChar:sc];
-                _inCommentLine=YES;
-                continue;
-            }
-
-            if([_whitespace characterIsMember:chr])
-            {
-                [self pushWord];
-                continue;
-            }
-            [self pushChar:sc];
+            [self pushWord];
+            [self pushLine];
+            continue;
         }
-        [self pushWord];
-        [self pushLine];
-        NSArray *result = _lines;
-        _lines = [[NSMutableArray alloc]init];
-        return result;
-    //}
+        
+        if(_inCommentLine)
+        {
+            [self pushChar:sc];
+            continue;
+        }
+        
+        if([_comment characterIsMember:chr])
+        {
+            [self pushWord];
+            [self pushChar:sc];
+            _inCommentLine=YES;
+            continue;
+        }
+        
+        if([_whitespace characterIsMember:chr])
+        {
+            [self pushWord];
+            continue;
+        }
+        [self pushChar:sc];
+    }
+    [self pushWord];
+    [self pushLine];
+    NSArray *result = _lines;
+    _lines = [[NSMutableArray alloc]init];
+    [_lock unlock];
+    return result;
 }
 
 @end

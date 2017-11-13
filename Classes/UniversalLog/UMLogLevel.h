@@ -10,6 +10,7 @@
 
 typedef enum UMLogLevel
 {
+    UMLOG_UNDEFINED = -1,
     UMLOG_DEBUG		= 0,
     UMLOG_INFO		= 1,
     UMLOG_WARNING	= 2,

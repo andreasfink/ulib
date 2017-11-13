@@ -100,7 +100,7 @@ static FILE *alloc_log;
 {
         [self addLogFromConfigGroup:grp
                           toHandler:handler
-                        sectionName:[grp objectForKey:@"group"]
+                        sectionName:grp[@"group"]
                      subSectionName:NULL
                        configOption:@"log-file"
                              logdir:logdir];
@@ -148,6 +148,11 @@ static FILE *alloc_log;
         {
             return;
         }
+        UMLogLevel logLevel = UMLOG_MAJOR;
+        if(grp[@"log-level"])
+        {
+            logLevel = (UMLogLevel)[grp[@"log-level"]intValue];
+        }
         if(logdir.length > 0)
         {
             logFileName = [logFileName fileNameRelativeToPath:logdir];
@@ -157,6 +162,7 @@ static FILE *alloc_log;
         {
             return;
         }
+        dst.level = logLevel;
         [handler addLogDestination:dst];
         UMLogFeed *feed = [[UMLogFeed alloc]initWithHandler:handler section:sec];
         self.logFeed = feed;

@@ -86,7 +86,7 @@
     UMLogDestination *dst = nil;
     for ( dst in dsts )
     {
-        [dst unlockedLogAnEntry:logEntry];
+        [dst logAnEntry:logEntry];
     }
 }
 

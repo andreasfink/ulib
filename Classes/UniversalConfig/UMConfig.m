@@ -133,8 +133,6 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
                 NSLog(@"newPath: %@",[[NSFileManager defaultManager] currentDirectoryPath]);
             }
             
-            
-            
             NSArray *lines = [self readFromFile:filename];
 #ifdef LINUX
             chdir([oldPath UTF8String]);

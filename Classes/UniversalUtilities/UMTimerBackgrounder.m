@@ -39,22 +39,16 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
 
 - (void)addTimer:(UMTimer *)t
 {
+    if ([t objectToCall] == NULL)
+    {
+        @throw([NSException exceptionWithName:@"INVALID_TIMER"
+                                       reason:@"trying to add timer with no target"
+                                     userInfo:@{    @"backtrace":   UMBacktrace(NULL,0) }]);
+    }
     [_timersLock lock];
-    @try
-    {
-        if ([t objectToCall] == NULL)
-        {
-            @throw([NSException exceptionWithName:@"INVALID_TIMER"
-                                           reason:@"trying to add timer with no target"
-                                         userInfo:@{    @"backtrace":   UMBacktrace(NULL,0) }]);
-        }
-        [timers removeObject:t]; /* in case its already there */
-        [timers addObject:t];
-    }
-    @finally
-    {
-        [_timersLock unlock];
-    }
+    [timers removeObject:t]; /* in case its already there */
+    [timers addObject:t];
+    [_timersLock unlock];
 }
 
 - (void)removeTimer:(UMTimer *)t
@@ -76,39 +70,33 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
     UMMicroSec now = ulib_microsecondTime();
     UMMicroSec nextWakeupIn = 100000; /* we wake up at least every 100ms or earlier */
     [_timersLock lock];
-    @try
+    for(UMTimer *t in timers)
     {
-        for(UMTimer *t in timers)
+        if([t isExpired:now])
         {
-            if([t isExpired:now])
-            {
-                [dueTimers addObject:t];
-                workDone++;
-            }
-            else
-            {
-                UMMicroSec timeLeft = [t timeLeft:now];
-                if(timeLeft < nextWakeupIn)
-                {
-                    nextWakeupIn = timeLeft;
-                }
-            }
+            [dueTimers addObject:t];
+            workDone++;
         }
-        for(UMTimer *t in dueTimers)
+        else
         {
-            [timers removeObject:t];
-        }
-        for(UMTimer *t in dueTimers)
-        {
-            if([t isRunning])
+            UMMicroSec timeLeft = [t timeLeft:now];
+            if(timeLeft < nextWakeupIn)
             {
-                [t fire];
+                nextWakeupIn = timeLeft;
             }
         }
     }
-    @finally
+    for(UMTimer *t in dueTimers)
     {
-        [_timersLock unlock];
+        [timers removeObject:t];
+    }
+    [_timersLock unlock];
+    for(UMTimer *t in dueTimers)
+    {
+        if([t isRunning])
+        {
+            [t fire];
+        }
     }
     return nextWakeupIn;
 }

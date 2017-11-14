@@ -27,6 +27,7 @@ typedef int32_t UMSleeper_Signal; /* note Sleeper signal is a bitmask */
     const char *ifile;
     long iline;
     const char *ifunction;
+    UMMutex *_prepareLock;
 }
 @property(readwrite,assign,atomic) BOOL isPrepared;
 @property(readwrite,assign,atomic) int rxpipe;

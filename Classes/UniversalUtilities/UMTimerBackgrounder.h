@@ -13,6 +13,7 @@
 @interface UMTimerBackgrounder : UMBackgrounder
 {
     NSMutableArray *timers;
+    UMMutex *_timersLock;
 }
 
 - (void)addTimer:(UMTimer *)t;

@@ -42,4 +42,5 @@
 - (UMBackgrounderWithQueue *)initWithSharedQueue:(UMQueue *)queue
                                             name:(NSString *)name
                                      workSleeper:(UMSleeper *)ws;
+
 @end

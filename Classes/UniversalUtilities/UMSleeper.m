@@ -50,6 +50,7 @@ static void socket_set_blocking(int fd, int blocking)
         ifile = file;
         iline = line;
         ifunction = function;
+        _prepareLock = [[UMMutex alloc]init];
     }
     return self;
 }
@@ -65,49 +66,49 @@ static void socket_set_blocking(int fd, int blocking)
     {
         return;
     }
-    @synchronized (self)
+    
+    [_prepareLock lock];
+    if(self.isPrepared==YES)
     {
-        if(self.isPrepared==YES)
-        {
-            return;
-        }
-        int pipefds[2];
-        pipefds[0] = -1;
-        pipefds[1] = -1;
-        if(pipe(pipefds)< 0)
-        {
-            int eno = errno;
-
-            switch(eno)
-            {
-                case EMFILE:
-                    NSLog(@"ERROR: EMFILE Too many file descriptors are in use by the process (Sleeper init)");
-                    break;
-                case ENFILE:
-                    NSLog(@"ERROR: ENFILE The system file table is full. (Sleeper init)");
-                    break;
-                default:
-                    NSLog(@"ERROR: %d Cannot allocate wakeup pipe (Sleeper init)",eno);
-                    break;
-            }
-            return;
-        }
-        self.rxpipe=pipefds[RXPIPE];
-        self.txpipe=pipefds[TXPIPE];
-        if(ifile)
-        {
-            TRACK_FILE_PIPE_FLF(self.rxpipe,@"rxpipe",ifile,iline,ifunction);
-            TRACK_FILE_PIPE_FLF(self.txpipe,@"txpipe",ifile,iline,ifunction);
-        }
-        else
-        {
-            TRACK_FILE_PIPE(self.rxpipe,@"rxpipe");
-            TRACK_FILE_PIPE(self.txpipe,@"txpipe");
-        }
-        socket_set_blocking(self.rxpipe, 0);
-        socket_set_blocking(self.txpipe, 0);
-        self.isPrepared = YES;
+        return;
     }
+    int pipefds[2];
+    pipefds[0] = -1;
+    pipefds[1] = -1;
+    if(pipe(pipefds)< 0)
+    {
+        int eno = errno;
+
+        switch(eno)
+        {
+            case EMFILE:
+                NSLog(@"ERROR: EMFILE Too many file descriptors are in use by the process (Sleeper init)");
+                break;
+            case ENFILE:
+                NSLog(@"ERROR: ENFILE The system file table is full. (Sleeper init)");
+                break;
+            default:
+                NSLog(@"ERROR: %d Cannot allocate wakeup pipe (Sleeper init)",eno);
+                break;
+        }
+        return;
+    }
+    self.rxpipe=pipefds[RXPIPE];
+    self.txpipe=pipefds[TXPIPE];
+    if(ifile)
+    {
+        TRACK_FILE_PIPE_FLF(self.rxpipe,@"rxpipe",ifile,iline,ifunction);
+        TRACK_FILE_PIPE_FLF(self.txpipe,@"txpipe",ifile,iline,ifunction);
+    }
+    else
+    {
+        TRACK_FILE_PIPE(self.rxpipe,@"rxpipe");
+        TRACK_FILE_PIPE(self.txpipe,@"txpipe");
+    }
+    socket_set_blocking(self.rxpipe, 0);
+    socket_set_blocking(self.txpipe, 0);
+    self.isPrepared = YES;
+    [_prepareLock unlock];
 }
 
 - (void) dealloc

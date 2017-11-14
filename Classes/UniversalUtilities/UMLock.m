@@ -8,7 +8,7 @@
 #import "UMLock.h"
 #import "UMUtil.h"
 #import "UMLockEvent.h"
-
+#import "UMMutex.h"
 #import <pthread.h>
 
 #if defined(LINUX)
@@ -104,6 +104,7 @@ void        ulib_set_thread_name(NSString *name)
 }
 
 NSMutableArray *global_umlock_registry = NULL;
+UMMutex *global_umlock_registry_lock = NULL;
 
 /* We put this into a C function for easier debugging tracking as you can simply set a break point to it
  lldb> break set -b nslock_nested_lock_warning
@@ -284,20 +285,18 @@ void nslock_nested_lock_warning(UMLock *lock)
     {
         global_umlock_registry = [[NSMutableArray alloc]init];
     }
-    @synchronized(global_umlock_registry)
-    {
-        [global_umlock_registry addObject:thisLock];
-    }
+    [global_umlock_registry_lock lock];
+    [global_umlock_registry addObject:thisLock];
+    [global_umlock_registry_lock unlock];
 }
 
 + (void)unregisterLock:(UMLock *)thisLock
 {
-    @synchronized(global_umlock_registry)
+    if(thisLock)
     {
-        if(thisLock)
-        {
-            [global_umlock_registry removeObject:thisLock];
-        }
+        [global_umlock_registry_lock lock];
+        [global_umlock_registry removeObject:thisLock];
+        [global_umlock_registry_lock unlock];
     }
 }
 

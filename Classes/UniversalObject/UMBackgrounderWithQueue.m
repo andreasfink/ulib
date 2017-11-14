@@ -24,7 +24,6 @@
     if(self)
     {
         queue = [[UMQueue alloc]init];
-        readLock = [[UMLock alloc]init];
         sharedQueue = NO;
     }
     return self;
@@ -37,7 +36,6 @@
     {
         self.queue = q;
         sharedQueue = YES;
-        readLock = [[UMLock alloc]init];
     }
     return self;
 }
@@ -56,10 +54,7 @@
 {
     @autoreleasepool
     {
-        [readLock lock];
-        [queue lock];
-        UMTask *task = [queue getFirstWhileLocked];
-        [queue unlock];
+        UMTask *task = [queue getFirst];
         if(task)
         {
             if(enableLogging)
@@ -68,13 +63,11 @@
             }
             @autoreleasepool
             {
-                [readLock unlock];
                 [task runOnBackgrounder:self];
             }
             ulib_set_thread_name([NSString stringWithFormat:@"%@ (idle)",self.name]);
             return 1;
         }
-        [readLock unlock];
     }
     return 0;
 }

@@ -8,10 +8,8 @@
 
 #import "UMBackgrounderWithQueues.h"
 #import "UMQueue.h"
-#import "UMLock.h"
 #import "UMTask.h"
 #import "UMSleeper.h"
-
 
 @implementation UMBackgrounderWithQueues
 
@@ -38,7 +36,6 @@
     {
         self.queues = q;
         sharedQueue = YES;
-        readLock = [[UMLock alloc]init];
     }
     return self;
 }
@@ -63,12 +60,8 @@
         {
             UMTask *task = NULL;
 
-            [queue lock];
-            [readLock lock];
             UMQueue *thisQueue = [queues objectAtIndex:i];
             task = [thisQueue getFirst];
-            [readLock unlock];
-            [queue unlock];
 
             if(task)
             {

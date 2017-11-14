@@ -179,9 +179,10 @@ static FILE *alloc_log;
     self=[super init];
     if(self)
     {
+#ifdef UMOBJECT_USE_MAGIC
+        
         @autoreleasepool
         {
-#ifdef UMOBJECT_USE_MAGIC
             NSString *m = [[self class] description];
             size_t l = strlen(m.UTF8String);
             _magic = calloc(l+1,1);
@@ -190,20 +191,27 @@ static FILE *alloc_log;
                 strncpy(_magic,m.UTF8String,l);
                 umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
             }
+        }
 #endif
-            if(alloc_file)
+        if(alloc_file)
+        {
+            @autoreleasepool
             {
-                NSString *s = [NSString stringWithFormat:@"+%@\n",m];
+                NSString *s = [NSString stringWithFormat:@"+%@\n",[[self class] description]];
                 NSData *d = [s dataUsingEncoding:NSUTF8StringEncoding];
                 @synchronized(alloc_file)
                 {
                     [alloc_file writeData:d];
                 }
             }
-            if(object_stat)
+        }
+        if(object_stat)
+        {
+            @autoreleasepool
             {
                 @synchronized(object_stat)
                 {
+                    NSString *m = [[self class] description];
                     NSMutableDictionary *entry = object_stat[m];
                     if(entry == NULL)
                     {

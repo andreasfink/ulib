@@ -31,7 +31,6 @@
 @interface UMBackgrounderWithQueue : UMBackgrounder
 {
     UMQueue *queue;
-    UMLock  *readLock;
     BOOL sharedQueue;
 }
 

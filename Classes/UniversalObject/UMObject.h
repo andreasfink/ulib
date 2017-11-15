@@ -11,10 +11,10 @@
 
 @class UMHistoryLog, UMConfig, UMLogFeed, UMLogHandler;
 
-void umobject_enable_alloc_logging(const char *f);
+int umobject_enable_alloc_logging(const char *f);
 void umobject_disable_alloc_logging(void);
 
-void umobject_enable_object_stat(void);
+int umobject_enable_object_stat(void);
 void umobject_disable_object_stat(void);
 NSArray *umobject_object_stat(BOOL sortByName);
 BOOL umobject_object_stat_is_enabled(void);
@@ -22,17 +22,21 @@ BOOL umobject_object_stat_is_enabled(void);
 
 /*  if UMOBJECT_USE_MAGIC is set, then the object has a field
     named _magic which is a cpointer to the object type string.
-    this is useful for debugging under linux but it takes memory
-    for every object */
+    this is useful for debugging under linux with a lldb not being able to show NSStrings
+    but it takes memory for every object */
 
 /*  if UMOBJECT_FLAG_LOG_RETAIN_RELEASE is set then the object
     is logging all retains/releases. This is useful for figuring out
     where your object is relased where it shouldnt be yet or is still
-    to use this you need to inherit from UMObjectDebug instead of UMObject
-    however.
+    to use this you need to compile UMObject.m with -fno-objc-arc
+    and the  RETAIN_RELEASE_DEBUG must be defined
  */
 
-//#define UMOBJECT_USE_MAGIC                  1
+#if !__has_feature(objc_arc)
+//#define RETAIN_RELEASE_DEBUG  1
+#endif
+
+#define UMOBJECT_USE_MAGIC                  1
 #define UMOBJECT_FLAG_HAS_MAGIC             0x01
 #define UMOBJECT_FLAG_LOG_RETAIN_RELEASE    0x02
 

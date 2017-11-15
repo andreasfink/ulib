@@ -1294,7 +1294,7 @@
 		A60C2E4E1A3F21730090FC94 /* UMJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A6827B0C16AD217D0035FEEC /* UMJsonUTF8Stream.m */; };
 		A60C2E501A3F21730090FC94 /* UMJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A6827B0E16AD217D0035FEEC /* UMJsonWriter.m */; };
 		A60C2E601A3F217B0090FC94 /* UMRedisCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = A67B5186191B5DB70090FC94 /* UMRedisCommand.m */; };
-		A60C4C961EF7FE59007C203A /* UMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB47149A77D10029E9CF /* UMObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A60C4C961EF7FE59007C203A /* UMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB47149A77D10029E9CF /* UMObject.m */; };
 		A60C4C971EF7FE59007C203A /* UMHistoryLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB43149A77D10029E9CF /* UMHistoryLog.m */; };
 		A60C4C981EF7FE59007C203A /* UMHTTPCookie.m in Sources */ = {isa = PBXBuildFile; fileRef = A69AB263182BC060001D0FE8 /* UMHTTPCookie.m */; };
 		A60C4C991EF7FE59007C203A /* UMIntegerWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AB45149A77D10029E9CF /* UMIntegerWithHistory.m */; };

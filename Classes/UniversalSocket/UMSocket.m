@@ -2404,6 +2404,20 @@ static int SSL_smart_shutdown(SSL *ssl)
             return @"pipe error";
         case UMSocketError_host_down:
             return @"host down";
+        case UMSocketError_no_data:
+            return @"no data";
+        case UMSocketError_not_listening:
+            return @"not listening";
+        case UMSocketError_invalid_advertize_domain:
+            return @"invalid advertize domain";
+        case UMSocketError_invalid_advertize_type:
+            return @"invalid advertize type";
+        case UMSocketError_invalid_advertize_name:
+            return @"invalid advertize name";
+        case UMSocketError_no_such_process:
+            return @"no such process";
+        case UMSocketError_not_known:
+            return @"not known";
         default:
             return [NSString stringWithFormat:@"Unknown error code %d",e];
     }

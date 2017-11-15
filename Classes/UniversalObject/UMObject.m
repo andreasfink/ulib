@@ -311,7 +311,9 @@ static FILE *alloc_log;
 - (void)threadStarter:(UMObjectThreadStarter *)ts
 {
     SEL sel = ts.selector;
+#if !defined(USE_ARC)
     id  obj = [ts.obj retain];
+#endif
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -466,25 +468,26 @@ BOOL umobject_object_stat_is_enabled(void)
 #if !defined(USING_ARC)
 - (void)retainDebug
 {
+#if !defined(USING_ARC)
     if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
         NSLog(@"Retain [%p] rc=%d",self,self.ulib_retain_counter);
         NSLog(@"Called from %@",UMBacktrace(NULL,0));
     }
-}
 #endif
+}
 
 
-#if !defined(USING_ARC)
 - (void)releaseDebug
 {
+#if !defined(USING_ARC)
     if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
         NSLog(@"Release [%p] rc=%d",self,self.ulib_retain_counter);
         NSLog(@"Called from %@",UMBacktrace(NULL,0));
     }
-}
 #endif
+}
 
 - (void)enableRetainReleaseLogging
 {

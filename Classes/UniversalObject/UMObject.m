@@ -465,7 +465,6 @@ BOOL umobject_object_stat_is_enabled(void)
 }
 #endif
 
-#if !defined(USING_ARC)
 - (void)retainDebug
 {
 #if !defined(USING_ARC)

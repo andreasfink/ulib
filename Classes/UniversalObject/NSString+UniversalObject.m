@@ -89,7 +89,7 @@ NSString *sqlEscapeNSString(NSString *input)
         {
             [onlyHexChars appendFormat:@"%c",(char)c];
         }
-        else if((c >='a') && (c<='F'))
+        else if((c >='a') && (c<='f'))
         {
             [onlyHexChars appendFormat:@"%c",(char)c-'a'+'A'];
         }

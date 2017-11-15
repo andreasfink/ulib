@@ -313,6 +313,8 @@ static FILE *alloc_log;
     SEL sel = ts.selector;
 #if !defined(USING_ARC)
     id  obj = [ts.obj retain];
+#else
+    id obj = ts;
 #endif
 
 #pragma clang diagnostic push

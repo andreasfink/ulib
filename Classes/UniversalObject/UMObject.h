@@ -32,7 +32,7 @@ BOOL umobject_object_stat_is_enabled(void);
     however.
  */
 
-#define UMOBJECT_USE_MAGIC                  0
+//#define UMOBJECT_USE_MAGIC                  1
 #define UMOBJECT_FLAG_HAS_MAGIC             0x01
 #define UMOBJECT_FLAG_LOG_RETAIN_RELEASE    0x02
 

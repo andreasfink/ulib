@@ -17,12 +17,21 @@
 #import "UMLogFile.h"
 #import "NSString+UniversalObject.h"
 
-/* Important: THIS FILE MUST BE COMPILED WITH -fno-objc-arc  !*/
+/* Important: THIS FILE CAN BE COMPILED WITH -fno-objc-arc  !*/
 
 static NSFileHandle *alloc_file = NULL;
 static NSMutableDictionary *object_stat = NULL;
 extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
+#if __has_feature(objc_arc)
+
+#define USING_ARC   1
+#undef  RETAIN_RELEASE_DEBUG
+
+#endif
+
+
+#ifdef RETAIN_RELEASE_DEBUG
 void umobject_enable_alloc_logging(const char *f)
 {
     if(alloc_file==NULL)
@@ -48,6 +57,7 @@ void umobject_disable_alloc_logging(void)
     alloc_file = NULL;
     [toClose closeFile];
 }
+#endif //RETAIN_RELEASE_DEBUG
 
 @interface UMObjectThreadStarter : NSObject
 {
@@ -58,20 +68,23 @@ void umobject_disable_alloc_logging(void)
     const char *_func;
 }
 
-@property(readwrite,assign,atomic) SEL selector;
-@property(readwrite,strong,atomic) id  obj;
-@property(readwrite,assign,atomic) const char *file;
+@property(readwrite,assign,atomic) SEL         selector;
+@property(readwrite,strong,atomic) id          obj;
+@property(readwrite,assign,atomic) const char  *file;
 @property(readwrite,assign,atomic) long        line;
-@property(readwrite,assign,atomic) const char *func;
+@property(readwrite,assign,atomic) const char  *func;
 @end
 
 @implementation UMObjectThreadStarter
 
+#if RETAIN_RELEASE_DEBUG
 - (void)dealloc
 {
     [_obj release];
     [super dealloc];
 }
+#endif
+
 @end
 
 #ifdef DEBUG_TRACK_ALLOCATION
@@ -134,8 +147,10 @@ static FILE *alloc_log;
                   configOption:(NSString *)configOption
                         logdir:(NSString *)logdir
 {
+#if !defined(USING_ARC)
     @autoreleasepool
     {
+#endif
         NSString *logFileName;
         UMLogFile *dst;
 
@@ -166,12 +181,16 @@ static FILE *alloc_log;
         [handler addLogDestination:dst];
         UMLogFeed *feed = [[UMLogFeed alloc]initWithHandler:handler section:sec];
         self.logFeed = feed;
+#if !defined(USING_ARC)
         [feed release];
         [dst release];
+#endif
         //    section = [type retain];
         //    subsection = [ss retain];
         //    name = [NSString stringwithFormat:section:subsection];
+#if !defined(USING_ARC)
     }
+#endif
 }
 
 - (id) init
@@ -181,7 +200,9 @@ static FILE *alloc_log;
     {
 #ifdef UMOBJECT_USE_MAGIC
         
+#if !defined(USING_ARC)
         @autoreleasepool
+#endif
         {
             NSString *m = [[self class] description];
             size_t l = strlen(m.UTF8String);
@@ -192,10 +213,13 @@ static FILE *alloc_log;
                 umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
             }
         }
+    
 #endif
         if(alloc_file)
         {
+#if !defined(USING_ARC)
             @autoreleasepool
+#endif
             {
                 NSString *s = [NSString stringWithFormat:@"+%@\n",[[self class] description]];
                 NSData *d = [s dataUsingEncoding:NSUTF8StringEncoding];
@@ -207,7 +231,9 @@ static FILE *alloc_log;
         }
         if(object_stat)
         {
+#if !defined(USING_ARC)
             @autoreleasepool
+#endif
             {
                 @synchronized(object_stat)
                 {
@@ -220,7 +246,10 @@ static FILE *alloc_log;
                         entry[@"alloc"] = @(1);
                         entry[@"dealloc"]=@(0);
                         object_stat[m]=entry;
+#if !defined(USING_ARC)
                         [entry release];
+#endif
+
                     }
                     else
                     {
@@ -234,6 +263,7 @@ static FILE *alloc_log;
     return self;
 }
 
+#if !defined(USING_ARC)
 - (void)dealloc
 {
     if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
@@ -276,7 +306,7 @@ static FILE *alloc_log;
     [logFeed release];
     [super dealloc];
 }
-
+#endif
 
 - (void)threadStarter:(UMObjectThreadStarter *)ts
 {
@@ -287,7 +317,9 @@ static FILE *alloc_log;
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     [self performSelector:sel withObject:obj];
 #pragma clang diagnostic pop
+#if !defined(USING_ARC)
     [obj release];
+#endif
 }
 
 - (void)runSelectorInBackground:(SEL)aSelector
@@ -406,6 +438,7 @@ BOOL umobject_object_stat_is_enabled(void)
 }
 
 
+#if !defined(USING_ARC)
 - (id)retain
 {
     [super retain];
@@ -416,7 +449,9 @@ BOOL umobject_object_stat_is_enabled(void)
     }
     return self;
 }
+#endif
 
+#if !defined(USING_ARC)
 - (oneway void)release
 {
     self.ulib_retain_counter--;
@@ -426,7 +461,9 @@ BOOL umobject_object_stat_is_enabled(void)
     }
     [super release];
 }
+#endif
 
+#if !defined(USING_ARC)
 - (void)retainDebug
 {
     if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
@@ -435,8 +472,10 @@ BOOL umobject_object_stat_is_enabled(void)
         NSLog(@"Called from %@",UMBacktrace(NULL,0));
     }
 }
+#endif
 
 
+#if !defined(USING_ARC)
 - (void)releaseDebug
 {
     if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
@@ -445,11 +484,13 @@ BOOL umobject_object_stat_is_enabled(void)
         NSLog(@"Called from %@",UMBacktrace(NULL,0));
     }
 }
-
+#endif
 
 - (void)enableRetainReleaseLogging
 {
+#if !defined(USING_ARC)
     umobject_flags |= UMOBJECT_FLAG_LOG_RETAIN_RELEASE;
+#endif
 }
 
 

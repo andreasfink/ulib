@@ -101,6 +101,7 @@ BOOL umobject_object_stat_is_enabled(void);
                        function:(const char *)fun;
 - (void)runSelectorInBackground:(SEL)aSelector;
 
+/* these might not be available if RETAIN_RELEASE_DEBUG is not defined */
 - (void)retainDebug; /*!< gets called at retain event */
 - (void)releaseDebug; /*!< gets called when a release occurs */
 - (void)enableRetainReleaseLogging; /*!< if set retain/release cycles get logged to the console with NSLog */

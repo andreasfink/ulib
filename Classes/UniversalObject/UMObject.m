@@ -311,7 +311,7 @@ static FILE *alloc_log;
 - (void)threadStarter:(UMObjectThreadStarter *)ts
 {
     SEL sel = ts.selector;
-#if !defined(USE_ARC)
+#if !defined(USING_ARC)
     id  obj = [ts.obj retain];
 #endif
 

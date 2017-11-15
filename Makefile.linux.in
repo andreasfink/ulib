@@ -33,8 +33,10 @@ ${LIB}: ${OFILES}
 
 
 # this is the only file which should NOT be compiled with ARC
-Classes/UniversalObject/UMObject.m.o: Classes/UniversalObject/UMObject.m
-	${CC} -c ${CFLAGS} -x objective-c $<  ${INCLUDEDIRS} -o $@ -fno-objc-arc
+# ... if we want to have retain/release debugging on
+#
+#Classes/UniversalObject/UMObject.m.o: Classes/UniversalObject/UMObject.m
+#	${CC} -c ${CFLAGS} -x objective-c $<  ${INCLUDEDIRS} -o $@ -fno-objc-arc
 
 install: ${LIB}
 	mkdir -p "${DESTDIR}/usr/local/lib/pkgconfig"

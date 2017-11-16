@@ -406,10 +406,11 @@ int umobject_enable_object_stat(void)
         {
             pthread_mutex_init(object_stat_mutex, NULL);
             object_stat = [[NSMutableDictionary alloc]init];
+            return 0;
         }
     }
+    return 1;
 }
-
 
 void umobject_disable_object_stat(void)
 {

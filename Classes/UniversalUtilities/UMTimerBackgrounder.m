@@ -32,13 +32,15 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
     if(self)
     {
         timers = [[NSMutableArray alloc] init];
+        _lock = [[UMMutex alloc]init];
     }
     return self;
 }
 
 - (void)addTimer:(UMTimer *)t
 {
-    @synchronized(timers)
+    [_lock lock];
+    @try
     {
         if ([t objectToCall] == NULL)
         {
@@ -49,16 +51,19 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
         [timers removeObject:t]; /* in case its already there */
         [timers addObject:t];
     }
+    @finally
+    {
+        [_lock unlock];
+    }
 }
 
 - (void)removeTimer:(UMTimer *)t
 {
-    @synchronized(timers)
+    if(t)
     {
-        if(t)
-        {
-            [timers removeObject:t];
-        }
+        [_lock lock];
+        [timers removeObject:t];
+        [_lock unlock];
     }
 }
 
@@ -70,7 +75,9 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
 
     UMMicroSec now = ulib_microsecondTime();
     UMMicroSec nextWakeupIn = 100000; /* we wake up at least every 100ms or earlier */
-    @synchronized(timers)
+
+    [_lock lock];
+    @try
     {
         for(UMTimer *t in timers)
         {
@@ -99,6 +106,10 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
                 [t fire];
             }
         }
+    }
+    @finally
+    {
+        [_lock unlock];
     }
     return nextWakeupIn;
 }

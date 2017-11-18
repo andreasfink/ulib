@@ -36,5 +36,7 @@
 - (void)removeObjectForKey:(id)aKey;
 - (NSMutableDictionary *)mutableCopy;
 - (UMSynchronizedDictionary *)copyWithZone:(NSZone *)zone;
+- (void) lock;
+- (void) unlock;
 
 @end

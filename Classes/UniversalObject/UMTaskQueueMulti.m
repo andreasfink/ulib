@@ -102,14 +102,11 @@
         {
             task.enableLogging = YES;
         }
-        @synchronized (queues)
-        {
-            UMQueue *queue = [queues objectAtIndex:nr];
-            if(queue)
-            {
-                [queue append:task];
-            }
-        }
+        [_queuesLock lock];
+        UMQueue *queue = [queues objectAtIndex:nr];
+        [queue append:task];
+        [_queuesLock unlock];
+
         [workSleeper wakeUp];
     }
 }

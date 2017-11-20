@@ -35,6 +35,8 @@
 {
 	switch(l)
 	{
+        case    UMLOG_UNDEFINED:
+            return @"UNDEFINED";
 		case	UMLOG_DEBUG:
 			return @"DEBUG";
 		case	UMLOG_INFO:

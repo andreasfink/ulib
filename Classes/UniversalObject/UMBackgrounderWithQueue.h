@@ -31,7 +31,6 @@
 @interface UMBackgrounderWithQueue : UMBackgrounder
 {
     UMQueue *queue;
-    UMLock  *readLock;
     BOOL sharedQueue;
 }
 
@@ -42,4 +41,5 @@
 - (UMBackgrounderWithQueue *)initWithSharedQueue:(UMQueue *)queue
                                             name:(NSString *)name
                                      workSleeper:(UMSleeper *)ws;
+
 @end

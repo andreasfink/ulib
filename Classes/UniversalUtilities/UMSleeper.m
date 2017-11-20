@@ -50,7 +50,7 @@ static void socket_set_blocking(int fd, int blocking)
         ifile = file;
         iline = line;
         ifunction = function;
-        _lock = [[UMMutex alloc]init];
+        _prepareLock = [[UMMutex alloc]init];
     }
     return self;
 }
@@ -66,7 +66,7 @@ static void socket_set_blocking(int fd, int blocking)
     {
         return;
     }
-    [_lock lock];
+    [_prepareLock lock];
     if(self.isPrepared==YES)
     {
         return;
@@ -77,7 +77,7 @@ static void socket_set_blocking(int fd, int blocking)
     if(pipe(pipefds)< 0)
     {
         int eno = errno;
-        
+
         switch(eno)
         {
             case EMFILE:
@@ -107,7 +107,7 @@ static void socket_set_blocking(int fd, int blocking)
     socket_set_blocking(self.rxpipe, 0);
     socket_set_blocking(self.txpipe, 0);
     self.isPrepared = YES;
-    [_lock unlock];
+    [_prepareLock unlock];
 }
 
 - (void) dealloc

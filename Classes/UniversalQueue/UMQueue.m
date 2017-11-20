@@ -41,6 +41,14 @@
     }
 }
 
+- (void)appendUnlocked:(id)obj
+{
+    if(obj)
+    {
+        [queue addObject:obj];
+    }
+}
+
 - (void)insertFirst:(id)obj
 {
     if(obj)

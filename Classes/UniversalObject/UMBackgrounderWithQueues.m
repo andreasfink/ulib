@@ -8,26 +8,11 @@
 
 #import "UMBackgrounderWithQueues.h"
 #import "UMQueue.h"
-#import "UMLock.h"
 #import "UMTask.h"
 #import "UMSleeper.h"
-
+#import "UMLock.h"
 
 @implementation UMBackgrounderWithQueues
-
-@synthesize queues;
-
-- (UMBackgrounderWithQueues *)init
-{
-    self = [super init];
-    if(self)
-    {
-        queue = [[UMQueue alloc]init];
-        sharedQueue = NO;
-    }
-    return self;
-}
-
 
 - (UMBackgrounderWithQueues *)initWithSharedQueues:(NSArray *)q
                                               name:(NSString *)n
@@ -36,9 +21,8 @@
     self = [super initWithName:n workSleeper:ws];
     if(self)
     {
-        self.queues = q;
+        _queues = q;
         sharedQueue = YES;
-        readLock = [[UMLock alloc]init];
     }
     return self;
 }
@@ -57,27 +41,21 @@
 {
     @autoreleasepool
     {
-        NSUInteger n = [queues count];
+        NSUInteger n = _queues.count;
         NSUInteger i;
         for(i=0;i<n;i++)
         {
-            UMTask *task = NULL;
-
-            [queue lock];
-            [readLock lock];
-            UMQueue *thisQueue = [queues objectAtIndex:i];
-            task = [thisQueue getFirst];
-            [readLock unlock];
-            [queue unlock];
-
+            UMQueue *thisQueue = [_queues objectAtIndex:i];
+            UMTask *task = [thisQueue getFirst];
             if(task)
             {
                 if(enableLogging)
                 {
-                    NSLog(@"%@: got task %@ on queue %d",self.name,task,(int)i);
+                    NSLog(@"%@: got task %@ on queue %d",self.name,task.name,(int)i);
                 }
                 @autoreleasepool
                 {
+                    _lastTask = task.name;
                     [task runOnBackgrounder:self];
                 }
                 ulib_set_thread_name([NSString stringWithFormat:@"%@ (idle)",self.name]);

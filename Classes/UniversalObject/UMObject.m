@@ -17,14 +17,26 @@
 #import "UMLogFile.h"
 #import "NSString+UniversalObject.h"
 
-/* Important: THIS FILE MUST BE COMPILED WITH -fno-objc-arc  !*/
+/* Important:  if alloc/dealloc logging is needed, this file must be compiled with -fno-objc-arc !*/
 
 static NSFileHandle *alloc_file = NULL;
 static NSMutableDictionary *object_stat = NULL;
+static pthread_mutex_t *object_stat_mutex = NULL;
+ 
 extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
-void umobject_enable_alloc_logging(const char *f)
+#if __has_feature(objc_arc)
+
+#define USING_ARC   1
+
+#undef  RETAIN_RELEASE_DEBUG
+
+#endif
+
+
+int umobject_enable_alloc_logging(const char *f)
 {
+#ifdef RETAIN_RELEASE_DEBUG
     if(alloc_file==NULL)
     {
         mode_t creationMode = 0664;
@@ -34,20 +46,44 @@ void umobject_enable_alloc_logging(const char *f)
             alloc_file = [[NSFileHandle alloc ]initWithFileDescriptor:fd];
             NSString *s = @"Start\n";
             [alloc_file writeData:[s dataUsingEncoding:NSUTF8StringEncoding]];
+            return 0;
         }
         else
         {
             NSLog(@" couldnt open alloc log %s",f);
+            return -2;
         }
     }
+    return 0;
+#else
+    return -1;
+#endif //RETAIN_RELEASE_DEBUG
+    
 }
 
 void umobject_disable_alloc_logging(void)
 {
+#ifdef RETAIN_RELEASE_DEBUG
     NSFileHandle *toClose = alloc_file;
     alloc_file = NULL;
     [toClose closeFile];
+#endif //RETAIN_RELEASE_DEBUG
 }
+
+@interface UMObjectStat : NSObject
+{
+    NSString *_name;
+    int64_t _alloc_count;
+    int64_t _dealloc_count;
+    int64_t _inUse_count;
+}
+@property(readwrite,strong,atomic)  NSString *name;
+@property(readwrite,assign,atomic)  int64_t alloc_count;
+@property(readwrite,assign,atomic)  int64_t dealloc_count;
+@property(readwrite,assign,atomic)  int64_t inUse_count;
+@end
+@implementation UMObjectStat
+@end
 
 @interface UMObjectThreadStarter : NSObject
 {
@@ -58,20 +94,23 @@ void umobject_disable_alloc_logging(void)
     const char *_func;
 }
 
-@property(readwrite,assign,atomic) SEL selector;
-@property(readwrite,strong,atomic) id  obj;
-@property(readwrite,assign,atomic) const char *file;
+@property(readwrite,assign,atomic) SEL         selector;
+@property(readwrite,strong,atomic) id          obj;
+@property(readwrite,assign,atomic) const char  *file;
 @property(readwrite,assign,atomic) long        line;
-@property(readwrite,assign,atomic) const char *func;
+@property(readwrite,assign,atomic) const char  *func;
 @end
 
 @implementation UMObjectThreadStarter
 
+#if RETAIN_RELEASE_DEBUG
 - (void)dealloc
 {
     [_obj release];
     [super dealloc];
 }
+#endif
+
 @end
 
 #ifdef DEBUG_TRACK_ALLOCATION
@@ -90,9 +129,6 @@ static FILE *alloc_log;
 @implementation UMObject
 
 @synthesize logFeed;
-
-
-
 
 - (void) addLogFromConfigGroup:(NSDictionary *)grp
                      toHandler:(UMLogHandler *)handler
@@ -134,8 +170,10 @@ static FILE *alloc_log;
                   configOption:(NSString *)configOption
                         logdir:(NSString *)logdir
 {
+#if !defined(USING_ARC)
     @autoreleasepool
     {
+#endif
         NSString *logFileName;
         UMLogFile *dst;
 
@@ -166,12 +204,16 @@ static FILE *alloc_log;
         [handler addLogDestination:dst];
         UMLogFeed *feed = [[UMLogFeed alloc]initWithHandler:handler section:sec];
         self.logFeed = feed;
+#if !defined(USING_ARC)
         [feed release];
         [dst release];
+#endif
         //    section = [type retain];
         //    subsection = [ss retain];
         //    name = [NSString stringwithFormat:section:subsection];
+#if !defined(USING_ARC)
     }
+#endif
 }
 
 - (id) init
@@ -179,9 +221,12 @@ static FILE *alloc_log;
     self=[super init];
     if(self)
     {
-        @autoreleasepool
-        {
 #ifdef UMOBJECT_USE_MAGIC
+        
+#if !defined(USING_ARC)
+        @autoreleasepool
+#endif
+        {
             NSString *m = [[self class] description];
             size_t l = strlen(m.UTF8String);
             _magic = calloc(l+1,1);
@@ -190,36 +235,50 @@ static FILE *alloc_log;
                 strncpy(_magic,m.UTF8String,l);
                 umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
             }
+        }
+    
 #endif
-            if(alloc_file)
+        if(alloc_file)
+        {
+#if !defined(USING_ARC)
+            @autoreleasepool
+#endif
             {
-                NSString *s = [NSString stringWithFormat:@"+%@\n",m];
+                NSString *s = [NSString stringWithFormat:@"+%@\n",[[self class] description]];
                 NSData *d = [s dataUsingEncoding:NSUTF8StringEncoding];
                 @synchronized(alloc_file)
                 {
                     [alloc_file writeData:d];
                 }
             }
-            if(object_stat)
+        }
+        if(object_stat)
+        {
+#if !defined(USING_ARC)
+            @autoreleasepool
+#endif
             {
-                @synchronized(object_stat)
+                NSString *m = [[self class] description];
+                pthread_mutex_lock(object_stat_mutex);
+                UMObjectStat *entry = object_stat[m];
+                if(entry == NULL)
                 {
-                    NSMutableDictionary *entry = object_stat[m];
-                    if(entry == NULL)
-                    {
-                        entry = [[NSMutableDictionary alloc]init];
-                        entry[@"type"] = m;
-                        entry[@"alloc"] = @(1);
-                        entry[@"dealloc"]=@(0);
-                        object_stat[m]=entry;
-                        [entry release];
-                    }
-                    else
-                    {
-                        entry[@"alloc"] =  @([entry[@"alloc"] intValue]+1);
-                        object_stat[m]=entry;
-                    }
+                    entry = [[UMObjectStat alloc]init];
+                    entry.name = m;
+                    entry.alloc_count = 1;
+                    entry.inUse_count = 1;
+                    object_stat[m]=entry;
+#if !defined(USING_ARC)
+                    [entry release];
+#endif
                 }
+                else
+                {
+                    entry.alloc_count++;
+                    entry.inUse_count--;
+                    object_stat[m]=entry;
+                }
+                pthread_mutex_unlock(object_stat_mutex);
             }
         }
     }
@@ -235,14 +294,18 @@ static FILE *alloc_log;
 
     if(alloc_file)
     {
-        NSString *m = [[self class] description];
-        NSString *s = [NSString stringWithFormat:@"-%@\n",m];
-        NSData *d = [s dataUsingEncoding:NSUTF8StringEncoding];
-        @synchronized(alloc_file)
+#if !defined(USING_ARC)
+        @autoreleasepool
+#endif
         {
-            [alloc_file writeData:d];
+            NSString *m = [[self class] description];
+            NSString *s = [NSString stringWithFormat:@"-%@\n",m];
+            NSData *d = [s dataUsingEncoding:NSUTF8StringEncoding];
+            @synchronized(alloc_file)
+            {
+                [alloc_file writeData:d];
+            }
         }
-        
     }
     if(object_stat)
     {
@@ -265,21 +328,28 @@ static FILE *alloc_log;
         free(_magic);
     }
     _magic = NULL;
+#if !defined(USING_ARC)
     [logFeed release];
     [super dealloc];
+#endif
 }
-
 
 - (void)threadStarter:(UMObjectThreadStarter *)ts
 {
     SEL sel = ts.selector;
+#if !defined(USING_ARC)
     id  obj = [ts.obj retain];
+#else
+    id obj = ts;
+#endif
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     [self performSelector:sel withObject:obj];
 #pragma clang diagnostic pop
+#if !defined(USING_ARC)
     [obj release];
+#endif
 }
 
 - (void)runSelectorInBackground:(SEL)aSelector
@@ -327,62 +397,60 @@ static FILE *alloc_log;
     return [[self description]prefixLines:prefix];
 }
 
-
-void umobject_enable_object_stat(void)
+int umobject_enable_object_stat(void)
 {
     if(object_stat == NULL)
     {
-        object_stat = [[NSMutableDictionary alloc]init];
+        object_stat_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+        if(object_stat_mutex)
+        {
+            pthread_mutex_init(object_stat_mutex, NULL);
+            object_stat = [[NSMutableDictionary alloc]init];
+            return 0;
+        }
     }
+    return 1;
 }
-
 
 void umobject_disable_object_stat(void)
 {
     object_stat = NULL;
+    pthread_mutex_destroy(object_stat_mutex);
+    free(object_stat_mutex);
+    object_stat_mutex = NULL;
 }
 
 NSArray *umobject_object_stat(BOOL sortByName)
 {
     NSMutableArray *arr = [[NSMutableArray alloc]init];
-    @synchronized(object_stat)
+    
+    pthread_mutex_lock(object_stat_mutex);
+    NSArray *keys = [object_stat allKeys];
+    for(NSString *key in keys)
     {
-        NSArray *keys = [object_stat allKeys];
-        for(NSString *key in keys)
-        {
-            [arr addObject: object_stat[key]];
-        }
-        NSArray *arr2 = [arr sortedArrayUsingComparator: ^(NSDictionary *a, NSDictionary *b)
-                         {
-                             if(sortByName)
-                             {
-                                 NSString *first = a[@"type"];
-                                 NSString *second = b[@"type"];
-                                 return [first compare:second];
-                             }
-                             else
-                             {
-                                 int a_alloc = [a[@"alloc"] intValue];
-                                 int a_dealloc = [a[@"dealloc"] intValue];
-                                 int a_inUse = a_alloc - a_dealloc;
-                                 
-                                 int b_alloc = [b[@"alloc"] intValue];
-                                 int b_dealloc = [b[@"dealloc"] intValue];
-                                 int b_inUse = b_alloc - b_dealloc;
-                                 
-                                 if(a_inUse == b_inUse)
-                                 {
-                                     return NSOrderedSame;
-                                 }
-                                 if(a_inUse < b_inUse)
-                                 {
-                                     return NSOrderedDescending;
-                                 }
-                                 return NSOrderedAscending;
-                             }
-                         }];
-        return arr2;
+        [arr addObject: object_stat[key]];
     }
+    NSArray *arr2 = [arr sortedArrayUsingComparator: ^(UMObjectStat *a, UMObjectStat *b)
+                     {
+                         if(sortByName)
+                         {
+                             return [a.name compare:b.name];
+                         }
+                         else
+                         {
+                             if(a.inUse_count == b.inUse_count)
+                             {
+                                 return NSOrderedSame;
+                             }
+                             if(a.inUse_count < b.inUse_count)
+                             {
+                                 return NSOrderedDescending;
+                             }
+                             return NSOrderedAscending;
+                         }
+                     }];
+    pthread_mutex_unlock(object_stat_mutex);
+    return arr2;
 }
 
 BOOL umobject_object_stat_is_enabled(void)
@@ -398,6 +466,7 @@ BOOL umobject_object_stat_is_enabled(void)
 }
 
 
+#if !defined(USING_ARC)
 - (id)retain
 {
     [super retain];
@@ -408,7 +477,9 @@ BOOL umobject_object_stat_is_enabled(void)
     }
     return self;
 }
+#endif
 
+#if !defined(USING_ARC)
 - (oneway void)release
 {
     self.ulib_retain_counter--;
@@ -418,30 +489,36 @@ BOOL umobject_object_stat_is_enabled(void)
     }
     [super release];
 }
+#endif
 
 - (void)retainDebug
 {
+#if !defined(USING_ARC)
     if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
         NSLog(@"Retain [%p] rc=%d",self,self.ulib_retain_counter);
         NSLog(@"Called from %@",UMBacktrace(NULL,0));
     }
+#endif
 }
 
 
 - (void)releaseDebug
 {
+#if !defined(USING_ARC)
     if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
         NSLog(@"Release [%p] rc=%d",self,self.ulib_retain_counter);
         NSLog(@"Called from %@",UMBacktrace(NULL,0));
     }
+#endif
 }
-
 
 - (void)enableRetainReleaseLogging
 {
+#if !defined(USING_ARC)
     umobject_flags |= UMOBJECT_FLAG_LOG_RETAIN_RELEASE;
+#endif
 }
 
 

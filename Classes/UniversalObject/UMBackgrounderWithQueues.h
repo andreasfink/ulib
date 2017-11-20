@@ -20,12 +20,12 @@
 @interface UMBackgrounderWithQueues : UMBackgrounderWithQueue
 
 {
-    NSArray *queues; /* array of UMQueue object sorted by priority */
+    NSArray *_queues; /* array of UMQueue object sorted by priority */
+    NSString *_lastTask;
 }
 
 @property(strong)     NSArray *queues;
 
-- (UMBackgrounderWithQueues *)init;
 - (UMBackgrounderWithQueues *)initWithSharedQueues:(NSArray *)queues
                                              name:(NSString *)name
                                       workSleeper:(UMSleeper *)ws;

@@ -70,19 +70,17 @@ void umobject_disable_alloc_logging(void)
 #endif //RETAIN_RELEASE_DEBUG
 }
 
-@interface UMObjectStat : NSObject
-{
-    NSString *_name;
-    int64_t _alloc_count;
-    int64_t _dealloc_count;
-    int64_t _inUse_count;
-}
-@property(readwrite,strong,atomic)  NSString *name;
-@property(readwrite,assign,atomic)  int64_t alloc_count;
-@property(readwrite,assign,atomic)  int64_t dealloc_count;
-@property(readwrite,assign,atomic)  int64_t inUse_count;
-@end
 @implementation UMObjectStat
+- (UMObjectStat *)copyWithZone:(NSZone *)zone;
+{
+    UMObjectStat *r = [[UMObjectStat allocWithZone:zone]init];
+    r.name = _name;
+    r.alloc_count = _alloc_count;
+    r.dealloc_count = _dealloc_count;
+    r.inUse_count = _inUse_count;
+    return r;
+}
+
 @end
 
 @interface UMObjectThreadStarter : NSObject
@@ -309,21 +307,18 @@ static FILE *alloc_log;
     }
     if(object_stat)
     {
-        @synchronized(object_stat)
-        {
-            NSString *m;
-            m = [[self class] description];
+        NSString *m;
+        m = [[self class] description];
 
-            pthread_mutex_lock(object_stat_mutex);
-            UMObjectStat *entry = object_stat[m];
-            if(entry)
-            {
-                entry.dealloc_count--;
-                entry.inUse_count--;
-                object_stat[m]=entry;
-            }
-            pthread_mutex_unlock(object_stat_mutex);
+        pthread_mutex_lock(object_stat_mutex);
+        UMObjectStat *entry = object_stat[m];
+        if(entry)
+        {
+            entry.dealloc_count--;
+            entry.inUse_count--;
+            object_stat[m]=entry;
         }
+        pthread_mutex_unlock(object_stat_mutex);
     }
 
     if(_magic)
@@ -432,7 +427,7 @@ NSArray *umobject_object_stat(BOOL sortByName)
     NSArray *keys = [object_stat allKeys];
     for(NSString *key in keys)
     {
-        [arr addObject: object_stat[key]];
+        [arr addObject: [object_stat[key] copy] ];
     }
     NSArray *arr2 = [arr sortedArrayUsingComparator: ^(UMObjectStat *a, UMObjectStat *b)
                      {

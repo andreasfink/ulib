@@ -112,4 +112,17 @@ BOOL umobject_object_stat_is_enabled(void);
 
 @end
 
+@interface UMObjectStat : NSObject
+{
+    NSString *_name;
+    int64_t _alloc_count;
+    int64_t _dealloc_count;
+    int64_t _inUse_count;
+}
+@property(readwrite,strong,atomic)  NSString *name;
+@property(readwrite,assign,atomic)  int64_t alloc_count;
+@property(readwrite,assign,atomic)  int64_t dealloc_count;
+@property(readwrite,assign,atomic)  int64_t inUse_count;
+@end
+
 

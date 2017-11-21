@@ -314,7 +314,7 @@ static FILE *alloc_log;
         UMObjectStat *entry = object_stat[m];
         if(entry)
         {
-            entry.dealloc_count--;
+            entry.dealloc_count++;
             entry.inUse_count--;
             object_stat[m]=entry;
         }

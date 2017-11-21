@@ -275,7 +275,7 @@ static FILE *alloc_log;
                 else
                 {
                     entry.alloc_count++;
-                    entry.inUse_count--;
+                    entry.inUse_count++;
                     object_stat[m]=entry;
                 }
                 pthread_mutex_unlock(object_stat_mutex);
@@ -313,12 +313,16 @@ static FILE *alloc_log;
         {
             NSString *m;
             m = [[self class] description];
-            NSMutableDictionary *entry = object_stat[m];
+
+            pthread_mutex_lock(object_stat_mutex);
+            UMObjectStat *entry = object_stat[m];
             if(entry)
             {
-                entry[@"dealloc"] =  @([entry[@"dealloc"] intValue]+1);
+                entry.dealloc_count--;
+                entry.inUse_count--;
                 object_stat[m]=entry;
             }
+            pthread_mutex_unlock(object_stat_mutex);
         }
     }
 

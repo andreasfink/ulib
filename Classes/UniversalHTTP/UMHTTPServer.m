@@ -20,7 +20,7 @@
 #import "UMTaskQueue.h"
 #import "UMHTTPTask_ReadRequest.h"
 #import "UMSynchronizedArray.h"
-#import "UMThreadHelper.h"
+#import "UMThreadHelpers.h"
 
 @implementation UMHTTPServer
 

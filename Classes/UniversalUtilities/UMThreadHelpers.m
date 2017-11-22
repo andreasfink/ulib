@@ -8,6 +8,13 @@
 
 #import "UMThreadHelpers.h"
 
+
+#if defined(LINUX)
+
+#define _GNU_SOURCE 1
+#include <sys/prctl.h>
+
+#endif
 #include <pthread.h>
 
 void        ulib_set_thread_name(NSString *name)

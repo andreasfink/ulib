@@ -1743,6 +1743,8 @@
 		A60C4E621EF80098007C203A /* UMPluginDirectory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CFD4541EAC85700002564E /* UMPluginDirectory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4E631EF80098007C203A /* UMPluginDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CFD4551EAC85700002564E /* UMPluginDirectory.m */; };
 		A610866D163530F700D0D9C6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A610866B163530F700D0D9C6 /* Security.framework */; };
+		A618E79A1FC58860001106C3 /* UMThreadHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = A618E7981FC58860001106C3 /* UMThreadHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A618E79B1FC58860001106C3 /* UMThreadHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A618E7991FC58860001106C3 /* UMThreadHelpers.m */; };
 		A62A7E2918AAD20D00EA8A2A /* UMHTTPPageRef.h in Headers */ = {isa = PBXBuildFile; fileRef = A62A7E2618AAD20D00EA8A2A /* UMHTTPPageRef.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62A7E2C18AAD20D00EA8A2A /* UMHTTPPageRef.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A7E2718AAD20D00EA8A2A /* UMHTTPPageRef.m */; };
 		A62A7E3118AAD6AD00EA8A2A /* UMHTTPPageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = A62A7E2E18AAD6AD00EA8A2A /* UMHTTPPageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2600,6 +2602,8 @@
 		A615D9161B4D6CF300854472 /* UMHistoryLogEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHistoryLogEntry.h; sourceTree = "<group>"; };
 		A615D9171B4D6CF300854472 /* UMHistoryLogEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHistoryLogEntry.m; sourceTree = "<group>"; };
 		A61635171A0C0E0400074D29 /* UMTaskQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTaskQueue.m; sourceTree = "<group>"; };
+		A618E7981FC58860001106C3 /* UMThreadHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMThreadHelpers.h; sourceTree = "<group>"; };
+		A618E7991FC58860001106C3 /* UMThreadHelpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMThreadHelpers.m; sourceTree = "<group>"; };
 		A61F7D551A2CB4F70090FC94 /* UMLayerUserProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMLayerUserProtocol.h; sourceTree = "<group>"; };
 		A628C8B71CB9270C00211137 /* Makefile.osx.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx.in; sourceTree = "<group>"; };
 		A62A7E2618AAD20D00EA8A2A /* UMHTTPPageRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPPageRef.h; sourceTree = "<group>"; };
@@ -4118,6 +4122,8 @@
 				A63F22AA1FB72B450048B329 /* UMAtomicCounter.m */,
 				A63F22B01FB72DEB0048B329 /* UMAtomicDate.h */,
 				A63F22B11FB72DEB0048B329 /* UMAtomicDate.m */,
+				A618E7981FC58860001106C3 /* UMThreadHelpers.h */,
+				A618E7991FC58860001106C3 /* UMThreadHelpers.m */,
 			);
 			path = UniversalUtilities;
 			sourceTree = "<group>";
@@ -5234,6 +5240,7 @@
 				A60C4D5E1EF7FE59007C203A /* UMRedisStatus.h in Headers */,
 				A60C4D5F1EF7FE59007C203A /* ssl2.h in Headers */,
 				A60C4E2D1EF80039007C203A /* UMHTTPTask_ReadRequest.h in Headers */,
+				A618E79A1FC58860001106C3 /* UMThreadHelpers.h in Headers */,
 				A663A5741F2F18F600A3A0AA /* des.h in Headers */,
 				A663A5A61F2F18F600A3A0AA /* opensslv.h in Headers */,
 				A60C4D601EF7FE59007C203A /* modes.h in Headers */,
@@ -6546,6 +6553,7 @@
 				A60C4CFE1EF7FE59007C203A /* NSString+UMSocket.m in Sources */,
 				A60C4CFF1EF7FE59007C203A /* UMDataWithHistory.m in Sources */,
 				A60C4D001EF7FE59007C203A /* UMDateWithHistory.m in Sources */,
+				A618E79B1FC58860001106C3 /* UMThreadHelpers.m in Sources */,
 				A60C4D011EF7FE59007C203A /* UMUUID.m in Sources */,
 				A60C4D021EF7FE59007C203A /* UMRegexMatch.m in Sources */,
 			);

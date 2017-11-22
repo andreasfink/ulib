@@ -8,10 +8,9 @@
 
 #import "UMBackgrounderWithQueue.h"
 #import "UMQueue.h"
-#import "UMLock.h"
 #import "UMTask.h"
 #import "UMSleeper.h"
-
+#import "UMThreadHelpers.h"
 
 @implementation UMBackgrounderWithQueue
 

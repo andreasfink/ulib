@@ -8,8 +8,6 @@
 
 #import "UMBackgrounder.h"
 
-@class UMLock;
-
 
 /*!
  @class UMBackgrounderWithQueue

@@ -8,7 +8,7 @@
 
 #import "UMBackgrounder.h"
 #import "UMSleeper.h"
-#import "UMLock.h"
+#import "UMThreadHelpers.h"
 
 #define UMSLEEPER_DEFAULT_SLEEP_TIME 500000 /* 500ms */
 

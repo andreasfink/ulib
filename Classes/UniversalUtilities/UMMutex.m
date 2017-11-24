@@ -40,7 +40,6 @@
     {
         pthread_mutex_destroy(_mutexLock);
         free(_mutexLock);
-        free(_mutexAttr);
         _mutexLock = NULL;
     }
     if(_mutexAttr)

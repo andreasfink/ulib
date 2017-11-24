@@ -21,7 +21,15 @@
         {
             return NULL;
         }
-        pthread_mutex_init(_mutexLock, NULL);
+        _mutexAttr = (pthread_mutexattr_t *)malloc(sizeof(pthread_mutexattr_t));
+        if(_mutexAttr == NULL)
+        {
+            free(_mutexLock);
+            return NULL;
+        }
+        pthread_mutexattr_init(_mutexAttr);
+        pthread_mutexattr_settype(_mutexAttr, PTHREAD_MUTEX_RECURSIVE);
+        pthread_mutex_init(_mutexLock, _mutexAttr);
     }
     return self;
 }
@@ -32,7 +40,13 @@
     {
         pthread_mutex_destroy(_mutexLock);
         free(_mutexLock);
+        free(_mutexAttr);
         _mutexLock = NULL;
+    }
+    if(_mutexAttr)
+    {
+        free(_mutexAttr);
+        _mutexAttr=NULL;
     }
 }
 
@@ -41,6 +55,7 @@
     if(_mutexLock)
     {
         pthread_mutex_lock(_mutexLock);
+        _lockDepth++;
     }
 }
 
@@ -48,6 +63,7 @@
 {
     if(_mutexLock)
     {
+        _lockDepth--;
         pthread_mutex_unlock(_mutexLock);
     }
 }
@@ -56,7 +72,12 @@
 {
     if(_mutexLock)
     {
-        return pthread_mutex_trylock(_mutexLock);
+        int r = pthread_mutex_trylock(_mutexLock);
+        if(r==0)
+        {
+            _lockDepth++;
+        }
+        return r;
     }
     return -1;
 }

@@ -33,6 +33,8 @@ NSString *sqlEscapeNSString(NSString *input)
     
     NSString *s = self;
     /* we always escape the lower 32 chars */
+    s = [s stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
+
     s = [s stringByReplacingOccurrencesOfString:@"\x00" withString:@"\\x00"];
 	s = [s stringByReplacingOccurrencesOfString:@"\x01" withString:@"\\x01"];
 	s = [s stringByReplacingOccurrencesOfString:@"\x02" withString:@"\\x02"];
@@ -70,7 +72,6 @@ NSString *sqlEscapeNSString(NSString *input)
     s = [s stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
     s = [s stringByReplacingOccurrencesOfString:@"`" withString:@"\\`"];
     s = [s stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-    s = [s stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
 	return s;
 }
 

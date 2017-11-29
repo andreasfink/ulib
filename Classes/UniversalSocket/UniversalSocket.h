@@ -13,3 +13,5 @@
 #import "UMSocket.h"
 #import "NSString+UMSocket.h"
 #import "NSData+UMSocket.h"
+#import "UMSyslogClient.h"
+

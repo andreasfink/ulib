@@ -13,5 +13,6 @@
 
 @interface NSDictionary (UMJson)
 - (NSString *)jsonString;
+- (NSString *)jsonCompactString;
 @end
 #endif

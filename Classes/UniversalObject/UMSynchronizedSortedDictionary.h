@@ -34,6 +34,7 @@
 - (void)addObject:(id)o forKey:(id)key;
 - (NSArray *)sortedKeys;
 - (NSString *)jsonString;
+- (NSString *)jsonCompactString;
 - (UMSynchronizedSortedDictionary *)copyWithZone:(NSZone *)zone;
 
 @end

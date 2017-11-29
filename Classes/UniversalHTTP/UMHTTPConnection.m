@@ -106,17 +106,14 @@
         NSDate *now = [NSDate date];
         if (pollResult == UMSocketError_no_data)
         {
-            if(lastActivity)
-            {
-                NSTimeInterval idleTime = [now timeIntervalSinceDate:lastActivity];
-                if(idleTime > 30)
-                {
-                    self.mustClose = YES;
-                }
-            }
-            else
+            if(lastActivity==NULL)
             {
                 lastActivity = [NSDate date];
+            }
+            NSTimeInterval idleTime = [now timeIntervalSinceDate:lastActivity];
+            if(idleTime > 30)
+            {
+                self.mustClose = YES;
             }
             continue;
         }

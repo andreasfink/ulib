@@ -5,7 +5,8 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
 #import "UMQueue.h"
-#import "UMLock.h"
+#import "UMMutex.h"
+
 @implementation UMQueue
 
 - (UMQueue *)init
@@ -13,7 +14,7 @@
     self=[super init];
     if(self)
     {
-        lock = [[UMLock alloc] initNonReentrant];
+        _lock = [[UMMutex alloc] init];
         queue = [[NSMutableArray alloc]init];
     }
     return self;
@@ -24,7 +25,7 @@
     self=[super init];
     if(self)
     {
-        lock = NULL;
+        _lock = NULL;
         queue = [[NSMutableArray alloc]init];
     }
     return self;
@@ -35,9 +36,9 @@
 {
     if(obj)
     {
-        [self lock];
+        [_lock lock];
         [queue addObject:obj];
-        [self unlock];
+        [_lock unlock];
     }
 }
 
@@ -53,9 +54,9 @@
 {
     if(obj)
     {
-        [self lock];
+        [_lock lock];
         [queue insertObject:obj atIndex:0];
-        [self unlock];
+        [_lock unlock];
     }
 }
 
@@ -64,10 +65,10 @@
 {
     if(obj)
     {
-        [self lock];
+        [_lock lock];
         [queue removeObject:obj]; /* should not be there twice */
         [queue addObject:obj];
-        [self unlock];
+        [_lock unlock];
     }
 }
 
@@ -76,22 +77,22 @@
 {
     if(obj)
     {
-        [self lock];
+        [_lock lock];
         [queue removeObject:obj];
-        [self unlock];
+        [_lock unlock];
     }
 }
 
 - (id)getFirst
 {
     id obj = NULL;
-    [self lock];
+    [_lock lock];
     if ([queue count]>0)
     {
         obj = [queue objectAtIndex:0];
         [queue removeObjectAtIndex:0];
     }
-    [self unlock];
+    [_lock unlock];
     return obj;
 }
 
@@ -106,21 +107,12 @@
     return obj;
 }
 
-- (void)lock
-{
-    [lock lock];
-}
-
-- (void)unlock
-{
-    [lock unlock];
-}
 
 - (NSInteger)count
 {
-    [self lock];
+    [_lock lock];
     NSInteger i = [queue count];
-    [self unlock];
+    [_lock unlock];
     return i;
 }
 @end

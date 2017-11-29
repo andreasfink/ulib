@@ -7,6 +7,7 @@
 
 #import "UMObject.h"
 #import "UMSocket.h"
+@class UMMutex;
 
 @interface UMHost : UMObject
 {
@@ -14,7 +15,7 @@
 	int				isLocalHost;
 	int				isResolving;
 	int				isResolved;
-	NSLock			*lock;
+	UMMutex			*lock;
     NSString        *name;
 }
 

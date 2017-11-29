@@ -15,11 +15,10 @@
 #import "NSMutableArray+UMHTTP.h"
 #import "NSDictionary+UMHTTP.h"
 #import "UMLogFeed.h"
-#import "UMLock.h"
 #import "UMHTTPTask_ProcessRequest.h"
 #import "UMHTTPTask_ReadRequest.h"
 #import "UMSynchronizedArray.h"
-
+#import "UMThreadHelpers.h"
 #import "UMTaskQueue.h"
 
 #include <poll.h>

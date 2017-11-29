@@ -17,10 +17,11 @@
 #ifdef SENTEST
 #import "UMConfig.h"
 #endif
-#import "UMLock.h"
 #import "UMTaskQueue.h"
 #import "UMHTTPTask_ReadRequest.h"
 #import "UMSynchronizedArray.h"
+#import "UMThreadHelpers.h"
+
 @implementation UMHTTPServer
 
 @synthesize	serverName;

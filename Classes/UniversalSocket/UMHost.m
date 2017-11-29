@@ -19,7 +19,8 @@
 #include <sys/uio.h>
 #include <unistd.h>
 
-#import "UMLock.h"
+#import "UMMutex.h"
+#import "UMThreadHelpers.h"
 
 @implementation UMHost
 
@@ -52,7 +53,7 @@
         NSString	*n;
         
         addresses = [[NSMutableArray alloc] init];
-        lock = [[NSLock alloc] init];
+        lock = [[UMMutex alloc] init];
         
         isResolved = 0;
         
@@ -136,7 +137,7 @@
     if (self)
     {
         addresses = [[NSMutableArray alloc] init];
-        lock = [[NSLock alloc] init];
+        lock = [[UMMutex alloc] init];
         isLocalHost = 0;
         isResolving = 0;
         isResolved = 0;
@@ -161,7 +162,7 @@
     if (self)
     {
         self.addresses = [NSMutableArray arrayWithObjects:n,nil];
-        lock = [[NSLock alloc] init];
+        lock = [[UMMutex alloc] init];
         isLocalHost = 0;
         isResolving = 0;
         isResolved = 1;

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
 #import "UMObject.h"
-@class UMLock;
+@class UMMutex;
 
 /*!
  @class UMQueue
@@ -19,7 +19,7 @@
 {
 @private
     NSMutableArray  *queue;
-    UMLock          *lock;
+    UMMutex          *_lock;
 }
 
 - (UMQueue *)init;
@@ -29,8 +29,6 @@
 - (id)getFirst;
 - (id)getFirstWhileLocked;
 - (void)insertFirst:(id)obj;
-- (void)lock;
-- (void)unlock;
 - (NSInteger)count;
 - (void)removeObject:(id)object;
 

@@ -39,6 +39,15 @@
     return self;
 }
 
+- (void)lock
+{
+    [mutex lock];
+}
+
+- (void)unlock
+{
+    [mutex unlock];
+}
 
 
 + (instancetype)synchronizedDictionary

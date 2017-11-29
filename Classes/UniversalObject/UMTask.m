@@ -7,8 +7,9 @@
 //
 
 #import "UMTask.h"
-#import "UMLock.h"
+#import "UMMutex.h"
 #import "UMBackgrounder.h"
+#import "UMThreadHelpers.h"
 
 @implementation UMTask
 @synthesize name;

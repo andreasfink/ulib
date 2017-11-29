@@ -55,7 +55,7 @@
     {
         return;
     }
-    [_mutex lock];
+    [mutex lock];
     if (underlyingDictionary[key] == NULL)
     {
         if(anObject)
@@ -71,7 +71,7 @@
             [underlyingDictionary setObject:anObject forKey:key];
         }
     }
-    [_mutex unlock];
+    [mutex unlock];
 }
 
 - (id)objectForKeyedSubscript:(id)key
@@ -80,40 +80,40 @@
     {
         return NULL;
     }
-    [_mutex lock];
+    [mutex lock];
     id r = [underlyingDictionary objectForKey:key];
-    [_mutex unlock];
+    [mutex unlock];
     return r;
 }
 
 - (id)objectAtIndex:(NSUInteger)index
 {
     id r = NULL;
-    [_mutex lock];
+    [mutex lock];
     id key = sortIndex[index];
     if(key)
     {
         r = [underlyingDictionary objectForKey:key];
     }
-    [_mutex unlock];
+    [mutex unlock];
     return r;
 }
 
 - (id)keyAtIndex:(NSUInteger)index
 {
     id key = NULL;
-    [_mutex lock];
+    [mutex lock];
     key = sortIndex[index];
-    [_mutex unlock];
+    [mutex unlock];
     return key;
 }
 
 
 - (NSArray *)allKeys
 {
-    [_mutex lock];
+    [mutex lock];
     NSArray *r = [sortIndex copy];
-    [_mutex unlock];
+    [mutex unlock];
     return r;
 }
 
@@ -123,11 +123,12 @@
     {
         return;
     }
-    [_mutex lock];
+    [mutex lock];
     [underlyingDictionary removeObjectForKey:aKey];
     [sortIndex removeObjectIdenticalTo:aKey];
-    [_mutex unlock];
+    [mutex unlock];
 }
+
 
 
 - (void)addObject:(id)o forKey:(id)key

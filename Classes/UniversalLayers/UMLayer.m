@@ -10,7 +10,6 @@
 #import "UMTask.h"
 #import "UMTaskQueue.h"
 #import "UMTaskQueueMulti.h"
-#import "UMLock.h" // for ulib_set_thread_name()
 #import "UMAssert.h"
 #import "UMLogFeed.h"
 #import "UMLayerTask.h"

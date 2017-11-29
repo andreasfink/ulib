@@ -20,7 +20,6 @@
 @interface UMSynchronizedSortedDictionary : UMSynchronizedDictionary<NSCopying>
 {
     NSMutableArray *sortIndex;
-    UMMutex *_mutex;
 }
 
 @property (readonly,strong) NSMutableArray *sortIndex;

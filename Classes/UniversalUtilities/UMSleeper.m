@@ -66,7 +66,6 @@ static void socket_set_blocking(int fd, int blocking)
     {
         return;
     }
-    
     [_prepareLock lock];
     if(self.isPrepared==YES)
     {

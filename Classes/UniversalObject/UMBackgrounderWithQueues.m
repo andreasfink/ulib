@@ -10,7 +10,7 @@
 #import "UMQueue.h"
 #import "UMTask.h"
 #import "UMSleeper.h"
-#import "UMLock.h"
+#import "UMThreadHelpers.h"
 
 @implementation UMBackgrounderWithQueues
 
@@ -39,30 +39,26 @@
 
 - (int)work
 {
-    @autoreleasepool
+    NSUInteger n = _queues.count;
+    NSUInteger i;
+    int r = 0;
+    for(i=0;i<n;i++)
     {
-        NSUInteger n = _queues.count;
-        NSUInteger i;
-        for(i=0;i<n;i++)
+        UMQueue *thisQueue = [_queues objectAtIndex:i];
+        UMTask *task = [thisQueue getFirst];
+        if(task)
         {
-            UMQueue *thisQueue = [_queues objectAtIndex:i];
-            UMTask *task = [thisQueue getFirst];
-            if(task)
+            if(enableLogging)
             {
-                if(enableLogging)
-                {
-                    NSLog(@"%@: got task %@ on queue %d",self.name,task.name,(int)i);
-                }
-                @autoreleasepool
-                {
-                    _lastTask = task.name;
-                    [task runOnBackgrounder:self];
-                }
-                ulib_set_thread_name([NSString stringWithFormat:@"%@ (idle)",self.name]);
-                return 1;
+                NSLog(@"%@: got task %@ on queue %d",self.name,task.name,(int)i);
             }
+            _lastTask = task.name;
+            [task runOnBackgrounder:self];
+            ulib_set_thread_name([NSString stringWithFormat:@"%@ (idle)",self.name]);
+            r = 1;
+            break;
         }
     }
-    return 0;
+    return r;
 }
 @end

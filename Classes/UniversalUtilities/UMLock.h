@@ -67,9 +67,9 @@ void        ulib_set_thread_name(NSString *name);       /* sets the name of the 
 #define UMLOCK(a)           [a lockAtFile:__FILE__ line:__LINE__ function:__func__]
 #define UMUNLOCK(a)         [a unlockAtFile:__FILE__ line:__LINE__ function:__func__]
 
-#define UMLOCK_CREATE_NONREENTRANT()    [[UMLock alloc]initNonReentrantWithFile:__FILE__ line:__LINE__ function:__func__];
-#define UMLOCK_CREATE_REENTRANT()       [[UMLock alloc]initReentrantWithFile:__FILE__ line:__LINE__ function:__func__];
-#define UMLOCK_DESTROY(a)   { [UMLock unregisterLock:a]; a=NULL; }
+//#define UMLOCK_CREATE_NONREENTRANT()    [[UMLock alloc]initNonReentrantWithFile:__FILE__ line:__LINE__ function:__func__];
+//#define UMLOCK_CREATE_REENTRANT()       [[UMLock alloc]initReentrantWithFile:__FILE__ line:__LINE__ function:__func__];
+//#define UMLOCK_DESTROY(a)   { [UMLock unregisterLock:a]; a=NULL; }
 
 void umlock_init(void);
 void nslock_nested_lock_warning(UMLock *lock);

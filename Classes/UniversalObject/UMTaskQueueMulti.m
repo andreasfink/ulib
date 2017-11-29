@@ -106,6 +106,7 @@
         UMQueue *queue = [queues objectAtIndex:nr];
         [queue append:task];
         [_queuesLock unlock];
+
         [workSleeper wakeUp];
     }
 }

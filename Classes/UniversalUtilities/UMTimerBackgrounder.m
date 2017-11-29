@@ -7,7 +7,7 @@
 //
 
 #import "UMTimerBackgrounder.h"
-#import "UMLock.h" /* for ulib_set_thread_name */
+#import "UMThreadHelpers.h"
 #import "UMTimer.h"
 #import "UMSleeper.h"
 #import "UMUtil.h"

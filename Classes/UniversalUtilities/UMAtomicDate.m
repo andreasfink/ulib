@@ -44,10 +44,16 @@
 - (NSTimeInterval)timeIntervallSinceDate:(NSDate *)since
 {
     NSTimeInterval r;
-
-    [_mutex lock];
-    r = [_date timeIntervalSinceDate:since];
-    [_mutex unlock];
+    if(since==NULL)
+    {
+        r = INFINITY;
+    }
+    else
+    {
+        [_mutex lock];
+        r = [_date timeIntervalSinceDate:since];
+        [_mutex unlock];
+    }
     return r;
 }
 

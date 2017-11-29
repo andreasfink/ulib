@@ -422,7 +422,10 @@ void umobject_disable_object_stat(void)
 NSArray *umobject_object_stat(BOOL sortByName)
 {
     NSMutableArray *arr = [[NSMutableArray alloc]init];
-    
+    if(object_stat==NULL)
+    {
+        return arr;
+    }
     pthread_mutex_lock(object_stat_mutex);
     NSArray *keys = [object_stat allKeys];
     for(NSString *key in keys)

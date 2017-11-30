@@ -68,22 +68,19 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
     int workDone = 0;
 
     UMMicroSec now = ulib_microsecondTime();
-    UMMicroSec nextWakeupIn = 100000; /* we wake up at least every 100ms or earlier */
+    UMMicroSec nextWakeupIn = 10000; /* we wake up at least every 10ms or earlier */
     [_timersLock lock];
     for(UMTimer *t in timers)
     {
-        if([t isExpired:now])
+        UMMicroSec timeLeft = [t timeLeft:now];
+        if(timeLeft < 0)
         {
             [dueTimers addObject:t];
             workDone++;
         }
-        else
+        else if(timeLeft < nextWakeupIn)
         {
-            UMMicroSec timeLeft = [t timeLeft:now];
-            if(timeLeft < nextWakeupIn)
-            {
-                nextWakeupIn = timeLeft;
-            }
+            nextWakeupIn = timeLeft;
         }
     }
     for(UMTimer *t in dueTimers)

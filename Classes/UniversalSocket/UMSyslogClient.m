@@ -23,8 +23,8 @@
         _localPid = getpid();
         _version = 1;
         _appname = @"UMSyslogClient";
-        _defaultFacility = 16; /* LOCAL0 */
-        _defaultSeverity = 7;   /* DEBUG */
+        _defaultFacility = UMSyslogFacility_Local0;
+        _defaultSeverity = UMSyslogSeverity_Error;
         _dateFormatter = [[NSDateFormatter alloc] init];
         [_dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
         [_dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
@@ -44,8 +44,8 @@
     isOpen = YES;
     [self logMessageId:@"00000000"
                message:@"--startup--"
-              facility:-1
-              severity:-1];
+              facility:UMSyslogFacility_Default
+              severity:UMSyslogSeverity_Informational];
 }
 
 - (void)close
@@ -56,18 +56,18 @@
 
 - (void)logMessageId:(NSString *)msgid
              message:(NSString *)msg
-            facility:(int)facility
-            severity:(int)severity
+            facility:(UMSyslogFacility)facility
+            severity:(UMSyslogSeverity)severity
 {
     if(!isOpen)
     {
         [self open];
     }
-    if(facility == -1)
+    if(facility == UMSyslogFacility_Default)
     {
         facility = _defaultFacility;
     }
-    if(severity == -1)
+    if(severity == UMSyslogSeverity_Default)
     {
         severity = _defaultSeverity;
     }
@@ -82,13 +82,7 @@
         msg
      ];
     NSData *data = [s dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-
     [_sock sendData:data];
-    /*
-     [_sock sendData:data
-           toAddress:_destinationHost
-              toPort:_udpPort];
-     */
 }
 
 - (NSString *)timeStamp

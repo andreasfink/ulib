@@ -41,7 +41,7 @@
     [_mutex unlock];
 }
 
-- (NSTimeInterval)timeIntervallSinceDate:(NSDate *)since
+- (NSTimeInterval)timeIntervalSinceDate:(NSDate *)since
 {
     NSTimeInterval r;
     if(since==NULL)
@@ -57,7 +57,7 @@
     return r;
 }
 
-- (NSTimeInterval)timeIntervallSinceNow
+- (NSTimeInterval)timeIntervalSinceNow
 {
     NSTimeInterval r;
 

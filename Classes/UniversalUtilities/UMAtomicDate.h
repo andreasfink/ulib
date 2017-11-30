@@ -18,8 +18,8 @@
 - (UMAtomicDate *)initWithDate:(NSDate *)d;
 - (NSDate *)date;
 - (void)setDate:(NSDate *)d;
-- (NSTimeInterval)timeIntervallSinceDate:(NSDate *)since;
-- (NSTimeInterval)timeIntervallSinceNow;
+- (NSTimeInterval)timeIntervalSinceDate:(NSDate *)since;
+- (NSTimeInterval)timeIntervalSinceNow;
 - (void)touch;
 - (UMAtomicDate *)copyWithZone:(NSZone *)zone;
 

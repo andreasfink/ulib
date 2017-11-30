@@ -35,6 +35,19 @@
                                 enableLogging:(BOOL)enableLog
                                        queues:(NSArray *)xqueues
 {
+    return [self initWithNumberOfThreads:workerThreadCount
+                                    name:n
+                           enableLogging:enableLog
+                                  queues:xqueues
+                                   debug:NO];
+}
+
+- (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
+                                         name:(NSString *)n
+                                enableLogging:(BOOL)enableLog
+                                       queues:(NSArray *)xqueues
+                                        debug:(BOOL)xdebug
+{
     self = [super init];
     if(self)
     {
@@ -42,8 +55,10 @@
         self.enableLogging = enableLog;
         queues = xqueues;
         workerThreads = [[NSMutableArray alloc]init];
+        _debug = xdebug;
         int i;
         self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
+        self.workSleeper.debug = xdebug;
         [self.workSleeper prepare];
         for(i=0;i<workerThreadCount;i++)
         {
@@ -60,6 +75,20 @@
                                          name:(NSString *)n
                                 enableLogging:(BOOL)enableLog
                                numberOfQueues:(int)queueCount
+{
+    return [self initWithNumberOfThreads:workerThreadCount
+                                    name:n
+                           enableLogging:enableLog
+                          numberOfQueues:queueCount
+                                   debug:NO];
+}
+
+- (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
+                                         name:(NSString *)n
+                                enableLogging:(BOOL)enableLog
+                               numberOfQueues:(int)queueCount
+                                        debug:(BOOL)debug;
+
 {
     self = [super init];
     if(self)
@@ -109,6 +138,20 @@
 
         [workSleeper wakeUp];
     }
+}
+
+- (NSUInteger)count
+{
+    NSUInteger cnt = 0;
+    [_queuesLock lock];
+    NSUInteger n = [queues count];
+    for(NSUInteger i=0;i<n;i++)
+    {
+        UMQueue *queue = [queues objectAtIndex:i];
+        cnt += [queue count];
+    }
+    [_queuesLock unlock];
+    return cnt;
 }
 
 - (void)start

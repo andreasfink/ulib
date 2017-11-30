@@ -28,10 +28,13 @@ typedef int32_t UMSleeper_Signal; /* note Sleeper signal is a bitmask */
     long iline;
     const char *ifunction;
     UMMutex *_prepareLock;
+    BOOL _debug;
 }
 @property(readwrite,assign,atomic) BOOL isPrepared;
 @property(readwrite,assign,atomic) int rxpipe;
 @property(readwrite,assign,atomic) int txpipe;
+@property(readwrite,assign,atomic) BOOL debug;
+
 
 
 - (UMSleeper *)initFromFile:(const char *)file line:(long)line function:(const char *)function;

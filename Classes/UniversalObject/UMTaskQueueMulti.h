@@ -31,11 +31,14 @@
     UMMutex         *_queuesLock;
     UMSleeper       *workSleeper;
     NSMutableArray  *workerThreads; /* UMBackgrounderWithQueues objects */
+    BOOL            _debug;
 }
 
 @property (strong) NSString     *name;
 @property (strong) UMSleeper    *workSleeper;
 @property (assign) BOOL         enableLogging;
+@property (assign) BOOL         debug;
+
 
 - (UMTaskQueueMulti *)init;
 - (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
@@ -46,11 +49,24 @@
 - (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
                                          name:(NSString *)n
                                 enableLogging:(BOOL)enableLog
+                               numberOfQueues:(int)queueCount
+                                        debug:(BOOL)debug;
+
+
+- (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
+                                         name:(NSString *)n
+                                enableLogging:(BOOL)enableLog
                                        queues:(NSArray *)xqueues;
+
+- (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
+                                         name:(NSString *)n
+                                enableLogging:(BOOL)enableLog
+                                       queues:(NSArray *)xqueues
+                                        debug:(BOOL)xdebug;
 
 - (void)queueTask:(UMTask *)task toQueueNumber:(int)nr;
 
 - (void)start;
 - (void)shutdown;
-
+- (NSUInteger)count;
 @end

@@ -76,6 +76,11 @@
     }
 }
 
+- (NSUInteger)count
+{
+    return [mainQueue count];
+}
+
 - (void)shutdown
 {
     @autoreleasepool

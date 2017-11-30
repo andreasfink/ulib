@@ -41,7 +41,7 @@
 
 - (void)start;
 - (void)shutdown;
-
+- (NSUInteger)count;
 
 @end
 

@@ -157,7 +157,11 @@ static void flushpipe(int fd)
     long long start_time = [UMThroughputCounter microsecondTime];
     long long end_time = start_time + microseconds;
     long long now;
-    
+
+    if(_debug)
+    {
+        NSLog(@"Going to sleep for %0.3lf seconds or until woken up by signal mask 0x%04x",(double)microseconds / 1000000.0,sig);
+    }
 
     int events = POLLIN | POLLPRI | POLLERR | POLLHUP | POLLNVAL;
 
@@ -235,14 +239,21 @@ static void flushpipe(int fd)
                 signalToRead = (buffer[0] << 24) | (buffer[1] << 16) | (buffer[2] <<8) | buffer[3];
                 if(signalToRead &  sig) /* checking if signal's bit is set */
                 {
+                    if(_debug)
+                    {
+                        NSLog(@"Signal 0x%04X received",sig);
+                    }
                     return (int)signalToRead;
+                }
+                if(_debug)
+                {
+                    NSLog(@"Ignoring signal 0x%04X",sig);
                 }
             }
         }
     }
     return pollresult; /* we get here on timeout only */
 }
-
 
 - (int) sleep:(long long) microseconds	/* returns 1 if interrupted, 0 if timer expired */
 {
@@ -257,19 +268,23 @@ static void flushpipe(int fd)
     }
 }
 
-- (void) wakeUp:(UMSleeper_Signal)signal
+- (void) wakeUp:(UMSleeper_Signal)sig
 {
+    if(_debug)
+    {
+        NSLog(@"WakeUp order 0x%04x",sig);
+    }
+
     if(self.txpipe >= 0)
     {
         uint8_t bytes[4];
-        bytes[0] = (signal & 0xFF000000 ) >> 24;
-        bytes[1] = (signal & 0x00FF0000 ) >> 16;
-        bytes[2] = (signal & 0x0000FF00 ) >> 8;
-        bytes[3] = (signal & 0x000000FF ) >> 0;
+        bytes[0] = (sig & 0xFF000000 ) >> 24;
+        bytes[1] = (sig & 0x00FF0000 ) >> 16;
+        bytes[2] = (sig & 0x0000FF00 ) >> 8;
+        bytes[3] = (sig & 0x000000FF ) >> 0;
         write(self.txpipe, &bytes,4);
     }
 }
-
 
 - (void) wakeUp
 {

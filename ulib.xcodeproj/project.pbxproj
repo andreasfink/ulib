@@ -1749,6 +1749,8 @@
 		A62A7E2C18AAD20D00EA8A2A /* UMHTTPPageRef.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A7E2718AAD20D00EA8A2A /* UMHTTPPageRef.m */; };
 		A62A7E3118AAD6AD00EA8A2A /* UMHTTPPageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = A62A7E2E18AAD6AD00EA8A2A /* UMHTTPPageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62A7E3418AAD6AD00EA8A2A /* UMHTTPPageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A7E2F18AAD6AD00EA8A2A /* UMHTTPPageCache.m */; };
+		A62DC22F1FD08593001ACCC7 /* UMQueueMulti.h in Headers */ = {isa = PBXBuildFile; fileRef = A62DC22D1FD08593001ACCC7 /* UMQueueMulti.h */; };
+		A62DC2301FD08593001ACCC7 /* UMQueueMulti.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DC22E1FD08593001ACCC7 /* UMQueueMulti.m */; };
 		A63F22A41FB725010048B329 /* UMMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = A63F22A21FB725010048B329 /* UMMutex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63F22A51FB725010048B329 /* UMMutex.m in Sources */ = {isa = PBXBuildFile; fileRef = A63F22A31FB725010048B329 /* UMMutex.m */; };
 		A63F22A61FB7272F0048B329 /* UMMutex.m in Sources */ = {isa = PBXBuildFile; fileRef = A63F22A31FB725010048B329 /* UMMutex.m */; };
@@ -2734,6 +2736,8 @@
 		A62A7E2718AAD20D00EA8A2A /* UMHTTPPageRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPPageRef.m; sourceTree = "<group>"; };
 		A62A7E2E18AAD6AD00EA8A2A /* UMHTTPPageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPPageCache.h; sourceTree = "<group>"; };
 		A62A7E2F18AAD6AD00EA8A2A /* UMHTTPPageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPPageCache.m; sourceTree = "<group>"; };
+		A62DC22D1FD08593001ACCC7 /* UMQueueMulti.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMQueueMulti.h; sourceTree = "<group>"; };
+		A62DC22E1FD08593001ACCC7 /* UMQueueMulti.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMQueueMulti.m; sourceTree = "<group>"; };
 		A6327C6D19ED2C6C0090FC94 /* UMBackgrounder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBackgrounder.m; sourceTree = "<group>"; };
 		A637FF9D1DBEC33B000A6A21 /* ulib-ios-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ulib-ios-info.plist"; sourceTree = "<group>"; };
 		A637FF9E1DBEC33B000A6A21 /* ulib-macos-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ulib-macos-info.plist"; sourceTree = "<group>"; };
@@ -4228,6 +4232,8 @@
 				A6D8AB95149A783A0029E9CF /* UMQueue.m */,
 				A684B4241AB8FF4500854472 /* UMQueueNull.h */,
 				A684B4251AB8FF4500854472 /* UMQueueNull.m */,
+				A62DC22D1FD08593001ACCC7 /* UMQueueMulti.h */,
+				A62DC22E1FD08593001ACCC7 /* UMQueueMulti.m */,
 			);
 			name = UniversalQueue;
 			path = Classes/UniversalQueue;
@@ -5346,6 +5352,7 @@
 				A60C4D341EF7FE59007C203A /* dh.h in Headers */,
 				A60C4D351EF7FE59007C203A /* rsa.h in Headers */,
 				A60C4D361EF7FE59007C203A /* asn1_mac.h in Headers */,
+				A62DC22F1FD08593001ACCC7 /* UMQueueMulti.h in Headers */,
 				A60C4D371EF7FE59007C203A /* UniversalHTTP.h in Headers */,
 				A60C4D381EF7FE59007C203A /* symhacks.h in Headers */,
 				A60C4D391EF7FE59007C203A /* pqueue.h in Headers */,
@@ -6678,6 +6685,7 @@
 				A60C4CCA1EF7FE59007C203A /* NSString+UniversalObject.m in Sources */,
 				A60C4CCB1EF7FE59007C203A /* NSString+UMHTTP.m in Sources */,
 				A60C4CCC1EF7FE59007C203A /* UMHTTPConnection.m in Sources */,
+				A62DC2301FD08593001ACCC7 /* UMQueueMulti.m in Sources */,
 				A63F22A51FB725010048B329 /* UMMutex.m in Sources */,
 				A60C4CCD1EF7FE59007C203A /* UMHTTPPageHandler.m in Sources */,
 				A60C4CCE1EF7FE59007C203A /* UMHTTPRequest.m in Sources */,

@@ -7,5 +7,7 @@
 
 #import "UMQueue.h"
 #import "UMQueueNull.h"
+#import "UMQueueMulti.h"
+
 #import "UMPool.h"
 

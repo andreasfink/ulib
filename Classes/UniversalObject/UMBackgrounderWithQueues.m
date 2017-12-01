@@ -11,17 +11,18 @@
 #import "UMTask.h"
 #import "UMSleeper.h"
 #import "UMThreadHelpers.h"
+#import "UMQueueMulti.h"
 
 @implementation UMBackgrounderWithQueues
 
-- (UMBackgrounderWithQueues *)initWithSharedQueues:(NSArray *)q
+- (UMBackgrounderWithQueues *)initWithSharedQueues:(UMQueueMulti *)q
                                               name:(NSString *)n
                                        workSleeper:(UMSleeper *)ws;
 {
     self = [super initWithName:n workSleeper:ws];
     if(self)
     {
-        _queues = q;
+        _multiQueue = q;
         sharedQueue = YES;
     }
     return self;
@@ -39,25 +40,18 @@
 
 - (int)work
 {
-    NSUInteger n = _queues.count;
-    NSUInteger i;
     int r = 0;
-    for(i=0;i<n;i++)
+    UMTask *task = [_multiQueue getFirst];
+    if(task)
     {
-        UMQueue *thisQueue = [_queues objectAtIndex:i];
-        UMTask *task = [thisQueue getFirst];
-        if(task)
+        if(enableLogging)
         {
-            if(enableLogging)
-            {
-                NSLog(@"%@: got task %@ on queue %d",self.name,task.name,(int)i);
-            }
-            _lastTask = task.name;
-            [task runOnBackgrounder:self];
-            ulib_set_thread_name([NSString stringWithFormat:@"%@ (idle)",self.name]);
-            r = 1;
-            break;
+            NSLog(@"%@: got task %@",self.name,task.name);
         }
+        _lastTask = task.name;
+        [task runOnBackgrounder:self];
+        ulib_set_thread_name([NSString stringWithFormat:@"%@ (idle)",self.name]);
+        r = 1;
     }
     return r;
 }

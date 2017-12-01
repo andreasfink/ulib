@@ -18,7 +18,7 @@
 
  */
 
-@class UMQueue;
+@class UMQueueMulti;
 @class UMBackgrounderWithQueue;
 @class UMTask;
 @class UMSleeper;
@@ -27,8 +27,7 @@
 {
     BOOL            enableLogging;
     NSString        *name;
-    NSArray         *queues;
-    UMMutex         *_queuesLock;
+    UMQueueMulti    *_multiQueues;
     UMSleeper       *workSleeper;
     NSMutableArray  *workerThreads; /* UMBackgrounderWithQueues objects */
     BOOL            _debug;

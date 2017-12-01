@@ -8,25 +8,26 @@
 
 #import "UMBackgrounderWithQueue.h"
 
-@class UMQueue;
+@class UMQueueMulti;
 @class UMSleeper;
 
 /*!
  @class UMBackgrounderWithQueues
  @brief UMBackgrounderWithQueues is a slightly modified version of UMBackgrounderWithQueue
- which instead of having a single queue, it can have multiple queues. Useful for priority queuing
+ which instead of having a single queue, it can have multiple queues in the form
+ of a UMQueueMulti. Useful for priority queuing
 */
 
 @interface UMBackgrounderWithQueues : UMBackgrounderWithQueue
 
 {
-    NSArray *_queues; /* array of UMQueue object sorted by priority */
+    UMQueueMulti *_multiQueue; /* array of UMQueue object sorted by priority */
     NSString *_lastTask;
 }
 
-@property(strong)     NSArray *queues;
+//@property(strong)     NSArray *queues;
 
-- (UMBackgrounderWithQueues *)initWithSharedQueues:(NSArray *)queues
+- (UMBackgrounderWithQueues *)initWithSharedQueues:(UMQueueMulti *)queues
                                              name:(NSString *)name
                                       workSleeper:(UMSleeper *)ws;
 @end

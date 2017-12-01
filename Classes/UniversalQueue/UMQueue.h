@@ -17,7 +17,7 @@
 
 @interface UMQueue : UMObject
 {
-@private
+@protected
     NSMutableArray  *queue;
     UMMutex          *_lock;
 }

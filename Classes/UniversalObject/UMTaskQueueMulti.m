@@ -9,7 +9,7 @@
 #import "UMTaskQueueMulti.h"
 #import "UMTaskQueue.h"
 #import "UMBackgrounderWithQueues.h"
-#import "UMQueue.h"
+#import "UMQueueMulti.h"
 #import "UMSleeper.h"
 #import "UMTask.h"
 
@@ -45,7 +45,7 @@
 - (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
                                          name:(NSString *)n
                                 enableLogging:(BOOL)enableLog
-                                       queues:(NSArray *)xqueues
+                                       queues:(UMQueueMulti *)xqueues
                                         debug:(BOOL)xdebug
 {
     self = [super init];
@@ -53,7 +53,7 @@
     {
         self.name = n;
         self.enableLogging = enableLog;
-        queues = xqueues;
+        _multiQueues = xqueues;
         workerThreads = [[NSMutableArray alloc]init];
         _debug = xdebug;
         int i;
@@ -63,7 +63,8 @@
         for(i=0;i<workerThreadCount;i++)
         {
             NSString *newName = [NSString stringWithFormat:@"%@[%d]",n,i];
-            UMBackgrounderWithQueues *bg = [[UMBackgrounderWithQueues alloc]initWithSharedQueues:queues name:newName workSleeper:workSleeper];
+            UMBackgrounderWithQueues *bg = [[UMBackgrounderWithQueues alloc]initWithSharedQueues:_multiQueues
+                                                                                            name:newName workSleeper:workSleeper];
             bg.enableLogging = self.enableLogging;
             [workerThreads addObject:bg];
         }
@@ -95,12 +96,7 @@
     {
         self.name = n;
         self.enableLogging = enableLog;
-        NSMutableArray *qarr = [[NSMutableArray alloc]init];
-        while(queueCount--)
-        {
-            [qarr addObject:[[UMQueue alloc]init]];
-        }
-        queues = qarr;
+        _multiQueues = [[UMQueueMulti alloc]initWithQueueCount:queueCount];
         workerThreads = [[NSMutableArray alloc]init];
         int i;
         self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
@@ -108,7 +104,7 @@
         for(i=0;i<workerThreadCount;i++)
         {
             NSString *newName = [NSString stringWithFormat:@"%@[%d]",n,i];
-            UMBackgrounderWithQueues *bg = [[UMBackgrounderWithQueues alloc]initWithSharedQueues:queues
+            UMBackgrounderWithQueues *bg = [[UMBackgrounderWithQueues alloc]initWithSharedQueues:_multiQueues
                                                                                            name:newName
                                                                                     workSleeper:workSleeper];
             bg.enableLogging = self.enableLogging;
@@ -131,27 +127,14 @@
         {
             task.enableLogging = YES;
         }
-        [_queuesLock lock];
-        UMQueue *queue = [queues objectAtIndex:nr];
-        [queue append:task];
-        [_queuesLock unlock];
-
+        [_multiQueues append:task forQueueNumber:nr];
         [workSleeper wakeUp];
     }
 }
 
 - (NSUInteger)count
 {
-    NSUInteger cnt = 0;
-    [_queuesLock lock];
-    NSUInteger n = [queues count];
-    for(NSUInteger i=0;i<n;i++)
-    {
-        UMQueue *queue = [queues objectAtIndex:i];
-        cnt += [queue count];
-    }
-    [_queuesLock unlock];
-    return cnt;
+    return [_multiQueues count];;
 }
 
 - (void)start

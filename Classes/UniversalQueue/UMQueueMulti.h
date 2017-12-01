@@ -8,14 +8,24 @@
 
 #import "UMQueue.h"
 
+@class UMThroughputCounter;
+
 @interface UMQueueMulti : UMQueue
 {
 @private
     NSMutableArray  *queues;
     NSUInteger      _workInProgress;
+    NSUInteger      _currentlyInQueue;
+    NSUInteger      _hardLimit;
+    UMThroughputCounter *_processingThroughput;
 }
 
-@property(readwrite,assign,atomic)      NSUInteger      workInProgress;
+@property(readwrite,assign,atomic)  NSUInteger      workInProgress;
+@property(readwrite,assign,atomic)  NSUInteger      hardLimit;
+@property(readwrite,strong,atomic)  UMThroughputCounter *processingThroughput;
+
+- (void)startWork;
+- (void)endWork;
 
 - (UMQueueMulti *)initWithQueueCount:(NSUInteger)index;
 - (void)append:(id)obj;

@@ -16,7 +16,7 @@
 
 - (UMThroughputCounter *)init
 {
-	return [self initWithResolutionInSeconds: 0.1f maxDuration: 60];
+	return [self initWithResolutionInSeconds: 0.25 maxDuration: 1260.0];
 }
 
 - (UMThroughputCounter *)initWithResolutionInMiliseconds:(long long)res
@@ -203,7 +203,7 @@ end:
 
 - (NSString *) getSpeedStringTriple
 {
-	return [NSString stringWithFormat:@"[%8.3f/s] [%8.3f/s] [%8.3f/s] msg/sec\n",
+    return [NSString stringWithFormat:@"10s: %8.3f/s  5m: %8.3f/s  20m: %8.3f/s\n",
 			(double)[self getSpeedForMicroseconds:   10000000ULL],
 			(double)[self getSpeedForMicroseconds:  300000000ULL],
 			(double)[self getSpeedForMicroseconds: 1200000000ULL]];

@@ -135,9 +135,9 @@
             taskQueue =tq;
             isSharedQueue = YES;
         }
-        lowerQueueThroughput = [[UMThroughputCounter alloc]init];
-        upperQueueThroughput = [[UMThroughputCounter alloc]init];
-        adminQueueThroughput = [[UMThroughputCounter alloc]init];
+        lowerQueueThroughput = [[UMThroughputCounter alloc]initWithResolutionInSeconds: 1.0 maxDuration: 1260.0];
+        upperQueueThroughput = [[UMThroughputCounter alloc]initWithResolutionInSeconds: 1.0 maxDuration: 1260.0];
+        adminQueueThroughput = [[UMThroughputCounter alloc]initWithResolutionInSeconds: 1.0 maxDuration: 1260.0];
         logLevel = UMLOG_MAJOR;
     }
     return self;

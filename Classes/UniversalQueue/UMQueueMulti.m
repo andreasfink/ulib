@@ -8,15 +8,14 @@
 
 #import "UMQueueMulti.h"
 #import "UMMutex.h"
+#import "UMThroughputCounter.h"
 
 @implementation UMQueueMulti
-
 
 - (UMQueueMulti *)init
 {
     return [self initWithQueueCount:1];
 }
-
 
 - (UMQueueMulti *)initWithQueueCount:(NSUInteger)count
 {
@@ -26,12 +25,30 @@
         _lock = [[UMMutex alloc] init];
         queue = NULL;
         queues = [[NSMutableArray alloc]init];
+        _currentlyInQueue = 0;
+        _hardLimit = 0;
         for(NSUInteger i=0;i<count;i++)
         {
             [queues addObject:[[NSMutableArray alloc]init]];
         }
+        _processingThroughput = [[UMThroughputCounter alloc]initWithResolutionInSeconds: 1.0 maxDuration: 1260.0];
     }
     return self;
+}
+
+- (void)startWork
+{
+    [_lock lock];
+    _workInProgress++;
+    [_lock unlock];
+    [_processingThroughput increase];
+}
+
+- (void)endWork
+{
+    [_lock lock];
+    _workInProgress--;
+    [_lock unlock];
 }
 
 - (void)append:(id)obj
@@ -44,6 +61,13 @@
     if(obj)
     {
         [_lock lock];
+        _currentlyInQueue++;
+        if((_hardLimit > 0) && (_currentlyInQueue > _hardLimit))
+        {
+            _currentlyInQueue--;
+            [_lock unlock];
+            @throw([NSException exceptionWithName:@"QUEUE-LIMIT-REACHED" reason:NULL userInfo:NULL]);
+        }
         NSMutableArray *subqueue = queues[index];
         [subqueue addObject:obj];
         [_lock unlock];
@@ -60,6 +84,13 @@
     if(obj)
     {
         NSMutableArray *subqueue = queues[index];
+        
+        _currentlyInQueue++;
+        if((_hardLimit > 0) && (_currentlyInQueue > _hardLimit))
+        {
+            _currentlyInQueue--;
+            @throw([NSException exceptionWithName:@"QUEUE-LIMIT-REACHED" reason:NULL userInfo:NULL]);
+        }
         [subqueue addObject:obj];
     }
 }
@@ -74,6 +105,13 @@
     if(obj)
     {
         [_lock lock];
+        _currentlyInQueue++;
+        if((_hardLimit > 0) && (_currentlyInQueue > _hardLimit))
+        {
+            _currentlyInQueue--;
+            [_lock unlock];
+            @throw([NSException exceptionWithName:@"QUEUE-LIMIT-REACHED" reason:NULL userInfo:NULL]);
+        }
         NSMutableArray *subqueue = queues[index];
         [subqueue insertObject:obj atIndex:0];
         [_lock unlock];
@@ -91,7 +129,20 @@
     {
         [_lock lock];
         NSMutableArray *subqueue = queues[index];
-        [subqueue removeObject:obj]; /* should not be there twice */
+        NSInteger idx = [subqueue indexOfObject:obj];
+        if(idx != NSNotFound)
+        {
+            [subqueue removeObjectAtIndex:idx]; /* should not be there twice */
+            _currentlyInQueue--;
+        }
+        
+        _currentlyInQueue++;
+        if((_hardLimit > 0) && (_currentlyInQueue > _hardLimit))
+        {
+            _currentlyInQueue--;
+            [_lock unlock];
+            @throw([NSException exceptionWithName:@"QUEUE-LIMIT-REACHED" reason:NULL userInfo:NULL]);
+        }
         [subqueue addObject:obj];
         [_lock unlock];
     }
@@ -100,7 +151,11 @@
 
 - (void)removeObject:(id)obj
 {
-    [self removeObject:obj forQueueNumber:0];
+    NSUInteger count = queues.count;
+    for(NSUInteger i=0;i<count;i++)
+    {
+        [self removeObject:obj forQueueNumber:i];
+    }
 }
 
 - (void)removeObject:(id)obj forQueueNumber:(NSUInteger)index
@@ -109,7 +164,12 @@
     {
         [_lock lock];
         NSMutableArray *subqueue = queues[index];
-        [subqueue removeObject:obj];
+        NSInteger idx = [subqueue indexOfObject:obj];
+        if(idx != NSNotFound)
+        {
+            _currentlyInQueue--;
+            [subqueue removeObjectAtIndex:idx];
+        }
         [_lock unlock];
     }
 }
@@ -122,10 +182,11 @@
     for(NSUInteger index=0;index<cnt;index++)
     {
         NSMutableArray *subqueue = queues[index];
-        if ([subqueue count]>0)
+        if (subqueue.count>0)
         {
             obj = [subqueue objectAtIndex:0];
             [subqueue removeObjectAtIndex:0];
+            _currentlyInQueue--;
             break;
         }
     }
@@ -141,10 +202,11 @@
     for(NSUInteger index=0;index<cnt;index++)
     {
         NSMutableArray *subqueue = queues[index];
-        if ([subqueue count]>0)
+        if (subqueue.count>0)
         {
             obj = [subqueue objectAtIndex:0];
             [subqueue removeObjectAtIndex:0];
+            _currentlyInQueue--;
             break;
         }
     }

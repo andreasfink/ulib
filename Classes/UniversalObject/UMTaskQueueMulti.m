@@ -33,13 +33,14 @@
 - (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
                                          name:(NSString *)n
                                 enableLogging:(BOOL)enableLog
-                                       queues:(NSArray *)xqueues
+                                       queues:(UMQueueMulti *)xqueues
 {
     return [self initWithNumberOfThreads:workerThreadCount
                                     name:n
                            enableLogging:enableLog
                                   queues:xqueues
-                                   debug:NO];
+                                   debug:NO
+                               hardLimit:0];
 }
 
 - (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
@@ -47,6 +48,7 @@
                                 enableLogging:(BOOL)enableLog
                                        queues:(UMQueueMulti *)xqueues
                                         debug:(BOOL)xdebug
+                                    hardLimit:(NSUInteger)hardLimit
 {
     self = [super init];
     if(self)
@@ -56,6 +58,7 @@
         _multiQueue = xqueues;
         workerThreads = [[NSMutableArray alloc]init];
         _debug = xdebug;
+        xqueues.hardLimit = hardLimit;
         int i;
         self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
         self.workSleeper.debug = xdebug;
@@ -81,15 +84,16 @@
                                     name:n
                            enableLogging:enableLog
                           numberOfQueues:queueCount
-                                   debug:NO];
+                                   debug:NO
+                               hardLimit:0];
 }
 
 - (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
                                          name:(NSString *)n
                                 enableLogging:(BOOL)enableLog
                                numberOfQueues:(int)queueCount
-                                        debug:(BOOL)debug;
-
+                                        debug:(BOOL)debug
+                                    hardLimit:(NSUInteger)hardLimit
 {
     self = [super init];
     if(self)
@@ -97,6 +101,8 @@
         self.name = n;
         self.enableLogging = enableLog;
         _multiQueue = [[UMQueueMulti alloc]initWithQueueCount:queueCount];
+        _multiQueue.hardLimit = hardLimit;
+
         workerThreads = [[NSMutableArray alloc]init];
         int i;
         self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];

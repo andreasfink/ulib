@@ -53,7 +53,7 @@
     {
         self.name = n;
         self.enableLogging = enableLog;
-        _multiQueues = xqueues;
+        _multiQueue = xqueues;
         workerThreads = [[NSMutableArray alloc]init];
         _debug = xdebug;
         int i;
@@ -63,7 +63,7 @@
         for(i=0;i<workerThreadCount;i++)
         {
             NSString *newName = [NSString stringWithFormat:@"%@[%d]",n,i];
-            UMBackgrounderWithQueues *bg = [[UMBackgrounderWithQueues alloc]initWithSharedQueues:_multiQueues
+            UMBackgrounderWithQueues *bg = [[UMBackgrounderWithQueues alloc]initWithSharedQueues:_multiQueue
                                                                                             name:newName workSleeper:workSleeper];
             bg.enableLogging = self.enableLogging;
             [workerThreads addObject:bg];
@@ -96,7 +96,7 @@
     {
         self.name = n;
         self.enableLogging = enableLog;
-        _multiQueues = [[UMQueueMulti alloc]initWithQueueCount:queueCount];
+        _multiQueue = [[UMQueueMulti alloc]initWithQueueCount:queueCount];
         workerThreads = [[NSMutableArray alloc]init];
         int i;
         self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
@@ -104,7 +104,7 @@
         for(i=0;i<workerThreadCount;i++)
         {
             NSString *newName = [NSString stringWithFormat:@"%@[%d]",n,i];
-            UMBackgrounderWithQueues *bg = [[UMBackgrounderWithQueues alloc]initWithSharedQueues:_multiQueues
+            UMBackgrounderWithQueues *bg = [[UMBackgrounderWithQueues alloc]initWithSharedQueues:_multiQueue
                                                                                            name:newName
                                                                                     workSleeper:workSleeper];
             bg.enableLogging = self.enableLogging;
@@ -127,14 +127,14 @@
         {
             task.enableLogging = YES;
         }
-        [_multiQueues append:task forQueueNumber:nr];
+        [_multiQueue append:task forQueueNumber:nr];
         [workSleeper wakeUp];
     }
 }
 
 - (NSUInteger)count
 {
-    return [_multiQueues count];;
+    return [_multiQueue count];;
 }
 
 - (void)start
@@ -153,4 +153,13 @@
     }
 }
 
+- (NSDictionary *)status
+{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+    dict[@"worker-threads"] = @(workerThreads.count);
+    dict[@"worker-threads-busy"] = @(_multiQueue.workInProgress);
+    dict[@"queues"] = _multiQueue.status;
+    return dict;
+    
+}
 @end

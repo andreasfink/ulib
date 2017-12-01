@@ -49,7 +49,9 @@
             NSLog(@"%@: got task %@",self.name,task.name);
         }
         _lastTask = task.name;
+        _multiQueue.workInProgress++;
         [task runOnBackgrounder:self];
+        _multiQueue.workInProgress--;
         ulib_set_thread_name([NSString stringWithFormat:@"%@ (idle)",self.name]);
         r = 1;
     }

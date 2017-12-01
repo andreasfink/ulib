@@ -12,7 +12,10 @@
 {
 @private
     NSMutableArray  *queues;
+    NSUInteger      _workInProgress;
 }
+
+@property(readwrite,assign,atomic)      NSUInteger      workInProgress;
 
 - (UMQueueMulti *)initWithQueueCount:(NSUInteger)index;
 - (void)append:(id)obj;
@@ -27,6 +30,7 @@
 - (NSInteger)countForQueueNumber:(NSUInteger)index;
 - (void)removeObject:(id)object;
 - (void)removeObject:(id)object forQueueNumber:(NSUInteger)index;;
+- (NSDictionary *)status;
 
 @end
 

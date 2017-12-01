@@ -167,6 +167,23 @@
     return total;
 }
 
+- (NSDictionary *)status
+{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+    [_lock lock];
+    NSUInteger cnt = queues.count;
+    NSUInteger total = 0;
+    for(NSUInteger index=0;index<cnt;index++)
+    {
+        NSMutableArray *subqueue = queues[index];
+        dict[@(index)] = @(subqueue.count);
+        total += subqueue.count;
+    }
+    [_lock unlock];
+    dict[@"total"] = @(total);
+    return dict;
+}
+
 - (NSInteger)countForQueueNumber:(NSUInteger)index
 {
     [_lock lock];

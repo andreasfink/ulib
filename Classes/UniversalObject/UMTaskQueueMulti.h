@@ -27,7 +27,7 @@
 {
     BOOL            enableLogging;
     NSString        *name;
-    UMQueueMulti    *_multiQueues;
+    UMQueueMulti    *_multiQueue;
     UMSleeper       *workSleeper;
     NSMutableArray  *workerThreads; /* UMBackgrounderWithQueues objects */
     BOOL            _debug;
@@ -68,4 +68,6 @@
 - (void)start;
 - (void)shutdown;
 - (NSUInteger)count;
+- (NSDictionary *)status;
+
 @end

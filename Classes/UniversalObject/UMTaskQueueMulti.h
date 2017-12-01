@@ -64,7 +64,7 @@
 - (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
                                          name:(NSString *)n
                                 enableLogging:(BOOL)enableLog
-                                       queues:(NSArray *)xqueues
+                                       queues:(UMQueueMulti *)xqueues
                                         debug:(BOOL)xdebug
                                     hardLimit:(NSUInteger)hardLimit;
 

@@ -85,4 +85,5 @@
 - (void)logPanic:(NSString *)s;
 - (void)addLayerConfig:(NSMutableDictionary *)config;
 - (void)readLayerConfig:(NSDictionary *)config;
+- (void)dump:(NSFileHandle *)filehandler;
 @end

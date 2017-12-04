@@ -395,4 +395,13 @@
     }
 }
 
+- (void)dump:(NSFileHandle *)filehandler
+{
+    NSMutableString *s = [[NSMutableString alloc]init];
+    [s appendString:@"\n"];
+    [s appendString:@"--------------------------------------------------------------------------------\n"];
+    [s appendFormat:@"Layer: %@\n",layerName];
+    [s appendString:@"--------------------------------------------------------------------------------\n"];
+    [filehandler writeData: [s dataUsingEncoding:NSUTF8StringEncoding]];
+}
 @end

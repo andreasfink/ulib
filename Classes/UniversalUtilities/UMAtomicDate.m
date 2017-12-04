@@ -33,6 +33,10 @@
     [_mutex unlock];
     return d;
 }
+- (NSString *)description
+{
+   return [[self date]description];
+}
 
 - (void)setDate:(NSDate *)d
 {

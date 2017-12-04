@@ -42,6 +42,13 @@
 - (UMTimer *)initWithTarget:(id)target
                    selector:(SEL)selector
                      object:(id)object
+                    seconds:(NSTimeInterval)d
+                       name:(NSString *)n
+                    repeats:(BOOL)r;
+
+- (UMTimer *)initWithTarget:(id)target
+                   selector:(SEL)selector
+                     object:(id)object
                    duration:(UMMicroSec)dur
                        name:(NSString *)n
                     repeats:(BOOL)rep;

@@ -23,6 +23,22 @@
                         repeats:NO];
 }
 
+
+- (UMTimer *)initWithTarget:(id)target
+                   selector:(SEL)selector
+                     object:(id)object
+                    seconds:(NSTimeInterval)d
+                       name:(NSString *)n
+                    repeats:(BOOL)r
+{
+    return [self initWithTarget:target
+                       selector:selector
+                         object:(id)object
+                       duration:(UMMicroSec)d * 1000000
+                           name:n
+                        repeats:r];
+}
+
 - (UMTimer *)initWithTarget:(id)target
                    selector:(SEL)selector
                      object:(id)object

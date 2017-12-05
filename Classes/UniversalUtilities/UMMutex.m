@@ -38,8 +38,15 @@
 {
     if(_mutexLock)
     {
-        pthread_mutex_destroy(_mutexLock);
-        free(_mutexLock);
+        pthread_mutex_lock(_mutexLock);
+        pthread_mutex_t *_mutexLock2 = _mutexLock;
+        _mutexLock = NULL;
+        pthread_mutex_unlock(_mutexLock2);
+        if(_mutexLock2)
+        {
+            pthread_mutex_destroy(_mutexLock2);
+            free(_mutexLock2);
+        }
         _mutexLock = NULL;
     }
     if(_mutexAttr)

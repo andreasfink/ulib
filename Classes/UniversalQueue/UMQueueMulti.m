@@ -197,7 +197,6 @@
 - (id)getFirstWhileLocked
 {
     id obj = NULL;
-    [_lock lock];
     NSUInteger cnt = queues.count;
     for(NSUInteger index=0;index<cnt;index++)
     {
@@ -210,7 +209,6 @@
             break;
         }
     }
-    [_lock unlock];
     return obj;
 }
 

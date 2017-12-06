@@ -74,5 +74,6 @@
 - (void)shutdown;
 - (NSUInteger)count;
 - (NSDictionary *)status;
+- (NSDictionary *)statusByObjectType;
 
 @end

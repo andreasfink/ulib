@@ -9,6 +9,7 @@
 #import "UMQueueMulti.h"
 #import "UMMutex.h"
 #import "UMThroughputCounter.h"
+#import "UMTask.h"
 
 @implementation UMQueueMulti
 
@@ -243,6 +244,52 @@
     dict[@"total"] = @(total);
     return dict;
 }
+
+- (NSDictionary *)subQueueStatus:(NSUInteger)index
+{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+    NSMutableArray *subqueue = queues[index];
+    NSUInteger n = subqueue.count;
+    for(NSUInteger i=0;i<n;i++)
+    {
+        NSString *name;
+        id obj = subqueue[i];
+        if([obj isKindOfClass:[UMTask class]])
+        {
+            UMTask *task = (UMTask *)obj;
+            name = task.name;
+        }
+        else
+        {
+            name = [[obj class]description];
+        }
+        NSNumber *entry = dict[name];
+        if(entry)
+        {
+            entry = @(entry.integerValue +1);
+        }
+        else
+        {
+            entry = @(1);
+        }
+        dict[name] = entry;
+    }
+    return dict;
+}
+
+- (NSDictionary *)statusByObjectType
+{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+    [_lock lock];
+    NSUInteger cnt = queues.count;
+    for(NSUInteger index=0;index<cnt;index++)
+    {
+        dict[@(index)] = [self subQueueStatus:index];
+    }
+    [_lock unlock];
+    return dict;
+}
+
 
 - (NSInteger)countForQueueNumber:(NSUInteger)index
 {

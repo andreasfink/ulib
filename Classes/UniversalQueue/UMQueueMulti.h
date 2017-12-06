@@ -41,6 +41,7 @@
 - (void)removeObject:(id)object;
 - (void)removeObject:(id)object forQueueNumber:(NSUInteger)index;;
 - (NSDictionary *)status;
+- (NSDictionary *)statusByObjectType;
 
 @end
 

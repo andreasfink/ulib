@@ -166,6 +166,14 @@
     dict[@"worker-threads-busy"] = @(_multiQueue.workInProgress);
     dict[@"queues"] = _multiQueue.status;
     return dict;
-    
+}
+
+- (NSDictionary *)statusByObjectType
+{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+    dict[@"worker-threads"] = @(workerThreads.count);
+    dict[@"worker-threads-busy"] = @(_multiQueue.workInProgress);
+    dict[@"queues"] = _multiQueue.statusByObjectType;
+    return dict;
 }
 @end

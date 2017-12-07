@@ -61,17 +61,21 @@
 {
     if(obj)
     {
+        BOOL limitReached = NO;
         [_lock lock];
         _currentlyInQueue++;
         if((_hardLimit > 0) && (_currentlyInQueue > _hardLimit))
         {
             _currentlyInQueue--;
-            [_lock unlock];
-            @throw([NSException exceptionWithName:@"QUEUE-LIMIT-REACHED" reason:NULL userInfo:NULL]);
+            limitReached = YES;
         }
         NSMutableArray *subqueue = queues[index];
         [subqueue addObject:obj];
         [_lock unlock];
+        if(limitReached)
+        {
+            @throw([NSException exceptionWithName:@"QUEUE-LIMIT-REACHED" reason:NULL userInfo:NULL]);
+        }
     }
 }
 

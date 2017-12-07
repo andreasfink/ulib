@@ -33,10 +33,6 @@
     [_mutex unlock];
     return d;
 }
-- (NSString *)description
-{
-   return [[self date]description];
-}
 
 - (void)setDate:(NSDate *)d
 {
@@ -84,5 +80,12 @@
     return [[UMAtomicDate allocWithZone:zone]initWithDate:d];
 }
 
+- (NSString *)description
+{
+    [_mutex lock];
+    NSString *s = _date.description;
+    [_mutex unlock];
+    return s;
+}
 @end
 

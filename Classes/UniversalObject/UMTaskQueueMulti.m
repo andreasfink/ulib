@@ -127,15 +127,12 @@
     {
         return;
     }
-    @autoreleasepool
+    if(enableLogging)
     {
-        if(enableLogging)
-        {
-            task.enableLogging = YES;
-        }
-        [_multiQueue append:task forQueueNumber:nr];
-        [workSleeper wakeUp];
+        task.enableLogging = YES;
     }
+    [_multiQueue append:task forQueueNumber:nr];
+    [workSleeper wakeUp];
 }
 
 - (NSUInteger)count

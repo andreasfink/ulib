@@ -137,9 +137,9 @@ int ulib_cpu_count()
         {
             cpu_count++;
         }
+        TRACK_FILE_FCLOSE(f);
+        fclose(f);
     }
-    TRACK_FILE_FCLOSE(f);
-    fclose(f);
     if(cpu_count <= 0)
     {
         return 5;

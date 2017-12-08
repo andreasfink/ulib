@@ -25,6 +25,8 @@
         if(_mutexAttr == NULL)
         {
             free(_mutexLock);
+            _mutexAttr = NULL;
+            _mutexLock = NULL;
             return NULL;
         }
         pthread_mutexattr_init(_mutexAttr);
@@ -41,18 +43,18 @@
         pthread_mutex_lock(_mutexLock);
         pthread_mutex_t *_mutexLock2 = _mutexLock;
         _mutexLock = NULL;
+        if(_mutexAttr)
+        {
+            pthread_mutexattr_destroy(_mutexAttr);
+            free(_mutexAttr);
+            _mutexAttr = NULL;
+        }
         pthread_mutex_unlock(_mutexLock2);
         if(_mutexLock2)
         {
             pthread_mutex_destroy(_mutexLock2);
             free(_mutexLock2);
         }
-        _mutexLock = NULL;
-    }
-    if(_mutexAttr)
-    {
-        free(_mutexAttr);
-        _mutexAttr=NULL;
     }
 }
 

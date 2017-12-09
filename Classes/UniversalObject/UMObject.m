@@ -354,12 +354,16 @@ static FILE *alloc_log;
 - (void)runSelectorInBackground:(SEL)aSelector
                      withObject:(id)anArgument
 {
+#ifdef LINUX
+    [self performSelector:aSelector withObject:anArgument];
+#else
     UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
     ts.selector = aSelector;
     ts.obj      = anArgument;
     [NSThread detachNewThreadSelector:@selector(threadStarter:)
                              toTarget:self
                            withObject:ts];
+#endif
 }
 
 - (void)runSelectorInBackground:(SEL)aSelector

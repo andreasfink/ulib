@@ -355,7 +355,9 @@ static FILE *alloc_log;
                      withObject:(id)anArgument
 {
 #ifdef LINUX
-    [self performSelector:aSelector withObject:anArgument];
+    [NSThread detachNewThreadSelector:aSelector
+                             toTarget:self
+                           withObject:anArgument];
 #else
     UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
     ts.selector = aSelector;

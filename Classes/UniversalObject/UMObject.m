@@ -374,6 +374,12 @@ static FILE *alloc_log;
                            line:(long)lin
                        function:(const char *)fun
 {
+#ifdef LINUX
+    [NSThread detachNewThreadSelector:aSelector
+                             toTarget:self
+                           withObject:anArgument];
+#else
+
     UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
     ts.selector = aSelector;
     ts.obj      = anArgument;
@@ -384,6 +390,7 @@ static FILE *alloc_log;
     [NSThread detachNewThreadSelector:@selector(threadStarter:)
                              toTarget:self
                            withObject:ts];
+#endif
 }
 
 - (void)runSelectorInBackground:(SEL)aSelector

@@ -73,7 +73,6 @@
 #endif
     NSString            *advertizeName;
     NSString            *advertizeDomain;
-    id   __weak         _friend;
     UMMutex             *_controlLock;
     UMMutex             *_dataLock;
 }

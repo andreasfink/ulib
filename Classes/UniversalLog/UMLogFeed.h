@@ -52,7 +52,6 @@
 - (void) minorErrorText:(NSString *)txt;
 - (void) majorErrorText:(NSString *)txt;
 - (void) panicText:(NSString *)txt;
-
 - (void) infoUnlocked:(int)err withText:(NSString *)txt;
 
 @end

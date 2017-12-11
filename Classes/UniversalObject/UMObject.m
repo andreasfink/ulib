@@ -28,7 +28,6 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 #if __has_feature(objc_arc)
 
 #define USING_ARC   1
-
 #undef  RETAIN_RELEASE_DEBUG
 
 #endif
@@ -80,7 +79,6 @@ void umobject_disable_alloc_logging(void)
     r.inUse_count = _inUse_count;
     return r;
 }
-
 @end
 
 @interface UMObjectThreadStarter : NSObject

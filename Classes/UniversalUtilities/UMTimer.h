@@ -21,7 +21,7 @@
     NSString            *_name;
     BOOL                _repeats;
     
-    UMObject            *__weak _objectToCall;
+    UMObject            *_objectToCall;
     SEL                 _selectorToCall;
     id                  _parameter;
 }
@@ -35,7 +35,7 @@
 @property(readwrite,assign,atomic) BOOL                repeats;
 
 
-@property(readwrite,weak)   UMObject            *objectToCall;
+@property(readwrite,strong)                            UMObject *objectToCall;
 @property(readwrite,assign,atomic) SEL                 selectorToCall;
 @property(readwrite,strong,atomic) id                  parameter;
 

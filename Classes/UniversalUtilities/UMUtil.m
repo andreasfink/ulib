@@ -542,7 +542,7 @@ static const unsigned char base32map[256] =
 
 + (NSString *)getMacAddr: (char *)ifname
 {
-    struct ifaddrs   *ifaphead;
+    struct ifaddrs   *ifaphead = NULL;
     unsigned char *   if_mac = NULL;
     int               found = 0;
     struct ifaddrs   *ifap;
@@ -587,9 +587,14 @@ static const unsigned char base32map[256] =
 	}
 end:
     if(ifaphead)
+    {
         freeifaddrs(ifaphead);
+    }
     if(if_mac)
+    {
         free(if_mac);
+        if_mac = NULL;
+    }
 	 return s;
 }
 

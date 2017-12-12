@@ -48,9 +48,9 @@
         {
             NSLog(@"Warning: ThroughputCounter size is %ld kbytes! Probably very ineficcient",(long)cellSize/1024);
         }
-        cells = (uint32_t *)malloc(cellSize);
+        cells = (uint32_t *)malloc(cellSize+4);
         NSAssert(cells,([NSString stringWithFormat:@"Could not allocate %ld kbytes for Throughput counter", (long)cellSize/1024]));
-        memset(cells,0x00,cellSize);
+        memset(cells,0x00,cellSize+4);
         endTime   = [UMThroughputCounter microsecondTime];
         endIndex  = endTime/resolution;
     }
@@ -67,6 +67,7 @@
 - (void)dealloc
 {
     free(cells);
+    cells = NULL;
 }
 
 + (UMMicroSec) microsecondTime

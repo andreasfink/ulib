@@ -27,6 +27,12 @@
         free(preg);
     }
     preg=NULL;
+
+    if(str2)
+    {
+        free(str2);
+    }
+    str2=NULL;
 }
 
 
@@ -43,7 +49,16 @@
         preg = malloc(sizeof(regex_t));
         memset(preg,0x00,sizeof(regex_t));
         const char *str = [r cStringUsingEncoding:NSASCIIStringEncoding];
-        int rc = regcomp((regex_t *)preg,str,cflags);
+        if(str2)
+        {
+            free(str2);
+            str2=NULL;
+        }
+        size_t bufsize = strlen(str)+1;
+        str2 = malloc(bufsize);
+        memset(str2,0x00,bufsize);
+        strncpy (str2,str,bufsize);
+        int rc = regcomp((regex_t *)preg,str2,cflags);
         if(rc!=0)
         {
             char buffer[512];
@@ -69,12 +84,23 @@
     regmatch_t  *pmatch = malloc(msize);
     memset(pmatch,0x00,msize);
     const char *str = [string cStringUsingEncoding:NSISOLatin1StringEncoding];
-    int rc = regexec((regex_t *)preg, str,  nmatch, pmatch, eflags);
+    if(str2)
+    {
+        free(str2);
+        str2=NULL;
+    }
+    size_t bufsize = strlen(str)+1;
+    str2 = malloc(bufsize);
+    memset(str2,0x00,bufsize);
+    strncpy (str2,str,bufsize);
+
+    int rc = regexec((regex_t *)preg, str2,  nmatch, pmatch, eflags);
     if (rc != REG_NOMATCH && rc != 0)
     {
         char buffer[512];
         regerror(rc, (regex_t *)preg, buffer, sizeof(buffer));
         free(pmatch);
+        pmatch=NULL;
         @throw([NSException exceptionWithName:@"EXEC_REGEX"
                                        reason:
                 [NSString stringWithFormat:@"regex execution on `%s' failed: %s",str,buffer]
@@ -83,6 +109,7 @@
     if(rc==REG_NOMATCH)
     {
         free(pmatch);
+        pmatch=NULL;
         return NULL;
     }
     NSMutableArray *a = [[NSMutableArray alloc]init];
@@ -107,7 +134,11 @@
         m.matched = matched;
         [a addObject:m];
     }
-    free(pmatch);
+    if(pmatch)
+    {
+        free(pmatch);
+        pmatch=NULL;
+    }
     return a;
 }
 

@@ -17,6 +17,7 @@
 {
     NSString *rule;
     void *preg;
+    char *str2;
 }
 
 @property(readwrite,strong) NSString *rule;

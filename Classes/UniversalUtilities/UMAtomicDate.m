@@ -70,7 +70,7 @@
 - (void)touch
 {
     [_mutex lock];
-    _date = [NSDate date];
+    _date = [NSDate new];
     [_mutex unlock];
 }
 

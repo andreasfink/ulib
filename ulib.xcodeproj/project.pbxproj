@@ -2640,11 +2640,8 @@
 		A6019BAB1AC15C0D00854472 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
 		A6020FEA1D48773E00211137 /* UMRedisStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMRedisStatus.m; sourceTree = "<group>"; };
 		A60211881D488A2F00211137 /* ulibios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ulibios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A60211891D488A3000211137 /* ulib-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ulib-Info.plist"; path = "/Users/afink/development/git/ulib/ulib-Info.plist"; sourceTree = "<absolute>"; };
 		A602130E1D488A3D00211137 /* ulibtvos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ulibtvos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A602130F1D488A3D00211137 /* ulibios-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ulibios-Info.plist"; path = "/Users/afink/development/git/ulib/ulibios-Info.plist"; sourceTree = "<absolute>"; };
 		A60214941D488A5A00211137 /* ulibwatchos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ulibwatchos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A60214951D488A5A00211137 /* ulibtvos-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ulibtvos-Info.plist"; path = "/Users/afink/development/git/ulib/ulibtvos-Info.plist"; sourceTree = "<absolute>"; };
 		A602149F1D488D8200211137 /* aes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
 		A60214A01D488D8200211137 /* asn1_mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = asn1_mac.h; sourceTree = "<group>"; };
 		A60214A11D488D8200211137 /* asn1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = asn1.h; sourceTree = "<group>"; };
@@ -2754,7 +2751,6 @@
 		A637FF9E1DBEC33B000A6A21 /* ulib-macos-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ulib-macos-info.plist"; sourceTree = "<group>"; };
 		A637FFA01DBEC33B000A6A21 /* ulib-tvos-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ulib-tvos-info.plist"; sourceTree = "<group>"; };
 		A637FFA11DBEC33B000A6A21 /* ulib-watchos-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ulib-watchos-info.plist"; sourceTree = "<group>"; };
-		A637FFA41DBEE041000A6A21 /* README-LINUX.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "README-LINUX.md"; sourceTree = "<group>"; };
 		A638ECF8194F607300E09643 /* UMLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMLock.m; sourceTree = "<group>"; };
 		A63B00811D0050A500211137 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = libs/osx/openssl1.0.2h/lib/libcrypto.a; sourceTree = SOURCE_ROOT; };
 		A63B00821D0050A500211137 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = libs/osx/openssl1.0.2h/lib/libssl.a; sourceTree = SOURCE_ROOT; };
@@ -2776,6 +2772,10 @@
 		A6538C74189B9A8C00B25A07 /* UMAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMAssert.h; sourceTree = "<group>"; };
 		A65727451B1869AA00854472 /* UMSynchronizedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSynchronizedDictionary.h; sourceTree = "<group>"; };
 		A65727461B1869AA00854472 /* UMSynchronizedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSynchronizedDictionary.m; sourceTree = "<group>"; };
+		A6590ED61FDFCA11004C8A74 /* README-centos7.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-centos7.txt"; sourceTree = "<group>"; };
+		A6590ED71FDFCA12004C8A74 /* README-Debian9-stretch.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Debian9-stretch.txt"; sourceTree = "<group>"; };
+		A6590ED81FDFCA12004C8A74 /* README-Ubuntu-16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Ubuntu-16.txt"; sourceTree = "<group>"; };
+		A6590ED91FDFCA12004C8A74 /* README-LINUX.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-LINUX.txt"; sourceTree = "<group>"; };
 		A663A5001F2F16D000A3A0AA /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		A663A5011F2F16D000A3A0AA /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		A663A5071F2F18F600A3A0AA /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
@@ -3492,7 +3492,10 @@
 		A637FFA31DBEDFE7000A6A21 /* doc */ = {
 			isa = PBXGroup;
 			children = (
-				A637FFA41DBEE041000A6A21 /* README-LINUX.md */,
+				A6590ED61FDFCA11004C8A74 /* README-centos7.txt */,
+				A6590ED71FDFCA12004C8A74 /* README-Debian9-stretch.txt */,
+				A6590ED91FDFCA12004C8A74 /* README-LINUX.txt */,
+				A6590ED81FDFCA12004C8A74 /* README-Ubuntu-16.txt */,
 			);
 			path = doc;
 			sourceTree = "<group>";
@@ -3990,9 +3993,6 @@
 				A6D8AB05149A769B0029E9CF /* Products */,
 				A6DDD91D1635F83E002FA7CC /* SupportingFiles */,
 				A682E4071AA7CB4100854472 /* libs */,
-				A60211891D488A3000211137 /* ulib-Info.plist */,
-				A602130F1D488A3D00211137 /* ulibios-Info.plist */,
-				A60214951D488A5A00211137 /* ulibtvos-Info.plist */,
 				A637FFA31DBEDFE7000A6A21 /* doc */,
 				A60C4E251EF7FE59007C203A /* ulibios copy-Info.plist */,
 			);

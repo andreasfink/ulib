@@ -103,12 +103,12 @@
         }
         
         UMSocketError pollResult = [socket dataIsAvailable:receivePollTimeoutMs];
-        NSDate *now = [NSDate date];
+        NSDate *now = [NSDate new];
         if (pollResult == UMSocketError_no_data)
         {
             if(lastActivity==NULL)
             {
-                lastActivity = [NSDate date];
+                lastActivity = [NSDate new];
             }
             NSTimeInterval idleTime = [now timeIntervalSinceDate:lastActivity];
             if(idleTime > 30)

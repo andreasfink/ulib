@@ -215,9 +215,9 @@ comment out  around line 250 this annoying verbose fprintf line:
 
 16. For universalSS7 the following dependency is also needed
 
-	wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
-	tar -xvzf libiconv-1.14.tar.gz
-	cd libiconv-1.14
+	wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz
+	tar -xvzf libiconv-1.15.tar.gz
+	cd libiconv-1.15
 	./configure
 	make
 	make install

@@ -27,7 +27,7 @@ typedef enum UMHTTPConnectionRequestSection
 {
 	int				timeout;
 @private
-	__weak UMHTTPServer	*server;
+	UMHTTPServer	*server;
 	UMSocket		*socket;
     BOOL			_mustClose;
 	NSDate			*lastActivity;
@@ -36,7 +36,7 @@ typedef enum UMHTTPConnectionRequestSection
 	ssize_t			awaitingBytes;
 }
 
-@property (readonly,weak)		UMHTTPServer	*server;
+@property (readonly,strong)		UMHTTPServer	*server;
 @property (readonly,strong)		UMSocket		*socket;
 @property (readwrite,assign,atomic)	BOOL            mustClose;
 @property (readwrite,assign)	int				timeout;

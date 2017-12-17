@@ -72,10 +72,12 @@ Here is how to get such a installation up and running under Debian 9 (codename S
 
 
 
-3. Download the sourcecode of gnustep and libobjc2 and cmake
+3. Download the sourcecode of gnustep and dependencies
 
     mkdir gnustep
     cd gnustep
+    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz
+    git clone ttps://github.com/apple/swift-corelibs-libdispatch
     git clone https://github.com/gnustep/scripts
     git clone https://github.com/gnustep/make
     git clone https://github.com/gnustep/libobjc2
@@ -86,8 +88,24 @@ Here is how to get such a installation up and running under Debian 9 (codename S
     /scripts/install-dependencies
 	cd ..
 	
-	
-4. install gnustep-make
+
+4. Build dependencies
+    cd gnustep
+    tar -xvzf libiconv-1.15.tar.gz
+    cd libiconv-1.15
+    ./configure
+    make
+    make install
+    cd ../..
+
+    cd gnustep/swift-corelibs-libdispatch
+    ./autogen.sh
+    ./configure
+    make
+    make install
+    cd ../..
+
+5. install gnustep-make
 
     cd gnustep/make
     export CC=clang
@@ -96,7 +114,7 @@ Here is how to get such a installation up and running under Debian 9 (codename S
     ./configure --with-layout=fhs \
             --disable-importing-config-file \
             --enable-native-objc-exceptions \
-            -enable-objc-nonfragile-abi \
+            --enable-objc-nonfragile-abi \
             --enable-objc-arc \
             --with-library-combo=ng-gnu-gnu
      make install
@@ -104,25 +122,21 @@ Here is how to get such a installation up and running under Debian 9 (codename S
      cd ../..
      
 
-5. install libobjc2 runtime
+6. install libobjc2 runtime
 
-edit the file gnustep/libobjc2/associate.m and 
-comment out  around line 250 this annoying verbose fprintf line:
-
-       //fprintf(stderr, "Deallocating dtable %p\n", hiddenClass->dtable);
 
     cd gnustep/libobjc2
     mkdir Build
     cd Build
     cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
-//-DCMAKE_BUILD_TYPE=Debug
     make
     make install
     cd ../../..
     ldconfig
 
+(for debug version add -DCMAKE_BUILD_TYPE=Debug   to the cmake statement )
 
-6. install gnustep-base
+7. install gnustep-base
 
     cd gnustep/base
     ./configure CFLAGS="-DEXPOSE_classname_IVARS=1"
@@ -135,8 +149,7 @@ comment out  around line 250 this annoying verbose fprintf line:
 (for debug version use "make debug=yes" instead of "make")
 
 
-
-7. install gnustep-corebase
+8. install gnustep-corebase
 
     cd gnustep/corebase
     ./configure
@@ -146,7 +159,7 @@ comment out  around line 250 this annoying verbose fprintf line:
     cd ../..
 
 
-8. install gnustep-gui
+9.  If you want X11 GUI support in GnuStep install gnustep-gui
 
     cd gnustep/gui
     ./configure
@@ -155,7 +168,7 @@ comment out  around line 250 this annoying verbose fprintf line:
     ldconfig
     cd ../..
 
-9. install gnustep-back
+10. install gnustep-back
 
     cd gnustep/corebase
     ./configure
@@ -163,7 +176,7 @@ comment out  around line 250 this annoying verbose fprintf line:
     make install
     cd ../..
 
-12. ulib
+11. ulib
     git clone http://github.com/andreasfink/ulib
     cd ulib
     ./configure
@@ -172,56 +185,12 @@ comment out  around line 250 this annoying verbose fprintf line:
     ldconfig
     cd ..
 
-13. webserver sample application
+12. webserver sample application
     git clone http://github.com/andreasfink/webserver
     cd webserver
     ./configure
     make
     make install
     
-14. If you want X11 GUI support in GnuStep
-
-    apt-get install \
-        xorg \
-        libfreetype6 libfreetype6-dev \
-        libpango1.0-dev \
-        libcairo2-dev \
-        libxt-dev \
-        libcups2-dev
-
-14.  gnustep-gui
-
-    tar -xvzf gnustep-gui-0.25.0.tar.gz
-    cd gnustep-gui-0.25.0
-    ./configure \
-        CC=clang \
-        CXX=clang++ \
-        CFLAGS="-fblocks -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1" \
-        LD=gcc
-    make
-    make install
-    cd ..
 
 
-15. gnustep-back
-
-    tar -xvzf gnustep-back-0.25.0.tar.gz
-    cd gnustep-back-0.25.0
-    ./configure CC=clang CXX=clang++ CFLAGS="-fblocks \
-        -fobjc-runtime=gnustep -DEXPOSE_classname_IVARS=1" LD=gcc
-    make
-    make install
-    cd ..
-
-
-16. For universalSS7 the following dependency is also needed
-
-	wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz
-	tar -xvzf libiconv-1.15.tar.gz
-	cd libiconv-1.15
-	./configure
-	make
-	make install
-	cd ..
-	
-	

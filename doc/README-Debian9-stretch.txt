@@ -115,6 +115,7 @@ comment out  around line 250 this annoying verbose fprintf line:
     mkdir Build
     cd Build
     cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+//-DCMAKE_BUILD_TYPE=Debug
     make
     make install
     cd ../../..

@@ -163,7 +163,7 @@ static void flushpipe(int fd)
     UMMicroSec end_time = start_time + microseconds;
     UMMicroSec now = start_time;
 
-    NSAssert((microseconds > 10),@"sleeping for less than 10µs is kind of ridiculous");
+    NSAssert((microseconds > 10LL),@"sleeping for less than 10µs is kind of ridiculous");
 
     if(_debug)
     {

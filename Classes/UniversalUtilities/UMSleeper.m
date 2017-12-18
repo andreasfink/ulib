@@ -163,8 +163,11 @@ static void flushpipe(int fd)
     UMMicroSec end_time = start_time + microseconds;
     UMMicroSec now = start_time;
 
-    NSAssert((microseconds > 10LL),@"sleeping for less than 10µs is kind of ridiculous");
-
+    if(microseconds < 10LL)
+    {
+       @throw([NSException exceptionWithName:@"OUT_OF_BOUNDS" reason:@"sleeping for less than 10µs is kind of ridiculous" userInfo:NULL]);
+    }
+    
     if(_debug)
     {
         NSLog(@"Going to sleep for %0.3lf seconds or until woken up by signal mask 0x%04x",(double)microseconds / 1000000.0,sig);

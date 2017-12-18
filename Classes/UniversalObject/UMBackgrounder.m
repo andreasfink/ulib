@@ -66,7 +66,7 @@
             int i=0;
             while(i<= 10)
             {
-                int s = [control_sleeper sleep:1000000L wakeOn:UMSleeper_StartupCompletedSignal]; /* 1s */
+                int s = [control_sleeper sleep:1000000LL wakeOn:UMSleeper_StartupCompletedSignal]; /* 1s */
                 if(s==UMSleeper_StartupCompletedSignal)
                 {
                     return;

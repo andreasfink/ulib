@@ -139,30 +139,35 @@
         NSLog(@"%@: started up successfully",self.name);
     }
     [self backgroundInit];
+
+    BOOL doSleep = NO;
     while((self.runningStatus == UMBackgrounder_running) && (mustQuit==NO))
     {
-        /* waiting for work */
-        long long sleepTime = UMSLEEPER_DEFAULT_SLEEP_TIME;
-        if(enableLogging)
+        if(doSleep)
         {
-            sleepTime= UMSLEEPER_DEFAULT_SLEEP_TIME*100;
-        }
-        int signal = [workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ]; /* 100ms */
-        if(enableLogging)
-        {
-            NSLog(@"%@ woke up with signal %d",self.name,signal);
-        }
-        if(signal & UMSleeper_ShutdownOrderSignal)
-        {
+            /* lets sleep for a small while or until woken up due to work */
+            long long sleepTime = UMSLEEPER_DEFAULT_SLEEP_TIME;
             if(enableLogging)
             {
-                NSLog(@"%@: got shutdown order",self.name);
+                sleepTime= UMSLEEPER_DEFAULT_SLEEP_TIME*100;
             }
-            mustQuit = YES;
+            int signal = [workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ]; /* 100ms */
+            if(enableLogging)
+            {
+                NSLog(@"%@ woke up with signal %d",self.name,signal);
+            }
+            if(signal & UMSleeper_ShutdownOrderSignal)
+            {
+                if(enableLogging)
+                {
+                    NSLog(@"%@: got shutdown order",self.name);
+                }
+                mustQuit = YES;
+            }
         }
-        else
+        if(!mustQuit)
         {
-            int status = [self work];
+            int status = [self work]; /* > 0 means we had work processed */
             if(status < 0)
             {
                 if(enableLogging)
@@ -170,6 +175,14 @@
                     NSLog(@"%@: shutdown because work returns %d",self.name,status);
                 }
                 mustQuit = YES;
+            }
+            if(status>1)
+            {
+                doSleep=NO;
+            }
+            else
+            {
+                doSleep=YES;
             }
         }
     }

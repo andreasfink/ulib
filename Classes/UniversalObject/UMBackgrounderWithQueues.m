@@ -41,19 +41,24 @@
 - (int)work
 {
     int r = 0;
-    UMTask *task = [_multiQueue getFirst];
-    if(task)
+
+    @autoreleasepool
     {
-        if(enableLogging)
+        UMTask *task = [_multiQueue getFirst];
+        if(task)
         {
-            NSLog(@"%@: got task %@",self.name,task.name);
+            ulib_set_thread_name(task.name);
+            if(enableLogging)
+            {
+                NSLog(@"%@: got task %@",self.name,task.name);
+            }
+            _lastTask = task.name;
+            [_multiQueue startWork];
+            [task runOnBackgrounder:self];
+            [_multiQueue endWork];
+            ulib_set_thread_name([NSString stringWithFormat:@"%@ (idle)",self.name]);
+            r = 1;
         }
-        _lastTask = task.name;
-        [_multiQueue startWork];
-        [task runOnBackgrounder:self];
-        [_multiQueue endWork];
-        ulib_set_thread_name([NSString stringWithFormat:@"%@ (idle)",self.name]);
-        r = 1;
     }
     return r;
 }

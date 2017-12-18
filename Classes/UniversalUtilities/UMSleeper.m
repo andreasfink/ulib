@@ -149,14 +149,21 @@ static void flushpipe(int fd)
 }
 
 
-- (int) sleep:(UMMicroSec) microseconds wakeOn:(UMSleeper_Signal)sig;	/* returns signal value if signal was received, 0 on timer epxiry, -1 on error  */
+
+//#define SLICE_TIME   (2073600LL*1000LL*1000LL)/* 24 days is about the max which fits into a signed integer */
+#define SLICE_TIME (1000LL*1000LL*10LL*60LL)   /* max 10 minutes for testing */
+
+- (int) sleep:(UMMicroSec) microseconds
+       wakeOn:(UMSleeper_Signal)sig;	/* returns signal value if signal was received, 0 on timer epxiry, -1 on error  */
 {
     struct pollfd pollfd[2];
     int pollresult;
     int wait_time;
-    long long start_time = [UMThroughputCounter microsecondTime];
-    long long end_time = start_time + microseconds;
-    long long now;
+    UMMicroSec start_time = [UMThroughputCounter microsecondTime];
+    UMMicroSec end_time = start_time + microseconds;
+    UMMicroSec now = start_time;
+
+    NSAssert((microseconds > 10),@"sleeping for less than 10µs is kind of ridiculous");
 
     if(_debug)
     {
@@ -183,50 +190,27 @@ static void flushpipe(int fd)
     while(pollresult == 0)
     {
         now = [UMThroughputCounter microsecondTime];
-        if(now > end_time)
+        UMMicroSec remaining = end_time - now;
+        if(remaining <= 0) /* end time reached */
         {
             return pollresult;
         }
-        if (microseconds < 0)
-        {
 
-            memset(&pollfd,0x00,sizeof(pollfd));
-            pollfd[0].fd = self.rxpipe;
-            pollfd[0].events = events;
-            pollfd[0].revents = 0;
-            pollresult = poll(pollfd, 1, (int)POLL_NOTIMEOUT);
+        if(remaining <= SLICE_TIME)
+        {
+            wait_time = (int)(remaining/1000); /* poll wants miliseconds */
         }
         else
         {
-            long long remaining = microseconds;
-            
-            //#define SLICE_TIME   (2073600LL*1000LL*1000LL)/* 24 days is about the max which fits into a signed integer */
-    #define SLICE_TIME (1000LL*1000LL*10LL*60LL)   /* max 10 minutes for testing */
-            while((remaining > 0) && (pollresult == 0))
-            {
-                if(remaining < SLICE_TIME)
-                {
-                    wait_time = (int)remaining/1000; /* poll wants miliseconds */
-                    memset(&pollfd,0x00,sizeof(pollfd));
-                    pollfd[0].fd = self.rxpipe;
-                    pollfd[0].events = events;
-                    pollfd[0].revents = 0;
-                    
-                    pollresult = poll(&pollfd[0], 1, wait_time);
-                    remaining = 0LL;
-                }
-                else
-                {
-                    remaining = remaining - SLICE_TIME;
-                    wait_time = (int)SLICE_TIME / 1000000;
-                    memset(&pollfd,0x00,sizeof(pollfd));
-                    pollfd[0].fd = self.rxpipe;
-                    pollfd[0].events = events;
-                    pollfd[0].revents = 0;
-                    pollresult = poll(&pollfd[0], 1, wait_time);
-                }
-            }
+            remaining = remaining - SLICE_TIME;
         }
+
+        memset(&pollfd,0x00,sizeof(pollfd));
+        pollfd[0].fd = self.rxpipe;
+        pollfd[0].events = events;
+        pollfd[0].revents = 0;
+        pollresult = poll(&pollfd[0], 1, wait_time);
+        remaining = remaining - wait_time;
         if(pollresult > 0)
         {
             /* something to read */

@@ -31,7 +31,6 @@
 #endif
 
 typedef unsigned long (*CRYPTO_CALLBACK_PTR)(void);
-static void crypto_threadid_callback(CRYPTO_THREADID *ctid);
 
 #define SCTP_IN_KERNEL  1
 
@@ -85,13 +84,9 @@ typedef struct CRYPTO_dynlock_value
     void *ummutex_ptr;
 } CRYPTO_dynlock_value;
 
-static CRYPTO_dynlock_value *dyn_create_function(const char *file, int line);
-static void dyn_lock_function(int mode, struct CRYPTO_dynlock_value *l, const char *file, int line);
-static void dyn_destroy_function(struct CRYPTO_dynlock_value *l, const char *file, int line);
 struct usocket;
 typedef void *ummutex_c_pointer;
 static ummutex_c_pointer *ssl_static_locks;
-static void openssl_locking_function(int mode, int n, const char *file, int line);
 
 #ifdef SCTP_IN_USERSPACE
 
@@ -2897,7 +2892,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         global_generic_ssl_context = SSL_CTX_new(TLSv1_2_method());
         global_server_ssl_context = SSL_CTX_new(TLSv1_2_server_method());
         global_client_ssl_context = SSL_CTX_new(TLSv1_2_client_method()) ;
-#endif
+#else
         global_generic_ssl_context = SSL_CTX_new(TLS_method());
         global_server_ssl_context = SSL_CTX_new(TLS_server_method());
         global_client_ssl_context = SSL_CTX_new(TLS_client_method());
@@ -2934,63 +2929,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
             UMMutex *lck = [[UMMutex alloc]init];
             ssl_static_locks[c] = (__bridge_retained ummutex_c_pointer)lck;
         }
-        CRYPTO_set_locking_callback(openssl_locking_function);
-        CRYPTO_THREADID_set_callback(crypto_threadid_callback);
-        CRYPTO_set_dynlock_create_callback(dyn_create_function);
-        CRYPTO_set_dynlock_lock_callback(dyn_lock_function);
-        CRYPTO_set_dynlock_destroy_callback(dyn_destroy_function);
     }
 }
 
 @end
-
-
-static void crypto_threadid_callback(CRYPTO_THREADID *ctid)
-{
-    void *p = (void *)pthread_self();
-    CRYPTO_THREADID_set_pointer(ctid, p);
-}
-
-static void openssl_locking_function(int mode, int n, const char *file, int line)
-{
-    UMMutex *lck = (__bridge UMMutex *)ssl_static_locks[n-1];
-    if (mode & CRYPTO_LOCK)
-    {
-        [lck lock];
-    }
-    else
-    {
-        [lck unlock];
-    }
-}
-
-static CRYPTO_dynlock_value *dyn_create_function(const char *file, int line)
-{
-    UMMutex *lck = [[UMMutex alloc]init];
-    
-    return (__bridge_retained void *)lck;
-}
-
-static void dyn_lock_function(int mode, struct CRYPTO_dynlock_value *l, const char *file, int line)
-{
-    UMMutex *lck =  (__bridge UMMutex *)l->ummutex_ptr;
-    
-    if(mode & CRYPTO_LOCK)
-    {
-        [lck lock];
-    }
-    if(mode & CRYPTO_UNLOCK)
-    {
-        [lck unlock];
-    }
-}
-
-
-static void dyn_destroy_function(struct CRYPTO_dynlock_value *l, const char *file, int line)
-{
-    UMMutex *lck =  (__bridge_transfer UMMutex *)l->ummutex_ptr;
-#pragma unused(lck)
-    l->ummutex_ptr = NULL;
-
-    lck = NULL;
-}

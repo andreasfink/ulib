@@ -13,7 +13,9 @@
 #import "UMLogFeed.h"
 #import "UMHTTPRequest.h"
 #include <sys/types.h>
-#include <netinet/in.h> 
+#include <netinet/in.h>
+#include <unistd.h>
+
 #ifdef SENTEST
 #import "UMConfig.h"
 #endif
@@ -218,7 +220,7 @@
             {
                 break;
             }
-            sleep(1);
+            usleep(1000000);
             counter += 1;
         }
 		if(!sErr)

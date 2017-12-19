@@ -389,7 +389,8 @@ static int SSL_smart_shutdown(SSL *ssl)
     self = [super init];
     if (self)
     {
-        char reuse = 1;
+        int reuse = 1;
+        int linger_time = 5;
         int eno = 0;
         rx_crypto_enable = 0;
         tx_crypto_enable = 0;
@@ -531,10 +532,20 @@ static int SSL_smart_shutdown(SSL *ssl)
         receiveBuffer = [[NSMutableData alloc] init];
         if(reuse)
         {
-            if(setsockopt(_sock, SOL_SOCKET, SO_REUSEADDR, (char *) &reuse,sizeof(reuse)) == -1)
+            /* see https://stackoverflow.com/questions/14388706/socket-options-so-reuseaddr-and-so-reuseport-how-do-they-differ-do-they-mean-t#14388707 */
+
+            if(setsockopt(_sock, SOL_SOCKET, SO_REUSEADDR, &reuse,sizeof(reuse)) < 0)
             {
                 eno = errno;
-                fprintf(stderr,"[UMSocket: init] setsockopt(SO_REUSEADDR) sets errno to %d",eno);
+                fprintf(stderr,"[UMSocket: init] setsockopt(SO_REUSEADDR) sets errno to %d (%s)",eno,strerror(eno));
+            }
+        }
+        if(linger_time)
+        {
+            if(setsockopt(_sock, SOL_SOCKET, SO_LINGER,  &linger_time,sizeof(linger_time)) < 0)
+            {
+                eno = errno;
+                fprintf(stderr,"[UMSocket: init] setsockopt(SO_LINGER,%d) sets errno to %d (%s)",linger_time,eno,strerror(eno));
             }
         }
     }

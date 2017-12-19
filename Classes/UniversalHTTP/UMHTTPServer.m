@@ -198,9 +198,29 @@
         ulib_set_thread_name(@"[UMHTTPServer mainListener]");
         /* performSelector will handle pool by itself */
 		UMSocketError		sErr = 0, ret;
-        
-		listenerRunning = YES;
-		sErr  = [listenerSocket bind];
+
+
+        /*
+
+         if an application is restarted, the port might come back with
+         address is already in use as the kernel has not yet deallocated it
+         from the old process. if thats the case, we will retry
+         every second up to a minute
+
+        */
+
+        listenerRunning = YES;
+        int counter = 0;
+        while(counter < 60)
+        {
+            sErr  = [listenerSocket bind];
+            if(sErr != UMSocketError_address_already_in_use)
+            {
+                break;
+            }
+            sleep(1);
+            counter += 1;
+        }
 		if(!sErr)
         {
 			sErr  = [listenerSocket listen];

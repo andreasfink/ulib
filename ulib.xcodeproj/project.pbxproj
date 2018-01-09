@@ -33718,7 +33718,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0f-binary/usr/local/lib",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -33760,7 +33760,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0f-binary/usr/local/lib",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

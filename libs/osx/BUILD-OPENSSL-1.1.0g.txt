@@ -1,10 +1,10 @@
-# You should build openssl 1.1.0f under MacOS X as following
+# You should build openssl 1.1.0g under MacOS X as following
 
 1. unpack the tar apply, the patch and change the directory
 
-tar -xvzf openssl-1.1.0f.tar.gz
-patch openssl-1.1.0f/crypto/bio/bss_dgram.c < openssl-1.1.0f.diff
-cd openssl-1.1.0f
+tar -xvzf openssl-1.1.0g.tar.gz
+patch openssl-1.1.0g/crypto/bio/bss_dgram.c < openssl-1.1.0g.diff
+cd openssl-1.1.0g
 
 
 2. Configure and build openssl with SCTP support
@@ -14,7 +14,8 @@ cd openssl-1.1.0f
 
 3. install it into the binary directory
 
-make DESTDIR=../openssl-1.1.0f-binary  install
+make DESTDIR=../openssl-1.1.0g-binary  install
 
 
 
+openssl-1.1.0g-binary/usr/local/include/

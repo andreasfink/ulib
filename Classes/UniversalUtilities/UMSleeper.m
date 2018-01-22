@@ -161,7 +161,7 @@ static void flushpipe(int fd)
     int wait_time;
     UMMicroSec start_time = [UMThroughputCounter microsecondTime];
     UMMicroSec end_time = start_time + microseconds;
-    UMMicroSec now = start_time;
+    UMMicroSec now;
 
     if(microseconds < 10LL)
     {
@@ -205,6 +205,7 @@ static void flushpipe(int fd)
         }
         else
         {
+            wait_time = (int)SLICE_TIME / 1000000;
             remaining = remaining - SLICE_TIME;
         }
 
@@ -213,7 +214,6 @@ static void flushpipe(int fd)
         pollfd[0].events = events;
         pollfd[0].revents = 0;
         pollresult = poll(&pollfd[0], 1, wait_time);
-        remaining = remaining - wait_time;
         if(pollresult > 0)
         {
             /* something to read */

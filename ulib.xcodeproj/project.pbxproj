@@ -20754,10 +20754,7 @@
 				INSTALL_PATH = /Library/Frameworks;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-<<<<<<< HEAD
 					"$(inherited)",
-=======
->>>>>>> master
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
 					"$(inherited)",
 				);

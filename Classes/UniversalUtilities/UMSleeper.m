@@ -206,7 +206,6 @@ static void flushpipe(int fd)
         else
         {
             wait_time = (int)SLICE_TIME / 1000;
-            remaining = remaining - SLICE_TIME;
         }
 
         memset(&pollfd,0x00,sizeof(pollfd));

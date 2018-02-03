@@ -77,7 +77,7 @@ Here is how to get such a installation up and running under Debian 9 (codename S
     mkdir gnustep
     cd gnustep
     wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz
-    git clone ttps://github.com/apple/swift-corelibs-libdispatch
+    git clone https://github.com/apple/swift-corelibs-libdispatch
     git clone https://github.com/gnustep/scripts
     git clone https://github.com/gnustep/make
     git clone https://github.com/gnustep/libobjc2
@@ -94,14 +94,14 @@ Here is how to get such a installation up and running under Debian 9 (codename S
     tar -xvzf libiconv-1.15.tar.gz
     cd libiconv-1.15
     ./configure
-    make
+    make CFLAGS=-g
     make install
     cd ../..
 
     cd gnustep/swift-corelibs-libdispatch
     ./autogen.sh
     ./configure
-    make
+    make CFLAGS=-g
     make install
     cd ../..
 
@@ -128,7 +128,7 @@ Here is how to get such a installation up and running under Debian 9 (codename S
     cd gnustep/libobjc2
     mkdir Build
     cd Build
-    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
     make
     make install
     cd ../../..
@@ -139,7 +139,7 @@ Here is how to get such a installation up and running under Debian 9 (codename S
 7. install gnustep-base
 
     cd gnustep/base
-    ./configure CFLAGS="-DEXPOSE_classname_IVARS=1"
+    ./configure CFLAGS="-DEXPOSE_classname_IVARS=1 -g"
 
     make -j8
     make install

@@ -20,6 +20,7 @@
 - (void)setDate:(NSDate *)d;
 - (NSTimeInterval)timeIntervalSinceDate:(NSDate *)since;
 - (NSTimeInterval)timeIntervalSinceNow;
+- (NSTimeInterval)age;
 - (void)touch;
 - (UMAtomicDate *)copyWithZone:(NSZone *)zone;
 

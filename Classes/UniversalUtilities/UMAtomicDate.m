@@ -57,6 +57,16 @@
     return r;
 }
 
+- (NSTimeInterval)age
+{
+    NSTimeInterval r;
+
+    [_mutex lock];
+    r = [_date timeIntervalSinceNow];
+    [_mutex unlock];
+    return -r;
+}
+
 - (NSTimeInterval)timeIntervalSinceNow
 {
     NSTimeInterval r;

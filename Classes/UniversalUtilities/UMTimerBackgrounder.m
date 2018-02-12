@@ -28,7 +28,7 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
 
 - (UMTimerBackgrounder *)init
 {
-    self = [super initWithName:@"UMTimerBackgrounder"workSleeper:NULL];
+    self = [super initWithName:@"UMTimerBackgrounder" workSleeper:NULL];
     if(self)
     {
         timers = [[NSMutableArray alloc] init];

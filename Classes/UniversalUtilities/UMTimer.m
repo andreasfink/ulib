@@ -65,6 +65,14 @@
 }
 
 
+- (void)startIfNotRunning
+{
+    if(self.isRunning==NO)
+    {
+        [self start];
+    }
+}
+
 - (void)start
 {
     self.isRunning = YES;

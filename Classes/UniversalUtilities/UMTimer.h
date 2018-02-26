@@ -61,6 +61,7 @@
 - (UMMicroSec)timeLeft:(UMMicroSec)now;
 
 - (void)start;
+- (void)startIfNotRunning;
 - (void)stop;
 - (void)fire;
 

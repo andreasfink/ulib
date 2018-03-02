@@ -11,6 +11,7 @@
 
 @class UMHTTPClientRequest;
 
+
 @interface UMHTTPClient : UMObject
 {
     UMSynchronizedArray *pendingOutgoingRequests;

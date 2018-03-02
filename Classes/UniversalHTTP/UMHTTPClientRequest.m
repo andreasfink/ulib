@@ -15,7 +15,6 @@
 @synthesize urlString;
 @synthesize url;
 @synthesize client;
-@synthesize delegate;
 @synthesize urlCon;
 
 - (UMHTTPClientRequest *)initWithURLString:(NSString *)urls
@@ -43,4 +42,30 @@
     }
     return self;
 }
+
+- (void)connection:(NSURLConnection *)connection
+didReceiveResponse:(NSURLResponse *)response
+{
+    NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
+    _responseStatusCode = res.statusCode;
+}
+
+- (void)connection:(NSURLConnection *)connection
+    didReceiveData:(NSData *)response
+{
+    if(_responseData == NULL)
+    {
+        _responseData = [response mutableCopy];
+    }
+    else
+    {
+        [_responseData appendData:response];
+    }
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    [_delegate urlLoadCompletedForReference:_reference data:_responseData status:_responseStatusCode];
+}
+
 @end

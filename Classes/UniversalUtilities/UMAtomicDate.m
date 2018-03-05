@@ -21,7 +21,7 @@
     if(self)
     {
         _date = d;
-        _mutex = [[UMMutex alloc]init];
+        _mutex = [[UMMutex alloc]initWithName:@"atomic-date-mutex"];
     }
     return self;
 }

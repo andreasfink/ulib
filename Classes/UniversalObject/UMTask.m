@@ -22,7 +22,7 @@
     if(self)
     {
         self.name = n;
-        _runMutex = [[UMMutex alloc]init];
+        _runMutex = [[UMMutex alloc]initWithName:@"umtask-lock"];
     }
     return self;
 }

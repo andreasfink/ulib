@@ -372,8 +372,8 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
         _sock = -1;
         cryptoStream = [[UMCrypto alloc] init];
-        _controlLock = [[UMMutex alloc]init];
-        _dataLock = [[UMMutex alloc]init];
+        _controlLock = [[UMMutex alloc]initWithName:@"socket-control-lock"];
+        _dataLock = [[UMMutex alloc]initWithName:@"socket-data-lock"];
     }
     return self;
 }
@@ -390,8 +390,8 @@ static int SSL_smart_shutdown(SSL *ssl)
         rx_crypto_enable = 0;
         tx_crypto_enable = 0;
         cryptoStream = [[UMCrypto alloc] init];
-        _controlLock = [[UMMutex alloc]init];
-        _dataLock = [[UMMutex alloc]init];
+        _controlLock = [[UMMutex alloc]initWithName:@"socket-control-lock"];
+        _dataLock = [[UMMutex alloc]initWithName:@"socket-data-lock"];
 
         type = t;
         _sock = -1;
@@ -2926,7 +2926,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         ssl_static_locks = (ummutex_c_pointer *)malloc(sizeof(ummutex_c_pointer) * maxlocks);
         for (int c = 0; c < maxlocks; c++)
         {
-            UMMutex *lck = [[UMMutex alloc]init];
+            UMMutex *lck = [[UMMutex alloc]initWithName: [NSString stringWithFormat:@"ssl_static_locks[%d]",c]];
             ssl_static_locks[c] = (__bridge_retained ummutex_c_pointer)lck;
         }
     }

@@ -23,9 +23,16 @@
     if(self)
     {
         underlyingDictionary = [[NSMutableDictionary alloc] init];
-        mutex = [[UMMutex alloc]init];
+        mutex = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
     }
     return self;
+}
+
+- (void)flush
+{
+    [mutex lock];
+    underlyingDictionary = [[NSMutableDictionary alloc] init];
+    [mutex unlock];
 }
 
 - (UMSynchronizedDictionary *)initWithDictionary:(NSDictionary *)sd
@@ -34,7 +41,7 @@
     if(self)
     {
         underlyingDictionary = [sd mutableCopy];
-        mutex = [[UMMutex alloc]init];
+        mutex = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
     }
     return self;
 }

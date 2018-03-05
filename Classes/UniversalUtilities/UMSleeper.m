@@ -50,7 +50,7 @@ static void socket_set_blocking(int fd, int blocking)
         ifile = file;
         iline = line;
         ifunction = function;
-        _prepareLock = [[UMMutex alloc]init];
+        _prepareLock = [[UMMutex alloc]initWithName:@"sleeper-mutex"];
     }
     return self;
 }

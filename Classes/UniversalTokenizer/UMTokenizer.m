@@ -21,7 +21,7 @@
         _comment     = [NSCharacterSet characterSetWithCharactersInString:@"!#"];
         _endOfLine   = [NSCharacterSet characterSetWithCharactersInString:@"\r\n"];
         _digits      = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-        _lock = [[UMMutex alloc]init];
+        _lock = [[UMMutex alloc]initWithName:@"tokenizer-lock"];
         [self reset];
     }
     return self;

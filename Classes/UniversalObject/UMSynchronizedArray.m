@@ -18,7 +18,7 @@
     if(self)
     {
         _array = [[NSMutableArray alloc]init];
-        _mutex = [[UMMutex alloc]init];
+        _mutex = [[UMMutex alloc]initWithName:@"synchronized-array"];
     }
     return self;
 }

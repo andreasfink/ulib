@@ -38,5 +38,5 @@
 - (UMSynchronizedDictionary *)copyWithZone:(NSZone *)zone;
 - (void) lock;
 - (void) unlock;
-
+- (void) flush;
 @end

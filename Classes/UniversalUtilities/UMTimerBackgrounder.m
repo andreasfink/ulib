@@ -32,7 +32,7 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
     if(self)
     {
         timers = [[NSMutableArray alloc] init];
-        _timersLock =[[UMMutex alloc]init];
+        _timersLock =[[UMMutex alloc]initWithName:@"timers-lock"];
     }
     return self;
 }
@@ -148,6 +148,5 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
         [control_sleeper wakeUp:UMSleeper_ShutdownCompletedSignal];
     }
 }
-
 
 @end

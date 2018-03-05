@@ -24,7 +24,7 @@
     {
         entries = [[NSMutableArray alloc] init];
         max = maxlines;
-        _lock =[[UMMutex alloc]init];
+        _lock =[[UMMutex alloc]initWithName:@"history-lock"];
         //count = 0;
     }
     return self;

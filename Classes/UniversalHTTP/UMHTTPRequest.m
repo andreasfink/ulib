@@ -580,7 +580,7 @@
 {
     self.awaitingCompletion = YES;
     self.completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
-    _pendingRequestLock = [[UMMutex alloc]init];
+    _pendingRequestLock = [[UMMutex alloc]initWithName:@"pending-request-lock"];
 }
 
 - (void)makeAsyncWithTimeout:(NSTimeInterval)timeoutInSeconds delegate:(id<UMHTTPRequest_TimeoutProtocol>)callback
@@ -588,7 +588,7 @@
     self.timeoutDelegate = callback;
     self.awaitingCompletion = YES;
     self.completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
-    _pendingRequestLock = [[UMMutex alloc]init];
+    _pendingRequestLock = [[UMMutex alloc]initWithName:@"pending-request-lock"];
 }
 
 - (void)resumePendingRequest

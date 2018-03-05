@@ -16,7 +16,7 @@
     if(self)
     {
         _counter = value;
-        _mutex = [[UMMutex alloc]init];
+        _mutex = [[UMMutex alloc]initWithName:@"atomic-counter-mutex"];
     }
     return self;
 }

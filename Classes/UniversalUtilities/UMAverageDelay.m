@@ -26,7 +26,7 @@
         }
         size = s;
         counters = [[NSMutableArray alloc]init];
-        _mutex = [[UMMutex alloc]init];
+        _mutex = [[UMMutex alloc]initWithName:@"average-delay-mutex"];
     }
     return self;
 }

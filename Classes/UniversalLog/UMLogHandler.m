@@ -25,7 +25,7 @@
     {
         logDestinations = [[NSMutableArray alloc] init];
         lock = [[NSLock alloc]init];
-        _logDestinationsLock = [[UMMutex alloc]init];
+        _logDestinationsLock = [[UMMutex alloc]initWithName:@"log-destinations-lock"];
     }	return self;
 }
 

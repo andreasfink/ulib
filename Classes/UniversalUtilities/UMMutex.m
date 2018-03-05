@@ -37,7 +37,6 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
     self = [super init];
     if(self)
     {
-        _name = name;
         _mutexLock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
         if(_mutexLock == NULL)
         {
@@ -54,6 +53,34 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
         pthread_mutexattr_init(_mutexAttr);
         pthread_mutexattr_settype(_mutexAttr, PTHREAD_MUTEX_RECURSIVE);
         pthread_mutex_init(_mutexLock, _mutexAttr);
+        
+        if(global_ummutex_stat)
+        {
+            pthread_mutex_lock(global_ummutex_stat_mutex);
+            UMMutexStat *stat = global_ummutex_stat[name];
+            if(stat!=NULL)
+            {
+                int i=2;
+                NSString *name2 = [NSString stringWithFormat:@"%@_%d",name,i];
+                while(global_ummutex_stat[name2]==NULL)
+                {
+                    i++;
+                    name2 = [NSString stringWithFormat:@"%@_%d",name,i];
+                }
+                stat = [[UMMutexStat alloc]init];
+                stat.name = name2;
+                global_ummutex_stat[_name] = stat;
+                _name = name2;
+            }
+            else
+            {
+                stat = [[UMMutexStat alloc]init];
+                stat.name = name;
+                global_ummutex_stat[_name] = stat;
+                _name = name;
+            }
+            pthread_mutex_unlock(global_ummutex_stat_mutex);
+        }
     }
     return self;
 }

@@ -68,4 +68,19 @@ didReceiveResponse:(NSURLResponse *)response
     [_delegate urlLoadCompletedForReference:_reference data:_responseData status:_responseStatusCode];
 }
 
+- (void)start
+{
+    
+#ifdef LINUX
+    urlCon = [[NSURLConnection alloc]initWithRequest:theRequest
+                                            delegate:self];
+#else
+    /* note: this triggers a depreciated waring under recent MacOS X versions.
+     However we have to stick to this as Gnustep doesnt know NSURLSession yet */
+    
+    urlCon = [[NSURLConnection alloc]initWithRequest:theRequest
+                                            delegate:self
+                                    startImmediately:YES];
+#endif
+}
 @end

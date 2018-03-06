@@ -42,4 +42,6 @@
                                 withChache:(BOOL)cache
                                    timeout:(NSTimeInterval) timeout;
 
+- (void)start;
+
 @end

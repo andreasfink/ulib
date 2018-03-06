@@ -25,18 +25,7 @@
 {
     [self addPendingSession:creq];
     creq.client = self;
-
-#ifdef LINUX
-    creq.urlCon = [[NSURLConnection alloc]initWithRequest:creq.theRequest
-                                  delegate:creq];
-#else
-/* note: this triggers a depreciated waring under recent MacOS X versions.
- However we have to stick to this as Gnustep doesnt know NSURLSession yet */
-    
-    creq.urlCon = [[NSURLConnection alloc]initWithRequest:creq.theRequest
-                                  delegate:creq
-                          startImmediately:YES];
-#endif
+    [creq performSelectorOnMainThread:@selector(start) withObject:NULL waitUntilDone:NO];
 }
 
 - (NSString *)simpleSynchronousRequest:(UMHTTPClientRequest *)req

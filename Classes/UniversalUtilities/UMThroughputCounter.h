@@ -55,5 +55,6 @@
 - (NSString *) getSpeedString5m;
 - (NSString *) getSpeedString20m;
 - (NSString *) getSpeedStringTriple;
+- (NSDictionary *) getSpeedTripleJson;
 
 @end

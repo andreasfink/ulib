@@ -78,9 +78,13 @@ didReceiveResponse:(NSURLResponse *)response
     /* note: this triggers a depreciated waring under recent MacOS X versions.
      However we have to stick to this as Gnustep doesnt know NSURLSession yet */
     
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     urlCon = [[NSURLConnection alloc]initWithRequest:theRequest
                                             delegate:self
                                     startImmediately:YES];
+#pragma clang diagnostic pop
+
 #endif
 }
 @end

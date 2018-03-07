@@ -25,7 +25,7 @@
     {
         logDestinations = [[NSMutableArray alloc] init];
         lock = [[NSLock alloc]init];
-        _logDestinationsLock = [[UMMutex alloc]initWithName:@"log-destinations-lock"];
+        _logDestinationsLock = [[UMMutex alloc]initWithName:@"loghandler-destinations"];
     }	return self;
 }
 
@@ -37,7 +37,7 @@
         logDestinations = [[NSMutableArray alloc] init];
         lock = [[NSLock alloc]init];
         console = [[UMLogConsole alloc] init];
-        _logDestinationsLock = [[UMMutex alloc]init];
+        _logDestinationsLock = [[UMMutex alloc]initWithName:@"loghandler-destinations"];
         [self addLogDestination:console];
     }
 	return self;

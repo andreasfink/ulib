@@ -10,6 +10,8 @@
 #import "UMThroughputCounter.h"
 #import "UMTimerBackgrounder.h"
 #import "UMBackgrounder.h"
+#import "UMMutex.h"
+
 #include <time.h>
 @implementation UMTimer
 
@@ -59,7 +61,7 @@
         _parameter = object;
         _name = n;
         _repeats = r;
-        _timerMutex = [UMMutex alloc]initWithName:[NSString stringWithFormat:@"timer %@",n];
+        _timerMutex = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"timer %@",n]];
 
     }
     return self;
@@ -94,10 +96,15 @@
 - (void) stop
 {
     [_timerMutex lock];
+    [self unlockedStop];
+    [_timerMutex unlock];
+}
+
+- (void) unlockedStop
+{
     self.isRunning = NO;
     self.expiryTime = 0;
     [[UMTimerBackgrounder sharedInstance]removeTimer:self];
-    [_timerMutex unlock];
 }
 
 - (BOOL)isExpired
@@ -125,7 +132,7 @@
 - (void)fire
 {
     /* we issue the callback */
-    if(self.repeats)
+    if(_repeats)
     {
         [self start];
     }
@@ -133,7 +140,17 @@
     {
         [self stop];
     }
-    [self.objectToCall runSelectorInBackground:self.selectorToCall withObject:self.parameter];
+    if(_runCallbackInForeground)
+    {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [_objectToCall performSelector:_selectorToCall withObject:_parameter];
+#pragma clang diagnostic pop
+    }
+    else
+    {
+        [_objectToCall runSelectorInBackground:_selectorToCall withObject:_parameter];
+    }
 }
 
 @end

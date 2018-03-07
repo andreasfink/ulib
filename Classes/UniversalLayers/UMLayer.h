@@ -42,6 +42,7 @@
 
 
 - (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq;
+- (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq name:(NSString *)name;
 
 @property(readwrite,strong) NSString    *layerName;
 @property(readwrite,strong) NSString    *layerType;

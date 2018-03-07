@@ -37,7 +37,7 @@
         locationFile = file;
         locationLine = line;
         locationFunction = func;
-        _lock = [[UMMutex alloc] init];
+        _lock = [[UMMutex alloc] initWithName:@"file-tracking-info"];
     }
     return self;
 }

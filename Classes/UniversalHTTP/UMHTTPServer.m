@@ -79,7 +79,7 @@
     {	
         getPostDict = [[NSMutableDictionary alloc]init];
         httpOperationsQueue = [NSOperationQueue mainQueue]; // [[NSOperationQueue alloc] init];
-        listenerSocket = [[UMSocket alloc] initWithType:type];
+        listenerSocket = [[UMSocket alloc] initWithType:type name:@"listener"];
         [listenerSocket setLocalPort:port];
         sleeper		= [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
         [sleeper prepare];

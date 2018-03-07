@@ -37,7 +37,7 @@
 
 - (void)open
 {
-    _sock = [[UMSocket alloc]initWithType:UMSOCKET_TYPE_UDP];
+    _sock = [[UMSocket alloc]initWithType:UMSOCKET_TYPE_UDP name:@"syslog-client"];
     _sock.remoteHost = [[UMHost alloc]initWithName:_destinationHost];
     _sock.requestedRemotePort = _udpPort;
     [_sock connect];

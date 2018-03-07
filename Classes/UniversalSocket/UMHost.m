@@ -53,8 +53,8 @@
         NSString	*n;
         
         addresses = [[NSMutableArray alloc] init];
-        lock = [[UMMutex alloc] init];
-        
+        lock = [[UMMutex alloc] initWithName:@"umhost"];
+
         isResolved = 0;
         
         if (getifaddrs (&ifptr) < 0)
@@ -137,7 +137,7 @@
     if (self)
     {
         addresses = [[NSMutableArray alloc] init];
-        lock = [[UMMutex alloc] init];
+        lock = [[UMMutex alloc] initWithName:@"umhost"];
         isLocalHost = 0;
         isResolving = 0;
         isResolved = 0;
@@ -162,7 +162,7 @@
     if (self)
     {
         self.addresses = [NSMutableArray arrayWithObjects:n,nil];
-        lock = [[UMMutex alloc] init];
+        lock = [[UMMutex alloc] initWithName:@"umhost"];
         isLocalHost = 0;
         isResolving = 0;
         isResolved = 1;

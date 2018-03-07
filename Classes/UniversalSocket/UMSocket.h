@@ -64,6 +64,7 @@
     NSData              *serverSideKeyData;
     BOOL                _isInPollCall;
     void                *ssl;
+    NSString            *_socketName;
 
 @private
     int                 ip_version;
@@ -77,7 +78,9 @@
     UMMutex             *_dataLock;
 }
 
-@property(readwrite,strong)		UMHost				*localHost;
+
+@property(readwrite,strong)        NSString *socketName;
+@property(readwrite,strong)        UMHost                *localHost;
 @property(readwrite,strong)		UMHost				*remoteHost;
 @property(readwrite,strong)		NSString			*connectedLocalAddress;
 @property(readwrite,strong)		NSString			*connectedRemoteAddress;
@@ -118,6 +121,9 @@
 @property(readonly) void *ssl;
 
 
+- (UMSocket *) initWithName:(NSString *)name;
+- (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name;
+- (UMSocket *) initWithType:(UMSocketType)t;
 
 
 //+ (void) initSSL;
@@ -126,7 +132,6 @@
 + (NSString *) socketTypeDescription:(UMSocketType)t;
 - (NSString *) description;
 - (NSString *) fullDescription;
-- (UMSocket *) initWithType:(UMSocketType)type;
 - (void) doInitReceiveBuffer;
 - (void) deleteFromReceiveBuffer:(NSUInteger)bytes;
 - (void) setRemoteHost: (UMHost *) host;

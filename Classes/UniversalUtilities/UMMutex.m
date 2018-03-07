@@ -63,7 +63,7 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
             {
                 int i=2;
                 NSString *name2 = [NSString stringWithFormat:@"%@_%d",name,i];
-                while(global_ummutex_stat[name2]==NULL)
+                while(global_ummutex_stat[name2]!=NULL)
                 {
                     i++;
                     name2 = [NSString stringWithFormat:@"%@_%d",name,i];
@@ -105,6 +105,13 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
             pthread_mutex_destroy(_mutexLock2);
             free(_mutexLock2);
         }
+    }
+    
+    if(global_ummutex_stat)
+    {
+        pthread_mutex_lock(global_ummutex_stat_mutex);
+        [global_ummutex_stat removeObjectForKey:_name];
+        pthread_mutex_unlock(global_ummutex_stat_mutex);
     }
 }
 
@@ -172,7 +179,6 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
         if(stat==NULL)
         {
             stat = [[UMMutexStat alloc]init];
-            stat.trylock_count++;
             stat.name = _name;
             global_ummutex_stat[_name] = stat;
         }
@@ -185,10 +191,18 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
         {
             _lockDepth++;
         }
-        if((r==0) && (global_ummutex_stat))
+        if(global_ummutex_stat)
         {
             pthread_mutex_lock(global_ummutex_stat_mutex);
-            stat.currently_locked = YES;
+            if(r==0)
+            {
+                stat.currently_locked = YES;
+                stat.lock_count++;
+            }
+            else
+            {
+                stat.trylock_count++;
+            }
             pthread_mutex_unlock(global_ummutex_stat_mutex);
         }
         return r;

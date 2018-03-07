@@ -365,21 +365,32 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
 }
 
+
 - (UMSocket *) init
+{
+    return [self initWithName:@"unnamed"];
+}
+
+- (UMSocket *) initWithName:(NSString *)name
 {
     self = [super init];
     if(self)
     {
+        _socketName = name;
         _sock = -1;
         cryptoStream = [[UMCrypto alloc] init];
-        _controlLock = [[UMMutex alloc]initWithName:@"socket-control-lock"];
-        _dataLock = [[UMMutex alloc]initWithName:@"socket-data-lock"];
+        _controlLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"socket-control-lock (%@)",_socketName]];
+        _dataLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"socket-data-lock (%@)",_socketName]];
     }
     return self;
 }
 
-
 - (UMSocket *) initWithType:(UMSocketType)t
+{
+    return [self initWithType:t name:@""];
+}
+
+- (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name
 {
     self = [super init];
     if (self)
@@ -389,9 +400,10 @@ static int SSL_smart_shutdown(SSL *ssl)
         int eno = 0;
         rx_crypto_enable = 0;
         tx_crypto_enable = 0;
+        _socketName = name;
         cryptoStream = [[UMCrypto alloc] init];
-        _controlLock = [[UMMutex alloc]initWithName:@"socket-control-lock"];
-        _dataLock = [[UMMutex alloc]initWithName:@"socket-data-lock"];
+        _controlLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"socket-control-lock (%@)",_socketName]];
+        _dataLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"socket-data-lock (%@)",_socketName]];
 
         type = t;
         _sock = -1;
@@ -926,8 +938,8 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocket *) copyWithZone:(NSZone *)zone
 {
-    UMSocket *newsock = [[UMSocket alloc]init];
-
+    
+    UMSocket *newsock = [[UMSocket alloc]initWithName:[NSString stringWithFormat:@"%@ copy",_socketName]];
     newsock.type = type;
     newsock.direction =  direction;
     newsock.status=status;

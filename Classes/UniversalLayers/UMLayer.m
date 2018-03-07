@@ -116,11 +116,19 @@
     return [self initWithTaskQueueMulti:NULL];
 }
 
+
+
 - (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq
+{
+    return [self initWithTaskQueueMulti:tq name:@""];
+}
+
+- (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq name:(NSString *)name
 {
     self = [super init];
     if(self)
     {
+        layerName = name;
         if(tq == NULL)
         {
             UMTaskQueueMulti *tq =[[UMTaskQueueMulti alloc]initWithNumberOfThreads:4

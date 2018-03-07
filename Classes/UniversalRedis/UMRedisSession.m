@@ -31,7 +31,7 @@
     self = [super init];
     if(self)
     {
-        socket = [[UMSocket alloc] initWithType:UMSOCKET_TYPE_TCP4ONLY];
+        socket = [[UMSocket alloc] initWithType:UMSOCKET_TYPE_TCP4ONLY name:@"redis-session"];
         if (!socket)
         {
             NSString *msg = [NSString stringWithFormat:@"[UMRedisSession initWithSocket]  Couldn't connect to server).\r\n"];
@@ -57,7 +57,7 @@
 
 - (BOOL)reinitWithHost
 {
-    socket = [[UMSocket alloc] initWithType:UMSOCKET_TYPE_TCP4ONLY];
+    socket = [[UMSocket alloc] initWithType:UMSOCKET_TYPE_TCP4ONLY name:@"redis-session"];
     if (!socket)
     {
         NSString *msg = [NSString stringWithFormat:@"[UMRedisSession initWithSocket]  Couldn't connect to server).\r\n"];

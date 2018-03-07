@@ -8,7 +8,7 @@
 
 #import "UMObject.h"
 #import "UMMicroSec.h"
-
+@class UMMutex;
 /* all timers are in microseconds since Jan. 1, 1970 */
 
 @interface UMTimer : UMObject
@@ -24,7 +24,8 @@
     UMObject            *_objectToCall;
     SEL                 _selectorToCall;
     id                  _parameter;
-    UMMutex             _timerMutex;
+    UMMutex             *_timerMutex;
+    BOOL                _runCallbackInForeground;
 }
 
 @property(readwrite,assign,atomic) BOOL                isRunning;
@@ -34,6 +35,7 @@
 @property(readwrite,assign,atomic) UMMicroSec          duration;
 @property(readwrite,strong,atomic) NSString            *name;
 @property(readwrite,assign,atomic) BOOL                repeats;
+@property(readwrite,assign,atomic) BOOL                runCallbackInForeground;
 
 
 @property(readwrite,strong)                            UMObject *objectToCall;

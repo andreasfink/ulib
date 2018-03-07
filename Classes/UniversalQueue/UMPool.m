@@ -17,7 +17,7 @@
     {
         for(int i=0;i<UMPOOL_QUEUES_COUNT;i++)
         {
-            _lock[i] = [[UMMutex alloc] init];
+            _lock[i] = [[UMMutex alloc] initWithName:@"umpool"];
             _queues[i] = [[NSMutableArray alloc]init];
             _rotary = 0;
         }

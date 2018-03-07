@@ -18,7 +18,7 @@
     {
         return YES;
     }
-    if(enable.length == NULL)
+    if(enable.length == 0)
     {
         return YES;
     }

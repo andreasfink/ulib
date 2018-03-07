@@ -23,7 +23,7 @@
     self=[super init];
     if(self)
     {
-        _lock = [[UMMutex alloc] init];
+        _lock = [[UMMutex alloc] initWithName:@"umqueue-multi"];
         queue = NULL;
         queues = [[NSMutableArray alloc]init];
         _currentlyInQueue = 0;

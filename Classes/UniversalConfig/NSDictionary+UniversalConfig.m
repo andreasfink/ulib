@@ -13,7 +13,12 @@
 
 - (BOOL)configEnabledWithYesDefault
 {
-    if(self[@"enable"] == NULL)
+    NSString *enable = self[@"enable"];
+    if(enable == NULL)
+    {
+        return YES;
+    }
+    if(enable.length == NULL)
     {
         return YES;
     }

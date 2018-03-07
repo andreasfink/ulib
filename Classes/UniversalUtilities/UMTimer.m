@@ -23,7 +23,6 @@
                         repeats:NO];
 }
 
-
 - (UMTimer *)initWithTarget:(id)target
                    selector:(SEL)selector
                      object:(id)object
@@ -60,6 +59,8 @@
         _parameter = object;
         _name = n;
         _repeats = r;
+        _timerMutex = [UMMutex alloc]initWithName:[NSString stringWithFormat:@"timer %@",n];
+
     }
     return self;
 }
@@ -67,13 +68,22 @@
 
 - (void)startIfNotRunning
 {
+    [_timerMutex lock];
     if(self.isRunning==NO)
     {
-        [self start];
+        [self unlockedStart];
     }
+    [_timerMutex unlock];
 }
 
 - (void)start
+{
+    [_timerMutex lock];
+    [self unlockedStart];
+    [_timerMutex unlock];
+}
+
+- (void)unlockedStart
 {
     self.isRunning = YES;
     UMMicroSec now  = [UMThroughputCounter microsecondTime];
@@ -83,9 +93,11 @@
 
 - (void) stop
 {
+    [_timerMutex lock];
     self.isRunning = NO;
     self.expiryTime = 0;
     [[UMTimerBackgrounder sharedInstance]removeTimer:self];
+    [_timerMutex unlock];
 }
 
 - (BOOL)isExpired

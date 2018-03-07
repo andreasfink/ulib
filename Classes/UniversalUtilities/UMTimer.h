@@ -24,6 +24,7 @@
     UMObject            *_objectToCall;
     SEL                 _selectorToCall;
     id                  _parameter;
+    UMMutex             _timerMutex;
 }
 
 @property(readwrite,assign,atomic) BOOL                isRunning;

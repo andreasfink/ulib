@@ -1925,6 +1925,18 @@
 		A6827B2D16AD217D0035FEEC /* UMJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6827B0A16AD217D0035FEEC /* UMJsonTokeniser.m */; };
 		A6827B3016AD217D0035FEEC /* UMJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = A6827B0C16AD217D0035FEEC /* UMJsonUTF8Stream.m */; };
 		A6827B3316AD217D0035FEEC /* UMJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A6827B0E16AD217D0035FEEC /* UMJsonWriter.m */; };
+		A684A6752052856F005D52A9 /* UMCommandLine.h in Headers */ = {isa = PBXBuildFile; fileRef = A684A6732052856F005D52A9 /* UMCommandLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A684A6762052856F005D52A9 /* UMCommandLine.h in Headers */ = {isa = PBXBuildFile; fileRef = A684A6732052856F005D52A9 /* UMCommandLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A684A6772052856F005D52A9 /* UMCommandLine.h in Headers */ = {isa = PBXBuildFile; fileRef = A684A6732052856F005D52A9 /* UMCommandLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A684A6782052856F005D52A9 /* UMCommandLine.h in Headers */ = {isa = PBXBuildFile; fileRef = A684A6732052856F005D52A9 /* UMCommandLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A684A6792052856F005D52A9 /* UMCommandLine.h in Headers */ = {isa = PBXBuildFile; fileRef = A684A6732052856F005D52A9 /* UMCommandLine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A684A67A2052856F005D52A9 /* UMCommandLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A684A6742052856F005D52A9 /* UMCommandLine.m */; };
+		A684A67B2052856F005D52A9 /* UMCommandLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A684A6742052856F005D52A9 /* UMCommandLine.m */; };
+		A684A67C2052856F005D52A9 /* UMCommandLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A684A6742052856F005D52A9 /* UMCommandLine.m */; };
+		A684A67D2052856F005D52A9 /* UMCommandLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A684A6742052856F005D52A9 /* UMCommandLine.m */; };
+		A684A67E2052856F005D52A9 /* UMCommandLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A684A6742052856F005D52A9 /* UMCommandLine.m */; };
+		A684A67F2052856F005D52A9 /* UMCommandLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A684A6742052856F005D52A9 /* UMCommandLine.m */; };
+		A684A6802052856F005D52A9 /* UMCommandLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A684A6742052856F005D52A9 /* UMCommandLine.m */; };
 		A684B4271AB8FF4500854472 /* UMQueueNull.h in Headers */ = {isa = PBXBuildFile; fileRef = A684B4241AB8FF4500854472 /* UMQueueNull.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A684B42B1AB8FF4500854472 /* UMQueueNull.m in Sources */ = {isa = PBXBuildFile; fileRef = A684B4251AB8FF4500854472 /* UMQueueNull.m */; };
 		A684B42C1AB8FF4500854472 /* UMQueueNull.m in Sources */ = {isa = PBXBuildFile; fileRef = A684B4251AB8FF4500854472 /* UMQueueNull.m */; };
@@ -2817,6 +2829,8 @@
 		A6827B0A16AD217D0035FEEC /* UMJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMJsonTokeniser.m; sourceTree = "<group>"; };
 		A6827B0C16AD217D0035FEEC /* UMJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMJsonUTF8Stream.m; sourceTree = "<group>"; };
 		A6827B0E16AD217D0035FEEC /* UMJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMJsonWriter.m; sourceTree = "<group>"; };
+		A684A6732052856F005D52A9 /* UMCommandLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMCommandLine.h; sourceTree = "<group>"; };
+		A684A6742052856F005D52A9 /* UMCommandLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMCommandLine.m; sourceTree = "<group>"; };
 		A684B4241AB8FF4500854472 /* UMQueueNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMQueueNull.h; sourceTree = "<group>"; };
 		A684B4251AB8FF4500854472 /* UMQueueNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMQueueNull.m; sourceTree = "<group>"; };
 		A68C00001FE90C5400A02B91 /* RAND_bytes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RAND_bytes.html; sourceTree = "<group>"; };
@@ -17400,6 +17414,8 @@
 				A63F22B11FB72DEB0048B329 /* UMAtomicDate.m */,
 				A618E7981FC58860001106C3 /* UMThreadHelpers.h */,
 				A618E7991FC58860001106C3 /* UMThreadHelpers.m */,
+				A684A6732052856F005D52A9 /* UMCommandLine.h */,
+				A684A6742052856F005D52A9 /* UMCommandLine.m */,
 			);
 			path = UniversalUtilities;
 			sourceTree = "<group>";
@@ -17733,6 +17749,7 @@
 				A60211391D488A2F00211137 /* des_old.h in Headers */,
 				A602113A1D488A2F00211137 /* ssl3.h in Headers */,
 				A602113B1D488A2F00211137 /* ocsp.h in Headers */,
+				A684A6762052856F005D52A9 /* UMCommandLine.h in Headers */,
 				A602113C1D488A2F00211137 /* UMQueue.h in Headers */,
 				A602113D1D488A2F00211137 /* NSDictionary+UMHTTP.h in Headers */,
 				A602113E1D488A2F00211137 /* ulib_config.h in Headers */,
@@ -18035,6 +18052,7 @@
 				A60212BF1D488A3D00211137 /* des_old.h in Headers */,
 				A60212C01D488A3D00211137 /* ssl3.h in Headers */,
 				A60212C11D488A3D00211137 /* ocsp.h in Headers */,
+				A684A6772052856F005D52A9 /* UMCommandLine.h in Headers */,
 				A60212C21D488A3D00211137 /* UMQueue.h in Headers */,
 				A60212C31D488A3D00211137 /* NSDictionary+UMHTTP.h in Headers */,
 				A60212C41D488A3D00211137 /* ulib_config.h in Headers */,
@@ -18337,6 +18355,7 @@
 				A60214451D488A5900211137 /* des_old.h in Headers */,
 				A60214461D488A5900211137 /* ssl3.h in Headers */,
 				A60214471D488A5900211137 /* ocsp.h in Headers */,
+				A684A6782052856F005D52A9 /* UMCommandLine.h in Headers */,
 				A60214481D488A5900211137 /* UMQueue.h in Headers */,
 				A60214491D488A5900211137 /* NSDictionary+UMHTTP.h in Headers */,
 				A602144A1D488A5900211137 /* ulib_config.h in Headers */,
@@ -18619,6 +18638,7 @@
 				A60C4DA11EF7FE59007C203A /* UMSyntaxToken_Name.h in Headers */,
 				A60C4DA21EF7FE59007C203A /* rc2.h in Headers */,
 				A68C09541FE90C7700A02B91 /* opensslv.h in Headers */,
+				A684A6752052856F005D52A9 /* UMCommandLine.h in Headers */,
 				A60C4DA31EF7FE59007C203A /* des.h in Headers */,
 				A60C4DA41EF7FE59007C203A /* UMSyntaxContext.h in Headers */,
 				A60C4DA51EF7FE59007C203A /* UMBackgrounderWithQueue.h in Headers */,
@@ -18817,6 +18837,7 @@
 				A6CC4B871A3F24E50090FC94 /* NSData+UMSocket.h in Headers */,
 				A60C2DA61A3F213F0090FC94 /* UMHTTPURLHandler.h in Headers */,
 				A6020FB71D4876E500211137 /* UMBackgrounderWithQueues.h in Headers */,
+				A684A6792052856F005D52A9 /* UMCommandLine.h in Headers */,
 				A60C2DC41A3F21450090FC94 /* UMLayerUserProtocol.h in Headers */,
 				A6BEA7191EF950D4007C203A /* UMHTTPClientRequest.h in Headers */,
 				A60C2DDE1A3F214E0090FC94 /* UMLogHandler.h in Headers */,
@@ -19372,6 +19393,7 @@
 				A60210141D488A2F00211137 /* UMBackgrounderWithQueues.m in Sources */,
 				A60210151D488A2F00211137 /* UMLogFeed.m in Sources */,
 				A60210161D488A2F00211137 /* UMLogFile.m in Sources */,
+				A684A67B2052856F005D52A9 /* UMCommandLine.m in Sources */,
 				A60210171D488A2F00211137 /* UMLogHandler.m in Sources */,
 				A63F22A61FB7272F0048B329 /* UMMutex.m in Sources */,
 				A6BEA6ED1EF95025007C203A /* NSDictionary+UniversalConfig.m in Sources */,
@@ -19506,6 +19528,7 @@
 				A602119A1D488A3D00211137 /* UMBackgrounderWithQueues.m in Sources */,
 				A602119B1D488A3D00211137 /* UMLogFeed.m in Sources */,
 				A602119C1D488A3D00211137 /* UMLogFile.m in Sources */,
+				A684A67C2052856F005D52A9 /* UMCommandLine.m in Sources */,
 				A602119D1D488A3D00211137 /* UMLogHandler.m in Sources */,
 				A63F22A71FB727300048B329 /* UMMutex.m in Sources */,
 				A6BEA6EE1EF95026007C203A /* NSDictionary+UniversalConfig.m in Sources */,
@@ -19640,6 +19663,7 @@
 				A60213201D488A5900211137 /* UMBackgrounderWithQueues.m in Sources */,
 				A60213211D488A5900211137 /* UMLogFeed.m in Sources */,
 				A60213221D488A5900211137 /* UMLogFile.m in Sources */,
+				A684A67D2052856F005D52A9 /* UMCommandLine.m in Sources */,
 				A60213231D488A5900211137 /* UMLogHandler.m in Sources */,
 				A63F22A81FB727310048B329 /* UMMutex.m in Sources */,
 				A6BEA6EF1EF95027007C203A /* NSDictionary+UniversalConfig.m in Sources */,
@@ -19774,6 +19798,7 @@
 				A6BEA7001EF950A3007C203A /* UMHTTPSServer.m in Sources */,
 				A60C4CA41EF7FE59007C203A /* UMLogEntry.m in Sources */,
 				A60C4CA51EF7FE59007C203A /* UMBackgrounderWithQueues.m in Sources */,
+				A684A67A2052856F005D52A9 /* UMCommandLine.m in Sources */,
 				A60C4CA61EF7FE59007C203A /* UMLogFeed.m in Sources */,
 				A60C4CA71EF7FE59007C203A /* UMLogFile.m in Sources */,
 				A60C4CA81EF7FE59007C203A /* UMLogHandler.m in Sources */,
@@ -19908,6 +19933,7 @@
 				A62A7E3418AAD6AD00EA8A2A /* UMHTTPPageCache.m in Sources */,
 				A60C2D971A3F213F0090FC94 /* NSMutableData+UMHTTP.m in Sources */,
 				A6BEA7111EF950CC007C203A /* UMHTTPClient.m in Sources */,
+				A684A67E2052856F005D52A9 /* UMCommandLine.m in Sources */,
 				A6B37B321FC830B500794057 /* UMMutex.m in Sources */,
 				A6020FCF1D4876E500211137 /* NSDate+stringFunctions.m in Sources */,
 				A67D3DF01AFA01D10090FC94 /* NSArray+UMJson.m in Sources */,
@@ -20049,6 +20075,7 @@
 				A6AC4AFD1D460B6D002BAA97 /* UMFileTracker.m in Sources */,
 				A6AC49F61D460AEE002BAA97 /* UMHTTPRequest.m in Sources */,
 				A6B37B471FC830ED00794057 /* UMPool.m in Sources */,
+				A684A67F2052856F005D52A9 /* UMCommandLine.m in Sources */,
 				A6AC4A1E1D460B01002BAA97 /* UMLayerTask.m in Sources */,
 				A6B37B441FC830D300794057 /* UMThreadHelpers.m in Sources */,
 				A6AC498F1D460A8D002BAA97 /* ulib.m in Sources */,
@@ -20180,6 +20207,7 @@
 				A6AC4B391D460B6E002BAA97 /* UMFileTracker.m in Sources */,
 				A6AC4A101D460AEF002BAA97 /* UMHTTPRequest.m in Sources */,
 				A6B37B481FC830ED00794057 /* UMPool.m in Sources */,
+				A684A6802052856F005D52A9 /* UMCommandLine.m in Sources */,
 				A6AC4A221D460B02002BAA97 /* UMLayerTask.m in Sources */,
 				A6B37B451FC830D300794057 /* UMThreadHelpers.m in Sources */,
 				A6AC49911D460A8F002BAA97 /* ulib.m in Sources */,

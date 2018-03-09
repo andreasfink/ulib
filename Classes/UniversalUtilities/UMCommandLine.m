@@ -11,9 +11,25 @@
 @implementation UMCommandLine
 
 
-- (UMCommandLine *)initWithArgs:(NSArray *)args
-           commandLineDefintion:(NSArray *)cld
-                  appDefinition:(NSDictionary *)appDefinition
+- (UMCommandLine *)initWithCommandLineDefintion:(NSArray *)cld
+                                  appDefinition:(NSDictionary *)appDefinition
+                                           argc:(int)argc
+                                           argv:(const char *[])argv
+{
+    NSMutableArray *args = [[NSMutableArray alloc]init];
+    for(int i=0;i<argc;i++)
+    {
+        [args addObject:@(argv[i])];
+    }
+    return [self initWithCommandLineDefintion:cld
+                                appDefinition:appDefinition
+                                         args:args];
+    return self;
+}
+
+- (UMCommandLine *)initWithCommandLineDefintion:(NSArray *)cld
+                                  appDefinition:(NSDictionary *)appDefinition
+                                           args:(NSArray *)args
 {
     self = [super init];
     if(self)
@@ -190,13 +206,27 @@
 {
     NSUInteger m = _commandLineDefinition.count;
     NSMutableString *help = [[NSMutableString alloc]init];
+    NSString *paramDef = _appDefinition[@"param-definition"];
+    NSString *exe = _appDefinition[@"executable"];
+    if(paramDef==NULL)
+    {
+        paramDef=@"";
+    }
+    [help appendFormat:@"Usage: %@ {options}  %@\n",exe,paramDef];
+    [help appendFormat:@"\nValid options are:\n"];
     for(NSUInteger j=0;j<m;j++)
     {
         NSDictionary *def = _commandLineDefinition[j];
         NSString *arg = @"";
+        NSString *arg_multi = NULL;
         if(def[@"argument"])
         {
-            arg = [NSString stringWithFormat:@" {%@}",def[@"argument"]];
+            if([def[@"multi"] boolValue])
+            {
+                arg_multi = [NSString stringWithFormat:@"=[%@,...]",def[@"argument"]];
+                arg = [NSString stringWithFormat:@" [%@]",def[@"argument"]];
+            }
+            arg = [NSString stringWithFormat:@" [%@]",def[@"argument"]];
         }
         if(def[@"short"])
         {
@@ -205,6 +235,14 @@
         if(def[@"long"])
         {
             [help appendFormat:@"%@%@\n",def[@"long"],arg];
+        }
+        if(arg_multi)
+        {
+            [help appendFormat:@"%@%@\n",def[@"long"],arg_multi];
+        }
+        else if (arg.length >0)
+        {
+            [help appendFormat:@"%@=[%@]\n",def[@"long"],def[@"argument"]];
         }
         if(def[@"help"])
         {

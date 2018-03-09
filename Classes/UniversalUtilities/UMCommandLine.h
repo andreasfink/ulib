@@ -9,7 +9,8 @@
 /*
  
 UMCommandLine is a helper object for a command line parsing
-
+It can be used independently of ulib if needed.
+ 
  Here is an example on how to use it:
  
  int main(int argc, const char *argv[])
@@ -20,6 +21,8 @@ UMCommandLine is a helper object for a command line parsing
         @"version" : @"1.0",
         @"executable" : @"myutil",
         @"run-as" : @(argv[0]),
+        @"copyright" : @"(c) 2018 bla bla",
+        @"param-definition" : @"{input-file}",
     };
 
     // we define a dictionary specifying what option flags and options are allowed
@@ -29,9 +32,21 @@ UMCommandLine is a helper object for a command line parsing
     //   short: optional short version -x
     //   long: optional long version --xxxxx
     //   help: mandatory   description of the help output
-    //   argument: optional   naming of the argument. If present, the flag requires an optional parameter
+    //   argument: optional   naming of the argument. If present, the flag
+    //   requires an optional parameter
     //
-    // parameters can be called like -x argument or --xxxxx argument or  --xxxx=argument
+    // options with parameters can be called like this
+    //     -x argument
+    //     --xlong argument
+    //     --xlong=argument
+    // if multipe items:
+    //     -x argument1 -x argument2
+    //     --xlong argument1 --xlong argument2
+    //     --xlong=argument1 --xlong=argument2
+    //     --xlong=argument1,argument2
+    //
+    // note: --xlong argument1,argument2  would result in a single
+    // argument with value "argument1,argument2"
  
     NSArray *commandLineDefinition = @[
                                    @{
@@ -52,30 +67,37 @@ UMCommandLine is a helper object for a command line parsing
                                        @"long" : @"--help",
                                        @"help"  : @"shows the help screen",
                                      }];
-      // convert C command line into array
-      NSMutableArray *args = [[NSMutableArray alloc]init];
-      for(int i=0;i<argc;i++)
-      {
-          [args addObject:@(argv[i])];
-      }
-      UMCommandLine *myCommandLine = [[UMCommandLine alloc]initWithArgs:args
-                                                   commandLineDefintion:commandLineDefinition
-                                                          appDefinition:appDefinition];
-      [myCommandLine handleStandardArguments]; // takes care --help and --version 
+                                   @{
+                                       @"name"  : @"debug",
+                                       @"short" : @"-h",
+                                       @"long" : @"--help",
+                                       @"argument" : @"debug-option",
+                                       @"multi" : @(YES),
+                                       @"help"  : @"shows the help screen",
+                                   }];     // initialize the command line object
+     UMCommandLine *cmd = [[UMCommandLine alloc]initWithCommandLineDefintion:commandLineDefinition
+                                                               appDefinition:appDefinition
+                                                                        argc:argc
+                                                                        argv:argv];
+ 
+      // takes care --help and --version
+      [cmd handleStandardArguments];
 
       ...
-      at this point the myCommandLine.params will contain a dictionary of all options (the key is the name from the definiton.
-      for parameters with arguments the value is an array of the passed arguments.
-      for parameters without arguments, the value is a NSValue representing the number of times the parameter appeared
-      for example if you pass -vvvv you would have @{ "verbose" : 4 }
-      mainArguments would contain all parameters you pass without options.
+      at this point the cmd.params will contain a dictionary of all options
+      (the key is the name from the definiton).
+      for options with arguments the value is an array of the passed arguments.
+      for options without arguments, the value is a NSValue representing the
+      number of times the parameter appeared for example if you pass -vvvv
+      you would have @{ "verbose" : 4 }
+      cmd.mainArguments would contain all parameters you pass without options.
       if you pass -- then all following strings are considered mainArugments.
  */
 
 
-#import <ulib/ulib.h>
+#import <Foundation/Foundation.h>
 
-@interface UMCommandLine : UMObject
+@interface UMCommandLine : NSObject
 {
     NSArray *_commandLineDefinition; /* an array of dictionary defining what parameters are allowed etc */
     NSArray *_commandLineArguments; /* as passed from main */
@@ -84,9 +106,15 @@ UMCommandLine is a helper object for a command line parsing
     NSDictionary *_appDefinition;
 }
 
-- (UMCommandLine *)initWithArgs:(NSArray *)args
-           commandLineDefintion:(NSArray *)cld
-                  appDefinition:(NSDictionary *)appDefinition;
+
+- (UMCommandLine *)initWithCommandLineDefintion:(NSArray *)cld
+                                  appDefinition:(NSDictionary *)appDefinition
+                                           argc:(int)arc
+                                           argv:(const char *[])arv;
+
+- (UMCommandLine *)initWithCommandLineDefintion:(NSArray *)cld
+                                  appDefinition:(NSDictionary *)appDefinition
+                                           args:(NSArray *)args;
 - (NSDictionary *)params;
 - (NSArray *)mainArguments;
 - (void)printHelp;

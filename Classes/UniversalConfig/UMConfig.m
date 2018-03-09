@@ -320,7 +320,8 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
                 NSString *reason = [NSString stringWithFormat:
                                     @"UMConfig: read: Don't know how to parse group '%@:%ld': \"%@\"",
                                     item.filename,item.lineNumber,item.content];
-                @throw([NSException exceptionWithName:@"config" reason:reason userInfo:@{@"backtrace": UMBacktrace(NULL,0) }]);
+                NSLog(@"%@",reason);
+                //@throw([NSException exceptionWithName:@"config" reason:reason userInfo:@{@"backtrace": UMBacktrace(NULL,0) }]);
             }
         }
         [currentGroup setObject:part2 forKey:part1];

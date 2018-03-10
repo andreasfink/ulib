@@ -249,15 +249,20 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
         NSString *line = [item.content stringByTrimmingCharactersInSet:whitespace];
         if([line length]<1)
         {
+            //currentGroup = NULL;
+            continue;
+        }
+        if([line isEqualToString:@"end-group"])
+        {
             currentGroup = NULL;
             continue;
         }
+
         if('#' == [line characterAtIndex:0])
         {
-            /* a comment line we can skip */
             continue;
         }
-
+        
         NSRange r = [line rangeOfString:@"="];
         if(r.length==0)
         {
@@ -276,6 +281,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
         part2 = [part2 stringByTrimmingCharactersInSet:quotes];
         if([part1 isEqualToString:@"group"])
         {
+            /*
             if(currentGroup != NULL)
             {
                 NSString *reason = [NSString stringWithFormat:
@@ -283,7 +289,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
                                     item.filename,item.lineNumber,item.content];
                 @throw([NSException exceptionWithName:@"config" reason:reason userInfo:@{@"backtrace": UMBacktrace(NULL,0) }]);
             }
-        
+             */
             /* SINGLE ENTRY */
             if([allowedSingleGroupNames objectForKey:part2])
             {
@@ -321,10 +327,31 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
                                     @"UMConfig: read: Don't know how to parse group '%@:%ld': \"%@\"",
                                     item.filename,item.lineNumber,item.content];
                 NSLog(@"%@",reason);
+                currentGroup = NULL;
                 //@throw([NSException exceptionWithName:@"config" reason:reason userInfo:@{@"backtrace": UMBacktrace(NULL,0) }]);
             }
         }
-        [currentGroup setObject:part2 forKey:part1];
+        if(currentGroup[part1]) /* we already have a line like this, we make an array out of it, if its not already an array */
+        {
+            id o = currentGroup[part1];
+
+            NSMutableArray *a;
+            if([o isKindOfClass:[NSString class]])
+            {
+                a = [[NSMutableArray alloc]init];
+                [a addObject:o];
+            }
+            else if([o isKindOfClass:[NSMutableArray class]])
+            {
+                a = o;
+            }
+            [a addObject:part2];
+            currentGroup[part1] = a;
+        }
+        else
+        {
+            currentGroup[part1] = part2;
+        }
     }
 }
 

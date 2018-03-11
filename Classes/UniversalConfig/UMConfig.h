@@ -63,6 +63,7 @@
     NSMutableDictionary    *allowedSingleGroupNames;
     NSMutableDictionary    *allowedMultiGroupNames;
     NSString                *_configAppend;
+    NSString                *_systemIncludePath;
 }
 
 @property(readwrite,assign) int verbose;
@@ -71,6 +72,7 @@
 @property(readwrite,strong) NSMutableDictionary    *singleGroups;
 @property(readwrite,strong) NSString               *fileName;
 @property(readwrite,strong) NSString               *configAppend;
+@property(readwrite,strong) NSString               *systemIncludePath;
 
 
 - (UMConfig *)initWithFileName:(NSString *)file;

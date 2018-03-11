@@ -75,72 +75,120 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
     [allowedMultiGroupNames removeObjectForKey:n];
 }
 
--(UMConfigParsedLine *)parseSingeLine:(NSString *)lin file:(NSString *)fn line:(long)ln
+
+-(UMConfigParsedLine *)parseSingeLine:(NSString *)lin
+                                 file:(NSString *)fn
+                                 line:(long)ln
 {
     UMConfigParsedLine *pl = [[UMConfigParsedLine alloc]init];
     pl.filename = fn;
     pl.lineNumber = ln;
     pl.content = lin;
 
-    if([lin length]>7)
+    if([lin hasPrefix:@"include"])
     {
-        if([[lin substringToIndex:7] isEqualToString:@"include"])
+        if(verbose)
         {
-            if(verbose>0)
-            {
-                NSLog(@"include found");
-            }
+            NSLog(@"%@",lin);
+        }
+        NSString *relativeFileName;
+        NSString *directoryPath1;
+        NSString *directoryPath2;
+        NSString *lin2 = [[lin substringFromIndex:7] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
-            NSArray *parts = [lin componentsSeparatedByString:@"\""];
-            if([parts count] !=3)
+        NSString *firstChar =  [lin2 substringToIndex:1];
+        NSString *lastChar = [lin2 substringFromIndex:lin2.length-1];
+
+        if(([firstChar isEqualToString:@"\""]) &&([lastChar isEqualToString:@"\""]))
+        {
+            /* Syntax:  include "filename"  */
+            relativeFileName = [lin2 substringWithRange:NSMakeRange(1,lin2.length-2)];
+            directoryPath1 = [fn stringByDeletingLastPathComponent];
+            directoryPath2 = _systemIncludePath;
+        }
+        else if(([firstChar isEqualToString:@"<"]) &&([lastChar isEqualToString:@">"]))
+        {
+            /* Syntax:  include <filename>  */
+            relativeFileName = [lin2 substringWithRange:NSMakeRange(1,lin2.length-2)];
+            directoryPath1 = _systemIncludePath;
+            directoryPath2 = [fn stringByDeletingLastPathComponent];
+        }
+        else if([firstChar isEqualToString:@"="])
+        {
+            relativeFileName =[[lin2 substringFromIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString *firstChar =  [relativeFileName substringToIndex:1];
+            NSString *lastChar = [relativeFileName substringFromIndex:relativeFileName.length-1];
+
+            if(([firstChar isEqualToString:@"\""]) &&([lastChar isEqualToString:@"\""]))
             {
-                if(verbose>0)
-                {
-                    NSLog(@"parts count is not 3. Pars are %@",parts);
-                }
+                /* Syntax:   include="filename"  */
+                relativeFileName = [relativeFileName substringWithRange:NSMakeRange(1,relativeFileName.length-2)];
+                directoryPath1 = [fn stringByDeletingLastPathComponent];
+                directoryPath2 = _systemIncludePath;
+            }
+            else if(([firstChar isEqualToString:@"<"]) &&([lastChar isEqualToString:@">"]))
+            {
+                /* Syntax:   include=<filename>  */
+                relativeFileName = [relativeFileName substringWithRange:NSMakeRange(1,relativeFileName.length-2)];
+                directoryPath1 = _systemIncludePath;
+                directoryPath2 = [fn stringByDeletingLastPathComponent];
+            }
+            else
+            {
+                /* Syntax:   include=filename */
+                directoryPath1 = [fn stringByDeletingLastPathComponent];
+                directoryPath2 = _systemIncludePath;
+            }
+        }
+        else
+        {
+            @throw([NSException exceptionWithName:@"config"
+                                           reason:
+                    [NSString stringWithFormat:
+                     @"Can not parse include statement in file %@ line %ld\n%@",fn,ln,lin]
+                                         userInfo:NULL]);
+        }
+        NSString *fullPath1;
+        NSString *fullPath2;
+        if([relativeFileName isAbsolutePath])
+        {
+            fullPath1 = [relativeFileName stringByStandardizingPath];
+            fullPath2 = NULL;
+        }
+        else
+        {
+            fullPath1 = [[NSString stringWithFormat:@"%@/%@",directoryPath1,relativeFileName]stringByStandardizingPath];
+            fullPath2 = [[NSString stringWithFormat:@"%@/%@",directoryPath2,relativeFileName]stringByStandardizingPath];
+        }
+
+        NSString *fullPath=fullPath1;
+        NSArray *lines = [self readFromFile:fullPath1];
+        if((lines==NULL) && (fullPath2==NULL))
+        {
+            @throw([NSException exceptionWithName:@"config"
+                                           reason:
+                    [NSString stringWithFormat:
+                     @"Can not read include file referenced in file %@ line %ld\n%@",fn,ln,lin]
+                                         userInfo:NULL]);
+        }
+        if(lines==NULL)
+        {
+            lines = [self readFromFile:fullPath2];
+            if(lines==NULL)
+            {
                 @throw([NSException exceptionWithName:@"config"
                                                reason:
                         [NSString stringWithFormat:
-                         @"Can not parse include statement in file %@ line %ld\n%@",fn,ln,lin]
-                                             userInfo:@{@"backtrace": UMBacktrace(NULL,0) }]);
+                         @"Can not read include file referenced in file %@ line %ld\n%@",fn,ln,lin]
+                                             userInfo:NULL]);
             }
-            
-            NSString *relativeFileName = [parts objectAtIndex:1];
-            NSString *fullPath  = [relativeFileName stringByStandardizingPath];
-            NSString *filename  = [fullPath lastPathComponent];
-            NSString *newPath   = [fullPath stringByDeletingLastPathComponent];
-            
-            if(verbose>0)
-            {
-                NSLog(@"relativeFileName: %@",relativeFileName);
-                NSLog(@"fullPath: %@",fullPath);
-                NSLog(@"filename: %@",filename);
-                NSLog(@"newPath: %@",newPath);
-            }
-            NSString *oldPath = [[NSFileManager defaultManager] currentDirectoryPath];
-            if(verbose>0)
-            {
-                NSLog(@"oldPath: %@",oldPath);
-            }
-#ifdef LINUX
-            chdir([newPath UTF8String]);
-#else
-            [[NSFileManager defaultManager] changeCurrentDirectoryPath:newPath];
-#endif           
-            if(verbose>0)
-            {
-                NSLog(@"newPath: %@",newPath);
-                NSLog(@"newPath: %@",[[NSFileManager defaultManager] currentDirectoryPath]);
-            }
-            
-            NSArray *lines = [self readFromFile:filename];
-#ifdef LINUX
-            chdir([oldPath UTF8String]);
-#else
-            [[NSFileManager defaultManager] changeCurrentDirectoryPath:oldPath];
-#endif
-            pl.includedLines   = lines;
+            fullPath=fullPath2;
         }
+        if(verbose)
+        {
+            NSLog(@"included file %@",fullPath);
+        }
+        pl.includedLines   = lines;
     }
     return pl;
 }
@@ -172,6 +220,10 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
     NSString *configFile = [NSString stringWithContentsOfFile:filename
                                                      encoding:NSUTF8StringEncoding
                                                         error:&err];
+    if(err)
+    {
+        return NULL;
+    }
     if(_configAppend)
     {
         if((configFile==NULL) && (_configAppend.length > 0))
@@ -257,12 +309,17 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
             currentGroup = NULL;
             continue;
         }
+        if([line hasPrefix:@"include"])
+        {
+            continue;
+        }
 
         if('#' == [line characterAtIndex:0])
         {
             continue;
         }
         
+
         NSRange r = [line rangeOfString:@"="];
         if(r.length==0)
         {

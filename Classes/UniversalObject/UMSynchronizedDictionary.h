@@ -35,6 +35,7 @@
 - (id)objectForKeyedSubscript:(id)key;
 - (void)removeObjectForKey:(id)aKey;
 - (NSMutableDictionary *)mutableCopy;
+- (NSDictionary *)dictionaryCopy;
 - (UMSynchronizedDictionary *)copyWithZone:(NSZone *)zone;
 - (void) lock;
 - (void) unlock;

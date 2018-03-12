@@ -68,6 +68,11 @@
     return [[UMSynchronizedDictionary alloc]initWithDictionary:xd];
 }
 
+- (NSDictionary *)dictionaryCopy
+{
+    return [underlyingDictionary copy];
+}
+
 - (NSUInteger)count
 {
     [mutex lock];

@@ -13,16 +13,21 @@
 
 - (BOOL)configEnabledWithYesDefault
 {
-    NSString *enable = self[@"enable"];
+
+    id enable = self[@"enable"];
     if(enable == NULL)
     {
         return YES;
     }
-    if(enable.length == 0)
+    if([enable isKindOfClass:[NSString class]])
     {
-        return YES;
+        NSString *s = (NSString *)enable;
+        if(s.length == 0)
+        {
+            return YES;
+        }
     }
-    return [self[@"enable"] boolValue];
+    return [enable boolValue];
 }
 
 - (NSString *)configName

@@ -101,10 +101,16 @@ It can be used independently of ulib if needed.
 {
     NSArray *_commandLineDefinition; /* an array of dictionary defining what parameters are allowed etc */
     NSArray *_commandLineArguments; /* as passed from main */
-    NSMutableArray *_mainArguments;  /* the arguments passed on the command line without any options */
-    NSMutableDictionary *_params;      /* a dictionary with option name as key and either a NSValue (integer) as counter of how many times the option occurred or an array of strings with all the options's parameters */
+    NSMutableArray *_internalMainArguments;  /* the arguments passed on the command line without any options */
+    NSMutableDictionary *_internalParams;      /* a dictionary with option name as key and either a NSValue (integer) as counter of how many times the option occurred or an array of strings with all the options's parameters */
     NSDictionary *_appDefinition;
 }
+
+@property(readwrite,strong,atomic)  NSArray *commandLineDefinition;
+@property(readwrite,strong,atomic)  NSArray *commandLineArguments;
+@property(readwrite,strong,atomic)  NSDictionary *appDefinition;
+@property(readwrite,strong,atomic)  NSMutableArray *internalMainArguments; /* this is only here for copyWithZone. use mainArguments and params instead */
+@property(readwrite,strong,atomic)  NSMutableDictionary *internalParams;
 
 
 - (UMCommandLine *)initWithCommandLineDefintion:(NSArray *)cld
@@ -120,5 +126,7 @@ It can be used independently of ulib if needed.
 - (void)printHelp;
 - (void)printVersion;
 - (void)handleStandardArguments; /* take care of --help and --version */
+
+- (UMCommandLine *)copyWithZone:(NSZone *)zone;
 
 @end

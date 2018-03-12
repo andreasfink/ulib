@@ -34,8 +34,8 @@
     self = [super init];
     if(self)
     {
-        _mainArguments      = [[NSMutableArray alloc]init];
-        _params             = [[NSMutableDictionary alloc]init];
+        _internalMainArguments      = [[NSMutableArray alloc]init];
+        _internalParams             = [[NSMutableDictionary alloc]init];
         _commandLineArguments = args;
         _commandLineDefinition = cld;
         _appDefinition = appDefinition;
@@ -46,12 +46,12 @@
 
 - (NSDictionary *)params
 {
-    return [_params copy];
+    return [_internalParams copy];
 }
 
 - (NSArray *)mainArguments
 {
-    return [_mainArguments copy];
+    return [_internalMainArguments copy];
 }
 
 - (void)processCommandLineArguments
@@ -112,7 +112,7 @@
         }
         else if(skip)
         {
-            [_mainArguments addObject:arg];
+            [_internalMainArguments addObject:arg];
             continue;
         }
         else if([arg hasPrefix:@"-"])
@@ -130,25 +130,25 @@
                 {
                     if(argument)
                     {
-                        if(_params[name] == NULL)
+                        if(_internalParams[name] == NULL)
                         {
-                            _params[name] = [[NSMutableArray alloc]init];
+                            _internalParams[name] = [[NSMutableArray alloc]init];
                         }
                         if(i<(n-1))
                         {
                             NSString *param = expandedArgs[++i];
-                            [_params[name] addObject:param];
+                            [_internalParams[name] addObject:param];
                         }
                     }
                     else
                     {
-                        if(_params[name] == NULL)
+                        if(_internalParams[name] == NULL)
                         {
-                            _params[name] = @(1);
+                            _internalParams[name] = @(1);
                         }
                         else
                         {
-                            _params[name] = @( [_params[name] intValue] +1);
+                            _internalParams[name] = @( [_internalParams[name] intValue] +1);
                         }
                     }
                     break;
@@ -161,16 +161,16 @@
                     NSString *prefix = [NSString stringWithFormat:@"%@=",longString];
                     if([arg hasPrefix:prefix])
                     {
-                        if(_params[name] == NULL)
+                        if(_internalParams[name] == NULL)
                         {
-                            _params[name] = [[NSMutableArray alloc]init];
+                            _internalParams[name] = [[NSMutableArray alloc]init];
                         }
                         NSString *params_list= [arg substringFromIndex:prefix.length];
                         NSArray *multiparams = [params_list componentsSeparatedByString:@","];
                         for(NSUInteger k=0;k<multiparams.count;k++)
                         {
                             NSString *param = multiparams[k];
-                            [_params[name] addObject:param];
+                            [_internalParams[name] addObject:param];
                         }
                         break;
                     }
@@ -183,19 +183,19 @@
         }
         else
         {
-            [_mainArguments addObject:arg];
+            [_internalMainArguments addObject:arg];
         }
     }
 }
 
 - (void)handleStandardArguments
 {
-    if(_params[@"help"])
+    if(_internalParams[@"help"])
     {
         [self printHelp];
         exit(0);
     }
-    if(_params[@"version"])
+    if(_internalParams[@"version"])
     {
         [self printVersion];
         exit(0);
@@ -264,5 +264,14 @@
     }
 }
 
-
+- (UMCommandLine *)copyWithZone:(NSZone *)zone
+{
+    UMCommandLine *cmd = [[UMCommandLine allocWithZone:zone ]init];
+    cmd.commandLineDefinition = [_commandLineDefinition copy];
+    cmd.commandLineArguments = [_commandLineArguments copy];
+    cmd.internalMainArguments = [_internalMainArguments copy];
+    cmd.internalParams = [_internalParams copy];
+    cmd.appDefinition = [_appDefinition copy];
+    return cmd;
+}
 @end

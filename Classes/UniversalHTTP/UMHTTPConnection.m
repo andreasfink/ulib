@@ -15,7 +15,6 @@
 #import "NSMutableArray+UMHTTP.h"
 #import "NSDictionary+UMHTTP.h"
 #import "UMLogFeed.h"
-#import "UMHTTPTask_ProcessRequest.h"
 #import "UMHTTPTask_ReadRequest.h"
 #import "UMSynchronizedArray.h"
 #import "UMThreadHelpers.h"
@@ -149,15 +148,14 @@
                     }
                 }
             }
+            if(completeRequestReceived)
+            {
+                [self processHTTPRequest:currentRequest];
+            }
         }
         else
         {
             self.mustClose = YES;
-        }
-        if(completeRequestReceived)
-        {
-            UMHTTPTask_ProcessRequest *pr = [[UMHTTPTask_ProcessRequest alloc]initWithRequest:currentRequest connection:self];
-            [server.taskQueue queueTask:pr];
         }
     }
     if (self.mustClose)

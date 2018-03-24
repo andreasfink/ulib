@@ -145,6 +145,8 @@
                     }
                     else
                     {
+                        UMHTTPTask_ProcessRequest *pr = [[UMHTTPTask_ProcessRequest alloc]initWithRequest:currentRequest connection:self];
+                        [server.taskQueue queueTask:pr];
                         break;
                     }
                 }

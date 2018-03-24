@@ -145,8 +145,6 @@
                     }
                     else
                     {
-                        UMHTTPTask_ProcessRequest *pr = [[UMHTTPTask_ProcessRequest alloc]initWithRequest:currentRequest connection:self];
-                        [server.taskQueue queueTask:pr];
                         break;
                     }
                 }
@@ -156,11 +154,11 @@
         {
             self.mustClose = YES;
         }
-	}
-    if(completeRequestReceived)
-    {
-        UMHTTPTask_ProcessRequest *pr = [[UMHTTPTask_ProcessRequest alloc]initWithRequest:currentRequest connection:self];
-        [server.taskQueue queueTask:pr];
+        if(completeRequestReceived)
+        {
+            UMHTTPTask_ProcessRequest *pr = [[UMHTTPTask_ProcessRequest alloc]initWithRequest:currentRequest connection:self];
+            [server.taskQueue queueTask:pr];
+        }
     }
     if (self.mustClose)
     {

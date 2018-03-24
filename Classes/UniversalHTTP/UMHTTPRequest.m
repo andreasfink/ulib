@@ -620,7 +620,6 @@
 - (void)finishRequest
 {
     [connection.server.pendingRequests removeObject:self];
-
     NSString *serverName = connection.server.serverName;
 
     [self setResponseHeader:@"Server" withValue:serverName];
@@ -635,6 +634,5 @@
         UMHTTPTask_ReadRequest *task = [[UMHTTPTask_ReadRequest alloc]initWithConnection:connection];
         [connection.server.taskQueue queueTask:task];
     }
-
 }
 @end

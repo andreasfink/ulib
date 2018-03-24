@@ -65,12 +65,9 @@
 }
 
 
-/* this takes a socket and reads a HTTP header and readas a request */
-/* returning NULL means socket closed and terminated */
-/* returning an object means that object now owns the connection. Once it is processed it is in charge of
-    writing the answer, closing the socket or calling startHttpConnection 
- again for reading the next request */
-
+/* connectionListener reads a single HTTP requests from the socket and
+   queues the processign for it
+*/
 - (void) connectionListener
 {
 	UMSocketError err;
@@ -94,7 +91,7 @@
         ulib_set_thread_name([NSString stringWithFormat:@"[UMHTTPConnection connectionListener] %@",socket.description]);
     }
     BOOL completeRequestReceived = NO;
-	while(self.mustClose == NO)
+	while((self.mustClose == NO) && (self.inputClosed==NO))
 	{
         if (!socket)
         {
@@ -114,12 +111,14 @@
             if(idleTime > 30)
             {
                 self.mustClose = YES;
+                break;
             }
             continue;
         }
         else if((pollResult == UMSocketError_has_data) ||
                 (pollResult== UMSocketError_has_data_and_hup))
         {
+
             err = [socket receiveEverythingTo:&appendToMe];
             if(err != UMSocketError_no_error)
             {
@@ -134,23 +133,20 @@
             {
                 if(pollResult == UMSocketError_has_data_and_hup)
                 {
-                    self.mustClose = YES;
+                    self.inputClosed = YES;
+                }
+                if(completeRequestReceived==NO)
+                {
+                    continue;
                 }
                 else
                 {
-                    if(completeRequestReceived==NO)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    /* if this is HTTP/1.1 with keepalive, this will initiate
+                     another read request task once completed
+                    otherwise mustClose will be set and we close it here */
+                    [self processHTTPRequest:currentRequest];
+                    break;
                 }
-            }
-            if(completeRequestReceived)
-            {
-                [self processHTTPRequest:currentRequest];
             }
         }
         else

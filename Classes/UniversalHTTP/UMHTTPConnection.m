@@ -71,7 +71,7 @@
 - (void) connectionListener
 {
 	UMSocketError err;
-    int receivePollTimeoutMs = 500;
+    int receivePollTimeoutMs = 5000;
     NSMutableData *appendToMe;
 
 	lastActivity = [[NSDate alloc]init];
@@ -101,8 +101,15 @@
         
         UMSocketError pollResult = [socket dataIsAvailable:receivePollTimeoutMs];
         NSDate *now = [NSDate new];
+#ifdef HTTP_DEBUG
+        NSLog(@"pollResult: %d",pollResult);
+#endif
         if (pollResult == UMSocketError_no_data)
         {
+#ifdef HTTP_DEBUG
+            NSLog(@"pollResult: UMSocketError_no_data");
+#endif
+
             if(lastActivity==NULL)
             {
                 lastActivity = [NSDate new];
@@ -110,6 +117,9 @@
             NSTimeInterval idleTime = [now timeIntervalSinceDate:lastActivity];
             if(idleTime > 30)
             {
+#ifdef HTTP_DEBUG
+                NSLog(@"timeout. mustClose set");
+#endif
                 self.mustClose = YES;
                 break;
             }
@@ -118,25 +128,39 @@
         else if((pollResult == UMSocketError_has_data) ||
                 (pollResult== UMSocketError_has_data_and_hup))
         {
-
+#ifdef HTTP_DEBUG
+            NSLog(@"data present");
+#endif
             err = [socket receiveEverythingTo:&appendToMe];
             if(err != UMSocketError_no_error)
             {
+#ifdef HTTP_DEBUG
+                NSLog(@"receiveEverythingTo returns %d. mustClose set",err);
+#endif
                 self.mustClose = YES;
             }
 
             if( [self checkForIncomingData:appendToMe requestCompleted:&completeRequestReceived] != 0)
             {
+#ifdef HTTP_DEBUG
+                NSLog(@"checkForIncomingData  returns error. mustClose set",err);
+#endif
                 self.mustClose = YES;
             }
             else
             {
                 if(pollResult == UMSocketError_has_data_and_hup)
                 {
+#ifdef HTTP_DEBUG
+                    NSLog(@"hup received. inputClosed is set",err);
+#endif
                     self.inputClosed = YES;
                 }
                 if(completeRequestReceived==NO)
                 {
+#ifdef HTTP_DEBUG
+                    NSLog(@"completeRequestReceived==NO");
+#endif
                     continue;
                 }
                 else
@@ -144,6 +168,9 @@
                     /* if this is HTTP/1.1 with keepalive, this will initiate
                      another read request task once completed
                     otherwise mustClose will be set and we close it here */
+#ifdef HTTP_DEBUG
+                    NSLog(@"calling processHTTPRequest");
+#endif
                     [self processHTTPRequest:currentRequest];
                     break;
                 }
@@ -151,11 +178,18 @@
         }
         else
         {
+#ifdef HTTP_DEBUG
+            NSLog(@"some error. mustClose set");
+#endif
+
             self.mustClose = YES;
         }
     }
     if (self.mustClose)
     {
+#ifdef HTTP_DEBUG
+        NSLog(@"calling connectionDone");
+#endif
         /* we're done with this thread so we must release our pool */
         /* tell the server process to terminate and release us */
         [server connectionDone:self];
@@ -274,23 +308,36 @@
     
 	if([protocolVersion isEqual:@"HTTP/1.0"])
     {
+#ifdef HTTP_DEBUG
+        NSLog(@"HTTP/1.0. mustClose set");
+#endif
+
 		self.mustClose = YES;
     }
     
     if([connectionValue isEqual:@"close"])
     {
+#ifdef HTTP_DEBUG
+        NSLog(@"Connection: close is set mustClose set");
+#endif
 		self.mustClose = YES;
     }
     
     if (!protocolVersion || !(([protocolVersion isEqual:@"HTTP/1.1"]) || ([protocolVersion isEqual:@"HTTP/1.0"])))
 	{
 		[req setResponseCode:505];
+#ifdef HTTP_DEBUG
+        NSLog(@"Connection: error 505. mustClose set");
+#endif
 		self.mustClose = YES;
         return;
     }
 	
 	if (!method)
 	{
+#ifdef HTTP_DEBUG
+        NSLog(@"Connection: error 400. mustClose not set");
+#endif
 		[req setResponseCode:400];
 		return;
 	}
@@ -353,6 +400,9 @@
             {
                 [req setResponseCode:HTTP_RESPONSE_CODE_BAD_REQUEST];
                 [req setResponseHtmlString:[NSString stringWithFormat:@"Unknown method '%@'",method]];
+#ifdef HTTP_DEBUG
+                NSLog(@"Connection: error 400. Unknown method");
+#endif
                 return;
             }
         }
@@ -360,6 +410,9 @@
         {
             req.connection = self;
             [server.pendingRequests addObject:req];
+#ifdef HTTP_DEBUG
+            NSLog(@"move to pending request (async)");
+#endif
         }
         else
         {

@@ -619,6 +619,10 @@
 
 - (void)finishRequest
 {
+#ifdef HTTP_DEBUG
+    NSLog(@"finishRequest called");
+#endif
+
     [connection.server.pendingRequests removeObject:self];
     NSString *serverName = connection.server.serverName;
 
@@ -627,10 +631,16 @@
     [connection.socket sendData:resp];
     if(connection.mustClose)
     {
+#ifdef HTTP_DEBUG
+        NSLog(@"connection.mustClose is set. terminating");
+#endif
         [connection terminate];
     }
     else
     {
+#ifdef HTTP_DEBUG
+        NSLog(@"connection.mustClose is not set. requeuing read request");
+#endif
         UMHTTPTask_ReadRequest *task = [[UMHTTPTask_ReadRequest alloc]initWithConnection:connection];
         [connection.server.taskQueue queueTask:task];
     }

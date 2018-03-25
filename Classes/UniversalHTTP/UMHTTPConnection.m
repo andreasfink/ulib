@@ -95,19 +95,19 @@
 	{
         if (!socket)
         {
-            NSLog(@"we have no socket");
+            NSLog(@"UMHTTPConnection [%@]: we have no socket",self);
             break;
         }
         
         UMSocketError pollResult = [socket dataIsAvailable:receivePollTimeoutMs];
         NSDate *now = [NSDate new];
 #ifdef HTTP_DEBUG
-        NSLog(@"pollResult: %d",pollResult);
+        NSLog(@"UMHTTPConnection [%@]: pollResult %d",self,pollResult);
 #endif
         if (pollResult == UMSocketError_no_data)
         {
 #ifdef HTTP_DEBUG
-            NSLog(@"pollResult: UMSocketError_no_data");
+            NSLog(@"UMHTTPConnection [%@]: pollResult UMSocketError_no_data",self);
 #endif
 
             if(lastActivity==NULL)
@@ -118,7 +118,7 @@
             if(idleTime > 30)
             {
 #ifdef HTTP_DEBUG
-                NSLog(@"timeout. mustClose set");
+                NSLog(@"UMHTTPConnection [%@]: timeout. mustClose set",self);
 #endif
                 self.mustClose = YES;
                 break;
@@ -129,13 +129,13 @@
                 (pollResult== UMSocketError_has_data_and_hup))
         {
 #ifdef HTTP_DEBUG
-            NSLog(@"data present");
+            NSLog(@"UMHTTPConnection [%@]: data present",self);
 #endif
             err = [socket receiveEverythingTo:&appendToMe];
             if(err != UMSocketError_no_error)
             {
 #ifdef HTTP_DEBUG
-                NSLog(@"receiveEverythingTo returns %d. mustClose set",err);
+                NSLog(@"UMHTTPConnection [%@]: receiveEverythingTo returns %d. mustClose set",self,err);
 #endif
                 self.mustClose = YES;
             }
@@ -143,7 +143,7 @@
             if( [self checkForIncomingData:appendToMe requestCompleted:&completeRequestReceived] != 0)
             {
 #ifdef HTTP_DEBUG
-                NSLog(@"checkForIncomingData  returns error. mustClose set",err);
+                NSLog(@"UMHTTPConnection [%@]: checkForIncomingData  returns error. mustClose set. mustClose set",self);
 #endif
                 self.mustClose = YES;
             }
@@ -152,14 +152,14 @@
                 if(pollResult == UMSocketError_has_data_and_hup)
                 {
 #ifdef HTTP_DEBUG
-                    NSLog(@"hup received. inputClosed is set",err);
+                    NSLog(@"UMHTTPConnection [%@]: hup received. inputClosed is set",self);
 #endif
                     self.inputClosed = YES;
                 }
                 if(completeRequestReceived==NO)
                 {
 #ifdef HTTP_DEBUG
-                    NSLog(@"completeRequestReceived==NO");
+                    NSLog(@"UMHTTPConnection [%@]: completeRequestReceived=NO",self);
 #endif
                     continue;
                 }
@@ -169,7 +169,7 @@
                      another read request task once completed
                     otherwise mustClose will be set and we close it here */
 #ifdef HTTP_DEBUG
-                    NSLog(@"calling processHTTPRequest");
+                    NSLog(@"UMHTTPConnection [%@]: calling processHTTPRequest[currentRequest=%@]",self,currentRequest);
 #endif
                     [self processHTTPRequest:currentRequest];
                     break;
@@ -179,7 +179,7 @@
         else
         {
 #ifdef HTTP_DEBUG
-            NSLog(@"some error. mustClose set");
+            NSLog(@"UMHTTPConnection [%@]: some error. mustClose set",self);
 #endif
 
             self.mustClose = YES;
@@ -188,7 +188,7 @@
     if (self.mustClose)
     {
 #ifdef HTTP_DEBUG
-        NSLog(@"calling connectionDone");
+        NSLog(@"UMHTTPConnection [%@]: calling connectionDone",self);
 #endif
         /* we're done with this thread so we must release our pool */
         /* tell the server process to terminate and release us */
@@ -227,7 +227,7 @@
                NSArray *lineItems = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
 				if([lineItems count] != 3)
 				{
-					NSLog(@"HTTP protocol error. First line does not have 3 parts");
+                    NSLog(@"UMHTTPConnection [%@]: HTTP protocol error. First line does not have 3 parts",self);
 					cSection = UMHTTPConnectionRequestSectionErrorOrClose;
 					return -1;
 				}
@@ -248,7 +248,7 @@
                 NSArray *lineItems = [line splitByFirstCharacter:':'];
                 if([lineItems count] != 2)
                 {
-                    NSLog(@"HTTP header line '%@' doesnt have exactly 2 items <header>:<value>",line);
+                    NSLog(@"UMHTTPConnection [%@]: HTTP header line '%@' doesnt have exactly 2 items <header>:<value>",self,line);
                     cSection = UMHTTPConnectionRequestSectionErrorOrClose;
                     return -1;
                 }
@@ -294,7 +294,7 @@
 		}
         else
         {
-            NSLog(@"if(@ >= awaitingBytes) = NO");
+            NSLog(@"UMHTTPConnection [%@]: if(@ >= awaitingBytes) = NO",self);
         }
 	}
     return 0;
@@ -309,7 +309,7 @@
 	if([protocolVersion isEqual:@"HTTP/1.0"])
     {
 #ifdef HTTP_DEBUG
-        NSLog(@"HTTP/1.0. mustClose set");
+        NSLog(@"UMHTTPConnection [%@]: HTTP/1.0. mustClose set",self);
 #endif
 
 		self.mustClose = YES;
@@ -318,7 +318,7 @@
     if([connectionValue isEqual:@"close"])
     {
 #ifdef HTTP_DEBUG
-        NSLog(@"Connection: close is set mustClose set");
+        NSLog(@"UMHTTPConnection [%@]: Connection: close is set mustClose set",self);
 #endif
 		self.mustClose = YES;
     }
@@ -327,7 +327,7 @@
 	{
 		[req setResponseCode:505];
 #ifdef HTTP_DEBUG
-        NSLog(@"Connection: error 505. mustClose set");
+        NSLog(@"UMHTTPConnection [%@]: Connection: error 505. mustClose set",self);
 #endif
 		self.mustClose = YES;
         return;
@@ -336,7 +336,7 @@
 	if (!method)
 	{
 #ifdef HTTP_DEBUG
-        NSLog(@"Connection: error 400. mustClose not set");
+        NSLog(@"UMHTTPConnection [%@]: Connection: error 400. mustClose set",self);
 #endif
 		[req setResponseCode:400];
 		return;
@@ -401,7 +401,7 @@
                 [req setResponseCode:HTTP_RESPONSE_CODE_BAD_REQUEST];
                 [req setResponseHtmlString:[NSString stringWithFormat:@"Unknown method '%@'",method]];
 #ifdef HTTP_DEBUG
-                NSLog(@"Connection: error 400. Unknown method");
+                NSLog(@"UMHTTPConnection [%@]: error 400. unknown method",self);
 #endif
                 return;
             }
@@ -411,7 +411,7 @@
             req.connection = self;
             [server.pendingRequests addObject:req];
 #ifdef HTTP_DEBUG
-            NSLog(@"move to pending request (async)");
+            NSLog(@"UMHTTPConnection [%@]: move to pending request (async)",self);
 #endif
         }
         else

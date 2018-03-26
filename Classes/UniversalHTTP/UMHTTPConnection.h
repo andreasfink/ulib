@@ -36,6 +36,7 @@ typedef enum UMHTTPConnectionRequestSection
 
 	UMHTTPConnectionRequestSection				cSection;
 	ssize_t			awaitingBytes;
+    BOOL            _enableKeepalive;
 }
 
 @property(readwrite,strong,atomic)     NSString        *name;
@@ -46,6 +47,7 @@ typedef enum UMHTTPConnectionRequestSection
 @property (readwrite,assign)	int				timeout;
 @property (readwrite,strong)	NSDate			*lastActivity;
 @property (readwrite,strong,atomic)    UMHTTPRequest	*currentRequest;
+@property (readwrite,assign,atomic)    BOOL            enableKeepalive;
 
 
 - (UMHTTPConnection *) initWithSocket:(UMSocket *)socket server:(UMHTTPServer *)server;

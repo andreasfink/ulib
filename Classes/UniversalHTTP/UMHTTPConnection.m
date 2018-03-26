@@ -315,7 +315,14 @@
 
 		self.mustClose = YES;
     }
-    
+    if(_enableKeepalive==NO)
+    {
+#ifdef HTTP_DEBUG
+        NSLog(@"[%@]: keepalive not enabled. mustClose set",self.name);
+#endif
+        self.mustClose = YES;
+    }
+
     if([connectionValue isEqual:@"close"])
     {
 #ifdef HTTP_DEBUG
@@ -326,9 +333,9 @@
     
     if (!protocolVersion || !(([protocolVersion isEqual:@"HTTP/1.1"]) || ([protocolVersion isEqual:@"HTTP/1.0"])))
 	{
-		[req setResponseCode:505];
+		[req setResponseCode:HTTP_RESPONSE_CODE_HTTP_VERSION_NOT_SUPPORTED];
 #ifdef HTTP_DEBUG
-        NSLog(@"[%@]: Connection: error 505. mustClose set",self.name);
+        NSLog(@"[%@] Error 505 (Protocol Version not supported). mustClose set",self.name);
 #endif
 		self.mustClose = YES;
         return;
@@ -337,9 +344,9 @@
 	if (!method)
 	{
 #ifdef HTTP_DEBUG
-        NSLog(@"[%@]: Connection: error 400. mustClose set",self.name);
+        NSLog(@"[%@]: Error 400 (BadRequest). mustClose set",self.name);
 #endif
-		[req setResponseCode:400];
+		[req setResponseCode:HTTP_RESPONSE_CODE_BAD_REQUEST];
 		return;
 	}
 	else

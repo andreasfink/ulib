@@ -124,6 +124,8 @@ typedef enum UMHTTPServerStatus
     int                 receivePollTimeoutMs;
     NSString            *advertizeName;
     BOOL                enableSSL;
+    BOOL                _enableKeepalive;
+
     UMTaskQueue         *_taskQueue;
 	//
 	// the delegates for authorisation
@@ -157,6 +159,7 @@ typedef enum UMHTTPServerStatus
 
 @property(readwrite,strong)		NSString *serverName;
 @property(readwrite,assign,atomic)		UMHTTPServerStatus  status;
+@property(readwrite,assign,atomic)      BOOL enableKeepalive;
 
 //
 // the delegates for authorisation

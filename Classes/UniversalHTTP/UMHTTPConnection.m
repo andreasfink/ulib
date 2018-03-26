@@ -50,12 +50,7 @@
 
 - (NSString *)description
 {
-    NSMutableString *desc;
-    
-    desc = [[NSMutableString alloc] initWithString:@"UM HTTP Connection dump starts\n"];
-    [desc appendFormat:@"socket used is %@\n", socket];
-    [desc appendString:@"UM HTTP Connection dump ends\n"];
-    return desc;
+    return [[NSstring alloc] initWithFormat:@"HTTP(%@)",socket];
 }
 
 - (void) terminate

@@ -34,6 +34,7 @@
 
 @interface UMHTTPRequest : UMObject
 {
+    uint64_t            _requestId;
     NSDate              *_completionTimeout;
     BOOL                _awaitingCompletion; /* set to YES if data is returned later */
 
@@ -62,6 +63,7 @@
 
 }
 
+@property (readwrite,assign,atomic)uint64_t            requestId;
 @property (readwrite,strong,atomic)NSDate               *completionTimeout;
 @property (readwrite,assign,atomic) BOOL                awaitingCompletion;
 
@@ -89,7 +91,7 @@
 
 
 
-
+- (NSString *)name;
 //- (id) initWithRequest:(CFHTTPMessageRef)req connection:(UMHTTPConnection *)conn;
 - (id) init;
 - (UMHTTPConnection *) connection;

@@ -42,15 +42,31 @@
 
 - (id) init
 {
+    static uint64_t lastRequestId = 0;
+    static UMMutex *lastRequestId_lock;
+
+    if(lastRequestId_lock==NULL)
+    {
+        lastRequestId_lock = [[UMMutex alloc]init];
+    }
+
     self = [super init];
     if(self)
 	{
+        [lastRequestId_lock lock];
+        _requestId = ++lastRequestId;
+        [lastRequestId_lock unlock];
         responseCode=HTTP_RESPONSE_CODE_OK;
         self.awaitingCompletion = NO;
         responseHeaders = [[NSMutableDictionary alloc]init];
 
     }
     return self;
+}
+
+- (NSString *)name
+{
+    return [NSString stringWithFormat:@"HTTPRequest #%llu",_requestId ];
 }
 
 - (NSString *)description
@@ -620,7 +636,7 @@
 - (void)finishRequest
 {
 #ifdef HTTP_DEBUG
-    NSLog(@"UMHTTPRequest [%@]: finishRequest called",self);
+    NSLog(@"[%@]: finishRequest called",self.name);
 #endif
 
     [connection.server.pendingRequests removeObject:self];
@@ -632,14 +648,14 @@
     if(connection.mustClose)
     {
 #ifdef HTTP_DEBUG
-        NSLog(@"UMHTTPRequest [%@]: connection.mustClose is set. terminatin",self);
+        NSLog(@"[%@]: connection.mustClose is set. terminatin",self.name);
 #endif
         [connection terminate];
     }
     else
     {
 #ifdef HTTP_DEBUG
-        NSLog(@"UMHTTPRequest [%@]: connection.mustClose is not set. requeuing read request",self);
+        NSLog(@"[%@]: connection.mustClose is not set. requeuing read request",self.name);
 #endif
         UMHTTPTask_ReadRequest *task = [[UMHTTPTask_ReadRequest alloc]initWithConnection:connection];
         [connection.server.taskQueue queueTask:task];

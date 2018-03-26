@@ -21027,6 +21027,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DULIB_CONFIG=Debug",
+					"-DHTTP_DEBUG=1",
 					"-DHAVE_LIBSSL=1",
 				);
 				PRODUCT_NAME = ulib;
@@ -21090,6 +21091,7 @@
 				OTHER_CFLAGS = (
 					"-DULIB_CONFIG=Release",
 					"-DHAVE_LIBSSL=1",
+					"-DHTTP_DEBUG=1",
 				);
 				PRODUCT_NAME = ulib;
 				SDKROOT = macosx;

@@ -66,10 +66,10 @@
 
 - (NSString *)name
 {
-    return [NSString stringWithFormat:@"HTTPRequest #%llu",_requestId ];
+    return [NSString stringWithFormat:@"HTTPRequest #%lu",(unsigned long)_requestId ];
 }
 
-- (NSString *)description
+- (NSString *)description2
 {
     NSMutableString *desc;
     

@@ -699,6 +699,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) listen: (int) backlog
 {
+    [self updateName];
     [_controlLock lock];
     @try
     {
@@ -971,19 +972,16 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (in_port_t) localPort
 {
-	[self updateName];
 	return connectedLocalPort;
 }
 
 - (in_port_t) remotePort
 {
-	[self updateName];
 	return connectedRemotePort;
 }
 
 - (NSString *)getRemoteAddress
 {
-    [self updateName];
     return self.connectedRemoteAddress;
 }
 
@@ -1426,7 +1424,6 @@ static int SSL_smart_shutdown(SSL *ssl)
 
     errno = 99;
     ret1 = poll(pollfds, 1, timeoutInMs);
-
     [_controlLock unlock];
 
     if (ret1 < 0)
@@ -1876,9 +1873,9 @@ static int SSL_smart_shutdown(SSL *ssl)
     memset(&sa_remote_in6,0x00,sizeof(sa_remote_in6));
     
     len = sizeof(sa_local);
-    [_controlLock lock];
+    //[_controlLock lock];
     getsockname(_sock, &sa_local, &len);
-    [_controlLock unlock];
+    //[_controlLock unlock];
 
     switch(sa_local.sa_family)
     {

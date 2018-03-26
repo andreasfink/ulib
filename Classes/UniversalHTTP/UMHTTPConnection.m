@@ -168,7 +168,7 @@
                      another read request task once completed
                     otherwise mustClose will be set and we close it here */
 #ifdef HTTP_DEBUG
-                    NSLog(@"[%@]: calling processHTTPRequest[currentRequest=%@]",self.name,currentRequest);
+                    NSLog(@"[%@]: calling processHTTPRequest[currentRequest=%@]",self.name,currentRequest.name);
 #endif
                     [self processHTTPRequest:currentRequest];
                     break;

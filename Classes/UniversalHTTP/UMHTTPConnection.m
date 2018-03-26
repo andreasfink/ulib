@@ -101,7 +101,7 @@
         UMSocketError pollResult = [socket dataIsAvailable:receivePollTimeoutMs];
         NSDate *now = [NSDate new];
 #ifdef HTTP_DEBUG
-        NSLog(@"[%@]: pollResult %d",self,pollResult.name);
+        NSLog(@"[%@]: pollResult %d",self.name,pollResult);
 #endif
         if (pollResult == UMSocketError_no_data)
         {

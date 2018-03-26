@@ -1538,4 +1538,13 @@ again:
     }
 }
 
+- (void)testUnifyIP
+{
+    NSString *a = @"79.134.238.20";
+    NSString *b  = [UMSocket unifyIP:a];
+    NSString *c = @"ipv4:79.134.238.20";
+
+    XCTAssertTrue([c isEqualToString:b], @"unifyIP mismatch #1");
+}
+
 @end

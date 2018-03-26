@@ -2544,7 +2544,10 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         }
         return [NSString stringWithFormat:@"ipv6:[%@]", addr];
     }
-
+    if([addr hasPrefix:@"::ffff:"])
+    {
+        addr = [addr substringFromIndex:7];
+    }
     NSArray *a = [addr componentsSeparatedByString:@"."];
     if([a count]==4)
     {

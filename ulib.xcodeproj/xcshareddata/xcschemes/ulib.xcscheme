@@ -38,6 +38,11 @@
                BlueprintName = "ulibTests"
                ReferencedContainer = "container:ulib.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "TestUMSocket/testSocketTCP">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

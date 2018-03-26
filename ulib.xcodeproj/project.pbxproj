@@ -2549,6 +2549,10 @@
 		A6F1E322187D448700AD2F85 /* UMRedisSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E31C187D448700AD2F85 /* UMRedisSession.m */; };
 		A6F1E32E187D935600AD2F85 /* UMRedisStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E329187D935600AD2F85 /* UMRedisStatus.m */; };
 		A6F1E32F187D935600AD2F85 /* UMRedisStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E329187D935600AD2F85 /* UMRedisStatus.m */; };
+		A6FA420420694B1400849F7F /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A68CEFA31FE90C2900A02B91 /* libssl.a */; };
+		A6FA420520694B1400849F7F /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A68CEF9E1FE90C2900A02B91 /* libcrypto.a */; };
+		A6FA420620694B3800849F7F /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; };
+		A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D8AB0C149A769B0029E9CF /* Foundation.framework */; };
 		A6FFFC811B9D73F900C331B0 /* NSString+UMSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A6FFFC7D1B9D716C00C331B0 /* NSString+UMSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -9818,7 +9822,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */,
+				A6FA420620694B3800849F7F /* sctp.framework in Frameworks */,
+				A6FA420420694B1400849F7F /* libssl.a in Frameworks */,
 				A610866D163530F700D0D9C6 /* Security.framework in Frameworks */,
+				A6FA420520694B1400849F7F /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -21122,14 +21130,14 @@
 					"SENTEST=1",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl1.0.2h/include",
+					"$(SRCROOT)/libs/osx/openssl-1.1.0g-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibTests/ulibTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0f-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/ilb",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.ulibtests.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -21160,14 +21168,14 @@
 					"SENTEST=1",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl1.0.2h/include",
+					"$(SRCROOT)/libs/osx/openssl-1.1.0g-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibTests/ulibTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0f-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/ilb",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.ulibtests.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

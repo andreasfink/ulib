@@ -116,7 +116,6 @@
 - (void) setResponseJsonObject:(id)content;
 - (void)setNotAuthorizedForRealm:(NSString *)realm;
 - (void)setContentType:(NSString *)ct;
-- (NSString *)description;
 - (NSString *)authenticationStatusAsString;
 - (NSMutableDictionary *)paramsMutableCopy;
 - (void)setResponseTypeText;

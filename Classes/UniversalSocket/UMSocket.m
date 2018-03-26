@@ -2354,8 +2354,11 @@ static int SSL_smart_shutdown(SSL *ssl)
             return UMSocketError_no_such_process;
         case EHOSTDOWN:
             return UMSocketError_host_down;
+        case ENOTCONN:
+            return UMSocketError_not_connected;
         default:
             fprintf(stderr,"Unknown errno code %d",e);
+            return UMSocketError_not_known;
             break;
     }
     return UMSocketError_not_known;

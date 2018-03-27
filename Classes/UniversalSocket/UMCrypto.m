@@ -223,13 +223,12 @@
 	{
         size_t bytesRemaining = length;
         size_t startPos = 0;
-
-        while(bytesRemaining > 0)
+        while((bytesRemaining > 0) && (startPos < length))
         {
 
             i = write(self.fileDescriptor,  &bytes[startPos],  bytesRemaining);
 #ifdef HTTP_DEBUG
-            NSLog(@"write %d bytes returns %d bytes written and errno=%s",(int)bytesRemaining,(int)i,strerror(errno));
+            NSLog(@"write %d bytes returns %d bytes written and errno=%s. Total written so far %d",(int)bytesRemaining,(int)i,strerror(errno),(int)startPos+i);
 #endif
             if(i>0)
             {

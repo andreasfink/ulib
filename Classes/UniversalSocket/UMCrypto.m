@@ -229,7 +229,7 @@
 
             i = write(self.fileDescriptor,  &bytes[startPos],  bytesRemaining);
 #ifdef HTTP_DEBUG
-            NSLog(@"write %d bytes returns %d bytes written and errno=%d",(int)bytesRemaining,(int)i,(int)errno);
+            NSLog(@"write %d bytes returns %d bytes written and errno=%s",(int)bytesRemaining,(int)i,strerror(errno));
 #endif
             if(i>0)
             {

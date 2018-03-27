@@ -235,6 +235,10 @@
             {
                 bytesRemaining -= i;
                 startPos += i;
+                if(bytesRemaining > 0)
+                {
+                    continue;
+                }
             }
             if((i<1) || (errno != EAGAIN))
             {

@@ -232,7 +232,7 @@
                 bytesRemaining -= i;
                 startPos += i;
             }
-            if(i<1)
+            if((i<1) || (errno != EAGAIN))
             {
                 break;
             }

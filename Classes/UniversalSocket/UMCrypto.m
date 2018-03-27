@@ -218,7 +218,7 @@
               length:(size_t)length
            errorCode:(int *)eno
 {
-    size_t i;
+    ssize_t i;
 	if(!enable)
 	{
         size_t bytesRemaining = length;
@@ -227,6 +227,10 @@
         while((bytesRemaining > 0) && (startPos < length))
         {
             i = write(self.fileDescriptor,  &bytes[startPos],  bytesRemaining);
+            if((i<0) && (errno==EAGAIN))
+            {
+                continue;
+            }
             if(i>0)
             {
 
@@ -240,7 +244,7 @@
                 NSLog(@" totalWritten: %d",(int)totalWritten);
 
             }
-            if(i<1)
+            if(i<0)
             {
                 break;
             }

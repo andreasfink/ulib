@@ -221,7 +221,22 @@
     size_t i;
 	if(!enable)
 	{
-		i = write(self.fileDescriptor,  bytes,  length);
+        size_t bytesRemaining = length;
+        size_t startPos = 0;
+
+        while(bytesRemaining > 0)
+        {
+            i = write(self.fileDescriptor,  &bytes[startPos],  bytesRemaining);
+            if(i>0)
+            {
+                bytesRemaining -= i;
+                startPos += i;
+            }
+            if(i<1)
+            {
+                break;
+            }
+        }
         *eno = errno;
 	}
     else

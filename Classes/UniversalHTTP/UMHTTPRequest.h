@@ -60,7 +60,6 @@
     id<UMHTTPRequest_TimeoutProtocol>    _timeoutDelegate;
     BOOL                _mustClose; /* if set, it means after answering this request the connection shall close */
     UMMutex             *_pendingRequestLock;
-
 }
 
 @property (readwrite,assign,atomic)uint64_t            requestId;
@@ -88,7 +87,6 @@
 @property (readwrite,strong) NSString                   *authUsername;
 @property (readwrite,strong) NSString                   *authPassword;
 @property (readwrite,assign,atomic)     BOOL                mustClose;
-
 
 
 - (NSString *)name;

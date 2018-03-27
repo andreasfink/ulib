@@ -643,6 +643,11 @@
     NSString *serverName = connection.server.serverName;
 
     [self setResponseHeader:@"Server" withValue:serverName];
+    if(connection.enableKeepalive)
+    {
+        [self setResponseHeader:@"Keep-Alive" withValue:@"timeout=4, max=100"];
+        [self setResponseHeader:@"Connection" withValue:@"Keep-Alive"];
+    }
     NSData *resp = [self extractResponse];
     [connection.socket sendData:resp];
     if(connection.mustClose)

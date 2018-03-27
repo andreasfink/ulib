@@ -229,14 +229,16 @@
             i = write(self.fileDescriptor,  &bytes[startPos],  bytesRemaining);
             if(i>0)
             {
-                bytesRemaining = bytesRemaining -i;
-                totalWritten = totalWritten + i;
 
 #ifdef HTTP_DEBUG
                 NSLog(@"write (startpos=%d,bytes to write=%d) returns %d bytes written",(int)startPos,(int)bytesRemaining,(int)i);
-                NSLog(@" totalWritten: %d",(int)totalWritten);
 #endif
+                bytesRemaining = bytesRemaining -i;
                 startPos = startPos + i;
+                totalWritten = totalWritten + i;
+
+                NSLog(@" totalWritten: %d",(int)totalWritten);
+
             }
             if(i<1)
             {

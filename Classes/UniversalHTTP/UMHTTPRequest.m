@@ -648,6 +648,10 @@
         [self setResponseHeader:@"Keep-Alive" withValue:@"timeout=4, max=100"];
         [self setResponseHeader:@"Connection" withValue:@"Keep-Alive"];
     }
+    else
+    {
+        [self setResponseHeader:@"Connection" withValue:@"close"];
+    }
     NSData *resp = [self extractResponse];
     [connection.socket sendData:resp];
     if(connection.mustClose)

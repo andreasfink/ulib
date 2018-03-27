@@ -1238,9 +1238,11 @@ static int SSL_smart_shutdown(SSL *ssl)
                 self.isConnected = 0;
                 return [UMSocket umerrFromErrno:ECONNREFUSED];
             }
+            [self switchToBlocking];
             [_dataLock lock];
             i = [cryptoStream writeBytes:bytes length:length errorCode:&eno];
             [_dataLock unlock];
+            [self switchToNonBlocking];
 
             if (i != length)
             {

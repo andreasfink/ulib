@@ -40,6 +40,20 @@
     return [self initWithLocalhostAddresses:NULL];
 }
 
++ (NSString *)localHostName
+{
+    char    localHostName[256];
+    memset(localHostName,0,sizeof(localHostName));
+    if(gethostname(localHostName, sizeof(localHostName)-1))
+    {
+        return @"localhost";
+    }
+    else
+    {
+        return @(localHostName);
+    }
+}
+
 - (UMHost *)  initWithLocalhostAddresses:(NSArray *)permittedAddresses
 {
     self = [super init];
@@ -47,10 +61,8 @@
     {
         struct ifaddrs *ifadders = NULL;
         struct ifaddrs *ifptr = NULL;
-        char	localHostName[256];
         char	ip[256];
         socklen_t sockLen;
-        NSString	*n;
         
         addresses = [[NSMutableArray alloc] init];
         lock = [[UMMutex alloc] initWithName:@"umhost"];
@@ -67,16 +79,7 @@
         [self setIsLocalHost:1];
         [self setIsResolved:1];
         
-        memset(localHostName,0,sizeof(localHostName));
-        if(gethostname(localHostName, sizeof(localHostName)-1))
-        {
-            n = @"localhost";
-        }
-        else
-        {
-            n = [[NSString alloc] initWithUTF8String: localHostName];
-        }
-        self->name = n;
+        self->name = [UMHost localHostName];
         
         for (ifadders = ifptr; ifadders; ifadders = ifadders->ifa_next)
         {

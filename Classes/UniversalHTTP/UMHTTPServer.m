@@ -275,6 +275,9 @@
                         {
                             
                             UMHTTPConnection *con = [[UMHTTPConnection alloc] initWithSocket:clientSocket server:self];
+                            con.name = [NSString stringWithFormat:@"HTTPConnection %@:%d",clientSocket.connectedRemoteAddress,clientSocket.connectedRemotePort];
+                            con.enableKeepalive = _enableKeepalive;
+
                             [connections addObject:con];
 
                             UMHTTPTask_ReadRequest *task = [[UMHTTPTask_ReadRequest alloc]initWithConnection:con];

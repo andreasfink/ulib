@@ -218,10 +218,37 @@
               length:(size_t)length
            errorCode:(int *)eno
 {
-    size_t i;
+    ssize_t i;
 	if(!enable)
 	{
-		i = write(self.fileDescriptor,  bytes,  length);
+        size_t bytesRemaining = length;
+        size_t startPos = 0;
+        size_t totalWritten=0;
+        while((bytesRemaining > 0) && (startPos < length))
+        {
+            i = write(self.fileDescriptor,  &bytes[startPos],  bytesRemaining);
+            if((i<0) && (errno==EAGAIN))
+            {
+                continue;
+            }
+            if(i>0)
+            {
+
+#ifdef HTTP_DEBUG
+                NSLog(@"write (startpos=%d,bytes to write=%d) returns %d bytes written",(int)startPos,(int)bytesRemaining,(int)i);
+#endif
+                bytesRemaining = bytesRemaining -i;
+                startPos = startPos + i;
+                totalWritten = totalWritten + i;
+
+                NSLog(@" totalWritten: %d",(int)totalWritten);
+
+            }
+            if(i<0)
+            {
+                break;
+            }
+        }
         *eno = errno;
 	}
     else

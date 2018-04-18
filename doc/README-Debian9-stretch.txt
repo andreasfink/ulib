@@ -85,7 +85,7 @@ Here is how to get such a installation up and running under Debian 9 (codename S
     git clone https://github.com/gnustep/corebase
     git clone https://github.com/gnustep/gui
     git clone https://github.com/gnustep/back
-    /scripts/install-dependencies
+    ./scripts/install-dependencies
 	cd ..
 	
 

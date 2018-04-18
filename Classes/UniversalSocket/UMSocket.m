@@ -699,6 +699,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) listen: (int) backlog
 {
+    [self updateName];
     [_controlLock lock];
     @try
     {
@@ -971,19 +972,16 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (in_port_t) localPort
 {
-	[self updateName];
 	return connectedLocalPort;
 }
 
 - (in_port_t) remotePort
 {
-	[self updateName];
 	return connectedRemotePort;
 }
 
 - (NSString *)getRemoteAddress
 {
-    [self updateName];
     return self.connectedRemoteAddress;
 }
 
@@ -1217,9 +1215,11 @@ static int SSL_smart_shutdown(SSL *ssl)
                 self.isConnected = 0;
                 return [UMSocket umerrFromErrno:ECONNREFUSED];
             }
+            [self switchToBlocking];
             [_dataLock lock];
             i = [cryptoStream writeBytes:bytes length:length errorCode:&eno];
             [_dataLock unlock];
+            [self switchToNonBlocking];
 
             if (i != length)
             {
@@ -1403,7 +1403,6 @@ static int SSL_smart_shutdown(SSL *ssl)
 
     errno = 99;
     ret1 = poll(pollfds, 1, timeoutInMs);
-
     [_controlLock unlock];
 
     if (ret1 < 0)
@@ -1853,9 +1852,9 @@ static int SSL_smart_shutdown(SSL *ssl)
     memset(&sa_remote_in6,0x00,sizeof(sa_remote_in6));
     
     len = sizeof(sa_local);
-    [_controlLock lock];
+    //[_controlLock lock];
     getsockname(_sock, &sa_local, &len);
-    [_controlLock unlock];
+    //[_controlLock unlock];
 
     switch(sa_local.sa_family)
     {
@@ -2331,8 +2330,11 @@ static int SSL_smart_shutdown(SSL *ssl)
             return UMSocketError_no_such_process;
         case EHOSTDOWN:
             return UMSocketError_host_down;
+        case ENOTCONN:
+            return UMSocketError_not_connected;
         default:
             fprintf(stderr,"Unknown errno code %d",e);
+            return UMSocketError_not_known;
             break;
     }
     return UMSocketError_not_known;
@@ -2518,7 +2520,10 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         }
         return [NSString stringWithFormat:@"ipv6:[%@]", addr];
     }
-
+    if([addr hasPrefix:@"::ffff:"])
+    {
+        addr = [addr substringFromIndex:7];
+    }
     NSArray *a = [addr componentsSeparatedByString:@"."];
     if([a count]==4)
     {

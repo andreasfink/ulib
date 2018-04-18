@@ -25,6 +25,7 @@ typedef enum UMHTTPConnectionRequestSection
 // This class represents each incoming client connection.
 @interface UMHTTPConnection : UMObject
 {
+    NSString        *_name;
 	int				timeout;
 @private
 	UMHTTPServer	*server;
@@ -35,8 +36,10 @@ typedef enum UMHTTPConnectionRequestSection
 
 	UMHTTPConnectionRequestSection				cSection;
 	ssize_t			awaitingBytes;
+    BOOL            _enableKeepalive;
 }
 
+@property(readwrite,strong,atomic)     NSString        *name;
 @property (readonly,strong)		UMHTTPServer	*server;
 @property (readonly,strong)		UMSocket		*socket;
 @property (readwrite,assign,atomic)    BOOL            mustClose;
@@ -44,6 +47,7 @@ typedef enum UMHTTPConnectionRequestSection
 @property (readwrite,assign)	int				timeout;
 @property (readwrite,strong)	NSDate			*lastActivity;
 @property (readwrite,strong,atomic)    UMHTTPRequest	*currentRequest;
+@property (readwrite,assign,atomic)    BOOL            enableKeepalive;
 
 
 - (UMHTTPConnection *) initWithSocket:(UMSocket *)socket server:(UMHTTPServer *)server;

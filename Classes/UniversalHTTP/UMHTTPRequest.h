@@ -34,6 +34,7 @@
 
 @interface UMHTTPRequest : UMObject
 {
+    uint64_t            _requestId;
     NSDate              *_completionTimeout;
     BOOL                _awaitingCompletion; /* set to YES if data is returned later */
 
@@ -59,9 +60,9 @@
     id<UMHTTPRequest_TimeoutProtocol>    _timeoutDelegate;
     BOOL                _mustClose; /* if set, it means after answering this request the connection shall close */
     UMMutex             *_pendingRequestLock;
-
 }
 
+@property (readwrite,assign,atomic)uint64_t            requestId;
 @property (readwrite,strong,atomic)NSDate               *completionTimeout;
 @property (readwrite,assign,atomic) BOOL                awaitingCompletion;
 
@@ -88,8 +89,7 @@
 @property (readwrite,assign,atomic)     BOOL                mustClose;
 
 
-
-
+- (NSString *)name;
 //- (id) initWithRequest:(CFHTTPMessageRef)req connection:(UMHTTPConnection *)conn;
 - (id) init;
 - (UMHTTPConnection *) connection;
@@ -114,7 +114,6 @@
 - (void) setResponseJsonObject:(id)content;
 - (void)setNotAuthorizedForRealm:(NSString *)realm;
 - (void)setContentType:(NSString *)ct;
-- (NSString *)description;
 - (NSString *)authenticationStatusAsString;
 - (NSMutableDictionary *)paramsMutableCopy;
 - (void)setResponseTypeText;

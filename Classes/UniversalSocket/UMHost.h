@@ -35,5 +35,6 @@
 - (NSString *)address:(UMSocketType)type;
 - (int)resolved;
 - (int)resolving;
++ (NSString *)localHostName;
 
 @end

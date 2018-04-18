@@ -88,7 +88,7 @@
         lock		= [[NSLock alloc] init];
         sslLock     = [[NSLock alloc]init];
         name =  @"unnamed";
-        receivePollTimeoutMs = 500;
+        receivePollTimeoutMs = 5000;
         serverName = @"UMHTTPServer 1.0";
         enableSSL = doSSL;
         if(tq)
@@ -199,7 +199,8 @@
     {
         ulib_set_thread_name(@"[UMHTTPServer mainListener]");
         /* performSelector will handle pool by itself */
-		UMSocketError		sErr = 0, ret;
+		UMSocketError sErr = 0;
+        UMSocketError pollResult;
 
 
         /*
@@ -250,18 +251,19 @@
 		{
             @autoreleasepool
             {
-                ret = [listenerSocket dataIsAvailable:receivePollTimeoutMs];
-                if(ret == UMSocketError_has_data_and_hup)
+                pollResult = [listenerSocket dataIsAvailable:receivePollTimeoutMs];
+                if(pollResult == UMSocketError_has_data_and_hup)
                 {
                     NSLog(@"  UMSocketError_has_data_and_hup");
 
                     /* we get HTTP request but nobody is there to read the answer so we ignore it */
                     ;
                 }
-                else if (ret == UMSocketError_has_data)
+                else if (pollResult == UMSocketError_has_data)
                 {
                     /* we get new HTTP request */
-                    UMSocket *clientSocket = [listenerSocket accept:&ret];
+                    UMSocketError ret1=UMSocketError_no_error;
+                    UMSocket *clientSocket = [listenerSocket accept:&ret1];
                     if(clientSocket)
                     {
                         clientSocket.useSSL=enableSSL;
@@ -284,19 +286,21 @@
 						    [clientSocket close];
 					    }
                     }
+                    else
+                    {
+                        lastErr = ret1;
+                    }
                 }
-                else if(ret == UMSocketError_no_data)
+                else if(pollResult == UMSocketError_no_data)
                 {
-                    ;
+                    usleep(10000); /* just to avoid too busy loops */
                 }
                 else
                 {
-                    lastErr = ret;
+                    lastErr = pollResult;
                     self.status = UMHTTPServerStatus_failed;
                 }
             }
-            
-            
             /* maintenance work */
 			while ([terminatedConnections count] > 0)
 			{

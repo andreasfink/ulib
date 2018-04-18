@@ -50,7 +50,7 @@
 
 - (NSString *)description
 {
-    return [[NSstring alloc] initWithFormat:@"HTTP(%@)",socket];
+    return [[NSString alloc] initWithFormat:@"HTTP(%@)",socket];
 }
 
 - (void) terminate
@@ -93,7 +93,6 @@
             NSLog(@"UMHTTPConnection [%@]: we have no socket",self);
             break;
         }
-        
         UMSocketError pollResult = [socket dataIsAvailable:receivePollTimeoutMs];
         NSDate *now = [NSDate new];
 #ifdef HTTP_DEBUG

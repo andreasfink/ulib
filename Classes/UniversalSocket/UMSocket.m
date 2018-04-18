@@ -1018,30 +1018,17 @@ static int SSL_smart_shutdown(SSL *ssl)
     [_controlLock lock];
     @try
     {
-
         int		newsock = -1;
         UMSocket *newcon =NULL;
         NSString *remoteAddress=@"";
         in_port_t remotePort=0;
-        int eno=0;
-
-
         if( (type == UMSOCKET_TYPE_TCP4ONLY) ||
            (type == UMSOCKET_TYPE_UDP4ONLY) ||
            (type == UMSOCKET_TYPE_SCTP4ONLY))
         {
-            struct	sockaddr_in		sa4;
+            struct	sockaddr_in sa4;
             socklen_t slen4 = sizeof(sa4);
-
-
-#ifdef FINK_DEBUG
-            fprintf(stderr,"accept ipv4 on %d",_sock);
-#endif
             newsock = accept(_sock,(struct sockaddr *)&sa4,&slen4);
-            eno = errno;
-#ifdef FINK_DEBUG
-            fprintf(stderr,"returned  %d, errno=%d",newsock,eno);
-#endif
             if(newsock >=0)
             {
                 char hbuf[NI_MAXHOST];
@@ -1059,25 +1046,15 @@ static int SSL_smart_shutdown(SSL *ssl)
                     remotePort = sa4.sin_port;
                 }
                 TRACK_FILE_SOCKET(newsock,remoteAddress);
-
                 newcon.cryptoStream.fileDescriptor = newsock;
             }
         }
         else
         {
+            /* IPv6 or dual mode */
             struct	sockaddr_in6		sa6;
             socklen_t slen6 = sizeof(sa6);
-
-#ifdef FINK_DEBUG
-            fprintf(stderr,"accept ipv4 on %d",_sock);
-#endif
             newsock = accept(_sock,(struct sockaddr *)&sa6,&slen6);
-            eno = errno;
-
-#ifdef FINK_DEBUG
-            fprintf(stderr,"returned  %d, errno=%d",newsock,eno);
-#endif
-
             if(newsock >= 0)
             {
                 char hbuf[NI_MAXHOST], sbuf[NI_MAXSERV];
@@ -1096,9 +1073,9 @@ static int SSL_smart_shutdown(SSL *ssl)
 
                 remoteAddress = [UMSocket unifyIP:remoteAddress];
                 TRACK_FILE_SOCKET(newsock,remoteAddress);
-
             }
         }
+        
         if(newsock >= 0)
         {
             newcon = [[UMSocket alloc]init];
@@ -1122,11 +1099,11 @@ static int SSL_smart_shutdown(SSL *ssl)
             newcon.useSSL = useSSL;
             [newcon updateName];
             [self reportStatus:@"accept () successful"];
-            
             /* TODO: start SSL if required here */
+            *ret = UMSocketError_no_error;
             return newcon;
         }
-        *ret = [UMSocket umerrFromErrno:eno];
+        *ret = [UMSocket umerrFromErrno:errno];
         return nil;
     }
     @finally

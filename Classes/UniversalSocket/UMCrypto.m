@@ -218,7 +218,7 @@
               length:(size_t)length
            errorCode:(int *)eno
 {
-    ssize_t i;
+    ssize_t i = 0;
 	if(!enable)
 	{
         size_t bytesRemaining = length;

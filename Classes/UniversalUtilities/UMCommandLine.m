@@ -224,9 +224,11 @@
             if([def[@"multi"] boolValue])
             {
                 arg_multi = [NSString stringWithFormat:@"=[%@,...]",def[@"argument"]];
+            }
+            else
+            {
                 arg = [NSString stringWithFormat:@" [%@]",def[@"argument"]];
             }
-            arg = [NSString stringWithFormat:@" [%@]",def[@"argument"]];
         }
         if(def[@"short"])
         {

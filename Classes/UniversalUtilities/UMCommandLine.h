@@ -104,6 +104,7 @@ It can be used independently of ulib if needed.
     NSMutableArray *_internalMainArguments;  /* the arguments passed on the command line without any options */
     NSMutableDictionary *_internalParams;      /* a dictionary with option name as key and either a NSValue (integer) as counter of how many times the option occurred or an array of strings with all the options's parameters */
     NSDictionary *_appDefinition;
+    NSString *_appName;
 }
 
 @property(readwrite,strong,atomic)  NSArray *commandLineDefinition;
@@ -111,6 +112,7 @@ It can be used independently of ulib if needed.
 @property(readwrite,strong,atomic)  NSDictionary *appDefinition;
 @property(readwrite,strong,atomic)  NSMutableArray *internalMainArguments; /* this is only here for copyWithZone. use mainArguments and params instead */
 @property(readwrite,strong,atomic)  NSMutableDictionary *internalParams;
+@property(readwrite,strong,atomic)  NSString *appName;
 
 
 - (UMCommandLine *)initWithCommandLineDefintion:(NSArray *)cld

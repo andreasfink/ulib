@@ -39,6 +39,8 @@
         _commandLineArguments = args;
         _commandLineDefinition = cld;
         _appDefinition = appDefinition;
+        _appName = args[0];
+        _appName = [_appName lastPathComponent];
         [self processCommandLineArguments];
     }
     return self;

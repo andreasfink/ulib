@@ -107,10 +107,9 @@
 - (void)unlockedStart
 {
     NSAssert(self.duration>0,@"Timer is 0");
-    NSLog(@"Starting timer %@ with duration %ld µs",self.name,self.duration);
     if(self.duration < 100)
     {
-        NSLog(@"Starting timer %@ with duration %ld µs",self.name,self.duration);
+        NSLog(@"Warning: Starting timer %@ with very short duration %lld µs",self.name,(long long)self.duration);
     }
     self.isRunning = YES;
     UMMicroSec now  = [UMThroughputCounter microsecondTime];

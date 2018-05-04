@@ -17,6 +17,7 @@
 
 - (UMTimer *)initWithTarget:(id)target selector:(SEL)selector
 {
+
     return [self initWithTarget:target
                        selector:selector
                          object:NULL
@@ -32,10 +33,28 @@
                        name:(NSString *)n
                     repeats:(BOOL)r
 {
+    self =[super init];
+    if(self)
+    {
+        UMMicroSec now  = [UMThroughputCounter microsecondTime];
+        _isRunning = NO;
+        _startTime = now;
+        _lastChecked = now;
+        _expiryTime = 0;
+        _duration = (UMMicroSec)(d * 1000000.0);
+        _objectToCall = target;
+        _selectorToCall = selector;
+        _parameter = object;
+        _name = n;
+        _repeats = r;
+        _timerMutex = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"timer %@",n]];
+
+    }
+    return self;
     return [self initWithTarget:target
                        selector:selector
                          object:(id)object
-                       duration:(UMMicroSec)d * 1000000
+                       duration:(UMMicroSec)(d * 1000000.0)
                            name:n
                         repeats:r];
 }
@@ -87,6 +106,12 @@
 
 - (void)unlockedStart
 {
+    NSAssert(self.duration>0,@"Timer is 0");
+    NSLog(@"Starting timer %@ with duration %ld µs",self.name,self.duration);
+    if(self.duration < 100)
+    {
+        NSLog(@"Starting timer %@ with duration %ld µs",self.name,self.duration);
+    }
     self.isRunning = YES;
     UMMicroSec now  = [UMThroughputCounter microsecondTime];
     self.expiryTime = now + self.duration;

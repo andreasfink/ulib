@@ -20,7 +20,6 @@
     UMMicroSec          _duration;
     NSString            *_name;
     BOOL                _repeats;
-    
     UMObject            *_objectToCall;
     SEL                 _selectorToCall;
     id                  _parameter;
@@ -36,8 +35,6 @@
 @property(readwrite,strong,atomic) NSString            *name;
 @property(readwrite,assign,atomic) BOOL                repeats;
 @property(readwrite,assign,atomic) BOOL                runCallbackInForeground;
-
-
 @property(readwrite,strong)                            UMObject *objectToCall;
 @property(readwrite,assign,atomic) SEL                 selectorToCall;
 @property(readwrite,strong,atomic) id                  parameter;
@@ -49,12 +46,14 @@
                        name:(NSString *)n
                     repeats:(BOOL)r;
 
+/* DEPRECATED
 - (UMTimer *)initWithTarget:(id)target
                    selector:(SEL)selector
                      object:(id)object
                    duration:(UMMicroSec)dur
                        name:(NSString *)n
                     repeats:(BOOL)rep;
+*/
 
 - (UMTimer *)initWithTarget:(id)target
                    selector:(SEL)selector;

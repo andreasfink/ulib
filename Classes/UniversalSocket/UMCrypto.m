@@ -240,9 +240,6 @@
                 bytesRemaining = bytesRemaining -i;
                 startPos = startPos + i;
                 totalWritten = totalWritten + i;
-
-                NSLog(@" totalWritten: %d",(int)totalWritten);
-
             }
             if(i<0)
             {

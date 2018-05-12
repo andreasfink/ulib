@@ -19,8 +19,8 @@
 @interface UMHistoryLog : UMObject
 {
     NSMutableArray  *entries;
-    int max;
-    UMMutex *_lock;
+    int             max;
+    UMMutex         *_lock;
 }
 
 - (UMHistoryLog *)init;

@@ -40,6 +40,7 @@
     _sock = [[UMSocket alloc]initWithType:UMSOCKET_TYPE_UDP name:@"syslog-client"];
     _sock.remoteHost = [[UMHost alloc]initWithName:_destinationHost];
     _sock.requestedRemotePort = _udpPort;
+    _sock.objectStatisticsName = @"UMSocket(Syslog-client)";
     [_sock connect];
     isOpen = YES;
     [self logMessageId:@"00000000"

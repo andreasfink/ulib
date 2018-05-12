@@ -142,6 +142,9 @@
 {
 	UMSocketError	sErr;
     logFeed.copyToConsole = 1;
+
+    listenerSocket.objectStatisticsName = [NSString stringWithFormat: @"UMSocket(UMHTTPServer-listener:%@)",serverName];
+
     @autoreleasepool
     {
 		if(self.status != UMHTTPServerStatus_notRunning)
@@ -198,6 +201,7 @@
 	@autoreleasepool
     {
         ulib_set_thread_name(@"[UMHTTPServer mainListener]");
+
         /* performSelector will handle pool by itself */
 		UMSocketError sErr = 0;
         UMSocketError pollResult;

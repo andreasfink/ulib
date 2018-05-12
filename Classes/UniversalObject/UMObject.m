@@ -69,6 +69,9 @@ void umobject_disable_alloc_logging(void)
 #endif //RETAIN_RELEASE_DEBUG
 }
 
+
+
+
 @implementation UMObjectStat
 - (UMObjectStat *)copyWithZone:(NSZone *)zone;
 {
@@ -212,6 +215,49 @@ static FILE *alloc_log;
 #endif
 }
 
+- (NSString *)objectStatisticsName
+{
+    if(_objectStatisticsName)
+    {
+        return _objectStatisticsName;
+    }
+    return [[self class] description];
+}
+
+- (void)setObjectStatisticsName:(NSString *)newName
+{
+    if(object_stat)
+    {
+#if !defined(USING_ARC)
+        @autoreleasepool
+#endif
+        {
+            pthread_mutex_lock(object_stat_mutex);
+            NSString *oldName = [self objectStatisticsName];
+
+            UMObjectStat *oldEntry = object_stat[oldName];
+            if(oldEntry)
+            {
+                oldEntry.alloc_count--;
+                oldEntry.inUse_count--;
+            }
+            UMObjectStat *newEntry = object_stat[newName];
+            if(newEntry==NULL)
+            {
+                newEntry = [[UMObjectStat alloc]init];
+                newEntry.name = newName;
+                object_stat[newName]=newEntry;
+            }
+            newEntry.alloc_count++;
+            newEntry.inUse_count++;
+
+            _objectStatisticsName = newName;
+            pthread_mutex_unlock(object_stat_mutex);
+        }
+    }
+}
+
+
 - (id) init
 {
     self=[super init];
@@ -223,7 +269,7 @@ static FILE *alloc_log;
         @autoreleasepool
 #endif
         {
-            NSString *m = [[self class] description];
+            NSString *m = [self objectStatisticsName];
             size_t l = strlen(m.UTF8String);
             _magic = calloc(l+1,1);
             if(_magic)
@@ -240,7 +286,7 @@ static FILE *alloc_log;
             @autoreleasepool
 #endif
             {
-                NSString *s = [NSString stringWithFormat:@"+%@\n",[[self class] description]];
+                NSString *s = [NSString stringWithFormat:@"+%@\n",[self objectStatisticsName]];
                 NSData *d = [s dataUsingEncoding:NSUTF8StringEncoding];
                 @synchronized(alloc_file)
                 {
@@ -254,7 +300,7 @@ static FILE *alloc_log;
             @autoreleasepool
 #endif
             {
-                NSString *m = [[self class] description];
+                NSString *m = [self objectStatisticsName];
                 pthread_mutex_lock(object_stat_mutex);
                 UMObjectStat *entry = object_stat[m];
                 if(entry == NULL)
@@ -294,7 +340,7 @@ static FILE *alloc_log;
         @autoreleasepool
 #endif
         {
-            NSString *m = [[self class] description];
+            NSString *m = [self objectStatisticsName];
             NSString *s = [NSString stringWithFormat:@"-%@\n",m];
             NSData *d = [s dataUsingEncoding:NSUTF8StringEncoding];
             @synchronized(alloc_file)
@@ -305,8 +351,7 @@ static FILE *alloc_log;
     }
     if(object_stat)
     {
-        NSString *m;
-        m = [[self class] description];
+        NSString *m = [self objectStatisticsName];
 
         pthread_mutex_lock(object_stat_mutex);
         UMObjectStat *entry = object_stat[m];
@@ -393,6 +438,21 @@ static FILE *alloc_log;
 {
     return [[self description]prefixLines:prefix];
 }
+
+- (UMObject *)copyWithZone:(NSZone *)zone;
+{
+    UMObject *r = [[UMObject allocWithZone:zone]init];
+
+    r->umobject_flags = umobject_flags;
+    r->_magic = _magic;
+    r.logFeed = logFeed;
+    if(_objectStatisticsName)
+    {
+        r.objectStatisticsName = _objectStatisticsName;
+    }
+    return r;
+}
+
 
 int umobject_enable_object_stat(void)
 {

@@ -1096,6 +1096,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             newcon.connectedRemotePort = remotePort;
             newcon.useSSL = useSSL;
             [newcon updateName];
+            newcon.objectStatisticsName = newcon.name;
             [self reportStatus:@"accept () successful"];
             /* TODO: start SSL if required here */
             *ret = UMSocketError_no_error;

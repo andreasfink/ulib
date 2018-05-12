@@ -472,8 +472,11 @@ int umobject_enable_object_stat(void)
 void umobject_disable_object_stat(void)
 {
     object_stat = NULL;
-    pthread_mutex_destroy(object_stat_mutex);
-    free(object_stat_mutex);
+    if(object_stat_mutex)
+    {
+        pthread_mutex_destroy(object_stat_mutex);
+        free(object_stat_mutex);
+    }
     object_stat_mutex = NULL;
 }
 

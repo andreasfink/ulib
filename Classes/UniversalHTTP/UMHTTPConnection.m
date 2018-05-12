@@ -21,11 +21,8 @@
 #import "UMTaskQueue.h"
 
 #include <poll.h>
-
 @implementation UMHTTPConnection
 
-@synthesize	server;
-@synthesize	socket;
 @synthesize	timeout;
 @synthesize	lastActivity;
 @synthesize currentRequest;
@@ -40,8 +37,8 @@
     self = [super init];
 	if(self)
 	{
-		server = s;
-		socket = sk;
+		_server = s;
+		_socket = sk;
 		lastActivity = nil;
 		timeout = DEFAULT_HTTP_TIMEOUT;
 	}
@@ -54,13 +51,15 @@
     {
         return _name;
     }
-    return [[NSString alloc] initWithFormat:@"HTTP(%@)",socket];
+    return [[NSString alloc] initWithFormat:@"HTTP(%@)",_socket];
 }
 
-- (void) terminate
+/* UMHTTPServer calls us back to terminate */
+- (void) terminateForServer
 {
-	[socket close];
-    server = NULL;
+	[_socket close];
+    _socket = NULL;
+    _server = NULL;
 }
 
 
@@ -69,6 +68,8 @@
 */
 - (void) connectionListener
 {
+    NSAssert(_server!=NULL,@"server is null");
+    
 	UMSocketError err;
     int receivePollTimeoutMs = 5000;
     NSMutableData *appendToMe;
@@ -77,27 +78,27 @@
     cSection = UMHTTPConnectionRequestSectionFirstLine;
 
 	self.mustClose = NO;
-    if(socket.useSSL)
+    if(_socket.useSSL)
     {
-        ulib_set_thread_name([NSString stringWithFormat:@"[UMHTTPConnection connectionListener] %@ (with SSL)",socket.description]);
-        if(socket.sslActive==NO)
+        ulib_set_thread_name([NSString stringWithFormat:@"[UMHTTPConnection connectionListener] %@ (with SSL)",_socket.description]);
+        if(_socket.sslActive==NO)
         {
-            [socket startTLS];
+            [_socket startTLS];
         }
     }
     else
     {
-        ulib_set_thread_name([NSString stringWithFormat:@"[UMHTTPConnection connectionListener] %@",socket.description]);
+        ulib_set_thread_name([NSString stringWithFormat:@"[UMHTTPConnection connectionListener] %@",_socket.description]);
     }
     BOOL completeRequestReceived = NO;
 	while((self.mustClose == NO) && (self.inputClosed==NO))
 	{
-        if (!socket)
+        if (!_socket)
         {
             NSLog(@"[%@]: we have no socket",self.name);
             break;
         }
-        UMSocketError pollResult = [socket dataIsAvailable:receivePollTimeoutMs];
+        UMSocketError pollResult = [_socket dataIsAvailable:receivePollTimeoutMs];
         NSDate *now = [NSDate new];
 #ifdef HTTP_DEBUG
         NSLog(@"[%@]: pollResult %d",self.name,pollResult);
@@ -129,7 +130,7 @@
 #ifdef HTTP_DEBUG
             NSLog(@"[%@]: data present",self.name);
 #endif
-            err = [socket receiveEverythingTo:&appendToMe];
+            err = [_socket receiveEverythingTo:&appendToMe];
             if(err != UMSocketError_no_error)
             {
 #ifdef HTTP_DEBUG
@@ -190,7 +191,7 @@
 #endif
         /* we're done with this thread so we must release our pool */
         /* tell the server process to terminate and release us */
-        [server connectionDone:self];
+        [_server connectionDone:self];
     }
 }
 
@@ -359,7 +360,7 @@
 
         if(req.authenticationStatus == UMHTTP_AUTHENTICATION_STATUS_UNTESTED)
         {
-            req.authenticationStatus =  [server httpAuthenticateRequest:req realm:&realm];
+            req.authenticationStatus =  [_server httpAuthenticateRequest:req realm:&realm];
         }
 
         if(req.authenticationStatus == UMHTTP_AUTHENTICATION_STATUS_FAILED)
@@ -373,35 +374,35 @@
         {
             if([method isEqual:@"GET"])
             {
-                [server httpGet:req];
+                [_server httpGet:req];
             }
             else if([method isEqual:@"POST"])
             {
-                [server httpPost:req];
+                [_server httpPost:req];
             }
             else if([method isEqual:@"HEAD"])
             {
-                [server httpHead:req];
+                [_server httpHead:req];
             }
             else if([method isEqual:@"PUT"])
             {
-                [server httpPut:req];
+                [_server httpPut:req];
             }
             else if([method isEqual:@"DELETE"])
             {
-                [server httpDelete:req];
+                [_server httpDelete:req];
             }
             else if([method isEqual:@"TRACE"])
             {
-                [server httpTrace:req];
+                [_server httpTrace:req];
             }
             else if([method isEqual:@"CONNECT"])
             {
-                [server httpConnect:req];
+                [_server httpConnect:req];
             }
             else if([method isEqual:@"OPTIONS"])
             {
-                [server httpOptions:req];
+                [_server httpOptions:req];
             }
             else
             {
@@ -416,7 +417,7 @@
         if(req.awaitingCompletion == YES) /*async callback */
         {
             req.connection = self;
-            [server.pendingRequests addObject:req];
+            [_server.pendingRequests addObject:req];
 #ifdef HTTP_DEBUG
             NSLog(@"[%@]: move to pending request (async)",self.name);
 #endif

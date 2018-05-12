@@ -657,9 +657,9 @@
     if(connection.mustClose)
     {
 #ifdef HTTP_DEBUG
-        NSLog(@"[%@]: connection.mustClose is set. terminatin",self.name);
+        NSLog(@"[%@]: connection.mustClose is set. listener should now terminate",self.name);
 #endif
-        [connection terminate];
+        connection = NULL; /* we give up ownership of the connection */
     }
     else
     {

@@ -121,7 +121,7 @@ typedef enum UMHTTPServerStatus
 	NSMutableDictionary *getPostDict;
 	NSOperationQueue	*httpOperationsQueue;
 	NSString            *name;
-    int                 receivePollTimeoutMs;
+    int                 _receivePollTimeoutMs;
     NSString            *advertizeName;
     BOOL                enableSSL;
     BOOL                _enableKeepalive;

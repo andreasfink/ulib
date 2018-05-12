@@ -84,13 +84,16 @@
         sleeper		= [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
         [sleeper prepare];
         connections = [[UMSynchronizedArray alloc] init];
+        _connectionsLock = [[UMMutex alloc]init];
+
         terminatedConnections = [[UMSynchronizedArray alloc]init];
         lock		= [[NSLock alloc] init];
         sslLock     = [[NSLock alloc]init];
         name =  @"unnamed";
-        receivePollTimeoutMs = 5000;
+        _receivePollTimeoutMs = 5000;
         serverName = @"UMHTTPServer 1.0";
         enableSSL = doSSL;
+
         if(tq)
         {
             _taskQueue = tq;
@@ -255,7 +258,8 @@
 		{
             @autoreleasepool
             {
-                pollResult = [listenerSocket dataIsAvailable:receivePollTimeoutMs];
+                //NSLog(@"_receivePollTimeoutMs=%ld",_receivePollTimeoutMs);
+                pollResult = [listenerSocket dataIsAvailable:_receivePollTimeoutMs];
                 if(pollResult == UMSocketError_has_data_and_hup)
                 {
                     NSLog(@"  UMSocketError_has_data_and_hup");
@@ -281,6 +285,7 @@
                             UMHTTPConnection *con = [[UMHTTPConnection alloc] initWithSocket:clientSocket server:self];
                             con.name = [NSString stringWithFormat:@"HTTPConnection %@:%d",clientSocket.connectedRemoteAddress,clientSocket.connectedRemotePort];
                             con.enableKeepalive = _enableKeepalive;
+                            con.server = self;
 
                             [connections addObject:con];
 
@@ -316,7 +321,8 @@
                 {
                     break;
                 }
-                [con terminate];
+                [con terminateForServer];
+                con = NULL;
 			}
 		}
         self.status = UMHTTPServerStatus_shutDown;

@@ -28,8 +28,8 @@ typedef enum UMHTTPConnectionRequestSection
     NSString        *_name;
 	int				timeout;
 @private
-	UMHTTPServer	*server;
-	UMSocket		*socket;
+	UMHTTPServer 	*_server;
+	UMSocket		*_socket;
     BOOL            _mustClose;
     BOOL            _inputClosed;
 	NSDate			*lastActivity;
@@ -39,15 +39,15 @@ typedef enum UMHTTPConnectionRequestSection
     BOOL            _enableKeepalive;
 }
 
-@property(readwrite,strong,atomic)     NSString        *name;
-@property (readonly,strong)		UMHTTPServer	*server;
-@property (readonly,strong)		UMSocket		*socket;
-@property (readwrite,assign,atomic)    BOOL            mustClose;
-@property (readwrite,assign,atomic)    BOOL            inputClosed;
-@property (readwrite,assign)	int				timeout;
-@property (readwrite,strong)	NSDate			*lastActivity;
-@property (readwrite,strong,atomic)    UMHTTPRequest	*currentRequest;
-@property (readwrite,assign,atomic)    BOOL            enableKeepalive;
+@property(readwrite,strong,atomic)      NSString        *name;
+@property (readwrite,strong)            UMHTTPServer	*server;
+@property (readonly,strong)		        UMSocket		*socket;
+@property (readwrite,assign,atomic)     BOOL            mustClose;
+@property (readwrite,assign,atomic)     BOOL            inputClosed;
+@property (readwrite,assign)	        int				timeout;
+@property (readwrite,strong)	        NSDate			*lastActivity;
+@property (readwrite,strong,atomic)     UMHTTPRequest	*currentRequest;
+@property (readwrite,assign,atomic) BOOL            enableKeepalive;
 
 
 - (UMHTTPConnection *) initWithSocket:(UMSocket *)socket server:(UMHTTPServer *)server;
@@ -55,7 +55,7 @@ typedef enum UMHTTPConnectionRequestSection
 - (void) connectionListener;
 - (int) checkForIncomingData:(NSMutableData *)appendToMe requestCompleted:(BOOL *)complete;
 - (void) processHTTPRequest:(UMHTTPRequest *)request;
-- (void) terminate;
+- (void) terminateForServer;
 //- (void) addLogFromConfigFile:(NSString *)file withSection:(NSString *)section withSubsection:(NSString *)subsection withName:(NSString *)name;
 
 @end

@@ -106,8 +106,8 @@ BOOL umobject_object_stat_is_enabled(void);
 - (void)retainDebug; /*!< gets called at retain event */
 - (void)releaseDebug; /*!< gets called when a release occurs */
 - (void)enableRetainReleaseLogging; /*!< if set retain/release cycles get logged to the console with NSLog */
-- (NSString *)objectStatisticsName;
-- (void)setObjectStatisticsName:(NSString *)newName;
+
+@property(readwrite,strong,atomic)  NSString *objectStatisticsName;
 
 @end
 

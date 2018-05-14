@@ -446,7 +446,7 @@ static FILE *alloc_log;
     r->umobject_flags = umobject_flags;
     r->_magic = _magic;
     r.logFeed = logFeed;
-    if(_objectStatisticsName)
+    if(_objectStatisticsName != NULL)
     {
         r.objectStatisticsName = _objectStatisticsName;
     }
@@ -572,7 +572,7 @@ BOOL umobject_object_stat_is_enabled(void)
     if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
         NSLog(@"Release [%p] rc=%d",self,self.ulib_retain_counter);
-        NSLog(@"Called from %@",UMBacktrace(NULL,0));
+        NSLog(@"Called from %@",UMBacktrace(NULL,0))
     }
 #endif
 }

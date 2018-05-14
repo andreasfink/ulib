@@ -2305,6 +2305,8 @@ static int SSL_smart_shutdown(SSL *ssl)
             return UMSocketError_host_down;
         case ENOTCONN:
             return UMSocketError_not_connected;
+        case ECONNABORTED:
+            return UMSocketError_connection_aborted;
         default:
             fprintf(stderr,"Unknown errno code %d\n",e);
             return UMSocketError_not_known;
@@ -2415,6 +2417,8 @@ static int SSL_smart_shutdown(SSL *ssl)
             return @"invalid advertize name";
         case UMSocketError_no_such_process:
             return @"no such process";
+        case UMSocketError_connection_aborted:
+            return @"connection aborted";
         case UMSocketError_not_known:
             return @"not known";
         default:

@@ -142,8 +142,6 @@ static int SSL_smart_shutdown(SSL *ssl)
 @synthesize status;
 @synthesize localHost;
 @synthesize remoteHost;
-//@synthesize connectedLocalAddress;
-//@synthesize connectedRemoteAddress;
 @synthesize requestedLocalPort;
 @synthesize requestedRemotePort;
 @synthesize connectedLocalPort;
@@ -165,6 +163,79 @@ static int SSL_smart_shutdown(SSL *ssl)
 @synthesize serverSideCertData;
 @synthesize serverSideKeyData;
 
+- (void)initNetworkSocket
+{
+    switch(type)
+    {
+        case UMSOCKET_TYPE_TCP4ONLY:
+            _socketFamily=AF_INET;
+            _socketType = SOCK_STREAM;
+            _socketProto = IPPROTO_TCP;
+            _sock = socket(_socketFamily, _socketType, _socketProto);
+            TRACK_FILE_SOCKET(_sock,@"tcp");
+            break;
+        case UMSOCKET_TYPE_TCP6ONLY:
+            _socketFamily=AF_INET6;
+            _socketType = SOCK_STREAM;
+            _socketProto = IPPROTO_TCP;
+            _sock = socket(_socketFamily, _socketType, _socketProto);
+            TRACK_FILE_SOCKET(_sock,@"tcp");
+            break;
+        case UMSOCKET_TYPE_TCP:
+            _socketFamily=AF_INET6;
+            _socketType = SOCK_STREAM;
+            _socketProto = IPPROTO_TCP;
+            _sock = socket(_socketFamily, _socketType, _socketProto);
+            TRACK_FILE_SOCKET(_sock,@"tcp");
+            if(_sock < 0)
+            {
+                if(errno==EAFNOSUPPORT)
+                {
+                    _socketFamily=AF_INET;
+                    _sock = socket(_socketFamily, _socketType, _socketProto);
+                    TRACK_FILE_SOCKET(_sock,@"tcp");
+                }
+            }
+            break;
+        case UMSOCKET_TYPE_UDP4ONLY:
+            _socketFamily=AF_INET;
+            _socketType = SOCK_DGRAM;
+            _socketProto = IPPROTO_UDP;
+            _sock = socket(_socketFamily, _socketType, _socketProto);
+            TRACK_FILE_SOCKET(_sock,@"udp");
+            break;
+        case UMSOCKET_TYPE_UDP6ONLY:
+            _socketFamily=AF_INET6;
+            _socketType = SOCK_DGRAM;
+            _socketProto = IPPROTO_UDP;
+            _sock = socket(_socketFamily, _socketType, _socketProto);
+            TRACK_FILE_SOCKET(_sock,@"udp");
+            break;
+        case UMSOCKET_TYPE_UDP:
+            _socketFamily=AF_INET6;
+            _socketType = SOCK_DGRAM;
+            _socketProto = IPPROTO_UDP;
+            _sock = socket(_socketFamily, _socketType, _socketProto);
+            TRACK_FILE_SOCKET(_sock,@"udp");
+            if(_sock < 0)
+            {
+                if(errno==EAFNOSUPPORT)
+                {
+                    _socketFamily=AF_INET;
+                    _sock = socket(_socketFamily, _socketType, _socketProto);
+                    TRACK_FILE_SOCKET(_sock,@"udp");
+                }
+            }
+            break;
+        case UMSOCKET_TYPE_SCTP4ONLY:
+        case UMSOCKET_TYPE_SCTP6ONLY:
+        case UMSOCKET_TYPE_SCTP:
+                /*we handle this in subclass UMSocketSCTP in ulibsctp */
+            break;
+        default:
+            break;
+    }
+}
 - (NSString *)connectedRemoteAddress
 {
     return _connectedRemoteAddress;
@@ -397,7 +468,6 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
         int reuse = 1;
         int linger_time = 5;
-        int eno = 0;
         rx_crypto_enable = 0;
         tx_crypto_enable = 0;
         _socketName = name;
@@ -407,129 +477,30 @@ static int SSL_smart_shutdown(SSL *ssl)
 
         type = t;
         _sock = -1;
-        switch(type)
-        {
-            case UMSOCKET_TYPE_TCP4ONLY:
-                _family=AF_INET;
-                _sock = socket(_family, SOCK_STREAM, IPPROTO_TCP);
-                eno = errno;
-                TRACK_FILE_SOCKET(_sock,@"tcp");
-                break;
-            case UMSOCKET_TYPE_TCP6ONLY:
-                _family=AF_INET6;
-                _sock = socket(_family, SOCK_STREAM, IPPROTO_TCP);
-                eno = errno;
-                TRACK_FILE_SOCKET(_sock,@"tcp");
-                break;
-            case UMSOCKET_TYPE_TCP:
-                _family=AF_INET6;
-                _sock = socket(_family, SOCK_STREAM, IPPROTO_TCP);
-                eno = errno;
-                TRACK_FILE_SOCKET(_sock,@"tcp");
-                if(_sock < 0)
-                {
-                    if(eno==EAFNOSUPPORT)
-                    {
-                        _family=AF_INET;
-                        _sock = socket(_family,SOCK_STREAM, IPPROTO_TCP);
-                        eno = errno;
-                        TRACK_FILE_SOCKET(_sock,@"tcp");
-                    }
-                }
-                break;
-            case UMSOCKET_TYPE_UDP4ONLY:
-                _family=AF_INET;
-                _sock = socket(_family,SOCK_DGRAM, IPPROTO_UDP);
-                eno = errno;
-                TRACK_FILE_SOCKET(_sock,@"udp");
-                break;
-            case UMSOCKET_TYPE_UDP6ONLY:
-                _family=AF_INET6;
-                _sock = socket(_family,SOCK_DGRAM, IPPROTO_UDP);
-                eno = errno;
-                TRACK_FILE_SOCKET(_sock,@"udp");
-                break;
-            case UMSOCKET_TYPE_UDP:
-                _family=AF_INET6;
-                _sock = socket(_family,SOCK_DGRAM, 0);
-                eno = errno;
-                TRACK_FILE_SOCKET(_sock,@"udp");
-                if(_sock < 0)
-                {
-                    if(eno==EAFNOSUPPORT)
-                    {
-                        _family=AF_INET;
-                        _sock = socket(_family,SOCK_DGRAM, 0);
-                        eno = errno;
-                        TRACK_FILE_SOCKET(_sock,@"udp");
-                    }
-                }
-                break;
-            case UMSOCKET_TYPE_SCTP4ONLY:
-                _family=AF_INET;
-                _sock = socket(_family,SOCK_STREAM, IPPROTO_SCTP);
-                eno = errno;
-                TRACK_FILE_SOCKET(_sock,@"sctp");
-                break;
-            case UMSOCKET_TYPE_SCTP6ONLY:
-                _family=AF_INET6;
-                _sock = socket(_family,SOCK_STREAM, IPPROTO_SCTP);
-                eno = errno;
-                TRACK_FILE_SOCKET(_sock,@"sctp");
-                break;
-#ifdef	SCTP_IN_KERNEL
-            case UMSOCKET_TYPE_SCTP:
-                _family=AF_INET6;
-                _sock = socket(_family,SOCK_STREAM, IPPROTO_SCTP);
-                eno = errno;
-                TRACK_FILE_SOCKET(_sock,@"sctp");
-                if(_sock < 0)
-                {
-                    if(eno==EAFNOSUPPORT)
-                    {
-                        _family=AF_INET;
-                        _sock = socket(_family,SOCK_STREAM, IPPROTO_SCTP);
-                        eno = errno;
-                        TRACK_FILE_SOCKET(_sock,@"sctp");
-                        if(_sock!=-1)
-                        {
-                            int flags = 1;
-                            setsockopt(_sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
-                        }
-                    }
-                }
-                break;
-#endif
-            default:
-                return nil;
-        }
-        
-        if(_sock <0 )
+        [self initNetworkSocket];
+        if(_sock < 0 )
         {
             switch(type)
             {
                 case UMSOCKET_TYPE_TCP6ONLY:
                 case UMSOCKET_TYPE_TCP4ONLY:
                 case UMSOCKET_TYPE_TCP:
-                    fprintf(stderr,"[UMSocket: init] socket(IPPROTO_TCP) returns %d errno = %d",_sock,eno);
+                    fprintf(stderr,"[UMSocket: init] socket(IPPROTO_TCP) returns %d errno = %d (%s)",_sock,errno,strerror(errno));
                     break;
                 case UMSOCKET_TYPE_UDP6ONLY:
                 case UMSOCKET_TYPE_UDP4ONLY:
                 case UMSOCKET_TYPE_UDP:
-                    fprintf(stderr,"[UMSocket: init] socket(IPPROTO_UDP) returns %d errno = %d",_sock,eno);
+                    fprintf(stderr,"[UMSocket: init] socket(IPPROTO_UDP) returns %d errno = %d (%s)",_sock,errno,strerror(errno));
                     break;
-#ifdef	SCTP_IN_KERNEL
                 case UMSOCKET_TYPE_SCTP4ONLY:
                 case UMSOCKET_TYPE_SCTP6ONLY:
                 case UMSOCKET_TYPE_SCTP:
-                    fprintf(stderr,"[UMSocket: init] socket(IPPROTO_SCTP) returns %d errno = %d",_sock,eno);
+                    fprintf(stderr,"[UMSocket: init] socket(IPPROTO_SCTP) returns %d errno = %d (%s)",_sock,errno,strerror(errno));
                     break;
-#endif
-                    
                 default:
                     break;
             }
-            return nil;
+            return NULL;
         }
         if(_sock >=0)
         {
@@ -543,16 +514,14 @@ static int SSL_smart_shutdown(SSL *ssl)
 
             if(setsockopt(_sock, SOL_SOCKET, SO_REUSEADDR, &reuse,sizeof(reuse)) < 0)
             {
-                eno = errno;
-                fprintf(stderr,"[UMSocket: init] setsockopt(SO_REUSEADDR) sets errno to %d (%s)",eno,strerror(eno));
+                fprintf(stderr,"[UMSocket: init] setsockopt(SO_REUSEADDR) sets errno to %d (%s)\n",errno,strerror(errno));
             }
         }
         if(linger_time)
         {
             if(setsockopt(_sock, SOL_SOCKET, SO_LINGER,  &linger_time,sizeof(linger_time)) < 0)
             {
-                eno = errno;
-                fprintf(stderr,"[UMSocket: init] setsockopt(SO_LINGER,%d) sets errno to %d (%s)",linger_time,eno,strerror(eno));
+                fprintf(stderr,"[UMSocket: init] setsockopt(SO_LINGER,%d) sets errno to %d (%s)\n",linger_time,errno,strerror(errno));
             }
         }
     }
@@ -876,7 +845,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             return UMSocketError_address_not_available;
         }
 
-        if((_family==AF_INET6) && (ip_version==4))
+        if((_socketFamily==AF_INET6) && (ip_version==4))
         {
             /* we have a IPV6 socket but the remote addres is in IPV4 format so we must use the IPv6 representation of it */
             NSString *ipv4_in_ipv6 =[NSString stringWithFormat:@"::ffff:%@",address];
@@ -1110,6 +1079,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         [_controlLock unlock];
     }
 }
+
 
 - (void) switchToNonBlocking
 {
@@ -2386,7 +2356,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         case UMSocketError_address_not_available:
             return @"address_not_available";
         case UMSocketError_address_not_valid_for_socket_family:
-            return @"address_not_valid_for_socket_family";
+            return @"address_not_valid_for_socket_socketFamily";
         case UMSocketError_socket_is_null_pointer:
             return @"socket_is_null_pointer";
         case UMSocketError_pointer_not_in_userspace:
@@ -2717,17 +2687,17 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 
     NSString *addr = [UMSocket deunifyIp:unifiedAddr type:&addrtype];
 
-    if(_family==AF_INET)
+    if(_socketFamily==AF_INET)
     {
         struct sockaddr_in	sa;
         
         memset(&sa,0x00,sizeof(sa));
-        sa.sin_family		= _family;
+        sa.sin_family		= _socketFamily;
 #ifdef	HAS_SOCKADDR_LEN
         sa.sin_len			= sizeof(struct sockaddr_in);
 #endif
         sa.sin_port             = htons(port);
-        inet_pton(_family, addr.UTF8String, &sa.sin_addr);
+        inet_pton(_socketFamily, addr.UTF8String, &sa.sin_addr);
         int flags=0;
         sentDataSize = sendto(_sock,
                               [data bytes],
@@ -2736,18 +2706,18 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
                               (struct sockaddr *)&sa,
                               (socklen_t) sizeof(struct sockaddr_in));
     }
-    else if(_family==AF_INET6)
+    else if(_socketFamily==AF_INET6)
     {
 
         struct sockaddr_in6	sa6;
 
         memset(&sa6,0x00,sizeof(sa6));
-        sa6.sin6_family			= _family;
+        sa6.sin6_family			= _socketFamily;
 #ifdef	HAS_SOCKADDR_LEN
         sa6.sin6_len        = sizeof(struct sockaddr_in6);
 #endif
         sa6.sin6_port       = htons(requestedRemotePort);
-        inet_pton(_family, addr.UTF8String, &sa6.sin6_addr);
+        inet_pton(_socketFamily, addr.UTF8String, &sa6.sin6_addr);
 
         sentDataSize = sendto(_sock, [data bytes],
                               (size_t)[data length],
@@ -2919,7 +2889,6 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         }
         
         int maxlocks = CRYPTO_num_locks();
-            
         ssl_static_locks = (ummutex_c_pointer *)malloc(sizeof(ummutex_c_pointer) * maxlocks);
         for (int c = 0; c < maxlocks; c++)
         {
@@ -2927,6 +2896,21 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
             ssl_static_locks[c] = (__bridge_retained ummutex_c_pointer)lck;
         }
     }
+}
+
+- (UMSocketError)setOptionLinger
+{
+#ifdef SO_LINGER
+    struct linger linger;
+    linger.l_onoff  = 1;
+    linger.l_linger = 32;
+    if(setsockopt(_sock, SOL_SOCKET, SO_LINGER, &linger, sizeof (struct linger)))
+    {
+        /* FIXME: use errno for proper return */
+        return UMSocketError_not_supported_operation;
+    }
+#endif
+    return UMSocketError_no_error;
 }
 
 @end

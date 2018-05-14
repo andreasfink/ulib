@@ -57,7 +57,8 @@ typedef enum UMSocketError
     UMSocketError_invalid_advertize_name    = -45,
     UMSocketError_no_such_process           = -46, /* ESRCH */
     UMSocketError_host_down                 = -47,  /* EHOSTDOWN*/
-    UMSocketError_not_connected             = -107, /* ENOTCONN */
+
+                                                                                                                                                                                                                                                                                                                                                                                                                               UMSocketError_not_connected             = -107, /* ENOTCONN */
     UMSocketError_not_known                 = -999
 } UMSocketError;
 

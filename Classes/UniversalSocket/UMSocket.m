@@ -2267,6 +2267,8 @@ static int SSL_smart_shutdown(SSL *ssl)
 {
 	switch(e)
     {
+        case 0:
+            return UMSocketError_no_error;
         case EACCES:
             return UMSocketError_insufficient_privileges;
         case EADDRINUSE:
@@ -2334,7 +2336,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         case ENOTCONN:
             return UMSocketError_not_connected;
         default:
-            fprintf(stderr,"Unknown errno code %d",e);
+            fprintf(stderr,"Unknown errno code %d\n",e);
             return UMSocketError_not_known;
             break;
     }

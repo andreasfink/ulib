@@ -39,7 +39,11 @@
 	NSString			*_connectedLocalAddress;
 	NSString			*_connectedRemoteAddress;
 	int					_sock;
-    int                 _family;
+    
+    int                 _socketFamily;
+    int                 _socketProto;
+    int                 _socketType;
+    
 	int					_isBound;
 	int					_isListening;
 	int					_isConnecting;
@@ -65,6 +69,8 @@
     BOOL                _isInPollCall;
     void                *ssl;
     NSString            *_socketName;
+    UMMutex             *_controlLock;
+    UMMutex             *_dataLock;
 
 @private
     int                 ip_version;
@@ -74,51 +80,48 @@
 #endif
     NSString            *advertizeName;
     NSString            *advertizeDomain;
-    UMMutex             *_controlLock;
-    UMMutex             *_dataLock;
 }
 
+@property(readwrite,strong,atomic)  NSString    *socketName;
+@property(readwrite,strong,atomic)  UMHost      *localHost;
+@property(readwrite,strong,atomic)  UMHost      *remoteHost;
+@property(readwrite,strong,atomic)  NSString    *connectedLocalAddress;
+@property(readwrite,strong,atomic)  NSString    *connectedRemoteAddress;
+@property(readwrite,assign,atomic)  in_port_t   connectedLocalPort;
+@property(readwrite,assign,atomic)  in_port_t   connectedRemotePort;
+@property(readwrite,assign,atomic)  BOOL        isInPollCall;
+@property(readwrite,weak)		    id          friend;
 
-@property(readwrite,strong)        NSString *socketName;
-@property(readwrite,strong)        UMHost                *localHost;
-@property(readwrite,strong)		UMHost				*remoteHost;
-@property(readwrite,strong)		NSString			*connectedLocalAddress;
-@property(readwrite,strong)		NSString			*connectedRemoteAddress;
-@property(readwrite,assign)		in_port_t			connectedLocalPort;
-@property(readwrite,assign)		in_port_t			connectedRemotePort;
-@property(readwrite,atomic,assign)  BOOL isInPollCall;
-@property(readwrite,weak)		id friend;
+@property(readwrite,assign,atomic)  UMSocketType		type;
+@property(readwrite,assign,atomic)  UMSocketConnectionDirection	direction;
+@property(readwrite,assign,atomic)  UMSocketStatus		status;
+@property(readwrite,assign,atomic)  in_port_t			requestedLocalPort;
+@property(readwrite,assign,atomic)  in_port_t			requestedRemotePort;
+@property(readwrite,assign,atomic)  int					sock;
 
-@property(readwrite,assign)		UMSocketType		type;
-@property(readwrite,assign)		UMSocketConnectionDirection	direction;
-@property(readwrite,assign)		UMSocketStatus		status;
-@property(readwrite,assign)		in_port_t			requestedLocalPort;
-@property(readwrite,assign)		in_port_t			requestedRemotePort;
-@property(readwrite,assign,atomic)		int					sock;
+@property(readwrite,assign,atomic)  int					isBound;
+@property(readwrite,assign,atomic)  int					isListening;
+@property(readwrite,assign,atomic)  int					isConnecting;
+@property(readwrite,assign,atomic)  BOOL	            isConnected;
+@property(readwrite,strong,atomic)  NSMutableData *		receiveBuffer;
+@property(readwrite,strong,atomic)  NSString *          lastError;
+@property(readwrite,strong,atomic)  id					reportDelegate;
+@property(readwrite,strong,atomic)  NSString            *name;
+@property(readwrite,assign,atomic)  int                 hasSocket;
+@property(readwrite,strong,atomic)  NSString            *advertizeName;
+@property(readwrite,strong,atomic)  NSString            *advertizeType;
+@property(readwrite,strong,atomic)  NSString            *advertizeDomain;
+@property(readwrite,strong,atomic)  UMCrypto            *cryptoStream;
+@property(readwrite,assign,atomic)  BOOL                useSSL;
+@property(readwrite,assign,atomic)  BOOL                sslActive;
 
-@property(readwrite,assign,atomic)		int					isBound;
-@property(readwrite,assign,atomic)		int					isListening;
-@property(readwrite,assign,atomic)		int					isConnecting;
-@property(readwrite,assign,atomic)		BOOL	isConnected;
-@property(readwrite,strong)		NSMutableData *		receiveBuffer;
-@property(readwrite,strong)		NSString *          lastError;
-@property(readwrite,strong)		id					reportDelegate;
-@property(readwrite,strong)		NSString *name;
-@property(readwrite,assign,atomic)     int                 hasSocket;
-@property(readwrite,strong)		NSString *advertizeName;
-@property(readwrite,strong)		NSString *advertizeType;
-@property(readwrite,strong)		NSString *advertizeDomain;
-@property(readwrite,strong)  	UMCrypto *cryptoStream;
-@property(readwrite,assign)     BOOL                useSSL;
-@property(readwrite,assign)     BOOL                sslActive;
+@property(readwrite,strong,atomic) NSString            *serverSideCertFilename;
+@property(readwrite,strong,atomic) NSString            *serverSideKeyFilename;
+@property(readwrite,strong,atomic) NSData              *serverSideCertData;
+@property(readwrite,strong,atomic) NSData              *serverSideKeyData;
 
-@property(readwrite,strong) NSString            *serverSideCertFilename;
-@property(readwrite,strong) NSString            *serverSideKeyFilename;
-@property(readwrite,strong) NSData              *serverSideCertData;
-@property(readwrite,strong) NSData              *serverSideKeyData;
-
-@property(readonly) int fileDescriptor;
-@property(readonly) void *ssl;
+@property(readonly)                int                 fileDescriptor;
+@property(readonly)                void                *ssl;
 
 
 - (UMSocket *) initWithName:(NSString *)name;
@@ -205,6 +208,8 @@
 
 +(void)initSSL;
 
+- (void)initNetworkSocket;
+- (UMSocketError)setOptionLinger;
 @end
 
 

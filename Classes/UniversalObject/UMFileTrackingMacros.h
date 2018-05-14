@@ -47,34 +47,43 @@
 
 #define TRACK_FILE_SOCKET(f,c)  \
 { \
-    UMFileTracker *ft = [UMFileTracker sharedInstance]; \
-    if(ft) \
+    if(f>=0) \
     { \
-        UMFileTrackingInfo *fi = [[UMFileTrackingInfo alloc]initWithSocket:f file:@(__FILE__) line:(long)__LINE__ func:@(__func__)]; \
-        [fi addLog:c file:__FILE__ line:__LINE__ func:__func__]; \
-        [ft add:fi ]; \
+        UMFileTracker *ft = [UMFileTracker sharedInstance]; \
+        if(ft) \
+        { \
+            UMFileTrackingInfo *fi = [[UMFileTrackingInfo alloc]initWithSocket:f file:@(__FILE__) line:(long)__LINE__ func:@(__func__)]; \
+            [fi addLog:c file:__FILE__ line:__LINE__ func:__func__]; \
+            [ft add:fi ]; \
+        } \
     } \
 }
 
 #define TRACK_FILE_PIPE(f,c)  \
 { \
-    UMFileTracker *ft = [UMFileTracker sharedInstance]; \
-    if(ft) \
+    if(f>=0) \
     { \
-        UMFileTrackingInfo *fi = [[UMFileTrackingInfo alloc]initWithPipe:f file:@(__FILE__) line:(long)__LINE__ func:@(__func__)]; \
-        [fi addLog:c file:__FILE__ line:__LINE__ func:__func__]; \
-        [ft add:fi]; \
+        UMFileTracker *ft = [UMFileTracker sharedInstance]; \
+        if(ft) \
+        { \
+            UMFileTrackingInfo *fi = [[UMFileTrackingInfo alloc]initWithPipe:f file:@(__FILE__) line:(long)__LINE__ func:@(__func__)]; \
+            [fi addLog:c file:__FILE__ line:__LINE__ func:__func__]; \
+            [ft add:fi]; \
+        } \
     } \
 }
 
 #define TRACK_FILE_PIPE_FLF(f,c,a,b,d)  \
 { \
-    UMFileTracker *ft = [UMFileTracker sharedInstance]; \
-    if(ft) \
+    if(f>=0) \
     { \
-        UMFileTrackingInfo *fi = [[UMFileTrackingInfo alloc]initWithPipe:f file:@(a) line:(long)b func:@(d)]; \
-        [fi addLog:c file:a line:b func:d]; \
-        [ft add:fi]; \
+        UMFileTracker *ft = [UMFileTracker sharedInstance]; \
+        if(ft) \
+        { \
+            UMFileTrackingInfo *fi = [[UMFileTrackingInfo alloc]initWithPipe:f file:@(a) line:(long)b func:@(d)]; \
+            [fi addLog:c file:a line:b func:d]; \
+            [ft add:fi]; \
+        } \
     } \
 }
 

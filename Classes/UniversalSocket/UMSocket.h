@@ -124,9 +124,8 @@
 @property(readonly)                void                *ssl;
 
 
-- (UMSocket *) initWithName:(NSString *)name;
-- (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name;
 - (UMSocket *) initWithType:(UMSocketType)t;
+- (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name;
 
 
 //+ (void) initSSL;

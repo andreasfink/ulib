@@ -436,29 +436,9 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
 }
 
-
-- (UMSocket *) init
-{
-    return [self initWithName:@"unnamed"];
-}
-
-- (UMSocket *) initWithName:(NSString *)name
-{
-    self = [super init];
-    if(self)
-    {
-        _socketName = name;
-        _sock = -1;
-        cryptoStream = [[UMCrypto alloc] init];
-        _controlLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"socket-control-lock (%@)",_socketName]];
-        _dataLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"socket-data-lock (%@)",_socketName]];
-    }
-    return self;
-}
-
 - (UMSocket *) initWithType:(UMSocketType)t
 {
-    return [self initWithType:t name:@""];
+    return [self initWithType:t name:@"unnamed"];
 }
 
 - (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name
@@ -906,6 +886,20 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
 }
 
+- (UMSocket *) initWithName:(NSString *)name
+{
+    self = [super init];
+    if(self)
+    {
+        _socketName = name;
+        _sock = -1;
+        cryptoStream = [[UMCrypto alloc] init];
+        _controlLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"socket-control-lock (%@)",_socketName]];
+        _dataLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"socket-data-lock (%@)",_socketName]];
+    }
+    return self;
+}
+
 - (UMSocket *) copyWithZone:(NSZone *)zone
 {
     
@@ -919,9 +913,8 @@ static int SSL_smart_shutdown(SSL *ssl)
     newsock.requestedRemotePort=requestedRemotePort;
     newsock.cryptoStream = [cryptoStream copy];
 /* we do not copy the socket on purpose as this is used from accept() */
-//	newsock._sock=0;
-//   newsock.hasSocket=0;
-
+    newsock->_sock=-1;
+    newsock->_hasSocket=NO;
      newsock.isBound=isBound;
 	newsock.isListening=self.isListening;
 	newsock.isConnecting=self.isConnecting;

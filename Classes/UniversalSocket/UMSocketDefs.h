@@ -59,6 +59,7 @@ typedef enum UMSocketError
     UMSocketError_host_down                 = -47,  /* EHOSTDOWN*/
     UMSocketError_connection_aborted        = -53,  /* ECONNABORTED */
     UMSocketError_not_connected             = -107, /* ENOTCONN */
+    UMSocketError_in_progress               = -115, /* EINPROGRESS */
     UMSocketError_not_known                 = -999
 } UMSocketError;
 

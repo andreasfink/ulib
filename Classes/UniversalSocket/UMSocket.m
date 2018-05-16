@@ -235,6 +235,10 @@ static int SSL_smart_shutdown(SSL *ssl)
         default:
             break;
     }
+    [self setIPDualStack];
+    [self setLinger];
+    [self setReuseAddr];
+
 }
 - (NSString *)connectedRemoteAddress
 {
@@ -492,16 +496,22 @@ static int SSL_smart_shutdown(SSL *ssl)
         {
             /* see https://stackoverflow.com/questions/14388706/socket-options-so-reuseaddr-and-so-reuseport-how-do-they-differ-do-they-mean-t#14388707 */
 
-            if(setsockopt(_sock, SOL_SOCKET, SO_REUSEADDR, &reuse,sizeof(reuse)) < 0)
+            int err = setsockopt(_sock, SOL_SOCKET, SO_REUSEADDR, &reuse,sizeof(reuse));
+            if(err != 0)
             {
-                fprintf(stderr,"[UMSocket: init] setsockopt(SO_REUSEADDR) sets errno to %d (%s)\n",errno,strerror(errno));
+                fprintf(stderr,"setsockopt(SO_REUSEADDR) failed %d (%s)\n",errno,strerror(errno));
             }
         }
         if(linger_time)
         {
-            if(setsockopt(_sock, SOL_SOCKET, SO_LINGER,  &linger_time,sizeof(linger_time)) < 0)
+            struct    linger xlinger;
+            bzero(&xlinger,sizeof(xlinger));
+            xlinger.l_onoff = 1;
+            xlinger.l_linger = linger_time;
+            int err = setsockopt(_sock, SOL_SOCKET, SO_LINGER,  &xlinger,sizeof(xlinger));
+            if(err !=0)
             {
-                fprintf(stderr,"[UMSocket: init] setsockopt(SO_LINGER,%d) sets errno to %d (%s)\n",linger_time,errno,strerror(errno));
+                fprintf(stderr,"setsockopt(SOL_SOCKET,SO_LINGER,%d) failed %d %s\n",linger_time,errno,strerror(errno));
             }
         }
     }
@@ -1082,24 +1092,6 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
         flags = fcntl(_sock, F_GETFL, 0);
         fcntl(_sock, F_SETFL, flags  | O_NONBLOCK);
-#ifdef SCTP_IN_KERNEL
-        if(type == UMSOCKET_TYPE_SCTP)
-        {
-            flags = 1;
-            setsockopt(_sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
-        }
-        else
-#endif
-            if (type==UMSOCKET_TYPE_USCTP)
-            {
-#ifdef SCTP_IN_USERSPACE
-                if(usrsctp_setsockopt)
-                {
-                    flags = 1;
-                    usrsctp_setsockopt(sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
-                }
-#endif
-            }
         _isNonBlocking = 1;
     }
     [_controlLock unlock];
@@ -2900,18 +2892,45 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     }
 }
 
-- (UMSocketError)setOptionLinger
+- (UMSocketError)setLinger
 {
 #ifdef SO_LINGER
     struct linger linger;
     linger.l_onoff  = 1;
     linger.l_linger = 32;
-    if(setsockopt(_sock, SOL_SOCKET, SO_LINGER, &linger, sizeof (struct linger)))
+    int err = setsockopt(_sock, SOL_SOCKET, SO_LINGER, &linger, sizeof (struct linger));
+
+    if(err !=0)
     {
-        /* FIXME: use errno for proper return */
-        return UMSocketError_not_supported_operation;
+        return [UMSocket umerrFromErrno:errno];
     }
+    return UMSocketError_no_error;
+#else
+    return UMSocketError_not_supported_operation;
 #endif
+}
+
+
+
+-(UMSocketError) setReuseAddr
+{
+    int flags = 1;
+    int err = setsockopt(_sock, SOL_SOCKET, SO_REUSEADDR, (char *)&flags, sizeof(flags));
+    if(err !=0)
+    {
+        return [UMSocket umerrFromErrno:errno];
+    }
+    return UMSocketError_no_error;
+}
+
+- (UMSocketError) setIPDualStack
+{
+    int flag = 0;
+    int err = setsockopt(_sock, IPPROTO_IPV6, IPV6_V6ONLY, (char *)&flag, sizeof(flag));
+    if(err !=0)
+    {
+        return [UMSocket umerrFromErrno:errno];
+    }
     return UMSocketError_no_error;
 }
 

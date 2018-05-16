@@ -207,8 +207,11 @@
 
 +(void)initSSL;
 
-- (void)initNetworkSocket;
-- (UMSocketError)setOptionLinger;
+- (void) initNetworkSocket;
+- (UMSocketError) setLinger;
+- (UMSocketError) setReuseAddr;
+- (UMSocketError) setIPDualStack;
+
 @end
 
 

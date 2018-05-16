@@ -235,6 +235,10 @@ static int SSL_smart_shutdown(SSL *ssl)
         default:
             break;
     }
+    [self setIPDualStack];
+    [self setLinger];
+    [self setReuseAddr];
+
 }
 - (NSString *)connectedRemoteAddress
 {
@@ -1088,34 +1092,6 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
         flags = fcntl(_sock, F_GETFL, 0);
         fcntl(_sock, F_SETFL, flags  | O_NONBLOCK);
-#ifdef SCTP_IN_KERNEL
-        if((type == UMSOCKET_TYPE_SCTP) || (type ==UMSOCKET_TYPE_SCTP4ONLY) || (type ==UMSOCKET_TYPE_SCTP6ONLY))
-        {
-            flags = 1;
-            int err = setsockopt(_sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
-            if(err !=0)
-            {
-                fprintf(stderr,"setsockopt(IPPROTO_SCTP,SCTP_NODELAY) failed %d %s\n",errno,strerror(errno));
-            }
-        }
-
-
-#endif
-        
-#ifdef SCTP_IN_USERSPACE
-        if((type == UMSOCKET_TYPE_USCTP) || (type ==UMSOCKET_TYPE_USCTP4ONLY) || (type ==UMSOCKET_TYPE_USCTP6ONLY))
-        {
-            if(usrsctp_setsockopt)
-            {
-                flags = 1;
-                int err = usrsctp_setsockopt(sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
-                if(err !=0)
-                {
-                    fprintf(stderr,"usrsctp_setsockopt(IPPROTO_SCTP,SCTP_NODELAY) failed %d %s\n",errno,strerror(errno));
-                }
-            }
-        }
-#endif
         _isNonBlocking = 1;
     }
     [_controlLock unlock];
@@ -2911,18 +2887,45 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     }
 }
 
-- (UMSocketError)setOptionLinger
+- (UMSocketError)setLinger
 {
 #ifdef SO_LINGER
     struct linger linger;
     linger.l_onoff  = 1;
     linger.l_linger = 32;
-    if(setsockopt(_sock, SOL_SOCKET, SO_LINGER, &linger, sizeof (struct linger)))
+    int err = setsockopt(_sock, SOL_SOCKET, SO_LINGER, &linger, sizeof (struct linger));
+
+    if(err !=0)
     {
-        /* FIXME: use errno for proper return */
-        return UMSocketError_not_supported_operation;
+        return [UMSocket umerrFromErrno:errno];
     }
+    return UMSocketError_no_error;
+#else
+    return UMSocketError_not_supported_operation;
 #endif
+}
+
+
+
+-(UMSocketError) setReuseAddr
+{
+    int flags = 1;
+    int err = setsockopt(_sock, SOL_SOCKET, SO_REUSEADDR, (char *)&flags, sizeof(flags));
+    if(err !=0)
+    {
+        return [UMSocket umerrFromErrno:errno];
+    }
+    return UMSocketError_no_error;
+}
+
+- (UMSocketError) setIPDualStack
+{
+    int flag = 0;
+    int err = setsockopt(_sock, IPPROTO_IPV6, IPV6_V6ONLY, (char *)&flag, sizeof(flag));
+    if(err !=0)
+    {
+        return [UMSocket umerrFromErrno:errno];
+    }
     return UMSocketError_no_error;
 }
 

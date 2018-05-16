@@ -492,16 +492,22 @@ static int SSL_smart_shutdown(SSL *ssl)
         {
             /* see https://stackoverflow.com/questions/14388706/socket-options-so-reuseaddr-and-so-reuseport-how-do-they-differ-do-they-mean-t#14388707 */
 
-            if(setsockopt(_sock, SOL_SOCKET, SO_REUSEADDR, &reuse,sizeof(reuse)) < 0)
+            int err = setsockopt(_sock, SOL_SOCKET, SO_REUSEADDR, &reuse,sizeof(reuse));
+            if(err != 0)
             {
-                fprintf(stderr,"[UMSocket: init] setsockopt(SO_REUSEADDR) sets errno to %d (%s)\n",errno,strerror(errno));
+                fprintf(stderr,"setsockopt(SO_REUSEADDR) failed %d (%s)\n",errno,strerror(errno));
             }
         }
         if(linger_time)
         {
-            if(setsockopt(_sock, SOL_SOCKET, SO_LINGER,  &linger_time,sizeof(linger_time)) < 0)
+            struct    linger xlinger;
+            bzero(&xlinger,sizeof(xlinger));
+            xlinger.l_onoff = 1;
+            xlinger.l_linger = linger_time;
+            int err = setsockopt(_sock, SOL_SOCKET, SO_LINGER,  &xlinger,sizeof(xlinger));
+            if(err !=0)
             {
-                fprintf(stderr,"[UMSocket: init] setsockopt(SO_LINGER,%d) sets errno to %d (%s)\n",linger_time,errno,strerror(errno));
+                fprintf(stderr,"setsockopt(SOL_SOCKET,SO_LINGER,%d) failed %d %s\n",linger_time,errno,strerror(errno));
             }
         }
     }
@@ -1083,23 +1089,33 @@ static int SSL_smart_shutdown(SSL *ssl)
         flags = fcntl(_sock, F_GETFL, 0);
         fcntl(_sock, F_SETFL, flags  | O_NONBLOCK);
 #ifdef SCTP_IN_KERNEL
-        if(type == UMSOCKET_TYPE_SCTP)
+        if((type == UMSOCKET_TYPE_SCTP) || (type ==UMSOCKET_TYPE_SCTP4ONLY) || (type ==UMSOCKET_TYPE_SCTP6ONLY))
         {
             flags = 1;
-            setsockopt(_sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
-        }
-        else
-#endif
-            if (type==UMSOCKET_TYPE_USCTP)
+            int err = setsockopt(_sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
+            if(err !=0)
             {
-#ifdef SCTP_IN_USERSPACE
-                if(usrsctp_setsockopt)
-                {
-                    flags = 1;
-                    usrsctp_setsockopt(sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
-                }
-#endif
+                fprintf(stderr,"setsockopt(IPPROTO_SCTP,SCTP_NODELAY) failed %d %s\n",errno,strerror(errno));
             }
+        }
+
+
+#endif
+        
+#ifdef SCTP_IN_USERSPACE
+        if((type == UMSOCKET_TYPE_USCTP) || (type ==UMSOCKET_TYPE_USCTP4ONLY) || (type ==UMSOCKET_TYPE_USCTP6ONLY))
+        {
+            if(usrsctp_setsockopt)
+            {
+                flags = 1;
+                int err = usrsctp_setsockopt(sock, IPPROTO_SCTP, SCTP_NODELAY, (char *)&flags, sizeof(flags));
+                if(err !=0)
+                {
+                    fprintf(stderr,"usrsctp_setsockopt(IPPROTO_SCTP,SCTP_NODELAY) failed %d %s\n",errno,strerror(errno));
+                }
+            }
+        }
+#endif
         _isNonBlocking = 1;
     }
     [_controlLock unlock];

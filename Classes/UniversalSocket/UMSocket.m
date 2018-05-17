@@ -2952,7 +2952,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 #ifdef SO_LINGER
     struct linger linger;
     linger.l_onoff  = 1;
-    linger.l_linger = 32;
+    linger.l_linger = 5;
     int err = setsockopt(_sock, SOL_SOCKET, SO_LINGER, &linger, sizeof (struct linger));
 
     if(err !=0)

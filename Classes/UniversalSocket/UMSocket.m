@@ -1085,11 +1085,11 @@ static int SSL_smart_shutdown(SSL *ssl)
 {
     [_controlLock lock];
     int flags;
-    if(_isNonBlocking == 0)
+    if(_blockingMode != SocketBlockingMode_isNotBlocking)
     {
         flags = fcntl(_sock, F_GETFL, 0);
         fcntl(_sock, F_SETFL, flags  | O_NONBLOCK);
-        _isNonBlocking = 1;
+        _blockingMode = SocketBlockingMode_isNotBlocking;
     }
     [_controlLock unlock];
 }
@@ -1097,11 +1097,11 @@ static int SSL_smart_shutdown(SSL *ssl)
 - (void) switchToBlocking
 {
     [_controlLock lock];
-    if(_isNonBlocking)
+    if(_blockingMode != SocketBlockingMode_isBlocking)
     {
         int flags = fcntl(_sock, F_GETFL, 0);
         fcntl(_sock, F_SETFL, flags  & ~O_NONBLOCK);
-        _isNonBlocking = 0;
+        _blockingMode = SocketBlockingMode_isBlocking;
     }
     [_controlLock unlock];
 }
@@ -2409,6 +2409,8 @@ static int SSL_smart_shutdown(SSL *ssl)
             return @"invalid port or address";
         case UMSocketError_is_already_connected:
             return @"socket is already connected";
+        case UMSocketError_file_descriptor_not_open:
+            return @"file descriptor is not open";
         case UMSocketError_not_known:
             return @"not known";
         default:

@@ -21,6 +21,13 @@
 
 @class UMHost;
 
+typedef enum SocketBlockingMode
+{
+    SocketBlockingMode_unknown = 0,
+    SocketBlockingMode_isNotBlocking = -1,
+    SocketBlockingMode_isBlocking = 1,
+} SocketBlockingMode;
+
 #if defined(TARGET_OS_WATCH)
 @interface UMSocket : UMObject
 #else
@@ -48,7 +55,7 @@
 	int					_isListening;
 	int					_isConnecting;
 	BOOL                _isConnected;
-	int					_isNonBlocking;
+	SocketBlockingMode  _blockingMode;
     int                 _hasSocket;
 	NSString			*device;
 	int					lastPollEvent;

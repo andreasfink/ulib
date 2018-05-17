@@ -25,9 +25,9 @@
 #import "UMUtil.h" /* for UMBacktrace */
 
 #if defined(HAVE_OPENSSL)
-#include <openssl/opensslconf.h>
-#include <openssl/ssl.h>
-#include <openssl/err.h>
+#include "openssl/opensslconf.h"
+#include "openssl/ssl.h"
+#include "openssl/err.h"
 #endif
 
 typedef unsigned long (*CRYPTO_CALLBACK_PTR)(void);
@@ -1081,29 +1081,52 @@ static int SSL_smart_shutdown(SSL *ssl)
 }
 
 
-- (void) switchToNonBlocking
+- (UMSocketError) switchToNonBlocking
 {
-    [_controlLock lock];
+    UMSocketError returnValue = UMSocketError_no_error;
     int flags;
+    int err;
+
+    [_controlLock lock];
     if(_blockingMode != SocketBlockingMode_isNotBlocking)
     {
         flags = fcntl(_sock, F_GETFL, 0);
-        fcntl(_sock, F_SETFL, flags  | O_NONBLOCK);
-        _blockingMode = SocketBlockingMode_isNotBlocking;
+        err = fcntl(_sock, F_SETFL, flags  | O_NONBLOCK);
+        if(err<0)
+        {
+            returnValue = [UMSocket umerrFromErrno:errno];
+        }
+        else
+        {
+            _blockingMode = SocketBlockingMode_isNotBlocking;
+        }
     }
     [_controlLock unlock];
+    return returnValue;
 }
 
-- (void) switchToBlocking
+- (UMSocketError) switchToBlocking
 {
+    UMSocketError returnValue = UMSocketError_no_error;
+    int flags;
+    int err;
+
     [_controlLock lock];
     if(_blockingMode != SocketBlockingMode_isBlocking)
     {
-        int flags = fcntl(_sock, F_GETFL, 0);
-        fcntl(_sock, F_SETFL, flags  & ~O_NONBLOCK);
-        _blockingMode = SocketBlockingMode_isBlocking;
+        flags = fcntl(_sock, F_GETFL, 0);
+        err = fcntl(_sock, F_SETFL, flags  & ~O_NONBLOCK);
+        if(err<0)
+        {
+            returnValue = [UMSocket umerrFromErrno:errno];
+        }
+        else
+        {
+            _blockingMode = SocketBlockingMode_isBlocking;
+        }
     }
     [_controlLock unlock];
+    return returnValue;
 }
 
 - (UMSocketError) close
@@ -1168,11 +1191,21 @@ static int SSL_smart_shutdown(SSL *ssl)
                 self.isConnected = 0;
                 return [UMSocket umerrFromErrno:ECONNREFUSED];
             }
-            [self switchToBlocking];
+            
+            
+            UMSocketError err = [self switchToBlocking];
+            if(err!= UMSocketError_no_error)
+            {
+                NSLog(@"can not switch to blocking mode ");
+            }
             [_dataLock lock];
             i = [cryptoStream writeBytes:bytes length:length errorCode:&eno];
             [_dataLock unlock];
-            [self switchToNonBlocking];
+            err = [self switchToNonBlocking];
+            if(err!= UMSocketError_no_error)
+            {
+                NSLog(@"can not switch to non blocking mode ");
+            }
 
             if (i != length)
             {
@@ -1628,16 +1661,19 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) receive:(ssize_t)max appendTo:(NSMutableData *)toData
 {
-	ssize_t wantReadBytes;
-	ssize_t actualReadBytes;
-	ssize_t remainingBytes;
-     UMSocketError ret;
+    ssize_t wantReadBytes;
+    ssize_t actualReadBytes;
+    ssize_t remainingBytes;
+    UMSocketError ret;
     int eno=0;
     
-	unsigned char chunk[UMBLOCK_READ_SIZE];
-	
-	[self switchToNonBlocking];
-
+    unsigned char chunk[UMBLOCK_READ_SIZE];
+    
+    ret = [self switchToNonBlocking];
+    if(ret != UMSocketError_no_error)
+    {
+        NSLog(@"can not switch to non blocking mode");
+    }
 	remainingBytes = max;
      while(remainingBytes > 0)
      {
@@ -1967,8 +2003,11 @@ static int SSL_smart_shutdown(SSL *ssl)
     
     unsigned char chunk[UMBLOCK_READ_SIZE];
     
-    [self switchToNonBlocking];
-    
+    e = [self switchToNonBlocking];
+    if(e != UMSocketError_no_error)
+    {
+        NSLog(@"can not switch to non blocking mode");
+    }
     remainingBytes = max - [receiveBuffer length];
     while (remainingBytes > 0)
     {
@@ -2083,7 +2122,13 @@ static int SSL_smart_shutdown(SSL *ssl)
     unsigned char chunk[UMBLOCK_READ_SIZE];
     ssize_t actualReadBytes;
     UMSocketError sErr;
-    [self switchToNonBlocking];
+
+    sErr = [self switchToNonBlocking];
+    if(sErr != UMSocketError_no_error)
+    {
+        NSLog(@"can not switch to non blocking mode");
+    }
+
     int eno = 0;
     
     *toData = nil;
@@ -2138,8 +2183,12 @@ static int SSL_smart_shutdown(SSL *ssl)
     unsigned char chunk[UMBLOCK_READ_SIZE];
     UMSocketError sErr;
     
-    [self switchToNonBlocking];
-    
+    sErr = [self switchToNonBlocking];
+    if(sErr != UMSocketError_no_error)
+    {
+        NSLog(@"can not switch to non blocking mode");
+    }
+
     *returningData = nil;
    // NSLog(@"[UMsocket receive:to:] %@", [self fullDescription]);
     
@@ -2736,7 +2785,11 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     /*
      * make sure the socket is non-blocking while we do SSL_connect
      */
-    [self switchToNonBlocking];
+    UMSocketError sErr = [self switchToNonBlocking];
+    if(sErr != UMSocketError_no_error)
+    {
+        NSLog(@"can not switch to non blocking mode");
+    }
 
     ssl = (void *)SSL_new(global_server_ssl_context);
     ERR_clear_error();

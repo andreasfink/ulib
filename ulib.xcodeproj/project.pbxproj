@@ -19803,7 +19803,7 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/libs/osx/openssl-1.1.0h-binary/usr/local/include/",
@@ -19842,7 +19842,7 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/libs/osx/openssl-1.1.0h-binary/usr/local/include/",

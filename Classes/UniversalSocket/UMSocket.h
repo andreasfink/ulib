@@ -169,10 +169,8 @@ typedef enum SocketBlockingMode
 - (UMSocketError) receive: (ssize_t)maxSize appendTo:(NSMutableData *)appendToMe;
 - (void) reportError:(int)err withString: (NSString *)errString;
 - (void) reportStatus: (NSString *)str;
-- (void) switchToNonBlocking;
-- (void) switchToBlocking;
-//- (BOOL) isNonBlocking;
-//- (void) setIsNonBlocking:(int)i;
+- (UMSocketError) switchToNonBlocking;
+- (UMSocketError) switchToBlocking;
 - (UMSocket *) copyWithZone:(NSZone *)zone;
 - (void) setLocalPort:(in_port_t) port;
 - (UMSocketError) receiveToBufferWithBufferLimit: (int) max;

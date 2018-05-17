@@ -235,11 +235,8 @@ static int SSL_smart_shutdown(SSL *ssl)
         default:
             break;
     }
-    [self setIPDualStack];
-    [self setLinger];
-    [self setReuseAddr];
-
 }
+
 - (NSString *)connectedRemoteAddress
 {
     return _connectedRemoteAddress;
@@ -2237,7 +2234,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         case EFAULT:
             return UMSocketError_pointer_not_in_userspace;
         case EINVAL:
-            return UMSocketError_already_bound;
+            return UMSocketError_invalid_port_or_address;
         case ENOTSOCK:
             return UMSocketError_not_a_socket;
         case EOPNOTSUPP:
@@ -2294,7 +2291,6 @@ static int SSL_smart_shutdown(SSL *ssl)
             return UMSocketError_connection_aborted;
         case EINPROGRESS:
             return UMSocketError_in_progress;
-
         default:
             fprintf(stderr,"Unknown errno code %d\n",e);
             return UMSocketError_not_known;
@@ -2409,6 +2405,8 @@ static int SSL_smart_shutdown(SSL *ssl)
             return @"connection aborted";
         case UMSocketError_in_progress:
             return @"in progress";
+        case UMSocketError_invalid_port_or_address:
+            return @"invalid port or address";
         case UMSocketError_not_known:
             return @"not known";
         default:

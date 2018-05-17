@@ -2407,6 +2407,8 @@ static int SSL_smart_shutdown(SSL *ssl)
             return @"in progress";
         case UMSocketError_invalid_port_or_address:
             return @"invalid port or address";
+        case UMSocketError_is_already_connected:
+            return @"socket is already connected";
         case UMSocketError_not_known:
             return @"not known";
         default:

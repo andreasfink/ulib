@@ -68,7 +68,7 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
     int workDone = 0;
 
     UMMicroSec now = ulib_microsecondTime();
-    UMMicroSec nextWakeupIn = 10000; /* we wake up at least every 10ms or earlier */
+    UMMicroSec nextWakeupIn = 1000000; /* we wake up at least every second or earlier */
     [_timersLock lock];
     for(UMTimer *t in timers)
     {
@@ -130,7 +130,7 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
             {
                 mustQuit = YES;
             }
-            else if(sleepTime > 10LL) /* sleeping less than 10µS is an overkill. So this might turn into a busy loop for 10µS */
+            else if(sleepTime >= 10LL) /* sleeping less than 10µS is an overkill. So this might turn into a busy loop for 10µS */
             {
                 int signal = [workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ];
                 if(signal & UMSleeper_ShutdownOrderSignal)

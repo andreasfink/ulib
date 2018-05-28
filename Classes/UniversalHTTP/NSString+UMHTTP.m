@@ -12,13 +12,13 @@
 
 static inline int nibbleToInt(const char a)
 {
-	if((a>='0') && (a<='9'))
-		return (a-'0');
-	if((a>='a') && (a<='f'))
-		return (a-'a'+10);
-	if((a>='A') && (a<='F'))
-		return (a-'A'+10);
-	return 0;
+    if((a>='0') && (a<='9'))
+        return (a-'0');
+    if((a>='a') && (a<='f'))
+        return (a-'a'+10);
+    if((a>='A') && (a<='F'))
+        return (a-'A'+10);
+    return 0;
 }
 
 
@@ -36,7 +36,7 @@ static inline int nibbleToInt(const char a)
         if(c==uc)
         {
             return @[[self substringToIndex:i],
-                    [self substringFromIndex:i+1]];
+                     [self substringFromIndex:i+1]];
         }
     }
     //not found?
@@ -46,7 +46,7 @@ static inline int nibbleToInt(const char a)
 - (NSString *)urldecode
 {
     NSString *result = [(NSString *)self stringByReplacingOccurrencesOfString:@"+" withString:@" "];
-    
+
 #if defined(__APPLE__)
     result = [result stringByRemovingPercentEncoding];
 #else
@@ -94,7 +94,7 @@ static inline int nibbleToInt(const char a)
                 nibble = nibbleToInt(c[i]);
                 status = 2;
             }
-            
+
         }
         else if(status==2)
         {

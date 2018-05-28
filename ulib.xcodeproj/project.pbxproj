@@ -2096,6 +2096,8 @@
 		A6F1E322187D448700AD2F85 /* UMRedisSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E31C187D448700AD2F85 /* UMRedisSession.m */; };
 		A6F1E32E187D935600AD2F85 /* UMRedisStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E329187D935600AD2F85 /* UMRedisStatus.m */; };
 		A6F1E32F187D935600AD2F85 /* UMRedisStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E329187D935600AD2F85 /* UMRedisStatus.m */; };
+		A6F8755020BC327A0086FBA1 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BC45B92077758C008C3CEB /* libcrypto.a */; };
+		A6F8755120BC327A0086FBA1 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BC45BE2077758C008C3CEB /* libssl.a */; };
 		A6FA420620694B3800849F7F /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; };
 		A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D8AB0C149A769B0029E9CF /* Foundation.framework */; };
 		A6FFFC811B9D73F900C331B0 /* NSString+UMSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A6FFFC7D1B9D716C00C331B0 /* NSString+UMSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -9341,7 +9343,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6F8755020BC327A0086FBA1 /* libcrypto.a in Frameworks */,
 				A661AB4320669EB100B0CD50 /* sctp.framework in Frameworks */,
+				A6F8755120BC327A0086FBA1 /* libssl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -19879,10 +19883,10 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ulib-static/ulib-static-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "SupportingFiles/ulib-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl1.0.2h/include",
+					"$(SRCROOT)/libs/osx/openssl-1.1.0h-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				LIBRARY_SEARCH_PATHS = (
@@ -19891,6 +19895,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0f-binary/usr/local/lib",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0h-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
@@ -19912,10 +19917,10 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ulib-static/ulib-static-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "SupportingFiles/ulib-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl1.0.2h/include",
+					"$(SRCROOT)/libs/osx/openssl-1.1.0h-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				LIBRARY_SEARCH_PATHS = (
@@ -19924,6 +19929,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0f-binary/usr/local/lib",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0h-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.$(PRODUCT_NAME:rfc1034identifier)";

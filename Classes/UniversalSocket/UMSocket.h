@@ -129,6 +129,9 @@ typedef enum SocketBlockingMode
 
 @property(readonly)                int                 fileDescriptor;
 @property(readonly)                void                *ssl;
+@property(readwrite,assign,atomic)  int socketFamily;
+@property(readwrite,assign,atomic)  int socketProto;
+@property(readwrite,assign,atomic)  int socketType;
 
 
 - (UMSocket *) initWithType:(UMSocketType)t;

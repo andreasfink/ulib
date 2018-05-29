@@ -66,6 +66,8 @@
 - (void)startIfNotRunning;
 - (void)stop;
 - (void)fire;
+- (void)setSeconds:(NSTimeInterval)sec;
+- (NSTimeInterval)seconds;
 
 
 @end

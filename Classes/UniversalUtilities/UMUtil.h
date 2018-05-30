@@ -34,7 +34,8 @@
 + (NSString *) version4;
 + (NSString *) machine;
 + (NSString *) getMacAddr: (char *)ifname;
-+ (NSMutableArray *)getMacAddrs;
++ (NSDictionary<NSString *,NSString *>*)getMacAddrs; /*!< NSDictionary with interface name as key and mac-address as value */
++ (NSDictionary<NSString *,NSString *>*)getMacAddrsWithCaching:(BOOL)useCache;
 + (long long) milisecondClock;
 + (uint32_t) random:(uint32_t)upperBound;
 + (uint32_t) random;

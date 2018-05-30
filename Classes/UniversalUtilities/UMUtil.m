@@ -538,7 +538,6 @@ static const unsigned char base32map[256] =
 	return @(p);
 }
 
-#ifndef	LINUX
 
 + (NSString *)getMacAddr: (char *)ifname
 {
@@ -546,55 +545,59 @@ static const unsigned char base32map[256] =
     return addrs[ifname];
 }
 
-+ (NSMutableArray *)getMacAddrs
+static NSDictionary *   _localMacAddrs = NULL;
+static BOOL             _localMacAddrsLoaded = NO;
+
++ (NSDictionary<NSString *,NSString *>*)getMacAddrs
 {
+    return [UMUtil getMacAddrsWithCaching:YES];
+}
+
+
++ (NSDictionary<NSString *,NSString *>*)getMacAddrsWithCaching:(BOOL)useCache
+{
+    if((_localMacAddrsLoaded) && (useCache == YES))
+    {
+        return _localMacAddrs;
+    }
     struct ifaddrs   *ifaphead;
     unsigned char *   if_mac;
     int               found = 0;
-    struct ifaddrs   *ifap;
+    struct ifaddrs   *ifap = NULL;
     struct sockaddr_dl *sdl = NULL;
-	NSMutableArray	*arr;
+    NSMutableDictionary	*dict =  [[NSMutableDictionary alloc] init];
     if (getifaddrs(&ifaphead) != 0)
     {
         perror("get_if_name: getifaddrs() failed");
-        return nil;
+        _localMacAddrs = dict;
     }
-	
-	arr = [[NSMutableArray alloc] init];
-    for (ifap = ifaphead; ifap && !found; ifap = ifap->ifa_next)
+	else
     {
-        if (ifap->ifa_addr->sa_family == AF_LINK)
+        for (ifap = ifaphead; ifap && !found; ifap = ifap->ifa_next)
         {
-            sdl = (struct sockaddr_dl *)ifap->ifa_addr;
-			if (sdl)
-			{
-				/* I was returning this from a function before converting
-				 * this snippet, which is why I make a copy here on the heap */
-			//	if_mac = malloc(sdl->sdl_alen);
-				if_mac = (unsigned char *)LLADDR(sdl);
-			//	memcpy(if_mac, LLADDR(sdl), sdl->sdl_alen);
-					[arr addObject: [NSString stringWithFormat: @"%s: %02X%02X%02X%02X%02X%02X",
-				ifap->ifa_name,
-				if_mac[0] , if_mac[1] , if_mac[2] ,
-				if_mac[3] , if_mac[4] , if_mac[5]]];
-			}
+            if (ifap->ifa_addr->sa_family == AF_LINK)
+            {
+                sdl = (struct sockaddr_dl *)ifap->ifa_addr;
+                if (sdl)
+                {
+                    /* I was returning this from a function before converting
+                     * this snippet, which is why I make a copy here on the heap */
+                //	if_mac = malloc(sdl->sdl_alen);
+                    if_mac = (unsigned char *)LLADDR(sdl);
+                    NSString *ifname = @(ifap->ifa_name);
+                    NSString *macaddr = [NSString stringWithFormat: @"%02X%02X%02X%02X%02X%02X",
+                                         if_mac[0],if_mac[1], if_mac[2],if_mac[3],if_mac[4],if_mac[5]];
+                    dict[ifname] = macaddr;
+                }
+            }
         }
+        _localMacAddrs = dict;
+        freeifaddrs(ifaphead);
+        ifaphead = NULL;
     }
-	return arr;
+    _localMacAddrsLoaded = YES;
+    return _localMacAddrs;
 }
-
-#else
-+ (NSString *)getMacAddr: (char *)ifname
-{
-	return	@"unknown";
-}
-
-+ (NSMutableArray *)getMacAddrs
-{
-	return [[NSMutableArray alloc]init];
-}
-#endif
-
 
 + (long long) milisecondClock;
 {

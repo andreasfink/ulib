@@ -2086,6 +2086,14 @@
 		A6D75F161FCF498A005C198E /* UMSyslogClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D75F0A1FCF35B5005C198E /* UMSyslogClient.m */; };
 		A6D75F171FCF498B005C198E /* UMSyslogClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D75F0A1FCF35B5005C198E /* UMSyslogClient.m */; };
 		A6D8AB28149A769B0029E9CF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6D8AB26149A769B0029E9CF /* InfoPlist.strings */; };
+		A6DBF0C320BEFE4F00B38DAF /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DBF0C220BEFE4F00B38DAF /* IOKit.framework */; };
+		A6DBF0C420BEFE4F00B38DAF /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DBF0C220BEFE4F00B38DAF /* IOKit.framework */; };
+		A6DBF0C520BEFE4F00B38DAF /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DBF0C220BEFE4F00B38DAF /* IOKit.framework */; };
+		A6DBF0C620BEFE4F00B38DAF /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DBF0C220BEFE4F00B38DAF /* IOKit.framework */; };
+		A6DBF0C720BEFE4F00B38DAF /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DBF0C220BEFE4F00B38DAF /* IOKit.framework */; };
+		A6DBF0C820BEFE4F00B38DAF /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DBF0C220BEFE4F00B38DAF /* IOKit.framework */; };
+		A6DBF0C920BEFE4F00B38DAF /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DBF0C220BEFE4F00B38DAF /* IOKit.framework */; };
+		A6DBF0CA20BEFE4F00B38DAF /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DBF0C220BEFE4F00B38DAF /* IOKit.framework */; };
 		A6DDD9AD16360B80002FA7CC /* NSMutableArray+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9AA16360B80002FA7CC /* NSMutableArray+UMHTTP.m */; };
 		A6DDD9B216360C81002FA7CC /* NSMutableString+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9AF16360C81002FA7CC /* NSMutableString+UMHTTP.m */; };
 		A6DDD9B716360D2A002FA7CC /* NSMutableData+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9B416360D2A002FA7CC /* NSMutableData+UMHTTP.m */; };
@@ -9265,6 +9273,7 @@
 		A6D8AC7E149AA4C30029E9CF /* UMSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSocket.m; sourceTree = "<group>"; tabWidth = 5; };
 		A6D94B2A193CA70E0090FC94 /* UMSynchronizedArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSynchronizedArray.m; sourceTree = "<group>"; };
 		A6DB3E6F191E40770090FC94 /* ulib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ulib.m; sourceTree = "<group>"; };
+		A6DBF0C220BEFE4F00B38DAF /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		A6DC79261DE5766F003BBA67 /* UMHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPClient.h; sourceTree = "<group>"; };
 		A6DC79271DE5766F003BBA67 /* UMHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPClient.m; sourceTree = "<group>"; };
 		A6DC792A1DE576D5003BBA67 /* UMHTTPClientRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPClientRequest.h; sourceTree = "<group>"; };
@@ -9301,6 +9310,7 @@
 				A602106E1D488A2F00211137 /* libssl-ios.a in Frameworks */,
 				A602106F1D488A2F00211137 /* libcrypto-ios.a in Frameworks */,
 				A60210701D488A2F00211137 /* Foundation.framework in Frameworks */,
+				A6DBF0C420BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 				A60210711D488A2F00211137 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -9312,6 +9322,7 @@
 				A60214971D488AA000211137 /* libssl-tvOS.a in Frameworks */,
 				A60214961D488A9C00211137 /* libcrypto-tvOS.a in Frameworks */,
 				A60211F61D488A3D00211137 /* Foundation.framework in Frameworks */,
+				A6DBF0C520BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 				A60211F71D488A3D00211137 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -9323,6 +9334,7 @@
 				A60214EC1D488DAD00211137 /* libcrypto-watchos.a in Frameworks */,
 				A60214ED1D488DAD00211137 /* libssl-watchos.a in Frameworks */,
 				A602137C1D488A5900211137 /* Foundation.framework in Frameworks */,
+				A6DBF0C620BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 				A602137D1D488A5900211137 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -9336,6 +9348,7 @@
 				A60C4D071EF7FE59007C203A /* Security.framework in Frameworks */,
 				A6BC5F76207775E0008C3CEB /* libcrypto.a in Frameworks */,
 				A661AB4220669EB100B0CD50 /* sctp.framework in Frameworks */,
+				A6DBF0C320BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9346,6 +9359,7 @@
 				A6F8755020BC327A0086FBA1 /* libcrypto.a in Frameworks */,
 				A661AB4320669EB100B0CD50 /* sctp.framework in Frameworks */,
 				A6F8755120BC327A0086FBA1 /* libssl.a in Frameworks */,
+				A6DBF0C720BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9355,6 +9369,7 @@
 			files = (
 				A6AC4C581D460C91002BAA97 /* libssl-tvOS.a in Frameworks */,
 				A6AC4C571D460C91002BAA97 /* libcrypto-tvOS.a in Frameworks */,
+				A6DBF0C820BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9364,6 +9379,7 @@
 			files = (
 				A6AC4C5E1D460CA0002BAA97 /* libssl-ios.a in Frameworks */,
 				A6AC4C5D1D460CA0002BAA97 /* libcrypto-ios.a in Frameworks */,
+				A6DBF0C920BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9374,6 +9390,7 @@
 				A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */,
 				A6FA420620694B3800849F7F /* sctp.framework in Frameworks */,
 				A610866D163530F700D0D9C6 /* Security.framework in Frameworks */,
+				A6DBF0CA20BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -16686,6 +16703,7 @@
 		A6D8AB06149A769B0029E9CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6DBF0C220BEFE4F00B38DAF /* IOKit.framework */,
 				A661AB4120669EB100B0CD50 /* sctp.framework */,
 				A610866B163530F700D0D9C6 /* Security.framework */,
 				A6D8AB0C149A769B0029E9CF /* Foundation.framework */,

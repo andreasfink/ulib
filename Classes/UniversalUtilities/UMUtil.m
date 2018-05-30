@@ -7,62 +7,44 @@
 
 #import "UMUtil.h"
 
-#ifndef	LINUX
+
+/* byte order stuff: we use macros under MacOS X */
+#if defined __APPLE__
+
+#include <TargetConditionals.h>
 #include <libkern/OSByteOrder.h>
-#else
+
+#else  /* ! _APPLE__ */
 #include <bsd/stdlib.h>
 #endif
-#include <arpa/inet.h>
 
+#include <arpa/inet.h>
 #include <sys/utsname.h>
 #include <time.h>
 #include <sys/time.h>
 #include <pthread.h>
 #include <execinfo.h>
-
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#ifdef __APPLE__
-#include <net/if_dl.h>
-#endif
 #include <ifaddrs.h>
 
 
-/* TODO: find correct endianness for Linux. Currently we assume i386 arch only */
-#ifdef	LINUX
-
-#ifndef	ntohll
-#define ntohll(x)       OSSwapInt64(x) 
-#define htonll(x)		OSSwapInt64(x)
-#endif
-
-#else
-#include <TargetConditionals.h>
-
-#ifdef	TARGET_RT_LITTLE_ENDIAN
-#ifndef	ntohll
-#define ntohll(x)        OSSwapInt64(x) 
-#endif
-#ifndef htonll
-#define htonll(x)        OSSwapInt64(x)  
-#endif
-#else 
-#ifdef TARGET_RT_BIG_ENDIAN
-#ifndef nothll
-#define ntohll(x)        ((uint64_t)(x))
-#endif
-#ifndef htonll
-#define htonll(x)        ((uint64_t)(x))
-#endif
-#else
-#error unknown endianness
-#endif
-#endif
-#endif
-
-
-@implementation UMUtil
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <sys/sockio.h>
+#include <net/if.h>
+#include <errno.h>
+#include <net/if_dl.h>
+#include <pcap.h>
 
 static const unsigned char base32char[32] =
 {
@@ -91,6 +73,17 @@ static const unsigned char base32map[256] =
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 };
+
+static NSDictionary *   _localMacAddrs = NULL;
+static BOOL             _localMacAddrsLoaded = NO;
+static NSString *       _machineSerialNumber = NULL;
+static BOOL             _machineSerialNumberLoaded = NO;
+static NSString *       _machineUUID = NULL;
+static BOOL             _machineUUIDLoaded = NO;
+static NSArray *        _machineCPUIDs = NULL;
+static BOOL             _machineCPUIDsLoaded = NO;
+
+@implementation UMUtil
 
 + (NSMutableData *)base32:(NSMutableData *)input
 {
@@ -216,222 +209,6 @@ static const unsigned char base32map[256] =
 	return out;
 }
 
-#if 0
-+(void) appendULLToNSMutableData:(NSMutableData *)dat withValue: (unsigned long long) value usingEncoding:(int)encodingVariant
-{
-	unsigned long long	L64;
-	uint32_t		L32;
-	uint8_t			L8;
-
-	if(encodingVariant == 0)
-	{
-		L32=htonl((uint32_t)value);
-		[dat appendBytes:&L32 length:sizeof(uint32_t)];
-		return;
-	}
-	
-	if(encodingVariant == 2)
-	{
-		L64=htonll(value);
-		[dat appendBytes:&L64 length:sizeof(unsigned long long)];
-		return;
-	}
-	if(encodingVariant == 1)
-	{
-		if(value < (1ULL<<7))
-		{
-			L8 = value | 0x80; /* highest bit set means its last byte of integer */
-			[dat appendBytes:&L8 length:1];
-		}
-		else if(value < (1ULL<<14))
-		{
-			L8 = (value >> 7)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value & 0x7F) | 0x80;
-			[dat appendBytes:&L8 length:1];
-		}
-		else if(value < (1ULL<<21))
-		{
-			L8 = (value >> 14)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 7) & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value & 0x7F) | 0x80;
-			[dat appendBytes:&L8 length:1];
-		}
-		else if(value < (1ULL<<28))
-		{
-			L8 = (value >> 21)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 14)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 7) & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value & 0x7F) | 0x80;
-			[dat appendBytes:&L8 length:1];
-		}
-		else if(value < (1ULL<< 35))
-		{
-			L8 = (value >> 28)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 21)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 14)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 7) & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value & 0x7F) | 0x80;
-			[dat appendBytes:&L8 length:1];
-		}
-		else if(value < (1ULL<< 42))
-		{
-			L8 = (value >> 35)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 28)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 21)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 14)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 7) & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value & 0x7F) | 0x80;
-			[dat appendBytes:&L8 length:1];
-		}
-		else if(value < (1ULL<< 49))
-		{
-			L8 = (value >> 42)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 35)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 28)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 21)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 14)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 7) & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value & 0x7F) | 0x80;
-			[dat appendBytes:&L8 length:1];
-		}
-		else if(value < (1ULL<< 56))
-		{
-			L8 = (value >> 49)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 42)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 35)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 28)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 21)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 14)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 7) & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value & 0x7F) | 0x80;
-			[dat appendBytes:&L8 length:1];
-		}
-		else if(value < (1ULL<< 63))
-	    {
-			L8 = (value >> 56)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 49)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 42)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 35)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 28)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 21)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 14)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 7) & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value & 0x7F) | 0x80;
-			[dat appendBytes:&L8 length:1];
-		}
-		else
-		{
-			L8 = (value >> 63)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 56)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 49)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 42)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 35)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 28)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 21)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 14)  & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value >> 7) & 0x7F;
-			[dat appendBytes:&L8 length:1];
-			L8 = (value & 0x7F) | 0x80;
-			[dat appendBytes:&L8 length:1];
-		}
-	}
-}
-
-+ (unsigned long long) grabULLFromNSMutableData:(NSMutableData *)dat usingIndex: (int *) idx usingEncoding:(int)encodingVariant
-{
-	unsigned long long 		L64;
-	uint32_t 		L32;
-	uint8_t			L8;
-	
-	int len;
-	
-	len = [dat length];
-	
-	if(encodingVariant == 0)
-	{
-		L32=0;
-		if( ((*idx)+sizeof(L32)) < len)
-		{
-			[dat getBytes:&L32 range: NSMakeRange(*idx,sizeof(L32))];
-		}
-		
-		L64=ntohl(L32);
-		*idx += sizeof(L32);
-	}
-	if(encodingVariant == 2)
-	{
-		L64=0;
-		if( ((*idx)+sizeof(L64)) < len)
-		{
-			[dat getBytes:&L64 range: NSMakeRange(*idx,sizeof(L64))];
-		}
-		
-		L64=ntohll(L64);
-		*idx += sizeof(L64);
-	}
-	
-	else if (encodingVariant==1)
-	{
-		L64 = 0;
-		L8  = 0;
-		while(((L8 & 0x80) == 0) && ( *idx < len))
-		{
-			if( *idx+1 < len)
-				[dat getBytes:&L8 range: NSMakeRange(*idx,1)];
-			L64 = L64 << 7;
-			L64 = L64 | (L8 & 0x7F);
-			(*idx)++;
-		}
-	}
-	return L64;
-}
-#endif
-
-
 + (NSString *) sysName
 {
 	struct utsname u;
@@ -539,14 +316,12 @@ static const unsigned char base32map[256] =
 }
 
 
-+ (NSString *)getMacAddr: (char *)ifname
++ (NSString *)getMacAddrForInterface: (NSString *)ifname
 {
     NSDictionary *addrs = [self getMacAddrs];
     return addrs[ifname];
 }
 
-static NSDictionary *   _localMacAddrs = NULL;
-static BOOL             _localMacAddrsLoaded = NO;
 
 + (NSDictionary<NSString *,NSString *>*)getMacAddrs
 {
@@ -560,6 +335,7 @@ static BOOL             _localMacAddrsLoaded = NO;
     {
         return _localMacAddrs;
     }
+
     struct ifaddrs   *ifaphead;
     unsigned char *   if_mac;
     int               found = 0;
@@ -618,6 +394,136 @@ static BOOL             _localMacAddrsLoaded = NO;
 + (uint32_t)  random
 {
     return arc4random_uniform(UINT_MAX);
+}
+
+
++ (NSString *)getMachineSerialNumber
+{
+    if(_machineSerialNumberLoaded)
+    {
+        return _machineSerialNumber;
+    }
+
+
+    NSString *serialNumber = NULL;
+    BOOL found = NO;
+
+#if defined(__APPLE__)
+
+#if defined(TARGETOSIPHONE)
+    serialNumber = [[UIDevice currentDevice] uniqueIdentifier];
+#else
+    CFStringRef cfSerialNumber = NULL;
+    io_service_t platformExpert = IOServiceGetMatchingService(   kIOMasterPortDefault,
+                                                              IOServiceMatching("IOPlatformExpertDevice")
+                                                              );
+
+    if (platformExpert)
+    {
+        CFTypeRef serialNumberAsCFString = IORegistryEntryCreateCFProperty(
+                                                                           platformExpert,
+                                                                           CFSTR(kIOPlatformSerialNumberKey),
+                                                                           kCFAllocatorDefault,
+                                                                           0
+                                                                           );
+        cfSerialNumber = (CFStringRef)serialNumberAsCFString;
+        IOObjectRelease(platformExpert);
+    }
+    if (cfSerialNumber)
+    {
+        serialNumber = @ ([(NSString *)CFBridgingRelease(cfSerialNumber) UTF8String]);
+        found = YES;
+    }
+    else
+    {
+        serialNumber = @"unknown";
+    }
+#endif
+#else /* ! __APPLE___ */
+
+#define MAXLINE 256
+
+
+    NSArray *cmd = [NSArray arrayWithObjects:@"/usr/sbin/dmidecode",@"-t",@"system",NULL];
+    NSArray *lines = readChildProcess(cmd);
+
+    for (NSString *line in lines)
+    {
+        const char *s = strstr([line UTF8String],"Serial Number: ");
+        if(s)
+        {
+            s += strlen("Serial Number: ");
+            size_t len = strlen(s);
+            int i;
+            serialNumber = [[NSMutableString alloc] init];
+            for(i=0;i<len;i++)
+            {
+                switch(s[i])
+                {
+                    case '\0':
+                    case '\n':
+                    case '\r':
+                    case '\t':
+                    case ' ':
+                        break;
+                    default:
+                        [serialNumber appendFormat:@"%c",s[i]];
+                        break;
+                }
+            }
+            found=YES;
+        }
+    }
+#endif
+    if(found)
+    {
+        _machineSerialNumber = serialNumber;
+        _machineSerialNumberLoaded = YES;
+        return _machineSerialNumber;
+    }
+    return @"unknown";
+}
+
+
++ (NSString *)getMachineUUID
+{
+    if(_machineUUIDLoaded)
+    {
+        return _machineUUID;
+    }
+
+#if defined(__APPLE__)
+    _machineUUID = [UMUtil getMachineSerialNumber];;
+    _machineUUIDLoaded = _machineSerialNumberLoaded;
+    return _machineUUID;
+
+#else // !__APPLE
+    NSString *uuidNumber = NULL;
+    BOOL found = NO;
+
+    NSArray *cmd = [NSArray arrayWithObjects:@"/usr/sbin/dmidecode",@"-t",@"system",NULL];
+    NSArray *lines = readChildProcess(cmd);
+
+    for (NSString *line in lines)
+    {
+        const char *s = strstr([line UTF8String],"UUID: ");
+        if(s)
+        {
+            s += strlen("UUID: ");
+            uuidNumber = [[ NSString stringWithUTF8String: s]
+                          stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            found=YES;
+        }
+    }
+
+    if(found)
+    {
+        _machineUUID = uuidNumber;
+        _machineUUIDLoaded = YES;
+        return _machineUUID;
+    }
+    return @"unknown";
+#endif
 }
 
 @end

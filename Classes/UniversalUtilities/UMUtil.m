@@ -602,7 +602,13 @@ static BOOL             _localMacAddrsLoaded = NO;
 
 + (NSDictionary<NSString *,NSString *>*)getMacAddrs
 {
-    if(_localMacAddrsLoaded)
+    return [UMUtil getMacAddrsWithCaching:YES];
+}
+
+
++ (NSDictionary<NSString *,NSString *>*)getMacAddrsWithCaching:(BOOL)useCache
+{
+    if((_localMacAddrsLoaded) && (useCache == YES))
     {
         return _localMacAddrs;
     }

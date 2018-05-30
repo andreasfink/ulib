@@ -542,60 +542,8 @@ static const unsigned char base32map[256] =
 
 + (NSString *)getMacAddr: (char *)ifname
 {
-    struct ifaddrs   *ifaphead = NULL;
-    unsigned char *   if_mac = NULL;
-    int               found = 0;
-    struct ifaddrs   *ifap;
-    struct sockaddr_dl *sdl = NULL;
-	
- 	NSString	*s = nil;
-	
-    if (getifaddrs(&ifaphead) != 0)
-    {
-        perror("get_if_name: getifaddrs() failed");
-        exit(1);
-    }
-	
-    for (ifap = ifaphead; ifap && !found; ifap = ifap->ifa_next)
-    {
-        if ((ifap->ifa_addr->sa_family) == AF_LINK)
-        {
-            if (strlen(ifap->ifa_name) == strlen(ifname))
-                if (strcmp(ifap->ifa_name,ifname) == 0)
-                {
-                    found = 1;
-                    sdl = (struct sockaddr_dl *)ifap->ifa_addr;
-                    if (sdl)
-                    {
-                        /* I was returning this from a function before converting
-                         * this snippet, which is why I make a copy here on the heap */
-                        if_mac = malloc(sdl->sdl_alen);
-                        memcpy(if_mac, LLADDR(sdl), sdl->sdl_alen);
-                    }
-                }
-        }
-    }
-    if (!found)
-    {
-		s = nil;
-    }
-    else
-    {
-        s = [NSString stringWithFormat: @"%02X%02X%02X%02X%02X%02X\n",
-                 if_mac[0] , if_mac[1] , if_mac[2] ,
-                 if_mac[3] , if_mac[4] , if_mac[5]];
-	}
-end:
-    if(ifaphead)
-    {
-        freeifaddrs(ifaphead);
-    }
-    if(if_mac)
-    {
-        free(if_mac);
-        if_mac = NULL;
-    }
-	 return s;
+    NSDictionary *addrs = [self getMacAddrs];
+    return addrs[ifname];
 }
 
 + (NSMutableArray *)getMacAddrs

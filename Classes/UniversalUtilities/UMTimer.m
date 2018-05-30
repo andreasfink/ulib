@@ -59,6 +59,23 @@
                         repeats:r];
 }
 
+
+- (void)setSeconds:(NSTimeInterval)sec
+{
+    [_timerMutex lock];
+    _duration = (UMMicroSec)(sec * 1000000.0);
+    [_timerMutex unlock];
+
+}
+- (NSTimeInterval)seconds
+{
+    NSTimeInterval sec;
+    [_timerMutex lock];
+    sec = ((double)_duration)/1000000.0;
+    [_timerMutex unlock];
+    return sec;
+}
+
 - (UMTimer *)initWithTarget:(id)target
                    selector:(SEL)selector
                      object:(id)object
@@ -106,6 +123,10 @@
 
 - (void)unlockedStart
 {
+    if(self.duration<=0)
+    {
+        NSLog(@"Timer is null seconds %@",self.name);
+    }
     NSAssert(self.duration>0,@"Timer is 0");
     if(self.duration < 100)
     {

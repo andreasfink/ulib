@@ -34,7 +34,7 @@
 + (NSString *) version4;
 + (NSString *) machine;
 + (NSString *) getMacAddr: (char *)ifname;
-+ (NSMutableArray *)getMacAddrs;
++ (NSDictionary<NSString *,NSString *>*)getMacAddrs; /* key = interface name, value = mac address in uppercase XX:XX:XX:XX:XX style */
 + (long long) milisecondClock;
 + (uint32_t) random:(uint32_t)upperBound;
 + (uint32_t) random;

@@ -348,10 +348,10 @@ static BOOL             _machineCPUIDsLoaded = NO;
     struct ifaddrs   *ifaphead;
     unsigned char *   if_mac;
     int               found = 0;
-#ifdef __APPLE__
     struct ifaddrs   *ifap = NULL;
-#endif
+#ifdef __APPLE__
     struct sockaddr_dl *sdl = NULL;
+#endif
     NSMutableDictionary	*dict =  [[NSMutableDictionary alloc] init];
     if (getifaddrs(&ifaphead) != 0)
     {

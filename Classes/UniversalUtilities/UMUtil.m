@@ -19,28 +19,24 @@
 #include <bsd/stdlib.h>
 #endif
 
-#include <arpa/inet.h>
-#include <sys/utsname.h>
-#include <time.h>
-#include <sys/time.h>
-#include <pthread.h>
-#include <execinfo.h>
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <ifaddrs.h>
-
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/time.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/utsname.h>
 #include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#include <time.h>
+#include <pthread.h>
+#include <execinfo.h>
+#include <ifaddrs.h>
+
 #if defined(HAVE_SYS_SOCKIO_H)
 #include <sys/sockio.h>
 #endif
@@ -49,6 +45,12 @@
 
 #if defined(HAVE_NET_IF_DL_H)
 #include <net/if_dl.h>
+#endif
+
+#ifdef __APPLE__
+#define AF_MACADDR AF_LINK
+#else
+#define AF_MACADDR AF_NETLINK
 #endif
 
 
@@ -357,7 +359,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
     {
         for (ifap = ifaphead; ifap && !found; ifap = ifap->ifa_next)
         {
-            if (ifap->ifa_addr->sa_family == AF_LINK)
+            if (ifap->ifa_addr->sa_family == AF_MACADDR)
             {
                 sdl = (struct sockaddr_dl *)ifap->ifa_addr;
                 if (sdl)

@@ -36,6 +36,7 @@
 #include <pthread.h>
 #include <execinfo.h>
 #include <ifaddrs.h>
+#include <sys/wait.h>
 
 #if defined(HAVE_SYS_SOCKIO_H)
 #include <sys/sockio.h>
@@ -347,7 +348,9 @@ static BOOL             _machineCPUIDsLoaded = NO;
     struct ifaddrs   *ifaphead;
     unsigned char *   if_mac;
     int               found = 0;
+#ifdef __APPLE__
     struct ifaddrs   *ifap = NULL;
+#endif
     struct sockaddr_dl *sdl = NULL;
     NSMutableDictionary	*dict =  [[NSMutableDictionary alloc] init];
     if (getifaddrs(&ifaphead) != 0)
@@ -421,11 +424,10 @@ static BOOL             _machineCPUIDsLoaded = NO;
     {
         return _machineSerialNumber;
     }
-    NSString *serialNumber = NULL;
     BOOL found = NO;
 
 #if defined(__APPLE__)
-
+    NSString *serialNumber = NULL;
 #if defined(TARGETOSIPHONE)
     serialNumber = [[UIDevice currentDevice] uniqueIdentifier];
 #else
@@ -457,9 +459,9 @@ static BOOL             _machineCPUIDsLoaded = NO;
 #endif
 #else /* ! __APPLE___ */
 
+
 #define MAXLINE 256
-
-
+    NSMutableString *serialNumber = NULL;
     NSArray *cmd = [NSArray arrayWithObjects:@"/usr/sbin/dmidecode",@"-t",@"system",NULL];
     NSArray *lines = [UMUtil readChildProcess:cmd];
     for (NSString *line in lines)

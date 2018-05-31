@@ -219,6 +219,8 @@ typedef enum SocketBlockingMode
 - (UMSocketError) setLinger;
 - (UMSocketError) setReuseAddr;
 - (UMSocketError) setIPDualStack;
++ (NSString *)addressOfSockAddr:(struct sockaddr *)sockAddr;
++ (int)portOfSockAddr:(struct sockaddr *)sockAddr;
 
 @end
 

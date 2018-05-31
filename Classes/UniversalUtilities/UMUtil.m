@@ -54,6 +54,7 @@
 #define AF_MACADDR AF_NETLINK
 #endif
 
+#import "UMSocket.h"
 
 static const unsigned char base32char[32] =
 {
@@ -85,6 +86,8 @@ static const unsigned char base32map[256] =
 
 static NSDictionary *   _localMacAddrs = NULL;
 static BOOL             _localMacAddrsLoaded = NO;
+static NSDictionary *   _localIpAddrs = NULL;
+static BOOL             _localIpAddrsLoaded = NO;
 static NSString *       _machineSerialNumber = NULL;
 static BOOL             _machineSerialNumberLoaded = NO;
 static NSString *       _machineUUID = NULL;
@@ -338,6 +341,12 @@ static BOOL             _machineCPUIDsLoaded = NO;
 }
 
 
++ (NSDictionary<NSString *,NSString *>*)getIpAddrs
+{
+    return [UMUtil getIpAddrsWithCaching:YES];
+}
+
+
 + (NSDictionary<NSString *,NSString *>*)getMacAddrsWithCaching:(BOOL)useCache
 {
     if((_localMacAddrsLoaded) && (useCache == YES))
@@ -394,6 +403,55 @@ static BOOL             _machineCPUIDsLoaded = NO;
     }
     _localMacAddrsLoaded = YES;
     return _localMacAddrs;
+}
+
+
++ (NSDictionary<NSString *,NSString *>*)getIpAddrsWithCaching:(BOOL)useCache
+{
+    if((_localIpAddrsLoaded) && (useCache == YES))
+    {
+        return _localIpAddrs;
+    }
+
+    struct ifaddrs   *ifaphead;
+    int               found = 0;
+    struct ifaddrs   *ifap = NULL;
+    NSMutableDictionary    *dict =  [[NSMutableDictionary alloc] init];
+    if (getifaddrs(&ifaphead) != 0)
+    {
+        perror("get_if_name: getifaddrs() failed");
+        _localMacAddrs = dict;
+    }
+    else
+    {
+        NSMutableArray *a;
+        for (ifap = ifaphead; ifap && !found; ifap = ifap->ifa_next)
+        {
+            NSString *ifname = @(ifap->ifa_name);
+            if ((ifap->ifa_addr->sa_family == AF_INET) || (ifap->ifa_addr->sa_family == AF_INET6))
+            {
+                struct sockaddr *sa = (struct sockaddr *)ifap->ifa_addr;
+                struct sockaddr *mask = (struct sockaddr *)ifap->ifa_netmask;
+                NSString *addr = [UMSocket addressOfSockAddr:sa];
+                NSString *netmask = [UMSocket addressOfSockAddr:mask];
+                NSDictionary *dict2 = @{ @"address" : addr, @"netmask" : netmask};
+
+                a = dict[ifname];
+                if(a==0)
+                {
+                    a = [[NSMutableArray alloc]init];
+                }
+                [a addObject:dict2];
+                dict[ifname] = a;
+
+            }
+        }
+        freeifaddrs(ifaphead);
+        ifaphead = NULL;
+        _localIpAddrs = dict;
+        _localIpAddrsLoaded = YES;
+    }
+    return _localIpAddrs;
 }
 
 + (long long) milisecondClock;

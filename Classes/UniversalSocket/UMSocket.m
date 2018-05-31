@@ -2989,4 +2989,58 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     return UMSocketError_no_error;
 }
 
++ (NSString *)addressOfSockAddr:(struct sockaddr *)sockAddr
+{
+    char buf[INET6_ADDRSTRLEN+1];
+    memset(buf,0x00,INET6_ADDRSTRLEN+1);
+    switch(sockAddr->sa_family)
+    {
+        case AF_INET:
+        {
+            struct sockaddr_in *sa_in = (struct sockaddr_in *)sockAddr;
+            const char *r = inet_ntop(sa_in->sin_family, &sa_in->sin_addr, &buf[0], INET6_ADDRSTRLEN);
+            return @(r);
+            break;
+        }
+        case AF_INET6:
+        {
+            struct sockaddr_in6 *sa_in6 = (struct sockaddr_in6 *)sockAddr;
+            const char *r = inet_ntop(sa_in6->sin6_family, &sa_in6->sin6_addr, &buf[0], INET6_ADDRSTRLEN);
+            NSString *s = @(r);
+            if([s hasPrefix:@"::ffff:"])
+            {
+                s = [s substringFromIndex:7];
+            }
+            return s;
+            break;
+        }
+        default:
+            return NULL;
+    }
+}
+
+
++ (int)portOfSockAddr:(struct sockaddr *)sockAddr
+{
+    char buf[INET6_ADDRSTRLEN+1];
+    memset(buf,0x00,INET6_ADDRSTRLEN+1);
+    switch(sockAddr->sa_family)
+    {
+        case AF_INET:
+        {
+            struct sockaddr_in *sa_in = (struct sockaddr_in *)sockAddr;
+            return ntohs (sa_in->sin_port);
+            break;
+        }
+        case AF_INET6:
+        {
+            struct sockaddr_in6 *sa_in6 = (struct sockaddr_in6 *)sockAddr;
+            return ntohs(sa_in6->sin6_port);
+            break;
+        }
+        default:
+            return 0;
+    }
+}
+
 @end

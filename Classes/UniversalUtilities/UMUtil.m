@@ -6,7 +6,7 @@
 //
 
 #import "UMUtil.h"
-
+#include "ulib_config.h"
 
 /* byte order stuff: we use macros under MacOS X */
 #if defined __APPLE__
@@ -41,7 +41,9 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#if defined(HAVE_SYS_SOCKIO_H)
 #include <sys/sockio.h>
+#endif
 #include <net/if.h>
 #include <errno.h>
 #include <net/if_dl.h>

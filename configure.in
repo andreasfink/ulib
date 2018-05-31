@@ -234,7 +234,7 @@ AC_CHECK_HEADERS(sys/socket.h sys/sockio.h net/if.h netinet/in.h,,,
 #include <sys/socket.h>
 #endif
 
-#if HAVE_SYS/SOCKIO_H
+#if HAVE_SYS_SOCKIO_H
 #include <sys/sockio.h>
 #endif
 

@@ -34,11 +34,12 @@
 + (NSString *) version4;
 + (NSString *) machine;
 + (NSString *) getMacAddrForInterface: (NSString *)ifname;
-+ (NSDictionary<NSString *,NSString *>*)getMacAddrs; /*!< NSDictionary with interface name as key and mac-address as value */
++ (NSDictionary<NSString *,NSString *>*)getMacAddrs; /*!< returns a NSDictionary with interface name as key and mac-address as value */
 + (NSDictionary<NSString *,NSString *>*)getMacAddrsWithCaching:(BOOL)useCache;
-+ (NSString *)getMachineSerialNumber;
-+ (NSString *)getMachineUUID;
-+ (NSString *)getCPUSerial;
++ (NSString *)getMachineSerialNumber; /*!< returns the machines serial number if it can be read */
++ (NSString *)getMachineUUID; /*!< returns the machines UUID if it can be read */
++ (NSArray *)getCPUSerialNumbers; /* !< returns the CPU serial if it can be read */
++ (NSArray *)readChildProcess:(NSArray *)args; /* !< creates a subprocess with the array elements as arguments. Executes it and returns an array of lines returned */
 
 + (long long) milisecondClock;
 + (uint32_t) random:(uint32_t)upperBound;

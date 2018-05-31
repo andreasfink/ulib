@@ -46,7 +46,11 @@
 #endif
 #include <net/if.h>
 #include <errno.h>
+
+#if defined(HAVE_NET_IF_DL_H)
 #include <net/if_dl.h>
+#endif
+
 
 static const unsigned char base32char[32] =
 {

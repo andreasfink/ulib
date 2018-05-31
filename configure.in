@@ -227,6 +227,7 @@ AC_CHECK_HEADERS(net/if.h,,,
 AC_CHECK_HEADERS(netinet/in.h)
 AC_CHECK_HEADERS(netinet/sctp.h)
 AC_CHECK_HEADERS(netinet/sctp_uio.h)
+AC_CHECK_HEADERS(net/if_dl.h)
 
 AC_CHECK_HEADERS(sys/socket.h sys/sockio.h net/if.h netinet/in.h,,,
 [

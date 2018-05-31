@@ -36,6 +36,10 @@
 + (NSString *) getMacAddrForInterface: (NSString *)ifname;
 + (NSDictionary<NSString *,NSString *>*)getMacAddrs; /*!< returns a NSDictionary with interface name as key and mac-address as value */
 + (NSDictionary<NSString *,NSString *>*)getMacAddrsWithCaching:(BOOL)useCache;
+
++ (NSDictionary<NSString *,NSArray<NSString *> *>*)getIpAddrs;
++ (NSDictionary<NSString *,NSArray<NSString *> *>*)getIpAddrsWithCaching:(BOOL)useCache;
+
 + (NSString *)getMachineSerialNumber; /*!< returns the machines serial number if it can be read */
 + (NSString *)getMachineUUID; /*!< returns the machines UUID if it can be read */
 + (NSArray *)getCPUSerialNumbers; /* !< returns the CPU serial if it can be read */

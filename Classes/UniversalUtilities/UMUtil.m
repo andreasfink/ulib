@@ -341,7 +341,8 @@ static BOOL             _machineCPUIDsLoaded = NO;
 }
 
 
-+ (NSDictionary<NSString *,NSString *>*)getIpAddrs
+
++ (NSDictionary<NSString *,NSArray<NSString *> *>*)getIpAddrs;
 {
     return [UMUtil getIpAddrsWithCaching:YES];
 }
@@ -406,7 +407,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
 }
 
 
-+ (NSDictionary<NSString *,NSString *>*)getIpAddrsWithCaching:(BOOL)useCache
++ (NSDictionary<NSString *,NSArray<NSString *> *>*)getIpAddrsWithCaching:(BOOL)useCache
 {
     if((_localIpAddrsLoaded) && (useCache == YES))
     {

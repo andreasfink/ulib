@@ -378,7 +378,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
             strcpy(buffer.ifr_name, ifap->ifa_name);
             ioctl(s, SIOCGIFHWADDR, &buffer);
             close(s);
-            if_mac = (unsigned char *)&buffer.ifr_hwaddr.sa_data[0]
+            if_mac = (unsigned char *)&buffer.ifr_hwaddr.sa_data[0];
 #endif
             NSString *ifname = @(ifap->ifa_name);
             NSString *macaddr= [NSString stringWithFormat: @"%02X%02X%02X%02X%02X%02X",
@@ -461,8 +461,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
 
 
     NSArray *cmd = [NSArray arrayWithObjects:@"/usr/sbin/dmidecode",@"-t",@"system",NULL];
-    NSArray *lines = readChildProcess(cmd);
-
+    NSArray *lines = [UMUtil readChildProcess:cmd];
     for (NSString *line in lines)
     {
         const char *s = strstr([line UTF8String],"Serial Number: ");
@@ -518,8 +517,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
     BOOL found = NO;
 
     NSArray *cmd = [NSArray arrayWithObjects:@"/usr/sbin/dmidecode",@"-t",@"system",NULL];
-    NSArray *lines = readChildProcess(cmd);
-
+    NSArray *lines = [UMUtil readChildProcess:cmd];
     for (NSString *line in lines)
     {
         const char *s = strstr([line UTF8String],"UUID: ");

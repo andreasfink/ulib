@@ -13,10 +13,10 @@
 
 #include <TargetConditionals.h>
 #include <libkern/OSByteOrder.h>
+#include <IOKit/IOTypes.h>
 
 #else  /* ! _APPLE__ */
 #include <bsd/stdlib.h>
-#import <IOKit/IOKit.h>
 #endif
 
 #include <arpa/inet.h>

@@ -118,10 +118,10 @@
 #pragma mark -
 #pragma mark DES
 
-- (NSData *)randomDataOfLength:(size_t)length;
++ (NSData *)randomDataOfLength:(size_t)length;
 
 #if (HAS_OPENSSL || HAS_OPENSSL1)
-- (NSData *)SSLRandomDataOfLength:(size_t)length;
++ (NSData *)SSLRandomDataOfLength:(size_t)length;
 - (UMCrypto *)initDESInitWithSaltAndIV;
 - (UMCrypto *)initDESInitWithKeyWithEntropySource:(NSString *)file withGrade:(int)grade;
 - (UMCrypto *)initSSLPublicCryptoWithEntropySource:(NSString *)file;
@@ -151,5 +151,7 @@
 - (NSData *)CAST5DecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key;
 - (NSData *)decryptDataWithSSL:(NSData *)data withKey:(NSData *)key;
 #endif
++(NSDictionary *)generateRsaKeyPair;
++(NSDictionary *)generateRsaKeyPair:(int)keyLength pub:(unsigned long)pubInt;
 
 @end

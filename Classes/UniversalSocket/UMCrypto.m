@@ -17,13 +17,16 @@
 #include "ulib_config.h"
 
 #ifdef HAVE_OPENSSL
-#include <openssl/rand.h>
 #include <openssl/rsa.h>
 #include <openssl/pem.h>
 #include <openssl/evp.h>
 #include <openssl/err.h>
 #include <openssl/ssl.h>
 #include <openssl/des.h>
+#include <openssl/rsa.h>
+#include <openssl/x509.h>
+#include <openssl/rand.h>
+#include <string.h>
 #endif
 
 
@@ -397,7 +400,7 @@
 }
 #endif
 
-- (NSData *)randomDataOfLength:(size_t)length
++ (NSData *)randomDataOfLength:(size_t)length
 {
 #if defined(__APPLE__)
     NSMutableData *data = [NSMutableData dataWithLength:length];
@@ -485,7 +488,7 @@
 	return self;
 }
 
-- (NSData *)SSLRandomDataOfLength:(size_t)length
++ (NSData *)SSLRandomDataOfLength:(size_t)length
 {
     NSData *data;
     
@@ -612,8 +615,9 @@
     SecKeyRef public;
     
     if (!publicKey)
+    {
         return nil;
-    
+    }
     __block SecGroupTransformRef group = SecTransformCreateGroupTransform();
     __block CFReadStreamRef readStream = NULL;
     __block SecTransformRef readTransform = NULL;
@@ -1376,5 +1380,88 @@
 }
 
 
++(NSDictionary *)generateRsaKeyPair
+{
+    return [UMCrypto generateRsaKeyPair:4096 pub:65537];
+}
+
++(NSDictionary *)generateRsaKeyPair:(int)keyLength pub:(unsigned long)pubInt
+{
+    NSMutableDictionary *dict = NULL;
+
+    int             ret = 0;
+    RSA             *r = NULL;
+    BIGNUM          *bne = NULL;
+    BIO             *bp_public = NULL;
+    BIO             *bp_private = NULL;
+
+    int             bits = keyLength;
+    unsigned long   e = pubInt; //RSA_F4;
+
+    while(RAND_status() == 0)
+    {
+        NSData *d = [UMCrypto randomDataOfLength:256];
+        RAND_add(d.bytes, (int)d.length, 3.1415926);
+    }
+
+    // 1. generate rsa key
+    bne = BN_new();
+    ret = BN_set_word(bne,e);
+    if(ret == 1)
+    {
+        r = RSA_new();
+        ret = RSA_generate_key_ex(r, bits, bne, NULL);
+
+        // 2. save public key
+        bp_public = BIO_new(BIO_s_secmem());
+        ret = PEM_write_bio_RSAPublicKey(bp_public, r);
+        if(ret == 1)
+        {
+
+            // 3. save private key
+            bp_private = BIO_new(BIO_s_secmem());
+            ret = PEM_write_bio_RSAPrivateKey(bp_private, r, NULL, NULL, 0, NULL, NULL);
+            if(ret==1)
+            {
+                size_t pri_len = BIO_pending(bp_private);
+                size_t pub_len = BIO_pending(bp_public);
+                char *pri_key = malloc(pri_len + 1);
+                char *pub_key = malloc(pub_len + 1);
+                BIO_read(bp_private, pri_key,(int)pri_len);
+                BIO_read(bp_public, pub_key,(int)pub_len);
+                pri_key[pri_len] = '\0';
+                pub_key[pub_len] = '\0';
+                dict = [[NSMutableDictionary alloc]init];
+                dict[@"private-key"] = @(pri_key);
+                dict[@"public-key"] = @(pub_key);
+                memset(pri_key,0x00,pri_len);
+                memset(pub_key,0x00,pub_len);
+                free(pri_key);
+                free(pub_key);
+            }
+        }
+    }
+    if(bp_public)
+    {
+        BIO_free_all(bp_public);
+        bp_public = NULL;
+    }
+    if(bp_private)
+    {
+        BIO_free_all(bp_private);
+        bp_private = NULL;
+    }
+    if(r)
+    {
+        RSA_free(r);
+        r = NULL;
+    }
+    if(bne)
+    {
+        BN_free(bne);
+        bne=NULL;
+    }
+    return dict;
+}
 
 @end

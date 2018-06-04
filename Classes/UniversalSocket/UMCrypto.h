@@ -34,32 +34,35 @@
 
 @interface UMCrypto : UMObject
 {
-	NSInteger	        enable;
-	NSInteger	        pos;
-	NSInteger	        method;
-	NSInteger	        vectorSize;
-    NSData              *deskey;              /* For symmetric cryptography*/
-    NSData              *cryptorKey;
-    unsigned char       *salt;
-    NSData              *iv;
-    NSData              *publicKey;           /* For unsymmetric cryptography, having PEM format*/
-    NSData              *privateKey;          /* Ditto */
-    int                 public_keylen;
-    int                 private_keylen;
-    NSData              *cryptorPublicKey;
-    NSData              *cryptorPrivateKey;
+	NSInteger	        _enable;
+	NSInteger	        _pos;
+	NSInteger	        _method;
+	NSInteger	        _vectorSize;
+    NSData              *_deskey;              /* For symmetric cryptography*/
+    NSData              *_cryptorKey;
+    NSData              *_saltData;
+    NSData              *_iv;
+    NSString            *_publicKey;           /* For unsymmetric cryptography, having PEM format*/
+    NSString            *_privateKey;          /* Ditto */
+    int                 _public_keylen;
+    int                 _private_keylen;
+    NSData              *_cryptorPublicKey;
+    NSData              *_cryptorPrivateKey;
     int                 _fileDescriptor;
-    UMSocket __weak     *relatedSocket;
+    UMSocket __weak     *_relatedSocket;
 }
 
 @property(readwrite,assign)		NSInteger	  enable;
 @property(readwrite,assign)		NSInteger	  pos;
 @property(readwrite,assign)		NSInteger	  method;
 @property(readwrite,assign)		NSInteger	  vectorSize;
-@property(readwrite,assign)		unsigned char *salt;
+@property(readwrite,strong)		NSData        *saltData;
 @property(readwrite,strong)		NSData        *iv;
-@property(readwrite,strong)		NSData        *publicKey;
-@property(readwrite,strong)		NSData        *privateKey;
+@property(readwrite,strong)		NSString      *publicKey;
+@property(readwrite,strong)		NSString      *privateKey;
+@property(readwrite,assign)     int            public_keylen;
+@property(readwrite,assign)     int            private_keylen;
+
 @property(readwrite,strong)		NSData        *deskey;
 @property(readwrite,strong)		NSData        *cryptorKey;
 @property(readwrite,assign)     int           fileDescriptor;
@@ -69,7 +72,6 @@
 
 #pragma mark -
 #pragma mark Initialisation
-- (UMCrypto *)initWithKey;
 - (void)enableCrypto;
 - (void)disableCrypto;
 
@@ -93,65 +95,40 @@
 #pragma mark -
 #pragma mark Encryption
 
-
-#ifdef HAS_COMMON_CRYPTO
-- (UMCrypto *)initPublicCrypto;
-#endif
-
-
 - (UMCrypto *)initWithFileDescriptor:(int)fileDescriptor;
 - (UMCrypto *)initWithRelatedSocket:(UMSocket *)s;
 
 - (void)setSeed:(NSInteger)seed;
 
-#ifdef HAS_COMMON_CRYPTO
-- (const char *)cryptErrorString:(int)code;
-#endif
-
-#pragma mark -
-#pragma mark Keychain Utilities
-#ifdef HAS_KEYCHAIN_UTILITIES
-- (NSData *)dataFromRef:(SecKeyRef)keyRef;
-- (SecKeyRef)refFromData:(NSData *)data isPublicKey:(BOOL)isPublic;
-#endif
 
 #pragma mark -
 #pragma mark DES
 
 + (NSData *)randomDataOfLength:(size_t)length;
 
-#if (HAS_OPENSSL || HAS_OPENSSL1)
 + (NSData *)SSLRandomDataOfLength:(size_t)length;
 - (UMCrypto *)initDESInitWithSaltAndIV;
 - (UMCrypto *)initDESInitWithKeyWithEntropySource:(NSString *)file withGrade:(int)grade;
-- (UMCrypto *)initSSLPublicCryptoWithEntropySource:(NSString *)file;
-#endif
 
-#ifdef HAS_COMMON_CRYPTO
-- (NSData *)DES3KeyForPassword:(NSData *)password withGrade:(int)grade;
-- (NSData *)RSAEncryptWithPlaintextPublic:(NSData *)plaintext;
-- (NSData *)RSADecryptWithCiphertextPrivate:(NSData *)ciphertext;
-- (NSData *)encryptData:(NSData *)data withPassword:(NSData *)password withKey:(NSData **)key withGrade:(int)grade;
-- (NSData *)encryptData:(NSData *)data withPassword:(NSData *)password;
-- (NSData *)decryptData:(NSData *)data withPassword:(NSData *)key;
-#endif
-
-
-#if (HAS_OPENSSL || HAS_OPENSSL1)
 - (NSData *)DESEncryptWithPlaintext:(NSData *)plaintext havingLength:(int *)len withPassword:(NSData *)password withKey:(NSData **)key withGrade:(int)grade;
 - (NSData *)DESEncryptWithPlaintext:(NSData *)plaintext havingLength:(int *)len withPassword:(NSData *)password;
 - (NSData *)DESDecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key;
 
 - (NSData *)RSAEncryptWithPlaintextSSLPublic:(NSData *)plaintext;
 - (NSData *)RSADecryptWithCiphertextSSLPrivate:(NSData *)ciphertext;
-- (NSData *)RSAEncryptWithPlaintextSSLPrivate:(NSData *)plaintext;
-- (NSData *)RSADecryptWithCiphertextSSLPublic:(NSData *)ciphertext;
+
 - (NSData *)RC4DecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key;
 - (NSData *)DES3DecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key;
 - (NSData *)CAST5DecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key;
 - (NSData *)decryptDataWithSSL:(NSData *)data withKey:(NSData *)key;
-#endif
-+(NSDictionary *)generateRsaKeyPair;
-+(NSDictionary *)generateRsaKeyPair:(int)keyLength pub:(unsigned long)pubInt;
+
+- (void)generateRsaKeyPair;
+- (void)generateRsaKeyPair:(int)keyLength pub:(unsigned long)pubInt;
+
+
+- (NSData *)AES256RandomKey;
+- (NSData *)AES256RandomIV;
+- (void)logOpenSSLErrorsForSection:(NSString *)section;
+- (NSData *)AES256EncryptWithPlaintext:(NSData *)plaintext key:(NSData *)key iv:(NSData *)iv;
 
 @end

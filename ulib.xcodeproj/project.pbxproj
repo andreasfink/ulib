@@ -1428,6 +1428,8 @@
 		A610866D163530F700D0D9C6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A610866B163530F700D0D9C6 /* Security.framework */; };
 		A618E79A1FC58860001106C3 /* UMThreadHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = A618E7981FC58860001106C3 /* UMThreadHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A618E79B1FC58860001106C3 /* UMThreadHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A618E7991FC58860001106C3 /* UMThreadHelpers.m */; };
+		A629A7A420C52B7B008F3CE8 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BC45B92077758C008C3CEB /* libcrypto.a */; };
+		A629A7A520C52B7B008F3CE8 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BC45BE2077758C008C3CEB /* libssl.a */; };
 		A62A7E2918AAD20D00EA8A2A /* UMHTTPPageRef.h in Headers */ = {isa = PBXBuildFile; fileRef = A62A7E2618AAD20D00EA8A2A /* UMHTTPPageRef.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62A7E2C18AAD20D00EA8A2A /* UMHTTPPageRef.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A7E2718AAD20D00EA8A2A /* UMHTTPPageRef.m */; };
 		A62A7E3118AAD6AD00EA8A2A /* UMHTTPPageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = A62A7E2E18AAD6AD00EA8A2A /* UMHTTPPageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -9388,6 +9390,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */,
+				A629A7A420C52B7B008F3CE8 /* libcrypto.a in Frameworks */,
+				A629A7A520C52B7B008F3CE8 /* libssl.a in Frameworks */,
 				A6FA420620694B3800849F7F /* sctp.framework in Frameworks */,
 				A610866D163530F700D0D9C6 /* Security.framework in Frameworks */,
 				A6DBF0CA20BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
@@ -18317,7 +18321,7 @@
 					};
 					A6D8AB1B149A769B0029E9CF = {
 						DevelopmentTeam = 2GSNWPNR77;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -20236,6 +20240,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
@@ -20252,7 +20257,7 @@
 					"SENTEST=1",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.0g-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.0h-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibTests/ulibTests-Info.plist";
@@ -20260,10 +20265,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/ilb",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0h-binary/usr/local/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.ulibtests.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -20274,6 +20281,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
@@ -20290,7 +20298,7 @@
 					"SENTEST=1",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.0g-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.0h-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibTests/ulibTests-Info.plist";
@@ -20298,10 +20306,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/ilb",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0h-binary/usr/local/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.ulibtests.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;

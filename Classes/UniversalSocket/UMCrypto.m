@@ -59,6 +59,18 @@
     return self;
 }
 
+
+- (UMCrypto *)initPublicCrypto
+{
+    self = [super init];
+    if(self)
+    {
+        [self generateRsaKeyPair];
+    }
+    return self;
+}
+
+
 - (int)fileDescriptor
 {
     if(_relatedSocket)
@@ -679,9 +691,8 @@
     no.relatedSocket = _relatedSocket;
     no.publicKey = _publicKey;
     no.privateKey = _privateKey;
-    no.public_keylen = _public_keylen;
-    no.private_keylen = _private_keylen;
- //   no.peer_certificate = peer_certificate;
+    no.aes256Key = _aes256Key;
+    //   no.peer_certificate = peer_certificate;
  //   no.local_certificate = local_certificate;
 
     return no;
@@ -816,12 +827,12 @@
     }
 }
 
-- (NSData *)AES256RandomKey
+- (NSData *)aes256RandomKey
 {
     return [UMCrypto SSLRandomDataOfLength:32];
 }
 
-- (NSData *)AES256RandomIV
+- (NSData *)aes256RandomIV
 {
     return [UMCrypto SSLRandomDataOfLength:16];
 }
@@ -843,7 +854,27 @@
     }
 }
 
-- (NSData *)AES256EncryptWithPlaintext:(NSData *)plaintext key:(NSData *)key iv:(NSData *)iv
+- (NSData *)aes256Encrypt:(NSData *)plaintext
+{
+    return [self aes256Encrypt:plaintext key:_aes256Key iv:NULL];
+}
+
+- (NSData *)aes256Decrypt:(NSData *)ciphertext
+{
+    return [self aes256Decrypt:ciphertext key:_aes256Key iv:NULL];
+}
+
+- (NSData *)aes256Encrypt:(NSData *)plaintext key:(NSData *)key
+{
+    return [self aes256Encrypt:plaintext key:key iv:NULL];
+}
+
+- (NSData *)aes256Decrypt:(NSData *)plaintext key:(NSData *)key
+{
+    return [self aes256Encrypt:plaintext key:key iv:NULL];
+}
+
+- (NSData *)aes256Encrypt:(NSData *)plaintext key:(NSData *)key iv:(NSData *)iv;
 {
     const unsigned char *plaintext_ptr = plaintext.bytes;
     int plaintext_len = (int)plaintext.length;
@@ -853,8 +884,12 @@
     NSData *ciphertext=NULL;
 
     const unsigned char *key_ptr = key.bytes;
-    const unsigned char *iv_ptr = iv.bytes;
-
+    int key_len = (int)key.length;
+    const unsigned char *iv_ptr = NULL;
+    if(iv)
+    {
+        iv_ptr = iv.bytes;
+    }
 
     int len = 0;
     /* Create and initialise the context */
@@ -873,18 +908,19 @@
          * is 128 bits */
         if(1 != EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key_ptr, iv_ptr))
         {
-            [self logOpenSSLErrorsForSection: @"AES256EncryptWithPlaintext: EVP_EncryptInit_ex"];
+            [self logOpenSSLErrorsForSection: @"aes256Encrypt: EVP_EncryptInit_ex"];
         }
         else
         {
             /* Provide the message to be encrypted, and obtain the encrypted output.
              * EVP_EncryptUpdate can be called multiple times if necessary
              */
-            ciphertext_ptr = OPENSSL_malloc(plaintext_len);
-
+            ciphertext_len = plaintext_len + 2*key_len; /* leave enough space for padding etc */
+            ciphertext_ptr = malloc(plaintext_len);
+            memset(ciphertext_ptr,0x00,ciphertext_len);
             if(1 != EVP_EncryptUpdate(ctx, ciphertext_ptr, &len, plaintext_ptr, plaintext_len))
             {
-                [self logOpenSSLErrorsForSection: @"AES256EncryptWithPlaintext: EVP_EncryptUpdate"];
+                [self logOpenSSLErrorsForSection: @"aes256Encrypt: EVP_EncryptUpdate"];
             }
             else
             {
@@ -895,19 +931,110 @@
                  */
                 if(1 != EVP_EncryptFinal_ex(ctx, ciphertext_ptr + len, &len))
                 {
-                    [self logOpenSSLErrorsForSection: @"AES256EncryptWithPlaintext: EVP_EncryptFinal_ex"];
+                    [self logOpenSSLErrorsForSection: @"aes256Encrypt: EVP_EncryptFinal_ex"];
                 }
                 else
                 {
                     ciphertext_len += len;
                     ciphertext = [NSData dataWithBytes:ciphertext_ptr length:ciphertext_len];
+                    free((void *)ciphertext_ptr);
+                    ciphertext_ptr=NULL;
                 }
             }
         }
         /* Clean up */
         EVP_CIPHER_CTX_free(ctx);
     }
+    if(ciphertext_ptr)
+    {
+        free((void *)ciphertext_ptr);
+        ciphertext_ptr=NULL;
+    }
     return ciphertext;
+}
+
+
+- (NSData *)aes256Decrypt:(NSData *)ciphertext key:(NSData *)key iv:(NSData *)iv
+{
+    const unsigned char *ciphertext_ptr = ciphertext.bytes;
+    int ciphertext_len = (int)ciphertext.length;
+    
+    unsigned char *plaintext_ptr = NULL;
+    int plaintext_len = 0;
+    NSData *plaintext=NULL;
+    
+    const unsigned char *key_ptr = key.bytes;
+    int key_len = (int)key.length;
+
+    const unsigned char *iv_ptr = NULL;
+    if(iv)
+    {
+        iv_ptr = iv.bytes;
+    }
+    
+    int len = 0;
+    /* Create and initialise the context */
+    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
+    if(ctx==NULL)
+    {
+        NSLog(@"can not allocate EVP_CIPHER_CTX_new context");
+    }
+    else
+    {
+        
+        /* Initialise the encryption operation. IMPORTANT - ensure you use a key
+         * and IV size appropriate for your cipher
+         * In this example we are using 256 bit AES (i.e. a 256 bit key). The
+         * IV size for *most* modes is the same as the block size. For AES this
+         * is 128 bits */
+        if(1 != EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key_ptr, iv_ptr))
+        {
+            [self logOpenSSLErrorsForSection: @"aes256Decrypt: EVP_DecryptInit_ex"];
+        }
+        else
+        {
+            /* Provide the message to be encrypted, and obtain the encrypted output.
+             * EVP_EncryptUpdate can be called multiple times if necessary
+             */
+            
+            plaintext_len = ciphertext_len + 2*key_len; /* leave enough space for padding etc */
+            plaintext_ptr = OPENSSL_malloc(plaintext_len);
+            memset(plaintext_ptr,0x00,plaintext_len);
+
+            if(1 != EVP_DecryptUpdate(ctx, plaintext_ptr, &len, ciphertext_ptr, ciphertext_len))
+            {
+                [self logOpenSSLErrorsForSection: @"aes256Decrypt: EVP_DecryptUpdate"];
+            }
+            else
+            {
+                plaintext_len = len;
+                
+                /* Finalise the decryption. Further plaintext bytes may be written at
+                 * this stage.
+                 */
+                if(1 != EVP_DecryptFinal_ex(ctx, plaintext_ptr + len, &len))
+                {
+                }
+                else
+                {
+                    plaintext_len += len;
+                }
+                plaintext = [NSData dataWithBytes:plaintext_ptr length:plaintext_len];
+                OPENSSL_free((void *)plaintext_ptr);
+                plaintext_ptr=NULL;
+            }
+        }
+        /* Clean up */
+        EVP_CIPHER_CTX_free(ctx);
+    }
+    
+    if(plaintext_ptr)
+    {
+        OPENSSL_free((void *)plaintext_ptr);
+        plaintext_ptr=NULL;
+    }
+
+    return plaintext;
 }
 
 @end

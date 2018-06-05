@@ -335,13 +335,27 @@ static BOOL             _machineCPUIDsLoaded = NO;
 }
 
 
++ (NSArray *)getArrayOfMacAddresses
+{
+    NSMutableArray *a =[[NSMutableArray alloc]init];
+    
+    NSDictionary *macs = [UMUtil getMacAddrsWithCaching:YES];
+    NSArray *interfaceNames = [macs allKeys];
+    for(NSString *interfaceName in interfaceNames)
+    {
+        NSString *mac = macs[interfaceName];
+        if(![mac isEqualToString:@"000000000000"])
+        {
+            [a addObject:macs[interfaceName]];
+        }
+    }
+    return a;
+}
+
 + (NSDictionary<NSString *,NSString *>*)getMacAddrs
 {
     return [UMUtil getMacAddrsWithCaching:YES];
 }
-
-
-
 
 
 + (NSDictionary<NSString *,NSString *>*)getMacAddrsWithCaching:(BOOL)useCache
@@ -400,6 +414,57 @@ static BOOL             _machineCPUIDsLoaded = NO;
     }
     _localMacAddrsLoaded = YES;
     return _localMacAddrs;
+}
+
+
++(NSArray *)getNonLocalIPs
+{
+    NSArray *localPrefixes = @[
+                               @"0.",
+                               @"10.",
+                               @"192.168.",
+                               @"172.16.",
+                               @"172.17.",
+                               @"172.18.",
+                               @"172.19.",
+                               @"172.20.",
+                               @"172.21.",
+                               @"172.22.",
+                               @"172.23.",
+                               @"172.24.",
+                               @"172.25.",
+                               @"172.26.",
+                               @"172.27.",
+                               @"172.28.",
+                               @"172.29.",
+                               @"172.30.",
+                               @"172.31.",
+                               @"fe80:",
+                               @"::",
+                               ];
+    NSMutableArray *results = [[NSMutableArray alloc]init];
+    
+    NSDictionary<NSString *,NSArray<NSDictionary<NSString *,NSString *> *> *> *interface_ips;
+    interface_ips = [UMUtil getIpAddrs];
+    NSArray *interface_names = [interface_ips allKeys];
+    for(NSString *interface_name in interface_names)
+    {
+        NSArray<NSDictionary<NSString *,NSString *> *> *ips_per_if = interface_ips[interface_name];
+        for(NSDictionary<NSString *,NSString *> *entry in ips_per_if)
+        {
+            NSString *ip = entry[@"address"];
+            //NSString *netmask = entry[@"netmask"];
+            for(NSString *localPrefix in localPrefixes)
+            {
+                if([ip hasPrefix:localPrefix])
+                {
+                    continue;
+                }
+            }
+            [results addObject:ip];
+        }
+    }
+    return results;
 }
 
 + (NSDictionary<NSString *,NSArray<NSDictionary<NSString *,NSString *> *> *>*)getIpAddrs;

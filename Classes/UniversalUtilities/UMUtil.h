@@ -34,9 +34,15 @@
 + (NSString *) version4;
 + (NSString *) machine;
 + (NSString *) getMacAddrForInterface: (NSString *)ifname;
++ (NSArray *)getArrayOfMacAddresses;
 + (NSDictionary<NSString *,NSString *>*)getMacAddrs; /*!< returns a NSDictionary with interface name as key and mac-address as value */
 + (NSDictionary<NSString *,NSString *>*)getMacAddrsWithCaching:(BOOL)useCache;
++ (NSArray *)getNonLocalIPs;
 
+/* this returns a dictionary of array of dictionaries.
+ It is a dictionary with the interface name being the key and content being an array of IP address properties.
+ An ip address property is a dictionary with "address" and "netmask" entries
+*/
 + (NSDictionary<NSString *,NSArray<NSDictionary<NSString *,NSString *> *> *>*)getIpAddrs;
 + (NSDictionary<NSString *,NSArray<NSDictionary<NSString *,NSString *> *> *>*)getIpAddrsWithCaching:(BOOL)useCache;
 

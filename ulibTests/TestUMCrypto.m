@@ -83,76 +83,6 @@
         puts("\r");
 }
 
-#ifdef HAS_COMMON_CRYPTO
-/* 
- * Encryption uses key generated from password, both iv and salt would be added. Decryption requires knowledge of IV used * when encrypting.
- * Decryption returs block sixed data, only first bytes are pertinent.
- */
-- (void)testCryptorCrypto
-{
-    long j;
-    NSData *ciphertext, *plaintext1, *plaintext2, *plaintext3, *password;
-    NSString *plainString1, *plainString2;
-    UMCrypto *cryptor = [[UMCrypto alloc] init];
-    NSData *newkey = nil, *oldkey = nil;
-    
-    @autoreleasepool {
-    
-        for (j = 0; j < 8; j++)
-        {
-            NSLog(@"DES:%ld data_len:%u key_len:%u\r\n", j+1, des_test[j].data_len, des_test[j].key_len);
-            //      debug_display_mem_hex(hmac_md5_test[j].data, hmac_md5_test[j].data_len, 0);
-            plaintext1 = [NSData dataWithBytes:des_test[j].data length:des_test[j].data_len];
-            plainString1 = [[NSString alloc] initWithData:plaintext1 encoding:NSUTF8StringEncoding];
-            password = [NSData dataWithBytes:des_test[j].key length:des_test[j].key_len];
-            
-            if (newkey)
-                oldkey = [NSData dataWithData:newkey];
-            ciphertext = [cryptor encryptData:plaintext1 withPassword:password withKey:&newkey withGrade:1];
-            XCTAssertNotNil(ciphertext, @"encryption should be successful");
-            XCTAssertTrue(![oldkey isEqualToData:newkey], @"new key generated should differ form the previous one ");
-            NSLog(@"TestUMCrypto: testCryptorCrypto: ciphertext: %@\r\n", ciphertext);
-            
-            if (ciphertext)
-            {
-                plaintext2 = [cryptor decryptData:ciphertext withPassword:newkey];
-                plaintext3 = [plaintext2 subdataWithRange:NSMakeRange(0, [plaintext1 length])];
-                plainString2 = [[NSString alloc] initWithData:plaintext2 encoding:NSUTF8StringEncoding];
-                XCTAssertNotNil(plaintext2, @"decryption should be successful");
-                //[TestUMCrypto displayMemHex:plaintext2 withSize:(unsigned int)[plaintext2 length] withColumn:0];
-                XCTAssertTrue([plaintext3 isEqualToData:plaintext1], @"encrypting plus deacrypting should equal original (expect added \0s in the end)");
-                XCTAssertTrue(![plaintext1 isEqualToData:ciphertext], @"encrypting should change the data");
-            }
-	}
-    
-    /* Testing generated CommonCrypto key*/
-    
-/* TODO: THIS TEST FAILS !! */
-
-/*    cryptor = [[[UMCrypto alloc] initWithKey] autorelease];
-    NSData *des3key = [cryptor cryptorKey];
-    XCTAssertTrue(![des3key isEqualToData:newkey], @"new key generated should be differ from the previous one");
-    
-    NSData *plaintext4 = [NSData dataWithBytes:des_test[7].data length:des_test[7].data_len];
-    NSData *ciphertext2 = [cryptor encryptData:plaintext4 withPassword:des3key];
-    XCTAssertNotNil(ciphertext2, @"encryption should be successful");
-    NSLog(@"TestUMCrypto: testSSLCrypto: ciphertext: %@\r\n", ciphertext2);
-    
-    if (ciphertext2)
-    {
-        NSData *plaintext5 = [cryptor decryptData:ciphertext2 withPassword:des3key];
-        NSData *plaintext6 = [plaintext5 subdataWithRange:NSMakeRange(0, [plaintext4 length])];
-        XCTAssertNotNil(plaintext5, @"decryption should be successful");
-        NSLog(@"Plaintext4: \n%@",plaintext4);
-        NSLog(@"Plaintext6: \n%@",plaintext6);
-        XCTAssertTrue([plaintext4 isEqualToData:plaintext6], @"encrypting plus decrypting should equal original (expect trailing zeroes)");
-        XCTAssertTrue(![plaintext4 isEqualToData:ciphertext2], @"encrypting should change the data");
-    }
-*/
-    }
-}
-#endif
-#ifdef HAS_OPENSSL
 - (void)testSSLCrypto
 {
     long j;
@@ -246,22 +176,26 @@
     @autoreleasepool
     {
         UMCrypto *cryptor, *cryptor1;
-        NSData *publickey1, *publickey2, *privatekey1, *privatekey2;
+        NSString *publickey1;
+        NSString *publickey2;
+        NSString *privatekey1;
+        NSString *privatekey2;
     
-        cryptor1 = [[UMCrypto alloc] initSSLPublicCryptoWithEntropySource:@"/tmp/random.data"];
+        cryptor1 = [[UMCrypto alloc] initPublicCrypto];
         publickey1 = [cryptor1 publicKey];
         privatekey1 = [cryptor1 privateKey];
-        cryptor = [[UMCrypto alloc] initSSLPublicCryptoWithEntropySource:@"/tmp/random.data"];
+        cryptor = [[UMCrypto alloc] initPublicCrypto];
         publickey2 = [cryptor publicKey];
         privatekey2 = [cryptor privateKey];
         XCTAssertNotNil(publickey1, @"creation a public key should be ´successful");
         XCTAssertNotNil(privatekey1, @"creation a private key should be ´successful");
-        XCTAssertTrue(![publickey1 isEqualToData:publickey2], @"every instantiation should produce a new public key");
-        XCTAssertTrue(![privatekey1 isEqualToData:privatekey2], @"every instantiation should produce a new private key");
+        XCTAssertTrue(![publickey1 isEqualToString:publickey2], @"every instantiation should produce a new public key");
+        XCTAssertTrue(![privatekey1 isEqualToString:privatekey2], @"every instantiation should produce a new private key");
     
         /* public cryptography */
         plaintext1 = [NSMutableData dataWithBytes:des_test[7].data length:108];
-        for (j = 1; j < 4; j++) {
+        for (j = 1; j < 4; j++)
+        {
             [plaintext1 appendBytes:des_test[4].data length:50];
        }
     
@@ -278,13 +212,13 @@
         }
     
         /* raw digital signature */
-        ciphertext2 = [cryptor RSAEncryptWithPlaintextSSLPrivate:plaintext1];
+        ciphertext2 = [cryptor RSAEncryptWithPlaintextSSLPublic:plaintext1];
         XCTAssertNotNil(ciphertext2, @"encryption should be successful");
         NSLog(@"TestUMCrypto: testSSLCrypto: ciphertext: %@\r\n", ciphertext1);
     
         if (ciphertext2)
         {
-            plaintext3 = [cryptor RSADecryptWithCiphertextSSLPublic:ciphertext2];
+            plaintext3 = [cryptor RSADecryptWithCiphertextSSLPrivate:ciphertext2];
             XCTAssertNotNil(plaintext3, @"decryption should be successful");
             XCTAssertTrue([plaintext1 isEqualToData:plaintext3], @"encrypting plus decrypting should equal original");
             XCTAssertTrue(![plaintext1 isEqualToData:ciphertext2], @"encrypting should change the data");
@@ -292,48 +226,26 @@
     }
 }
 
-#endif
-
-#ifdef HAS_COMMON_CRYPTO
-- (void)testCryptorPublicCrypto
+- (void)testAES256
 {
-    @autoreleasepool
-    {
-        UMCrypto *cryptor, *cryptor1;
-        NSData *publickey1, *publickey2, *privatekey1, *privatekey2, *ciphertext1, *plaintext2;
-        NSMutableData *plaintext1;
-        long j;
-        
-        cryptor1 = [[UMCrypto alloc] initPublicCrypto];
-        publickey1 = [cryptor1 publicKey];
-        privatekey1 = [cryptor1 privateKey];
-        cryptor = [[UMCrypto alloc] initPublicCrypto];
-        publickey2 = [cryptor publicKey];
-        privatekey2 = [cryptor privateKey];
-        XCTAssertNotNil(publickey1, @"creation a public key should be successful");
-        XCTAssertNotNil(privatekey1, @"creation a private key should be successful");
-        XCTAssertTrue(![publickey1 isEqualToData:publickey2], @"every instantiation should produce a new public key");
-        XCTAssertTrue(![privatekey1 isEqualToData:privatekey2], @"every instantiation should produce a new private key");
-        
-        /* public cryptography */
-        plaintext1 = [NSMutableData dataWithBytes:des_test[7].data length:108];
-        for (j = 1; j < 4; j++) {
-            [plaintext1 appendBytes:des_test[4].data length:50];
-        }
-        
-        ciphertext1 = [cryptor RSAEncryptWithPlaintextPublic:plaintext1];
-        XCTAssertNotNil(ciphertext1, @"encryption should be successful");
-        NSLog(@"TestUMCrypto: testCryptorPublicCryptoCrypto: ciphertext: %@\r\n", ciphertext1);
-        
-        if (ciphertext1)
-        {
-            plaintext2 = [cryptor RSADecryptWithCiphertextPrivate:ciphertext1];
-            XCTAssertNotNil(plaintext2, @"decryption should be successful");
-            XCTAssertTrue([plaintext1 isEqualToData:plaintext2], @"encrypting plus decrypting should equal original");
-            XCTAssertTrue(![plaintext1 isEqualToData:ciphertext1], @"encrypting should change the data");
-        }
-        
-    }
+    unsigned char key[]      = { 0x08,0x09,0x0A,0x0B,0x0D,0x0E,0x0F,0x10,0x12,0x13,0x14,0x15,0x17,0x18,0x19,0x1A,0x1C,0x1D,0x1E,0x1F,0x21,0x22,0x23,0x24,0x26,0x27,0x28,0x29,0x2B,0x2C,0x2D,0x2E};
+    unsigned char plaintext[]= { 0x06,0x9A,0x00,0x7F,0xC7,0x6A,0x45,0x9F,0x98,0xBA,0xF9,0x17,0xFE,0xDF,0x95,0x21,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+    unsigned char ciphertext[] = { 0x08,0x0e,0x95,0x17,0xeb,0x16,0x77,0x71,0x9a,0xcf,0x72,0x80,0x86,0x04,0x0a,0xe3,
+        0x9a,0x4f,0x27,0x6d,0x62,0xa2,0xab,0x69,0xc1,0x82,0x22,0x69,0xde,0xba,0x79,0x37,0x50,0x95,0x44,0x2a,0x2c,0xeb,0x4e,0x44,0x9e,0x6d,0x27,0xd3,0x75,0xff,0x8a,0xd4};
+
+    NSData *plaintext1 = [NSData dataWithBytes:plaintext length:sizeof(plaintext)];
+    NSData *ciphertext1 = [NSData dataWithBytes:ciphertext length:sizeof(ciphertext)];
+
+    UMCrypto *crypto = [[UMCrypto alloc]init];
+    crypto.aes256Key = [NSData dataWithBytes:key length:sizeof(key)];
+    NSData *ciphertext2 = [crypto aes256Encrypt:plaintext1];
+    XCTAssertTrue([ciphertext1 isEqualToData:ciphertext2],  @"encrypting did not return test case");
+    NSData *plaintext2 = [crypto aes256Decrypt:ciphertext2];
+    XCTAssertTrue([plaintext1 isEqualToData:plaintext2],  @"decrypting did not return test case");
+
+    NSData *plaintext3 = [crypto aes256Decrypt:ciphertext1];
+    XCTAssertTrue([plaintext1 isEqualToData:plaintext3],  @"decrypting did not return original test case");
+
 }
-#endif
+
 @end

@@ -39,7 +39,34 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "TestUMHTTPServer">
+               </Test>
+               <Test
+                  Identifier = "TestUMLogFeed">
+               </Test>
+               <Test
+                  Identifier = "TestUMPool">
+               </Test>
+               <Test
+                  Identifier = "TestUMQueue">
+               </Test>
+               <Test
+                  Identifier = "TestUMSocket">
+               </Test>
+               <Test
                   Identifier = "TestUMSocket/testSocketTCP">
+               </Test>
+               <Test
+                  Identifier = "TestUMSocket/testSocketTCPError">
+               </Test>
+               <Test
+                  Identifier = "TestUmLogFile">
+               </Test>
+               <Test
+                  Identifier = "TestUmLogHandler">
+               </Test>
+               <Test
+                  Identifier = "TestUmSleeper">
                </Test>
             </SkippedTests>
          </TestableReference>

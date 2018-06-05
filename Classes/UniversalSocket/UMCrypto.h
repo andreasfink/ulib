@@ -48,6 +48,7 @@
     int                 _private_keylen;
     NSData              *_cryptorPublicKey;
     NSData              *_cryptorPrivateKey;
+    NSData              *_aes256Key;
     int                 _fileDescriptor;
     UMSocket __weak     *_relatedSocket;
 }
@@ -60,11 +61,10 @@
 @property(readwrite,strong)		NSData        *iv;
 @property(readwrite,strong)		NSString      *publicKey;
 @property(readwrite,strong)		NSString      *privateKey;
-@property(readwrite,assign)     int            public_keylen;
-@property(readwrite,assign)     int            private_keylen;
 
 @property(readwrite,strong)		NSData        *deskey;
-@property(readwrite,strong)		NSData        *cryptorKey;
+@property(readwrite,strong)     NSData        *cryptorKey;
+@property(readwrite,strong)     NSData        *aes256Key;
 @property(readwrite,assign)     int           fileDescriptor;
 @property(readwrite,weak)       UMSocket      *relatedSocket;
 
@@ -97,6 +97,7 @@
 
 - (UMCrypto *)initWithFileDescriptor:(int)fileDescriptor;
 - (UMCrypto *)initWithRelatedSocket:(UMSocket *)s;
+- (UMCrypto *)initPublicCrypto;
 
 - (void)setSeed:(NSInteger)seed;
 
@@ -126,9 +127,14 @@
 - (void)generateRsaKeyPair:(int)keyLength pub:(unsigned long)pubInt;
 
 
-- (NSData *)AES256RandomKey;
-- (NSData *)AES256RandomIV;
+- (NSData *)aes256RandomKey;
+- (NSData *)aes256RandomIV;
 - (void)logOpenSSLErrorsForSection:(NSString *)section;
-- (NSData *)AES256EncryptWithPlaintext:(NSData *)plaintext key:(NSData *)key iv:(NSData *)iv;
+- (NSData *)aes256Encrypt:(NSData *)plaintext;
+- (NSData *)aes256Decrypt:(NSData *)ciphertext;
+- (NSData *)aes256Encrypt:(NSData *)plaintext key:(NSData *)key;
+- (NSData *)aes256Decrypt:(NSData *)plaintext key:(NSData *)key;
+- (NSData *)aes256Encrypt:(NSData *)plaintext key:(NSData *)key iv:(NSData *)iv;
+- (NSData *)aes256Decrypt:(NSData *)plaintext key:(NSData *)key iv:(NSData *)iv;
 
 @end

@@ -536,6 +536,11 @@ static BOOL             _machineCPUIDsLoaded = NO;
     return arc4random_uniform(upperBound);
 }
 
++ (uint32_t)  randomFrom:(uint32_t)lowerBound to:(uint32_t)upperBound
+{
+    return arc4random_uniform(upperBound-lowerBound) + lowerBound;
+}
+
 + (uint32_t)  random
 {
     return arc4random_uniform(UINT_MAX);

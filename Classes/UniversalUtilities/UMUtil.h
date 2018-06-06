@@ -53,6 +53,7 @@
 
 + (long long) milisecondClock;
 + (uint32_t) random:(uint32_t)upperBound;
++ (uint32_t) randomFrom:(uint32_t)lowerBound to:(uint32_t)upperBound;
 + (uint32_t) random;
 @end
 

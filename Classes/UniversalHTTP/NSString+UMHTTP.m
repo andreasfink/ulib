@@ -6,9 +6,9 @@
 //
 
 #import "NSString+UMHTTP.h"
+#import "NSData+UMHTTP.h"
 #include <openssl/bio.h>
 #include <openssl/evp.h>
-
 
 static inline int nibbleToInt(const char a)
 {
@@ -117,24 +117,7 @@ static inline int nibbleToInt(const char a)
     }
 
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    const char *bytes = data.bytes;
-
-    NSMutableString *out = [[NSMutableString alloc]init];
-    NSInteger i;
-    NSInteger len = [data length];
-    for(i=0;i<len;i++)
-    {
-        unsigned char c = bytes[i];
-        if([allowedInUrl characterIsMember:(unichar)c])
-        {
-            [out appendFormat:@"%c",c];
-        }
-        else
-        {
-            [out appendFormat:@"%%%02x",(int)c];
-        }
-    }
-    return out;
+    return [data urlencode];
 }
 
 - (NSData *)decodeBase64

@@ -993,7 +993,7 @@
         }
         else
         {
-            /* Provide the message to be encrypted, and obtain the encrypted output.
+            /* Provide the message to be decrypted, and obtain the encrypted output.
              * EVP_EncryptUpdate can be called multiple times if necessary
              */
             

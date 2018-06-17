@@ -2340,6 +2340,8 @@ static int SSL_smart_shutdown(SSL *ssl)
             return UMSocketError_connection_aborted;
         case EINPROGRESS:
             return UMSocketError_in_progress;
+        case EISCONN:
+            return UMSocketError_is_already_connected;
         default:
             fprintf(stderr,"Unknown errno code %d\n",e);
             return UMSocketError_not_known;

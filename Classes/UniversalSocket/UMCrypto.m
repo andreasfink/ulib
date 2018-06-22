@@ -874,7 +874,9 @@
     return [self aes256Encrypt:plaintext key:key iv:NULL];
 }
 
-- (NSData *)aes256Encrypt:(NSData *)plaintext key:(NSData *)key iv:(NSData *)iv;
+- (NSData *)aes256Encrypt:(NSData *)plaintext
+                      key:(NSData *)key
+                       iv:(NSData *)iv;
 {
     const unsigned char *plaintext_ptr = plaintext.bytes;
     int plaintext_len = (int)plaintext.length;
@@ -916,7 +918,7 @@
              * EVP_EncryptUpdate can be called multiple times if necessary
              */
             ciphertext_len = plaintext_len + 2*key_len; /* leave enough space for padding etc */
-            ciphertext_ptr = malloc(plaintext_len);
+            ciphertext_ptr = malloc(ciphertext_len);
             memset(ciphertext_ptr,0x00,ciphertext_len);
             if(1 != EVP_EncryptUpdate(ctx, ciphertext_ptr, &len, plaintext_ptr, plaintext_len))
             {

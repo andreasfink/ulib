@@ -30,6 +30,11 @@
 
 - (NSString *)simpleSynchronousRequest:(UMHTTPClientRequest *)req
 {
+    NSURL *url = req.url;
+    if(url==NULL)
+    {
+        return @"";
+    }
     NSError *err = NULL;
     NSString *html = [NSString stringWithContentsOfURL:req.url
                                               encoding:NSUTF8StringEncoding

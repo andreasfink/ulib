@@ -235,7 +235,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
 	return @(&u.nodename[0]);
 }
 
-+ (NSString *) release
++ (NSString *) osRelease
 {
 	struct utsname u;
 	uname(&u);
@@ -382,7 +382,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
     {
         for (ifap = ifaphead; ifap && !found; ifap = ifap->ifa_next)
         {
-#ifdef __APPLE__
+#if defined(__APPLE__)
             if (ifap->ifa_addr->sa_family == AF_MACADDR)
             {
                 sdl = (struct sockaddr_dl *)ifap->ifa_addr;
@@ -393,6 +393,10 @@ static BOOL             _machineCPUIDsLoaded = NO;
                 //	if_mac = malloc(sdl->sdl_alen);
                     if_mac = (unsigned char *)LLADDR(sdl);
                 }
+                NSString *ifname = @(ifap->ifa_name);
+                NSString *macaddr= [NSString stringWithFormat: @"%02X%02X%02X%02X%02X%02X",
+                                    if_mac[0],if_mac[1], if_mac[2],if_mac[3],if_mac[4],if_mac[5]];
+                dict[ifname] = macaddr;
             }
 #else
             struct ifreq buffer;
@@ -402,11 +406,11 @@ static BOOL             _machineCPUIDsLoaded = NO;
             ioctl(s, SIOCGIFHWADDR, &buffer);
             close(s);
             if_mac = (unsigned char *)&buffer.ifr_hwaddr.sa_data[0];
-#endif
             NSString *ifname = @(ifap->ifa_name);
             NSString *macaddr= [NSString stringWithFormat: @"%02X%02X%02X%02X%02X%02X",
                        if_mac[0],if_mac[1], if_mac[2],if_mac[3],if_mac[4],if_mac[5]];
             dict[ifname] = macaddr;
+#endif
         }
         _localMacAddrs = dict;
         freeifaddrs(ifaphead);

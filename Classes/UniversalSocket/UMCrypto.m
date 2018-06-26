@@ -706,8 +706,6 @@
 
 - (void)generateRsaKeyPair:(int)keyLength pub:(unsigned long)pubInt
 {
-    NSMutableDictionary *dict = NULL;
-
     int             ret = 0;
     RSA             *r = NULL;
     BIGNUM          *bne = NULL;
@@ -790,7 +788,6 @@
                                     BIO_read(bp_public, pub_key,(int)pub_len);
                                     pri_key[pri_len] = '\0';
                                     pub_key[pub_len] = '\0';
-                                    dict = [[NSMutableDictionary alloc]init];
                                     _privateKey = @(pri_key);
                                     _publicKey = @(pub_key);
                                     memset(pri_key,0x00,pri_len);

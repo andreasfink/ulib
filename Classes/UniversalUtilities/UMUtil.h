@@ -26,7 +26,7 @@
 //+ (NSString *) grabNSStringFromNSMutableData:(NSMutableData *)dat usingIndex: (int *) idx usingEncoding:(int)encodingVariant;
 + (NSString *) sysName;
 + (NSString *) nodeName;
-+ (NSString *) release;
++ (NSString *) osRelease;
 + (NSString *) version;
 + (NSString *) version1;
 + (NSString *) version2;

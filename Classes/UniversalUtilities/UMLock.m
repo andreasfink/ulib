@@ -307,7 +307,7 @@ void nslock_nested_lock_warning(UMLock *lock)
     [s appendFormat:@"nrlock: %@\n",[_nrlock description]];
     [s appendFormat:@"rlock: %@\n",[_rlock description]];
     [s appendFormat:@"isLocked: %@\n",isLocked ? @"YES" : @"NO"];
-    [s appendFormat:@"locking_thread_tid: %lld\n",(long long)locking_thread_tid];
+    [s appendFormat:@"locking_thread_tid: %llu\n",(unsigned long long)locking_thread_tid];
     [s appendFormat:@"lock_count: %d\n",lock_count];
     int i;
     for(i=0;i<MAX_LOCK_EVENTS;i++)

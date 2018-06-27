@@ -130,7 +130,7 @@
     NSAssert(self.duration>0,@"Timer is 0");
     if(self.duration < 100)
     {
-        NSLog(@"Warning: Starting timer %@ with very short duration %lld µs",self.name,(long long)self.duration);
+        NSLog(@"Warning: Starting timer %@ with very short duration %llud µs",self.name,(long long)self.duration);
     }
     self.isRunning = YES;
     UMMicroSec now  = [UMThroughputCounter microsecondTime];

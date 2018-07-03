@@ -544,7 +544,7 @@
 
 - (void) setResponseCssString:(NSString *)content
 { 
-    [self setResponseTypeHtml];
+    [self setResponseTypeCss];
     [self setResponseData:[content dataUsingEncoding:NSUTF8StringEncoding]];
 }
 

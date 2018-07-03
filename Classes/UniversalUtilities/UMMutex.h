@@ -44,5 +44,5 @@
 
 BOOL ummutex_stat_is_enabled(void);
 NSArray *ummutex_stat(BOOL sortByName);
-int umutex_stat_enable(void);
+int ummutex_stat_enable(void);
 void ummutex_stat_disable(void);

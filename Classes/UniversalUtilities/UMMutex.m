@@ -215,7 +215,7 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
 
 
-int umutex_stat_enable(void)
+int ummutex_stat_enable(void)
 {
     if(global_ummutex_stat == NULL)
     {

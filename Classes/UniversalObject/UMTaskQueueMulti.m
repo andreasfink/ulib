@@ -95,6 +95,7 @@
                                         debug:(BOOL)debug
                                     hardLimit:(NSUInteger)hardLimit
 {
+    NSAssert(workerThreadCount>0,@"you must have at least one workerThread for UMTaskQueueMulti");
     self = [super init];
     if(self)
     {

@@ -21,6 +21,7 @@
 #import "NSData+UMSocket.h"
 #import "UMAssert.h"
 #import "UMFileTrackingMacros.h"
+#import "NSString+UMSocket.h"
 
 #import "UMUtil.h" /* for UMBacktrace */
 
@@ -29,6 +30,8 @@
 #include "openssl/ssl.h"
 #include "openssl/err.h"
 #endif
+
+#import "ulib_config.h" /* for HAVE_SOCKADDR_IN etc */
 
 typedef unsigned long (*CRYPTO_CALLBACK_PTR)(void);
 
@@ -58,16 +61,6 @@ typedef unsigned long (*CRYPTO_CALLBACK_PTR)(void);
 #ifndef	IPPROTO_SCTP
 #define	IPPROTO_SCTP	132
 #endif			
-
-#ifdef __APPLE__
-#define HAS_SOCKADDR_LEN    1
-#else
-#ifdef	LINUX
-#undef  HAS_SOCKADDR_LEN
-#else
-#error  We dont know if this platform needs HAS_SOCKADDR_LEN or not
-#endif
-#endif
 
 #import "UMHost.h"
 
@@ -521,8 +514,8 @@ static int SSL_smart_shutdown(SSL *ssl)
     @try
     {
         int eno = 0;
-        NSArray				*localAddresses = NULL;
-        NSMutableArray            *useableLocalAddresses;
+        NSArray                 *localAddresses = NULL;
+        NSMutableArray          *useableLocalAddresses;
         struct sockaddr_in	sa;
         struct sockaddr_in6	sa6;
         NSString    *ipAddr;
@@ -537,10 +530,10 @@ static int SSL_smart_shutdown(SSL *ssl)
         }
         if(localHost == NULL)
         {
-            localHost				= [[UMHost alloc] initWithLocalhost];
+            localHost               = [[UMHost alloc] initWithLocalhost];
         }
-        localAddresses			= [localHost addresses];
-        useableLocalAddresses	= [[NSMutableArray alloc] init];
+        localAddresses              = [localHost addresses];
+        useableLocalAddresses       = [[NSMutableArray alloc] init];
 
         memset(&sa,0x00,sizeof(sa));
         sa.sin_family			= AF_INET;
@@ -655,36 +648,36 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) listen: (int) backlog
 {
+    UMSocketError e;
+    
     [self updateName];
-    [_controlLock lock];
-    @try
+
+    int err;
+    [self reportStatus:@"caling listen()"];
+    if (self.isListening == 1)
     {
-        int err;
+        [self reportStatus:@"- already listening"];
+        return UMSocketError_already_listening;
+    }
+    self.isListening = 0;
+    
+    [_controlLock lock];
+    err = listen(_sock,backlog);
+    [_controlLock unlock];
 
-        [self reportStatus:@"caling listen()"];
-        if (self.isListening == 1)
-        {
-            [self reportStatus:@"- already listening"];
-            return UMSocketError_already_listening;
-        }
-        self.isListening = 0;
-
-        err = listen(_sock,backlog);
-
-        direction = direction | UMSOCKET_DIRECTION_INBOUND;
-        if(err)
-        {
-            int eno = errno;
-            return [UMSocket umerrFromErrno:eno];
-        }
+    direction = direction | UMSOCKET_DIRECTION_INBOUND;
+    if(err)
+    {
+        int eno = errno;
+        e = [UMSocket umerrFromErrno:eno];
+    }
+    else
+    {
         self.isListening = 1;
         [self reportStatus:@"isListening=1"];
-        return UMSocketError_no_error;
+        e= UMSocketError_no_error;
     }
-    @finally
-    {
-        [_controlLock unlock];
-    }
+    return e;
 }
 
 
@@ -777,6 +770,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         if(self.isConnected)
         {
             fprintf(stderr,"connecting an already connected socket!?");
+            return UMSocketError_is_already_connected;
         }
 
         if((_sock < 0) || (!_hasSocket))
@@ -1087,11 +1081,12 @@ static int SSL_smart_shutdown(SSL *ssl)
     int flags;
     int err;
 
-    [_controlLock lock];
     if(_blockingMode != SocketBlockingMode_isNotBlocking)
     {
+        [_controlLock lock];
         flags = fcntl(_sock, F_GETFL, 0);
         err = fcntl(_sock, F_SETFL, flags  | O_NONBLOCK);
+        [_controlLock unlock];
         if(err<0)
         {
             returnValue = [UMSocket umerrFromErrno:errno];
@@ -1101,7 +1096,6 @@ static int SSL_smart_shutdown(SSL *ssl)
             _blockingMode = SocketBlockingMode_isNotBlocking;
         }
     }
-    [_controlLock unlock];
     return returnValue;
 }
 
@@ -1111,11 +1105,12 @@ static int SSL_smart_shutdown(SSL *ssl)
     int flags;
     int err;
 
-    [_controlLock lock];
     if(_blockingMode != SocketBlockingMode_isBlocking)
     {
+        [_controlLock lock];
         flags = fcntl(_sock, F_GETFL, 0);
         err = fcntl(_sock, F_SETFL, flags  & ~O_NONBLOCK);
+        [_controlLock unlock];
         if(err<0)
         {
             returnValue = [UMSocket umerrFromErrno:errno];
@@ -1131,14 +1126,10 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) close
 {
-    [_controlLock lock];
-    @try
+    UMSocketError err = UMSocketError_no_error;
+    if((self.hasSocket) && (_sock >=0))
     {
-        UMSocketError err = UMSocketError_no_error;
-        if((self.hasSocket == 0) || (_sock < 0))
-        {
-            return err;
-        }
+        [_controlLock lock];
         TRACK_FILE_CLOSE(_sock);
         int res = close(_sock);
         if (res)
@@ -1146,20 +1137,16 @@ static int SSL_smart_shutdown(SSL *ssl)
             int eno = errno;
             err = [UMSocket umerrFromErrno:eno];
         }
-
         _sock=-1;
         self.hasSocket=0;
         status = UMSOCKET_STATUS_OOS;
         self.isConnected = 0;
-        return err;
-    }
-    @finally
-    {
         [_controlLock unlock];
     }
+    return err;
 }
 
-- (UMSocketError)  sendBytes:(void *)bytes length:(ssize_t)length
+- (UMSocketError)sendBytes:(void *)bytes length:(ssize_t)length
 {
     ssize_t i;
     int eno = 0;
@@ -1378,16 +1365,13 @@ static int SSL_smart_shutdown(SSL *ssl)
     events |= POLLRDHUP;
 #endif
 
-    [_controlLock lock];
     memset(pollfds,0,sizeof(pollfds));
     pollfds[0].fd = _sock;
     pollfds[0].events = events;
-
-
-    //    UMAssert(timeoutInMs>0,@"timeout should be larger than 0");
     UMAssert(timeoutInMs<200000,@"timeout should be smaller than 20seconds");
-
     errno = 99;
+
+    [_controlLock lock];
     ret1 = poll(pollfds, 1, timeoutInMs);
     [_controlLock unlock];
 
@@ -1841,9 +1825,9 @@ static int SSL_smart_shutdown(SSL *ssl)
     memset(&sa_remote_in6,0x00,sizeof(sa_remote_in6));
     
     len = sizeof(sa_local);
-    //[_controlLock lock];
+    [_controlLock lock];
     getsockname(_sock, &sa_local, &len);
-    //[_controlLock unlock];
+    [_controlLock unlock];
 
     switch(sa_local.sa_family)
     {
@@ -3044,5 +3028,68 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
             return 0;
     }
 }
+
+
++ (NSData *)sockaddrFromAddress:(NSString *)theAddr
+                             port:(int)thePort
+                     socketFamily:(int)socketFamily
+{
+    NSData *resultData = NULL;
+    
+    NSString *address = theAddr;
+    NSString *address2 = [UMSocket deunifyIp:address];
+    if(address2.length>0)
+    {
+        address = address2;
+    }
+
+    if(socketFamily==AF_INET6)
+    {
+        struct sockaddr_in6 address6;
+        memset(&address6,0x00,sizeof(struct sockaddr_in6));
+
+        if([address isIPv4])
+        {
+            /* we have a IPV6 socket but the  addres is in IPV4 format so we must use the IPv6 representation of it */
+            address = [NSString stringWithFormat:@"::ffff:%@",address];
+        }
+        
+        int result = inet_pton(AF_INET6,address.UTF8String, &address6.sin6_addr);
+        if(result==1)
+        {
+#ifdef HAVE_SOCKADDR_SIN_LEN
+            address6.sin6_len = sizeof(struct sockaddr_in6);
+#endif
+            address6.sin6_family = AF_INET6;
+            address6.sin6_port = htons(thePort);
+            resultData = [NSData dataWithBytes:&address6 length:sizeof(address6)];
+        }
+        else
+        {
+            NSLog(@"'%@' is not a valid IPv6 address",theAddr);
+        }
+    }
+    else if(socketFamily==AF_INET)
+    {
+        struct sockaddr_in  address4;
+        memset(&address4,0x00,sizeof(struct sockaddr_in));
+        int result = inet_pton(AF_INET,address.UTF8String, &address4.sin_addr);
+        if(result==1)
+        {
+#ifdef HAVE_SOCKADDR_SIN_LEN
+            address4.sin_len = sizeof(struct sockaddr_in);
+#endif
+            address4.sin_family = AF_INET;
+            address4.sin_port = htons(thePort);
+            resultData = [NSData dataWithBytes:&address4 length:sizeof(address4)];
+        }
+        else
+        {
+            NSLog(@"'%@' is not a valid IPv4 address",theAddr);
+        }
+    }
+    return resultData;
+}
+
 
 @end

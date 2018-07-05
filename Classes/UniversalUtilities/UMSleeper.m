@@ -69,6 +69,7 @@ static void socket_set_blocking(int fd, int blocking)
     [_prepareLock lock];
     if(self.isPrepared==YES)
     {
+        [_prepareLock unlock];
         return;
     }
     int pipefds[2];

@@ -84,7 +84,7 @@
         sleeper		= [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
         [sleeper prepare];
         connections = [[UMSynchronizedArray alloc] init];
-        _connectionsLock = [[UMMutex alloc]init];
+        _connectionsLock = [[UMMutex alloc]initWithName:@"http-connections-lock"];
 
         terminatedConnections = [[UMSynchronizedArray alloc]init];
         lock		= [[NSLock alloc] init];

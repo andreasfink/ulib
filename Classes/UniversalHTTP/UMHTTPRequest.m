@@ -47,7 +47,7 @@
 
     if(lastRequestId_lock==NULL)
     {
-        lastRequestId_lock = [[UMMutex alloc]init];
+        lastRequestId_lock = [[UMMutex alloc]initWithName: @"last-requested-id"];
     }
 
     self = [super init];
@@ -596,7 +596,7 @@
 {
     self.awaitingCompletion = YES;
     self.completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
-    _pendingRequestLock = [[UMMutex alloc]initWithName:@"pending-request-lock"];
+    _pendingRequestLock = [[UMMutex alloc]initWithName:@"http-pending-request-lock"];
 }
 
 - (void)makeAsyncWithTimeout:(NSTimeInterval)timeoutInSeconds delegate:(id<UMHTTPRequest_TimeoutProtocol>)callback
@@ -604,7 +604,7 @@
     self.timeoutDelegate = callback;
     self.awaitingCompletion = YES;
     self.completionTimeout = [NSDate dateWithTimeIntervalSinceNow:timeoutInSeconds];
-    _pendingRequestLock = [[UMMutex alloc]initWithName:@"pending-request-lock"];
+    _pendingRequestLock = [[UMMutex alloc]initWithName:@"http-pending-request-lock"];
 }
 
 - (void)resumePendingRequest

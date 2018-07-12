@@ -113,7 +113,7 @@ static inline int nibbleToInt(const char a)
     static NSCharacterSet *allowedInUrl;
     if(allowedInUrl == NULL)
     {
-        allowedInUrl = [NSCharacterSet characterSetWithCharactersInString:@"!$&'()*,-.0123456789:;=ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"];
+        allowedInUrl = [NSCharacterSet characterSetWithCharactersInString:@"!$&'()*,-.0123456789;=ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"];
     }
 
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];

@@ -20,7 +20,7 @@
     static NSCharacterSet *allowedInUrl;
     if(allowedInUrl == NULL)
     {
-        allowedInUrl = [NSCharacterSet characterSetWithCharactersInString:@"!$&'()*,-.0123456789:;=ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"];
+        allowedInUrl = [NSCharacterSet characterSetWithCharactersInString:@"!$'()*,-.0123456789;ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"];
     }
     
     const char *bytes = self.bytes;

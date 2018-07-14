@@ -87,4 +87,19 @@ didReceiveResponse:(NSURLResponse *)response
 
 #endif
 }
+
+
+- (void)main
+{
+    if(url==NULL)
+    {
+        return;
+    }
+    NSError *err = NULL;
+    [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&err];
+    if(err)
+    {
+        NSLog(@"Error %@ while loading URL %@",err,urlString);
+    }
+}
 @end

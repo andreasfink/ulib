@@ -8,6 +8,7 @@
 
 #import "UMObject.h"
 #import "UMSynchronizedArray.h"
+#import "UMTaskQueueMulti.h"
 
 @class UMHTTPClientRequest;
 
@@ -15,12 +16,13 @@
 @interface UMHTTPClient : UMObject
 {
     UMSynchronizedArray *pendingOutgoingRequests;
+    UMTaskQueueMulti *_taskQueue;
+    BOOL _isSharedQueue;
 }
 
+- (UMHTTPClient *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq;
 - (void)addPendingSession:(UMHTTPClientRequest *)creq;
 - (void)removePendingSession:(UMHTTPClientRequest *)creq;
 - (void)startRequest:(UMHTTPClientRequest *)creq;
-- (NSString *)simpleSynchronousRequest:(UMHTTPClientRequest *)req;
-- (void)simpleASynchronousRequest:(UMHTTPClientRequest *)req;
 
 @end

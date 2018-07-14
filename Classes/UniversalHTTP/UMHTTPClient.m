@@ -8,8 +8,10 @@
 
 #import "UMHTTPClient.h"
 #import "UMHTTPClientRequest.h"
+#import "UMLayer.h"
 
 @implementation UMHTTPClient
+
 
 - (void)addPendingSession:(UMHTTPClientRequest *)creq
 {
@@ -26,30 +28,6 @@
     [self addPendingSession:creq];
     creq.client = self;
     [creq performSelectorOnMainThread:@selector(start) withObject:NULL waitUntilDone:NO];
-}
-
-- (NSString *)simpleSynchronousRequest:(UMHTTPClientRequest *)req
-{
-    NSURL *url = req.url;
-    if(url==NULL)
-    {
-        return @"";
-    }
-    NSError *err = NULL;
-    NSString *html = [NSString stringWithContentsOfURL:req.url
-                                              encoding:NSUTF8StringEncoding
-                                                 error:&err];
-    if(err)
-    {
-        NSLog(@"Error %@ while loading URL %@",err,req.urlString);
-    }
-    return html;
-}
-
-- (void)simpleASynchronousRequest:(UMHTTPClientRequest *)req
-{
-    [self runSelectorInBackground:@selector(simpleSynchronousRequest:)
-                       withObject:req];
 }
 
 @end

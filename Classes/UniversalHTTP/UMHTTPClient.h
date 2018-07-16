@@ -20,7 +20,6 @@
     BOOL _isSharedQueue;
 }
 
-- (UMHTTPClient *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq;
 - (void)addPendingSession:(UMHTTPClientRequest *)creq;
 - (void)removePendingSession:(UMHTTPClientRequest *)creq;
 - (void)startRequest:(UMHTTPClientRequest *)creq;

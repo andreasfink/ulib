@@ -9,11 +9,10 @@
 #import "UMObject.h"
 #import "UMSynchronizedArray.h"
 #import "UMTaskQueueMulti.h"
+#import "UMHTTPClientRequest.h"
 
-@class UMHTTPClientRequest;
 
-
-@interface UMHTTPClient : UMObject
+@interface UMHTTPClient : UMObject<UMHTTPClientDelegateProtocol>
 {
     UMSynchronizedArray *pendingOutgoingRequests;
     UMTaskQueueMulti *_taskQueue;
@@ -23,5 +22,5 @@
 - (void)addPendingSession:(UMHTTPClientRequest *)creq;
 - (void)removePendingSession:(UMHTTPClientRequest *)creq;
 - (void)startRequest:(UMHTTPClientRequest *)creq;
-
+- (NSString *)simpleSynchronousRequest:(UMHTTPClientRequest *)creq;
 @end

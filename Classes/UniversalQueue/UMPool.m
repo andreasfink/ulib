@@ -71,6 +71,23 @@
     }
 }
 
+- (void)removeObjectIdenticalTo:(id)obj
+{
+    if(obj)
+    {
+        int start = _rotary;
+        int end = start + UMPOOL_QUEUES_COUNT;
+        for(int index=start;index<end;index++)
+        {
+            int i = index % UMPOOL_QUEUES_COUNT;
+            [_lock[i] lock];
+            [_queues[i] removeObjectIdenticalTo:obj];
+            [_lock[i] unlock];
+        }
+        _rotary = ++_rotary % UMPOOL_QUEUES_COUNT;
+    }
+}
+
 - (id)getAny
 {
     id obj = NULL;

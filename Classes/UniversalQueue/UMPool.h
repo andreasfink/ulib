@@ -21,6 +21,7 @@
 - (UMPool *)init;
 - (void)append:(id)obj;
 - (void)removeObject:(id)obj;
+- (void)removeObjectIdenticalTo:(id)obj;
 - (id)getAny;
 - (NSInteger)count;
 

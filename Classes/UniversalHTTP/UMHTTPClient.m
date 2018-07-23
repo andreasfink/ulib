@@ -29,7 +29,7 @@
     [self addPendingSession:creq];
     creq.client = self;
 #ifdef LINUX
-    [self performSelectorOnMainThread:@selector(linuxWebFetch:) withObject:creq waitUntilDone:NO];
+    [self linuxWebFetch:creq];
 #else
     [creq performSelectorOnMainThread:@selector(start) withObject:NULL waitUntilDone:NO];
 #endif

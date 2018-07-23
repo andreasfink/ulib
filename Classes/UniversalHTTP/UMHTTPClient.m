@@ -25,6 +25,7 @@
 
 - (void)startRequest:(UMHTTPClientRequest *)creq
 {
+    creq.url = [[NSURL alloc]initWithString:creq.urlString];
     [self addPendingSession:creq];
     creq.client = self;
 #ifdef LINUX

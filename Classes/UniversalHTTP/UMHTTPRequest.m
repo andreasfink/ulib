@@ -131,12 +131,20 @@
 - (void) extractPutParams
 {
     self.url = [[NSURL alloc]initWithString:path];
+    if(self.url==NULL)
+    {
+        NSLog(@"can not decode URL %@",path);
+    }
 	[self extractParams:[url query]];
 }
 
 - (void) extractPostParams;
 {
     self.url = [[NSURL alloc]initWithString:path];
+    if(self.url==NULL)
+    {
+        NSLog(@"can not decode URL %@",path);
+    }
     NSString *requestDataString = [[NSString alloc]initWithBytes:[requestData bytes] length:[requestData length] encoding:NSUTF8StringEncoding];
 	[self extractParams:requestDataString];
 }

@@ -26,6 +26,11 @@
 - (void)startRequest:(UMHTTPClientRequest *)creq
 {
     creq.url = [[NSURL alloc]initWithString:creq.urlString];
+    if(creq.url==NULL)
+    {
+        NSLog(@"can not decode URL %@",creq.urlString);
+    }
+
     [self addPendingSession:creq];
     creq.client = self;
 //#ifdef LINUX
@@ -59,6 +64,11 @@
 - (void)linuxWebFetch:(UMHTTPClientRequest *)req
 {
     req.url = [[NSURL alloc]initWithString:req.urlString];
+    if(req.url==NULL)
+    {
+        NSLog(@"can not decode URL %@",req.urlString);
+    }
+
     NSData *data = [NSData dataWithContentsOfURL:req.url];
     if(data.length > 0)
     {

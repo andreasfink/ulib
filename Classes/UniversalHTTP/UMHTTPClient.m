@@ -27,7 +27,11 @@
 {
     [self addPendingSession:creq];
     creq.client = self;
+#ifdef LINUX
+    [self performSelectorOnMainThread:@selector(linuxWebFetch:) withObject:creq waitUntilDone:NO];
+#else
     [creq performSelectorOnMainThread:@selector(start) withObject:NULL waitUntilDone:NO];
+#endif
 }
 
 - (NSString *)simpleSynchronousRequest:(UMHTTPClientRequest *)creq
@@ -49,6 +53,20 @@
         return [NSString stringWithFormat:@"ERROR %03d",(int)creq.responseStatusCode];
     }
     return NULL;
+}
+
+- (void)linuxWebFetch:(UMHTTPClientRequest *)req
+{
+    req.url = [[NSURL alloc]initWithString:req.urlString];
+    NSData *data = [NSData dataWithContentsOfURL:req.url];
+    if(data.length > 0)
+    {
+        [self urlLoadCompletedForReference:req data:data status:200];
+    }
+    else
+    {
+        [self urlLoadCompletedForReference:req data:data status:404];
+    }
 }
 
 - (void) urlLoadCompletedForReference:(id)ref data:(NSData *)data status:(NSInteger)statusCode

@@ -70,7 +70,7 @@ didReceiveResponse:(NSURLResponse *)response
 
 - (void)start
 {
-    
+
 #ifdef LINUX
     urlCon = [[NSURLConnection alloc]initWithRequest:theRequest
                                             delegate:self];

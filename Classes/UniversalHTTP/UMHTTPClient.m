@@ -28,11 +28,11 @@
     creq.url = [[NSURL alloc]initWithString:creq.urlString];
     [self addPendingSession:creq];
     creq.client = self;
-#ifdef LINUX
-    [self linuxWebFetch:creq];
-#else
+//#ifdef LINUX
+//    [self linuxWebFetch:creq];
+//#else
     [creq performSelectorOnMainThread:@selector(start) withObject:NULL waitUntilDone:NO];
-#endif
+//#endif
 }
 
 - (NSString *)simpleSynchronousRequest:(UMHTTPClientRequest *)creq

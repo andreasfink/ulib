@@ -121,6 +121,10 @@
 - (void) extractGetParams
 {
     self.url = [[NSURL alloc]initWithString:path];
+    if(self.url==NULL)
+    {
+        NSLog(@"can not decode URL %@",path);
+    }
 	[self extractParams:[url query]];
 }
 

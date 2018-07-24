@@ -5,7 +5,7 @@
 //  Created by Andreas Fink on 23.11.16.
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
-
+#include <unistd.h>
 #import "UMHTTPClient.h"
 #import "UMHTTPClientRequest.h"
 #import "UMLayer.h"

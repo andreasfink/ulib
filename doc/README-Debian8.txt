@@ -1,4 +1,4 @@
-ulib under Debian9-Stretch
+ulib under Debian8
 -------------------------
 
 To user ulib with Linux you need to build your own gnustep installation
@@ -13,7 +13,7 @@ Here is how to get such a installation up and running under Debian 9 (codename S
 --------------------------
 (run as root or use sudo in front)
 
-  Debian 9 Stretch
+  Debian 8 Stretch
   --------------------------
 
  apt-get install build-essential git subversion  \
@@ -50,21 +50,22 @@ Here is how to get such a installation up and running under Debian 9 (codename S
         libxft2 libxft-dev \
         libflite1 flite1-dev \
         libxmu6 libxpm4 wmaker-common\
-        libgnutls30 libgnutls28-dev\
-        libpng-dev libpng16-16\
-        libstdc++-6-dev \
-        libreadline7 libreadline-dev \
-        gobjc-6 gobjc++-6 \
-        libgif7 libgif-dev libwings3 libwings-dev libwraster5 libwraster-dev libwutil5 \
-        libcups2-dev  libicu57 libicu-dev \
-        llvm clang lldb libclang-dev \
+        libgnutls-deb0-28 libgnutls28-dev\
+        libpng12-0 libpng12-dev\
+        libstdc++-4.9-dev \
+        libreadline6 libreadline6-dev \
+        gobjc-4.8 gobjc++-4.8 \
+        libgif4 libgif-dev libgif-dev libwings2 libwings-dev libwraster3 libwraster3-dev libwutil3 \
+        libcups2-dev  libicu52 libicu-dev \
         cmake  gobjc++\
         xorg \
         libfreetype6 libfreetype6-dev \
         libpango1.0-dev \
         libcairo2-dev \
-        libxt-dev libssl-dev \
+        libxt-dev libssl-dev
+        lldb-4.0 liblldb-4.0 clang-4.0 lldb-4.0 \
         libasound2-dev libjack-dev libjack0 libportaudio2 libportaudiocpp0 portaudio19-dev
+  
 
     export CC=clang
     export CXX=clang++
@@ -96,7 +97,7 @@ Here is how to get such a installation up and running under Debian 9 (codename S
     cd libiconv-1.15
     ./configure
     make CFLAGS=-g
-    make CFLAGS=-g install
+    make install
     cd ../..
 
     cd gnustep/swift-corelibs-libdispatch
@@ -105,7 +106,7 @@ Here is how to get such a installation up and running under Debian 9 (codename S
     cmake ..
     make
     make install
-    
+    cd ../../..
 
 5. install gnustep-make
 

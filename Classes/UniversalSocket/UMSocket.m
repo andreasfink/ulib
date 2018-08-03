@@ -2890,7 +2890,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         SSL_library_init();
         SSLeay_add_ssl_algorithms();
         SSL_load_error_strings();
-#ifdef  REQUIRE_OLD_TLS_V1_2
+#ifdef  HAVE_TLS_METHOD
         global_generic_ssl_context = SSL_CTX_new(TLSv1_2_method());
         global_server_ssl_context = SSL_CTX_new(TLSv1_2_server_method());
         global_client_ssl_context = SSL_CTX_new(TLSv1_2_client_method()) ;

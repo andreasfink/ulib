@@ -351,6 +351,9 @@ AC_CHECK_FUNC(gethostbyname_r, [ AC_FUNC_WHICH_GETHOSTBYNAME_R ], [
 dnl Checking if we have new TLS_method() or the older TLSv12_method()
 AC_CHECK_FUNC(TLS_method, [AC_DEFINE(HAVE_TLS_METHOD)],[])
 
+dnl Checking if we have new BN_secure_new() or the older BN_new()
+AC_CHECK_FUNC(BN_secure_new, [AC_DEFINE(HAVE_BN_SECURE_NEW)],[])
+
 dnl Macro to find out which pthread_setname_np variant can be used if any 
 dnl
 

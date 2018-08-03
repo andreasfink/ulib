@@ -5197,6 +5197,13 @@ if test "x$ac_cv_func_TLS_method" = xyes; then :
 fi
 
 
+ac_fn_c_check_func "$LINENO" "BN_secure_new" "ac_cv_func_BN_secure_new"
+if test "x$ac_cv_func_BN_secure_new" = xyes; then :
+  $as_echo "#define HAVE_BN_SECURE_NEW 1" >>confdefs.h
+
+fi
+
+
 
 
 

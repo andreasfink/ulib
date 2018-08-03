@@ -1,4 +1,4 @@
-ulib under Debian8
+ulib under Debian8 Jessie
 -------------------------
 
 To user ulib with Linux you need to build your own gnustep installation
@@ -6,10 +6,19 @@ The ones shipped with the distributions is not supporting automatic
 reference counting because its using the old objc runtime which does not support
 ARC.
 
+Here is how to get such a installation up and running under Debian 8 (codename Jessie)
 
-Here is how to get such a installation up and running under Debian 9 (codename Stretch)
 
-1. Install depenencies
+1. You need to install the llvm repository
+-------------------------------------------
+
+echo "deb http://llvm.org/apt/jessie/ llvm-toolchain-jessie-5.0 main"     > /etc/apt/sources.list.d/llvm.list
+echo "deb-src http://llvm.org/apt/jessie/ llvm-toolchain-jessie-5.0 main" >> /etc/apt/sources.list.d/llvm.list
+apt-get update
+    
+
+
+2. Install depenencies
 --------------------------
 (run as root or use sudo in front)
 
@@ -63,14 +72,33 @@ Here is how to get such a installation up and running under Debian 9 (codename S
         libpango1.0-dev \
         libcairo2-dev \
         libxt-dev libssl-dev
-        lldb-4.0 liblldb-4.0 clang-4.0 lldb-4.0 \
         libasound2-dev libjack-dev libjack0 libportaudio2 libportaudiocpp0 portaudio19-dev
+    
   
+4. We need a newer cmake and compile it with gcc
+------------------------------------------------
 
-    export CC=clang
-    export CXX=clang++
+        wget https://cmake.org/files/v3.7/cmake-3.7.2.tar.gz
+        tar -xvzf cmake-3.7.2.tar.gz
+        cd cmake-3.7.2
+        export CC=gcc
+        export CXX=g++
+        ./configure
+        make
+        make install
+
+
+5. Set defaults for the remaining to clang-6.0
+------------------------------------------------
+
+
+    export CC=clang-5.0
+    export CXX=clang++-5.0
     export PATH=/usr/local/bin:$PATH
     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
+
+    alias clang=clang-5.0
+    alias clang++=clang++-5.0
 
 
 
@@ -79,7 +107,6 @@ Here is how to get such a installation up and running under Debian 9 (codename S
     mkdir gnustep
     cd gnustep
     wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz
-    git clone https://github.com/apple/swift-corelibs-libdispatch
     git clone https://github.com/gnustep/scripts
     git clone https://github.com/gnustep/make
     git clone https://github.com/gnustep/libobjc2
@@ -97,22 +124,16 @@ Here is how to get such a installation up and running under Debian 9 (codename S
     cd libiconv-1.15
     ./configure
     make CFLAGS=-g
-    make install
+    make CFLAGS=-g install
     cd ../..
 
-    cd gnustep/swift-corelibs-libdispatch
-    mkdir build
-    cd build
-    cmake ..
-    make
-    make install
-    cd ../../..
+
 
 5. install gnustep-make
 
     cd gnustep/make
-    export CC=clang
-    export CXX=clang++
+    export CC=clang-5.0
+    export CXX=clang++-5.0
     export OBJCFLAGS="-DEXPOSE_classname_IVARS=1"
     ./configure --with-layout=fhs \
             --disable-importing-config-file \
@@ -131,7 +152,7 @@ Here is how to get such a installation up and running under Debian 9 (codename S
     cd gnustep/libobjc2
     mkdir Build
     cd Build
-    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
+    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang-6.0 -DCMAKE_CXX_COMPILER=clang++-5.0 -DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
     make
     make install
     cd ../../..

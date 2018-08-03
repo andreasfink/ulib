@@ -726,14 +726,14 @@
     bne = BN_secure_new();
 #else
     bne = BN_new();
-#fi
+#endif
     if(bne==NULL)
     {
 #ifdef HAS_BN_SECURE_NEW
         NSLog(@"can not allocate BN_secure_new()");
 #else
         NSLog(@"can not allocate BN_new()");
-#fi
+#endif
     }
     else
     {

@@ -758,8 +758,11 @@
                 }
                 else
                 {
-
+#ifdef HAVE_BIO_S_SECMEM
                     bp_public = BIO_new(BIO_s_secmem());
+#else
+                    bp_public = BIO_new(BIO_s_mem());
+#endif
                     if(bp_public == NULL)
                     {
                         [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: bp_public=BIO_new(BIO_s_secmem()"];
@@ -774,7 +777,12 @@
                         }
                         else
                         {
+#ifdef HAVE_BIO_S_SECMEM
                             bp_private = BIO_new(BIO_s_secmem());
+#else
+                            bp_private = BIO_new(BIO_s_mem());
+#endif
+
                             if(bp_private == NULL)
                             {
                                 [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: bp_private=BIO_new(BIO_s_secmem()"];

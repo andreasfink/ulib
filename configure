@@ -5205,6 +5205,17 @@ fi
 
 
 
+ac_fn_c_check_func "$LINENO" "BIO_s_secmem" "ac_cv_func_BIO_s_secmem"
+if test "x$ac_cv_func_BIO_s_secmem" = xyes; then :
+  $as_echo "#define HAVE_BIO_S_SECMEM 1" >>confdefs.h
+
+fi
+
+
+
+
+
+
 
 
 

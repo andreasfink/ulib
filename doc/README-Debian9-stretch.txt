@@ -188,41 +188,19 @@ Symlink to the correct compiler version
     ln -s llvm-xray-6.0 llvm-xray
     popd
 
-4. We need a newer cmake and compile it with gcc
+Setting some defaults
 ------------------------------------------------
 
-        wget https://cmake.org/files/v3.12/cmake-3.12.0.tar.gz
-        tar -xvzf cmake-3.12.0.tar.gz
-        cd cmake-3.12.0
-        export CC=gcc
-        export CXX=g++
-        ./configure
-        make
-        make install
-    export CC=/usr/bin/clang-6.0
-    export CXX=/usr/bin/clang++-6.0
+
+    export CC=clang
+    export CXX=clang++
     export PATH=/usr/local/bin:$PATH
     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 
-4. We need a newer cmake and compile it with gcc
-------------------------------------------------
 
-        wget https://cmake.org/files/v3.12/cmake-3.12.0.tar.gz
-        tar -xvzf cmake-3.12.0.tar.gz
-        cd cmake-3.12.0
-        export CC=gcc
-        export CXX=g++
-        ./configure
-        make
-        make install
+Download the sourcecode of gnustep and dependencies
+---------------------------------------------------
 
-3. Download the sourcecode of gnustep and dependencies
---------------------------
-
-    export CC=/usr/bin/clang-5.0
-    export CXX=/usr/bin/clang++-5.0
-    export PATH=/usr/local/bin:$PATH
-    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
     
     mkdir gnustep
     cd gnustep
@@ -236,61 +214,84 @@ Symlink to the correct compiler version
     git clone https://github.com/gnustep/gui
     git clone https://github.com/gnustep/back
     ./scripts/install-dependencies
-	cd ..
 	
 
 4. Build dependencies
-    cd gnustep
     tar -xvzf libiconv-1.15.tar.gz
     cd libiconv-1.15
     ./configure
     make CFLAGS=-g
     make CFLAGS=-g install
-    cd ../..
+    cd ..
 
-    cd gnustep/swift-corelibs-libdispatch
+    cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    cmake .. -DCMAKE_C_COMPILER=clang-6.0 -DCMAKE_CXX_COMPILER=clang++-6.0 -DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
+    cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
     make
     make install
     
 
 5. install gnustep-make
+    export PATH=/usr/local/bin:$PATH
 
-    cd gnustep/make
-    export CC=/usr/bin/clang-5.0
-    export CXX=/usr/bin/clang-5.0++
+    cd make
+    export CC=/usr/bin/clang
+    export CXX=/usr/bin/clang++
+    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
     export OBJCFLAGS="-DEXPOSE_classname_IVARS=1"
     ./configure --with-layout=fhs \
             --disable-importing-config-file \
             --enable-native-objc-exceptions \
-            --enable-objc-nonfragile-abi \
             --enable-objc-arc \
+            --enable-install-ld-so-conf \
             --with-library-combo=ng-gnu-gnu
      make install
      source /usr/local/etc/GNUstep/GNUstep.conf
-     cd ../..
+     cd ..
      
 
 6. install libobjc2 runtime
 
+# if you run into llvm crashes try
+#
+#	remove below line from  Test/CMakeLists.txt
+#       addtest_variants("ForwardDeclareProtocolAccess" "ForwardDeclareProtocolAccess.m;ForwardDeclareProtocol.m" true)
+#	remove file Test/ForwardDeclareProtocol.m
 
-    cd gnustep/libobjc2
+    cd libobjc2
     mkdir Build
     cd Build
-    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=/usr/local/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++ -DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
+    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
     make
     make install
-    cd ../../..
+    cd ..
+    cp objc/objc-visibility.h /usr/local/include/objc/
+    cd ..
     ldconfig
+	cp 
 
+    cd make
+    export CC=clang
+    export CXX=clang++
+    export PATH=/usr/local/bin:$PATH
+    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
+    export OBJCFLAGS="-DEXPOSE_classname_IVARS=1"
+    ./configure --with-layout=fhs \
+            --disable-importing-config-file \
+            --enable-native-objc-exceptions \
+            --enable-objc-arc \
+            --with-objc-lib-flag=-l:/usr/local/lib/libobjc.so \
+            --with-library-combo=ng-gnu-gnu
+     make install
+     source /usr/local/etc/GNUstep/GNUstep.conf
+     cd ..
 (for debug version add -DCMAKE_BUILD_TYPE=Debug   to the cmake statement )
 
 7. install gnustep-base
 
-    cd gnustep/base
-    ./configure CFLAGS="-DEXPOSE_classname_IVARS=1 -g"
+    cd base
+    ./configure CFLAGS="-DEXPOSE_classname_IVARS=1 -g " --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf --disable-libdispatch
 
     make -j8
     make install

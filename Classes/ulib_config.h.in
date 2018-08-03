@@ -150,6 +150,12 @@
 /* define if we have TLS_method() */
 #undef HAVE_TLS_METHOD
 
+/* define if we have BN_secure_new() */
+#undef HAVE_BN_SECURE_NEW
+
+/* define if we have BIO_s_mem()() */
+#undef HAVE_BIO_S_SECMEM
+
 /* define if we have common crypto installed */
 #undef HAVE_COMMONCRYPTO
 

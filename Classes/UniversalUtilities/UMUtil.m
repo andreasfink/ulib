@@ -504,6 +504,17 @@ static BOOL             _machineCPUIDsLoaded = NO;
                 struct sockaddr *mask = (struct sockaddr *)ifap->ifa_netmask;
                 NSString *addr = [UMSocket addressOfSockAddr:sa];
                 NSString *netmask = [UMSocket addressOfSockAddr:mask];
+                if(netmask.length==0)
+                {
+                    if(ifap->ifa_addr->sa_family == AF_INET)
+                    {
+                        netmask = @"255.255.255.255";
+                    }
+                    else
+                    {
+                        netmask = @"ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff";
+                    }
+                }
                 NSDictionary *dict2 = @{ @"address" : addr, @"netmask" : netmask};
 
                 a = dict[ifname];

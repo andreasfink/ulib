@@ -159,9 +159,13 @@ static int SSL_smart_shutdown(SSL *ssl)
 #define SOCKET_DEBUG    1
 - (void)initNetworkSocket
 {
+#ifdef SOCKET_DEBUG
+    NSLog(@"type=%d",type);
+#endif
     switch(type)
     {
         case UMSOCKET_TYPE_TCP4ONLY:
+
             _socketDomain=PF_INET;
             _socketFamily=AF_INET;
             _socketType = SOCK_STREAM;
@@ -243,7 +247,12 @@ static int SSL_smart_shutdown(SSL *ssl)
             {
                 if(errno==EAFNOSUPPORT)
                 {
+                    _socketDomain = PF_INET;
                     _socketFamily=AF_INET;
+
+#ifdef SOCKET_DEBUG
+                    NSLog(@"socket(_socketDomain=%d, _socketType=%d, _socketProto=%d);",_socketDomain,_socketType,_socketProto);
+#endif
                     _sock = socket(_socketFamily, _socketType, _socketProto);
                     TRACK_FILE_SOCKET(_sock,@"udp");
                 }

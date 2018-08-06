@@ -161,54 +161,61 @@ static int SSL_smart_shutdown(SSL *ssl)
     switch(type)
     {
         case UMSOCKET_TYPE_TCP4ONLY:
+            _socketDomain=PF_INET;
             _socketFamily=AF_INET;
             _socketType = SOCK_STREAM;
-            _socketProto = IPPROTO_TCP;
-            _sock = socket(_socketFamily, _socketType, _socketProto);
+            _socketProto = 0;//IPPROTO_TCP;
+            _sock = socket(_socketDomain, _socketType, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"tcp");
             break;
         case UMSOCKET_TYPE_TCP6ONLY:
+            _socketDomain=PF_INET6;
             _socketFamily=AF_INET6;
             _socketType = SOCK_STREAM;
-            _socketProto = IPPROTO_TCP;
-            _sock = socket(_socketFamily, _socketType, _socketProto);
+            _socketProto = 0;//IPPROTO_TCP;
+            _sock = socket(_socketDomain, _socketType, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"tcp");
             break;
         case UMSOCKET_TYPE_TCP:
+            _socketDomain=PF_INET6;
             _socketFamily=AF_INET6;
             _socketType = SOCK_STREAM;
-            _socketProto = IPPROTO_TCP;
-            _sock = socket(_socketFamily, _socketType, _socketProto);
+            _socketProto = 0;//IPPROTO_TCP;
+            _sock = socket(_socketDomain, _socketType, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"tcp");
             if(_sock < 0)
             {
                 if(errno==EAFNOSUPPORT)
                 {
+                    _socketDomain=PF_INET;
                     _socketFamily=AF_INET;
-                    _sock = socket(_socketFamily, _socketType, _socketProto);
+                    _sock = socket(_socketDomain, _socketType, _socketProto);
                     TRACK_FILE_SOCKET(_sock,@"tcp");
                 }
             }
             break;
         case UMSOCKET_TYPE_UDP4ONLY:
+            _socketDomain=PF_INET;
             _socketFamily=AF_INET;
             _socketType = SOCK_DGRAM;
-            _socketProto = IPPROTO_UDP;
-            _sock = socket(_socketFamily, _socketType, _socketProto);
+            _socketProto = 0;//IPPROTO_UDP;
+            _sock = socket(_socketDomain, _socketType, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"udp");
             break;
         case UMSOCKET_TYPE_UDP6ONLY:
+            _socketDomain=PF_INET6;
             _socketFamily=AF_INET6;
             _socketType = SOCK_DGRAM;
-            _socketProto = IPPROTO_UDP;
-            _sock = socket(_socketFamily, _socketType, _socketProto);
+            _socketProto = 0;//IPPROTO_UDP;
+            _sock = socket(_socketDomain, _socketType, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"udp");
             break;
         case UMSOCKET_TYPE_UDP:
+            _socketDomain = PF_INET6;
             _socketFamily=AF_INET6;
             _socketType = SOCK_DGRAM;
-            _socketProto = IPPROTO_UDP;
-            _sock = socket(_socketFamily, _socketType, _socketProto);
+            _socketProto = 0;//IPPROTO_UDP;
+            _sock = socket(_socketDomain, _socketType, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"udp");
             if(_sock < 0)
             {

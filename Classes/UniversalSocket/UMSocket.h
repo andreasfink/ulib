@@ -47,6 +47,7 @@ typedef enum SocketBlockingMode
 	NSString			*_connectedRemoteAddress;
 	int					_sock;
     
+    int                 _socketDomain;
     int                 _socketFamily;
     int                 _socketProto;
     int                 _socketType;

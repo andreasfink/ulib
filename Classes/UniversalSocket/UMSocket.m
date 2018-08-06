@@ -193,9 +193,9 @@ static int SSL_smart_shutdown(SSL *ssl)
             _socketType = SOCK_STREAM;
             _socketProto = 0;//IPPROTO_TCP;
 #ifdef SOCKET_DEBUG
-            NSLog(@"socket(_socketDomain=%d, _socketType=%d, _socketProto=%d);",_socketDomain,_socketType,_socketProto);
+            NSLog(@"socket(_socketDomain=%d, _socketType=%d, _socketProto=%d);",_socketDomain,SOCK_STREAM,_socketProto);
 #endif
-            _sock = socket(_socketDomain, _socketType, _socketProto);
+            _sock = socket(_socketDomain, SOCK_STREAM, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"tcp");
             if(_sock < 0)
             {

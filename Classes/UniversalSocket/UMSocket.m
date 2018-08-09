@@ -156,12 +156,8 @@ static int SSL_smart_shutdown(SSL *ssl)
 @synthesize serverSideCertData;
 @synthesize serverSideKeyData;
 
-#define SOCKET_DEBUG    1
 - (void)initNetworkSocket
 {
-#ifdef SOCKET_DEBUG
-    NSLog(@"type=%d",type);
-#endif
     switch(type)
     {
         case UMSOCKET_TYPE_TCP4ONLY:
@@ -170,9 +166,6 @@ static int SSL_smart_shutdown(SSL *ssl)
             _socketFamily=AF_INET;
             _socketType = SOCK_STREAM;
             _socketProto = 0;//IPPROTO_TCP;
-#ifdef SOCKET_DEBUG
-            NSLog(@"socket(_socketDomain=%d, _socketType=%d, _socketProto=%d);",_socketDomain,_socketType,_socketProto);
-#endif
             _sock = socket(_socketDomain, _socketType, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"tcp");
             break;
@@ -181,9 +174,6 @@ static int SSL_smart_shutdown(SSL *ssl)
             _socketFamily=AF_INET6;
             _socketType = SOCK_STREAM;
             _socketProto = 0;//IPPROTO_TCP;
-#ifdef SOCKET_DEBUG
-            NSLog(@"socket(_socketDomain=%d, _socketType=%d, _socketProto=%d);",_socketDomain,_socketType,_socketProto);
-#endif
             _sock = socket(_socketDomain, _socketType, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"tcp");
             break;
@@ -192,9 +182,6 @@ static int SSL_smart_shutdown(SSL *ssl)
             _socketFamily=AF_INET6;
             _socketType = SOCK_STREAM;
             _socketProto = 0;//IPPROTO_TCP;
-#ifdef SOCKET_DEBUG
-            NSLog(@"socket(_socketDomain=%d, _socketType=%d, _socketProto=%d);",_socketDomain,SOCK_STREAM,_socketProto);
-#endif
             _sock = socket(_socketDomain, SOCK_STREAM, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"tcp");
             if(_sock < 0)
@@ -203,9 +190,6 @@ static int SSL_smart_shutdown(SSL *ssl)
                 {
                     _socketDomain=PF_INET;
                     _socketFamily=AF_INET;
-#ifdef SOCKET_DEBUG
-                    NSLog(@"socket(_socketDomain=%d, _socketType=%d, _socketProto=%d);",_socketDomain,_socketType,_socketProto);
-#endif
                     _sock = socket(_socketDomain, _socketType, _socketProto);
                     TRACK_FILE_SOCKET(_sock,@"tcp");
                 }
@@ -216,9 +200,6 @@ static int SSL_smart_shutdown(SSL *ssl)
             _socketFamily=AF_INET;
             _socketType = SOCK_DGRAM;
             _socketProto = 0;//IPPROTO_UDP;
-#ifdef SOCKET_DEBUG
-            NSLog(@"socket(_socketDomain=%d, _socketType=%d, _socketProto=%d);",_socketDomain,_socketType,_socketProto);
-#endif
             _sock = socket(_socketDomain, _socketType, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"udp");
             break;
@@ -227,9 +208,6 @@ static int SSL_smart_shutdown(SSL *ssl)
             _socketFamily=AF_INET6;
             _socketType = SOCK_DGRAM;
             _socketProto = 0;//IPPROTO_UDP;
-#ifdef SOCKET_DEBUG
-            NSLog(@"socket(_socketDomain=%d, _socketType=%d, _socketProto=%d);",_socketDomain,_socketType,_socketProto);
-#endif
             _sock = socket(_socketDomain, _socketType, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"udp");
             break;
@@ -238,9 +216,6 @@ static int SSL_smart_shutdown(SSL *ssl)
             _socketFamily=AF_INET6;
             _socketType = SOCK_DGRAM;
             _socketProto = 0;//IPPROTO_UDP;
-#ifdef SOCKET_DEBUG
-            NSLog(@"socket(_socketDomain=%d, _socketType=%d, _socketProto=%d);",_socketDomain,_socketType,_socketProto);
-#endif
             _sock = socket(_socketDomain, _socketType, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"udp");
             if(_sock < 0)
@@ -249,10 +224,6 @@ static int SSL_smart_shutdown(SSL *ssl)
                 {
                     _socketDomain = PF_INET;
                     _socketFamily=AF_INET;
-
-#ifdef SOCKET_DEBUG
-                    NSLog(@"socket(_socketDomain=%d, _socketType=%d, _socketProto=%d);",_socketDomain,_socketType,_socketProto);
-#endif
                     _sock = socket(_socketFamily, _socketType, _socketProto);
                     TRACK_FILE_SOCKET(_sock,@"udp");
                 }

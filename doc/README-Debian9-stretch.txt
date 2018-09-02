@@ -122,80 +122,18 @@ apt-get update
         libasound2-dev libjack-dev libjack0 libportaudio2 libportaudiocpp0 portaudio19-dev
 
 
-Install clang 6.0
---------------------------------------------
 
-    apt-get install --assume-yes lldb-6.0 liblldb-6.0 clang-6.0 clang++-6.0 lldb-6.0 python-lldb-6.0 llvm-6.0-doc
-
-Symlink to the correct compiler version
---------------------------------------------
-    pushd /usr/bin
-    ln -s clang-6.0 clang
-    ln -s clang++-6.0 clang++
-    ln -s clang-cpp-6.0 clang-cpp
-    ln -s llc-6.0 llc
-    ln -s lldb-6.0 lldb
-    ln -s lldb-argdumper-6.0 lldb-argdumper
-    ln -s lldb-mi-6.0 lldb-mi
-    ln -s lldb-server-6.0 lldb-server
-    ln -s lldb-test-6.0 lldb-test
-    ln -s lli-6.0 lli
-    ln -s lli-child-target-6.0 lli-child-target
-    ln -s llvm-ar-6.0 llvm-ar
-    ln -s llvm-as-6.0 llvm-as
-    ln -s llvm-bcanalyzer-6.0 llvm-bcanalyzer
-    ln -s llvm-cat-6.0 llvm-cat
-    ln -s llvm-cfi-verify-6.0 llvm-cfi-verify
-    ln -s llvm-config-6.0 llvm-config
-    ln -s llvm-cov-6.0 llvm-cov
-    ln -s llvm-c-test-6.0 llvm-c-test
-    ln -s llvm-cvtres-6.0 llvm-cvtres
-    ln -s llvm-cxxdump-6.0 llvm-cxxdump
-    ln -s llvm-cxxfilt-6.0 llvm-cxxfilt
-    ln -s llvm-diff-6.0 llvm-diff
-    ln -s llvm-dis-6.0 llvm-dis
-    ln -s llvm-dlltool-6.0 llvm-dlltool
-    ln -s llvm-dsymutil-6.0 llvm-dsymutil
-    ln -s llvm-dwarfdump-6.0 llvm-dwarfdump
-    ln -s llvm-dwp-6.0 llvm-dwp
-    ln -s llvm-extract-6.0 llvm-extract
-    ln -s llvm-lib-6.0 llvm-lib
-    ln -s llvm-link-6.0 llvm-link
-    ln -s llvm-lto2-6.0 llvm-lto2
-    ln -s llvm-lto-6.0 llvm-lto
-    ln -s llvm-mc-6.0 llvm-mc
-    ln -s llvm-mcmarkup-6.0 llvm-mcmarkup
-    ln -s llvm-modextract-6.0 llvm-modextract
-    ln -s llvm-mt-6.0 llvm-mt
-    ln -s llvm-nm-6.0 llvm-nm
-    ln -s llvm-objcopy-6.0 llvm-objcopy
-    ln -s llvm-objdump-6.0 llvm-objdump
-    ln -s llvm-opt-report-6.0 llvm-opt-report
-    ln -s llvm-pdbutil-6.0 llvm-pdbutil
-    ln -s llvm-PerfectShuffle-6.0 llvm-PerfectShuffle
-    ln -s llvm-profdata-6.0 llvm-profdata
-    ln -s llvm-ranlib-6.0 llvm-ranlib
-    ln -s llvm-rc-6.0 llvm-rc
-    ln -s llvm-readelf-6.0 llvm-readelf
-    ln -s llvm-readobj-6.0 llvm-readobj
-    ln -s llvm-rtdyld-6.0 llvm-rtdyld
-    ln -s llvm-size-6.0 llvm-size
-    ln -s llvm-split-6.0 llvm-split
-    ln -s llvm-stress-6.0 llvm-stress
-    ln -s llvm-strings-6.0 llvm-strings
-    ln -s llvm-symbolizer-6.0 llvm-symbolizer
-    ln -s llvm-tblgen-6.0 llvm-tblgen
-    ln -s llvm-xray-6.0 llvm-xray
-    popd
 
 Setting some defaults
 ------------------------------------------------
 
 
-    export CC=clang
-    export CXX=clang++
-    export PATH=/usr/local/bin:$PATH
-    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
+export CC=/usr/local/bin/clang
+export CXX=/usr/local/bin/clang++
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
+export LD=ld.lld
+    
 
 
 Download the sourcecode of gnustep and dependencies
@@ -215,37 +153,44 @@ Download the sourcecode of gnustep and dependencies
     git clone https://github.com/gnustep/back
     ./scripts/install-dependencies
 	
+	
+Lets purge the gcc stuff
+apt-get purge libblocksruntime-dev libblocksruntime0
+apt-get purge libobjc
+
 
 4. Build dependencies
     tar -xvzf libiconv-1.15.tar.gz
     cd libiconv-1.15
     ./configure
-    make CFLAGS=-g
-    make CFLAGS=-g install
+    make
+    make install
     cd ..
 
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
+    cmake .. -DCMAKE_C_COMPILER=/usr/local/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++ -DCMAKE_LINKER=/usr/local/bin/ld.lld
+
+
+ -DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
     make
     make install
     
 
 5. install gnustep-make
-    export PATH=/usr/local/bin:$PATH
 
     cd make
-    export CC=/usr/bin/clang
-    export CXX=/usr/bin/clang++
-    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
-    export OBJCFLAGS="-DEXPOSE_classname_IVARS=1"
+    #export OBJCFLAGS="-DEXPOSE_classname_IVARS=1"
+    #export OBJCFLAGS="-fasm-blocks -fblocks -fstrict-aliasing -fobjc-arc -fobjc-runtime=gnustep -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -fpascal-strings"
     ./configure --with-layout=fhs \
             --disable-importing-config-file \
             --enable-native-objc-exceptions \
             --enable-objc-arc \
             --enable-install-ld-so-conf \
-            --with-library-combo=ng-gnu-gnu
+            --with-library-combo=ng-gnu-gnu \
+            --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf \
+            --with-objc-lib-flag="-l:libobjc.so.4.6 -fblocks"
      make install
      source /usr/local/etc/GNUstep/GNUstep.conf
      cd ..
@@ -262,36 +207,20 @@ Download the sourcecode of gnustep and dependencies
     cd libobjc2
     mkdir Build
     cd Build
-    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
+    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=/usr/local/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++ 
+    #-DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
     make
     make install
     cd ..
-    cp objc/objc-visibility.h /usr/local/include/objc/
-    cd ..
     ldconfig
-	cp 
 
-    cd make
-    export CC=clang
-    export CXX=clang++
-    export PATH=/usr/local/bin:$PATH
-    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
-    export OBJCFLAGS="-DEXPOSE_classname_IVARS=1"
-    ./configure --with-layout=fhs \
-            --disable-importing-config-file \
-            --enable-native-objc-exceptions \
-            --enable-objc-arc \
-            --with-objc-lib-flag=-l:/usr/local/lib/libobjc.so \
-            --with-library-combo=ng-gnu-gnu
-     make install
-     source /usr/local/etc/GNUstep/GNUstep.conf
-     cd ..
-(for debug version add -DCMAKE_BUILD_TYPE=Debug   to the cmake statement )
 
 7. install gnustep-base
 
     cd base
-    ./configure CFLAGS="-DEXPOSE_classname_IVARS=1 -g " --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf --disable-libdispatch
+    export LD=/usr/bin/ld.lld-6.0
+    ./configure --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf  --disable-libdispatch
+    # --disable-libdispatch
 
     make -j8
     make install
@@ -303,12 +232,12 @@ Download the sourcecode of gnustep and dependencies
 
 8. install gnustep-corebase
 
-    cd gnustep/corebase
+    cd corebase
     ./configure
     make -j8
     make install
     ldconfig
-    cd ../..
+    cd ..
 
 
 9.  If you want X11 GUI support in GnuStep install gnustep-gui

@@ -170,7 +170,7 @@ apt-get purge libobjc
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    cmake .. -DCMAKE_C_COMPILER=/usr/local/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++ -DCMAKE_LINKER=/usr/local/bin/ld.lld
+    cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_LINKER=/usr/local/bin/ld.lld
 
 
  -DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
@@ -190,7 +190,8 @@ apt-get purge libobjc
             --enable-install-ld-so-conf \
             --with-library-combo=ng-gnu-gnu \
             --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf \
-            --with-objc-lib-flag="-l:libobjc.so.4.6 -fblocks"
+            --with-objc-lib-flag="-l:libobjc.so.4.6 -fblocks" \
+            --enable-strict-v2-mode
      make install
      source /usr/local/etc/GNUstep/GNUstep.conf
      cd ..
@@ -219,8 +220,7 @@ apt-get purge libobjc
 
     cd base
     export LD=/usr/bin/ld.lld-6.0
-    ./configure --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf  --disable-libdispatch
-    # --disable-libdispatch
+    ./configure --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf
 
     make -j8
     make install

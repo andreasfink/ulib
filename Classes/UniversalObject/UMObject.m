@@ -587,5 +587,56 @@ BOOL umobject_object_stat_is_enabled(void)
 
 @end
 
+static NSString *umobject_stat_external_name(const char *file,long line, const char *func);
 
+static NSString *umobject_stat_external_name(const char *file,long line, const char *func)
+{
+    NSString *s = [NSString stringWithFormat:@"%s:%ld %s()",file,line,func];
+    return s;
+}
+
+void umobject_stat_external_alloc_increase(const char *file,long line, const char *func)
+{
+    if(object_stat)
+    {
+        NSString *name = umobject_stat_external_name(file,line,func);
+        pthread_mutex_lock(object_stat_mutex);
+        UMObjectStat *entry = object_stat[name];
+        if(entry == NULL)
+        {
+            entry = [[UMObjectStat alloc]init];
+            entry.name = name;
+            entry.alloc_count = 1;
+            entry.inUse_count = 1;
+            object_stat[name]=entry;
+#if !defined(USING_ARC)
+            [entry release];
+#endif
+        }
+        else
+        {
+            entry.alloc_count++;
+            entry.inUse_count++;
+            object_stat[name]=entry;
+        }
+        pthread_mutex_unlock(object_stat_mutex);
+    }
+}
+
+void umobject_stat_external_free_decrease(const char *file,long line, const char *func)
+{
+    if(object_stat)
+    {
+        NSString *name = umobject_stat_external_name(file,line,func);
+        pthread_mutex_lock(object_stat_mutex);
+        UMObjectStat *entry = object_stat[name];
+        if(entry)
+        {
+            entry.dealloc_count++;
+            entry.inUse_count--;
+            object_stat[name]=entry;
+        }
+        pthread_mutex_unlock(object_stat_mutex);
+    }
+}
 

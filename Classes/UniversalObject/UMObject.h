@@ -124,4 +124,7 @@ BOOL umobject_object_stat_is_enabled(void);
 @property(readwrite,assign,atomic)  int64_t inUse_count;
 @end
 
+void umobject_stat_external_alloc_increase(const char *file,long line, const char *func);
+void umobject_stat_external_free_decrease(const char *file,long line, const char *func); /* pass the file/line/func pair of the original alloc position */
+
 

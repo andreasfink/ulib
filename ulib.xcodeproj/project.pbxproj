@@ -1464,6 +1464,12 @@
 		A657274C1B1869AA00854472 /* UMSynchronizedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A65727461B1869AA00854472 /* UMSynchronizedDictionary.m */; };
 		A661AB4220669EB100B0CD50 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; };
 		A661AB4320669EB100B0CD50 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; };
+		A663F34821532D4100072BAA /* UMProtocolBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A663F34621532D4100072BAA /* UMProtocolBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A663F34921532D4100072BAA /* UMProtocolBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = A663F34721532D4100072BAA /* UMProtocolBuffer.m */; };
+		A663F34A21532D5D00072BAA /* UMProtocolBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A663F34621532D4100072BAA /* UMProtocolBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A663F34B21532D5E00072BAA /* UMProtocolBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A663F34621532D4100072BAA /* UMProtocolBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A663F34C21532D5F00072BAA /* UMProtocolBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A663F34621532D4100072BAA /* UMProtocolBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A663F34D21532D6000072BAA /* UMProtocolBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A663F34621532D4100072BAA /* UMProtocolBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A666EED91E89BB17004804CB /* UMCommandActionProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A666EEC31E89BB17004804CB /* UMCommandActionProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A666EEDA1E89BB17004804CB /* UMCommandActionProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A666EEC31E89BB17004804CB /* UMCommandActionProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A666EEDB1E89BB17004804CB /* UMCommandActionProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A666EEC31E89BB17004804CB /* UMCommandActionProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2326,6 +2332,8 @@
 		A6590ED81FDFCA12004C8A74 /* README-Ubuntu-16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Ubuntu-16.txt"; sourceTree = "<group>"; };
 		A6590ED91FDFCA12004C8A74 /* README-LINUX.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-LINUX.txt"; sourceTree = "<group>"; };
 		A661AB4120669EB100B0CD50 /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = ../../../../../Library/Frameworks/sctp.framework; sourceTree = "<group>"; };
+		A663F34621532D4100072BAA /* UMProtocolBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMProtocolBuffer.h; sourceTree = "<group>"; };
+		A663F34721532D4100072BAA /* UMProtocolBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMProtocolBuffer.m; sourceTree = "<group>"; };
 		A666EEC31E89BB17004804CB /* UMCommandActionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMCommandActionProtocol.h; path = UniversalTokenizer/UMCommandActionProtocol.h; sourceTree = "<group>"; };
 		A666EEC41E89BB17004804CB /* UMScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMScanner.h; path = UniversalTokenizer/UMScanner.h; sourceTree = "<group>"; };
 		A666EEC51E89BB17004804CB /* UMScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMScanner.m; path = UniversalTokenizer/UMScanner.m; sourceTree = "<group>"; };
@@ -16978,6 +16986,8 @@
 				A618E7991FC58860001106C3 /* UMThreadHelpers.m */,
 				A684A6732052856F005D52A9 /* UMCommandLine.h */,
 				A684A6742052856F005D52A9 /* UMCommandLine.m */,
+				A663F34621532D4100072BAA /* UMProtocolBuffer.h */,
+				A663F34721532D4100072BAA /* UMProtocolBuffer.m */,
 			);
 			path = UniversalUtilities;
 			sourceTree = "<group>";
@@ -17221,6 +17231,7 @@
 				A602116C1D488A2F00211137 /* UMJsonStreamWriterAccumulator.h in Headers */,
 				A602116D1D488A2F00211137 /* UMSocketDefs.h in Headers */,
 				A666EEDE1E89BB17004804CB /* UMScanner.h in Headers */,
+				A663F34A21532D5D00072BAA /* UMProtocolBuffer.h in Headers */,
 				A60211701D488A2F00211137 /* UMJsonParser.h in Headers */,
 				A60211721D488A2F00211137 /* UMJsonStreamWriterState.h in Headers */,
 				A60211741D488A2F00211137 /* UMFileTrackingInfo.h in Headers */,
@@ -17459,6 +17470,7 @@
 				A60212C01D488A3D00211137 /* ssl3.h in Headers */,
 				A60212C11D488A3D00211137 /* ocsp.h in Headers */,
 				A684A6772052856F005D52A9 /* UMCommandLine.h in Headers */,
+				A663F34B21532D5E00072BAA /* UMProtocolBuffer.h in Headers */,
 				A60212C21D488A3D00211137 /* UMQueue.h in Headers */,
 				A60212C31D488A3D00211137 /* NSDictionary+UMHTTP.h in Headers */,
 				A60212C41D488A3D00211137 /* ulib_config.h in Headers */,
@@ -17761,6 +17773,7 @@
 				A60214461D488A5900211137 /* ssl3.h in Headers */,
 				A60214471D488A5900211137 /* ocsp.h in Headers */,
 				A684A6782052856F005D52A9 /* UMCommandLine.h in Headers */,
+				A663F34C21532D5F00072BAA /* UMProtocolBuffer.h in Headers */,
 				A60214481D488A5900211137 /* UMQueue.h in Headers */,
 				A60214491D488A5900211137 /* NSDictionary+UMHTTP.h in Headers */,
 				A602144A1D488A5900211137 /* ulib_config.h in Headers */,
@@ -17954,6 +17967,7 @@
 				A60C4DCA1EF7FE59007C203A /* NSMutableData+UMHTTP.h in Headers */,
 				A6BEA7151EF950D1007C203A /* UMHTTPClientRequest.h in Headers */,
 				A60C4E4A1EF80094007C203A /* UMPluginDirectory.h in Headers */,
+				A663F34821532D4100072BAA /* UMProtocolBuffer.h in Headers */,
 				A60C4DD81EF7FE59007C203A /* UMQueue.h in Headers */,
 				A60C4DD91EF7FE59007C203A /* NSDictionary+UMHTTP.h in Headers */,
 				A60C4DDA1EF7FE59007C203A /* ulib_config.h in Headers */,
@@ -18062,6 +18076,7 @@
 				A6AC49791D460A49002BAA97 /* UMRegexMatch.h in Headers */,
 				A60C4E5E1EF80098007C203A /* UMPlugin.h in Headers */,
 				A6CC4B6C1A3F24C70090FC94 /* UMSleeper.h in Headers */,
+				A663F34D21532D6000072BAA /* UMProtocolBuffer.h in Headers */,
 				A6CC4B4B1A3F249A0090FC94 /* UMJsonWriter.h in Headers */,
 				A6CC4B751A3F24C70090FC94 /* UMTimerBackgrounder.h in Headers */,
 				A60C2D961A3F213F0090FC94 /* NSMutableData+UMHTTP.h in Headers */,
@@ -19003,6 +19018,7 @@
 				A60C4CFE1EF7FE59007C203A /* NSString+UMSocket.m in Sources */,
 				A60C4CFF1EF7FE59007C203A /* UMDataWithHistory.m in Sources */,
 				A60C4D001EF7FE59007C203A /* UMDateWithHistory.m in Sources */,
+				A663F34921532D4100072BAA /* UMProtocolBuffer.m in Sources */,
 				A6BA42B71FC813540099A441 /* UMPool.m in Sources */,
 				A618E79B1FC58860001106C3 /* UMThreadHelpers.m in Sources */,
 				A60C4D011EF7FE59007C203A /* UMUUID.m in Sources */,

@@ -24,15 +24,11 @@
 
 @implementation UMHost
 
-@synthesize addresses;
-@synthesize isLocalHost;
-@synthesize isResolved;
-@synthesize isResolving;
-@synthesize name;
-
 - (void) addAddress:(NSString *)a
 {
-	[addresses addObject:a];
+    [_lock lock];
+	[_addresses addObject:a];
+    [_lock unlock];
 }
 
 - (UMHost *)  initWithLocalhost
@@ -54,6 +50,23 @@
     }
 }
 
+- (NSArray *)addresses
+{
+    NSArray *a;
+    [_lock lock];
+    a = [_addresses copy];
+    [_lock unlock];
+    return a;
+}
+
+- (void) setAddresses:(NSArray *)addresses
+{
+    [_lock lock];
+    _addresses = [addresses mutableCopy];
+    [_lock unlock];
+
+}
+
 - (UMHost *)  initWithLocalhostAddresses:(NSArray *)permittedAddresses
 {
     self = [super init];
@@ -64,10 +77,10 @@
         char	ip[256];
         socklen_t sockLen;
         
-        addresses = [[NSMutableArray alloc] init];
-        lock = [[UMMutex alloc] initWithName:@"umhost"];
+        _addresses = [[NSMutableArray alloc] init];
+        _lock = [[UMMutex alloc] initWithName:@"umhost"];
 
-        isResolved = 0;
+        _isResolved = 0;
         
         if (getifaddrs (&ifptr) < 0)
         {
@@ -76,10 +89,9 @@
             return nil;
         }
         
-        [self setIsLocalHost:1];
-        [self setIsResolved:1];
-        
-        self->name = [UMHost localHostName];
+        _isLocalHost=1;
+        _isResolved=1;
+        _name = [UMHost localHostName];
         
         for (ifadders = ifptr; ifadders; ifadders = ifadders->ifa_next)
         {
@@ -139,12 +151,12 @@
     self = [super init];
     if (self)
     {
-        addresses = [[NSMutableArray alloc] init];
-        lock = [[UMMutex alloc] initWithName:@"umhost"];
-        isLocalHost = 0;
-        isResolving = 0;
-        isResolved = 0;
-        self->name = n;
+        _addresses = [[NSMutableArray alloc] init];
+        _lock = [[UMMutex alloc] initWithName:@"umhost"];
+        _isLocalHost = 0;
+        _isResolving = 0;
+        _isResolved = 0;
+        _name = n;
         [self runSelectorInBackground:@selector(resolve)
                            withObject:nil
                                  file:__FILE__
@@ -165,11 +177,11 @@
     if (self)
     {
         self.addresses = [NSMutableArray arrayWithObjects:n,nil];
-        lock = [[UMMutex alloc] initWithName:@"umhost"];
-        isLocalHost = 0;
-        isResolving = 0;
-        isResolved = 1;
-        self.name = n;
+        _lock = [[UMMutex alloc] initWithName:@"umhost"];
+        _isLocalHost = 0;
+        _isResolving = 0;
+        _isResolved = 1;
+        _name = n;
     }
     return self;
 }
@@ -177,69 +189,68 @@
 - (NSString*) description
 {
 	NSString *s;
-	s = [[NSString alloc] initWithFormat:@"UMHost: %@", self->name ? self->name : @"not set"];
+	s = [[NSString alloc] initWithFormat:@"UMHost: %@", _name ? _name : @"not set"];
 	return s;
 }
 
 - (NSString *)address:(UMSocketType)type
 {
     NSString *addr = nil;
-    
-	if([addresses count] > 0)
+    [_lock lock];
+	if([_addresses count] > 0)
     {
-        if (isLocalHost)
+        if (_isLocalHost)
         {
             if (type == UMSOCKET_TYPE_TCP4ONLY || type == UMSOCKET_TYPE_UDP4ONLY ||
                     type == UMSOCKET_TYPE_SCTP4ONLY || type == UMSOCKET_TYPE_USCTP4ONLY)
             {
-                addr = [addresses objectAtIndex:1];
+                addr = [_addresses objectAtIndex:1];
             }
             else if (type == UMSOCKET_TYPE_TCP6ONLY || type == UMSOCKET_TYPE_UDP6ONLY ||
                     type == UMSOCKET_TYPE_SCTP6ONLY || type == UMSOCKET_TYPE_USCTP6ONLY)
             {
-                addr = [addresses objectAtIndex:2];
+                addr = [_addresses objectAtIndex:2];
             }
             else
             {
-                addr = [addresses objectAtIndex:2];
+                addr = [_addresses objectAtIndex:2];
             }
         }
         else
         {
-            addr = [addresses objectAtIndex:0];
+            addr = [_addresses objectAtIndex:0];
         }
-        return addr;
     }
-	return nil;
+    [_lock unlock];
+    return addr;
 }
 
 - (void)resolve
 {
-    ulib_set_thread_name([NSString stringWithFormat:@"UMHost: resolve(%@)",name]);
+    ulib_set_thread_name([NSString stringWithFormat:@"UMHost: resolve(%@)",_name]);
 
-	char	namecstr[INET6_ADDRSTRLEN + 18];
-
+    char	namecstr[INET6_ADDRSTRLEN + 18];
     memset(namecstr,0x00,INET6_ADDRSTRLEN + 18);
     //memset(in_namecstr,0x00,256);
-	if(isLocalHost == 1)
+	if(self.isLocalHost == 1)
     {
 		return;
     }
-	if(isResolving)
+	if(self.isResolving)
 	{
-		while(isResolving == 1)
+		while(self.isResolving == 1)
         {
 			usleep(30000); /* wait 30ms */
         }
 		return;
 	}
-	[lock lock];
-	isResolving = 1;
-	addresses = [[NSMutableArray alloc]init];	
+    [_lock lock];
+	_isResolving = 1;
+	_addresses = [[NSMutableArray alloc]init];
     
     struct addrinfo *addrInfos = NULL;
 
-    int res =getaddrinfo([name UTF8String] ,NULL, NULL, &addrInfos);
+    int res =getaddrinfo([_name UTF8String] ,NULL, NULL, &addrInfos);
     if(res==0)
     {
         struct addrinfo *thisAddr = addrInfos;
@@ -250,7 +261,7 @@
             {
                 struct sockaddr_in *sa = (struct sockaddr_in *)thisAddr->ai_addr;
                 inet_ntop(thisAddr->ai_family, &(sa->sin_addr), namecstr, sizeof(namecstr));
-                [addresses addObject:@(namecstr)];
+                [_addresses addObject:@(namecstr)];
             }
             thisAddr = thisAddr->ai_next;
         }
@@ -258,18 +269,18 @@
         freeaddrinfo(addrInfos);
     }
     
-	isResolving = 0;
-	isResolved = 1;
-	[lock unlock];
+	_isResolving = 0;
+	_isResolved = 1;
+	[_lock unlock];
 }
 
 - (int) resolved
 {
     int ret;
     
-    [lock lock];
-    ret = isResolved;
-    [lock unlock];
+    [_lock lock];
+    ret = _isResolved;
+    [_lock unlock];
     
     return ret;
 }
@@ -278,10 +289,9 @@
 {
     int ret;
     
-    [lock lock];
-    ret = isResolving;
-    [lock unlock];
-    
+    [_lock lock];
+    ret = _isResolving;
+    [_lock unlock];
     return ret;
 }
 

@@ -62,8 +62,8 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
 apt-get install dirmngr
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421
 
-echo "deb http://llvm.org/apt/stretch/ llvm-toolchain-stretch-5.0 main"     > /etc/apt/sources.list.d/llvm.list
-echo "deb-src http://llvm.org/apt/stretch/ llvm-toolchain-stretch-5.0 main" >> /etc/apt/sources.list.d/llvm.list
+echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main" > /etc/apt/sources.list.d/llvm.list
+echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main" >> /etc/apt/sources.list.d/llvm.list
 apt-get update
 
 

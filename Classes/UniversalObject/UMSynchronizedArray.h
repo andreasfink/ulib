@@ -51,5 +51,8 @@
 - (void)appendArray:(NSArray *)app;
 - (NSArray *)arrayCopy;
 
+- (NSString *)jsonString;
+- (NSString *)jsonCompactString;
+
 @end
 

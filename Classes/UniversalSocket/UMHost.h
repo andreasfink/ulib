@@ -11,15 +11,16 @@
 
 @interface UMHost : UMObject
 {
-	NSMutableArray	*addresses;
-	int				isLocalHost;
-	int				isResolving;
-	int				isResolved;
-	UMMutex			*lock;
-    NSString        *name;
+	NSMutableArray	*_addresses;
+	int				_isLocalHost;
+	int				_isResolving;
+	int				_isResolved;
+	UMMutex			*_lock;
+    NSString        *_name;
 }
 
-@property(readwrite,strong)	NSMutableArray  *addresses;
+- (NSArray *)addresses;
+- (void) setAddresses:(NSArray *)addresses;
 @property(readwrite,strong)	NSString *name;
 @property(readwrite,assign)	int isLocalHost;
 @property(readwrite,assign)	int isResolved;

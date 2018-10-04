@@ -19,8 +19,8 @@
 
 @interface UMSynchronizedDictionary : UMObject<NSCopying>
 {
-    NSMutableDictionary *underlyingDictionary;
-    UMMutex *mutex;
+    NSMutableDictionary *_underlyingDictionary;
+    UMMutex *_lock;
 }
 
 @property (readonly,strong) NSMutableDictionary *dict;

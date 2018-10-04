@@ -12,9 +12,10 @@
 
 @implementation NSArray(UMJson)
 
-- (NSString *)jsonString;
+- (NSString *)jsonString
 {
     UMJsonWriter *writer = [[UMJsonWriter alloc] init];
+    writer.humanReadable = YES;
     NSString *json = [writer stringWithObject:self];
     if (!json)
     {
@@ -22,5 +23,18 @@
     }
     return json;
 }
+
+- (NSString *)jsonCompactString
+{
+    UMJsonWriter *writer = [[UMJsonWriter alloc] init];
+    writer.humanReadable = YES;
+    NSString *json = [writer stringWithObject:self];
+    if (!json)
+    {
+        NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
+    }
+    return json;
+}
+
 
 @end

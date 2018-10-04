@@ -12,7 +12,7 @@
 
 @implementation NSDictionary(UMJson)
 
-- (NSString *)jsonString;
+- (NSString *)jsonString
 {
     UMJsonWriter *writer = [[UMJsonWriter alloc] init];
     writer.humanReadable = YES;
@@ -24,7 +24,7 @@
     return json;
 }
 
-- (NSString *)jsonCompactString;
+- (NSString *)jsonCompactString
 {
     UMJsonWriter *writer = [[UMJsonWriter alloc] init];
     writer.humanReadable = NO;

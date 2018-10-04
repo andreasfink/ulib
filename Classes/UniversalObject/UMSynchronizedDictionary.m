@@ -8,6 +8,7 @@
 
 #include <pthread.h>
 #import "UMSynchronizedDictionary.h"
+#import "UMJsonWriter.h"
 
 #define SYNC_LOCK()
 
@@ -22,17 +23,17 @@
     self = [super init];
     if(self)
     {
-        underlyingDictionary = [[NSMutableDictionary alloc] init];
-        mutex = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
+        _underlyingDictionary = [[NSMutableDictionary alloc] init];
+        _lock = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
     }
     return self;
 }
 
 - (void)flush
 {
-    [mutex lock];
-    underlyingDictionary = [[NSMutableDictionary alloc] init];
-    [mutex unlock];
+    [_lock lock];
+    _underlyingDictionary = [[NSMutableDictionary alloc] init];
+    [_lock unlock];
 }
 
 - (UMSynchronizedDictionary *)initWithDictionary:(NSDictionary *)sd
@@ -40,20 +41,20 @@
     self = [super init];
     if(self)
     {
-        underlyingDictionary = [sd mutableCopy];
-        mutex = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
+        _underlyingDictionary = [sd mutableCopy];
+        _lock = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
     }
     return self;
 }
 
 - (void)lock
 {
-    [mutex lock];
+    [_lock lock];
 }
 
 - (void)unlock
 {
-    [mutex unlock];
+    [_lock unlock];
 }
 
 
@@ -70,14 +71,14 @@
 
 - (NSDictionary *)dictionaryCopy
 {
-    return [underlyingDictionary copy];
+    return [_underlyingDictionary copy];
 }
 
 - (NSUInteger)count
 {
-    [mutex lock];
-    NSUInteger cnt  = [underlyingDictionary count];
-    [mutex unlock];
+    [_lock lock];
+    NSUInteger cnt  = [_underlyingDictionary count];
+    [_lock unlock];
     return cnt;
 }
 
@@ -86,9 +87,9 @@
 {
     if(key)
     {
-        [mutex lock];
-        [underlyingDictionary setObject:anObject forKey:key];
-        [mutex unlock];
+        [_lock lock];
+        [_underlyingDictionary setObject:anObject forKey:key];
+        [_lock unlock];
     }
 }
 
@@ -97,9 +98,9 @@
     id returnValue = NULL;
     if(key)
     {
-        [mutex lock];
-        returnValue = [underlyingDictionary objectForKey:key];
-        [mutex unlock];
+        [_lock lock];
+        returnValue = [_underlyingDictionary objectForKey:key];
+        [_lock unlock];
     }
     return returnValue;
 }
@@ -107,9 +108,9 @@
 - (NSArray *)allKeys
 {
     NSArray *a;
-    [mutex lock];
-    a = [underlyingDictionary allKeys];
-    [mutex unlock];
+    [_lock lock];
+    a = [_underlyingDictionary allKeys];
+    [_lock unlock];
     return a;
 }
 
@@ -117,27 +118,52 @@
 {
     if(aKey)
     {
-        [mutex lock];
-        [underlyingDictionary removeObjectForKey:aKey];
-        [mutex unlock];
+        [_lock lock];
+        [_underlyingDictionary removeObjectForKey:aKey];
+        [_lock unlock];
     }
 }
 
 - (NSMutableDictionary *)mutableCopy
 {
     NSMutableDictionary *d;
-    [mutex lock];
-    d = [underlyingDictionary mutableCopy];
-    [mutex unlock];
+    [_lock lock];
+    d = [_underlyingDictionary mutableCopy];
+    [_lock unlock];
     return d;
 }
 
 - (id)copyWithZone:(nullable NSZone *)zone
 {
     UMSynchronizedDictionary *cpy;
-    [mutex lock];
-    cpy = [[UMSynchronizedDictionary allocWithZone:zone] initWithDictionary:underlyingDictionary];
-    [mutex unlock];
+    [_lock lock];
+    cpy = [[UMSynchronizedDictionary allocWithZone:zone] initWithDictionary:_underlyingDictionary];
+    [_lock unlock];
     return cpy;
 }
+
+- (NSString *)jsonString;
+{
+    UMJsonWriter *writer = [[UMJsonWriter alloc] init];
+    writer.humanReadable = YES;
+    NSString *json = [writer stringWithObject:_underlyingDictionary];
+    if (!json)
+    {
+        NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
+    }
+    return json;
+}
+
+- (NSString *)jsonCompactString;
+{
+    UMJsonWriter *writer = [[UMJsonWriter alloc] init];
+    writer.humanReadable = NO;
+    NSString *json = [writer stringWithObject:_underlyingDictionary];
+    if (!json)
+    {
+        NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
+    }
+    return json;
+}
+
 @end

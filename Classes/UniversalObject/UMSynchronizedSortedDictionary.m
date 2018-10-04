@@ -29,7 +29,7 @@
     if(self)
     {
         sortIndex = [[NSMutableArray alloc]init];
-        for(id key in underlyingDictionary)
+        for(id key in _underlyingDictionary)
         {
             [sortIndex addObject:key];
         }
@@ -55,12 +55,12 @@
     {
         return;
     }
-    [mutex lock];
-    if (underlyingDictionary[key] == NULL)
+    [_lock lock];
+    if (_underlyingDictionary[key] == NULL)
     {
         if(anObject)
         {
-            [underlyingDictionary setObject:anObject forKey:key];
+            [_underlyingDictionary setObject:anObject forKey:key];
             [sortIndex addObject:key];
         }
     }
@@ -68,10 +68,10 @@
     {
         if(anObject)
         {
-            [underlyingDictionary setObject:anObject forKey:key];
+            [_underlyingDictionary setObject:anObject forKey:key];
         }
     }
-    [mutex unlock];
+    [_lock unlock];
 }
 
 - (id)objectForKeyedSubscript:(id)key
@@ -80,40 +80,40 @@
     {
         return NULL;
     }
-    [mutex lock];
-    id r = [underlyingDictionary objectForKey:key];
-    [mutex unlock];
+    [_lock lock];
+    id r = [_underlyingDictionary objectForKey:key];
+    [_lock unlock];
     return r;
 }
 
 - (id)objectAtIndex:(NSUInteger)index
 {
     id r = NULL;
-    [mutex lock];
+    [_lock lock];
     id key = sortIndex[index];
     if(key)
     {
-        r = [underlyingDictionary objectForKey:key];
+        r = [_underlyingDictionary objectForKey:key];
     }
-    [mutex unlock];
+    [_lock unlock];
     return r;
 }
 
 - (id)keyAtIndex:(NSUInteger)index
 {
     id key = NULL;
-    [mutex lock];
+    [_lock lock];
     key = sortIndex[index];
-    [mutex unlock];
+    [_lock unlock];
     return key;
 }
 
 
 - (NSArray *)allKeys
 {
-    [mutex lock];
+    [_lock lock];
     NSArray *r = [sortIndex copy];
-    [mutex unlock];
+    [_lock unlock];
     return r;
 }
 
@@ -123,10 +123,10 @@
     {
         return;
     }
-    [mutex lock];
-    [underlyingDictionary removeObjectForKey:aKey];
+    [_lock lock];
+    [_underlyingDictionary removeObjectForKey:aKey];
     [sortIndex removeObjectIdenticalTo:aKey];
-    [mutex unlock];
+    [_lock unlock];
 }
 
 
@@ -146,33 +146,51 @@
     [s appendFormat:@"UMSynchronizedSortedDictionary {\n"];
     for(id key in sortIndex)
     {
-        id entry = underlyingDictionary[key];
+        id entry = _underlyingDictionary[key];
         [s appendFormat:@"%@ = %@\n",key,entry];
     }
     [s appendFormat:@"}\n"];
     return s;
 }
 
-- (NSString *)jsonString;
+- (NSString *)jsonString
 {
     UMJsonWriter *writer = [[UMJsonWriter alloc] init];
     writer.humanReadable = YES;
-    NSString *json = [writer stringWithObject:self];
-    if (!json)
+    [_lock lock];
+    NSString *json=NULL;
+    @try
     {
-        NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
+        json = [writer stringWithObject:self];
+        if (!json)
+        {
+            NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
+        }
+    }
+    @finally
+    {
+        [_lock unlock];
     }
     return json;
 }
 
-- (NSString *)jsonCompactString;
+- (NSString *)jsonCompactString
 {
     UMJsonWriter *writer = [[UMJsonWriter alloc] init];
     writer.humanReadable = NO;
-    NSString *json = [writer stringWithObject:self];
-    if (!json)
+    [_lock lock];
+    NSString *json=NULL;
+    @try
     {
-        NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
+        json = [writer stringWithObject:self];
+        if (!json)
+        {
+            NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
+        }
+    }
+    @finally
+    {
+        [_lock unlock];
     }
     return json;
 }
@@ -181,7 +199,7 @@
 - (id)copyWithZone:(nullable NSZone *)zone
 {
     UMSynchronizedSortedDictionary *cpy = [[UMSynchronizedSortedDictionary allocWithZone:zone]init];
-    cpy->underlyingDictionary = [underlyingDictionary copy];
+    cpy->_underlyingDictionary = [_underlyingDictionary copy];
     cpy->sortIndex = [sortIndex copy];
     return cpy;
 }

@@ -193,25 +193,6 @@
     }
 }
 
-- (NSString *)jsonString;
-{
-    NSString *json;
-    [_mutex lock];
-    @try
-    {
-        UMJsonWriter *writer = [[UMJsonWriter alloc] init];
-        json = [writer stringWithObject:_array];
-        if (!json)
-        {
-            NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
-        }
-    }
-    @finally
-    {
-        [_mutex unlock];
-    }
-    return json;
-}
 
 - (id)copyWithZone:(nullable NSZone *)zone
 {
@@ -227,5 +208,49 @@
     NSArray *a = [_array copy];
     [_mutex unlock];
     return a;
+}
+
+
+- (NSString *)jsonString
+{
+    UMJsonWriter *writer = [[UMJsonWriter alloc] init];
+    writer.humanReadable = YES;
+    [_mutex lock];
+    NSString *json=NULL;
+    @try
+    {
+        json = [writer stringWithObject:_array];
+        if (!json)
+        {
+            NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
+        }
+    }
+    @finally
+    {
+        [_mutex unlock];
+    }
+    return json;
+}
+
+
+- (NSString *)jsonCompactString
+{
+    UMJsonWriter *writer = [[UMJsonWriter alloc] init];
+    writer.humanReadable = YES;
+    [_mutex lock];
+    NSString *json=NULL;
+    @try
+    {
+        json = [writer stringWithObject:_array];
+        if (!json)
+        {
+            NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
+        }
+    }
+    @finally
+    {
+        [_mutex unlock];
+    }
+    return json;
 }
 @end

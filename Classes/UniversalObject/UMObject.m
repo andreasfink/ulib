@@ -258,6 +258,41 @@ static FILE *alloc_log;
 }
 
 
++ (NSCharacterSet *)whitespaceAndNewlineCharacterSet /* this differs from NSCharacterSet version by having LINE SEPARATOR' (U+2028)
+                                                      in it as well (UTF8 E280AD) */
+{
+    static NSCharacterSet *_charset=NULL;
+
+    if(_charset==NULL)
+    {
+        NSMutableCharacterSet *c  = [[NSCharacterSet whitespaceAndNewlineCharacterSet] mutableCopy];
+        NSRange lineSeparator;
+        lineSeparator.location = (unsigned int)0x2028;
+        lineSeparator.length = 1;
+        [c addCharactersInRange:lineSeparator];
+        _charset = [((NSCharacterSet *)c) copy];
+    }
+    return _charset;
+}
+
+
++ (NSCharacterSet *)newlineCharacterSet /* this differs from NSCharacterSet version by having LINE SEPARATOR' (U+2028)
+                                          in it as well (UTF8 E280AD) */
+{
+    static NSCharacterSet *_charset=NULL;
+
+    if(_charset==NULL)
+    {
+        NSMutableCharacterSet *c  = [[NSCharacterSet newlineCharacterSet] mutableCopy];
+        NSRange lineSeparator;
+        lineSeparator.location = (unsigned int)0x2028;
+        lineSeparator.length = 1;
+        [c addCharactersInRange:lineSeparator];
+        _charset = [((NSCharacterSet *)c) copy];
+    }
+    return _charset;
+}
+
 - (id) init
 {
     self=[super init];
@@ -583,7 +618,6 @@ BOOL umobject_object_stat_is_enabled(void)
     umobject_flags |= UMOBJECT_FLAG_LOG_RETAIN_RELEASE;
 #endif
 }
-
 
 @end
 

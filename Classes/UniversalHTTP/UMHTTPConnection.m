@@ -208,7 +208,7 @@
 	{
 		while((eol = memchr(ptr,'\n',n)))
 		{
-			NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+			NSCharacterSet *whitespace = [UMObject whitespaceAndNewlineCharacterSet];
 			line = [[NSString alloc]initWithBytes:ptr length:eol-ptr encoding:NSUTF8StringEncoding];
 			size_t removeLen = eol-ptr+1;
 			[appendToMe replaceBytesInRange:NSMakeRange(0,removeLen) withBytes:nil length:0];

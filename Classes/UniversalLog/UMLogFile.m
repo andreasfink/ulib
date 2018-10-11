@@ -366,7 +366,7 @@ error:
 
 - (NSString *) readTrimmedLine:(int *)ret 
 {
-    return [[self readLine:ret] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return [[self readLine:ret] stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
 }
 
 #if NS_BLOCKS_AVAILABLE

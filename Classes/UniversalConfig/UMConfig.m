@@ -94,7 +94,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
         NSString *relativeFileName;
         NSString *directoryPath1;
         NSString *directoryPath2;
-        NSString *lin2 = [[lin substringFromIndex:7] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSString *lin2 = [[lin substringFromIndex:7] stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
 
         NSString *firstChar =  [lin2 substringToIndex:1];
         NSString *lastChar = [lin2 substringFromIndex:lin2.length-1];
@@ -115,7 +115,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
         }
         else if([firstChar isEqualToString:@"="])
         {
-            relativeFileName =[[lin2 substringFromIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            relativeFileName =[[lin2 substringFromIndex:1] stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
             NSString *firstChar =  [relativeFileName substringToIndex:1];
             NSString *lastChar = [relativeFileName substringFromIndex:relativeFileName.length-1];
 
@@ -273,7 +273,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 {
     NSMutableDictionary *currentGroup = NULL;
     
-    NSCharacterSet *whitespace  = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSCharacterSet *whitespace  = [UMObject whitespaceAndNewlineCharacterSet];
     NSCharacterSet *quotes      = [NSCharacterSet characterSetWithCharactersInString:@"\""];
     
     singleGroups = [[NSMutableDictionary alloc]init];

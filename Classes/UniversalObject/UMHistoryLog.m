@@ -35,7 +35,7 @@
     self = [self initWithMaxLines:MAX_UMHISTORY_LOG];
     if(self)
     {
-        NSArray *lines = [s componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+        NSArray *lines = [s componentsSeparatedByCharactersInSet:[UMObject newlineCharacterSet]];
         for(NSString *line in lines)
         {
             [self addLogEntry:line];

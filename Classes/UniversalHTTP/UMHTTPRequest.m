@@ -209,7 +209,7 @@
     }
     if([name isEqualToString:@"Cookie"])
     {
-        value = [value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        value = [value stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
         
         NSArray *items = [value componentsSeparatedByString:@";"];
         for (NSString *itemString in items)
@@ -219,8 +219,8 @@
             if ([item count] == 2)
             {
                 UMHTTPCookie *cookie = [[UMHTTPCookie alloc]init];
-                cookie.name     = [[item objectAtIndex:0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                cookie.value    = [[item objectAtIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                cookie.name     = [[item objectAtIndex:0] stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
+                cookie.value    = [[item objectAtIndex:1] stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
                 [self setRequestCookie:cookie];
                 
             }
@@ -261,7 +261,7 @@
             [array getHeaderAtIndex:i withName:&name andValue:&value];
             if([name isEqualToString:@"Cookie"])
             {
-                value = [[value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]mutableCopy];
+                value = [[value stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]]mutableCopy];
                 NSArray *items = [value componentsSeparatedByString:@";"];
                 for (NSString *itemString in items)
                 {
@@ -269,8 +269,8 @@
                     if ([item count] == 2)
                     {
                         UMHTTPCookie *cookie = [[UMHTTPCookie alloc]init];
-                        cookie.name     = [[item objectAtIndex:0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                        cookie.value    = [[item objectAtIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                        cookie.name     = [[item objectAtIndex:0] stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
+                        cookie.value    = [[item objectAtIndex:1] stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
                         [self setRequestCookie:cookie];
 
                     }

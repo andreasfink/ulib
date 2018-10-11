@@ -6,6 +6,7 @@
 //  Copyright © 2017 Andreas Fink. All rights reserved.
 //
 
+#import "UMObject.h"
 #import "UMTokenizer.h"
 #import "UMScannerChar.h"
 #import "UMTokenizerWord.h"
@@ -17,7 +18,7 @@
     self = [super init];
     if(self)
     {
-        _whitespace  = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        _whitespace  = [UMObject whitespaceAndNewlineCharacterSet];
         _comment     = [NSCharacterSet characterSetWithCharactersInString:@"!#"];
         _endOfLine   = [NSCharacterSet characterSetWithCharactersInString:@"\r\n"];
         _digits      = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];

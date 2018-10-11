@@ -5,6 +5,7 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
+#import "UMObject.h"
 #import "NSString+UniversalObject.h"
 #import "NSData+UniversalObject.h"
 #import "NSDate+stringFunctions.h"
@@ -111,7 +112,7 @@ NSString *sqlEscapeNSString(NSString *input)
 	NSUInteger len = [self length];
 	NSMutableString *out = [[NSMutableString alloc]initWithCapacity:len];
 	int i;
-        for(i=0;i<len;i++)
+    for(i=0;i<len;i++)
 	{
         unichar uc  = [self characterAtIndex:i];
 		switch(uc)
@@ -221,7 +222,7 @@ NSString *sqlEscapeNSString(NSString *input)
 - (NSString *) prefixLines:(NSString *)prefix
 {
     NSMutableString *s = [[NSMutableString alloc]init];
-    NSArray *lines = [self componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    NSArray *lines = [self componentsSeparatedByCharactersInSet:[UMObject newlineCharacterSet]];
     for(NSString *line in lines)
     {
         [s appendFormat:@"%@%@\n",prefix,line];

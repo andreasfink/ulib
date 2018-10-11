@@ -671,7 +671,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
         {
             s += strlen("UUID: ");
             uuidNumber = [[ NSString stringWithUTF8String: s]
-                          stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                          stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
             found=YES;
         }
     }

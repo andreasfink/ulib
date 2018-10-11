@@ -142,8 +142,9 @@ static NSCharacterSet *kDecimalDigitCharacterSet;
             NSMutableString *string = nil;
             
             if (![_stream getStringFragment:&string])
+            {
                 return UMjson_token_eof;
-            
+            }
             if (!string)
             {
                 self.error = @"Broken Unicode encoding";

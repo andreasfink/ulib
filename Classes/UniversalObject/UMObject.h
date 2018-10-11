@@ -90,6 +90,10 @@ BOOL umobject_object_stat_is_enabled(void);
                 subSectionName:(NSString *)ss
                   configOption:(NSString *)configOption
                         logdir:(NSString *)logdir;
++ (NSCharacterSet *)whitespaceAndNewlineCharacterSet; /* this differs from NSCharacterSet version by having LINE SEPARATOR' (U+2028)
+                                                       in it as well (UTF8 E280AD) */
++ (NSCharacterSet *)newlineCharacterSet; /* this differs from NSCharacterSet version by having LINE SEPARATOR' (U+2028)
+                                                       in it as well (UTF8 E280AD) */
 
 - (id) init;
 - (NSString *) descriptionWithPrefix:(NSString *)prefix;
@@ -122,6 +126,8 @@ BOOL umobject_object_stat_is_enabled(void);
 @property(readwrite,assign,atomic)  int64_t alloc_count;
 @property(readwrite,assign,atomic)  int64_t dealloc_count;
 @property(readwrite,assign,atomic)  int64_t inUse_count;
+
+
 @end
 
 void umobject_stat_external_alloc_increase(const char *file,long line, const char *func);

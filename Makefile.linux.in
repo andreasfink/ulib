@@ -34,6 +34,7 @@ ${LIB}: ${OFILES}
 
 ${SLIB}: ${OFILES}
 	ar rcs ${SLIB} ${OFILES}
+	ranlib ${SLIB}
 
 # this is the only file which should NOT be compiled with ARC
 # ... if we want to have retain/release debugging on
@@ -41,14 +42,15 @@ ${SLIB}: ${OFILES}
 #Classes/UniversalObject/UMObject.m.o: Classes/UniversalObject/UMObject.m
 #	${CC} -c ${CFLAGS} -x objective-c $<  ${INCLUDEDIRS} -o $@ -fno-objc-arc
 
-install: ${LIB}
+install: ${LIB} ${SLIB}
 	mkdir -p "${DESTDIR}/usr/local/lib/pkgconfig"
 	mkdir -p "${DESTDIR}/usr/local/include/ulib"
 	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"
 	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}"
 	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
 	rm -f "${DESTDIR}/usr/local/lib/${LIB}"
-	install -b -g root -o root -m 644 "${LIB}" "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"	
+	install -b -g root -o root -m 644 "${LIB}" "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"
+	install -b -g root -o root -m 644 "${SLIB}" "${DESTDIR}/usr/local/lib/${SLIB}"
 	ln -s "${LIB}.${MAJORVER}.${MINORVER}.${REVISION}" "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}"
 	ln -s "${LIB}.${MAJORVER}.${MINORVER}"             "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
 	ln -s "${LIB}.${MAJORVER}"                         "${DESTDIR}/usr/local/lib/${LIB}"
@@ -57,7 +59,7 @@ install: ${LIB}
 	ldconfig
 
 clean:
-	rm -f $(LIB) $(OFILES)
+	rm -f $(LIB) $(OFILES) $(SLIB)
 
 .SUFFIXES: .m.o .o .m .c
 

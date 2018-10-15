@@ -33,7 +33,7 @@ ${LIB}: ${OFILES}
 	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
 
 ${SLIB}: ${OFILES}
-    ar rcs ${SLIB} ${OFILES}
+	ar rcs ${SLIB} ${OFILES}
 
 # this is the only file which should NOT be compiled with ARC
 # ... if we want to have retain/release debugging on

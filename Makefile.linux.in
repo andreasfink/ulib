@@ -14,6 +14,8 @@ MINORVER=@MINORVER@
 REVISION=@REVISION@
 
 LIB=lib@PROJECT_NAME@.@SHARED_LIBRARY_EXTENSION@
+SLIB=lib@PROJECT_NAME@.a
+
 PKGCONFIGFILE=ulib.pc
 
 MFILES = $(wildcard Classes/*.m) $(wildcard Classes/*/*.m)
@@ -28,9 +30,10 @@ INCLUDEDIRS=-I/usr/include/postgresql -I/usr/include/mysql-I/usr/include/libxml2
 #
 
 ${LIB}: ${OFILES}
-	./make_version
 	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
 
+${STATICLIB}: ${OFILES}
+    ar rcs ${SLIB} ${OFILES}
 
 # this is the only file which should NOT be compiled with ARC
 # ... if we want to have retain/release debugging on

@@ -32,7 +32,7 @@ INCLUDEDIRS=-I/usr/include/postgresql -I/usr/include/mysql-I/usr/include/libxml2
 ${LIB}: ${OFILES}
 	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
 
-${STATICLIB}: ${OFILES}
+${SLIB}: ${OFILES}
     ar rcs ${SLIB} ${OFILES}
 
 # this is the only file which should NOT be compiled with ARC

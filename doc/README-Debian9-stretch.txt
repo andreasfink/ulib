@@ -128,11 +128,10 @@ Setting some defaults
 ------------------------------------------------
 
 
-export CC=/usr/local/bin/clang
-export CXX=/usr/local/bin/clang++
+export CC=clang
+export CXX=clang++
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
-export LD=ld.lld
     
 
 
@@ -170,10 +169,7 @@ apt-get purge libobjc
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_LINKER=/usr/local/bin/ld.lld
-
-
- -DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
+    cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
     make
     make install
     
@@ -182,7 +178,7 @@ apt-get purge libobjc
 
     cd make
     #export OBJCFLAGS="-DEXPOSE_classname_IVARS=1"
-    #export OBJCFLAGS="-fasm-blocks -fblocks -fstrict-aliasing -fobjc-arc -fobjc-runtime=gnustep -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -fpascal-strings"
+    export OBJCFLAGS="-fblocks -fobjc-arc -fobjc-runtime=gnustep-2.0"
     ./configure --with-layout=fhs \
             --disable-importing-config-file \
             --enable-native-objc-exceptions \
@@ -205,10 +201,16 @@ apt-get purge libobjc
 #       addtest_variants("ForwardDeclareProtocolAccess" "ForwardDeclareProtocolAccess.m;ForwardDeclareProtocol.m" true)
 #	remove file Test/ForwardDeclareProtocol.m
 
+	edit CMakeLists.txt and change OLDABI_COMPAT to FALSE
+	
+	set(OLDABI_COMPAT FALSE CACHE BOOL
+        "Enable compatibility with GCC and old GNUstep ABIs")
+        
+        
     cd libobjc2
     mkdir Build
     cd Build
-    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=/usr/local/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++ 
+    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ 
     #-DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
     make
     make install
@@ -219,8 +221,8 @@ apt-get purge libobjc
 7. install gnustep-base
 
     cd base
-    export LD=/usr/bin/ld.lld-6.0
-    ./configure --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf
+    export CFLAGS="-fconstant-string-class=NSConstantString"
+    ./configure --disable-mixedabi --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf
 
     make -j8
     make install

@@ -66,7 +66,13 @@ echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main" > /etc/apt
 echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main" >> /etc/apt/sources.list.d/llvm.list
 apt-get update
 
-
+apt-get install clang-7 lldb-7 llvm-7 libc++-7-dev lld-7
+pushd /usr/bin
+ln -s clang-7 clang
+ln -s clang++-7 clang++
+ln -s clang-cpp-7 clang-cpp
+ln -s lldb-7 lldb
+popd
 
 2. Install depenencies
 --------------------------
@@ -74,7 +80,6 @@ apt-get update
 
  apt-get install build-essential git subversion  \
         libpthread-workqueue0 libpthread-workqueue-dev \
-        libblocksruntime0 libblocksruntime-dev \
         libxml2 libxml2-dev \
         libffi6 libffi-dev\
         libicu-dev \
@@ -153,9 +158,11 @@ Download the sourcecode of gnustep and dependencies
     ./scripts/install-dependencies
 	
 	
-Lets purge the gcc stuff
+Lets purge the gcc stuff in case its installed
+----------------------------------------------
+
 apt-get purge libblocksruntime-dev libblocksruntime0
-apt-get purge libobjc
+apt-get purge libblocksruntime-dev libblocksruntime0
 
 
 4. Build dependencies
@@ -177,8 +184,9 @@ apt-get purge libobjc
 5. install gnustep-make
 
     cd make
-    #export OBJCFLAGS="-DEXPOSE_classname_IVARS=1"
-    export OBJCFLAGS="-fblocks -fobjc-arc -fobjc-runtime=gnustep-2.0"
+
+	export RUNTIME_VERSION=gnustep-2.0
+    export OBJCFLAGS="-fblocks"
     ./configure --with-layout=fhs \
             --disable-importing-config-file \
             --enable-native-objc-exceptions \
@@ -186,8 +194,9 @@ apt-get purge libobjc
             --enable-install-ld-so-conf \
             --with-library-combo=ng-gnu-gnu \
             --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf \
-            --with-objc-lib-flag="-l:libobjc.so.4.6 -fblocks" \
-            --enable-strict-v2-mode
+            --with-objc-lib-flag="-l:libobjc.so.4.6"
+           # --enable-strict-v2-mode
+            
      make install
      source /usr/local/etc/GNUstep/GNUstep.conf
      cd ..
@@ -201,17 +210,11 @@ apt-get purge libobjc
 #       addtest_variants("ForwardDeclareProtocolAccess" "ForwardDeclareProtocolAccess.m;ForwardDeclareProtocol.m" true)
 #	remove file Test/ForwardDeclareProtocol.m
 
-	edit CMakeLists.txt and change OLDABI_COMPAT to FALSE
-	
-	set(OLDABI_COMPAT FALSE CACHE BOOL
-        "Enable compatibility with GCC and old GNUstep ABIs")
-        
         
     cd libobjc2
     mkdir Build
     cd Build
-    cmake .. -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ 
-    #-DCMAKE_CXX_FLAGS=-g -DCMAKE_C_FLAGS=-g
+    cmake ..  -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++  
     make
     make install
     cd ..
@@ -220,9 +223,27 @@ apt-get purge libobjc
 
 7. install gnustep-base
 
+
+if you see this error:
+././config/objc-common.g:53:19: error: implicit conversion of C pointer type 'void *' to Objective-C pointer type 'NSObject *' requires a bridged c
+
     cd base
+
+edit the file config/objc-common.g
+change line 53 from 
+
+	NSObject *obj = calloc(sizeof(id), 1);
+to
+	NSObject *obj = (__bridge NSObject *)calloc(sizeof(id), 1);
+otherwise configure will complain you cant compile objc
+
+
+edit configure.ac
+gs_cv_objc_compiler_supports_constant_string_class=1
+ac_cv_func_objc_sync_enter=yes
+
     export CFLAGS="-fconstant-string-class=NSConstantString"
-    ./configure --disable-mixedabi --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf
+    ./configure  --disable-mixedabi --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf
 
     make -j8
     make install

@@ -266,15 +266,36 @@ static FILE *alloc_log;
     if(_charset==NULL)
     {
         NSMutableCharacterSet *c  = [[NSCharacterSet whitespaceAndNewlineCharacterSet] mutableCopy];
-        NSRange lineSeparator;
-        lineSeparator.location = (unsigned int)0x2028;
-        lineSeparator.length = 1;
-        [c addCharactersInRange:lineSeparator];
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x0009 ,1)]; /*  CHARACTER TABULATION */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x000A ,1)]; /*  LINE FEED (LF) */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x000B ,1)]; /*  LINE TABULATION */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x000C ,1)]; /*  FORM FEED (FF) */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x000D ,1)]; /*  CARRIAGE RETURN (CR) */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x0020 ,1)]; /*  SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x0085 ,1)]; /*  NEXT LINE (NEL)  */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x00A0 ,1)]; /*  NO-BREAK SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x1680 ,1)]; /*  OGHAM SPACE MARK */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x180E ,1)]; /*  MONGOLIAN VOWEL SEPARATOR */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2000 ,1)]; /*  EN QUAD  */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2001 ,1)]; /*  EM QUAD  */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2002 ,1)]; /*  EN SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2003 ,1)]; /*  EM SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2004 ,1)]; /*  THREE-PER-EM SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2005 ,1)]; /*  FOUR-PER-EM SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2006 ,1)]; /*  SIX-PER-EM SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2007 ,1)]; /*  FIGURE SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2008 ,1)]; /*  PUNCTUATION SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2009 ,1)]; /*  THIN SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x200A ,1)]; /*  HAIR SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2028 ,1)]; /*  LINE SEPARATOR */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2029 ,1)]; /*  PARAGRAPH SEPARATOR */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x202F ,1)]; /*  NARROW NO-BREAK SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x205F ,1)]; /*  MEDIUM MATHEMATICAL SPACE */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x3000 ,1)]; /*  IDEOGRAPHIC SPACE */
         _charset = [((NSCharacterSet *)c) copy];
     }
     return _charset;
 }
-
 
 + (NSCharacterSet *)newlineCharacterSet /* this differs from NSCharacterSet version by having LINE SEPARATOR' (U+2028)
                                           in it as well (UTF8 E280AD) */
@@ -284,10 +305,11 @@ static FILE *alloc_log;
     if(_charset==NULL)
     {
         NSMutableCharacterSet *c  = [[NSCharacterSet newlineCharacterSet] mutableCopy];
-        NSRange lineSeparator;
-        lineSeparator.location = (unsigned int)0x2028;
-        lineSeparator.length = 1;
-        [c addCharactersInRange:lineSeparator];
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x000C ,1)]; /*  FORM FEED (FF) */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x000D ,1)]; /*  CARRIAGE RETURN (CR) */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x0085 ,1)]; /*  NEXT LINE (NEL)  */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2028 ,1)]; /*  LINE SEPARATOR */
+        [c addCharactersInRange:NSMakeRange((unsigned int) 0x2029 ,1)]; /*  PARAGRAPH SEPARATOR */
         _charset = [((NSCharacterSet *)c) copy];
     }
     return _charset;

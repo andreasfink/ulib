@@ -194,8 +194,8 @@ apt-get purge libblocksruntime-dev libblocksruntime0
             --enable-install-ld-so-conf \
             --with-library-combo=ng-gnu-gnu \
             --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf \
-            --with-objc-lib-flag="-l:libobjc.so.4.6"
-           # --enable-strict-v2-mode
+            --with-objc-lib-flag="-l:libobjc.so.4.6" \
+            --enable-strict-v2-mode
             
      make install
      source /usr/local/etc/GNUstep/GNUstep.conf

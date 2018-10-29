@@ -59,3 +59,4 @@
 
 NSString *UMBacktrace(void **stack_frames, size_t size);
 uint64_t ulib_get_thread_id(void);
+NSString *ulib_get_thread_name(pthread_t thread);

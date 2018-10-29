@@ -822,7 +822,6 @@ static BOOL             _machineCPUIDsLoaded = NO;
 }
 @end
 
-extern NSString *ulib_get_thread_name(pthread_t thread);
 
 NSString *UMBacktrace(void **stack_frames, size_t size)
 {

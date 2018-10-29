@@ -14,14 +14,14 @@
 
 @interface UMThroughputCounter : UMObject
 {
-	long long           counter;
-	UMMicroSec          duration;
-	UMMicroSec          resolution;
-	long long           cellCount;
-	size_t              cellSize;
-	uint32_t            *cells;
-	UMMicroSec          endTime;	/* time in MicroSeconds */
-	long long           endIndex;   /* time in index counters (MicroSeconds / resolution */
+	long long           _counter;
+	UMMicroSec          _duration;
+	UMMicroSec          _resolution;
+	long long           _cellCount;
+	size_t              _cellSize;
+	uint32_t            *_cells;
+	UMMicroSec          _endTime;	/* time in MicroSeconds */
+	long long           _endIndex;   /* time in index counters (MicroSeconds / resolution */
     UMMutex             *_mutex;
 }
 

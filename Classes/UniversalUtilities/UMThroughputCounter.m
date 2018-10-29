@@ -29,30 +29,30 @@
 - (UMThroughputCounter *)initWithResolutionInMicroseconds:(UMMicroSec)res
                                               maxDuration:(UMMicroSec)dur;
 {
-    self=[super init];
+    self = [super init];
     if(self)
     {
         NSAssert(res > 0,   @"UMThroughputCounter: resolution must be larger than zero");
         NSAssert(dur   > 0, @"UMThroughputCounter: duration must be larger than zero");
-        resolution = res;
-        duration = dur;
+        _resolution = res;
+        _duration = dur;
 
-        if(duration < (resolution*16))
+        if(_duration < (_resolution*16))
         {
-            duration = resolution * 16;
+            _duration = _resolution * 16;
         }
-        cellCount = 1<<((int)log2f((double)duration / (double)resolution) + 1); /* round up to the next power of */
+        _cellCount = 1<<((int)log2f((double)_duration / (double)_resolution) + 1); /* round up to the next power of */
 
-        cellSize = (size_t)cellCount * (size_t)sizeof(uint32_t);
-        if(cellSize > 32768)
+        _cellSize = (size_t)_cellCount * (size_t)sizeof(uint32_t);
+        if(_cellSize > 32768)
         {
-            NSLog(@"Warning: ThroughputCounter size is %ld kbytes! Probably very ineficcient",(long)cellSize/1024);
+            NSLog(@"Warning: ThroughputCounter size is %ld kbytes! Probably very ineficcient",(long)_cellSize/1024);
         }
-        cells = (uint32_t *)malloc(cellSize+4);
-        NSAssert(cells,([NSString stringWithFormat:@"Could not allocate %ld kbytes for Throughput counter", (long)cellSize/1024]));
-        memset(cells,0x00,cellSize+4);
-        endTime   = [UMThroughputCounter microsecondTime];
-        endIndex  = endTime/resolution;
+        _cells = (uint32_t *)malloc(_cellSize+4);
+        NSAssert(_cells,([NSString stringWithFormat:@"Could not allocate %ld kbytes for Throughput counter", (long)_cellSize/1024]));
+        memset(_cells,0x00,_cellSize+4);
+        _endTime   = [UMThroughputCounter microsecondTime];
+        _endIndex  = _endTime/_resolution;
     }
 	return self;
 }
@@ -66,8 +66,8 @@
 
 - (void)dealloc
 {
-    free(cells);
-    cells = NULL;
+    free(_cells);
+    _cells = NULL;
 }
 
 + (UMMicroSec) microsecondTime
@@ -91,9 +91,9 @@
     UMMicroSec nowTime = [UMThroughputCounter microsecondTime];
 
     [_mutex lock];
-    long long nowIndex = nowTime/resolution;
+    long long nowIndex = nowTime/_resolution;
     [self timeShiftByIndex: nowIndex];
-    cells[nowIndex % cellCount] += count;
+    _cells[nowIndex % _cellCount] += count;
     [_mutex unlock];
 }
 
@@ -103,22 +103,22 @@
 	long long i;
 	long long shiftIndex;
 
-	if (nowIndex == endIndex)
+	if (nowIndex == _endIndex)
     {
 		return;
     }
-    shiftIndex = nowIndex - endIndex;
-	if(shiftIndex >= cellCount)
+    shiftIndex = nowIndex - _endIndex;
+	if(shiftIndex >= _cellCount)
 	{
-		memset((void *)cells,0,cellSize);
+		memset((void *)_cells,0,_cellSize);
 		goto end;
 	}
-	for(i = endIndex + 1; i <= nowIndex; i++)
+	for(i = _endIndex + 1; i <= nowIndex; i++)
     {
-		cells[i % cellCount] = 0;
+		_cells[i % _cellCount] = 0;
     }
 end:
-	endIndex = nowIndex;
+	_endIndex = nowIndex;
 }
 
 - (long long) getCountForSeconds: (double)secondsDuration
@@ -143,19 +143,19 @@ end:
     nowTime  = [UMThroughputCounter microsecondTime];
 
     [_mutex lock];
-    nowIndex = nowTime/resolution;
+    nowIndex = nowTime/_resolution;
     [self timeShiftByIndex: nowIndex];
-    indexCount = microsecondDuration/resolution;
-    if(indexCount >= cellCount)
+    indexCount = microsecondDuration/_resolution;
+    if(indexCount >= _cellCount)
     {
-        indexCount = cellCount-1;
+        indexCount = _cellCount-1;
     }
     startIndex = nowIndex - 1 - indexCount;
 
     result = 0;
     for ( i = startIndex; i < (nowIndex -1); i++ )
     {
-        result += cells[i % cellCount];
+        result += _cells[i % _cellCount];
     }
     [_mutex unlock];
 
@@ -232,9 +232,9 @@ end:
 - (void)fillWithInt:(uint32_t)j
 {
 	int i;
-	for(i=0;i<cellCount;i++)
+	for(i=0;i<_cellCount;i++)
     {
-		cells[i%cellCount]=j;
+		_cells[i%_cellCount]=j;
     }
 }
 

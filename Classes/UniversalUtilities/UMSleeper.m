@@ -37,9 +37,6 @@ static void socket_set_blocking(int fd, int blocking)
 #define	TXPIPE 1
 
 @implementation UMSleeper
-@synthesize rxpipe;
-@synthesize txpipe;
-@synthesize isPrepared;
 
 - (UMSleeper *)initFromFile:(const char *)file line:(long)line function:(const char *)function
 {
@@ -47,9 +44,9 @@ static void socket_set_blocking(int fd, int blocking)
     if(self)
     {
         self.isPrepared = NO;
-        ifile = file;
-        iline = line;
-        ifunction = function;
+        _ifile = file;
+        _iline = line;
+        _ifunction = function;
         _prepareLock = [[UMMutex alloc]initWithName:@"sleeper-mutex"];
     }
     return self;
@@ -93,43 +90,43 @@ static void socket_set_blocking(int fd, int blocking)
         }
         return;
     }
-    self.rxpipe=pipefds[RXPIPE];
-    self.txpipe=pipefds[TXPIPE];
-    if(ifile)
+    _rxpipe=pipefds[RXPIPE];
+    _txpipe=pipefds[TXPIPE];
+    if(_ifile)
     {
-        TRACK_FILE_PIPE_FLF(self.rxpipe,@"rxpipe",ifile,iline,ifunction);
-        TRACK_FILE_PIPE_FLF(self.txpipe,@"txpipe",ifile,iline,ifunction);
+        TRACK_FILE_PIPE_FLF(self.rxpipe,@"rxpipe",_ifile,_iline,_ifunction);
+        TRACK_FILE_PIPE_FLF(self.txpipe,@"txpipe",_ifile,_iline,_ifunction);
     }
     else
     {
-        TRACK_FILE_PIPE(self.rxpipe,@"rxpipe");
-        TRACK_FILE_PIPE(self.txpipe,@"txpipe");
+        TRACK_FILE_PIPE(_rxpipe,@"rxpipe");
+        TRACK_FILE_PIPE(_txpipe,@"txpipe");
     }
-    socket_set_blocking(self.rxpipe, 0);
-    socket_set_blocking(self.txpipe, 0);
-    self.isPrepared = YES;
+    socket_set_blocking(_rxpipe, 0);
+    socket_set_blocking(_txpipe, 0);
+    _isPrepared = YES;
     [_prepareLock unlock];
 }
 
 - (void) dealloc
 {
-    if(self.isPrepared==NO)
+    if(_isPrepared==NO)
     {
         return;
     }
-    if(self.rxpipe >=0)
+    if(_rxpipe >=0)
     {
-        TRACK_FILE_CLOSE(self.rxpipe);
-        close(self.rxpipe);
+        TRACK_FILE_CLOSE(_rxpipe);
+        close(_rxpipe);
     }
-    if(self.txpipe>=0)
+    if(_txpipe>=0)
     {
-        TRACK_FILE_CLOSE(self.txpipe);
-        close(self.txpipe);
+        TRACK_FILE_CLOSE(_txpipe);
+        close(_txpipe);
     }
-    self.rxpipe = -1;
-    self.txpipe = -1;
-    self.isPrepared = NO;
+    _rxpipe = -1;
+    _txpipe = -1;
+    _isPrepared = NO;
 }
 
 
@@ -185,7 +182,7 @@ static void flushpipe(int fd)
 #endif
     
     [self prepare];
-    if(self.rxpipe < 0)
+    if(_rxpipe < 0)
     {
         return -1;
     }
@@ -210,7 +207,7 @@ static void flushpipe(int fd)
         }
 
         memset(&pollfd,0x00,sizeof(pollfd));
-        pollfd[0].fd = self.rxpipe;
+        pollfd[0].fd = _rxpipe;
         pollfd[0].events = events;
         pollfd[0].revents = 0;
         pollresult = poll(&pollfd[0], 1, wait_time);
@@ -249,9 +246,9 @@ static void flushpipe(int fd)
 
 - (void) reset
 {
-    if(self.isPrepared)
+    if(_isPrepared)
     {
-        flushpipe(self.rxpipe);
+        flushpipe(_rxpipe);
     }
 }
 
@@ -262,14 +259,14 @@ static void flushpipe(int fd)
         NSLog(@"WakeUp order 0x%04x",sig);
     }
 
-    if(self.txpipe >= 0)
+    if(_txpipe >= 0)
     {
         uint8_t bytes[4];
         bytes[0] = (sig & 0xFF000000 ) >> 24;
         bytes[1] = (sig & 0x00FF0000 ) >> 16;
         bytes[2] = (sig & 0x0000FF00 ) >> 8;
         bytes[3] = (sig & 0x000000FF ) >> 0;
-        write(self.txpipe, &bytes,4);
+        write(_txpipe, &bytes,4);
     }
 }
 

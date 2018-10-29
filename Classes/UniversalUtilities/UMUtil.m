@@ -6,6 +6,7 @@
 //
 
 #import "UMUtil.h"
+#import <pthread.h>
 #include "ulib_config.h"
 
 /* byte order stuff: we use macros under MacOS X */
@@ -860,3 +861,45 @@ NSString *UMBacktrace(void **stack_frames, size_t size)
     return s;
 }
 
+#if defined(LINUX)
+
+#include <sys/types.h>
+#include "unistd.h"
+#include <sys/syscall.h>
+#include <sys/prctl.h>
+extern int pthread_setname_np (pthread_t __target_thread, __const char *__name);
+
+uint64_t ulib_get_thread_id(void)
+{
+    uint64_t tid = (uint64_t)syscall (SYS_gettid);
+    return tid;
+}
+
+#elif defined(__APPLE__)
+
+uint64_t ulib_get_thread_id(void)
+{
+    uint64_t tid = 0;
+    pthread_t me = pthread_self();
+    pthread_threadid_np(me,&tid);
+    return tid;
+}
+#else
+
+#error  We need gettid()
+
+#endif
+
+
+#if defined(LINUX) || defined(__APPLE__)
+extern int pthread_getname_np (pthread_t thread, char *buf,size_t len);
+NSString *ulib_get_thread_name(pthread_t thread)
+{
+    char name[256];
+    memset(name,0x00,256);
+    pthread_getname_np (thread, &name[0],255);
+    return [NSString stringWithUTF8String:name];
+}
+#else
+#error We need something like pthread_getname_np defined
+#endif

@@ -24,8 +24,8 @@
         {
             s = 10;
         }
-        size = s;
-        counters = [[NSMutableArray alloc]init];
+        _size = s;
+        _counters = [[NSMutableArray alloc]init];
         _mutex = [[UMMutex alloc]initWithName:@"average-delay-mutex"];
     }
     return self;
@@ -34,11 +34,11 @@
 - (void) appendNumber:(NSNumber *)nr
 {
     [_mutex lock];
-    [counters addObject:nr];
-    NSInteger i = [counters count];
-    while(i > size)
+    [_counters addObject:nr];
+    NSInteger i = [_counters count];
+    while(i > _size)
     {
-        [counters removeObjectAtIndex:0];
+        [_counters removeObjectAtIndex:0];
         i--;
     }
     [_mutex unlock];
@@ -50,7 +50,7 @@
     int count = 0;
 
     [_mutex lock];
-    for(NSNumber *nr in counters)
+    for(NSNumber *nr in _counters)
     {
         value += [nr doubleValue];
         count++;
@@ -72,7 +72,7 @@
     int count = 0;
     double sum = 0.0;
     [_mutex lock];
-    for(NSNumber *nr in counters)
+    for(NSNumber *nr in _counters)
     {
         sum += [nr doubleValue];
         count++;

@@ -20,13 +20,13 @@ typedef int32_t UMSleeper_Signal; /* note Sleeper signal is a bitmask */
 
 @interface UMSleeper : UMObject
 {
-    int rxpipe;
-    int txpipe;
+    int _rxpipe;
+    int _txpipe;
 	int flag;
-    BOOL isPrepared;
-    const char *ifile;
-    long iline;
-    const char *ifunction;
+    BOOL _isPrepared;
+    const char *_ifile;
+    long _iline;
+    const char *_ifunction;
     UMMutex *_prepareLock;
     BOOL _debug;
 }

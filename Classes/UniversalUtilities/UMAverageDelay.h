@@ -9,8 +9,8 @@
 #import "UMMutex.h"
 @interface UMAverageDelay : UMObject
 {
-    int size;
-    NSMutableArray *counters;
+    int _size;
+    NSMutableArray *_counters;
     UMMutex *_mutex;
 }
 

@@ -17,7 +17,7 @@
     UMMicroSec          _startTime;
     UMMicroSec          _lastChecked;
     UMMicroSec          _expiryTime;
-    UMMicroSec          _duration;
+    UMMicroSec          _microsecDuration;
     NSString            *_name;
     BOOL                _repeats;
     UMObject            *_objectToCall;
@@ -31,7 +31,7 @@
 @property(readwrite,assign,atomic) UMMicroSec          startTime;
 @property(readwrite,assign,atomic) UMMicroSec          lastChecked;
 @property(readwrite,assign,atomic) UMMicroSec          expiryTime;
-@property(readwrite,assign,atomic) UMMicroSec          duration;
+@property(readwrite,assign,atomic) UMMicroSec          microsecDuration;
 @property(readwrite,strong,atomic) NSString            *name;
 @property(readwrite,assign,atomic) BOOL                repeats;
 @property(readwrite,assign,atomic) BOOL                runCallbackInForeground;

@@ -41,7 +41,7 @@
         _startTime = now;
         _lastChecked = now;
         _expiryTime = 0;
-        _duration = (UMMicroSec)(d * 1000000.0);
+        _microsecDuration = (UMMicroSec)(d * 1000000.0);
         _objectToCall = target;
         _selectorToCall = selector;
         _parameter = object;
@@ -59,11 +59,10 @@
                         repeats:r];
 }
 
-
 - (void)setSeconds:(NSTimeInterval)sec
 {
     [_timerMutex lock];
-    _duration = (UMMicroSec)(sec * 1000000.0);
+    _microsecDuration = (UMMicroSec)(sec * 1000000.0);
     [_timerMutex unlock];
 
 }
@@ -71,7 +70,7 @@
 {
     NSTimeInterval sec;
     [_timerMutex lock];
-    sec = ((double)_duration)/1000000.0;
+    sec = ((double)_microsecDuration)/1000000.0;
     [_timerMutex unlock];
     return sec;
 }
@@ -91,7 +90,7 @@
         _startTime = now;
         _lastChecked = now;
         _expiryTime = 0;
-        _duration = dur;
+        _microsecDuration = dur;
         _objectToCall = target;
         _selectorToCall = selector;
         _parameter = object;
@@ -123,18 +122,18 @@
 
 - (void)unlockedStart
 {
-    if(self.duration<=0)
+    if(_microsecDuration<=0)
     {
         NSLog(@"Timer is null seconds %@",self.name);
     }
-    NSAssert(self.duration>0,@"Timer is 0");
-    if(self.duration < 100)
+    NSAssert(_microsecDuration>0,@"Timer is 0");
+    if(_microsecDuration < 100)
     {
-        NSLog(@"Warning: Starting timer %@ with very short duration %llud µs",self.name,(long long)self.duration);
+        NSLog(@"Warning: Starting timer %@ with very short duration %llu µs",self.name,(long long)_microsecDuration);
     }
     self.isRunning = YES;
     UMMicroSec now  = [UMThroughputCounter microsecondTime];
-    self.expiryTime = now + self.duration;
+    self.expiryTime = now + _microsecDuration;
     [[UMTimerBackgrounder sharedInstance]addTimer:self];
 }
 

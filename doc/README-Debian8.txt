@@ -12,8 +12,8 @@ Here is how to get such a installation up and running under Debian 8 (codename J
 1. You need to install the llvm repository
 -------------------------------------------
 
-echo "deb http://llvm.org/apt/jessie/ llvm-toolchain-jessie-5.0 main"     > /etc/apt/sources.list.d/llvm.list
-echo "deb-src http://llvm.org/apt/jessie/ llvm-toolchain-jessie-5.0 main" >> /etc/apt/sources.list.d/llvm.list
+echo "deb http://apt.llvm.org/jessie/ llvm-toolchain-jessie-7 main" > /etc/apt/sources.list.d/llvm.list
+echo "deb-src http://apt.llvm.org/jessie/ llvm-toolchain-jessie-7 main" >> /etc/apt/sources.list.d/llvm.list
 apt-get update
     
 

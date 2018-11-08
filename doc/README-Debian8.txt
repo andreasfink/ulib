@@ -15,7 +15,9 @@ Here is how to get such a installation up and running under Debian 8 (codename J
 echo "deb http://apt.llvm.org/jessie/ llvm-toolchain-jessie-7 main" > /etc/apt/sources.list.d/llvm.list
 echo "deb-src http://apt.llvm.org/jessie/ llvm-toolchain-jessie-7 main" >> /etc/apt/sources.list.d/llvm.list
 apt-get update
-    
+apt-get install libllvm-7-ocaml-dev libllvm7 llvm-7 llvm-7-dev llvm-7-doc llvm-7-examples llvm-7-runtime clang-7 lldb-7
+
+
 
 
 2. Install depenencies
@@ -88,17 +90,15 @@ apt-get update
         make install
 
 
-5. Set defaults for the remaining to clang-6.0
+5. Set defaults for the remaining to clang-7
 ------------------------------------------------
 
 
-    export CC=clang-5.0
-    export CXX=clang++-5.0
+    export CC=clang-7
+    export CXX=clang++-7
     export PATH=/usr/local/bin:$PATH
     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 
-    alias clang=clang-5.0
-    alias clang++=clang++-5.0
 
 
 

@@ -66,7 +66,7 @@ echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main" > /etc/apt
 echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main" >> /etc/apt/sources.list.d/llvm.list
 apt-get update
 
-apt-get install clang-7 lldb-7 llvm-7 libc++-7-dev lld-7
+apt-get install clang-7 lldb-7 llvm-7 libc++-7-dev lld-7 python-lldb-7
 pushd /usr/bin
 ln -s clang-7 clang
 ln -s clang++-7 clang++

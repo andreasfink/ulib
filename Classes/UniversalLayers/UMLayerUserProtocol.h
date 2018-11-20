@@ -12,7 +12,7 @@
 
 @protocol UMLayerUserProtocol<NSObject>
 
-- (UMLogFeed *)logFeed;
-- (UMLogLevel)logLevel;
+@property(readwrite,strong) UMLogFeed *logFeed;
+@property(readwrite,assign) UMLogLevel logLevel;
 
 @end

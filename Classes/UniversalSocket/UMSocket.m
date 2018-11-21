@@ -1359,6 +1359,10 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) dataIsAvailable:(int)timeoutInMs
 {
+    if(_sock<0)
+    {
+        return UMSocketError_invalid_file_descriptor;
+    }
     struct pollfd pollfds[1];
     int ret1;
     int ret2;
@@ -1378,6 +1382,8 @@ static int SSL_smart_shutdown(SSL *ssl)
     pollfds[0].fd = _sock;
     pollfds[0].events = events;
     UMAssert(timeoutInMs<200000,@"timeout should be smaller than 20seconds");
+    UMAssert(((timeoutInMs>100) ||  (timeoutInMs !=0) ||  (timeoutInMs !=-1)),@"timeout should be bigger than 100ms");
+
     errno = 99;
 
     [_controlLock lock];

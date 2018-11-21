@@ -103,7 +103,11 @@
 #ifdef HTTP_DEBUG
         NSLog(@"[%@]: pollResult %d",self.name,pollResult);
 #endif
-        if (pollResult == UMSocketError_no_data)
+        if(pollResult == UMSocketError_invalid_file_descriptor)
+        {
+            self.inputClosed = YES;
+        }
+        else  if (pollResult == UMSocketError_no_data)
         {
 #ifdef HTTP_DEBUG
             NSLog(@"[%@]: pollResult UMSocketError_no_data",self.name);

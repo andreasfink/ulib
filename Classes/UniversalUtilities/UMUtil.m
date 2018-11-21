@@ -427,6 +427,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
     NSArray *localPrefixes = @[
                                @"0.",
                                @"10.",
+                               @"169.254.",
                                @"192.168.",
                                @"172.16.",
                                @"172.17.",

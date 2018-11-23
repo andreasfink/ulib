@@ -1463,6 +1463,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     struct pollfd *pollfds = calloc(inputSockets.count,sizeof(struct pollfd));
     
     UMAssert(timeoutInMs<200000,@"timeout should be smaller than 20seconds");
+    UMAssert( ((timeoutInMs<100 ) && (timeoutInMs>0) ),@"timeout should be bigger than 100ms");
 
     int ret1;
     int ret2;
@@ -1495,15 +1496,11 @@ static int SSL_smart_shutdown(SSL *ssl)
         if (eno == EINTR)
         {
             *err = [UMSocket umerrFromErrno:eno];
-            free(pollfds);
-            return [NSArray array];
         }
     }
     else if (ret1 == 0)
     {
         *err = UMSocketError_no_data;
-        free(pollfds);
-        return [NSArray array];
     }
     else
     {
@@ -1570,7 +1567,11 @@ static int SSL_smart_shutdown(SSL *ssl)
             }
         }
     }
-    free(pollfds);
+    if(pollfds)
+    {
+        free(pollfds);
+        pollfds = NULL;
+    }
     return returnArray;
 }
 

@@ -554,6 +554,14 @@
     [self setResponseData:[content dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
+- (void) appendResponsePlainText:(NSString *)content
+{
+    [self setResponseTypeText];
+    NSMutableData *mdata = [responseData mutableCopy];
+    [mdata appendData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+    [self setResponseData:[mdata copy]];
+}
+
 - (void) setResponseCssString:(NSString *)content
 { 
     [self setResponseTypeCss];

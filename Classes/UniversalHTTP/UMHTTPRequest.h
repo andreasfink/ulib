@@ -108,6 +108,8 @@
 - (NSData *)extractResponseHeader;
 - (NSData *)extractResponse;
 - (void) setResponsePlainText:(NSString *)content;
+- (void) appendResponsePlainText:(NSString *)content;
+
 - (void) setResponseHtmlString:(NSString *)content;
 - (void) setResponseCssString:(NSString *)content;
 - (void) setResponseJsonString:(NSString *)content;

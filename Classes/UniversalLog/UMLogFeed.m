@@ -8,14 +8,9 @@
 
 #import "UMLogFeed.h"
 #import "UMUtil.h"
+extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 @implementation UMLogFeed
-
-@synthesize handler;
-@synthesize section;
-@synthesize subsection;
-@synthesize name;
-@synthesize copyToConsole;
 
 
 - (UMLogFeed *)initWithHandler:(UMLogHandler *)h
@@ -28,14 +23,16 @@
     return [self initWithHandler:h section:s subsection:@""];
 }
 
-- (UMLogFeed *)initWithHandler:(UMLogHandler *)h section:(NSString *)s1 subsection:(NSString *)s2
+- (UMLogFeed *)initWithHandler:(UMLogHandler *)h
+					   section:(NSString *)s1
+					subsection:(NSString *)s2
 {
     self = [super init];
 	if(self)
     {
-	    section = s1;
-	    subsection = s2;
-	    handler = h;
+	    _section = s1;
+	    _subsection = s2;
+	    _handler = h;
     }
 	return self;
 }
@@ -43,9 +40,9 @@
 
 - (UMLogFeed *) copyWithZone:(NSZone *)zone
 {
-    UMLogFeed *n = [[UMLogFeed alloc]initWithHandler:handler section:section subsection:subsection];
-    n.name = [NSString stringWithFormat:@"%@ (copy)",name];
-    n.copyToConsole = copyToConsole;
+    UMLogFeed *n = [[UMLogFeed alloc]initWithHandler:_handler section:_section subsection:_subsection];
+    n.name = [NSString stringWithFormat:@"%@ (copy)",_name];
+    n.copyToConsole = _copyToConsole;
     return n;
 }
 
@@ -60,13 +57,13 @@
 	
 	e = [[UMLogEntry alloc] init];
 	[e setLevel: UMLOG_DEBUG];
-	[e setSection: section];
-	[e setSubsection: subsection];
-	[e setName: name];
+	[e setSection: _section];
+	[e setSubsection: _subsection];
+	[e setName: _name];
 	[e setErrorCode: err];
 	[e setMessage: txt];
-	[handler logAnEntry:e];
-	if(copyToConsole)
+	[_handler logAnEntry:e];
+	if(_copyToConsole)
     {
 		NSLog(@"%@\n",e);
     }
@@ -78,13 +75,13 @@
 	
 	e = [[UMLogEntry alloc] init];
 	[e setLevel: UMLOG_INFO];
-	[e setSection: section];
-	[e setSubsection: subsection];
-	[e setName: name];
+	[e setSection:_section];
+	[e setSubsection:_subsection];
+	[e setName:_name];
 	[e setErrorCode: err];
 	[e setMessage: txt];
-	[handler logAnEntry:e];
-	if(copyToConsole)
+	[_handler logAnEntry:e];
+	if(_copyToConsole)
     {
 		NSLog(@"%@\n",e);
     }
@@ -96,13 +93,13 @@
 	
 	e = [[UMLogEntry alloc] init];
 	[e setLevel: UMLOG_WARNING];
-	[e setSection: section];
-	[e setSubsection: subsection];
-	[e setName: name];
+	[e setSection:_section];
+	[e setSubsection:_subsection];
+	[e setName:_name];
 	[e setErrorCode: err];
 	[e setMessage: txt];
-	[handler logAnEntry:e];
-	if(copyToConsole)
+	[_handler logAnEntry:e];
+	if(_copyToConsole)
     {
 		NSLog(@"%@\n",e);
     }
@@ -115,13 +112,13 @@
 	
 	e = [[UMLogEntry alloc] init];
 	[e setLevel: UMLOG_MINOR];
-	[e setSection: section];
-	[e setSubsection: subsection];
-	[e setName: name];
+	[e setSection: _section];
+	[e setSubsection: _subsection];
+	[e setName: _name];
 	[e setErrorCode: err];
 	[e setMessage: txt];
-	[handler logAnEntry:e];
-	if(copyToConsole)
+	[_handler logAnEntry:e];
+	if(_copyToConsole)
     {
 		NSLog(@"%@\n",e);
     }
@@ -134,13 +131,13 @@
 	
 	e = [[UMLogEntry alloc] init];
 	[e setLevel: UMLOG_MAJOR];
-	[e setSection: section];
-	[e setSubsection: subsection];
-	[e setName: name];
+	[e setSection: _section];
+	[e setSubsection: _subsection];
+	[e setName: _name];
 	[e setErrorCode: err];
 	[e setMessage: txt];
-	[handler logAnEntry:e];
-	if(copyToConsole)
+	[_handler logAnEntry:e];
+	if(_copyToConsole)
     {
 		NSLog(@"%@\n",e);
     }
@@ -154,12 +151,12 @@
     NSString *logtext = [NSString stringWithFormat:@"%@\r\n%@",txt,bt];
 	e = [[UMLogEntry alloc] init];
 	[e setLevel: UMLOG_PANIC];
-	[e setSection: section];
-	[e setSubsection: subsection];
-	[e setName: name];
+	[e setSection: _section];
+	[e setSubsection: _subsection];
+	[e setName: _name];
 	[e setErrorCode: err];
 	[e setMessage: logtext];
-    [handler logAnEntry:e];
+    [_handler logAnEntry:e];
     NSLog(@"%@\n",e);
   
 }
@@ -201,32 +198,33 @@
 	
 	e = [[UMLogEntry alloc] init];
 	[e setLevel:		UMLOG_DEBUG];
-	[e setSection:		section];
+	[e setSection:		_section];
 	[e setSubsection:	s];
-	[e setName:		name];
+	[e setName:		_name];
 	[e setErrorCode:	err];
 	[e setMessage:		txt];
-	[handler logAnEntry:e];
-	if(copyToConsole)
+	[_handler logAnEntry:e];
+	if(_copyToConsole)
     {
 		NSLog(@"%@\n",e);
     }
 	
 }
 
-- (void) info:		(int)err inSubsection:(NSString *)s withText:(NSString *)txt
+- (void) info:		(int)err inSubsection:(NSString *)s
+	 withText:(NSString *)txt
 {
 	UMLogEntry *e;
 	
 	e = [[UMLogEntry alloc] init];
 	[e setLevel:		UMLOG_INFO];
-	[e setSection:		section];
+	[e setSection:		_section];
 	[e setSubsection:	s];
-	[e setName:		name];
+	[e setName:		_name];
 	[e setErrorCode:	err];
 	[e setMessage:		txt];
-	[handler logAnEntry:e];
-	if(copyToConsole)
+	[_handler logAnEntry:e];
+	if(_copyToConsole)
     {
 		NSLog(@"%@\n",e);
     }
@@ -239,13 +237,13 @@
 	
 	e = [[UMLogEntry alloc] init];
 	[e setLevel:		UMLOG_WARNING];
-	[e setSection:		section];
+	[e setSection:		_section];
 	[e setSubsection:	s];
-	[e setName:		name];
+	[e setName:		_name];
 	[e setErrorCode:	err];
 	[e setMessage:		txt];
-	[handler logAnEntry:e];
-	if(copyToConsole)
+	[_handler logAnEntry:e];
+	if(_copyToConsole)
     {
 		NSLog(@"%@\n",e);
     }
@@ -257,12 +255,12 @@
 	
 	e = [[UMLogEntry alloc] init];
 	[e setLevel:		UMLOG_MINOR];
-	[e setSection:		section];
+	[e setSection:		_section];
 	[e setSubsection:	s];
-	[e setName:		name];
+	[e setName:		_name];
 	[e setErrorCode:	err];
 	[e setMessage:		txt];
-	[handler logAnEntry:e];
+	[_handler logAnEntry:e];
 }
 
 - (void) majorError:(int)err inSubsection:(NSString *)s withText:(NSString *)txt
@@ -271,13 +269,13 @@
 	
 	e = [[UMLogEntry alloc] init];
 	[e setLevel:		UMLOG_MAJOR];
-	[e setSection:		section];
+	[e setSection:		_section];
 	[e setSubsection:	s];
-	[e setName:		name];
+	[e setName:		_name];
 	[e setErrorCode:	err];
 	[e setMessage:		txt];
-	[handler logAnEntry:e];
-	if(copyToConsole)
+	[_handler logAnEntry:e];
+	if(_copyToConsole)
     {
 		NSLog(@"%@\n",e);
     }
@@ -289,13 +287,13 @@
 	
 	e = [[UMLogEntry alloc] init];
 	[e setLevel:		UMLOG_PANIC];
-	[e setSection:		section];
+	[e setSection:		_section];
 	[e setSubsection:	s];
-	[e setName:		name];
+	[e setName:		_name];
 	[e setErrorCode:	err];
 	[e setMessage:		txt];
-	[handler logAnEntry:e];
-	if(copyToConsole)
+	[_handler logAnEntry:e];
+	if(_copyToConsole)
     {
 		NSLog(@"%@\n",e);
     }
@@ -307,13 +305,13 @@
 	
 	e = [[UMLogEntry alloc] init];
 	[e setLevel:		UMLOG_INFO];
-	[e setSection:		section];
-	[e setSubsection:	subsection];
-	[e setName:		name];
+	[e setSection:		_section];
+	[e setSubsection:	_subsection];
+	[e setName:		_name];
 	[e setErrorCode:	err];
 	[e setMessage:		txt];
-	[handler unlockedLogAnEntry:e];
-	if(copyToConsole)
+	[_handler unlockedLogAnEntry:e];
+	if(_copyToConsole)
     {
 		NSLog(@"%@\n",e);
     }

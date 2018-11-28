@@ -9,11 +9,11 @@
 
 @interface UMLogFeed : NSObject /* can not be UMObject as UMObject uses logfeed */
 {
-	UMLogHandler *handler;
-	NSString	*section;
-	NSString	*subsection;
-	NSString	*name;
-	int			copyToConsole;
+	UMLogHandler 	*_handler;
+	NSString		*_section;
+	NSString		*_subsection;
+	NSString		*_name;
+	int				_copyToConsole;
 }
 
 @property (readwrite,strong,atomic) UMLogHandler *handler;

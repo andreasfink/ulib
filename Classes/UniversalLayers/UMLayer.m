@@ -153,32 +153,32 @@
 
 - (void)logDebug:(NSString *)s
 {
-    [logFeed debugText:s];
+    [self.logFeed debugText:s];
 }
 
 - (void)logWarning:(NSString *)s
 {
-    [logFeed warningText:s];
+    [self.logFeed warningText:s];
 }
 
 - (void)logInfo:(NSString *)s
 {
-    [logFeed infoText:s];
+    [self.logFeed infoText:s];
 }
 
 - (void) logPanic:(NSString *)s
 {
-    [logFeed panicText:s];
+    [self.logFeed panicText:s];
 }
 
 - (void)logMajorError:(NSString *)s
 {
-    [logFeed majorErrorText:s];
+    [self.logFeed majorErrorText:s];
 }
 
 - (void)logMinorError:(NSString *)s
 {
-    [logFeed majorErrorText:s];
+    [self.logFeed majorErrorText:s];
 }
 
 - (void)logMajorError:(int)err location:(NSString *)location
@@ -189,80 +189,80 @@
             return;
             
         case EPROTONOSUPPORT:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EPROTONOSUPPORT: The protocol type or the specified protocol is not supported within this domain.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EPROTONOSUPPORT: The protocol type or the specified protocol is not supported within this domain.",location]];
             break;
         case EMFILE:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EMFILE: The per-process descriptor table is full.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EMFILE: The per-process descriptor table is full.",location]];
             break;
             
         case ENFILE:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ ENFILE: The system file table is full.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ ENFILE: The system file table is full.",location]];
             break;
         case EBADF:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EBADF: An invalid descriptor was specified",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EBADF: An invalid descriptor was specified",location]];
             break;
         case ENOTSOCK:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ ENOTSOCK: The argument s is not a socket",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ ENOTSOCK: The argument s is not a socket",location]];
             break;
         case EFAULT:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EFAULT:  An invalid  address or parameter was specified",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EFAULT:  An invalid  address or parameter was specified",location]];
             break;
         case EMSGSIZE:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EMSGSIZE: The socket requires that message be sent atomically, and the size of the message to be sent made this impossible.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EMSGSIZE: The socket requires that message be sent atomically, and the size of the message to be sent made this impossible.",location]];
             break;
         case EAGAIN:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EAGAIN: The socket is marked non-blocking and the requested operation would block.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EAGAIN: The socket is marked non-blocking and the requested operation would block.",location]];
             break;
         case ENOBUFS:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ ENOBUFS: Insufficient buffer space is available",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ ENOBUFS: Insufficient buffer space is available",location]];
             break;
         case EACCES:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EACCES: Permission to create/use a socket of the specified type and/or protocol is denied.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EACCES: Permission to create/use a socket of the specified type and/or protocol is denied.",location]];
             break;
         case EHOSTUNREACH:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EHOSTUNREACH The destination address specified an unreachable host.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EHOSTUNREACH The destination address specified an unreachable host.",location]];
             break;
         case EADDRNOTAVAIL:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EADDRNOTAVAIL The specified address is not available from the local machine.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EADDRNOTAVAIL The specified address is not available from the local machine.",location]];
             break;
         case EADDRINUSE:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EADDRINUSE The specified address is already in use.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EADDRINUSE The specified address is already in use.",location]];
             break;
         case EINVAL:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EINVAL The socket is already bound to an address. in bind(): The addrlen is wrong, or the socket was not in the AF_UNIX family",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EINVAL The socket is already bound to an address. in bind(): The addrlen is wrong, or the socket was not in the AF_UNIX family",location]];
             break;
         case ENOTDIR:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ ENOTDIR A component of the path prefix is not a directory.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ ENOTDIR A component of the path prefix is not a directory.",location]];
             break;
         case ENAMETOOLONG:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@  ENAMETOOLONG a part of the pathname or the pathname itself is too long",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@  ENAMETOOLONG a part of the pathname or the pathname itself is too long",location]];
             break;
         case ENOENT:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ ENOENT A prefix component of the path name does not exist",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ ENOENT A prefix component of the path name does not exist",location]];
             break;
         case ELOOP:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ ELOOP Too many symbolic links were encountered in translating the pathname",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ ELOOP Too many symbolic links were encountered in translating the pathname",location]];
             break;
         case EIO:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EIO An I/O error occurred while making the directory entry or allocating the inode.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EIO An I/O error occurred while making the directory entry or allocating the inode.",location]];
             break;
         case EROFS:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EROFS The name would reside on a read-only file system.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EROFS The name would reside on a read-only file system.",location]];
             break;
         case EISDIR:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EISDIR An empty pathname was specified.",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EISDIR An empty pathname was specified.",location]];
             break;
         case EPFNOSUPPORT:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EPFNOSUPPORT Protocol family not supported",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EPFNOSUPPORT Protocol family not supported",location]];
             break;
         case EAFNOSUPPORT:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ EAFNOSUPPORT  Address family not supported by protocol family ",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EAFNOSUPPORT  Address family not supported by protocol family ",location]];
             break;
         case ECONNRESET:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ ECONNRESET Connection reset by peer",location]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ ECONNRESET Connection reset by peer",location]];
             break;
         default:
-            [logFeed majorErrorText:[NSString stringWithFormat:@"%@ error %d",location,err]];
+            [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ error %d",location,err]];
             break;
     }
 }
@@ -279,102 +279,102 @@
             return;
             
         case EPROTONOSUPPORT:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EPROTONOSUPPORT: The protocol type or the specified protocol is not supported within this domain.",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EPROTONOSUPPORT: The protocol type or the specified protocol is not supported within this domain.",location]];
             break;
         case EMFILE:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EMFILE: The per-process descriptor table is full.",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EMFILE: The per-process descriptor table is full.",location]];
             break;
             
         case ENFILE:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ ENFILE: The system file table is full.",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ ENFILE: The system file table is full.",location]];
             break;
         case EBADF:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EBADF: An invalid descriptor was specified",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EBADF: An invalid descriptor was specified",location]];
             break;
         case ENOTSOCK:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ ENOTSOCK: The argument s is not a socket",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ ENOTSOCK: The argument s is not a socket",location]];
             break;
         case EFAULT:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EFAULT:  An invalid  address or parameter was specified",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EFAULT:  An invalid  address or parameter was specified",location]];
             break;
         case EMSGSIZE:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EMSGSIZE: The socket requires that message be sent atomically, and the size of the message to be sent made this impossible.",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EMSGSIZE: The socket requires that message be sent atomically, and the size of the message to be sent made this impossible.",location]];
             break;
         case EAGAIN:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EAGAIN: The socket is marked non-blocking and the requested operation would block.",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EAGAIN: The socket is marked non-blocking and the requested operation would block.",location]];
             break;
         case ENOBUFS:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ ENOBUFS: Insufficient buffer space is available",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ ENOBUFS: Insufficient buffer space is available",location]];
             break;
         case EACCES:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EACCES: Permission to create/use a socket of the specified type and/or protocol is denied.",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EACCES: Permission to create/use a socket of the specified type and/or protocol is denied.",location]];
             break;
         case EHOSTUNREACH:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EHOSTUNREACH The destination address specified an unreachable host.",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EHOSTUNREACH The destination address specified an unreachable host.",location]];
             break;
         case EADDRNOTAVAIL:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EADDRNOTAVAIL The specified address is not available from the local machine..",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EADDRNOTAVAIL The specified address is not available from the local machine..",location]];
             break;
         case EADDRINUSE:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EADDRINUSE The specified address is already in use.",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EADDRINUSE The specified address is already in use.",location]];
             break;
         case EINVAL:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EINVAL The socket is already bound to an address. in bind(): The addrlen is wrong, or the socket was not in the AF_UNIX family",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EINVAL The socket is already bound to an address. in bind(): The addrlen is wrong, or the socket was not in the AF_UNIX family",location]];
             break;
         case ENOTDIR:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ ENOTDIR A component of the path prefix is not a directory.",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ ENOTDIR A component of the path prefix is not a directory.",location]];
             break;
         case ENAMETOOLONG:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@  ENAMETOOLONG a part of the pathname or the pathname itself is too long",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@  ENAMETOOLONG a part of the pathname or the pathname itself is too long",location]];
             break;
         case ENOENT:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ ENOENT A prefix component of the path name does not exist",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ ENOENT A prefix component of the path name does not exist",location]];
             break;
         case ELOOP:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ ELOOP Too many symbolic links were encountered in translating the pathname",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ ELOOP Too many symbolic links were encountered in translating the pathname",location]];
             break;
         case EIO:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EIO An I/O error occurred while making the directory entry or allocating the inode.",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EIO An I/O error occurred while making the directory entry or allocating the inode.",location]];
             break;
         case EROFS:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EROFS The name would reside on a read-only file system.",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EROFS The name would reside on a read-only file system.",location]];
             break;
         case EISDIR:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EISDIR An empty pathname was specified.",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EISDIR An empty pathname was specified.",location]];
             break;
         case EPFNOSUPPORT:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EPFNOSUPPORT Protocol family not supported",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EPFNOSUPPORT Protocol family not supported",location]];
             break;
         case EAFNOSUPPORT:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ EAFNOSUPPORT  Address family not supported by protocol family ",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ EAFNOSUPPORT  Address family not supported by protocol family ",location]];
             break;
         case ECONNRESET:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ ECONNRESET Connection reset by peer",location]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ ECONNRESET Connection reset by peer",location]];
             break;
         default:
-            [logFeed minorErrorText:[NSString stringWithFormat:@"%@ error %d",location,err]];
+            [self.logFeed minorErrorText:[NSString stringWithFormat:@"%@ error %d",location,err]];
             break;
     }
 }
 
 - (void)adminInit
 {
-    [logFeed majorErrorText:@"adminInit not implemented"];
+    [self.logFeed majorErrorText:@"adminInit not implemented"];
 }
 
 - (void)adminAttachFor:(id)attachingUser userId:(id)uid
 {
-    [logFeed majorErrorText:@"adminAttachFor not implemented"];
+    [self.logFeed majorErrorText:@"adminAttachFor not implemented"];
 }
 
 - (void)adminAttachConfirm:(UMLayer *)reportingLayer userId:(id)uid
 {
-    [logFeed majorErrorText:@"adminAttachConfirm not implemented"];
+    [self.logFeed majorErrorText:@"adminAttachConfirm not implemented"];
 }
 
 - (void)adminAttachFail:(UMLayer *)reportingLayer userId:(id)uid
 {
-    [logFeed majorErrorText:@"adminAttachFail not implemented"];
+    [self.logFeed majorErrorText:@"adminAttachFail not implemented"];
 }
 
 

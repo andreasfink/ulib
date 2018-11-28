@@ -153,7 +153,7 @@
 {
     @synchronized(dst)
     {
-        [logFeed info:0 withText:text];
+        [self.logFeed info:0 withText:text];
         [dst flushUnlocked];
     }
 }
@@ -482,12 +482,12 @@
         {
             status = running;
             NSString *text = [NSString stringWithFormat:@"Server socket %@ on port %ld is starting up\r\n",name, (long)[listenerSocket requestedLocalPort]];
-            [logFeed info:0 withText:text];
+            [self.logFeed info:0 withText:text];
         }
         else
         {
             NSString *text = [NSString stringWithFormat:@"Server socket %@ on could not be started at port %ld\r\n",name, (long)[listenerSocket requestedLocalPort]];
-            [logFeed majorError:0 withText:text];
+            [self.logFeed majorError:0 withText:text];
         }
         
         startupDone = YES;
@@ -968,12 +968,12 @@
         {
             status = running;
             NSString *text = [NSString stringWithFormat:@"serverSocketWithErrorAndWithLog: Server socket %@ on port %ld is starting up\r\n",name, (long)[listenerSocket requestedLocalPort]];
-            [logFeed info:0 withText:text];
+            [self.logFeed info:0 withText:text];
         }
         else
         {
             NSString *text = [NSString stringWithFormat:@"serverSocketWithErrorAndWithLog: Server socket %@ on could not be started at port %ld\r\n",name, (long)[listenerSocket requestedLocalPort]];
-            [logFeed majorError:0 withText:text];
+            [self.logFeed majorError:0 withText:text];
         }
         
         startupDone = YES;

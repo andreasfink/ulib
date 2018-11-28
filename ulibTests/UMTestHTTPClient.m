@@ -90,7 +90,7 @@ enum bodyxpectation {
     
 error:
     msg = [NSString stringWithFormat:@"Couldn't send request to <%@>\r\n", url];
-    [logFeed minorError:0 inSubsection:subsection withText:msg];
+    [self.logFeed minorError:0 inSubsection:subsection withText:msg];
     return nil;
 }
 
@@ -110,7 +110,7 @@ error:
             break;
         
         NSString *msg1 = [NSString stringWithFormat:@"UMTestHTTPClient: writeRequestThread: Queue contains %lu pending requests.\r\n", (unsigned long)[pendingRequests count]];
-        [logFeed debug:0 inSubsection:subsection withText:msg1];
+        [self.logFeed debug:0 inSubsection:subsection withText:msg1];
         
         /*
          * get the socket to use
@@ -128,7 +128,7 @@ error:
         }
         else if ([sock isConnected]) 
         {
-            [logFeed debug:0 inSubsection:subsection withText:@"UMTestHTTPClient: writeRequestThread:Socket connected at once\r\n"];
+            [self.logFeed debug:0 inSubsection:subsection withText:@"UMTestHTTPClient: writeRequestThread:Socket connected at once\r\n"];
             trans.sock = sock;
             
             if ((rc = [trans sendRequest]) == 0) 
@@ -143,7 +143,7 @@ error:
         } 
         else 
         { /* Socket not connected, wait for connection */
-            [logFeed debug:0 inSubsection:subsection withText:@"UMTestHTTPClient: writeRequestThread:Socket connecting\r\n"];
+            [self.logFeed debug:0 inSubsection:subsection withText:@"UMTestHTTPClient: writeRequestThread:Socket connecting\r\n"];
             self.state = connecting;
             [self handleTransaction:trans];
         }
@@ -246,7 +246,7 @@ error:
     else if (requestBody) 
     {
         NSString *msg = [NSString stringWithFormat:@"UMTestHTTPClient: startRequest: GET or HEAD method request contains body: %@\r\n", requestBody];
-        [logFeed warning:0 inSubsection:subsection withText:msg];
+        [self.logFeed warning:0 inSubsection:subsection withText:msg];
         
         [requestHeaders removeAllWithName:@"Content-Length"];
         value = [NSString stringWithFormat:@"%lu", (unsigned long)[requestBody length]];
@@ -285,18 +285,18 @@ error:
         logRequestBody = [[logRequest substringFromIndex:headerEnd.location + 6] mutableCopy];
         [logRequestBody appendString:@" trend "];
         NSString *msg3 = [NSString stringWithFormat:@"Test HTTP: sent %@ request headers %@ \r\n", methodName, logRequestHeaders];
-        [logFeed info:0 inSubsection:subsection withText:msg3];
+        [self.logFeed info:0 inSubsection:subsection withText:msg3];
         NSString *msg4 = [NSString stringWithFormat:@"Test HTTP: sent %@ request body %@ \r\n", methodName, logRequestBody];
-        [logFeed info:0 inSubsection:subsection withText:msg4];
+        [self.logFeed info:0 inSubsection:subsection withText:msg4];
     }
     else
     {
         NSString *msg3 = [NSString stringWithFormat:@"sent %@ request with no headers \r\n", methodName];
-        [logFeed info:0 inSubsection:subsection withText:msg3];
+        [self.logFeed info:0 inSubsection:subsection withText:msg3];
     }
 
     NSString *msg1 = [NSString stringWithFormat:@"UMTestHTTPClient: startRequest: sending request %@\r\n", request];
-    [logFeed info:0 inSubsection:subsection withText:msg1];
+    [self.logFeed info:0 inSubsection:subsection withText:msg1];
 
     if ([sock sendString:request] == -1)
         goto error;
@@ -307,7 +307,7 @@ error:
     [sock close];
     sock = nil;
     NSString *msg2 = [NSString stringWithFormat:@"UMTestHTTPClient: Couldn't send request to <%@>\r\n", url];
-     [logFeed majorError:0 inSubsection:subsection withText:msg2];
+     [self.logFeed majorError:0 inSubsection:subsection withText:msg2];
     return -1;
 }
 
@@ -358,7 +358,7 @@ try_again:
     
     sline = [[NSMutableString alloc] initWithData:line encoding:NSASCIIStringEncoding];
     NSString *msg = [NSString stringWithFormat:@"UMTestHTTPClient: readStatus: Status line: <%@>\r\n", sline];
-    [logFeed debug:0 inSubsection:subsection withText:msg];
+    [self.logFeed debug:0 inSubsection:subsection withText:msg];
     
     space = [sline rangeOfString:@" "];
     if (space.location == NSNotFound)
@@ -382,7 +382,7 @@ try_again:
     
 error:
     msg2 = [NSString stringWithFormat:@"UMTestHTTPClient: readStatus: Malformed status line from HTTP server: <%@>\r\n", sline];
-    [logFeed minorError:0 inSubsection:subsection withText:msg2];
+    [self.logFeed minorError:0 inSubsection:subsection withText:msg2];
     return -1;
 }
 
@@ -516,7 +516,7 @@ error:
             case connecting:
                 if ([sock isConnected]) 
                 {
-                    [logFeed debug:0 inSubsection:subsection withText:@"UMTestHTTPClient: handleTransaction: Socket not connected\r\n"];
+                    [self.logFeed debug:0 inSubsection:subsection withText:@"UMTestHTTPClient: handleTransaction: Socket not connected\r\n"];
                     goto error;
                 }
                     
@@ -526,7 +526,7 @@ error:
                 } 
                 else 
                 {
-                    [logFeed debug:0 inSubsection:subsection withText:@"UMTestHTTPClient: handleTransaction:Failed while sending request\r\n"];
+                    [self.logFeed debug:0 inSubsection:subsection withText:@"UMTestHTTPClient: handleTransaction:Failed while sending request\r\n"];
                     goto error;
                 }
                 break;
@@ -540,7 +540,7 @@ error:
                      * that the socket had been closed by the server after an
                      * idle timeout.
                      */
-                    [logFeed debug:0 inSubsection:subsection withText:@"UMTestHTTPClient: handleTransaction: Failed while reading status\r\n"];
+                    [self.logFeed debug:0 inSubsection:subsection withText:@"UMTestHTTPClient: handleTransaction: Failed while reading status\r\n"];
                     goto error;
                 } 
                 else if (ret == 0)
@@ -560,7 +560,7 @@ error:
                 ret = [response readEntityFrom:sock];
                 if (ret < 0) 
                 {
-                    [logFeed debug:0 inSubsection:subsection withText:@"UMTestHTTPClient: handleTransaction:Failed reading entity\r\n"];
+                    [self.logFeed debug:0 inSubsection:subsection withText:@"UMTestHTTPClient: handleTransaction:Failed reading entity\r\n"];
                     goto error;
                 } 
                 else if (ret == 0 && [self statusClassOf:httpStatus] == HTTP_STATUS_PROVISIONAL)
@@ -576,7 +576,7 @@ error:
                     /* Dump the response */
                     h = [self buildResponseWithHeaders:[response headers] andBody:[response body]];
                     NSString *msg = [NSString stringWithFormat:@"UMTestHTTPClient: handleTransaction: Reveived response %@\r\n", h];
-                    [logFeed debug:0 inSubsection:subsection withText:msg];
+                    [self.logFeed debug:0 inSubsection:subsection withText:msg];
 #endif
                 } 
                 else 
@@ -691,7 +691,7 @@ error:
     [sock close];
     sock = nil;
     NSString *msg = [NSString stringWithFormat:@"UMTestHTTPClient: handleTransaction: Couldn't fetch <%@>\r\n", url];
-    [logFeed majorError:0 inSubsection:subsection withText:msg];
+    [self.logFeed majorError:0 inSubsection:subsection withText:msg];
     runStatus = terminating;
     [caller addObject:trans];
 }
@@ -902,7 +902,7 @@ error:
             
             //if ([sender isExecuting] == FALSE) 
             //{
-            //[logFeed majorError:0 inSubsection:subsection withText:@"UMTestHTTPClient: startClientThreads: //Could not start client writeRequestThread.\r\n"];
+            //[self.logFeed majorError:0 inSubsection:subsection withText:@"UMTestHTTPClient: startClientThreads: //Could not start client writeRequestThread.\r\n"];
             //     client_threads_are_running = 0;
                 // } else
             client_threads_are_running = 1;
@@ -948,7 +948,7 @@ error:
     {
         e = exceptions[i];
         msg = [NSString stringWithFormat:@"UMTestHTTPClient: useProxy: Proxy exception `%@'\r\n.", e];
-        [logFeed debug:0 inSubsection:subsection withText:msg];
+        [self.logFeed debug:0 inSubsection:subsection withText:msg];
         [proxyExceptions addObject:[e copy]];
     }
     
@@ -968,7 +968,7 @@ error:
     self.proxyPassword = [pass copy];
     msg2 = [NSString stringWithFormat:@"UMTestHTTPClient: useProxy: Using proxy <%@:%d> with %@ scheme\r\n", proxyHostname,
             proxyPort, proxySsl ? @"HTTPS" : @"HTTP"];
-    [logFeed debug:0 inSubsection:subsection withText:msg2];
+    [self.logFeed debug:0 inSubsection:subsection withText:msg2];
     
     [proxyMutex unlock];
 }

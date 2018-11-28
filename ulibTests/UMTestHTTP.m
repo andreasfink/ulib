@@ -591,7 +591,7 @@
             sErr = [sock dataIsAvailable:0];
             if (sErr != UMSocketError_no_error) 
             {
-                [logFeed debug:0 inSubsection:@"UMTestHTTP" withText:[NSString stringWithFormat:@"getSocketWith: Server closed connection, destroying it <%@><%@><fd:%d>.\r\n", key, sock, [sock sock]]];
+                [self.logFeed debug:0 inSubsection:@"UMTestHTTP" withText:[NSString stringWithFormat:@"getSocketWith: Server closed connection, destroying it <%@><%@><fd:%d>.\r\n", key, sock, [sock sock]]];
                 [sock close];
                 retry = 1;
                 sock = nil;
@@ -635,9 +635,9 @@
                 goto error;
         }
         
-        [logFeed info:0 inSubsection:@"UMTestHTTP" withText:[NSString stringWithFormat:@"getSocketWith: Opening connection to `%@:%d' (fd=%d).\r\n", host, port, [sock sock]]];
+        [self.logFeed info:0 inSubsection:@"UMTestHTTP" withText:[NSString stringWithFormat:@"getSocketWith: Opening connection to `%@:%d' (fd=%d).\r\n", host, port, [sock sock]]];
     } else {
-        [logFeed info:0 inSubsection:@"UMTestHTTP" withText:[NSString stringWithFormat:@"getSocketWith: Reusing connection to `%@:%d' (fd=%d).\r\n", host, port, [sock sock]]];
+        [self.logFeed info:0 inSubsection:@"UMTestHTTP" withText:[NSString stringWithFormat:@"getSocketWith: Reusing connection to `%@:%d' (fd=%d).\r\n", host, port, [sock sock]]];
     }
     
     return sock;

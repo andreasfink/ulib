@@ -112,7 +112,7 @@
         if (!serverDenyIP)
             self.serverDenyIP = @"";
         if (serverAllowIP && !serverDenyIP)
-            [logFeed info:0 inSubsection:subsection withText:@"Box connection allowed IPs defined without any denied...\r"];
+            [self.logFeed info:0 inSubsection:subsection withText:@"Box connection allowed IPs defined without any denied...\r"];
     }
     return self;
 }
@@ -245,10 +245,10 @@ error:
         
         [hdrs appendString: @" tend "];
         NSString *msg3 = [NSString stringWithFormat:@"Test HTTP: received post request headers %@ \r\n", hdrs];
-        [logFeed info:0 inSubsection:subsection withText:msg3];
+        [self.logFeed info:0 inSubsection:subsection withText:msg3];
     }
     else
-        [logFeed info:0 inSubsection:subsection withText:@"received post request with no headers"];
+        [self.logFeed info:0 inSubsection:subsection withText:@"received post request with no headers"];
     
     if (data)
     {
@@ -257,10 +257,10 @@ error:
         [body replaceOccurrencesOfString:@"\n" withString:@" bend " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [body length])];
         [body appendString:@" trend "];
         NSString *msg3 = [NSString stringWithFormat:@"Test HTTP: received post request body %@ \r\n", body];
-        [logFeed info:0 inSubsection:subsection withText:msg3];
+        [self.logFeed info:0 inSubsection:subsection withText:msg3];
     }
     else
-        [logFeed info:0 inSubsection:subsection withText:@"received post request with no body \r\n"];
+        [self.logFeed info:0 inSubsection:subsection withText:@"received post request with no body \r\n"];
     
     [req setResponseCode:HTTP_RESPONSE_CODE_OK];
     [req setResponseHeader:@"Connection" withValue:@"keep-alive"];
@@ -273,14 +273,14 @@ error:
     
         contentString = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
         msg = [NSString stringWithFormat:@"Test HTTP: sent content %@ via post\r\n", contentString];
-        [logFeed debug:0 inSubsection:subsection withText:msg];
+        [self.logFeed debug:0 inSubsection:subsection withText:msg];
         msg2 = [NSString stringWithFormat:@"Test HTTP: sent post reply headers with content type text/plain charset UTF-8 and content length %lu \r\n", (unsigned long)[content length]];
-        [logFeed debug:0 inSubsection:subsection withText:msg2];
+        [self.logFeed debug:0 inSubsection:subsection withText:msg2];
     }
     else
     {
         msg2 = [NSString stringWithFormat:@"Test HTTP: sent post reply headers %@", headers];
-        [logFeed debug:0 inSubsection:subsection withText:msg2];
+        [self.logFeed debug:0 inSubsection:subsection withText:msg2];
     }
 }
 
@@ -331,10 +331,10 @@ error:
         
         [hdrs appendString: @" tend "];
         NSString *msg3 = [NSString stringWithFormat:@"Test HTTP: received head request headers %@ \r\n", hdrs];
-        [logFeed info:0 inSubsection:subsection withText:msg3];
+        [self.logFeed info:0 inSubsection:subsection withText:msg3];
     }
     else
-        [logFeed info:0 inSubsection:subsection withText:@"received head request with no headers"];
+        [self.logFeed info:0 inSubsection:subsection withText:@"received head request with no headers"];
     
     if (data)
     {
@@ -343,10 +343,10 @@ error:
         [body replaceOccurrencesOfString:@"\n" withString:@" bend " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [body length])];
         [body appendString:@" trend "];
         NSString *msg3 = [NSString stringWithFormat:@"Test HTTP: received head request body %@ \r\n", body];
-        [logFeed info:0 inSubsection:subsection withText:msg3];
+        [self.logFeed info:0 inSubsection:subsection withText:msg3];
     }
     else
-        [logFeed info:0 inSubsection:subsection withText:@"received head request with no body \r\n"];
+        [self.logFeed info:0 inSubsection:subsection withText:@"received head request with no body \r\n"];
     
     [req setResponseCode:HTTP_RESPONSE_CODE_OK];
     [req setResponseHeader:@"Content-Type" withValue:@"text/plain; charset=\"UTF-8\""];
@@ -355,7 +355,7 @@ error:
     [req setResponseHeader:@"Connection" withValue:@"keep-alive"];
     
     msg2 = [NSString stringWithFormat:@"Test HTTP: sent head reply headers with content type text/plain charset UTF-8 and content length %lu \r\n", (unsigned long)[content length]];
-    [logFeed debug:0 inSubsection:subsection withText:msg2];
+    [self.logFeed debug:0 inSubsection:subsection withText:msg2];
 }
 
 @end
@@ -403,10 +403,10 @@ error:
         
         [hdrs appendString: @" tend "];
         NSString *msg3 = [NSString stringWithFormat:@"Test HTTP: received options request headers %@ \r\n", hdrs];
-        [logFeed info:0 inSubsection:subsection withText:msg3];
+        [self.logFeed info:0 inSubsection:subsection withText:msg3];
     }
     else
-        [logFeed info:0 inSubsection:subsection withText:@"received head request with no headers"];
+        [self.logFeed info:0 inSubsection:subsection withText:@"received head request with no headers"];
     
     [req setResponseCode:HTTP_RESPONSE_CODE_OK];
     [req setResponseHeader:@"Allow" withValue:@"GET, POST, HEAD, OPTIONS, TRACE, PUT"];
@@ -414,7 +414,7 @@ error:
     [req setResponseHeader:@"Connection" withValue:@"keep-alive"]; 
     
     msg2 = [NSString stringWithFormat:@"Test HTTP: sent options reply headers with allow GET, POST, HEAD, OPTIONS, TRACE, PUT and with content length 0 \r\n"];
-    [logFeed debug:0 inSubsection:subsection withText:msg2];
+    [self.logFeed debug:0 inSubsection:subsection withText:msg2];
 }
 
 @end
@@ -474,10 +474,10 @@ enum {
         [logString replaceOccurrencesOfString:@"\n" withString:@" bend " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [dataString length])];
         [logString appendString:@" trend "];
         NSString *msg3 = [NSString stringWithFormat:@"Test HTTP: received trace request body %@ \r\n", logString];
-        [logFeed info:0 inSubsection:subsection withText:msg3];
+        [self.logFeed info:0 inSubsection:subsection withText:msg3];
     }
     else
-        [logFeed info:0 inSubsection:subsection withText:@"received trace request with no body \r\n"];
+        [self.logFeed info:0 inSubsection:subsection withText:@"received trace request with no body \r\n"];
 
     headers = [[req requestHeaders] toArray];
     if (headers)
@@ -494,10 +494,10 @@ enum {
         
         [hdrs appendString: @" tend "];
         NSString *msg3 = [NSString stringWithFormat:@"Test HTTP: received trace request headers %@ \r\n", hdrs];
-        [logFeed info:0 inSubsection:subsection withText:msg3];
+        [self.logFeed info:0 inSubsection:subsection withText:msg3];
     }
     else
-        [logFeed info:0 inSubsection:subsection withText:@"received trace request with no headers"];
+        [self.logFeed info:0 inSubsection:subsection withText:@"received trace request with no headers"];
     
     requestString = [self rebuildRequestWithMethod:[req method] withURL:[req path] withHeaders:headers withBody:dataString];
     request = [[requestString dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
@@ -515,10 +515,10 @@ enum {
     [contentString appendString:@" trend "];
     
     msg = [NSString stringWithFormat:@"Test HTTP: sent content %@ via trace\r\n", contentString];
-    [logFeed debug:0 inSubsection:subsection withText:msg];
+    [self.logFeed debug:0 inSubsection:subsection withText:msg];
     
     msg2 = [NSString stringWithFormat:@"Test HTTP: sent trace reply headers with content type message/http and content length %lu \r\n", (unsigned long)[request length]];
-    [logFeed debug:0 inSubsection:subsection withText:msg2];
+    [self.logFeed debug:0 inSubsection:subsection withText:msg2];
 }
 
 @end
@@ -581,16 +581,16 @@ enum {
         if (h)
         {
             NSString *msg3 = [NSString stringWithFormat:@"Test HTTP: received get request headers %@ with url %@ and version %@ and content type %@ and content length %@ fend \r\n\r\n", hdrs, urlString, protocolVersion ? protocolVersion : @"HTTP/1.1", contentType ? contentType : @"text/plain;charset=UTF-8", contentLength ? contentLength : @"0"];
-            [logFeed info:0 inSubsection:subsection withText:msg3];
+            [self.logFeed info:0 inSubsection:subsection withText:msg3];
         }
         else
         {
             NSString *msg4 = [NSString stringWithFormat:@"Test HTTP: received get request headers %@ with url %@ and version %@ fend \r\n\r\n", hdrs, urlString, protocolVersion ? protocolVersion : @"HTTP/1.1"];
-            [logFeed info:0 inSubsection:subsection withText:msg4];
+            [self.logFeed info:0 inSubsection:subsection withText:msg4];
         }
     }
     else
-        [logFeed info:0 inSubsection:subsection withText:@"received get request with no headers"];
+        [self.logFeed info:0 inSubsection:subsection withText:@"received get request with no headers"];
     
     [req setResponseCode:HTTP_RESPONSE_CODE_OK];
     [req setResponseHeader:@"Connection" withValue:@"keep-alive"];
@@ -603,9 +603,9 @@ enum {
         [req setResponseData:content];
         contentString = [[NSMutableString alloc] initWithData:content encoding:NSUTF8StringEncoding];
         msg = [NSString stringWithFormat:@"Test HTTP: sent content %@ via get\r\n", contentString];
-        [logFeed debug:0 inSubsection:subsection withText:msg];
+        [self.logFeed debug:0 inSubsection:subsection withText:msg];
         msg2 = [NSString stringWithFormat:@"Test HTTP: sent get reply headers with content type text/plain charset UTF-8 and content length %lu \r\n", (unsigned long)[content length]];
-        [logFeed debug:0 inSubsection:subsection withText:msg2];
+        [self.logFeed debug:0 inSubsection:subsection withText:msg2];
     }
 }
 
@@ -653,10 +653,10 @@ enum {
         
         [hdrs appendString: @" tend "];
         NSString *msg3 = [NSString stringWithFormat:@"Test HTTP: received put request headers %@ \r\n", hdrs];
-        [logFeed info:0 inSubsection:subsection withText:msg3];
+        [self.logFeed info:0 inSubsection:subsection withText:msg3];
     }
     else
-        [logFeed info:0 inSubsection:subsection withText:@"received put request with no headers"];
+        [self.logFeed info:0 inSubsection:subsection withText:@"received put request with no headers"];
     
     data = [req requestData];
     
@@ -667,16 +667,16 @@ enum {
         [body replaceOccurrencesOfString:@"\n" withString:@" bend " options:NSCaseInsensitiveSearch range:NSMakeRange(0, [body length])];
         [body appendString:@" trend "];
         NSString *msg3 = [NSString stringWithFormat:@"Test HTTP: received put request body %@ \r\n", body];
-        [logFeed info:0 inSubsection:subsection withText:msg3];
+        [self.logFeed info:0 inSubsection:subsection withText:msg3];
     }
     else
-        [logFeed info:0 inSubsection:subsection withText:@"received put request with no body \r\n"];
+        [self.logFeed info:0 inSubsection:subsection withText:@"received put request with no body \r\n"];
     
     [req setResponseCode:HTTP_RESPONSE_CODE_OK];
     [req setResponseHeader:@"Connection" withValue:@"keep-alive"];
     
     msg2 = [NSString stringWithFormat:@"Test HTTP: sent put reply headers with content length 0 \r\n"];
-    [logFeed debug:0 inSubsection:subsection withText:msg2];
+    [self.logFeed debug:0 inSubsection:subsection withText:msg2];
 }
 
 @end
@@ -721,16 +721,16 @@ enum {
         
         [hdrs appendString: @" tend "];
         NSString *msg3 = [NSString stringWithFormat:@"Test HTTP: received delete request headers %@ \r\n", hdrs];
-        [logFeed info:0 inSubsection:subsection withText:msg3];
+        [self.logFeed info:0 inSubsection:subsection withText:msg3];
     }
     else
-        [logFeed info:0 inSubsection:subsection withText:@"Test HTTP: received delete request with no headers"];
+        [self.logFeed info:0 inSubsection:subsection withText:@"Test HTTP: received delete request with no headers"];
     
     [req setResponseCode:HTTP_RESPONSE_CODE_OK];
     [req setResponseHeader:@"Connection" withValue:@"keep-alive"]; 
     
     msg2 = [NSString stringWithFormat:@"Test HTTP: sent delete reply headers with content length 0 \r\n"];
-    [logFeed debug:0 inSubsection:subsection withText:msg2];
+    [self.logFeed debug:0 inSubsection:subsection withText:msg2];
 }
 
 @end

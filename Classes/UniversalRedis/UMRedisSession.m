@@ -35,7 +35,7 @@
         if (!socket)
         {
             NSString *msg = [NSString stringWithFormat:@"[UMRedisSession initWithSocket]  Couldn't connect to server).\r\n"];
-            [logFeed majorError:0 withText:msg];
+            [self.logFeed majorError:0 withText:msg];
             return nil;
         }
     
@@ -61,7 +61,7 @@
     if (!socket)
     {
         NSString *msg = [NSString stringWithFormat:@"[UMRedisSession initWithSocket]  Couldn't connect to server).\r\n"];
-        [logFeed majorError:0 withText:msg];
+        [self.logFeed majorError:0 withText:msg];
         return NO;
     }
     
@@ -82,7 +82,7 @@
     if (sErr != UMSocketError_no_error)
     {
         NSString *msg = [NSString stringWithFormat:@"[UMRedisSession connect] Couldn't connect to server error %d, status %d.\n", sErr, status];
-        [logFeed majorError:0 withText:msg];
+        [self.logFeed majorError:0 withText:msg];
         socket = nil;
         if(autoReconnect==NO)
         {
@@ -121,7 +121,7 @@
     NSString *command = [userInfo objectForKey:@"command"];
     NSString *errorString = [socketException reason];
     NSString *msg = [NSString stringWithFormat:@"[UMRedisSession restart]: cannot do [UMRedisSession %@], error %@, restarting", command, errorString];
-    [logFeed majorError:0 inSubsection:@"redis" withText:msg];
+    [self.logFeed majorError:0 inSubsection:@"redis" withText:msg];
     
     BOOL success = [self restart];
     return success;
@@ -137,7 +137,7 @@
         return NO;
     }
     status = REDIS_STATUS_HAS_SOCKET;
-    [logFeed majorError:0 inSubsection:@"redis" withText:@"[UMRedisSession restart]: restarting after 30 seconds"];
+    [self.logFeed majorError:0 inSubsection:@"redis" withText:@"[UMRedisSession restart]: restarting after 30 seconds"];
 
     UMSocketError sErr = [socket connect];
     success = sErr == UMSocketError_no_error;
@@ -223,7 +223,7 @@
     NSString *first = parts[0];
     if ([first isEqualToString:@"-ERR Protocol error"])
     {
-        [logFeed majorError:0 withText:[NSString stringWithFormat:@"redis protocol error %@", parts[1]]];
+        [self.logFeed majorError:0 withText:[NSString stringWithFormat:@"redis protocol error %@", parts[1]]];
     }
     return s;
 }

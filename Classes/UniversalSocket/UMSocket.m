@@ -1206,7 +1206,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             if (i != length)
             {
                 NSString *msg = [NSString stringWithFormat:@"[UMSocket: sendBytes] socket %d (status %d) returns %d errno = %d",_sock,status, [UMSocket umerrFromErrno:eno],eno];
-                [logFeed info:0 inSubsection:@"Universal socket" withText:msg];
+                [self.logFeed info:0 inSubsection:@"Universal socket" withText:msg];
                 return [UMSocket umerrFromErrno:eno];
             }
             break;
@@ -1235,7 +1235,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             if (i != length)
             {
                 NSString *msg = [NSString stringWithFormat:@"[UMSocket: sendBytes] socket %d (status %d) returns %d errno = %d",_sock,status, [UMSocket umerrFromErrno:eno],eno];
-                [logFeed info:0 inSubsection:@"Universal socket" withText:msg];
+                [self.logFeed info:0 inSubsection:@"Universal socket" withText:msg];
                 return [UMSocket umerrFromErrno:eno];
             }
             break;

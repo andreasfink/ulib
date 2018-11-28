@@ -410,14 +410,18 @@ error:
     return NO;
 }
 
-+ (UMLogFeed *) setLogHandler:(UMLogHandler *)handler  withName:(NSString *)name withSection:(NSString *)type withSubsection:(NSString *)sub andWithLogFile:(UMLogFile *)dst
++ (UMLogFeed *) setLogHandler:(UMLogHandler *)handler
+					 withName:(NSString *)name
+				  withSection:(NSString *)type
+			   withSubsection:(NSString *)sub
+			   andWithLogFile:(UMLogFile *)dst
 {
-    UMLogFeed *logFeed;
-    logFeed = [[UMLogFeed alloc] initWithHandler:handler section:type subsection:sub];
-    [logFeed setCopyToConsole:0];
-    [logFeed setName:name];
+    UMLogFeed *xlogFeed;
+    xlogFeed = [[UMLogFeed alloc] initWithHandler:handler section:type subsection:sub];
+    [xlogFeed setCopyToConsole:0];
+    [xlogFeed setName:name];
     [handler addLogDestination:dst];
-    return logFeed;
+    return xlogFeed;
 }
 
 

@@ -127,8 +127,6 @@ static FILE *alloc_log;
  */
 @implementation UMObject
 
-@synthesize logFeed;
-
 - (void) addLogFromConfigGroup:(NSDictionary *)grp
                      toHandler:(UMLogHandler *)handler
                         logdir:(NSString *)logdir
@@ -428,7 +426,7 @@ static FILE *alloc_log;
     }
     _magic = NULL;
 #if !defined(USING_ARC)
-    [logFeed release];
+    [self.logFeed release];
     [super dealloc];
 #endif
 }
@@ -502,7 +500,7 @@ static FILE *alloc_log;
 
     r->umobject_flags = umobject_flags;
     r->_magic = _magic;
-    r.logFeed = logFeed;
+    r.logFeed = _logFeed;
     if(_objectStatisticsName != NULL)
     {
         r.objectStatisticsName = _objectStatisticsName;

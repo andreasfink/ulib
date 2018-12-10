@@ -117,7 +117,7 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
             [self.workSleeper prepare];
         }
         _runningStatus = UMBackgrounder_running;
-        [_control_sleeper wakeUp:UMSleeper_StartupCompletedSignal];
+        [self.control_sleeper wakeUp:UMSleeper_StartupCompletedSignal];
         [self backgroundInit];
     }
     while((_runningStatus == UMBackgrounder_running) && (mustQuit==NO))
@@ -145,7 +145,7 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
         ulib_set_thread_name(@"UMTimerBackgrounder (terminating)");
         _runningStatus = UMBackgrounder_notRunning;
         self.workSleeper = NULL;
-        [_control_sleeper wakeUp:UMSleeper_ShutdownCompletedSignal];
+        [self.control_sleeper wakeUp:UMSleeper_ShutdownCompletedSignal];
     }
 }
 

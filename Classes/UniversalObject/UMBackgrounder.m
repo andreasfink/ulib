@@ -14,17 +14,13 @@
 
 @implementation UMBackgrounder
 
-@synthesize name;
-@synthesize workSleeper;
-@synthesize enableLogging;
-@synthesize runningStatus;
 
 - (UMBackgrounder *)init
 {
-    return [self initWithName:@"(unnamed)"
-                  workSleeper:[[UMSleeper alloc]initFromFile:__FILE__
-                                                        line:__LINE__
-                                                    function:__func__]];
+    UMSleeper *ws = [[UMSleeper alloc]initFromFile:__FILE__
+                                               line:__LINE__
+                                           function:__func__];
+    return [self initWithName:@"(unnamed)" workSleeper:ws];
 }
 
 - (UMBackgrounder *)initWithName:(NSString *)n
@@ -34,10 +30,10 @@
     if(self)
     {
         self.name = n;
-        control_sleeper = [[UMSleeper alloc]initFromFile:__FILE__
+        _control_sleeper = [[UMSleeper alloc]initFromFile:__FILE__
                                                     line:__LINE__
                                                 function:__func__];
-        [control_sleeper prepare];
+        [_control_sleeper prepare];
         [ws prepare];
         self.workSleeper = ws;
     }
@@ -46,7 +42,7 @@
 
 - (void)startBackgroundTask
 {
-    if(control_sleeper == NULL)
+    if(_control_sleeper == NULL)
     {
         @throw([NSException exceptionWithName:@"NOT_INITIALIZED" reason:@"control sleeper in UMBackgrounder is not initialized" userInfo:NULL]);
     }
@@ -66,7 +62,7 @@
             int i=0;
             while(i<= 10)
             {
-                int s = [control_sleeper sleep:1000000LL wakeOn:UMSleeper_StartupCompletedSignal]; /* 1s */
+                int s = [_control_sleeper sleep:1000000LL wakeOn:UMSleeper_StartupCompletedSignal]; /* 1s */
                 if(s==UMSleeper_StartupCompletedSignal)
                 {
                     return;
@@ -94,11 +90,11 @@
         self.runningStatus = UMBackgrounder_shuttingDown;
         int i=0;
       
-        [workSleeper wakeUp:UMSleeper_ShutdownOrderSignal];
+        [_workSleeper wakeUp:UMSleeper_ShutdownOrderSignal];
         while((self.runningStatus == UMBackgrounder_shuttingDown) && (i<= 100))
         {
             i++;
-            [control_sleeper sleep:UMSLEEPER_DEFAULT_SLEEP_TIME wakeOn:UMSleeper_ShutdownCompletedSignal]; /* 500ms */
+            [_control_sleeper sleep:UMSLEEPER_DEFAULT_SLEEP_TIME wakeOn:UMSleeper_ShutdownCompletedSignal]; /* 500ms */
         }
         if((self.runningStatus == UMBackgrounder_shuttingDown) && (i> 100))
         {
@@ -125,16 +121,16 @@
     {
         return;
     }
-    if(workSleeper==NULL)
+    if(_workSleeper==NULL)
     {
         self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
         [self.workSleeper prepare];
     }
    self.runningStatus = UMBackgrounder_running;
 
-    [control_sleeper wakeUp:UMSleeper_StartupCompletedSignal];
+    [_control_sleeper wakeUp:UMSleeper_StartupCompletedSignal];
 
-    if(enableLogging)
+    if(_enableLogging)
     {
         NSLog(@"%@: started up successfully",self.name);
     }
@@ -147,18 +143,18 @@
         {
             /* lets sleep for a small while or until woken up due to work */
             long long sleepTime = UMSLEEPER_DEFAULT_SLEEP_TIME;
-            if(enableLogging)
+            if(_enableLogging)
             {
                 sleepTime= UMSLEEPER_DEFAULT_SLEEP_TIME*100;
             }
-            int signal = [workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ]; /* 100ms */
-            if(enableLogging)
+            int signal = [_workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ]; /* 100ms */
+            if(_enableLogging)
             {
                 NSLog(@"%@ woke up with signal %d",self.name,signal);
             }
             if(signal & UMSleeper_ShutdownOrderSignal)
             {
-                if(enableLogging)
+                if(_enableLogging)
                 {
                     NSLog(@"%@: got shutdown order",self.name);
                 }
@@ -170,7 +166,7 @@
             int status = [self work]; /* > 0 means we had work processed */
             if(status < 0)
             {
-                if(enableLogging)
+                if(_enableLogging)
                 {
                     NSLog(@"%@: shutdown because work returns %d",self.name,status);
                 }
@@ -186,14 +182,14 @@
             }
         }
     }
-    if(enableLogging)
+    if(_enableLogging)
     {
         NSLog(@"%@: shutting down",self.name);
     }
     [self backgroundExit];
     self.runningStatus = UMBackgrounder_notRunning;
     self.workSleeper = NULL;
-    [control_sleeper wakeUp:UMSleeper_ShutdownCompletedSignal];
+    [_control_sleeper wakeUp:UMSleeper_ShutdownCompletedSignal];
 }
 
 

@@ -107,20 +107,20 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
     @autoreleasepool
     {
         ulib_set_thread_name(@"UMTimerBackgrounder");
-        if(runningStatus != UMBackgrounder_startingUp)
+        if(_runningStatus != UMBackgrounder_startingUp)
         {
             return;
         }
-        if(workSleeper==NULL)
+        if(_workSleeper==NULL)
         {
             self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
             [self.workSleeper prepare];
         }
-        runningStatus = UMBackgrounder_running;
-        [control_sleeper wakeUp:UMSleeper_StartupCompletedSignal];
+        _runningStatus = UMBackgrounder_running;
+        [_control_sleeper wakeUp:UMSleeper_StartupCompletedSignal];
         [self backgroundInit];
     }
-    while((runningStatus == UMBackgrounder_running) && (mustQuit==NO))
+    while((_runningStatus == UMBackgrounder_running) && (mustQuit==NO))
     {
         @autoreleasepool
         {
@@ -132,7 +132,7 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
             }
             else if(sleepTime >= 10LL) /* sleeping less than 10µS is an overkill. So this might turn into a busy loop for 10µS */
             {
-                int signal = [workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ];
+                int signal = [_workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ];
                 if(signal & UMSleeper_ShutdownOrderSignal)
                 {
                     mustQuit = YES;
@@ -143,9 +143,9 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
     @autoreleasepool
     {
         ulib_set_thread_name(@"UMTimerBackgrounder (terminating)");
-        runningStatus = UMBackgrounder_notRunning;
+        _runningStatus = UMBackgrounder_notRunning;
         self.workSleeper = NULL;
-        [control_sleeper wakeUp:UMSleeper_ShutdownCompletedSignal];
+        [_control_sleeper wakeUp:UMSleeper_ShutdownCompletedSignal];
     }
 }
 

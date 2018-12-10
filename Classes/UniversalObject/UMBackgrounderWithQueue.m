@@ -56,7 +56,7 @@
         UMTask *task = [queue getFirst];
         if(task)
         {
-            if(enableLogging)
+            if(self.enableLogging)
             {
                 NSLog(@"%@: got task %@",self.name,task);
             }

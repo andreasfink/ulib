@@ -13,15 +13,13 @@
 
 @interface UMLogHandler : UMObject
 {
-	NSMutableArray	*logDestinations;
-	UMLogConsole	*console;
-    UMMutex *_logDestinationsLock;
-
+	NSMutableArray	*_logDestinations;
+	UMLogConsole	*_console;
+    UMMutex         *_lock;
+    UMMutex         *_logDestinationsLock;
 }
 
-@property	(readwrite,strong)		NSMutableArray	*logDestinations;
-@property	(readwrite,strong)		UMLogConsole	*console;
-@property	(readwrite,strong)		NSLock			*lock;
+@property	(readwrite,strong,atomic)		UMLogConsole	*console;
 
 - (UMLogHandler *) init;
 - (UMLogHandler *) initWithConsole;
@@ -31,7 +29,12 @@
 - (void) logAnEntry:(UMLogEntry *)logEntry;
 - (void) unlockedLogAnEntry:(UMLogEntry *)logEntry;
 
-- (void) log:(UMLogLevel) level section:(NSString *)section subsection:(NSString *)subsection name:(NSString *)name text:(NSString *)message errorCode:(int)err;
+- (void) log:(UMLogLevel) level
+     section:(NSString *)section
+  subsection:(NSString *)subsection
+        name:(NSString *)name
+        text:(NSString *)message
+   errorCode:(int)err;
 
 - (UMLogLevel)level;
 @end

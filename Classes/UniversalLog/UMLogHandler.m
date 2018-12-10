@@ -10,23 +10,25 @@
 #import "UMLogConsole.h"
 #import "UMLogDestination.h"
 #import "UMLogFile.h"
-
+#import "UMMutex.h"
 
 @implementation UMLogHandler
 
-@synthesize	logDestinations;
-@synthesize	console;
-@synthesize	lock;
+- (void)genericInitialisation
+{
+    _logDestinationsLock = [[UMMutex alloc]initWithName:@"loghandler-destinations"];
+    _lock = [[UMMutex alloc]initWithName:@"loghandler-lock"];
+    _logDestinations = [[NSMutableArray alloc] init];
+}
 
 - (UMLogHandler *) init
 {
     self = [super init];
     if(self)
     {
-        logDestinations = [[NSMutableArray alloc] init];
-        lock = [[NSLock alloc]init];
-        _logDestinationsLock = [[UMMutex alloc]initWithName:@"loghandler-destinations"];
-    }	return self;
+        [self genericInitialisation];
+    }
+    return self;
 }
 
 - (UMLogHandler *)initWithConsole
@@ -34,11 +36,9 @@
     self = [super init];
     if(self)
     {
-        logDestinations = [[NSMutableArray alloc] init];
-        lock = [[NSLock alloc]init];
-        console = [[UMLogConsole alloc] init];
-        _logDestinationsLock = [[UMMutex alloc]initWithName:@"loghandler-destinations"];
-        [self addLogDestination:console];
+        [self genericInitialisation];
+        _console = [[UMLogConsole alloc] init];
+        [self addLogDestination:_console];
     }
 	return self;
 }
@@ -48,11 +48,11 @@
     self = [super init];
     if(self)
     {
-        logDestinations = [[NSMutableArray alloc] init];
-        lock = [[NSLock alloc]init];
-        console = [[UMLogConsole alloc] init];
-        console.level = clevel;
-        [self addLogDestination:console];
+        [self genericInitialisation];
+
+        _console = [[UMLogConsole alloc] init];
+        _console.level = clevel;
+        [self addLogDestination:_console];
     }
     return self;
 }
@@ -60,7 +60,7 @@
 - (void) addLogDestination:(UMLogDestination *)dst
 {
     [_logDestinationsLock lock];
-    [logDestinations addObject: dst];
+    [_logDestinations addObject: dst];
     [_logDestinationsLock unlock];
 }
 
@@ -69,10 +69,10 @@
     NSUInteger i;
 
     [_logDestinationsLock lock];
-    i = [logDestinations indexOfObject: dst];
+    i = [_logDestinations indexOfObject: dst];
     if (i != NSNotFound)
     {
-        [logDestinations removeObjectAtIndex:i];
+        [_logDestinations removeObjectAtIndex:i];
     }
     [_logDestinationsLock unlock];
 }
@@ -80,7 +80,7 @@
 - (void) logAnEntry:(UMLogEntry *)logEntry
 {
     [_logDestinationsLock lock];
-    NSArray *dsts  = [logDestinations copy];
+    NSArray *dsts  = [_logDestinations copy];
     [_logDestinationsLock unlock];
 
     UMLogDestination *dst = nil;
@@ -93,13 +93,18 @@
 - (void) unlockedLogAnEntry:(UMLogEntry *)logEntry
 {
     UMLogDestination *dst;
-    for ( dst in logDestinations )
+    for ( dst in _logDestinations )
     {
         [dst unlockedLogAnEntry:logEntry];
     }
 }
 
-- (void) log:(UMLogLevel) level section:(NSString *)section subsection:(NSString *)subsection name:(NSString *)name text:(NSString *)message errorCode:(int)err
+- (void) log:(UMLogLevel) level
+     section:(NSString *)section
+  subsection:(NSString *)subsection
+        name:(NSString *)name
+        text:(NSString *)message
+   errorCode:(int)err
 {
 	UMLogEntry *e;
 	
@@ -116,20 +121,20 @@
 - (NSString *)description
 {
     [_logDestinationsLock lock];
-    NSArray *dsts  = [logDestinations copy];
+    NSArray *dsts  = [_logDestinations copy];
     [_logDestinationsLock unlock];
 
     NSMutableString *s = [[NSMutableString alloc]init];
     [s appendFormat:@"%@\n", [super description]];
-    if(console)
+    if(_console)
     {
-         [s appendFormat:@" Logs to Console: %@\n",[console oneLineDescription]];
+         [s appendFormat:@" Logs to Console: %@\n",[_console oneLineDescription]];
     }
 
     UMLogDestination *logDestination;
     for(logDestination in dsts)
     {
-        if(logDestination == console)
+        if(logDestination == _console)
         {
             continue;
         }
@@ -141,7 +146,7 @@
 - (UMLogLevel)level
 {
     [_logDestinationsLock lock];
-    NSArray *dsts  = [logDestinations copy];
+    NSArray *dsts  = [_logDestinations copy];
     [_logDestinationsLock unlock];
 
     UMLogLevel minLevel = UMLOG_PANIC;
@@ -156,5 +161,6 @@
     }
     return minLevel;
 }
+
 
 @end

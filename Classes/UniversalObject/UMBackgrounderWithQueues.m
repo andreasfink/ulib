@@ -48,7 +48,7 @@
         if(task)
         {
             ulib_set_thread_name(task.name);
-            if(enableLogging)
+            if(self.enableLogging)
             {
                 NSLog(@"%@: got task %@",self.name,task.name);
             }

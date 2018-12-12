@@ -143,7 +143,7 @@ export CXX=/usr/bin/clang++-7
 export LD=/usr/bin/lld-7
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
-export RUNTIME_VERSION=gnustep-2.0 
+export RUNTIME_VERSION=gnustep-1.9
 
 
 
@@ -192,7 +192,7 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 
     cd make
 
-    #export RUNTIME_VERSION=gnustep-1.9
+    export RUNTIME_VERSION=gnustep-1.9
     export OBJCFLAGS="-fblocks"
     export CFLAGS="-L/usr/local/lib"
     ./configure \

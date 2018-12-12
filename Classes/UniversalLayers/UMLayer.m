@@ -131,8 +131,9 @@
         layerName = name;
         if(tq == NULL)
         {
+            NSString *s = (name.length > 0) ? [NSString stringWithFormat:@"private_task_queue(%@)",name] : @"private_task_queue";
             UMTaskQueueMulti *tq =[[UMTaskQueueMulti alloc]initWithNumberOfThreads:4
-                                                                              name:@"private_task_queue"
+                                                                              name:s
                                                                      enableLogging:NO
                                                                     numberOfQueues:UMLAYER_QUEUE_COUNT];
             taskQueue =tq;

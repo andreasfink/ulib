@@ -192,8 +192,9 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 
     cd make
 
-    export RUNTIME_VERSION=gnustep-2.0 
+    #export RUNTIME_VERSION=gnustep-1.9
     export OBJCFLAGS="-fblocks"
+    export CFLAGS="-L/usr/local/lib"
     ./configure \
             --with-layout=fhs \
             --disable-importing-config-file \
@@ -205,12 +206,9 @@ apt-get purge libblocksruntime-dev libblocksruntime0
             --with-user-config-file='.GNUstep.conf' \
             --with-user-defaults-dir='GNUstep/Library/Defaults' \
             --with-objc-lib-flag="-l:libobjc.so.4.6" \
-            --enable-strict-v2-mode
+#            --enable-strict-v2-mode
             
      make install
-    unset RUNTIME_VERSION
-    unset OBJCFLAGS
-
      source /usr/local/etc/GNUstep/GNUstep.conf
      cd ..
      
@@ -230,7 +228,8 @@ apt-get install clang-7 clang++-7 lld-7 lldb-7 libstdc++-6
     mkdir Build
     cd Build
     cmake ..  -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=/usr/local/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++ -DCMAKE_LINKER=/usr/local/bin/lld -DCMAKE_BUILD_TYPE=RelWithDebInfo -DTESTS=OFF -DENABLE_OBJCXX=ON -DCXX_RUNTIME=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
-    cmake ..  -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=/usr/bin/clang-7 -DCMAKE_CXX_COMPILER=/usr/bin/clang++-7 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DTESTS=OFF -DENABLE_OBJCXX=ON -DCXX_RUNTIME=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+    cmake ..  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=/usr/bin/clang-7 -DCMAKE_CXX_COMPILER=/usr/bin/clang++-7 -DTESTS=OFF 
+    #-DENABLE_OBJCXX=ON -DCXX_RUNTIME=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
     make
     make install
     cd ..
@@ -259,7 +258,7 @@ edit configure.ac  and add on top
 gs_cv_objc_compiler_supports_constant_string_class=1
 ac_cv_func_objc_sync_enter=yes
 
-    ./configure  CFLAGS="-fconstant-string-class=NSConstantString -fPIC" LDFLAGS="-L/usr/local/lib" CPPFLAGS="-fconstant-string-class=NSConstantString -fPIC" --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf  --disable-mixedabi  --with-objc-lib-flag="-l:libobjc.so.4.6"
+    ./configure  CFLAGS="-fconstant-string-class=NSConstantString" --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf  --disable-mixedabi
     make -j8
     make install
     cd ../..

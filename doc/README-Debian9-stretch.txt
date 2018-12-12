@@ -101,7 +101,7 @@ popd
         libxt-dev \
         libgl1-mesa-dev \
         libpcap-dev \
-        libc-dev libc++-dev \
+        libc-dev libc++-dev libc++1 \
         python-dev swig \
         libedit-dev libeditline0  libeditline-dev  readline-common \
         binfmt-support libtinfo-dev \
@@ -124,8 +124,8 @@ popd
         libpango1.0-dev \
         libcairo2-dev \
         libxt-dev libssl-dev \
-        libasound2-dev libjack-dev libjack0 libportaudio2 libportaudiocpp0 portaudio19-dev
-
+        libasound2-dev libjack-dev libjack0 libportaudio2 libportaudiocpp0 portaudio19-dev \
+        libstdc++-6-dev libstdc++-6-doc libstdc++-6-pic libstdc++6 wmaker cmake cmake-curses-gui
 
 
 
@@ -133,11 +133,18 @@ Setting some defaults
 ------------------------------------------------
 
 
-export CC=clang
-export CXX=clang++
+export CC=/usr/local/bin/clang
+export CXX=/usr/local/bin/clang++
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
     
+export CC=/usr/bin/clang-7
+export CXX=/usr/bin/clang++-7
+export LD=/usr/bin/lld-7
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
+export RUNTIME_VERSION=gnustep-2.0 
+
 
 
 Download the sourcecode of gnustep and dependencies
@@ -162,7 +169,6 @@ Lets purge the gcc stuff in case its installed
 ----------------------------------------------
 
 apt-get purge libblocksruntime-dev libblocksruntime0
-apt-get purge libblocksruntime-dev libblocksruntime0
 
 
 4. Build dependencies
@@ -176,7 +182,8 @@ apt-get purge libblocksruntime-dev libblocksruntime0
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+    cmake .. -DCMAKE_C_COMPILER=/usr/local/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++  -DCMAKE_LINKER=/usr/local/bin/lld -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cmake .. -DCMAKE_C_COMPILER=/usr/bin/clang-7 -DCMAKE_CXX_COMPILER=/usr/bin/clang++-7  -DCMAKE_LINKER=/usr/bin/lld-7 -DCMAKE_BUILD_TYPE=RelWithDebInfo
     make
     make install
     
@@ -185,24 +192,32 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 
     cd make
 
-	export RUNTIME_VERSION=gnustep-2.0
+    export RUNTIME_VERSION=gnustep-2.0 
     export OBJCFLAGS="-fblocks"
-    ./configure --with-layout=fhs \
+    ./configure \
+            --with-layout=fhs \
             --disable-importing-config-file \
             --enable-native-objc-exceptions \
             --enable-objc-arc \
             --enable-install-ld-so-conf \
             --with-library-combo=ng-gnu-gnu \
             --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf \
+            --with-user-config-file='.GNUstep.conf' \
+            --with-user-defaults-dir='GNUstep/Library/Defaults' \
             --with-objc-lib-flag="-l:libobjc.so.4.6" \
             --enable-strict-v2-mode
             
      make install
+    unset RUNTIME_VERSION
+    unset OBJCFLAGS
+
      source /usr/local/etc/GNUstep/GNUstep.conf
      cd ..
      
 
 6. install libobjc2 runtime
+
+apt-get install clang-7 clang++-7 lld-7 lldb-7 libstdc++-6
 
 # if you run into llvm crashes try
 #
@@ -214,7 +229,8 @@ apt-get purge libblocksruntime-dev libblocksruntime0
     cd libobjc2
     mkdir Build
     cd Build
-    cmake ..  -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++  
+    cmake ..  -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=/usr/local/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++ -DCMAKE_LINKER=/usr/local/bin/lld -DCMAKE_BUILD_TYPE=RelWithDebInfo -DTESTS=OFF -DENABLE_OBJCXX=ON -DCXX_RUNTIME=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+    cmake ..  -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=/usr/bin/clang-7 -DCMAKE_CXX_COMPILER=/usr/bin/clang++-7 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DTESTS=OFF -DENABLE_OBJCXX=ON -DCXX_RUNTIME=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
     make
     make install
     cd ..
@@ -238,13 +254,12 @@ to
 otherwise configure will complain you cant compile objc
 
 
-edit configure.ac
+edit configure.ac  and add on top
+
 gs_cv_objc_compiler_supports_constant_string_class=1
 ac_cv_func_objc_sync_enter=yes
 
-    export CFLAGS="-fconstant-string-class=NSConstantString"
-    ./configure  --disable-mixedabi --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf
-
+    ./configure  CFLAGS="-fconstant-string-class=NSConstantString -fPIC" LDFLAGS="-L/usr/local/lib" CPPFLAGS="-fconstant-string-class=NSConstantString -fPIC" --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf  --disable-mixedabi  --with-objc-lib-flag="-l:libobjc.so.4.6"
     make -j8
     make install
     cd ../..

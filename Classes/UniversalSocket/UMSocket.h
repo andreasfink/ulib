@@ -220,6 +220,7 @@ typedef enum SocketBlockingMode
 - (UMSocketError) setLinger;
 - (UMSocketError) setReuseAddr;
 - (UMSocketError) setIPDualStack;
+- (UMSocketError) setKeepalive:(BOOL)keepalive;
 + (NSString *)addressOfSockAddr:(struct sockaddr *)sockAddr;
 + (int)portOfSockAddr:(struct sockaddr *)sockAddr;
 + (NSData *)sockaddrFromAddress:(NSString *)theAddr

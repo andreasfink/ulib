@@ -2991,6 +2991,17 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     return UMSocketError_no_error;
 }
 
+- (UMSocketError) setKeepalive:(BOOL)keepalive
+{
+    int flag = keepalive ? 1 : 0;
+    int err = setsockopt(_sock, SOL_SOCKET, SO_KEEPALIVE, (char *)&flag, sizeof(flag));
+    if(err !=0)
+    {
+        return [UMSocket umerrFromErrno:errno];
+    }
+    return UMSocketError_no_error;
+}
+
 + (NSString *)addressOfSockAddr:(struct sockaddr *)sockAddr
 {
     char buf[INET6_ADDRSTRLEN+1];

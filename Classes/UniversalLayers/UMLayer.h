@@ -27,17 +27,17 @@
 
 @interface UMLayer : UMObject
 {
-    UMTaskQueueMulti                    *taskQueue;
-    BOOL                                isSharedQueue;
-    UMThroughputCounter					*lowerQueueThroughput;
-    UMThroughputCounter					*upperQueueThroughput;
-    UMThroughputCounter					*adminQueueThroughput;
-    NSString                            *layerName;
-    NSString                            *layerType;
-    BOOL                                enable;
-    NSString                            *logFileName;
-    UMLogLevel                          logLevel;
-    UMHistoryLog *                      layerHistory;
+    UMTaskQueueMulti                    *_taskQueue;
+    BOOL                                _isSharedQueue;
+    UMThroughputCounter					*_lowerQueueThroughput;
+    UMThroughputCounter					*_upperQueueThroughput;
+    UMThroughputCounter					*_adminQueueThroughput;
+    NSString                            *_layerName;
+    NSString                            *_layerType;
+    BOOL                                _enable;
+    NSString                            *_logFileName;
+    UMLogLevel                          _logLevel;
+    UMHistoryLog *                      _layerHistory;
 }
 
 

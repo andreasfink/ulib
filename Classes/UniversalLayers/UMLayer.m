@@ -15,23 +15,9 @@
 #import "UMLayerTask.h"
 #import "UMLayerUserProtocol.h"
 #import "NSString+UniversalObject.h"
+#import "UMAssert.h"
 
 @implementation UMLayer
-
-@synthesize taskQueue;
-@synthesize isSharedQueue;
-
-@synthesize lowerQueueThroughput;
-@synthesize upperQueueThroughput;
-@synthesize adminQueueThroughput;
-
-@synthesize layerName;
-@synthesize layerType;
-@synthesize enable;
-
-@synthesize layerHistory;
-
-@synthesize logLevel;
 
 - (void)queueFromLower:(UMLayerTask *)job
 {
@@ -47,7 +33,8 @@
                      inSubsection:@"txup"
                          withText:job.name];
     }
-    [taskQueue queueTask:job toQueueNumber:UMLAYER_LOWER_QUEUE];
+    UMAssert(_taskQueue !=NULL,@"Can not queue task to NULL queue");
+    [_taskQueue queueTask:job toQueueNumber:UMLAYER_LOWER_QUEUE];
 }
 
 - (void)queueFromUpper:(UMLayerTask *)job
@@ -63,7 +50,8 @@
                      inSubsection:@"txdown"
                          withText:job.name];
     }
-    [taskQueue queueTask:job toQueueNumber:UMLAYER_UPPER_QUEUE];
+    UMAssert(_taskQueue !=NULL,@"Can not queue task to NULL queue");
+    [_taskQueue queueTask:job toQueueNumber:UMLAYER_UPPER_QUEUE];
 }
 
 - (void)queueFromLowerWithPriority:(UMLayerTask *)job
@@ -81,7 +69,8 @@
                      inSubsection:@"txup"
                          withText:job.name];
     }
-    [taskQueue queueTask:job toQueueNumber:UMLAYER_LOWER_PRIORITY_QUEUE];
+    UMAssert(_taskQueue !=NULL,@"Can not queue task to NULL queue");
+    [_taskQueue queueTask:job toQueueNumber:UMLAYER_LOWER_PRIORITY_QUEUE];
 }
 
 - (void)queueFromUpperWithPriority:(UMLayerTask *)job
@@ -96,7 +85,8 @@
                      inSubsection:@"txdown"
                          withText:job.name];
     }
-    [taskQueue queueTask:job toQueueNumber:UMLAYER_UPPER_PRIORITY_QUEUE];
+    UMAssert(_taskQueue !=NULL,@"Can not queue task to NULL queue");
+    [_taskQueue queueTask:job toQueueNumber:UMLAYER_UPPER_PRIORITY_QUEUE];
 }
 
 - (void)queueFromAdmin:(UMLayerTask *)job
@@ -107,7 +97,8 @@
                      inSubsection:@"txadmin"
                          withText:job.name];
     }
-    [taskQueue queueTask:job toQueueNumber:UMLAYER_ADMIN_QUEUE];
+    UMAssert(_taskQueue !=NULL,@"Can not queue task to NULL queue");
+    [_taskQueue queueTask:job toQueueNumber:UMLAYER_ADMIN_QUEUE];
 }
 
 
@@ -128,7 +119,7 @@
     self = [super init];
     if(self)
     {
-        layerName = name;
+        _layerName = name;
         if(tq == NULL)
         {
             NSString *s = (name.length > 0) ? [NSString stringWithFormat:@"private_task_queue(%@)",name] : @"private_task_queue";
@@ -136,18 +127,18 @@
                                                                               name:s
                                                                      enableLogging:NO
                                                                     numberOfQueues:UMLAYER_QUEUE_COUNT];
-            taskQueue =tq;
-            isSharedQueue = NO;
+            _taskQueue =tq;
+            _isSharedQueue = NO;
         }
         else
         {
-            taskQueue =tq;
-            isSharedQueue = YES;
+            _taskQueue =tq;
+            _isSharedQueue = YES;
         }
-        lowerQueueThroughput = [[UMThroughputCounter alloc]initWithResolutionInSeconds: 1.0 maxDuration: 1260.0];
-        upperQueueThroughput = [[UMThroughputCounter alloc]initWithResolutionInSeconds: 1.0 maxDuration: 1260.0];
-        adminQueueThroughput = [[UMThroughputCounter alloc]initWithResolutionInSeconds: 1.0 maxDuration: 1260.0];
-        logLevel = UMLOG_MAJOR;
+        _lowerQueueThroughput = [[UMThroughputCounter alloc]initWithResolutionInSeconds: 1.0 maxDuration: 1260.0];
+        _upperQueueThroughput = [[UMThroughputCounter alloc]initWithResolutionInSeconds: 1.0 maxDuration: 1260.0];
+        _adminQueueThroughput = [[UMThroughputCounter alloc]initWithResolutionInSeconds: 1.0 maxDuration: 1260.0];
+        _logLevel = UMLOG_MAJOR;
     }
     return self;
 }
@@ -382,8 +373,8 @@
 - (void)addLayerConfig:(NSMutableDictionary *)config
 {
     config[@"name"] = self.layerName;
-    config[@"enable"]=  enable ? @YES : @NO;
-    config[@"log-level"]=@(logLevel);
+    config[@"enable"]=  _enable ? @YES : @NO;
+    config[@"log-level"]=@(_logLevel);
     /* we should add some log file options here somehow */
 }
 
@@ -391,16 +382,16 @@
 {
     if(cfg[@"name"])
     {
-        layerName = [cfg[@"name"]stringValue];
+        _layerName = [cfg[@"name"]stringValue];
     }
     if(cfg[@"enable"])
     {
-        enable = [cfg[@"enable"]boolValue];
+        _enable = [cfg[@"enable"]boolValue];
     }
 
     if(cfg[@"log-level"])
     {
-        logLevel = [cfg[@"log-level"]intValue];
+        _logLevel = [cfg[@"log-level"]intValue];
     }
 }
 
@@ -409,7 +400,7 @@
     NSMutableString *s = [[NSMutableString alloc]init];
     [s appendString:@"\n"];
     [s appendString:@"--------------------------------------------------------------------------------\n"];
-    [s appendFormat:@"Layer: %@\n",layerName];
+    [s appendFormat:@"Layer: %@\n",_layerName];
     [s appendString:@"--------------------------------------------------------------------------------\n"];
     [filehandler writeData: [s dataUsingEncoding:NSUTF8StringEncoding]];
 }

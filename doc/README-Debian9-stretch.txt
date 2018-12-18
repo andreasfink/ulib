@@ -157,7 +157,7 @@ Download the sourcecode of gnustep and dependencies
     git clone https://github.com/apple/swift-corelibs-libdispatch
     git clone https://github.com/gnustep/scripts
     git clone https://github.com/gnustep/make
-    git clone https://github.com/gnustep/libobjc2
+    git clone https://github.com/gnustep/libobjc2 --branch 1.9
     git clone https://github.com/gnustep/base
     git clone https://github.com/gnustep/corebase
     git clone https://github.com/gnustep/gui
@@ -215,6 +215,11 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 
 6. install libobjc2 runtime
 
+
+OBJC_RUNTIME_LIB
+
+ac_cv_func_objc_sync_enter
+
 apt-get install clang-7 clang++-7 lld-7 lldb-7 libstdc++-6
 
 # if you run into llvm crashes try
@@ -227,10 +232,8 @@ apt-get install clang-7 clang++-7 lld-7 lldb-7 libstdc++-6
     cd libobjc2
     mkdir Build
     cd Build
-    cmake ..  -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=/usr/local/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++ -DCMAKE_LINKER=/usr/local/bin/lld -DCMAKE_BUILD_TYPE=RelWithDebInfo -DTESTS=OFF -DENABLE_OBJCXX=ON -DCXX_RUNTIME=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
     cmake ..  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=/usr/bin/clang-7 -DCMAKE_CXX_COMPILER=/usr/bin/clang++-7 -DTESTS=OFF 
-    #-DENABLE_OBJCXX=ON -DCXX_RUNTIME=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
-    make
+    make -j8
     make install
     cd ..
     ldconfig
@@ -258,7 +261,7 @@ edit configure.ac  and add on top
 gs_cv_objc_compiler_supports_constant_string_class=1
 ac_cv_func_objc_sync_enter=yes
 
-    ./configure  CFLAGS="-fconstant-string-class=NSConstantString" --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf  --disable-mixedabi
+    ./configure  CFLAGS="-fconstant-string-class=NSConstantString" --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf  ---with-objc-lib-flag="-l:libobjc.so.4.6" --disable-mixedabi
     make -j8
     make install
     cd ../..

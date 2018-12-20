@@ -194,7 +194,7 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 
     export RUNTIME_VERSION=gnustep-1.9
     export OBJCFLAGS="-fblocks"
-    export CFLAGS="-L/usr/local/lib"
+    export LDLAGS="-L/usr/local/lib"
     ./configure \
             --with-layout=fhs \
             --disable-importing-config-file \
@@ -261,7 +261,7 @@ edit configure.ac  and add on top
 gs_cv_objc_compiler_supports_constant_string_class=1
 ac_cv_func_objc_sync_enter=yes
 
-    ./configure  CFLAGS="-fconstant-string-class=NSConstantString" --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf  ---with-objc-lib-flag="-l:libobjc.so.4.6" --disable-mixedabi
+    ./configure  --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf  
     make -j8
     make install
     cd ../..

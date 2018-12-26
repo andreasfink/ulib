@@ -133,12 +133,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 @synthesize type;
 @synthesize direction;
 @synthesize status;
-@synthesize localHost;
-@synthesize remoteHost;
-@synthesize requestedLocalPort;
-@synthesize requestedRemotePort;
-@synthesize connectedLocalPort;
-@synthesize connectedRemotePort;
+
 @synthesize isBound;
 @synthesize receiveBuffer;
 @synthesize lastError;
@@ -394,8 +389,8 @@ static int SSL_smart_shutdown(SSL *ssl)
     NSString *typeDesc = [UMSocket socketTypeDescription:type];
     NSString *directionDesc = [UMSocket directionDescription:direction];
     NSString *statusDesc = [UMSocket statusDescription:status];
-    NSString *localHostDesc = [localHost description];
-    NSString *remoteHostDesc = [remoteHost description];
+    NSString *localHostDesc = [_localHost description];
+    NSString *remoteHostDesc = [_remoteHost description];
     
 	[self updateName];
 
@@ -405,8 +400,8 @@ static int SSL_smart_shutdown(SSL *ssl)
     NSString* l3 = [NSString localizedStringWithFormat:@"Status:               %@", statusDesc ? statusDesc : @"none available"];
     NSString* l4 = [NSString localizedStringWithFormat:@"Local Host:           %@", localHostDesc ? localHostDesc : @"none available"];
     NSString* l5 = [NSString localizedStringWithFormat:@"Remote Host:          %@", remoteHostDesc ? remoteHostDesc : @"none available"];
-    NSString* l6 = [NSString localizedStringWithFormat:@"Local Port:           %d", connectedLocalPort];
-    NSString* l7 = [NSString localizedStringWithFormat:@"Remote Port:          %d", connectedRemotePort];
+    NSString* l6 = [NSString localizedStringWithFormat:@"Local Port:           %d", _connectedLocalPort];
+    NSString* l7 = [NSString localizedStringWithFormat:@"Remote Port:          %d", _connectedRemotePort];
     NSString* l8;
     [_controlLock lock];
     l8 = [NSString localizedStringWithFormat:@"Socket:               %d", _sock];
@@ -537,11 +532,11 @@ static int SSL_smart_shutdown(SSL *ssl)
             [self reportStatus:@"- already bound"];
             return UMSocketError_already_bound;
         }
-        if(localHost == NULL)
+        if(_localHost == NULL)
         {
-            localHost               = [[UMHost alloc] initWithLocalhost];
+            _localHost               = [[UMHost alloc] initWithLocalhost];
         }
-        localAddresses              = [localHost addresses];
+        localAddresses              = [_localHost addresses];
         useableLocalAddresses       = [[NSMutableArray alloc] init];
 
         memset(&sa,0x00,sizeof(sa));
@@ -549,14 +544,14 @@ static int SSL_smart_shutdown(SSL *ssl)
 #ifdef	HAS_SOCKADDR_LEN
         sa.sin_len			= sizeof(struct sockaddr_in);
 #endif
-        sa.sin_port			= htons(requestedLocalPort);
+        sa.sin_port			= htons(_requestedLocalPort);
         sa.sin_addr.s_addr		= htonl(INADDR_ANY);
         memset(&sa6,0x00,sizeof(sa6));
         sa6.sin6_family			= AF_INET6;
 #ifdef	HAS_SOCKADDR_LEN
         sa6.sin6_len			= sizeof(struct sockaddr_in);
 #endif
-        sa6.sin6_port			= htons(requestedLocalPort);
+        sa6.sin6_port			= htons(_requestedLocalPort);
         sa6.sin6_addr			= in6addr_any;
 
         switch(type)
@@ -572,7 +567,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 #ifdef	HAS_SOCKADDR_LEN
                     sa.sin_len  = sizeof(struct sockaddr_in);
 #endif
-                    sa.sin_port = htons(requestedLocalPort);
+                    sa.sin_port = htons(_requestedLocalPort);
 
                     ipAddr = [localAddresses objectAtIndex:i];
                     [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
@@ -794,20 +789,20 @@ static int SSL_smart_shutdown(SSL *ssl)
 #ifdef	HAS_SOCKADDR_LEN
         sa.sin_len			= sizeof(struct sockaddr_in);
 #endif
-        sa.sin_port         = htons(requestedRemotePort);
+        sa.sin_port         = htons(_requestedRemotePort);
 
         memset(&sa6,0x00,sizeof(sa6));
         sa6.sin6_family			= AF_INET6;
 #ifdef	HAS_SOCKADDR_LEN
         sa6.sin6_len        = sizeof(struct sockaddr_in6);
 #endif
-        sa6.sin6_port       = htons(requestedRemotePort);
+        sa6.sin6_port       = htons(_requestedRemotePort);
 
-        while((resolved = [remoteHost resolved]) == 0)
+        while((resolved = [_remoteHost resolved]) == 0)
         {
             usleep(50000);
         }
-        address = [remoteHost address:(UMSocketType)type];
+        address = [_remoteHost address:(UMSocketType)type];
         if (!address)
         {
             fprintf(stderr,"[UMSocket connect] EADDRNOTAVAIL (address not resolved) during connect");
@@ -917,10 +912,10 @@ static int SSL_smart_shutdown(SSL *ssl)
     newsock.type = type;
     newsock.direction =  direction;
     newsock.status=status;
-    newsock.localHost = localHost;
-    newsock.remoteHost = remoteHost;
-    newsock.requestedLocalPort=requestedLocalPort;
-    newsock.requestedRemotePort=requestedRemotePort;
+    newsock.localHost = _localHost;
+    newsock.remoteHost = _remoteHost;
+    newsock.requestedLocalPort=_requestedLocalPort;
+    newsock.requestedRemotePort=_requestedRemotePort;
     newsock.cryptoStream = [cryptoStream copy];
 /* we do not copy the socket on purpose as this is used from accept() */
     newsock->_sock=-1;
@@ -934,22 +929,22 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (void) setLocalPort:(in_port_t) port
 {
-	requestedLocalPort = port;
+	_requestedLocalPort = port;
 }
 
 - (void) setRemotePort:(in_port_t) port
 {
-	requestedRemotePort = port;
+	_requestedRemotePort = port;
 }
 
 - (in_port_t) localPort
 {
-	return connectedLocalPort;
+	return _connectedLocalPort;
 }
 
 - (in_port_t) remotePort
 {
-	return connectedRemotePort;
+	return _connectedRemotePort;
 }
 
 - (NSString *)getRemoteAddress
@@ -1052,10 +1047,10 @@ static int SSL_smart_shutdown(SSL *ssl)
             newcon.type = type;
             newcon.direction =  direction;
             newcon.status=status;
-            newcon.localHost = localHost;
-            newcon.remoteHost = remoteHost;
-            newcon.requestedLocalPort=requestedLocalPort;
-            newcon.requestedRemotePort=requestedRemotePort;
+            newcon.localHost = _localHost;
+            newcon.remoteHost = _remoteHost;
+            newcon.requestedLocalPort=_requestedLocalPort;
+            newcon.requestedRemotePort=_requestedRemotePort;
             newcon.cryptoStream = [[UMCrypto alloc]initWithRelatedSocket:newcon];
             newcon.isBound=NO;
             newcon.isListening=NO;
@@ -2763,7 +2758,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 #ifdef	HAS_SOCKADDR_LEN
         sa6.sin6_len        = sizeof(struct sockaddr_in6);
 #endif
-        sa6.sin6_port       = htons(requestedRemotePort);
+        sa6.sin6_port       = htons(_requestedRemotePort);
         inet_pton(_socketFamily, addr.UTF8String, &sa6.sin6_addr);
 
         sentDataSize = sendto(_sock, [data bytes],

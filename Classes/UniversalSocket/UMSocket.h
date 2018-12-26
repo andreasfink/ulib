@@ -37,12 +37,12 @@ typedef enum SocketBlockingMode
 	UMSocketType		type;
 	UMSocketConnectionDirection	direction;
 	UMSocketStatus		status;
-	UMHost				*localHost;
-	UMHost				*remoteHost;
-	in_port_t			requestedLocalPort;
-	in_port_t			requestedRemotePort;
-	in_port_t			connectedLocalPort;
-	in_port_t			connectedRemotePort;
+	UMHost				*_localHost;
+	UMHost				*_remoteHost;
+	in_port_t			_requestedLocalPort;
+	in_port_t			_requestedRemotePort;
+	in_port_t			_connectedLocalPort;
+	in_port_t			_connectedRemotePort;
 	NSString			*_connectedLocalAddress;
 	NSString			*_connectedRemoteAddress;
 	int					_sock;

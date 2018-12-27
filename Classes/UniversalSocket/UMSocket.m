@@ -712,7 +712,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     netService = [[NSNetService alloc] initWithDomain:advertizeDomain
                                          type:advertizeType
                                          name:advertizeName
-                                         port:requestedLocalPort];
+                                         port:self.requestedLocalPort];
     [netService scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [netService setDelegate:self];
     [netService publish];

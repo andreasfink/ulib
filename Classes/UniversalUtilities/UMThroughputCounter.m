@@ -213,9 +213,9 @@ end:
 - (NSDictionary *) getSpeedTripleJson
 {
     NSMutableDictionary *d = [[NSMutableDictionary alloc]init];
-    d[@"10s"] = @([self getSpeedForMicroseconds:   10000000ULL]);
-    d[@"30s"] = @([self getSpeedForMicroseconds:   300000000ULL]);
-    d[@"120s"] = @([self getSpeedForMicroseconds:   1200000000ULL]);
+    d[@"10s"] = @([self getSpeedForMicroseconds:      10000000ULL]);
+    d[@"300s"] = @([self getSpeedForMicroseconds:    300000000ULL]);
+    d[@"1200s"] = @([self getSpeedForMicroseconds:  1200000000ULL]);
     return d;
 }
 

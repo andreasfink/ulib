@@ -484,7 +484,7 @@ static const char *strForChar(int c)
     return [self writeString:[date stringValue]];
 }
 
-- (BOOL)writeNumber:(NSNumber*)number
+- (BOOL)writeNumber:(NSNumber *)number
 {
 	if (number == kTrue || number == kFalse)
     {

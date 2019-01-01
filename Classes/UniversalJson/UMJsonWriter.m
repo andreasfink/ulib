@@ -87,17 +87,21 @@
     {
         ok = [streamWriter writeObject:[object mutableCopy]];
     }
-    else if ([object isKindOfClass:[NSDictionary class]])
-    {
-        ok = [streamWriter writeObject:object];
-    }
     else if ([object isKindOfClass:[UMSynchronizedArray class]])
     {
         ok = [streamWriter writeObject:[object mutableCopy]];
     }
+    else if ([object isKindOfClass:[NSDictionary class]])
+    {
+        ok = [streamWriter writeObject:object];
+    }
 	else if ([object isKindOfClass:[NSArray class]])
 	{
         ok = [streamWriter writeArray:object];
+    }
+    else if ([object isKindOfClass:[NSNumber class]])
+    {
+        ok = [streamWriter writeNumber:object];
     }
 	else if ([object respondsToSelector:@selector(proxyForJson)])
     {

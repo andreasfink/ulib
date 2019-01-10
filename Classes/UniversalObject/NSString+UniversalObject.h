@@ -25,4 +25,5 @@ NSString *sqlEscapeNSString(NSString *input);
 - (BOOL)hasCaseInsensitivePrefix:(NSString *)p;     /*!< does it start with this prefix in a case insensitive way */
 - (BOOL)isEqualToStringCaseInsensitive:(NSString *)aString;
 - (NSData *)sha1;
+- (BOOL)webBoolValue;
 @end

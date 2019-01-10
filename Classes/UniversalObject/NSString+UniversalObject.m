@@ -320,6 +320,33 @@ NSString *sqlEscapeNSString(NSString *input)
     return [data sha512];
 }
 
-
+- (BOOL)webBoolValue
+{
+	if([self caseInsensitiveCompare:@"on"]==NSOrderedSame)
+	{
+		return YES;
+	}
+	if([self caseInsensitiveCompare:@"off"]==NSOrderedSame)
+	{
+		return NO;
+	}
+	if([self caseInsensitiveCompare:@"checked"]==NSOrderedSame)
+	{
+		return YES;
+	}
+	if([self caseInsensitiveCompare:@"selected"]==NSOrderedSame)
+	{
+		return YES;
+	}
+	if([self caseInsensitiveCompare:@"on"]==NSOrderedSame)
+	{
+		return YES;
+	}
+	if([self caseInsensitiveCompare:@""]==NSOrderedSame)
+	{
+		return NO;
+	}
+	return [self boolValue];
+}
 @end
 

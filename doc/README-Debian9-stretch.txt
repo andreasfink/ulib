@@ -11,19 +11,18 @@ Here is how to get such a installation up and running under Debian 9 (codename S
 
 First we need some basic tools and repository's set up
 
-apt-get install --assume-yes\
-	apt-transport-https\
-	openssh-client\
-	vim\
-	system-config-lvm\
-	dirmngr\
-	libsctp1\
-	lksctp-tools\
-	acpid\
-	wget\
-	telnet\
-	sudo\
-	locales-all\
+apt-get install --assume-yes \
+	apt-transport-https \
+	openssh-client \
+	vim \
+	dirmngr \
+	libsctp1 \
+	lksctp-tools \
+	acpid \
+	wget \
+	telnet \
+	sudo \
+	locales-all \
 	net-tools
 
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xCBCB082A1BB943DB
@@ -157,7 +156,7 @@ Download the sourcecode of gnustep and dependencies
     git clone https://github.com/apple/swift-corelibs-libdispatch
     git clone https://github.com/gnustep/scripts
     git clone https://github.com/gnustep/make
-    git clone https://github.com/gnustep/libobjc2 --branch 1.9
+    git clone https://github.com/gnustep/libobjc2 
     git clone https://github.com/gnustep/base
     git clone https://github.com/gnustep/corebase
     git clone https://github.com/gnustep/gui
@@ -172,9 +171,11 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 
 
 4. Build dependencies
+Note libiconf does not build if the compiler is set to clang or the linker to lld.
+
     tar -xvzf libiconv-1.15.tar.gz
     cd libiconv-1.15
-    ./configure
+    ./configure --enable-static --enable-dynamic
     make
     make install
     cd ..
@@ -182,8 +183,7 @@ apt-get purge libblocksruntime-dev libblocksruntime0
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    cmake .. -DCMAKE_C_COMPILER=/usr/local/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++  -DCMAKE_LINKER=/usr/local/bin/lld -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    cmake .. -DCMAKE_C_COMPILER=/usr/bin/clang-7 -DCMAKE_CXX_COMPILER=/usr/bin/clang++-7  -DCMAKE_LINKER=/usr/bin/lld-7 -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cmake .. -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX}  -DCMAKE_LINKER=${LD} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX}
     make
     make install
     
@@ -192,24 +192,28 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 
     cd make
 
-    export RUNTIME_VERSION=gnustep-1.9
+	cat FilesystemLayouts/fhs | sed 's/^GNUSTEP_DEFAULT_PREFIX=.*$/GNUSTEP_DEFAULT_PREFIX=\/opt\/universalss7/g' > FilesystemLayouts/universalss7
+    export RUNTIME_VERSION=gnustep-2.0
     export OBJCFLAGS="-fblocks"
-    export LDLAGS="-L/usr/local/lib"
+    export LDLAGS="-L${PREFIX}/lib"
+    export PREFIX=/opt/universalss7/
     ./configure \
-            --with-layout=fhs \
+    		--includedir=${PREFIX}/include \
+    		--libdir==${PREFIX}/lib \
+            --with-layout=universalss7 \
             --disable-importing-config-file \
             --enable-native-objc-exceptions \
             --enable-objc-arc \
             --enable-install-ld-so-conf \
             --with-library-combo=ng-gnu-gnu \
-            --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf \
+            --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf \
             --with-user-config-file='.GNUstep.conf' \
             --with-user-defaults-dir='GNUstep/Library/Defaults' \
             --with-objc-lib-flag="-l:libobjc.so.4.6" \
 #            --enable-strict-v2-mode
             
      make install
-     source /usr/local/etc/GNUstep/GNUstep.conf
+     source ${PREFIX}/etc/GNUstep/GNUstep.conf
      cd ..
      
 
@@ -232,7 +236,7 @@ apt-get install clang-7 clang++-7 lld-7 lldb-7 libstdc++-6
     cd libobjc2
     mkdir Build
     cd Build
-    cmake ..  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=/usr/bin/clang-7 -DCMAKE_CXX_COMPILER=/usr/bin/clang++-7 -DTESTS=OFF 
+    cmake ..  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=${PREFIX}
     make -j8
     make install
     cd ..
@@ -261,7 +265,14 @@ edit configure.ac  and add on top
 gs_cv_objc_compiler_supports_constant_string_class=1
 ac_cv_func_objc_sync_enter=yes
 
-    ./configure  --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf  
+
+export CFLAGS="-I ${PREFIX}/include"
+echo "# universalss7 libraries" > /etc/ld.so.conf.d/universalss7.conf
+echo "${PREFIX}/lib" >> /etc/ld.so.conf.d/universalss7.conf
+ldconfig
+
+
+    ./configure  --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf  
     make -j8
     make install
     cd ../..

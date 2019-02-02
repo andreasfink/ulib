@@ -33,45 +33,30 @@ apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0D9A1950E2EF0603 
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EF0F382A1A7B6500
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421
-apt-key adv --recv-keys --keyserver keys.gnupg.net A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
-wget -4 -O - http://repo.universalss7.ch/debian/key.asc |apt-key add -
+wget -4 -O - http://repo.universalss7.ch/debian/key.asc | apt-key add -
 
-export DEBIAN_VERSION=`cat /etc/debian_version | cut -f1 -d.`
-if [ "${DEBIAN_VERSION}" == "9" ]
-then
-    export DEBIAN_NICKNAME="stretch"
-    export BACKPORT_KERNEL_IMAGE=linux-image-4.17.0-0.bpo.1-amd64
-else 
-    echo "*** UNEXPECTED DEBIAN VERSION ****"
-fi
-
-if [ "`cat /proc/cpuinfo | grep KVM`" == "" ]
-then
-	export MACHINE_TYPE=PHYSICAL
-else
-	export MACHINE_TYPE=VIRTUAL
-fi
-
-echo "deb http://ftp.debian.org/debian ${DEBIAN_NICKNAME}-backports main" > /etc/apt/sources.list.d/backports.list
+echo "deb http://ftp.debian.org/debian ${DEBIAN_NICKNAME}-backports main"      > /etc/apt/sources.list.d/backports.list
 echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" > /etc/apt/sources.list.d/universalss7.list
 
 
-1. You need to install the llvm repository
+1. You need to install the llvm-7 compiler
 -------------------------------------------
 
-apt-get install dirmngr
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421
 
-echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main" > /etc/apt/sources.list.d/llvm.list
-echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main" >> /etc/apt/sources.list.d/llvm.list
+echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main"         > /etc/apt/sources.list.d/llvm.list
+echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main"     >> /etc/apt/sources.list.d/llvm.list
+echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-snapshot main"         >> /etc/apt/sources.list.d/llvm.list
+echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-snapshot main"     >> /etc/apt/sources.list.d/llvm.list
 apt-get update
 
 apt-get install clang-7 lldb-7 llvm-7 libc++-7-dev lld-7 python-lldb-7
+apt-get install clang-8 lldb-8 llvm-8 libc++-8-dev lld-8 python-lldb-8
 pushd /usr/bin
-ln -s clang-7 clang
-ln -s clang++-7 clang++
-ln -s clang-cpp-7 clang-cpp
-ln -s lldb-7 lldb
+rm -f clang clang++ clang-cpp lldb
+ln -s clang-8 clang
+ln -s clang++-8 clang++
+ln -s clang-cpp-8 clang-cpp
+ln -s lldb-8 lldb
 popd
 
 2. Install depenencies
@@ -129,28 +114,19 @@ popd
 
 
 
-Setting some defaults
+3. Setting some defaults
 ------------------------------------------------
 
-
-export CC=/usr/local/bin/clang
-export CXX=/usr/local/bin/clang++
+export CC=/usr/bin/clang-8
+export CXX=/usr/bin/clang++-8
+#export LD=/usr/bin/lld-8
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
-    
-export CC=/usr/bin/clang-7
-export CXX=/usr/bin/clang++-7
-export LD=/usr/bin/lld-7
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
-export RUNTIME_VERSION=gnustep-1.9
-
-
+export RUNTIME_VERSION=gnustep-2.0
 
 Download the sourcecode of gnustep and dependencies
 ---------------------------------------------------
 
-    
     mkdir gnustep
     cd gnustep
     wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz
@@ -182,8 +158,8 @@ apt-get purge libblocksruntime-dev libblocksruntime0
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    cmake .. -DCMAKE_C_COMPILER=/usr/local/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++  -DCMAKE_LINKER=/usr/local/bin/lld -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    cmake .. -DCMAKE_C_COMPILER=/usr/bin/clang-7 -DCMAKE_CXX_COMPILER=/usr/bin/clang++-7  -DCMAKE_LINKER=/usr/bin/lld-7 -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    export LD=/usr/bin/ld.lld-8
+    cmake .. -DBUILD_STATIC_LIBOBJC=1 -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_LINKER=${LD} -DCMAKE_BUILD_TYPE=RelWithDebInfo
     make
     make install
     
@@ -192,9 +168,9 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 
     cd make
 
-    export RUNTIME_VERSION=gnustep-1.9
-    export OBJCFLAGS="-fblocks"
-    export LDLAGS="-L/usr/local/lib"
+    export RUNTIME_VERSION=gnustep-2.0
+    export CPPFLAGS=-L/usr/local/lib
+    export LDFLAGS=-fuse-ld=lld-8
     ./configure \
             --with-layout=fhs \
             --disable-importing-config-file \
@@ -205,8 +181,8 @@ apt-get purge libblocksruntime-dev libblocksruntime0
             --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf \
             --with-user-config-file='.GNUstep.conf' \
             --with-user-defaults-dir='GNUstep/Library/Defaults' \
-            --with-objc-lib-flag="-l:libobjc.so.4.6" \
-#            --enable-strict-v2-mode
+            --with-objc-lib-flag="-l:libobjc.so.4.6" 
+            
             
      make install
      source /usr/local/etc/GNUstep/GNUstep.conf
@@ -232,7 +208,9 @@ apt-get install clang-7 clang++-7 lld-7 lldb-7 libstdc++-6
     cd libobjc2
     mkdir Build
     cd Build
-    cmake ..  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=/usr/bin/clang-7 -DCMAKE_CXX_COMPILER=/usr/bin/clang++-7 -DTESTS=OFF 
+    # -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    export LD=/usr/bin/ld.lld-8
+    cmake ..  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX}   -DCMAKE_LINKER=${LD} 
     make -j8
     make install
     cd ..
@@ -244,8 +222,6 @@ apt-get install clang-7 clang++-7 lld-7 lldb-7 libstdc++-6
 
 if you see this error:
 ././config/objc-common.g:53:19: error: implicit conversion of C pointer type 'void *' to Objective-C pointer type 'NSObject *' requires a bridged c
-
-    cd base
 
 edit the file config/objc-common.g
 change line 53 from 
@@ -261,7 +237,9 @@ edit configure.ac  and add on top
 gs_cv_objc_compiler_supports_constant_string_class=1
 ac_cv_func_objc_sync_enter=yes
 
-    ./configure  --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf  
+
+    cd base
+    ./configure --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf
     make -j8
     make install
     cd ../..

@@ -11,19 +11,18 @@ Here is how to get such a installation up and running under Debian 9 (codename S
 
 First we need some basic tools and repository's set up
 
-apt-get install --assume-yes\
-	apt-transport-https\
-	openssh-client\
-	vim\
-	system-config-lvm\
-	dirmngr\
-	libsctp1\
-	lksctp-tools\
-	acpid\
-	wget\
-	telnet\
-	sudo\
-	locales-all\
+apt-get install --assume-yes \
+	apt-transport-https \
+	openssh-client \
+	vim \
+	dirmngr \
+	libsctp1 \
+	lksctp-tools \
+	acpid \
+	wget \
+	telnet \
+	sudo \
+	locales-all \
 	net-tools
 
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xCBCB082A1BB943DB
@@ -114,15 +113,7 @@ popd
 
 
 
-3. Setting some defaults
-------------------------------------------------
 
-export CC=/usr/bin/clang-8
-export CXX=/usr/bin/clang++-8
-#export LD=/usr/bin/lld-8
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
-export RUNTIME_VERSION=gnustep-2.0
 
 Download the sourcecode of gnustep and dependencies
 ---------------------------------------------------
@@ -133,7 +124,7 @@ Download the sourcecode of gnustep and dependencies
     git clone https://github.com/apple/swift-corelibs-libdispatch
     git clone https://github.com/gnustep/scripts
     git clone https://github.com/gnustep/make
-    git clone https://github.com/gnustep/libobjc2 --branch 1.9
+    git clone https://github.com/gnustep/libobjc2 
     git clone https://github.com/gnustep/base
     git clone https://github.com/gnustep/corebase
     git clone https://github.com/gnustep/gui
@@ -148,99 +139,91 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 
 
 4. Build dependencies
+
+#   Note libiconf does not build if the compiler is set to clang or the linker to lld.
+
     tar -xvzf libiconv-1.15.tar.gz
     cd libiconv-1.15
-    ./configure
+    ./configure --enable-static --enable-dynamic
     make
     make install
     cd ..
 
+
+3. Setting some defaults
+------------------------------------------------
+
+export CC="/usr/bin/clang-7"
+export CXX="/usr/bin/clang++-7"
+export PREFIX="/opt/universalss7/"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"
+export RUNTIME_VERSION="gnustep-2.0"
+export CPPFLAGS="-L/usr/local/lib -L${PREFIX}/lib"
+#export LD="/usr/bin/lld-7"
+#export LDFLAGS="-fuse-ld=${LD}"
+export OBJCFLAGS="-fblocks"
+export CFLAGS="-I ${PREFIX}/include"
+
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    export LD=/usr/bin/ld.lld-8
-    cmake .. -DBUILD_STATIC_LIBOBJC=1 -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_LINKER=${LD} -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cmake .. -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX} # -DCMAKE_LINKER=${LD} 
     make
     make install
     
 
-5. install gnustep-make
+    
 
-    cd make
+5. install libobjc2 runtime
 
-    export RUNTIME_VERSION=gnustep-2.0
-    export CPPFLAGS=-L/usr/local/lib
-    export LDFLAGS=-fuse-ld=lld-8
-    ./configure \
-            --with-layout=fhs \
-            --disable-importing-config-file \
-            --enable-native-objc-exceptions \
-            --enable-objc-arc \
-            --enable-install-ld-so-conf \
-            --with-library-combo=ng-gnu-gnu \
-            --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf \
-            --with-user-config-file='.GNUstep.conf' \
-            --with-user-defaults-dir='GNUstep/Library/Defaults' \
-            --with-objc-lib-flag="-l:libobjc.so.4.6" 
-            
-            
-     make install
-     source /usr/local/etc/GNUstep/GNUstep.conf
-     cd ..
-     
-
-6. install libobjc2 runtime
-
-
-OBJC_RUNTIME_LIB
-
-ac_cv_func_objc_sync_enter
-
-apt-get install clang-7 clang++-7 lld-7 lldb-7 libstdc++-6
-
-# if you run into llvm crashes try
-#
-#	remove below line from  Test/CMakeLists.txt
-#       addtest_variants("ForwardDeclareProtocolAccess" "ForwardDeclareProtocolAccess.m;ForwardDeclareProtocol.m" true)
-#	remove file Test/ForwardDeclareProtocol.m
-
-        
     cd libobjc2
     mkdir Build
     cd Build
-    # -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    export LD=/usr/bin/ld.lld-8
-    cmake ..  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX}   -DCMAKE_LINKER=${LD} 
+    cmake ..  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_LINKER=${LD} DCMAKE_INSTALL_PREFIX=${PREFIX}
     make -j8
     make install
     cd ..
     ldconfig
 
 
+
+6. install gnustep-make
+
+    cd make
+
+	cat FilesystemLayouts/fhs | sed 's/^GNUSTEP_DEFAULT_PREFIX=.*$/GNUSTEP_DEFAULT_PREFIX=\/opt\/universalss7/g' > FilesystemLayouts/universalss7
+
+    ./configure \
+    		--includedir=${PREFIX}/include \
+    		--libdir==${PREFIX}/lib \
+            --with-layout=universalss7 \
+            --disable-importing-config-file \
+            --enable-native-objc-exceptions \
+            --enable-objc-arc \
+            --enable-install-ld-so-conf \
+            --with-library-combo=ng-gnu-gnu \
+            --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf \
+            --with-user-config-file='.GNUstep.conf' \
+            --with-user-defaults-dir='GNUstep/Library/Defaults' \
+            --with-objc-lib-flag="-l:libobjc.so.4.6"
+
+    make install
+    source ${PREFIX}/etc/GNUstep/GNUstep.conf
+    cd ..
+ 
 7. install gnustep-base
 
 
-if you see this error:
-././config/objc-common.g:53:19: error: implicit conversion of C pointer type 'void *' to Objective-C pointer type 'NSObject *' requires a bridged c
-
-edit the file config/objc-common.g
-change line 53 from 
-
-	NSObject *obj = calloc(sizeof(id), 1);
-to
-	NSObject *obj = (__bridge NSObject *)calloc(sizeof(id), 1);
-otherwise configure will complain you cant compile objc
-
-
-edit configure.ac  and add on top
-
-gs_cv_objc_compiler_supports_constant_string_class=1
-ac_cv_func_objc_sync_enter=yes
-
-
     cd base
-    ./configure --with-config-file=/usr/local/etc/GNUstep/GNUstep.conf
-    make -j8
+    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf
+	echo "# universalss7 libraries" > /etc/ld.so.conf.d/universalss7.conf
+	echo "${PREFIX}/lib" >> /etc/ld.so.conf.d/universalss7.conf
+	ldconfig
+
+
+    ./configure  --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf  
+	make -j8
     make install
     cd ../..
     ldconfig

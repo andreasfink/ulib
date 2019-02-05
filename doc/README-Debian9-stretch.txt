@@ -155,7 +155,7 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 
 export CC="/usr/bin/clang-7"
 export CXX="/usr/bin/clang++-7"
-export PREFIX="/opt/universalss7/"
+export PREFIX="/opt/universalss7"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"
 export RUNTIME_VERSION="gnustep-2.0"
@@ -164,6 +164,10 @@ export CPPFLAGS="-L/usr/local/lib -L${PREFIX}/lib"
 #export LDFLAGS="-fuse-ld=${LD}"
 export OBJCFLAGS="-fblocks"
 export CFLAGS="-I ${PREFIX}/include"
+
+mkdir -p ${PREFIX}/lib
+mkdir -p ${PREFIX}/etc
+mkdir -p ${PREFIX}/bin
 
     cd swift-corelibs-libdispatch
     mkdir build
@@ -180,7 +184,7 @@ export CFLAGS="-I ${PREFIX}/include"
     cd libobjc2
     mkdir Build
     cd Build
-    cmake ..  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_LINKER=${LD} DCMAKE_INSTALL_PREFIX=${PREFIX}
+    cmake ..  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=${PREFIX}
     make -j8
     make install
     cd ..
@@ -196,7 +200,7 @@ export CFLAGS="-I ${PREFIX}/include"
 
     ./configure \
     		--includedir=${PREFIX}/include \
-    		--libdir==${PREFIX}/lib \
+    		--libdir=${PREFIX}/lib \
             --with-layout=universalss7 \
             --disable-importing-config-file \
             --enable-native-objc-exceptions \

@@ -153,9 +153,10 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 3. Setting some defaults
 ------------------------------------------------
 
-export CC="/usr/bin/clang-7"
-export CXX="/usr/bin/clang++-7"
+export CC="/usr/bin/clang-8"
+export CXX="/usr/bin/clang++-8"
 export PREFIX="/opt/universalss7"
+export PREFIX="/usr/local"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"
 export RUNTIME_VERSION="gnustep-2.0"
@@ -172,7 +173,7 @@ mkdir -p ${PREFIX}/bin
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    cmake .. -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX} # -DCMAKE_LINKER=${LD} 
+    cmake .. -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX}
     make
     make install
     
@@ -198,6 +199,21 @@ mkdir -p ${PREFIX}/bin
 
 	cat FilesystemLayouts/fhs | sed 's/^GNUSTEP_DEFAULT_PREFIX=.*$/GNUSTEP_DEFAULT_PREFIX=\/opt\/universalss7/g' > FilesystemLayouts/universalss7
 
+
+with standard /usr/local layout...
+    ./configure \
+            --with-layout=fhs \
+            --disable-importing-config-file \
+            --enable-native-objc-exceptions \
+            --enable-objc-arc \
+            --enable-install-ld-so-conf \
+            --with-library-combo=ng-gnu-gnu \
+            --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf \
+            --with-user-config-file='.GNUstep.conf' \
+            --with-user-defaults-dir='GNUstep/Library/Defaults' \
+            --with-objc-lib-flag="-l:libobjc.so.4.6"
+
+
     ./configure \
     		--includedir=${PREFIX}/include \
     		--libdir=${PREFIX}/lib \
@@ -210,8 +226,7 @@ mkdir -p ${PREFIX}/bin
             --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf \
             --with-user-config-file='.GNUstep.conf' \
             --with-user-defaults-dir='GNUstep/Library/Defaults' \
-            --with-objc-lib-flag="-l:libobjc.so.4.6"
-
+          #  --with-objc-lib-flag="-l:libobjc.so.4.6"
     make install
     source ${PREFIX}/etc/GNUstep/GNUstep.conf
     cd ..
@@ -220,7 +235,7 @@ mkdir -p ${PREFIX}/bin
 
 
     cd base
-    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf
+    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf --disable-mixedabi --with-libiconv-library=
 	echo "# universalss7 libraries" > /etc/ld.so.conf.d/universalss7.conf
 	echo "${PREFIX}/lib" >> /etc/ld.so.conf.d/universalss7.conf
 	ldconfig

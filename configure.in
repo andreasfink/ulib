@@ -53,6 +53,18 @@ BUILD_DIR=.
 PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export PKG_CONFIG_PATH
 
+#
+# we prefer clang over gcc
+#
+if [[ "$CC" == "" ]]
+then
+	CC=clang
+fi
+if [[ "$CXX" == "" ]]
+then 
+	CXX=clang++
+fi
+	
 case "$host" in
   *apple-darwin*) 
     #
@@ -78,14 +90,6 @@ case "$host" in
     ;;
 
   *-linux-*)
-	if [[ "$CC" == "" ]]
-	then
-		CC=clang
-	fi
-	if [[ "$CXX" == "" ]]
-	then 
-		CXX=clang++
-	fi
 	CFLAGS="$CFLAGS -std=c99 -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_POSIX_SOURCE"
 	DEBIAN_VERSION=`cat /etc/debian_version | cut -f1 -d.`
 	if [[ "$DEBIAN_VERSION" == "8" ]]
@@ -117,14 +121,6 @@ case "$host" in
 	;;
 
   *-freebsd*)
-	if [[ "$CC" == "" ]]
-	then
-		CC=clang
-	fi
-	if [[ "$CXX" == "" ]]
-	then 
-		CXX=clang++
-	fi
 	CFLAGS="$CFLAGS -std=c99 -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_POSIX_SOURCE"
 	FREEBSD_VERSION=`uname -r`
 	CFLAGS="$CFLAGS  -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties"

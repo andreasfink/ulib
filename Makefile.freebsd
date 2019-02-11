@@ -1,0 +1,70 @@
+# File: Makefile
+# Project "ulib"
+# Copyright: © 2017 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
+#
+#
+
+CC=@CC@
+CFLAGS=  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude -arch x86_64 -O2 -DULIB_CONFIG=Release -D_POSIX_SOURCE
+LDFLAGS= -F/Library/Frameworks -framework Foundation -framework Security -arch x86_64
+LIBS=-lresolv -lm  -lpthread
+STATIC_LIBS=
+MAJORVER=1
+MINORVER=9
+REVISION=2
+
+LIB=libulib.dylib
+SLIB=libulib.a
+
+PKGCONFIGFILE=ulib.pc
+
+MFILES = $(wildcard Classes/*.m) $(wildcard Classes/*/*.m)
+HFILES = version.h $(wildcard Classes/*.h) $(wildcard Classes/*/*.h)
+MOFILES  = $(MFILES:.m=.m.o)
+OFILES = $(MOFILES)
+
+INCLUDEDIRS=-I/usr/include/postgresql -I/usr/include/mysql-I/usr/include/libxml2 -I Classes/UniversalConfig -I Classes/UniversalHTTP -I Classes/UniversalJson -I Classes/UniversalLayers -I Classes/UniversalLog -I Classes/UniversalObject -I Classes/UniversalQueue -I Classes/UniversalRedis -I Classes/UniversalSocket -I Classes/UniversalUtilities -I Classes/UniversalTokenizer -I Classes/UniversalPlugin -I Classes 
+
+#
+# special compilation rule for this debug object so it can contain retain/release stuff
+#
+
+${LIB}: ${OFILES}
+	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
+
+${SLIB}: ${OFILES}
+	ar rcs ${SLIB} ${OFILES}
+	ranlib ${SLIB}
+
+# this is the only file which should NOT be compiled with ARC
+# ... if we want to have retain/release debugging on
+#
+#Classes/UniversalObject/UMObject.m.o: Classes/UniversalObject/UMObject.m
+#	${CC} -c ${CFLAGS} -x objective-c $<  ${INCLUDEDIRS} -o $@ -fno-objc-arc
+
+install: ${LIB} ${SLIB}
+	mkdir -p "${DESTDIR}/usr/local/lib/pkgconfig"
+	mkdir -p "${DESTDIR}/usr/local/include/ulib"
+	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"
+	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}"
+	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
+	rm -f "${DESTDIR}/usr/local/lib/${LIB}"
+	install -b -g root -o root -m 644 "${LIB}" "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"
+	install -b -g root -o root -m 644 "${SLIB}" "${DESTDIR}/usr/local/lib/${SLIB}"
+	ln -s "${LIB}.${MAJORVER}.${MINORVER}.${REVISION}" "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}"
+	ln -s "${LIB}.${MAJORVER}.${MINORVER}"             "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
+	ln -s "${LIB}.${MAJORVER}"                         "${DESTDIR}/usr/local/lib/${LIB}"
+	install -b -g root -o root -m 644 ${PKGCONFIGFILE} ${DESTDIR}/usr/local/lib/pkgconfig/
+	cp $(HFILES) "${DESTDIR}/usr/local/include/ulib"
+	ldconfig
+
+clean:
+	rm -f $(LIB) $(OFILES) $(SLIB)
+
+.SUFFIXES: .m.o .o .m .c
+
+%.m.o:	%.m
+	${CC} -c ${CFLAGS} -x objective-c -fobjc-arc $<  ${INCLUDEDIRS} -o $@
+
+
+

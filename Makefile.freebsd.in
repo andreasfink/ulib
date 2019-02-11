@@ -5,16 +5,16 @@
 #
 
 CC=@CC@
-CFLAGS=  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude -arch x86_64 -O2 -DULIB_CONFIG=Release -D_POSIX_SOURCE
-LDFLAGS= -F/Library/Frameworks -framework Foundation -framework Security -arch x86_64
-LIBS=-lresolv -lm  -lpthread
-STATIC_LIBS=
-MAJORVER=1
-MINORVER=9
-REVISION=2
+CFLAGS=@CFLAGS@ -D_POSIX_SOURCE
+LDFLAGS=@LDFLAGS@
+LIBS=@LIBS@
+STATIC_LIBS=@STATIC_LIBS@
+MAJORVER=@MAJORVER@
+MINORVER=@MINORVER@
+REVISION=@REVISION@
 
-LIB=libulib.dylib
-SLIB=libulib.a
+LIB=lib@PROJECT_NAME@.@SHARED_LIBRARY_EXTENSION@
+SLIB=lib@PROJECT_NAME@.a
 
 PKGCONFIGFILE=ulib.pc
 
@@ -24,10 +24,6 @@ MOFILES  = $(MFILES:.m=.m.o)
 OFILES = $(MOFILES)
 
 INCLUDEDIRS=-I/usr/include/postgresql -I/usr/include/mysql-I/usr/include/libxml2 -I Classes/UniversalConfig -I Classes/UniversalHTTP -I Classes/UniversalJson -I Classes/UniversalLayers -I Classes/UniversalLog -I Classes/UniversalObject -I Classes/UniversalQueue -I Classes/UniversalRedis -I Classes/UniversalSocket -I Classes/UniversalUtilities -I Classes/UniversalTokenizer -I Classes/UniversalPlugin -I Classes 
-
-#
-# special compilation rule for this debug object so it can contain retain/release stuff
-#
 
 ${LIB}: ${OFILES}
 	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}

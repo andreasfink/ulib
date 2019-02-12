@@ -69,6 +69,7 @@ typedef unsigned long (*CRYPTO_CALLBACK_PTR)(void);
 #define	EMPTYSTRINGFORNIL(a)	(a?a:@"")
 #define	EMPTYIPFORNIL(a)		((a) ? (a) : @"0.0.0.0")
 
+
 static SSL_CTX *global_client_ssl_context = NULL;
 static SSL_CTX *global_server_ssl_context = NULL;
 static SSL_CTX *global_generic_ssl_context = NULL;

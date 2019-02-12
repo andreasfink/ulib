@@ -5,7 +5,7 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#ifdef  LINUX
+#if defined(LINUX) || defined(FREEBSD)
 #import <Foundation/Foundation.h>
 typedef NSUInteger NSDataSearchOptions;
 #define  NSDataSearchBackwards (1UL << 0)

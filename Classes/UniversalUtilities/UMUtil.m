@@ -384,7 +384,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
     {
         for (ifap = ifaphead; ifap && !found; ifap = ifap->ifa_next)
         {
-#if defined(__APPLE__)
+#if defined(__APPLE__) || defined(FREEBSD)
             if (ifap->ifa_addr->sa_family == AF_MACADDR)
             {
                 sdl = (struct sockaddr_dl *)ifap->ifa_addr;

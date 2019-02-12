@@ -16,4 +16,6 @@ typedef NSUInteger NSDataSearchOptions;
 - (NSRange)rangeOfData:(NSData *)dataToFind options:(NSDataSearchOptions)mask range:(NSRange)searchRange;
 
 @end
+
+
 #endif

@@ -2621,7 +2621,7 @@ case "$host" in
 		fi
 	fi
 
-	CFLAGS="$CFLAGS `$GNUSTEP_CONFIG-objc-flags`"
+	CFLAGS="$CFLAGS `$GNUSTEP_CONFIG --objc-flags`"
 	LDFLAGS="$LDFLAGS `/usr/local/bin/gnustep-config --base-libs --objc-libs`"
 	CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
 	CFLAGS="$CFLAGS `pkg-config --cflags libssl libcrypto`"

@@ -22,6 +22,8 @@
 #import "UMMutex.h"
 #import "UMThreadHelpers.h"
 
+#include <netinet/in.h>
+
 @implementation UMHost
 
 - (void) addAddress:(NSString *)a

@@ -8,6 +8,9 @@
 
 #import "NSString+UMSocket.h"
 #include <arpa/inet.h>
+#if defined(FREEBSD)
+#include <netinet/in.h>
+#endif
 
 @implementation NSString(UMSocket)
 

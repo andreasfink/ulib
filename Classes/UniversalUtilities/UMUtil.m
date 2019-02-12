@@ -15,8 +15,9 @@
 #include <TargetConditionals.h>
 #include <libkern/OSByteOrder.h>
 #include <IOKit/IOTypes.h>
+#endif
 
-#else  /* ! _APPLE__ */
+#ifdef LINUX
 #include <bsd/stdlib.h>
 #endif
 

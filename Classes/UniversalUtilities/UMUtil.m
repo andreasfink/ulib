@@ -860,12 +860,20 @@ NSString *UMBacktrace(void **stack_frames, size_t size)
     return s;
 }
 
+
+
+/*
+* uint64_t ulib_get_thread_id(void)
+*/
+
+
 #if defined(LINUX)
 
 #include <sys/types.h>
 #include "unistd.h"
 #include <sys/syscall.h>
 #include <sys/prctl.h>
+
 extern int pthread_setname_np (pthread_t __target_thread, __const char *__name);
 
 uint64_t ulib_get_thread_id(void)
@@ -874,7 +882,8 @@ uint64_t ulib_get_thread_id(void)
     return tid;
 }
 
-#elif defined(__APPLE__)
+
+#elif defined(__APPLE__) || defined(FREEBSD)
 
 uint64_t ulib_get_thread_id(void)
 {
@@ -883,14 +892,24 @@ uint64_t ulib_get_thread_id(void)
     pthread_threadid_np(me,&tid);
     return tid;
 }
+
+
 #else
 
-#error  We need gettid()
+#error please implement ulib_get_thread_id(void) for this platform
 
 #endif
 
 
-#if defined(LINUX) || defined(__APPLE__)
+
+
+/*
+ * NSString * uint64_t ulib_get_thread_name(pthread_t thread)
+ */
+
+
+
+#if defined(LINUX) || defined(__APPLE__) || defined(FREEBSD)
 extern int pthread_getname_np (pthread_t thread, char *buf,size_t len);
 NSString *ulib_get_thread_name(pthread_t thread)
 {
@@ -900,5 +919,7 @@ NSString *ulib_get_thread_name(pthread_t thread)
     return [NSString stringWithUTF8String:name];
 }
 #else
-#error We need something like pthread_getname_np defined
+
+#error please implement NSString *ulib_get_thread_name(pthread_t thread) for this platform
+
 #endif

@@ -9,7 +9,7 @@
 #import "UMLogFile.h"
 #import "UMLogFeed.h"
 #import "UMConfig.h"
-#ifdef LINUX
+#if defined(LINUX) || defined(FREEBSD)
 #import "NSData+UMLog.h"
 #endif
 #include <unistd.h>
@@ -338,7 +338,7 @@ error:
                     [chunk appendData:newChunk];
                 }
             
-                NSRange newLineRange = [(NSData *)chunk rangeOfData:newLineData options:0 range:NSMakeRange(0, [chunk length])];
+                NSRange newLineRange = [chunk rangeOfData:newLineData options:0 range:NSMakeRange(0, [chunk length])];
                 //include the length so we can include the delimiter in the string
                 NSRange subData = NSMakeRange(0, newLineRange.location+[newLineData length]);
                 if (newLineRange.location != NSNotFound)

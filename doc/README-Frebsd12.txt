@@ -17,7 +17,6 @@ pkg install git \
 	automake \
 	cmake \
 	subversion  \
-	clang-devel-8.d20181024 \
 	wget \
 	bash \
 	pkgconf \
@@ -36,8 +35,10 @@ pkg install git \
 	avahi \
 	portaudio \
 	flite \
-	pngwriter
-
+	pngwriter \
+	mariadb103-client \
+	postgresql96-client \
+	bash
 
 
 Download the sourcecode of gnustep and dependencies

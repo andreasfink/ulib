@@ -310,7 +310,7 @@ error:
                 }
             
                 NSData *chunkToBeAdded;
-#ifdef LINUX
+#if defined(LINUX) || defined(FREEBSD)
                 NSMutableData *chunk = [[fileHandler readDataOfLength:(unsigned int)chunkSize] mutableCopy];
 #else
                 NSMutableData *chunk = [[fileHandler readDataOfLength:chunkSize] mutableCopy];
@@ -324,7 +324,7 @@ error:
                  * the whole separator.*/
                 if([self splittedSepatorInChunk:chunk])
                 {
-#ifdef LINUX
+#if defined(LINUX) || defined(FREEBSD)
                     NSData *newChunk = [fileHandler readDataOfLength:(unsigned int)([newLineData length] - 1)];
 #else
                     NSData *newChunk = [fileHandler readDataOfLength:([newLineData length] - 1)];

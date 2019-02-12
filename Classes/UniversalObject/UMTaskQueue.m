@@ -149,3 +149,22 @@ int ulib_cpu_count()
 }
 #endif
 
+#ifdef FREEBSD
+int ulib_cpu_count()
+{
+    if(g_cpu_count)
+    {
+        return g_cpu_count;
+    }
+    int cpu_count = 0;
+    size_t buflen = sizeof(cpu_count);
+    sysctlbyname("hw.ncpu",&cpu_count,&buflen, NULL,0);
+    if(cpu_count <= 0)
+    {
+        return 5;
+    }
+    g_cpu_count = cpu_count;
+    return cpu_count;
+}
+#endif
+

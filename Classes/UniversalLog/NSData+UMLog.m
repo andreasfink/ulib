@@ -7,7 +7,7 @@
 
 #include <Foundation/Foundation.h>
 
-#ifdef LINUX
+#if defined(LINUX) || defined(FREEBSD)
 
 #import "NSData+UMLog.h"
 

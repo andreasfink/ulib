@@ -71,7 +71,7 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)start
 {
 
-#ifdef LINUX
+#if defined(LINUX) || defined(FREEBSD)
     urlCon = [[NSURLConnection alloc]initWithRequest:theRequest
                                             delegate:self];
 #else

@@ -219,11 +219,7 @@
         }
         else if(k==0)
         {
-#if defined(ECONNRESET)
             *eno = ECONNRESET;
-#else
-            *eno = ENOTCONN;
-#endif
         }
         return k;
     }

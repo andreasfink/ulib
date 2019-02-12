@@ -11,7 +11,6 @@
 
 /* byte order stuff: we use macros under MacOS X */
 #if defined __APPLE__
-
 #include <TargetConditionals.h>
 #include <libkern/OSByteOrder.h>
 #include <IOKit/IOTypes.h>
@@ -20,7 +19,6 @@
 #ifdef LINUX
 #include <bsd/stdlib.h>
 #endif
-
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,20 +35,20 @@
 #include <time.h>
 #include <pthread.h>
 #include <execinfo.h>
+#include <net/if.h>
 #include <ifaddrs.h>
 #include <sys/wait.h>
+#include <errno.h>
 
 #if defined(HAVE_SYS_SOCKIO_H)
 #include <sys/sockio.h>
 #endif
-#include <net/if.h>
-#include <errno.h>
 
 #if defined(HAVE_NET_IF_DL_H)
 #include <net/if_dl.h>
 #endif
 
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(FREEBSD)
 #define AF_MACADDR AF_LINK
 #else
 #define AF_MACADDR AF_NETLINK
@@ -371,7 +369,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
     unsigned char *   if_mac;
     int               found = 0;
     struct ifaddrs   *ifap = NULL;
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(FREEBSD)
     struct sockaddr_dl *sdl = NULL;
 #endif
     NSMutableDictionary	*dict =  [[NSMutableDictionary alloc] init];
@@ -384,7 +382,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
     {
         for (ifap = ifaphead; ifap && !found; ifap = ifap->ifa_next)
         {
-#if defined(__APPLE__)
+#if defined(__APPLE__) || defined(FREEBSD)
             if (ifap->ifa_addr->sa_family == AF_MACADDR)
             {
                 sdl = (struct sockaddr_dl *)ifap->ifa_addr;

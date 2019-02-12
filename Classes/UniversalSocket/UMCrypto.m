@@ -223,7 +223,7 @@
             *eno = ECONNRESET;
 #else
             *eno = ENOTCONN;
-#fi
+#endif
         }
         return k;
     }

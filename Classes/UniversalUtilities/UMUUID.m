@@ -7,7 +7,12 @@
 
 #import "UMUUID.h"
 #include <unistd.h>
+
+#if defined(FREEBSD)
+#include <sys/uuid.h>
+#else
 #include <uuid/uuid.h>
+#endif
 
 @implementation UMUUID
 

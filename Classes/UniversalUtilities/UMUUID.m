@@ -6,10 +6,11 @@
 //
 
 #import "UMUUID.h"
+#undef uuid_t
 #include <unistd.h>
 
 #if defined(FREEBSD)
-#include <sys/uuid.h>
+#include <uuid.h>
 #else
 #include <uuid/uuid.h>
 #endif

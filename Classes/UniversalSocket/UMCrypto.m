@@ -207,7 +207,11 @@
         if(k<0)
         {
             int e = errno;
-            if (e == EINTR || e == EAGAIN || e == EWOULDBLOCK)
+#if defined(EWOULDBLOCK)
+            if ((e == EINTR) || (e == EAGAIN) || (e == EWOULDBLOCK))
+#else
+            if ((e == EINTR) || (e == EAGAIN))
+#endif
             {
                 *eno = e;
                 return 0;
@@ -215,7 +219,11 @@
         }
         else if(k==0)
         {
+#if defined(ECONNRESET)
             *eno = ECONNRESET;
+#else
+            *eno = ENOTCONN;
+#fi
         }
         return k;
     }

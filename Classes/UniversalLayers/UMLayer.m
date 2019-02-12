@@ -17,6 +17,11 @@
 #import "NSString+UniversalObject.h"
 #import "UMAssert.h"
 
+#if defined(FREEBSD)
+#include <errno.h>
+#include <sys/errno.h>
+#endif
+
 @implementation UMLayer
 
 - (void)queueFromLower:(UMLayerTask *)job
@@ -179,7 +184,7 @@
     {
         case 0:
             return;
-            
+
         case EPROTONOSUPPORT:
             [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EPROTONOSUPPORT: The protocol type or the specified protocol is not supported within this domain.",location]];
             break;

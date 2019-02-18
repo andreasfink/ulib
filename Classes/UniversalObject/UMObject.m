@@ -412,12 +412,6 @@ static FILE *alloc_log;
         }
         pthread_mutex_unlock(object_stat_mutex);
     }
-
-    if(_magic)
-    {
-        *_magic = '~';
-        free(_magic);
-    }
     _magic = NULL;
 #if !defined(USING_ARC)
     [self.logFeed release];

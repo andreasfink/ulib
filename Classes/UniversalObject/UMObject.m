@@ -324,14 +324,8 @@ static FILE *alloc_log;
         @autoreleasepool
 #endif
         {
-            NSString *m = [self objectStatisticsName];
-            size_t l = strlen(m.UTF8String);
-            _magic = calloc(l+1,1);
-            if(_magic)
-            {
-                strncpy(_magic,m.UTF8String,l);
-                umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
-            }
+            _magic =  [[self class] description].UTF8String;
+            _umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
         }
     
 #endif
@@ -384,7 +378,7 @@ static FILE *alloc_log;
 
 - (void)dealloc
 {
-    if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
+    if(_umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
         NSLog(@"Dealloc [%p] rc=%d",self,self.ulib_retain_counter);
     }
@@ -498,7 +492,7 @@ static FILE *alloc_log;
 {
     UMObject *r = [[UMObject allocWithZone:zone]init];
 
-    r->umobject_flags = umobject_flags;
+    r->_umobject_flags = _umobject_flags;
     r->_magic = _magic;
     r.logFeed = _logFeed;
     if(_objectStatisticsName != NULL)
@@ -589,7 +583,7 @@ BOOL umobject_object_stat_is_enabled(void)
 {
     [super retain];
     self.ulib_retain_counter++;
-    if(umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
+    if(_umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
             [self retainDebug];
     }
@@ -601,7 +595,7 @@ BOOL umobject_object_stat_is_enabled(void)
 - (oneway void)release
 {
     self.ulib_retain_counter--;
-    if(umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
+    if(_umobject_flags & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
         [self releaseDebug];
     }
@@ -612,7 +606,7 @@ BOOL umobject_object_stat_is_enabled(void)
 - (void)retainDebug
 {
 #if !defined(USING_ARC)
-    if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
+    if(_umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
         NSLog(@"Retain [%p] rc=%d",self,self.ulib_retain_counter);
         NSLog(@"Called from %@",UMBacktrace(NULL,0));
@@ -624,7 +618,7 @@ BOOL umobject_object_stat_is_enabled(void)
 - (void)releaseDebug
 {
 #if !defined(USING_ARC)
-    if(umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
+    if(_umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
         NSLog(@"Release [%p] rc=%d",self,self.ulib_retain_counter);
         NSLog(@"Called from %@",UMBacktrace(NULL,0))
@@ -635,7 +629,7 @@ BOOL umobject_object_stat_is_enabled(void)
 - (void)enableRetainReleaseLogging
 {
 #if !defined(USING_ARC)
-    umobject_flags |= UMOBJECT_FLAG_LOG_RETAIN_RELEASE;
+    _umobject_flags |= UMOBJECT_FLAG_LOG_RETAIN_RELEASE;
 #endif
 }
 

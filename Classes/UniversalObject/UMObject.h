@@ -52,7 +52,8 @@ BOOL umobject_object_stat_is_enabled(void);
 
 @interface UMObject : NSObject 
 {
-    const char  *_magic;        /*!< c pointer to the class name which has instantiated this object. Only populated if UMOBJECT_USE_MAGIC is set to 1. Useful for debugging with a limited verison of lldb */
+
+    const char  _magic[256];        /*!< c pointer to the class name which has instantiated this object. Only populated if UMOBJECT_USE_MAGIC is set to 1. Useful for debugging with a limited verison of lldb */
     UMLogFeed   *_logFeed;                  /*!< The log feed this object can use to log anything related to this UMObject */
     NSString    *_objectStatisticsName;
     uint32_t    _umobject_flags; /*!< internal flags to remember which options this object has */
@@ -61,6 +62,8 @@ BOOL umobject_object_stat_is_enabled(void);
 
 @property (readwrite,strong,atomic) UMLogFeed *logFeed;
 @property (readwrite,assign,atomic) int ulib_retain_counter;
+
+- (UMObject *) init;
 
 - (void) addLogFromConfigGroup:(NSDictionary *)grp
                      toHandler:(UMLogHandler *)handler
@@ -95,7 +98,6 @@ BOOL umobject_object_stat_is_enabled(void);
 + (NSCharacterSet *)newlineCharacterSet; /* this differs from NSCharacterSet version by having LINE SEPARATOR' (U+2028)
                                                        in it as well (UTF8 E280AD) */
 
-- (id) init;
 - (NSString *) descriptionWithPrefix:(NSString *)prefix;
 - (void)runSelectorInBackground:(SEL)aSelector
                      withObject:(id)anArgument;

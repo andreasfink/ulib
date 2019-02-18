@@ -313,7 +313,7 @@ static FILE *alloc_log;
     return _charset;
 }
 
-- (id) init
+- (UMObject *) init
 {
     self=[super init];
     if(self)
@@ -324,7 +324,7 @@ static FILE *alloc_log;
         @autoreleasepool
 #endif
         {
-            _magic =  [[self class] description].UTF8String;
+            strncpy(&_magic, [[self class] description].UTF8String, sizeof(_magic));
             _umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
         }
     

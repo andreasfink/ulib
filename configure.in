@@ -49,7 +49,7 @@ RANLIB="ranlib"
 LIBS=""
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
-DEPENDENT_PKGCONFIGS=libssl libcrypto
+DEPENDENT_PKGCONFIGS="libssl libcrypto"
 
 PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export PKG_CONFIG_PATH
@@ -118,7 +118,7 @@ case "$host" in
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
     CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
     AC_DEFINE(HAVE_OPENSSL)
-   	SHARED_LIBRARY_EXTENSION="so"
+	SHARED_LIBRARY_EXTENSION="so"
 	;;
 
   *-freebsd*)

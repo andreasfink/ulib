@@ -53,7 +53,7 @@ BOOL umobject_object_stat_is_enabled(void);
 @interface UMObject : NSObject 
 {
 
-    const char  _magic[256];        /*!< c pointer to the class name which has instantiated this object. Only populated if UMOBJECT_USE_MAGIC is set to 1. Useful for debugging with a limited verison of lldb */
+    char        _magic[256];        /*!< c pointer to the class name which has instantiated this object. Only populated if UMOBJECT_USE_MAGIC is set to 1. Useful for debugging with a limited verison of lldb */
     UMLogFeed   *_logFeed;                  /*!< The log feed this object can use to log anything related to this UMObject */
     NSString    *_objectStatisticsName;
     uint32_t    _umobject_flags; /*!< internal flags to remember which options this object has */

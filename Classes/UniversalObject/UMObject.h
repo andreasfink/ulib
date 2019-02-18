@@ -39,7 +39,9 @@ BOOL umobject_object_stat_is_enabled(void);
 #define UMOBJECT_USE_MAGIC                  1
 #define UMOBJECT_FLAG_HAS_MAGIC             0x01
 #define UMOBJECT_FLAG_LOG_RETAIN_RELEASE    0x02
-
+#define UMOBJECT_FLAG_IS_COPIED             0x04
+#define UMOBJECT_FLAG_IS_INITIALIZED        0xCC00
+#define UMOBJECT_FLAG_IS_RELEASED           0x3300
 /*!
  @class UMObject
  @brief The root object for ulib
@@ -53,7 +55,7 @@ BOOL umobject_object_stat_is_enabled(void);
 @interface UMObject : NSObject 
 {
 
-    char        _magic[63];        /*!< c pointer to the class name which has instantiated this object. Only populated if UMOBJECT_USE_MAGIC is set to 1. Useful for debugging with a limited verison of lldb */
+    char        *_magic;        /*!< c pointer to the class name which has instantiated this object. Only populated if UMOBJECT_USE_MAGIC is set to 1. Useful for debugging with a limited verison of lldb */
     UMLogFeed   *_logFeed;                  /*!< The log feed this object can use to log anything related to this UMObject */
     NSString    *_objectStatisticsName;
     uint32_t    _umobject_flags; /*!< internal flags to remember which options this object has */

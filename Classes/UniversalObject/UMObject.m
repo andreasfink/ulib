@@ -325,10 +325,14 @@ static FILE *alloc_log;
 #endif
         {
             const char *str = [[self class] description].UTF8String;
-            strncpy(&_magic[0], str, sizeof(_magic));
-            _umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
+            size_t len = strlen(str)+1;
+            _magic = calloc(1,len);
+            if(_magic)
+            {
+                strncpy(_magic, str, len);
+                _umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
+            }
         }
-    
 #endif
         if(alloc_file)
         {
@@ -374,11 +378,13 @@ static FILE *alloc_log;
             }
         }
     }
+    _umobject_flags  |= UMOBJECT_FLAG_IS_INITIALIZED;
     return self;
 }
 
 - (void)dealloc
 {
+
     if(_umobject_flags  & UMOBJECT_FLAG_LOG_RETAIN_RELEASE)
     {
         NSLog(@"Dealloc [%p] rc=%d",self,self.ulib_retain_counter);
@@ -413,7 +419,12 @@ static FILE *alloc_log;
         }
         pthread_mutex_unlock(object_stat_mutex);
     }
-    _magic[0] = '~';
+    if(_magic)
+    {
+        *_magic = '~';
+    }
+    _magic = NULL;
+    _umobject_flags  |= UMOBJECT_FLAG_IS_RELEASED;
 #if !defined(USING_ARC)
     [self.logFeed release];
     [super dealloc];
@@ -488,7 +499,24 @@ static FILE *alloc_log;
     UMObject *r = [[UMObject allocWithZone:zone]init];
 
     r->_umobject_flags = _umobject_flags;
-    strncpy(&r->_magic[0],&_magic[0],sizeof(_magic));
+
+#ifdef UMOBJECT_USE_MAGIC
+
+#if !defined(USING_ARC)
+    @autoreleasepool
+#endif
+    {
+        const char *str = _magic;
+        size_t len = strlen(str)+1;
+        r->_magic = calloc(1,len);
+        if(r->_magic)
+        {
+            strncpy(r->_magic, str, len);
+            r->_umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
+        }
+    }
+#endif
+    r->_umobject_flags |= UMOBJECT_FLAG_IS_COPIED;
     r.logFeed = _logFeed;
     if(_objectStatisticsName != NULL)
     {

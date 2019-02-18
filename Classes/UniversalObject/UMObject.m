@@ -324,7 +324,8 @@ static FILE *alloc_log;
         @autoreleasepool
 #endif
         {
-            strncpy(&_magic, [[self class] description].UTF8String, sizeof(_magic));
+            const char *str = [[self class] description].UTF8String;
+            strncpy(&_magic[0], str, sizeof(_magic));
             _umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
         }
     
@@ -412,7 +413,7 @@ static FILE *alloc_log;
         }
         pthread_mutex_unlock(object_stat_mutex);
     }
-    _magic = NULL;
+    _magic[0] = '~';
 #if !defined(USING_ARC)
     [self.logFeed release];
     [super dealloc];
@@ -487,7 +488,7 @@ static FILE *alloc_log;
     UMObject *r = [[UMObject allocWithZone:zone]init];
 
     r->_umobject_flags = _umobject_flags;
-    r->_magic = _magic;
+    strncpy(&r->_magic[0],&_magic[0],sizeof(_magic));
     r.logFeed = _logFeed;
     if(_objectStatisticsName != NULL)
     {

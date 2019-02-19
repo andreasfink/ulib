@@ -19,9 +19,9 @@
 
 /* Important:  if alloc/dealloc logging is needed, this file must be compiled with -fno-objc-arc !*/
 
-static NSFileHandle *alloc_file = NULL;
-static NSMutableDictionary *object_stat = NULL;
-static pthread_mutex_t *object_stat_mutex = NULL;
+static NSFileHandle         *alloc_file = NULL;
+static NSMutableDictionary  *object_stat = NULL;
+static pthread_mutex_t      *object_stat_mutex = NULL;
  
 extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
@@ -57,7 +57,6 @@ int umobject_enable_alloc_logging(const char *f)
 #else
     return -1;
 #endif //RETAIN_RELEASE_DEBUG
-    
 }
 
 void umobject_disable_alloc_logging(void)

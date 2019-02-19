@@ -376,8 +376,8 @@ static FILE *alloc_log;
                 pthread_mutex_unlock(object_stat_mutex);
             }
         }
+        _umobject_flags  |= UMOBJECT_FLAG_IS_INITIALIZED;
     }
-    _umobject_flags  |= UMOBJECT_FLAG_IS_INITIALIZED;
     return self;
 }
 

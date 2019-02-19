@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import "UMMutex.h"
-#define MAGIC_SIZE  64
 
 @class UMHistoryLog, UMConfig, UMLogFeed, UMLogHandler;
 

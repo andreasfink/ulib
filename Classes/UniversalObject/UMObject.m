@@ -314,7 +314,7 @@ static FILE *alloc_log;
 
 - (UMObject *) init
 {
-    self=[super init];
+    self = [super init];
     if(self)
     {
 #ifdef UMOBJECT_USE_MAGIC

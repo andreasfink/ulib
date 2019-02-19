@@ -58,11 +58,14 @@ BOOL umobject_object_stat_is_enabled(void);
     UMLogFeed   *_logFeed;                  /*!< The log feed this object can use to log anything related to this UMObject */
     NSString    *_objectStatisticsName;
     uint32_t    _umobject_flags; /*!< internal flags to remember which options this object has */
-    int         _ulib_retain_counter;
+    uint32_t    _ulib_retain_counter;
 }
 
-@property (readwrite,strong,atomic) UMLogFeed *logFeed;
-@property (readwrite,assign,atomic) int ulib_retain_counter;
+@property (readonly,assign,atomic)  char        *magic;
+@property (readwrite,strong,atomic) UMLogFeed   *logFeed;
+@property (readwrite,assign,atomic) NSString    *objectStatisticsName;
+@property (readonly,assign,atomic)  uint32_t    umobject_flags;
+@property (readonly,assign,atomic)  uint32_t    ulib_retain_counter;
 
 - (UMObject *) init;
 
@@ -113,8 +116,6 @@ BOOL umobject_object_stat_is_enabled(void);
 - (void)retainDebug; /*!< gets called at retain event */
 - (void)releaseDebug; /*!< gets called when a release occurs */
 - (void)enableRetainReleaseLogging; /*!< if set retain/release cycles get logged to the console with NSLog */
-
-@property(readwrite,strong,atomic)  NSString *objectStatisticsName;
 
 @end
 

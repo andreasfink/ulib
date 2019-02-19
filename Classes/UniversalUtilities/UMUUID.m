@@ -10,16 +10,46 @@
 #include <unistd.h>
 
 #if defined(FREEBSD)
-<<<<<<< HEAD
-#undef uuid_t
-=======
->>>>>>> 2783ed409437ddece6b293f0a303ad7b449561d0
+//#undef uuid_t
 #include <uuid.h>
 #else
 #include <uuid/uuid.h>
 #endif
 
 @implementation UMUUID
+
+#ifdef	FREEBSD
+
++(NSString *)UUID
+{ 
+    char uuid_string2[40];
+    memset(uuid_string,0x00,40);
+    uuid_t uu;
+    uint32_t status;
+    uuid_create(&uu,&status);
+    uuid_to_string(uu,uuid_string2,&status);
+
+    NSString *uniqueId = NULL;
+
+    time_t              now;
+    struct tm           trec;
+
+
+    time(&now);
+    gmtime_r(&now, &trec);
+    trec.tm_mon++;
+    uniqueId =  [NSString stringWithFormat:@"%04d%02d%02d-%02d%02d%02d-%s",
+                 trec.tm_year+1900,
+                 trec.tm_mon,
+                 trec.tm_mday,
+                 trec.tm_hour,
+                 trec.tm_min,
+                 trec.tm_sec,
+                 uuid_string2];
+    return uniqueId;
+}
+
+#else
 
 +(NSString *)UUID
 {
@@ -62,5 +92,6 @@
     uuid_clear(uu);
     return uniqueId;
 }
+#endif
 
 @end

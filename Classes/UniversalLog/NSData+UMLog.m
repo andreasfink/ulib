@@ -8,6 +8,7 @@
 #include <Foundation/Foundation.h>
 
 #if defined(LINUX) || defined(FREEBSD)
+/* this stuff is not in Gnustep but in OSX so we emulate it here */
 
 #import "NSData+UMLog.h"
 

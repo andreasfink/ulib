@@ -9,6 +9,7 @@
 #import "UMBackgrounder.h"
 #import "UMSleeper.h"
 #import "UMThreadHelpers.h"
+#import "UMAssert.h"
 
 #define UMSLEEPER_DEFAULT_SLEEP_TIME 500000 /* 500ms */
 
@@ -17,6 +18,7 @@
 
 - (UMBackgrounder *)init
 {
+
     UMSleeper *ws = [[UMSleeper alloc]initFromFile:__FILE__
                                                line:__LINE__
                                            function:__func__];
@@ -36,16 +38,16 @@
         [_control_sleeper prepare];
         [ws prepare];
         self.workSleeper = ws;
+        _startStopLock = [[UMMutex alloc]init];
     }
     return self;
 }
 
 - (void)startBackgroundTask
 {
-    if(_control_sleeper == NULL)
-    {
-        @throw([NSException exceptionWithName:@"NOT_INITIALIZED" reason:@"control sleeper in UMBackgrounder is not initialized" userInfo:NULL]);
-    }
+    UMAssert(_startStopLock,@"_startStopLock is NULL");
+    UMAssert(_control_sleeper,@"_control_sleeper is NULL");
+
 
     [_startStopLock lock];
     @try
@@ -79,6 +81,8 @@
 
 - (void)shutdownBackgroundTask
 {
+    UMAssert(_startStopLock,@"_startStopLock is NULL");
+    UMAssert(_control_sleeper,@"_control_sleeper is NULL");
     [_startStopLock lock];
     @try
     {

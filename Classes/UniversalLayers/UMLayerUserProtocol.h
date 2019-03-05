@@ -12,6 +12,7 @@
 
 @protocol UMLayerUserProtocol<NSObject>
 
+- (NSString *)layerName;
 - (UMLogFeed *)logFeed;
 - (void)setLogFeed:(UMLogFeed *)lf;
 

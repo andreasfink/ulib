@@ -15,15 +15,20 @@
 #include <time.h>
 @implementation UMTimer
 
-- (UMTimer *)initWithTarget:(id)target selector:(SEL)selector
+- (UMTimer *)initWithTarget:(id)target
+                   selector:(SEL)selector
+                     object:(id)object
+                    seconds:(NSTimeInterval)d
+                       name:(NSString *)n
+                    repeats:(BOOL)r
 {
-
     return [self initWithTarget:target
                        selector:selector
-                         object:NULL
-                       duration:0
-                           name:NULL
-                        repeats:NO];
+                         object:object
+                        seconds:d
+                           name:n
+                        repeats:r
+                runInForeground:NO];
 }
 
 - (UMTimer *)initWithTarget:(id)target
@@ -32,6 +37,7 @@
                     seconds:(NSTimeInterval)d
                        name:(NSString *)n
                     repeats:(BOOL)r
+            runInForeground:(BOOL)inForeground
 {
     self =[super init];
     if(self)
@@ -48,6 +54,7 @@
         _name = n;
         _repeats = r;
         _timerMutex = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"timer %@",n]];
+        _runCallbackInForeground = inForeground;
 
     }
     return self;
@@ -57,6 +64,19 @@
                        duration:(UMMicroSec)(d * 1000000.0)
                            name:n
                         repeats:r];
+}
+
+
+- (UMTimer *)initWithTarget:(id)target selector:(SEL)selector
+{
+
+    return [self initWithTarget:target
+                       selector:selector
+                         object:NULL
+                        seconds:0
+                           name:NULL
+                        repeats:NO
+               runInForeground:NO];
 }
 
 - (void)setSeconds:(NSTimeInterval)sec

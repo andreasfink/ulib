@@ -18,11 +18,7 @@
 
 - (UMBackgrounder *)init
 {
-
-    UMSleeper *ws = [[UMSleeper alloc]initFromFile:__FILE__
-                                               line:__LINE__
-                                           function:__func__];
-    return [self initWithName:@"(unnamed)" workSleeper:ws];
+    return [self initWithName:@"(unnamed)" workSleeper:NULL];
 }
 
 - (UMBackgrounder *)initWithName:(NSString *)n
@@ -31,13 +27,22 @@
     self = [super init];
     if(self)
     {
+        if(ws==NULL)
+        {
+            _workSleeper = [[UMSleeper alloc]initFromFile:__FILE__
+                                                      line:__LINE__
+                                                  function:__func__];
+            [ws prepare];
+        }
+        else
+        {
+            _workSleeper = ws;
+        }
         self.name = n;
         _control_sleeper = [[UMSleeper alloc]initFromFile:__FILE__
                                                     line:__LINE__
                                                 function:__func__];
         [_control_sleeper prepare];
-        [ws prepare];
-        self.workSleeper = ws;
         _startStopLock = [[UMMutex alloc]init];
     }
     return self;

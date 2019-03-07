@@ -44,16 +44,15 @@
                      object:(id)object
                     seconds:(NSTimeInterval)d
                        name:(NSString *)n
-                    repeats:(BOOL)r;
+                    repeats:(BOOL)r
+            runInForeground:(BOOL)inForeground;
 
-/* DEPRECATED
 - (UMTimer *)initWithTarget:(id)target
                    selector:(SEL)selector
                      object:(id)object
-                   duration:(UMMicroSec)dur
+                    seconds:(NSTimeInterval)d
                        name:(NSString *)n
-                    repeats:(BOOL)rep;
-*/
+                    repeats:(BOOL)r;
 
 - (UMTimer *)initWithTarget:(id)target
                    selector:(SEL)selector;

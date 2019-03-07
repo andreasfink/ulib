@@ -38,7 +38,6 @@ typedef enum UMBackgrounder_runningStatus
 } UMBackgrounder_runningStatus;
 
 
-
 @interface UMBackgrounder : UMObject
 {
     NSString *_name;
@@ -49,10 +48,10 @@ typedef enum UMBackgrounder_runningStatus
     UMMutex *_startStopLock;
 }
 
-@property(readwrite,strong) NSString *name;
-@property(readwrite,strong) UMSleeper *control_sleeper;
-@property(readwrite,strong) UMSleeper *workSleeper;
-@property(readwrite,assign) BOOL enableLogging;
+@property(readwrite,strong,atomic) NSString *name;
+@property(readwrite,strong,atomic) UMSleeper *control_sleeper;
+@property(readwrite,strong,atomic) UMSleeper *workSleeper;
+@property(readwrite,assign,atomic) BOOL enableLogging;
 @property(readwrite,assign,atomic) UMBackgrounder_runningStatus runningStatus;
 
 - (UMBackgrounder *)initWithName:(NSString *)n workSleeper:(UMSleeper *)ws;

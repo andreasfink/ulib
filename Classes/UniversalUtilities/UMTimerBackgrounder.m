@@ -12,18 +12,21 @@
 #import "UMSleeper.h"
 #import "UMUtil.h"
 
-static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
+static UMTimerBackgrounder *_sharedTimerBackgrounder = NULL;
 
 @implementation UMTimerBackgrounder
 
-+(UMTimerBackgrounder *)sharedInstance
++ (UMTimerBackgrounder *)sharedInstance
 {
-    if(sharedTimerBackgrounder==NULL)
+    @synchronized (self)
     {
-        sharedTimerBackgrounder = [[UMTimerBackgrounder alloc]init];
-        [sharedTimerBackgrounder startBackgroundTask];
+        if(_sharedTimerBackgrounder==NULL)
+        {
+            _sharedTimerBackgrounder = [[UMTimerBackgrounder alloc]init];
+            [_sharedTimerBackgrounder startBackgroundTask];
+        }
     }
-    return sharedTimerBackgrounder;
+    return _sharedTimerBackgrounder;
 }
 
 - (UMTimerBackgrounder *)init
@@ -31,7 +34,7 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
     self = [super initWithName:@"UMTimerBackgrounder" workSleeper:NULL];
     if(self)
     {
-        timers = [[NSMutableArray alloc] init];
+        _timers = [[NSMutableArray alloc] init];
         _timersLock =[[UMMutex alloc]initWithName:@"timers-lock"];
     }
     return self;
@@ -39,15 +42,15 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
 
 - (void)addTimer:(UMTimer *)t
 {
-    if ([t objectToCall] == NULL)
+    if (t.objectToCall == NULL)
     {
         @throw([NSException exceptionWithName:@"INVALID_TIMER"
                                        reason:@"trying to add timer with no target"
                                      userInfo:@{    @"backtrace":   UMBacktrace(NULL,0) }]);
     }
     [_timersLock lock];
-    [timers removeObject:t]; /* in case its already there */
-    [timers addObject:t];
+    [_timers removeObject:t]; /* in case its already there */
+    [_timers addObject:t];
     [_timersLock unlock];
 }
 
@@ -56,7 +59,7 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
     if(t)
     {
         [_timersLock lock];
-        [timers removeObject:t];
+        [_timers removeObject:t];
         [_timersLock unlock];
     }
 }
@@ -70,7 +73,7 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
     UMMicroSec now = ulib_microsecondTime();
     UMMicroSec nextWakeupIn = 1000000; /* we wake up at least every second or earlier */
     [_timersLock lock];
-    for(UMTimer *t in timers)
+    for(UMTimer *t in _timers)
     {
         UMMicroSec timeLeft = [t timeLeft:now];
         if(timeLeft < 0)
@@ -85,7 +88,7 @@ static UMTimerBackgrounder *sharedTimerBackgrounder = NULL;
     }
     for(UMTimer *t in dueTimers)
     {
-        [timers removeObject:t];
+        [_timers removeObject:t];
     }
     [_timersLock unlock];
     for(UMTimer *t in dueTimers)

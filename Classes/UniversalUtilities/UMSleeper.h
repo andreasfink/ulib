@@ -8,15 +8,17 @@
 #import "UMObject.h"
 #import "UMMicroSec.h"
 
-typedef int32_t UMSleeper_Signal; /* note Sleeper signal is a bitmask */
+typedef uint8_t UMSleeper_Signal; /* note Sleeper signal is a bitmask */
 
-#define UMSleeper_WakeupSignal              (UMSleeper_Signal)0x1FFF
-#define UMSleeper_AnySignal                 (UMSleeper_Signal)0xFFFF
+#define UMSleeper_AnySignalMask             (UMSleeper_Signal)0xFF
+#define UMSleeper_Error                     (UMSleeper_Signal)0xFE
+#define UMSleeper_TimerExpired              (UMSleeper_Signal)0x00
 
-#define UMSleeper_HasWorkSignal             (UMSleeper_Signal)0x1000
-#define UMSleeper_StartupCompletedSignal    (UMSleeper_Signal)0x2000
-#define UMSleeper_ShutdownOrderSignal       (UMSleeper_Signal)0x4000
-#define UMSleeper_ShutdownCompletedSignal   (UMSleeper_Signal)0x8000
+#define UMSleeper_WakeupSignal              (UMSleeper_Signal)0x01
+#define UMSleeper_HasWorkSignal             (UMSleeper_Signal)0x02
+#define UMSleeper_StartupCompletedSignal    (UMSleeper_Signal)0x04
+#define UMSleeper_ShutdownOrderSignal       (UMSleeper_Signal)0x08
+#define UMSleeper_ShutdownCompletedSignal   (UMSleeper_Signal)0x10
 
 @interface UMSleeper : UMObject
 {
@@ -35,13 +37,11 @@ typedef int32_t UMSleeper_Signal; /* note Sleeper signal is a bitmask */
 @property(readwrite,assign,atomic) int txpipe;
 @property(readwrite,assign,atomic) BOOL debug;
 
-
-
 - (UMSleeper *)initFromFile:(const char *)file line:(long)line function:(const char *)function;
 - (void) prepare;
 - (void) dealloc;
-- (int) sleep:(UMMicroSec) microseconds wakeOn:(UMSleeper_Signal)sig;	/* returns signal number (1-0xFFFF) if signal was received, 0 on timer epxiry, -1 on error  */
-- (int) sleep:(UMMicroSec) microseconds;	/* returns returns signal number (1-0xFFFF)if interrupted, 0 if timer expired */
+- (UMSleeper_Signal) sleep:(UMMicroSec) microseconds wakeOn:(UMSleeper_Signal)sig;	/* returns signal number if signal was received, 0 on timer epxiry, or UMSleeper_Error  */
+- (UMSleeper_Signal) sleep:(UMMicroSec) microseconds;	/* returns returns signal number (1-0xFFFF)if interrupted, 0 if timer expired */
 - (void) reset;
 - (void) wakeUp:(UMSleeper_Signal)signal;
 - (void) wakeUp;

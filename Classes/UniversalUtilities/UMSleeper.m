@@ -43,7 +43,7 @@ static void socket_set_blocking(int fd, int blocking)
     self = [super init];
     if(self)
     {
-        self.isPrepared = NO;
+        _isPrepared = NO;
         _ifile = file;
         _iline = line;
         _ifunction = function;
@@ -151,7 +151,7 @@ static void flushpipe(int fd)
 //#define SLICE_TIME   (2073600LL*1000LL*1000LL)/* 24 days is about the max which fits into a signed integer */
 #define SLICE_TIME (1000LL*1000LL*10LL*60LL)   /* max 10 minutes for testing */
 
-- (int) sleep:(UMMicroSec) microseconds
+- (UMSleeper_Signal) sleep:(UMMicroSec) microseconds
        wakeOn:(UMSleeper_Signal)sig;	/* returns signal value if signal was received, 0 on timer epxiry, -1 on error  */
 {
     struct pollfd pollfd[2];
@@ -161,9 +161,9 @@ static void flushpipe(int fd)
     UMMicroSec end_time = start_time + microseconds;
     UMMicroSec now;
 
-    if(microseconds < 10LL)
+    if(microseconds <= 1000LL)
     {
-       @throw([NSException exceptionWithName:@"OUT_OF_BOUNDS" reason:@"sleeping for less than 10µs is kind of ridiculous" userInfo:NULL]);
+       @throw([NSException exceptionWithName:@"OUT_OF_BOUNDS" reason:@"can not sleep for less than 1ms is kind of ridiculous" userInfo:NULL]);
     }
     
     if(_debug)
@@ -216,32 +216,36 @@ static void flushpipe(int fd)
             /* something to read */
             UMSleeper_Signal signalToRead=0xFE;
             ssize_t bytes;
-            uint8_t buffer[4];
-            bytes = read(self.rxpipe, &buffer, 4);
-            if(bytes == 4)
+            uint8_t buffer[1];
+            bytes = read(self.rxpipe, &buffer, 1);
+            if(bytes == 1)
             {
-                signalToRead = (buffer[0] << 24) | (buffer[1] << 16) | (buffer[2] <<8) | buffer[3];
-                if(signalToRead &  sig) /* checking if signal's bit is set */
+                signalToRead = (buffer[0]);
+                if(signalToRead & sig) /* checking if signal's bit is set */
                 {
                     if(_debug)
                     {
-                        NSLog(@"Signal 0x%04X received",sig);
+                        NSLog(@"Signal 0x%01X received",(int)sig);
                     }
-                    return (int)signalToRead;
+                    return (UMSleeper_Signal)signalToRead;
                 }
                 if(_debug)
                 {
-                    NSLog(@"Ignoring signal 0x%04X",sig);
+                    NSLog(@"Ignoring signal 0x%01X",(int)sig);
                 }
             }
         }
+        else if(pollresult < 0)
+        {
+            return UMSleeper_Error;
+        }
     }
-    return pollresult; /* we get here on timeout only */
+    return UMSleeper_TimerExpired; /* we get here on timeout only */
 }
 
-- (int) sleep:(long long) microseconds	/* returns 1 if interrupted, 0 if timer expired */
+- (UMSleeper_Signal) sleep:(long long) microseconds	/* returns 1 if interrupted, 0 if timer expired */
 {
-    return [self sleep:microseconds wakeOn:UMSleeper_AnySignal];
+    return [self sleep:microseconds wakeOn:UMSleeper_AnySignalMask];
 };	/* returns signal if signal was received, 0 on timer epxiry, -1 on error  */
 
 - (void) reset
@@ -261,12 +265,9 @@ static void flushpipe(int fd)
 
     if(_txpipe >= 0)
     {
-        uint8_t bytes[4];
-        bytes[0] = (sig & 0xFF000000 ) >> 24;
-        bytes[1] = (sig & 0x00FF0000 ) >> 16;
-        bytes[2] = (sig & 0x0000FF00 ) >> 8;
-        bytes[3] = (sig & 0x000000FF ) >> 0;
-        write(_txpipe, &bytes,4);
+        uint8_t bytes[1];
+        bytes[0] = sig;
+        write(_txpipe, &bytes,1);
     }
 }
 

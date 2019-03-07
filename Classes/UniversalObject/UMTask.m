@@ -12,16 +12,13 @@
 #import "UMThreadHelpers.h"
 
 @implementation UMTask
-@synthesize name;
-@synthesize enableLogging;
-@synthesize sync;
 
 - (UMTask *)initWithName:(NSString *)n
 {
     self = [super init];
     if(self)
     {
-        self.name = n;
+        _name = n;
         _runMutex = [[UMMutex alloc]initWithName:@"umtask-lock"];
     }
     return self;
@@ -32,12 +29,12 @@
     [_runMutex lock];
     @try
     {
-        ulib_set_thread_name([NSString stringWithFormat:@"%@ (executing: %@)",bg.name,self.name]);
-        if(enableLogging)
+        ulib_set_thread_name([NSString stringWithFormat:@"%@ (executing: %@)",bg.name,_name]);
+        if(_enableLogging)
         {
-            if(self.name==NULL)
+            if(_name==NULL)
             {
-                NSLog (@"self.name is NULL!");
+                NSLog (@"_name is NULL!");
             }
             NSLog(@"Task %@ execution on backgrounder %@",self.name,bg.name);
         }

@@ -27,46 +27,42 @@
 
 @interface UMLayer : UMObject
 {
+    NSString                            *_layerName;
+    NSString                            *_layerType;
     UMTaskQueueMulti                    *_taskQueue;
-    BOOL                                _isSharedQueue;
     UMThroughputCounter					*_lowerQueueThroughput;
     UMThroughputCounter					*_upperQueueThroughput;
     UMThroughputCounter					*_adminQueueThroughput;
-    NSString                            *_layerName;
-    NSString                            *_layerType;
-    BOOL                                _enable;
     NSString                            *_logFileName;
+    UMHistoryLog                        *_layerHistory;
+
     UMLogLevel                          _logLevel;
-    UMHistoryLog *                      _layerHistory;
+    BOOL                                _enable;
+    BOOL                                _isSharedQueue;
 }
 
 
 - (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq;
 - (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq name:(NSString *)name;
 
-@property(readwrite,strong) NSString    *layerName;
-@property(readwrite,strong) NSString    *layerType;
-
-@property(readwrite,strong) UMTaskQueueMulti *taskQueue;
-@property(readwrite,assign) BOOL             isSharedQueue;
-
-
+@property(readwrite,strong) NSString            *layerName;
+@property(readwrite,strong) NSString            *layerType;
+@property(readwrite,strong) UMTaskQueueMulti    *taskQueue;
 @property(readwrite,strong) UMThroughputCounter *lowerQueueThroughput;
 @property(readwrite,strong) UMThroughputCounter *upperQueueThroughput;
 @property(readwrite,strong) UMThroughputCounter *adminQueueThroughput;
+@property(readwrite,strong) NSString            *logFileName;
+@property(readwrite,strong) UMHistoryLog        *layerHistory;
 
-@property(readwrite,assign) BOOL        enable;
-@property(readwrite,strong) UMHistoryLog *layerHistory;
-@property(readwrite,assign,atomic)      UMLogLevel logLevel;
-
+@property(readwrite,assign,atomic)              UMLogLevel logLevel;
+@property(readwrite,assign) BOOL                enable;
+@property(readwrite,assign) BOOL                isSharedQueue;
 
 - (void)queueFromLower:(UMLayerTask *)task;
 - (void)queueFromUpper:(UMLayerTask *)task;
 - (void)queueFromAdmin:(UMLayerTask *)task;
 - (void)queueFromLowerWithPriority:(UMLayerTask *)task;
 - (void)queueFromUpperWithPriority:(UMLayerTask *)task;
-
-
 
 - (void)adminInit;
 - (void)adminAttachFor:(UMLayer *)attachingLayer userId:(id)uid;

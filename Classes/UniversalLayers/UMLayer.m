@@ -123,12 +123,14 @@
     return [self initWithTaskQueueMulti:tq name:@""];
 }
 
-- (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq name:(NSString *)name
+- (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq
+                               name:(NSString *)name
 {
     self = [super init];
     if(self)
     {
         _layerName = name;
+
         if(tq == NULL)
         {
             NSString *s = (name.length > 0) ? [NSString stringWithFormat:@"private_task_queue(%@)",name] : @"private_task_queue";

@@ -10,9 +10,9 @@
 
 @interface UMRegexMatch : UMObject
 {
-    ssize_t  start;
-    ssize_t  end;
-    NSString *matched;
+    ssize_t  _start;
+    ssize_t  _end;
+    NSString *_matched;
 }
 
 @property(readwrite,assign) ssize_t  start;

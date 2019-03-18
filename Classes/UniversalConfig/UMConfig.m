@@ -18,12 +18,6 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 @implementation UMConfig
 
-@synthesize verbose;
-@synthesize allowedSingleGroupNames;
-@synthesize allowedMultiGroupNames;
-@synthesize fileName;
-@synthesize singleGroups;
-
 - (UMConfig *)initWithFileName:(NSString *)file
 {
     if (!file)
@@ -33,11 +27,11 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
     self = [super init];
     if (self)
     {
-        fileName = [[NSString alloc] initWithString:file];
-        singleGroups = [[NSMutableDictionary alloc] init];
-        multiGroups = [[NSMutableDictionary alloc] init];
-        allowedSingleGroupNames = [[NSMutableDictionary alloc] init];
-        allowedMultiGroupNames = [[NSMutableDictionary alloc] init];
+        _fileName = [[NSString alloc] initWithString:file];
+        _singleGroups = [[NSMutableDictionary alloc] init];
+        _multiGroups = [[NSMutableDictionary alloc] init];
+        _allowedSingleGroupNames = [[NSMutableDictionary alloc] init];
+        _allowedMultiGroupNames = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -47,11 +41,11 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
     NSMutableString *desc;
 
     desc = [NSMutableString stringWithString:@"configuration file dump starts\n"];
-    [desc appendFormat:@"configuration file was %@\n", fileName];
-    [desc appendFormat:@"it has single groups %@\n", singleGroups];
-    [desc appendFormat:@"and multigroups %@\n", multiGroups];
-    [desc appendFormat:@"%@ were allowed single groups\n", allowedSingleGroupNames];
-    [desc appendFormat:@"and %@ allowed multigroups\n", allowedMultiGroupNames];
+    [desc appendFormat:@"configuration file was %@\n", _fileName];
+    [desc appendFormat:@"it has single groups %@\n", _singleGroups];
+    [desc appendFormat:@"and multigroups %@\n", _multiGroups];
+    [desc appendFormat:@"%@ were allowed single groups\n", _allowedSingleGroupNames];
+    [desc appendFormat:@"and %@ allowed multigroups\n", _allowedMultiGroupNames];
     [desc appendString:@"configuration file dump ends\n"];
     
     return desc;
@@ -59,20 +53,20 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 - (void)allowSingleGroup:(NSString *)n
 {
-    [allowedSingleGroupNames setObject:@"allowed" forKey:n];
+    [_allowedSingleGroupNames setObject:@"allowed" forKey:n];
 }
 - (void)disallowSingleGroup:(NSString *)n
 {
-    [allowedSingleGroupNames removeObjectForKey:n];
+    [_allowedSingleGroupNames removeObjectForKey:n];
 }
 
 - (void)allowMultiGroup:(NSString *)n
 {
-    [allowedMultiGroupNames setObject:@"allowed" forKey:n];
+    [_allowedMultiGroupNames setObject:@"allowed" forKey:n];
 }
 - (void)disallowMultiGroup:(NSString *)n
 {
-    [allowedMultiGroupNames removeObjectForKey:n];
+    [_allowedMultiGroupNames removeObjectForKey:n];
 }
 
 
@@ -87,7 +81,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
     if([lin hasPrefix:@"include"])
     {
-        if(verbose)
+        if(_verbose)
         {
             NSLog(@"%@",lin);
         }
@@ -184,7 +178,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
             }
             fullPath=fullPath2;
         }
-        if(verbose)
+        if(_verbose)
         {
             NSLog(@"included file %@",fullPath);
         }
@@ -195,7 +189,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 - (NSArray *)readFromFile
 {
-    return [self readFromFile:fileName andAppend:_configAppend];
+    return [self readFromFile:_fileName andAppend:_configAppend];
 }
 
 - (NSArray *)readFromFile:(NSString *)fn
@@ -276,17 +270,17 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
     NSCharacterSet *whitespace  = [UMObject whitespaceAndNewlineCharacterSet];
     NSCharacterSet *quotes      = [NSCharacterSet characterSetWithCharactersInString:@"\""];
     
-    singleGroups = [[NSMutableDictionary alloc]init];
-    multiGroups = [[NSMutableDictionary alloc]init];
+    _singleGroups = [[NSMutableDictionary alloc]init];
+    _multiGroups = [[NSMutableDictionary alloc]init];
 
-    if(fileName==NULL)
+    if(_fileName==NULL)
     {
         @throw([NSException exceptionWithName:@"config"
                                        reason:@"property fileName is not set"
                                      userInfo:@{@"backtrace": UMBacktrace(NULL,0) }]);
     }
     
-    BOOL noGroupsDefined = (allowedSingleGroupNames==NULL || [allowedSingleGroupNames count]==0) && (allowedMultiGroupNames==NULL || [allowedMultiGroupNames count] == 0);
+    BOOL noGroupsDefined = (_allowedSingleGroupNames==NULL || [_allowedSingleGroupNames count]==0) && (_allowedMultiGroupNames==NULL || [_allowedMultiGroupNames count] == 0);
     if(noGroupsDefined)
     {
         @throw([NSException exceptionWithName:@"config"
@@ -294,7 +288,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
                                      userInfo:@{@"backtrace": UMBacktrace(NULL,0) }]);
     }
 
-    NSArray *configArray = [self readFromFile:fileName];
+    NSArray *configArray = [self readFromFile:_fileName];
     configArray =[UMConfigParsedLine flattenConfig:configArray];
     for(UMConfigParsedLine *item in configArray)
     {
@@ -348,9 +342,9 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
             }
              */
             /* SINGLE ENTRY */
-            if([allowedSingleGroupNames objectForKey:part2])
+            if([_allowedSingleGroupNames objectForKey:part2])
             {
-                currentGroup  = [singleGroups objectForKey:part2];
+                currentGroup  = [_singleGroups objectForKey:part2];
                 if(currentGroup)
                 {
                     @throw([NSException exceptionWithName:@"config"
@@ -360,18 +354,18 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
                                                  userInfo:@{@"backtrace": UMBacktrace(NULL,0) }]);
                 }
                 currentGroup = [[NSMutableDictionary alloc]init];
-                [singleGroups setObject:currentGroup forKey:part2];
+                [_singleGroups setObject:currentGroup forKey:part2];
             }
             
             /* MULTI ENTRY */
-            else if([allowedMultiGroupNames objectForKey:part2])
+            else if([_allowedMultiGroupNames objectForKey:part2])
             {
                 currentGroup = [[NSMutableDictionary alloc]init];
-                NSMutableArray *currentItems  = [multiGroups objectForKey:part2];
+                NSMutableArray *currentItems  = [_multiGroups objectForKey:part2];
                 if(currentItems == NULL)
                 {
                     currentItems = [NSMutableArray arrayWithObject:currentGroup];
-                    [multiGroups setObject:currentItems forKey:part2];
+                    [_multiGroups setObject:currentItems forKey:part2];
                 }
                 else
                 {
@@ -414,12 +408,12 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 - (NSDictionary *)getSingleGroup:(NSString *)n
 {
-    return [singleGroups objectForKey:n];
+    return [_singleGroups objectForKey:n];
 }
 
 - (NSArray *)getMultiGroups:(NSString *)n
 {
-    return [multiGroups objectForKey:n];
+    return [_multiGroups objectForKey:n];
 }
 
 @end

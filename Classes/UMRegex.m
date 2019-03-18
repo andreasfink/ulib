@@ -10,9 +10,10 @@
 #import "UMRegexMatch.h"
 
 #include <regex.h>
+#include <stdlib.h>
+#include <string.h>
 
 @implementation UMRegex
-@synthesize rule;
 
 - (void) dealloc
 {
@@ -21,18 +22,18 @@
 
 - (void)free
 {
-    if(preg)
+    if(_preg)
     {
-        regfree((regex_t *)preg);
-        free(preg);
+        regfree((regex_t *)_preg);
+        free(_preg);
     }
-    preg=NULL;
+    _preg=NULL;
 
-    if(str2)
+    if(_str2)
     {
-        free(str2);
+        free(_str2);
     }
-    str2=NULL;
+    _str2=NULL;
 }
 
 
@@ -45,24 +46,24 @@
     self = [super init];
     if(self)
     {
-        rule = r;
-        preg = malloc(sizeof(regex_t));
-        memset(preg,0x00,sizeof(regex_t));
-        const char *str = [r cStringUsingEncoding:NSASCIIStringEncoding];
-        if(str2)
+        _rule = r;
+        _preg = malloc(sizeof(regex_t));
+        memset(_preg,0x00,sizeof(regex_t));
+        const char *str = [_rule cStringUsingEncoding:NSASCIIStringEncoding];
+        if(_str2)
         {
-            free(str2);
-            str2=NULL;
+            free(_str2);
+            _str2=NULL;
         }
         size_t bufsize = strlen(str)+1;
-        str2 = malloc(bufsize);
-        memset(str2,0x00,bufsize);
-        strncpy (str2,str,bufsize);
-        int rc = regcomp((regex_t *)preg,str2,cflags);
+        _str2 = malloc(bufsize);
+        memset(_str2,0x00,bufsize);
+        strncpy (_str2,str,bufsize);
+        int rc = regcomp((regex_t *)_preg,_str2,cflags);
         if(rc!=0)
         {
             char buffer[512];
-            regerror(rc, (regex_t *)preg, buffer, sizeof(buffer));
+            regerror(rc, (regex_t *)_preg, buffer, sizeof(buffer));
             [self free];
             @throw([NSException exceptionWithName:@"INV_REGEX" reason:[NSString stringWithFormat:@"regex compilation for '%s' failed: %s",str,buffer] userInfo:NULL]);
         }
@@ -84,21 +85,21 @@
     regmatch_t  *pmatch = malloc(msize);
     memset(pmatch,0x00,msize);
     const char *str = [string cStringUsingEncoding:NSISOLatin1StringEncoding];
-    if(str2)
+    if(_str2)
     {
-        free(str2);
-        str2=NULL;
+        free(_str2);
+        _str2=NULL;
     }
     size_t bufsize = strlen(str)+1;
-    str2 = malloc(bufsize);
-    memset(str2,0x00,bufsize);
-    strncpy (str2,str,bufsize);
+    _str2 = malloc(bufsize);
+    memset(_str2,0x00,bufsize);
+    strncpy (_str2,str,bufsize);
 
-    int rc = regexec((regex_t *)preg, str2,  nmatch, pmatch, eflags);
+    int rc = regexec((regex_t *)_preg, _str2,  nmatch, pmatch, eflags);
     if (rc != REG_NOMATCH && rc != 0)
     {
         char buffer[512];
-        regerror(rc, (regex_t *)preg, buffer, sizeof(buffer));
+        regerror(rc, (regex_t *)_preg, buffer, sizeof(buffer));
         free(pmatch);
         pmatch=NULL;
         @throw([NSException exceptionWithName:@"EXEC_REGEX"

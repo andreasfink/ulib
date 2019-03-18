@@ -26,7 +26,6 @@
 @interface ulib : NSObject
 {
 }
-@property(readwrite,strong)     UMFileTracker *fileTracker;
 
 + (NSString *) ulib_version;
 + (NSString *) ulib_build;

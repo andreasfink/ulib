@@ -10,27 +10,20 @@
 
 @implementation UMConfigParsedLine
 
-@synthesize filename;
-@synthesize lineNumber;
-@synthesize content;
-@synthesize includedLines;
-
-
-
 - (void) flattenConfigTo:(NSMutableArray *)writerArray;
 {
-    if(includedLines == NULL)
+    if(_includedLines == NULL)
     {
         [writerArray addObject:self];
     }
     else 
     {
         UMConfigParsedLine *includeStatement = [[UMConfigParsedLine alloc]init];
-        includeStatement.filename = filename;
-        includeStatement.lineNumber = lineNumber;
-        includeStatement.content = content;
+        includeStatement.filename = _filename;
+        includeStatement.lineNumber = _lineNumber;
+        includeStatement.content = _content;
         [writerArray addObject:includeStatement];
-        for(UMConfigParsedLine *sub in includedLines)
+        for(UMConfigParsedLine *sub in _includedLines)
         {
             [sub flattenConfigTo:writerArray];
         }
@@ -49,6 +42,6 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"[%@:%ld] %@",filename,lineNumber,content];
+    return [NSString stringWithFormat:@"[%@:%ld] %@",_filename,_lineNumber,_content];
 }
 @end

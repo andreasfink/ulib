@@ -56,17 +56,17 @@
 
 @interface UMConfig : UMObject
 {
-    NSString               *fileName;
-    NSMutableDictionary    *singleGroups;
-    NSMutableDictionary    *multiGroups;
-    int                    verbose;
-    NSMutableDictionary    *allowedSingleGroupNames;
-    NSMutableDictionary    *allowedMultiGroupNames;
+    NSString               *_fileName;
+    NSMutableDictionary    *_singleGroups;
+    NSMutableDictionary    *_multiGroups;
+    int                    _verbose;
+    NSMutableDictionary    *_allowedSingleGroupNames;
+    NSMutableDictionary    *_allowedMultiGroupNames;
     NSString                *_configAppend;
     NSString                *_systemIncludePath;
 }
 
-@property(readwrite,assign) int verbose;
+@property(readwrite,assign) int                    verbose;
 @property(readwrite,strong) NSMutableDictionary    *allowedSingleGroupNames;
 @property(readwrite,strong) NSMutableDictionary    *allowedMultiGroupNames;
 @property(readwrite,strong) NSMutableDictionary    *singleGroups;

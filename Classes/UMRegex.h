@@ -15,9 +15,9 @@
 
 @interface UMRegex : UMObject
 {
-    NSString *rule;
-    void *preg;
-    char *str2;
+    NSString *_rule;
+    void *_preg;
+    char *_str2;
 }
 
 @property(readwrite,strong) NSString *rule;

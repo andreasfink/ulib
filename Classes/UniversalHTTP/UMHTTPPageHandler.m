@@ -10,8 +10,6 @@
 
 @implementation UMHTTPPageHandler
 
-@synthesize path;
-
 - (UMHTTPPageHandler *)initWithPath:(NSString *)p 
                        callDelegate:(id)cdel
                        callSelector:(SEL)csel
@@ -37,13 +35,13 @@
     self = [super init];
     if(self)
 	{
-        callDelegate = cdel;
-        callSelector = csel;
-        authenticationDelegate = adel;
-        authenticationSelector = asel;
-        requiresAuthentication = auth;
-        realm = r;
-        path = p;
+        _callDelegate = cdel;
+        _callSelector = csel;
+        _authenticationDelegate = adel;
+        _authenticationSelector = asel;
+        _requiresAuthentication = auth;
+        _realm = r;
+        _path = p;
     }
     return self;
 }
@@ -80,39 +78,39 @@
 
 - (void) authenticate:(UMHTTPRequest *)req
 {
-    if(requiresAuthentication==NO)
+    if(_requiresAuthentication==NO)
     {
         [req setAuthenticationStatus:UMHTTP_AUTHENTICATION_STATUS_NOT_REQUESTED];
     }
-    if(!authenticationDelegate)
+    if(!_authenticationDelegate)
     {
         [req setAuthenticationStatus:UMHTTP_AUTHENTICATION_STATUS_FAILED];
     }
-	if(![authenticationDelegate respondsToSelector:authenticationSelector] )
+	if(![_authenticationDelegate respondsToSelector:_authenticationSelector] )
     {
         [req setAuthenticationStatus:UMHTTP_AUTHENTICATION_STATUS_FAILED];
     }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    [authenticationDelegate performSelector:authenticationSelector withObject:req];
+    [_authenticationDelegate performSelector:_authenticationSelector withObject:req];
 #pragma clang diagnostic pop
 }
 
 - (void) call:(UMHTTPRequest *)req;
 {
-    if(!callDelegate)
+    if(!_callDelegate)
     {
         [req setNotFound];
         return;
     }
-	if(! [callDelegate respondsToSelector:callSelector] )
+	if(! [_callDelegate respondsToSelector:_callSelector] )
     {
         [req setNotFound];
         return;
     }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    [callDelegate performSelector:callSelector withObject:req];
+    [_callDelegate performSelector:_callSelector withObject:req];
 #pragma clang diagnostic pop
 }
 @end

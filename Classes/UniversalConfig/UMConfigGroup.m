@@ -10,19 +10,14 @@
 
 @implementation UMConfigGroup
 
-@synthesize configFile;
-@synthesize line;
-@synthesize vars;
-@synthesize name;
-
 
 - (UMConfigGroup *)init
 {
     if ((self = [super init]))
     {
-        name = [[NSString alloc] init];
-        vars = [NSMutableDictionary dictionary];
-        configFile = [[NSString alloc] init];
+        _name = [[NSString alloc] init];
+        _vars = [NSMutableDictionary dictionary];
+        _configFile = [[NSString alloc] init];
     }
     
     return self;
@@ -30,7 +25,7 @@
 
 - (NSString *)getString:(NSString *)n
 {
-    return [vars objectForKey:n];
+    return [_vars objectForKey:n];
 }
 
 - (NSInteger)getInteger:(NSString *)n

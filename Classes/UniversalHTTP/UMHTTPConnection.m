@@ -23,9 +23,6 @@
 #include <poll.h>
 @implementation UMHTTPConnection
 
-@synthesize	timeout;
-@synthesize	lastActivity;
-@synthesize currentRequest;
 
 - (id)init
 {
@@ -39,8 +36,8 @@
 	{
 		_server = s;
 		_socket = sk;
-		lastActivity = nil;
-		timeout = DEFAULT_HTTP_TIMEOUT;
+		_lastActivity = nil;
+		_timeout = DEFAULT_HTTP_TIMEOUT;
 	}
 	return self;
 }
@@ -74,7 +71,7 @@
     int receivePollTimeoutMs = 5000;
     NSMutableData *appendToMe;
 
-	lastActivity = [[NSDate alloc]init];
+	_lastActivity = [[NSDate alloc]init];
     cSection = UMHTTPConnectionRequestSectionFirstLine;
 
 	self.mustClose = NO;
@@ -113,11 +110,11 @@
             NSLog(@"[%@]: pollResult UMSocketError_no_data",self.name);
 #endif
 
-            if(lastActivity==NULL)
+            if(_lastActivity==NULL)
             {
-                lastActivity = [NSDate new];
+                _lastActivity = [NSDate new];
             }
-            NSTimeInterval idleTime = [now timeIntervalSinceDate:lastActivity];
+            NSTimeInterval idleTime = [now timeIntervalSinceDate:_lastActivity];
             if(idleTime > 30)
             {
 #ifdef HTTP_DEBUG
@@ -172,9 +169,9 @@
                      another read request task once completed
                     otherwise mustClose will be set and we close it here */
 #ifdef HTTP_DEBUG
-                    NSLog(@"[%@]: calling processHTTPRequest[currentRequest=%@]",self.name,currentRequest.name);
+                    NSLog(@"[%@]: calling processHTTPRequest[_currentRequest=%@]",self.name,_currentRequest.name);
 #endif
-                    [self processHTTPRequest:currentRequest];
+                    [self processHTTPRequest:_currentRequest];
                     break;
                 }
             }
@@ -239,11 +236,11 @@
 				NSString *protocol = [[lineItems objectAtIndex:2] stringByTrimmingCharactersInSet:whitespace];
 
 
-                currentRequest =[[UMHTTPRequest alloc]init];
-				currentRequest.method = met;
-				currentRequest.path = path;
-				currentRequest.protocolVersion = protocol;
-                currentRequest.connection = self;
+                _currentRequest =[[UMHTTPRequest alloc]init];
+				_currentRequest.method = met;
+				_currentRequest.path = path;
+				_currentRequest.protocolVersion = protocol;
+                _currentRequest.connection = self;
 				cSection=UMHTTPConnectionRequestSectionHeaderLine;
 				continue;
 			}
@@ -260,14 +257,14 @@
 
                 NSString *header = [[lineItems objectAtIndex:0]stringByTrimmingCharactersInSet:whitespace];
                 NSString *value = [[lineItems objectAtIndex:1] stringByTrimmingCharactersInSet:whitespace];
-                [currentRequest setRequestHeader:header withValue:value];
+                [_currentRequest setRequestHeader:header withValue:value];
                 if([header isEqual:@"Content-Length"])
                 {
-                    awaitingBytes = [value intValue];
+                    _awaitingBytes = [value intValue];
                 }
                 else if ([header isEqual:@"Connection"])
                 {
-                    [currentRequest setConnectionValue:value];
+                    [_currentRequest setConnectionValue:value];
                 }
             }
 			continue;
@@ -275,14 +272,14 @@
 	}
 	if(cSection == UMHTTPConnectionRequestSectionData)
 	{
-		if(n >= awaitingBytes)
+		if(n >= _awaitingBytes)
 		{
 			NSData *data = [[NSData alloc]initWithBytes:ptr length:n];
 			[appendToMe replaceBytesInRange:NSMakeRange(0,n) withBytes:nil length:0];
-			[currentRequest setRequestData:data];
-            [self setLastActivity: [NSDate date]];
+			[_currentRequest setRequestData:data];
+            self.lastActivity = [NSDate date];
 
-            currentRequest.mustClose = self.mustClose;
+            _currentRequest.mustClose = self.mustClose;
             if(complete)
             {
                 *complete = YES;

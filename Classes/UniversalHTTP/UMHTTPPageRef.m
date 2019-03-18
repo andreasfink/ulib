@@ -22,9 +22,6 @@
 
 @implementation UMHTTPPageRef
 
-@synthesize path;
-@synthesize data;
-@synthesize mimeType;
 
 + (NSString *)defaultPrefix
 {
@@ -40,12 +37,12 @@
         {
             prefix = [UMHTTPPageRef defaultPrefix];
         }
-        self.path = thePath;
+        _path = thePath;
         int i = chdir(prefix.UTF8String);
         int eno = errno;
         if(i !=0)
         {
-            NSLog(@"error %d while chdir(0%@')",eno,path);
+            NSLog(@"error %d while chdir(0%@')",eno,_path);
             return NULL;
         }
 

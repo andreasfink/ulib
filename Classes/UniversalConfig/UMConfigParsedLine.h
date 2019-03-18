@@ -16,10 +16,10 @@
 
 @interface UMConfigParsedLine : UMObject
 {
-    NSString    *filename;
-    long        lineNumber;
-    NSString    *content;
-    NSArray     *includedLines;
+    NSString    *_filename;
+    long        _lineNumber;
+    NSString    *_content;
+    NSArray     *_includedLines;
 }
 
 @property(readwrite,strong) NSString *filename;

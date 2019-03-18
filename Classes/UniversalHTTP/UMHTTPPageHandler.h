@@ -11,13 +11,13 @@
 
 @interface UMHTTPPageHandler : UMObject
 {
-    NSString    *path;
-    id          callDelegate;
-    SEL         callSelector;
-    BOOL        requiresAuthentication;
-    id          authenticationDelegate;
-    SEL         authenticationSelector;
-    NSString    *realm;
+    NSString    *_path;
+    id          _callDelegate;
+    SEL         _callSelector;
+    BOOL        _requiresAuthentication;
+    id          _authenticationDelegate;
+    SEL         _authenticationSelector;
+    NSString    *_realm;
 }
 
 @property(readonly,strong) NSString *path;

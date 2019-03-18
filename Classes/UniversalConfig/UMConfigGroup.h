@@ -16,10 +16,10 @@
 
 @interface UMConfigGroup : UMObject
 {
-    NSMutableDictionary *vars;
-    NSString *configFile;
-    NSString *name;
-    long line;
+    NSMutableDictionary *_vars;
+    NSString *_configFile;
+    NSString *_name;
+    long _line;
 }
 
 @property(readwrite,strong) NSMutableDictionary *vars;

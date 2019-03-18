@@ -11,7 +11,6 @@
 
 @implementation ulib
 
-@synthesize fileTracker;
 
 + (NSString *) ulib_version
 {

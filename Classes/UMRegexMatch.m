@@ -10,7 +10,4 @@
 
 @implementation UMRegexMatch
 
-@synthesize start;
-@synthesize end;
-@synthesize matched;
 @end

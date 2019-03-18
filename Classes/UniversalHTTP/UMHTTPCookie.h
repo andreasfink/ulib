@@ -10,15 +10,15 @@
 #import "UMObject.h"
 @interface UMHTTPCookie : UMObject
 {
-    NSString *name;
-    NSString *value;
-    NSDate *expiration;
-    NSString *version;
-    NSString *path;
-    NSString *domain;
-    NSString *maxage;
-    NSString *secure;
-    NSString *comment;
+    NSString *_name;
+    NSString *_value;
+    NSDate *_expiration;
+    NSString *_version;
+    NSString *_path;
+    NSString *_domain;
+    NSString *_maxage;
+    NSString *_secure;
+    NSString *_comment;
 
     NSString *raw;
 }
@@ -36,3 +36,5 @@
 @property(readwrite,strong)   NSString *raw;
 
 @end
+
+

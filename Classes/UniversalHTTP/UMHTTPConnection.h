@@ -26,28 +26,29 @@ typedef enum UMHTTPConnectionRequestSection
 @interface UMHTTPConnection : UMObject
 {
     NSString        *_name;
-	int				timeout;
+	int				_timeout;
 @private
 	UMHTTPServer 	*_server;
 	UMSocket		*_socket;
     BOOL            _mustClose;
     BOOL            _inputClosed;
-	NSDate			*lastActivity;
+	NSDate			*_lastActivity;
 
 	UMHTTPConnectionRequestSection				cSection;
-	ssize_t			awaitingBytes;
+	ssize_t			_awaitingBytes;
     BOOL            _enableKeepalive;
+    UMHTTPRequest    *_currentRequest;
 }
 
 @property(readwrite,strong,atomic)      NSString        *name;
-@property (readwrite,strong)            UMHTTPServer	*server;
-@property (readonly,strong)		        UMSocket		*socket;
+@property (readwrite,strong,atomic)     UMHTTPServer	*server;
+@property (readonly,strong,atomic)	    UMSocket		*socket;
 @property (readwrite,assign,atomic)     BOOL            mustClose;
 @property (readwrite,assign,atomic)     BOOL            inputClosed;
-@property (readwrite,assign)	        int				timeout;
-@property (readwrite,strong)	        NSDate			*lastActivity;
+@property (readwrite,assign,atomic)     int				timeout;
+@property (readwrite,strong,atomic)     NSDate			*lastActivity;
 @property (readwrite,strong,atomic)     UMHTTPRequest	*currentRequest;
-@property (readwrite,assign,atomic) BOOL            enableKeepalive;
+@property (readwrite,assign,atomic)     BOOL            enableKeepalive;
 
 
 - (UMHTTPConnection *) initWithSocket:(UMSocket *)socket server:(UMHTTPServer *)server;

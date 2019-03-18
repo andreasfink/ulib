@@ -10,9 +10,9 @@
 
 @interface UMHTTPPageRef : UMObject
 {
-    NSString *path;
-    NSData  *data;
-    NSString *mimeType;
+    NSString *_path;
+    NSData  *_data;
+    NSString *_mimeType;
 /* private stuff: */
     void     *_dataPtr;
     size_t  _dataSize;

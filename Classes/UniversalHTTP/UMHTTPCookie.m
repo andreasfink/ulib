@@ -9,15 +9,6 @@
 
 @implementation UMHTTPCookie
 
-@synthesize name;
-@synthesize value;
-@synthesize expiration;
-@synthesize version;
-@synthesize path;
-@synthesize domain;
-@synthesize maxage;
-@synthesize secure;
-@synthesize comment;
 
 - (UMHTTPCookie *)init
 {
@@ -57,27 +48,27 @@
             {
                 if([tag isEqualToString:@"Domain" ])
                 {
-                    self.domain = value;
+                    _domain = val;
                 }
                 else if([tag isEqualToString:@"Path" ])
                 {
-                    self.path = val;
+                    _path = val;
                 }
                 else if([tag isEqualToString:@"Version" ])
                 {
-                    self.version = val;
+                    _version = val;
                 }
                 else if([tag isEqualToString:@"Max-Age" ])
                 {
-                    self.maxage = val;
+                    _maxage = val;
                 }
                 else if([tag isEqualToString:@"Secure" ])
                 {
-                    self.secure = val;
+                    _secure = val;
                 }
                 else if([tag isEqualToString:@"Comment" ])
                 {
-                    self.comment = val;
+                    _comment = val;
                 }
             }
         }

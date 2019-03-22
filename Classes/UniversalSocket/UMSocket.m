@@ -1006,7 +1006,7 @@ static int SSL_smart_shutdown(SSL *ssl)
                                 sizeof(sbuf), NI_NUMERICHOST | NI_NUMERICSERV))
                 {
                     remoteAddress = @"ipv4:0.0.0.0";
-                    remotePort = sa4.sin_port;
+                    remotePort = 0;
                 }
                 else
                 {
@@ -1031,7 +1031,7 @@ static int SSL_smart_shutdown(SSL *ssl)
                                 sizeof(sbuf), NI_NUMERICHOST | NI_NUMERICSERV))
                 {
                     remoteAddress = @"ipv6:[::]";
-                    remotePort = sa6.sin6_port;
+                    remotePort = 0;
                 }
                 else
                 {
@@ -2675,7 +2675,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 
     if(rxsize > 0)
     {
-        uint16_t p;
+        uint16_t p=0;
         *toData = [NSData dataWithBytes:rxbuf length:rxsize];
         sa_family_t family = src_addr.ss_family;
         if(family == AF_INET6)

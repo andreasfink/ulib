@@ -11,7 +11,8 @@
 #import "UMThreadHelpers.h"
 #import "UMAssert.h"
 
-#define UMSLEEPER_DEFAULT_SLEEP_TIME 500000 /* 500ms */
+//#define UMSLEEPER_DEFAULT_SLEEP_TIME 500000 /* 500ms */
+#define UMSLEEPER_DEFAULT_SLEEP_TIME 50000000LL /* 50s */
 
 @implementation UMBackgrounder
 
@@ -156,7 +157,7 @@
             {
                 sleepTime= UMSLEEPER_DEFAULT_SLEEP_TIME*100;
             }
-            int signal = [_workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ]; /* 100ms */
+            UMSleeper_Signal signal = [_workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ]; /* 100ms */
             if(_enableLogging)
             {
                 NSLog(@"%@ woke up with signal %d",self.name,signal);

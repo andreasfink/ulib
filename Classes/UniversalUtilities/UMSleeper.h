@@ -22,15 +22,14 @@ typedef uint8_t UMSleeper_Signal; /* note Sleeper signal is a bitmask */
 
 @interface UMSleeper : UMObject
 {
-    int _rxpipe;
-    int _txpipe;
-	int flag;
-    BOOL _isPrepared;
-    const char *_ifile;
-    long _iline;
-    const char *_ifunction;
-    UMMutex *_prepareLock;
-    BOOL _debug;
+    int         _rxpipe;
+    int         _txpipe;
+    BOOL        _isPrepared;
+    const char  *_ifile;
+    long        _iline;
+    const char  *_ifunction;
+    UMMutex     *_prepareLock;
+    BOOL        _debug;
 }
 @property(readwrite,assign,atomic) BOOL isPrepared;
 @property(readwrite,assign,atomic) int rxpipe;

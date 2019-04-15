@@ -15,6 +15,7 @@
 #include <poll.h>
 #include <fcntl.h>
 #include <sys/socket.h>
+#include <netinet/tcp.h>
 #include <netdb.h>
 
 #import "UMMutex.h"
@@ -1049,6 +1050,25 @@ static int SSL_smart_shutdown(SSL *ssl)
         {
             newcon = [[UMSocket alloc]init];
             newcon.type = type;
+
+            if((type == UMSOCKET_TYPE_TCP) || (type == UMSOCKET_TYPE_TCP4ONLY) || (type == UMSOCKET_TYPE_TCP6ONLY))
+            {
+                newcon.configuredTcpMaxSegmentSize = _configuredTcpMaxSegmentSize;
+                int activeTcpMaxSegmentSize = 0;
+                socklen_t tcp_maxseg_len = sizeof(activeTcpMaxSegmentSize);
+                if(getsockopt(_sock, IPPROTO_TCP, TCP_MAXSEG, &activeTcpMaxSegmentSize, &tcp_maxseg_len) == 0)
+                {
+                    newcon.activeTcpMaxSegmentSize = activeTcpMaxSegmentSize;
+                    if((_configuredTcpMaxSegmentSize > 0) && (_configuredTcpMaxSegmentSize < activeTcpMaxSegmentSize))
+                    {
+                        activeTcpMaxSegmentSize = _configuredTcpMaxSegmentSize;
+                        if(setsockopt(_sock, IPPROTO_TCP, TCP_MAXSEG, &activeTcpMaxSegmentSize, tcp_maxseg_len))
+                        {
+                            newcon.activeTcpMaxSegmentSize = _configuredTcpMaxSegmentSize;
+                        }
+                    }
+                }
+            }
             newcon.direction =  direction;
             newcon.status=status;
             newcon.localHost = _localHost;
@@ -1060,6 +1080,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             newcon.isListening=NO;
             newcon.isConnecting=NO;
             newcon.isConnected=YES;
+            newcon.tcpMaxSegmentSize=_tcpMaxSegmentSize;
             [newcon setSock: newsock];
             [newcon switchToNonBlocking];
             [newcon doInitReceiveBuffer];
@@ -1081,7 +1102,6 @@ static int SSL_smart_shutdown(SSL *ssl)
         [_controlLock unlock];
     }
 }
-
 
 - (UMSocketError) switchToNonBlocking
 {

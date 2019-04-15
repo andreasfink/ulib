@@ -88,6 +88,8 @@ typedef enum SocketBlockingMode
 #endif
     NSString            *advertizeName;
     NSString            *advertizeDomain;
+    int                 _configuredTcpMaxSegmentSize;
+    int                 _activeTcpMaxSegmentSize;
 }
 
 @property(readwrite,strong,atomic)  NSString    *socketName;
@@ -133,7 +135,10 @@ typedef enum SocketBlockingMode
 @property(readwrite,assign,atomic)  int socketFamily;
 @property(readwrite,assign,atomic)  int socketProto;
 @property(readwrite,assign,atomic)  int socketType;
+@property(readwrite,assign,atomic)  int tcpMaxSegmentSize;
 
+@property(readwrite,assign,atomic)  int                configuredTcpMaxSegmentSize;
+@property(readwrite,assign,atomic)  int                activeTcpMaxSegmentSize;
 
 - (UMSocket *) initWithType:(UMSocketType)t;
 - (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name;

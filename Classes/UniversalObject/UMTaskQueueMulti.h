@@ -21,7 +21,7 @@
 @class UMBackgrounderWithQueue;
 @class UMTask;
 @class UMSleeper;
-@class UMThrougputCounter;
+@class UMThroughputCounter;
 
 @interface UMTaskQueueMulti : UMObject
 {
@@ -31,7 +31,7 @@
     UMSleeper       *workSleeper;
     NSMutableArray  *workerThreads; /* UMBackgrounderWithQueues objects */
     BOOL            _debug;
-    UMThrougputCounter *throughput;
+    UMThroughputCounter *throughput;
 }
 
 @property (strong) NSString     *name;

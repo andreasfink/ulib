@@ -8,7 +8,7 @@
 
 #import "NSDate+stringFunctions.h"
 
-#define STANDARD_DATE_STRING_FORMAT     @"yyyy-MM-dd HH:mm:ss.SSSS"
+#define STANDARD_DATE_STRING_FORMAT     @"yyyy-MM-dd HH:mm:ss.SSSSSS"
 
 static NSDateFormatter *standardDateFormatter = NULL;
 

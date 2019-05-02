@@ -10,68 +10,58 @@
 #import "NSString+UniversalObject.h"
 
 @implementation UMDataWithHistory
-@synthesize oldValue;
-@synthesize currentValue;
-
-- (id)init
-{
-    self = [super init];
-    if (self)
-    {
-        // Initialization code here.
-    }
-    
-    return self;
-}
 
 
 -(void)setData:(NSData *)newValue
 {
-    oldValue = currentValue;
-    currentValue = newValue;
-    if(currentValue != oldValue)
-        isModified = YES;
+    _oldValue = _currentValue;
+    _currentValue = newValue;
+    NSData *oldData = (NSData *)_oldValue;
+    NSData *currentData = (NSData *)_currentValue;
+
+    if([oldData isEqualTo:currentData])
+    {
+        _isModified = YES;
+    }
+    else
+    {
+        _isModified = NO;
+    }
 }
 
 - (NSData *)data
 {
-    return currentValue;
+    return [self currentData];
+}
+
+- (NSData *)currentData
+{
+    return (NSData *)_currentValue;
 }
 
 -(NSData *)oldData
 {
-    return oldValue;
+    return (NSData *)_oldValue;
 }
 
 -(NSString *)nonNullString
 {
-    if(currentValue==NULL)
+    if(_currentValue==NULL)
+    {
         return @"";
-    return [currentValue hexString];
+    }
+    NSData *d = (NSData *)_currentValue;
+    return [d hexString];
 }
 
 - (NSString *)oldNonNullString;
 {
-    if(oldValue==NULL)
+    if(_oldValue==NULL)
+    {
         return @"";
-    return [oldValue hexString];
-}
-
-
-- (BOOL) hasChanged
-{
-    return isModified;
-}
-
-- (void) clearChangedFlag;
-{
-    isModified = NO;
-}
-
-- (void)clearDirtyFlag
-{
-    self.oldValue = self.currentValue;
-    [self clearChangedFlag];
+    }
+    NSData *d = (NSData *)_oldValue;
+    return [d hexString];
 }
 
 - (void) loadFromString:(NSString *)str
@@ -79,15 +69,26 @@
     self.currentValue = [str unhexedData];
 }
 
+
++ (UMDataWithHistory *)dataWithHistoryWithData:(NSData *)d
+{
+    UMDataWithHistory *dh = [[UMDataWithHistory alloc]init];
+    dh.currentValue = d;
+    return dh;
+
+}
 - (NSString *)description
 {
-    if(isModified)
+    if(_isModified)
     {
-        return [NSString stringWithFormat:@"Data '%@' (unmodified)",[currentValue hexString]];
+        NSData *currentData = (NSData *)_currentValue;
+        return [NSString stringWithFormat:@"Data '%@' (unmodified)",[currentData hexString]];
     }
     else
     {
-        return [NSString stringWithFormat:@"Data '%@' (changed from '%@')",[currentValue hexString],[oldValue hexString]];
+        NSData *oldData = (NSData *)_oldValue;
+        NSData *currentData = (NSData *)_currentValue;
+        return [NSString stringWithFormat:@"Data '%@' (changed from '%@')",[currentData hexString],[oldData hexString]];
     }
 }
 

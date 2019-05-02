@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UMObject.h"
+#import "UMObjectWithHistory.h"
 
 /*!
  @class UMStringWithHistory
@@ -19,25 +20,17 @@
  (and if none has changed, not doing any query at all).
 */
 
-@interface UMStringWithHistory : UMObject
+@interface UMStringWithHistory : UMObjectWithHistory
 {
-@private    
-    NSString    *oldValue;      /*!< the previous string value */
-    NSString    *currentValue;  /*!< the current string value */
-    BOOL        isModified;     /*!< BOOL telling us if there was any change */
 }
 
-@property (readwrite,strong)    NSString    *oldValue;
-@property (readwrite,strong)    NSString    *currentValue;
+- (void)setString:(NSString *)newString;
+- (NSString *)string;
 
-- (void)setString:(NSString *)newValue; /*!< set to a new value. if different the isModified flag is raised */
-- (NSString *)string; /*!< the current value */
-- (NSString *)oldString; /*!y the previous value */
-- (BOOL) hasChanged; /*!< has it changed since we cleared the flag? */
-- (void) clearChangedFlag; /*!< flush the has changed flag (for example after updating db) */
-- (NSString *)nonNullString; /*!< returns the current value and if its NULL it returns an empty string */
-- (NSString *)oldNonNullString; /*!< returns the old value and if its NULL it returns an empty string */
-- (void)clearDirtyFlag; /*!< same as clearChanged flag but the new value is now the old value */
-- (void) loadFromString:(NSString *)str; /*!< initialize with a string */
+- (NSString *)currentString;
+- (NSString *)oldString;
+- (NSString *)nonNullString;
+- (NSString *)oldNonNullString;
+- (void) loadFromString:(NSString *)str;
 
 @end

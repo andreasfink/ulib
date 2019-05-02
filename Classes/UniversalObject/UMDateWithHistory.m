@@ -13,11 +13,13 @@
 
 #define UMDATE_FORMAT   @"%Y-%m-%d %H:%M:%S.%F UTC"
 #define UMDATE_FORMAT_C   "%Y-%m-%d %H:%M:%S.%F UTC"
-//#define UMDATE_NULL     @"0001-01-01 00:00:00"
+#define UMDATE_ZERO   @"0000-00-00 00:00.000000"
+
+#define UMDATE_STRING_FORMAT  @"yyyy-MM-dd HH:mm:ss.SSSSSS"
+
+static NSDateFormatter *umdate_string_formatter = NULL;
 
 @implementation UMDateWithHistory
-@synthesize oldValue;
-@synthesize currentValue;
 
 - (id)init
 {
@@ -25,10 +27,14 @@
     if (self)
     {
         // Initialization code here.
-        self.oldValue = [UMDateWithHistory zeroDate];
-        self.currentValue = [UMDateWithHistory zeroDate];
+        self.oldValue       = [UMDateWithHistory zeroDate];
+        self.currentValue   = [UMDateWithHistory zeroDate];
+        if(umdate_string_formatter==NULL)
+        {
+            NSDateFormatter* umdate_string_formatter = [[NSDateFormatter alloc] init];
+            [umdate_string_formatter setDateFormat:UMDATE_STRING_FORMAT];
+        }
     }
-    
     return self;
 }
 
@@ -40,36 +46,70 @@
         newValue = [UMDateWithHistory zeroDate];
     }
     
-    oldValue = currentValue;
-    currentValue = newValue;
-    if(currentValue != oldValue)
+    _oldValue = _currentValue;
+    _currentValue = newValue;
+
+    NSDate *currentDate = (NSDate *)_currentValue;
+    NSDate *oldDate     = (NSDate *)_oldValue;
+    if([currentDate isEqualToDate:oldDate])
     {
-        isModified = YES;
+        _isModified = YES;
+    }
+    else
+    {
+        _isModified = NO;
     }
 }
 
 - (NSDate *)date
 {
-    return currentValue;
+    return [self currentDate];
+}
+
+
+- (NSDate *)currentDate
+{
+    return (NSDate *)_currentValue;
 }
 
 -(NSDate *)oldDate
 {
-    return oldValue;
+    return (NSDate *)_oldValue;
 }
 
 -(NSString *)nonNullDateAsString
 {
     NSString *s;
-    if(currentValue==NULL)
+    if(_currentValue==NULL)
     {
-        currentValue = [UMDateWithHistory zeroDate];
+        _currentValue = [UMDateWithHistory zeroDate];
+    }
+    s = [umdate_string_formatter stringFromDate:(NSDate *)_currentValue];
+    return s;
+}
+
+-(NSString *)dateAsString
+{
+    if(_currentValue==NULL)
+    {
+        return UMDATE_ZERO;
     }
 
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    s = [dateFormatter stringFromDate:currentValue];
+    NSString *s = [umdate_string_formatter stringFromDate:(NSDate *)_currentValue];
     return s;
+}
+
+- (void)setDateFromString:(NSString *)str
+{
+    if(([str isEqualToString:UMDATE_ZERO]) || (str.length == 0))
+    {
+        self.currentValue = NULL;
+    }
+    else
+    {
+        NSDate *d = [umdate_string_formatter dateFromString:str];
+        self.currentValue = d;
+    }
 }
 
 + (NSDate *)zeroDate
@@ -80,9 +120,9 @@
 
 - (BOOL)isNullDate
 {
-    if(currentValue==NULL)
+    if(_currentValue==NULL)
         return YES;
-    return [UMDateWithHistory isNullDate:currentValue];
+    return NO;
 }
 
 + (BOOL)isNullDate:(NSDate *)d
@@ -99,54 +139,33 @@
 -(NSString *)oldNonNullDateAsString
 {
     NSString *s;
-    if(oldValue==NULL)
+    if(_oldValue==NULL)
     {
-        oldValue = [UMDateWithHistory zeroDate];
+        _oldValue = [UMDateWithHistory zeroDate];
     }
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    s = [dateFormatter stringFromDate:oldValue];
-
+    s = [umdate_string_formatter stringFromDate:(NSDate *)_oldValue];
     return s;
 }
 
 -(NSDate *)nonNullDate
 {
-    if(currentValue==NULL)
+    if(_currentValue==NULL)
     {
-        currentValue = [UMDateWithHistory zeroDate];
+        _currentValue = [UMDateWithHistory zeroDate];
     }
-    return currentValue;
+    return (NSDate *)_currentValue;
 }
 
 - (NSDate *)oldNonNullDate;
 {
-    if(oldValue==NULL)
+    if(_oldValue==NULL)
     {
-        oldValue = [UMDateWithHistory zeroDate];
+        _oldValue = [UMDateWithHistory zeroDate];
     }
-    return oldValue;
+    return (NSDate *)_oldValue;
 }
 
 
-
-- (BOOL) hasChanged
-{
-    return isModified;
-}
-
-- (void) clearChangedFlag;
-{
-    isModified = NO;
-}
-
-- (void)clearDirtyFlag
-{
-    self.oldValue = self.currentValue;
-    [self clearChangedFlag];
-}
-
-///NS_CALENDAR_DEPRECATED(10_4, 10_10, 2_0, 8_0, "Use NSCalendar and NSDateComponents and NSDateFormatter instead")
 
 - (void) loadFromString:(NSString *)str
 {
@@ -155,13 +174,16 @@
 
 - (NSString *)description
 {
-    if(isModified)
+    if(_isModified)
     {
-        return [NSString stringWithFormat:@"Date '%@' (unmodified)",currentValue];
+        NSDate *currentDate = (NSDate *)_currentValue;
+        return [NSString stringWithFormat:@"Date '%@' (unmodified)",currentDate];
     }
     else
     {
-        return [NSString stringWithFormat:@"Date '%@' (changed from '%@')",currentValue,oldValue];
+        NSDate *currentDate = (NSDate *)_currentValue;
+        NSDate *oldDate     = (NSDate *)_oldValue;
+        return [NSString stringWithFormat:@"Date '%@' (changed from '%@')",currentDate,oldDate];
     }
 }
 

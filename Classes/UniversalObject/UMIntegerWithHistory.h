@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UMObject.h"
+#import "UMObjectWithHistory.h"
 
 /*!
  @class UMIntegerWithHistory
@@ -19,25 +20,18 @@
  (and if none has changed, not doing any query at all).
  */
 
-@interface UMIntegerWithHistory : UMObject
+@interface UMIntegerWithHistory : UMObjectWithHistory
 {
-@private    
-    NSInteger    oldValue;
-    NSInteger    currentValue;
-    BOOL         isModified;
 }
 
-@property(readwrite,assign) NSInteger    oldValue;
-@property(readwrite,assign) NSInteger    currentValue;
 
 - (void)setInteger:(NSInteger)newValue;
-- (NSInteger )integer;
+- (NSInteger )currentInteger;
 - (NSInteger)oldInteger;
-- (BOOL) hasChanged;
-- (void) clearChangedFlag;
+
 - (NSString *)nonNullString;
 - (NSString *)oldNonNullString;
-- (void)clearDirtyFlag;
 - (void) loadFromString:(NSString *)str;
-+(UMIntegerWithHistory *)integerWithHistoryWithInteger:(int)i;
+
++ (UMIntegerWithHistory *)integerWithHistoryWithInteger:(int)i;
 @end

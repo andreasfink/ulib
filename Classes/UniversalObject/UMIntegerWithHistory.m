@@ -9,87 +9,79 @@
 
 @implementation UMIntegerWithHistory
 
-@synthesize oldValue;
-@synthesize currentValue;
-
-- (id)init
-{
-    self = [super init];
-    if(self)
-	{
-        // Initialization code here.
-    }
-    
-    return self;
-}
-
 -(void)setInteger:(NSInteger)newValue
 {
-    oldValue = currentValue;
-    currentValue = newValue;
-    if(currentValue != oldValue)
-        isModified = YES;
+
+    _oldValue = _currentValue;
+    _currentValue = [NSNumber numberWithInteger:newValue];
+    NSNumber *currentNumber = (NSNumber *)_currentValue;
+    NSNumber *oldNumber = (NSNumber *)_oldValue;
+    if([currentNumber isEqualToNumber:oldNumber])
+    {
+        _isModified = YES;
+    }
+    else
+    {
+        _isModified=NO;
+    }
 }
 
 - (NSInteger)integer
 {
-    return currentValue;
+    return [self currentInteger];
+}
+
+
+- (NSInteger)currentInteger
+{
+    NSNumber *currentNumber = (NSNumber *)_currentValue;
+    return [currentNumber integerValue];
 }
 
 - (NSInteger)oldInteger
 {
-    return oldValue;
+    NSNumber *oldNumber = (NSNumber *)_oldValue;
+    return [oldNumber integerValue];
 }
 
 -(NSString *)nonNullString
 {
-    return [NSString stringWithFormat:@"%ld",(long)currentValue];
+    return [NSString stringWithFormat:@"%ld",(long)(self.integer)];
 }
 
 - (NSString *)oldNonNullString;
 {
-    return [NSString stringWithFormat:@"%ld",(long)oldValue];
-}
-
-- (BOOL) hasChanged
-{
-    return isModified;
-}
-
-- (void) clearChangedFlag;
-{
-    isModified = NO;
-}
-
-- (void)clearDirtyFlag
-{
-    self.oldValue = self.currentValue;
-    [self clearChangedFlag];
+    return [NSString stringWithFormat:@"%ld",(long)(self.integer)];
 }
 
 - (void) loadFromString:(NSString *)str
 {
-    self.currentValue = atol([str UTF8String]);
+    _currentValue = [NSNumber numberWithInteger:(NSInteger)atol([str UTF8String])];
 }
 
 
 - (NSString *)description
 {
-    if(isModified)
+    if(_isModified)
     {
-        return [NSString stringWithFormat:@"Integer '%ld' (unmodified)",(long)currentValue];
+        NSNumber *currentNumber = (NSNumber *)_currentValue;
+        return [NSString stringWithFormat:@"Integer '%ld' (unmodified)",(long)currentNumber.integerValue];
     }
     else
     {
-        return [NSString stringWithFormat:@"Integer '%ld' (changed from '%ld')",(long)currentValue,(long) oldValue];
+        NSNumber *currentNumber = (NSNumber *)_currentValue;
+        NSNumber *oldNumber = (NSNumber *)_oldValue;
+        return [NSString stringWithFormat:@"Integer '%ld' (changed from '%ld')",(long)currentNumber.integerValue,(long)oldNumber.integerValue];
     }
 }
 
-+(UMIntegerWithHistory *)integerWithHistoryWithInteger:(int)i
++ (UMIntegerWithHistory *)integerWithHistoryWithInteger:(int)i
 {
     UMIntegerWithHistory *iwh = [[UMIntegerWithHistory alloc]init];
     [iwh setInteger:i];
     return iwh;
 }
+
+
 
 @end

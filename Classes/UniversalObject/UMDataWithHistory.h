@@ -6,7 +6,7 @@
 //
 
 #import "UMObject.h"
-
+#import "UMObjectWithHistory.h"
 /*!
  @class UMDataWithHistory
  @brief A NSData which remembers its previous value and if it has been modified
@@ -18,25 +18,18 @@
  (and if none has changed, not doing any query at all).
  */
 
-@interface UMDataWithHistory : UMObject
+@interface UMDataWithHistory : UMObjectWithHistory
 {
-@private
-    NSData      *oldValue;
-    NSData      *currentValue;
-    BOOL        isModified;
 }
 
-@property (readwrite,strong) NSData *oldValue;
-@property (readwrite,strong) NSData *currentValue;
 
 - (void)setData:(NSData *)newValue;
 - (NSData *)data;
+- (NSData *)currentData;
 - (NSData *)oldData;
-- (BOOL) hasChanged;
-- (void) clearChangedFlag;
 - (NSString *)nonNullString;
 - (NSString *)oldNonNullString;
-- (void)clearDirtyFlag;
 - (void) loadFromString:(NSString *)str;
++ (UMDataWithHistory *)dataWithHistoryWithData:(NSData *)s;
 
 @end

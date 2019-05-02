@@ -8,88 +8,81 @@
 #import "UMStringWithHistory.h"
 
 @implementation UMStringWithHistory
-@synthesize oldValue;
-@synthesize currentValue;
 
-- (id)init
+-(void)setString:(NSString *)newString
 {
-    self = [super init];
-    if (self) 
+    _oldValue = _currentValue;
+    _currentValue = newString;
+    NSString *_oldString = (NSString *)_oldValue;
+    NSString *_currentString = (NSString *)_oldValue;
+    if(![_currentString isEqualToString:_oldString])
     {
-        // Initialization code here.
+        _isModified = YES;
     }
-    
-    return self;
-}
-
-
--(void)setString:(NSString *)newValue
-{
-    oldValue = currentValue;
-    currentValue = newValue;
-    if(![currentValue isEqualToString:oldValue])
+    else
     {
-        isModified = YES;
+        _isModified = NO;
     }
 }
 
 - (NSString *)string
 {
-    return currentValue; 
+    return [self currentString];
+}
+
+- (NSString *)currentString
+{
+    return (NSString *)_currentValue;
+}
+
+- (NSString *)oldString
+{
+    return (NSString *)_oldValue;
 }
 
 - (NSString *)nonNullString
 {
-    if(currentValue==NULL)
+    if(_currentValue==NULL)
+    {
         return @"";
-    return currentValue;
+    }
+    return (NSString *)_currentValue;
 }
 
 - (NSString *)oldNonNullString
 {
-    if(oldValue==NULL)
+    if(_oldValue==NULL)
+    {
         return @"";
-    return oldValue;
+    }
+    return (NSString *)_oldValue;
 }
 
-
--(NSString *)oldString
-{
-    return oldValue;
-}
-
-- (BOOL) hasChanged
-{
-    return isModified;
-}
-
-- (void) clearChangedFlag;
-{
-    isModified = NO;
-}
-
-- (void)clearDirtyFlag
-{
-    self.oldValue = self.currentValue;
-    [self clearChangedFlag];
-}
 
 - (void) loadFromString:(NSString *)str
 {
-    self.currentValue = str;
+    _currentValue = str;
 }
 
 - (NSString *)description
 {
-    if(isModified)
+    if(_isModified)
     {
-        return [NSString stringWithFormat:@"String '%@' (unmodified)",currentValue];
+        return [NSString stringWithFormat:@"String '%@' (unmodified)",(NSString *)_currentValue];
     }
     else
     {
-        return [NSString stringWithFormat:@"String '%@' (changed from '%@')",currentValue,oldValue];
+        return [NSString stringWithFormat:@"String '%@' (changed from '%@')",(NSString *)_currentValue,(NSString *)_oldValue];
     }
 }
 
+
++ (UMStringWithHistory *)stringWithHistoryWithString:(NSString *)s;
+{
+    UMStringWithHistory *sh = [[UMStringWithHistory alloc]init];
+    [sh loadFromString:s];
+    return sh;
+
+}
 
 @end

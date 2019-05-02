@@ -6,6 +6,7 @@
 //
 
 #import "UMObject.h"
+#import "UMObjectWithHistory.h"
 
 /*!
  @class UMDateWithHistory
@@ -18,28 +19,23 @@
  (and if none has changed, not doing any query at all).
  */
 
-@interface UMDateWithHistory : UMObject
+@interface UMDateWithHistory : UMObjectWithHistory
 {
-@private
-    NSDate      *oldValue;
-    NSDate      *currentValue;
-    BOOL        isModified;
+    
 }
-
-@property (readwrite,strong) NSDate    *oldValue;
-@property (readwrite,strong) NSDate    *currentValue;
 
 - (void)setDate:(NSDate *)newValue;
 - (NSDate *)date;
+- (NSDate *)currentDate;
 - (NSDate *)oldDate;
-- (BOOL) hasChanged;
-- (void) clearChangedFlag;
+
 - (NSDate *)nonNullDate;
 - (NSDate *)oldNonNullDate;
-- (void)clearDirtyFlag;
 - (void) loadFromString:(NSString *)str;
-- (NSString *)nonNullDateAsString;
-- (NSString *)oldNonNullDateAsString;
+- (NSString *)nonNullDateAsString;          /* returns 1970-01-01 00:00:00 if not set */
+- (NSString *)oldNonNullDateAsString;       /* returns 1970-01-01 00:00:00 if not set */
+- (NSString *)dateAsString; /* returns date or 0000-00-00 00:00:00 if its internally NULL */
+
 + (NSDate *)zeroDate; /* return zero date  1970-01-01 00:00:00 */
 - (BOOL)isNullDate;
 + (BOOL)isNullDate:(NSDate *)date;

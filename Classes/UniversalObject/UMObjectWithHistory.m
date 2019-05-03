@@ -85,5 +85,13 @@
     return oh;
 }
 
+- (UMObjectWithHistory *)copyWithZone:(NSZone *)zone
+{
+    UMObjectWithHistory *ti = [[UMObjectWithHistory alloc]init];
+    ti->_oldValue = [_oldValue copy];
+    ti->_currentValue =[_currentValue copy];
+    ti->_isModified = _isModified;
+    return ti;
+}
 
 @end

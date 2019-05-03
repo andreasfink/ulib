@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UMObject.h"
-
+#import "UMObjectWithHistory.h"
 /*!
  @class UMDoubleWithHistory
  @brief A NSData which remembers its previous value and if it has been modified
@@ -19,25 +19,18 @@
  (and if none has changed, not doing any query at all).
  */
 
-@interface UMDoubleWithHistory : UMObject
+@interface UMDoubleWithHistory : UMObjectWithHistory
 {
-@private    
-    double    oldValue;
-    double    currentValue;
-    BOOL        isModified;
 }
-
-@property(readwrite,assign) double oldValue;
-@property(readwrite,assign) double currentValue;
 
 - (void)setDouble:(double)newValue;
 - (double)double;
+- (double)currentDouble;
 - (double)oldDouble;
-- (BOOL) hasChanged;
-- (void)clearDirtyFlag;
-- (void) clearChangedFlag;
 - (NSString *)nonNullString;
 - (NSString *)oldNonNullString;
 - (void) loadFromString:(NSString *)str;
++ (UMDoubleWithHistory *)doubleWithHistoryWithDouble:(double)d;
+
 
 @end

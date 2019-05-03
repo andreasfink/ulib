@@ -2055,10 +2055,10 @@
 		A6CC4B961A3F24E50090FC94 /* UniversalSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B851A3F24E50090FC94 /* UniversalSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6CC4B9B1A3F24FC0090FC94 /* UMQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B981A3F24FC0090FC94 /* UMQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6CC4B9E1A3F24FC0090FC94 /* UniversalQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B991A3F24FC0090FC94 /* UniversalQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6D039FB227AABF60035014D /* UMObjectWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D039F9227AABF60035014D /* UMObjectWithHistory.h */; };
-		A6D039FC227AABF60035014D /* UMObjectWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D039F9227AABF60035014D /* UMObjectWithHistory.h */; };
-		A6D039FD227AABF60035014D /* UMObjectWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D039F9227AABF60035014D /* UMObjectWithHistory.h */; };
-		A6D039FE227AABF60035014D /* UMObjectWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D039F9227AABF60035014D /* UMObjectWithHistory.h */; };
+		A6D039FB227AABF60035014D /* UMObjectWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D039F9227AABF60035014D /* UMObjectWithHistory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6D039FC227AABF60035014D /* UMObjectWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D039F9227AABF60035014D /* UMObjectWithHistory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6D039FD227AABF60035014D /* UMObjectWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D039F9227AABF60035014D /* UMObjectWithHistory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6D039FE227AABF60035014D /* UMObjectWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D039F9227AABF60035014D /* UMObjectWithHistory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6D039FF227AABF60035014D /* UMObjectWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D039FA227AABF60035014D /* UMObjectWithHistory.m */; };
 		A6D03A00227AABF60035014D /* UMObjectWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D039FA227AABF60035014D /* UMObjectWithHistory.m */; };
 		A6D03A01227AABF60035014D /* UMObjectWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D039FA227AABF60035014D /* UMObjectWithHistory.m */; };
@@ -16851,8 +16851,6 @@
 				A6EB479F1A35C73A0090FC94 /* UMBackgrounderWithQueues.m */,
 				A6C7894D1B4A8EE00090FC94 /* UMDateTimeStuff.h */,
 				A6C7894E1B4A8EE00090FC94 /* UMDateTimeStuff.m */,
-				A6CC4BAD1A3F25450090FC94 /* UMDoubleWithHistory.h */,
-				A6D8ABEC149A94E60029E9CF /* UMDoubleWithHistory.m */,
 				A695A3F81AF62AD100854472 /* UMFileTracker.h */,
 				A695A3F91AF62AD100854472 /* UMFileTracker.m */,
 				A695A3F41AF60E8600854472 /* UMFileTrackingInfo.h */,
@@ -16874,6 +16872,8 @@
 				A67C389216B2D53000C9DA95 /* UMDataWithHistory.m */,
 				A6CC4BAC1A3F25450090FC94 /* UMDateWithHistory.h */,
 				A67C389316B2D53000C9DA95 /* UMDateWithHistory.m */,
+				A6CC4BAD1A3F25450090FC94 /* UMDoubleWithHistory.h */,
+				A6D8ABEC149A94E60029E9CF /* UMDoubleWithHistory.m */,
 				A6CC4BB21A3F25450090FC94 /* UMSynchronizedArray.h */,
 				A6D94B2A193CA70E0090FC94 /* UMSynchronizedArray.m */,
 				A65727451B1869AA00854472 /* UMSynchronizedDictionary.h */,

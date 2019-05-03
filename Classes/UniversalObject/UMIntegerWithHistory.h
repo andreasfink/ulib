@@ -26,7 +26,8 @@
 
 
 - (void)setInteger:(NSInteger)newValue;
-- (NSInteger )currentInteger;
+- (NSInteger)integer;
+- (NSInteger)currentInteger;
 - (NSInteger)oldInteger;
 
 - (NSString *)nonNullString;

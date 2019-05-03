@@ -9,78 +9,70 @@
 
 @implementation UMDoubleWithHistory
 
-@synthesize currentValue;
-@synthesize oldValue;
-
-- (id)init
-{
-    self = [super init];
-    if(self)
-	{
-        // Initialization code here.
-    }
-    
-    return self;
-}
 -(void)setDouble:(double)newValue
 {
-    oldValue = currentValue;
-    currentValue = newValue;
-    if(currentValue != oldValue)
-        isModified = YES;
+    _oldValue = _currentValue;
+    _currentValue = @(newValue);
+    if([((NSNumber *)_currentValue) doubleValue] != [((NSNumber *)_oldValue) doubleValue])
+    {
+        _isModified = YES;
+    }
+    else
+    {
+        _isModified=NO;
+    }
 }
 
 - (double)double
 {
-    return currentValue;
+    return [self currentDouble];
+}
+
+- (double)currentDouble
+{
+    return [((NSNumber *)_currentValue) doubleValue];
 }
 
 - (double)oldDouble
 {
-    return oldValue;
-}
+    return [((NSNumber *)_oldValue) doubleValue];
 
-- (BOOL) hasChanged
-{
-    return isModified;
-}
-
-- (void) clearChangedFlag
-{
-    isModified = NO;
 }
 
 -(NSString *)nonNullString
 {
-    return [NSString stringWithFormat:@"%lf",currentValue];
+    return [NSString stringWithFormat:@"%lf",[((NSNumber *)_currentValue) doubleValue]];
 }
 
 - (NSString *)oldNonNullString
 {
-    return [NSString stringWithFormat:@"%lf",oldValue];
+    return [NSString stringWithFormat:@"%lf",[((NSNumber *)_oldValue) doubleValue]];
 }
 
-- (void)clearDirtyFlag
-{
-    self.oldValue = self.currentValue;
-    [self clearChangedFlag];
-}
 
 - (void) loadFromString:(NSString *)str
 {
-    self.currentValue = atof([str UTF8String]);
+    self.currentValue = @(atof([str UTF8String]));
 }
 
 
 - (NSString *)description
 {
-    if(isModified)
+    if(_isModified)
     {
-        return [NSString stringWithFormat:@"Double '%8.4lf' (unmodified)",currentValue];
+        return [NSString stringWithFormat:@"Double '%8.4lf' (unmodified)",((NSNumber *)_currentValue).doubleValue];
     }
     else
     {
-        return [NSString stringWithFormat:@"Double '%8.4lf' (changed from '%8.4lf')",currentValue,oldValue];
+        return [NSString stringWithFormat:@"Double '%8.4lf' (changed from '%8.4lf')",((NSNumber *)_currentValue).doubleValue,((NSNumber *)_oldValue).doubleValue];
     }
 }
+
++ (UMDoubleWithHistory *)doubleWithHistoryWithDouble:(double)d
+{
+    UMDoubleWithHistory *dh = [[UMDoubleWithHistory alloc]init];
+    [dh setDouble:d];
+    return dh;
+}
+
 @end

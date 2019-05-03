@@ -25,6 +25,8 @@
 }
 
 - (void)setDate:(NSDate *)newValue;
+- (void)setDateFromString:(NSString *)str;
+
 - (NSDate *)date;
 - (NSDate *)currentDate;
 - (NSDate *)oldDate;

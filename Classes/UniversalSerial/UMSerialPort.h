@@ -8,6 +8,10 @@
 #import "UMObject.h"
 #import "UMMutex.h"
 
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <unistd.h>
+
 typedef enum UMSerialPortParity
 {
     UMSerialPortParity_none = 0,

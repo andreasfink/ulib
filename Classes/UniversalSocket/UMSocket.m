@@ -159,7 +159,6 @@ static int SSL_smart_shutdown(SSL *ssl)
     switch(type)
     {
         case UMSOCKET_TYPE_TCP4ONLY:
-
             _socketDomain=PF_INET;
             _socketFamily=AF_INET;
             _socketType = SOCK_STREAM;

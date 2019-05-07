@@ -1080,7 +1080,6 @@ static int SSL_smart_shutdown(SSL *ssl)
             newcon.isListening=NO;
             newcon.isConnecting=NO;
             newcon.isConnected=YES;
-            newcon.tcpMaxSegmentSize=_tcpMaxSegmentSize;
             [newcon setSock: newsock];
             [newcon switchToNonBlocking];
             [newcon doInitReceiveBuffer];

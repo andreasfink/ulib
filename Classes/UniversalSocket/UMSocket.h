@@ -80,7 +80,7 @@ typedef enum SocketBlockingMode
     UMMutex             *_controlLock;
     UMMutex             *_dataLock;
 
-@private
+@protected
     int                 ip_version;
     NSString            *name;
 #if !defined(TARGET_OS_WATCH)
@@ -132,13 +132,15 @@ typedef enum SocketBlockingMode
 
 @property(readonly)                int                 fileDescriptor;
 @property(readonly)                void                *ssl;
-@property(readwrite,assign,atomic)  int socketFamily;
-@property(readwrite,assign,atomic)  int socketProto;
-@property(readwrite,assign,atomic)  int socketType;
-@property(readwrite,assign,atomic)  int tcpMaxSegmentSize;
+@property(readwrite,assign,atomic)  int                 socketDomain;
+@property(readwrite,assign,atomic)  int 				socketFamily;
+@property(readwrite,assign,atomic)  int 				socketProto;
+@property(readwrite,assign,atomic)  int 				socketType;
 
 @property(readwrite,assign,atomic)  int                configuredTcpMaxSegmentSize;
 @property(readwrite,assign,atomic)  int                activeTcpMaxSegmentSize;
+
+
 
 - (UMSocket *) initWithType:(UMSocketType)t;
 - (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name;

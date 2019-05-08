@@ -35,7 +35,7 @@ BOOL umobject_object_stat_is_enabled(void);
 //#define RETAIN_RELEASE_DEBUG  1
 #endif
 
-#define UMOBJECT_USE_MAGIC                  1
+//#define UMOBJECT_USE_MAGIC                  1
 #define UMOBJECT_FLAG_HAS_MAGIC             0x01
 #define UMOBJECT_FLAG_LOG_RETAIN_RELEASE    0x02
 #define UMOBJECT_FLAG_IS_COPIED             0x04
@@ -53,15 +53,16 @@ BOOL umobject_object_stat_is_enabled(void);
 
 @interface UMObject : NSObject 
 {
-
+#if defined(UMOBJECT_USE_MAGIC)
     char        *_magic;        /*!< c pointer to the class name which has instantiated this object. Only populated if UMOBJECT_USE_MAGIC is set to 1. Useful for debugging with a limited verison of lldb */
-    UMLogFeed   *_logFeed;                  /*!< The log feed this object can use to log anything related to this UMObject */
+#endif
+	UMLogFeed   *_logFeed;                  /*!< The log feed this object can use to log anything related to this UMObject */
     NSString    *_objectStatisticsName;
     uint32_t    _umobject_flags; /*!< internal flags to remember which options this object has */
     uint32_t    _ulib_retain_counter;
 }
 
-@property (readonly,assign,atomic)  char        *magic;
+- (NSString *)magic;
 @property (readwrite,strong,atomic) UMLogFeed   *logFeed;
 @property (readwrite,assign,atomic) NSString    *objectStatisticsName;
 @property (readonly,assign,atomic)  uint32_t    umobject_flags;

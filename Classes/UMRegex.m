@@ -47,6 +47,7 @@
     if(self)
     {
         _rule = r;
+
         _preg = malloc(sizeof(regex_t));
         memset(_preg,0x00,sizeof(regex_t));
         const char *str = [_rule cStringUsingEncoding:NSASCIIStringEncoding];

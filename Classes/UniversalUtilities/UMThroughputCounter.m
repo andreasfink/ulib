@@ -66,8 +66,11 @@
 
 - (void)dealloc
 {
-    free(_cells);
-    _cells = NULL;
+	if(_cells)
+	{
+    	free(_cells);
+    }
+	_cells = NULL;
 }
 
 + (UMMicroSec) microsecondTime

@@ -117,7 +117,7 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
 - (void)lock
 {
-    UMMutexStat *stat;
+    UMMutexStat *stat = NULL;
     if(global_ummutex_stat)
     {
         pthread_mutex_lock(global_ummutex_stat_mutex);

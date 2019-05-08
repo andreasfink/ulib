@@ -221,6 +221,16 @@ static FILE *alloc_log;
     return [[self class] description];
 }
 
+
+- (NSString *)magic
+{
+#if	defined UMOBJECT_USE_MAGIC
+	return @(_magic);
+#endif
+	return [[self class] description];
+}
+
+
 - (void)setObjectStatisticsName:(NSString *)newName
 {
     if(object_stat)
@@ -418,11 +428,14 @@ static FILE *alloc_log;
         }
         pthread_mutex_unlock(object_stat_mutex);
     }
+#if defined(ULIB_USE_MAGIC)
     if(_magic)
     {
         *_magic = '~';
+		free(_magic);
     }
     _magic = NULL;
+#endif
     _umobject_flags  |= UMOBJECT_FLAG_IS_RELEASED;
 #if !defined(USING_ARC)
     [self.logFeed release];
@@ -529,7 +542,10 @@ int umobject_enable_object_stat(void)
 {
     if(object_stat == NULL)
     {
-        object_stat_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+		if(object_stat_mutex==NULL)
+		{
+        	object_stat_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+		}
         if(object_stat_mutex)
         {
             pthread_mutex_init(object_stat_mutex, NULL);
@@ -542,6 +558,7 @@ int umobject_enable_object_stat(void)
 
 void umobject_disable_object_stat(void)
 {
+	NSMutableDictionary *d = object_stat;
     object_stat = NULL;
     if(object_stat_mutex)
     {
@@ -549,6 +566,7 @@ void umobject_disable_object_stat(void)
         free(object_stat_mutex);
     }
     object_stat_mutex = NULL;
+	d=NULL;
 }
 
 NSArray *umobject_object_stat(BOOL sortByName)

@@ -13,13 +13,13 @@ dnl
 dnl initialization
 
 AC_PREREQ(2.13)
-AC_INIT([ulib],[1.0],[afink])
+AC_INIT([ulib],[1.0],[andreas@fink.org])
 AC_CONFIG_HEADER(Classes/ulib_config.h)
 AC_SUBST(SHELL)
 AC_CONFIG_AUX_DIR(.)
 AC_SET_TERMINAL_SEQUENCES()
 
-COPYRIGHT="Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved."
+COPYRIGHT="Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved."
 PROJECT_NAME="ulib"
 CONFIG_DEFINE="ULIB_CONFIG"
 
@@ -493,10 +493,12 @@ AC_CHECK_MEMBER([struct sockaddr_in.sin_len],
 ])
 
 
+
+
 dnl Implement --enable-debug --enable-profiling options.
 dnl -------------------------------------
 AC_ARG_ENABLE(profiling,
-[  --enable-profiling	  enable profiling  [disabled]], [
+[  --enable-profiling	  enable profiling  [[disabled]]], [
 	echo Using Debuging+profiling target
 	CFLAGS="$CFLAGS -pg -g -O0 -D${CONFIG_DEFINE}=Debug"
 	LDFLAGS="$LDFLAGS -g"
@@ -506,7 +508,7 @@ AC_ARG_ENABLE(profiling,
 ,
 [
 AC_ARG_ENABLE(debug,
-[  --enable-debug	  enable debugging  [disabled]], [
+[  --enable-debug	  enable debugging  [[disabled]]], [
 	echo Using Debuging target
 	CFLAGS="$CFLAGS -g -O0 -D${CONFIG_DEFINE}=Debug"
 	LDFLAGS="$LDFLAGS -g"
@@ -520,7 +522,13 @@ AC_ARG_ENABLE(debug,
 	CONFIGURATION="-configuration Release"
 ])])
 
-
+dnl Implement --enable-magic
+dnl -------------------------------------
+AC_ARG_ENABLE(magic,
+[  --enable-magic	  enable magic field for debugging  [[disabled]]], [
+	echo defining UMOBJECT_USE_MAGIC=1
+	CFLAGS="$CFLAGS -DUMOBJECT_USE_MAGIC=1"
+])
 
 
 ./make_version

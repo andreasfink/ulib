@@ -37,3 +37,5 @@
 #import "UMSynchronizedSortedDictionary.h"
 #import "UMSynchronizedArray.h"
 #import "UMDateTimeStuff.h"
+#import "UMObjectStatisticEntry.h"
+#import "UMObjectStatistic.h"

@@ -10,6 +10,7 @@
 
 @class UMHistoryLog, UMConfig, UMLogFeed, UMLogHandler;
 
+
 int umobject_enable_alloc_logging(const char *f);
 void umobject_disable_alloc_logging(void);
 
@@ -18,27 +19,10 @@ void umobject_disable_object_stat(void);
 NSArray *umobject_object_stat(BOOL sortByName);
 BOOL umobject_object_stat_is_enabled(void);
 
-
-/*  if UMOBJECT_USE_MAGIC is set, then the object has a field
-    named _magic which is a cpointer to the object type string.
-    this is useful for debugging under linux with a lldb not being able to show NSStrings
-    but it takes memory for every object */
-
-/*  if UMOBJECT_FLAG_LOG_RETAIN_RELEASE is set then the object
-    is logging all retains/releases. This is useful for figuring out
-    where your object is relased where it shouldnt be yet or is still
-    to use this you need to compile UMObject.m with -fno-objc-arc
-    and the  RETAIN_RELEASE_DEBUG must be defined
- */
-
-#if !__has_feature(objc_arc)
-//#define RETAIN_RELEASE_DEBUG  1
-#endif
-
-//#define UMOBJECT_USE_MAGIC                  1
-#define UMOBJECT_FLAG_HAS_MAGIC             0x01
+#define UMOBJECT_FLAG_HAS_MAGIC				0x01
 #define UMOBJECT_FLAG_LOG_RETAIN_RELEASE    0x02
 #define UMOBJECT_FLAG_IS_COPIED             0x04
+#define UMOBJECT_FLAG_COUNTED_IN_STAT		0x08
 #define UMOBJECT_FLAG_IS_INITIALIZED        0xCC00
 #define UMOBJECT_FLAG_IS_RELEASED           0x3300
 /*!
@@ -53,20 +37,15 @@ BOOL umobject_object_stat_is_enabled(void);
 
 @interface UMObject : NSObject 
 {
-#if defined(UMOBJECT_USE_MAGIC)
-    char        *_magic;        /*!< c pointer to the class name which has instantiated this object. Only populated if UMOBJECT_USE_MAGIC is set to 1. Useful for debugging with a limited verison of lldb */
-#endif
+    const char	*_magic;        			/*!< c pointer to the class name which has instantiated this object */
+	const char  *_objectStatisticsName;		/*!< c pointer to the name which is used in object statistics. defaults to _magic */
 	UMLogFeed   *_logFeed;                  /*!< The log feed this object can use to log anything related to this UMObject */
-    NSString    *_objectStatisticsName;
-    uint32_t    _umobject_flags; /*!< internal flags to remember which options this object has */
-    uint32_t    _ulib_retain_counter;
+    uint32_t    _umobject_flags; 			/*!< internal flags to remember which options this object has */
 }
 
-- (NSString *)magic;
 @property (readwrite,strong,atomic) UMLogFeed   *logFeed;
 @property (readwrite,assign,atomic) NSString    *objectStatisticsName;
 @property (readonly,assign,atomic)  uint32_t    umobject_flags;
-@property (readonly,assign,atomic)  uint32_t    ulib_retain_counter;
 
 - (UMObject *) init;
 
@@ -113,29 +92,10 @@ BOOL umobject_object_stat_is_enabled(void);
                        function:(const char *)fun;
 - (void)runSelectorInBackground:(SEL)aSelector;
 
-/* these might not be available if RETAIN_RELEASE_DEBUG is not defined */
-- (void)retainDebug; /*!< gets called at retain event */
-- (void)releaseDebug; /*!< gets called when a release occurs */
-- (void)enableRetainReleaseLogging; /*!< if set retain/release cycles get logged to the console with NSLog */
-
 @end
 
-@interface UMObjectStat : NSObject
-{
-    NSString *_name;
-    int64_t _alloc_count;
-    int64_t _dealloc_count;
-    int64_t _inUse_count;
-}
-@property(readwrite,strong,atomic)  NSString *name;
-@property(readwrite,assign,atomic)  int64_t alloc_count;
-@property(readwrite,assign,atomic)  int64_t dealloc_count;
-@property(readwrite,assign,atomic)  int64_t inUse_count;
 
+void umobject_stat_external_increase_name(const char *name);
+void umobject_stat_external_decrease_name(const char *name);
 
-@end
-
-void umobject_stat_external_alloc_increase(const char *file,long line, const char *func);
-void umobject_stat_external_free_decrease(const char *file,long line, const char *func); /* pass the file/line/func pair of the original alloc position */
-
-
+const char *umobject_get_constant_name_pointer(const char *file, const long line, const char *func);

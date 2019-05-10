@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "UMObject.h"
 @class UMHistoryLogEntry;
-#define MAX_UMHISTORY_LOG   10240
+#define MAX_UMHISTORY_LOG   1000
 
 /*!
  @class UMHistoryLog
@@ -18,8 +18,8 @@
 
 @interface UMHistoryLog : UMObject
 {
-    NSMutableArray  *entries;
-    int             max;
+    NSMutableArray  *_entries;
+    NSInteger       _max;
     UMMutex         *_lock;
 }
 

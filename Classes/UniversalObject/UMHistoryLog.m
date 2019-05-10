@@ -22,8 +22,8 @@
     self = [super init];
     if(self)
     {
-        entries = [[NSMutableArray alloc] init];
-        max = maxlines;
+        _entries = [[NSMutableArray alloc] init];
+        _max = maxlines;
         _lock =[[UMMutex alloc]initWithName:@"history-lock"];
         //count = 0;
     }
@@ -52,12 +52,13 @@
 
 - (void)trim
 {
-    if(max>0)
+    if(_max>0)
     {
-        int itemsToRemove = (int)[entries count] - max;
-        if(itemsToRemove > 0)
-        {
-            [entries removeObjectsInRange:NSMakeRange(0,itemsToRemove)];
+		NSInteger cnt = [_entries count];
+		if(cnt > _max)
+		{
+        	NSInteger itemsToRemove = cnt - _max;
+            [_entries removeObjectsInRange:NSMakeRange(0,itemsToRemove)];
         }
     }
 }
@@ -67,7 +68,7 @@
 {
     [_lock lock];
     UMHistoryLogEntry *e = [[UMHistoryLogEntry alloc] initWithLog:log];
-    [entries addObject:e];
+    [_entries addObject:e];
     [self trim];
     [_lock unlock];
 }
@@ -76,7 +77,7 @@
 {
     [_lock lock];
     NSMutableArray *output = [[NSMutableArray alloc]init];
-    NSInteger count = [entries count];
+    NSInteger count = [_entries count];
     NSInteger position;
     NSInteger direction;
 
@@ -87,20 +88,19 @@
     }
     else
     {
-        position = count -1;
+        position = count - 1;
         direction = -1;
 
     }
 
     while(count--)
     {
-        UMHistoryLogEntry *entry = entries[position];
+        UMHistoryLogEntry *entry = _entries[position];
         NSString *line = entry.log;
         if([line length]>0)
         {
             [output addObject:line];
         }
-
         position = position + direction;
     }
     [_lock unlock];
@@ -119,7 +119,6 @@
  
     }
 }
-
 
 - (NSString *)getLogBackwardOrder
 {

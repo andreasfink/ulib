@@ -7,6 +7,7 @@
 //
 
 #import "UMConstantStringsDict.h"
+#import "UMMutex.h"
 
 static UMConstantStringsDict *global_constant_strings = NULL;
 
@@ -26,7 +27,7 @@ static UMConstantStringsDict *global_constant_strings = NULL;
 	self = [super init];
 	if(self)
 	{
-		_lock = [[NSLock alloc]init];
+		_lock = [[UMMutex alloc]init];
 		_dict = [[NSMutableDictionary alloc]init];
 	}
 	return self;
@@ -45,10 +46,6 @@ static UMConstantStringsDict *global_constant_strings = NULL;
 		len = strlen(cptr);
 		d = [NSData dataWithBytes:cptr length:len+1]; /* We  include the null byte */
 		_dict[str] = d;
-	}
-	else
-	{
-		cptr  = (const char *)d.bytes;
 	}
 	[_lock unlock];
 	return cptr;

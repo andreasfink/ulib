@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UMMutex.h"
 
 /*
  	the purpose of this class is to collect a bunch of constant
@@ -22,7 +23,7 @@
 @interface UMConstantStringsDict : NSObject
 {
 	NSMutableDictionary 		*_dict;
-	NSLock						*_lock;
+	UMMutex						*_lock;
 }
 
 + (UMConstantStringsDict *)sharedInstance;

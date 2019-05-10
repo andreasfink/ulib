@@ -44,7 +44,7 @@ extern void umobject_stat_verify_ascii_name(const char *asciiName);
 - (UMObjectStatisticEntry *)getEntryForName:(const char *)asciiName
 {
 	NSString *nsName = @(asciiName);
-	NSAssert(nsName.length==0,@"name length is 0");
+	NSAssert(nsName.length!=0,@"name length is 0");
 	NSAssert(_dict,@"_dict is NULL");
 	NSAssert(_lock,@"_lock is NULL");
 
@@ -106,27 +106,35 @@ extern void umobject_stat_verify_ascii_name(const char *asciiName);
 
 - (void)increaseAllocCounter:(const char *)asciiName
 {
+	[_lock lock];
 	UMObjectStatisticEntry *entry = [self getEntryForName:asciiName];
 	[entry increaseAllocCounter];
+	[_lock unlock];
 }
 
 - (void)decreaseAllocCounter:(const char *)asciiName
 {
+	[_lock lock];
 	UMObjectStatisticEntry *entry = [self getEntryForName:asciiName];
 	[entry decreaseAllocCounter];
+	[_lock unlock];
 
 }
 
 - (void)increaseDeallocCounter:(const char *)asciiName
 {
+	[_lock lock];
 	UMObjectStatisticEntry *entry = [self getEntryForName:asciiName];
 	[entry increaseDeallocCounter];
+	[_lock unlock];
 }
 
 - (void)decreaseDeallocCounter:(const char *)asciiName
 {
+	[_lock lock];
 	UMObjectStatisticEntry *entry = [self getEntryForName:asciiName];
 	[entry decreaseDeallocCounter];
+	[_lock unlock];
 }
 
 @end

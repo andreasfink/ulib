@@ -14,19 +14,24 @@ extern void umobject_stat_external_increase_name(const char *cname);
 extern void umobject_stat_external_decrease_name(const char *cname);
 
 extern const char *umobject_get_constant_name_pointer(const char *file, const long line, const char *func);
-static void ummemory_header_init(ummemory_header *h, const char *file, long line, const char *function,size_t size);
 static void ummemory_header_destroy(ummemory_header *h);
 extern const char *umobject_get_constant_name_pointer(const char *file, const long line, const char *func);
-static void ummemory_header_init(ummemory_header *h, const char *file, long line, const char *function,size_t size);
+static void ummemory_header_init(ummemory_header *h, size_t size,
+								 const char *file,
+								 long line,
+								 const char *func);
 static void ummemory_header_destroy(ummemory_header *h);
 static ssize_t ummemory_header_size_increase(ssize_t in);
 
-static void ummemory_header_init(ummemory_header *h, const char *file, long line, const char *function,size_t size)
+static void ummemory_header_init(ummemory_header *h, size_t size,
+								 const char *file,
+								 long line,
+								 const char *func)
 {
 	if(h)
 	{
 		memset((void *)h,0x00,sizeof(ummemory_header));
-		h->magicName = umobject_get_constant_name_pointer(file,line,function);
+		h->magicName = umobject_get_constant_name_pointer(file,line,func);
 		h->size = size;
 		h->relativeOffset = h->magicName - (char *)h;
 		h->status = UMMEMORY_HEADER_STATUS_VALID;
@@ -120,7 +125,7 @@ void *umcalloc_real(size_t count,size_t size,const char *file,const long line, c
 	size_t total_size = ummemory_header_size_increase(count * size);
 	ptr = malloc(total_size);
 	memset(ptr,0x00,total_size);
-	ummemory_header_init((ummemory_header *)ptr, file,line,function,count*size);
+	ummemory_header_init((ummemory_header *)ptr, (count*size), file,line,function);
 	ptr = ummemory_header_to_data(ptr);
 
 	if (ptr == NULL)
@@ -146,7 +151,7 @@ void *ummalloc_real(size_t size,const char *file,const long line, const char *fu
 
 	size_t total_size = ummemory_header_size_increase(size);
 	void *ptr1 = malloc(total_size);
-	ummemory_header_init((ummemory_header *)ptr1, file,line,function,size);
+	ummemory_header_init((ummemory_header *)ptr1, size,file,line,function);
 	ptr = ummemory_header_to_data(ptr1);
 	if (ptr == NULL)
 	{

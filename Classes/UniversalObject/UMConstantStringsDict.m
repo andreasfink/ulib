@@ -46,6 +46,7 @@ static UMConstantStringsDict *global_constant_strings = NULL;
 		len = strlen(cptr);
 		d = [NSData dataWithBytes:cptr length:len+1]; /* We  include the null byte */
 		_dict[str] = d;
+		cptr = d.bytes;
 	}
 	[_lock unlock];
 	return cptr;

@@ -376,7 +376,8 @@ BOOL umobject_object_stat_is_enabled(void)
 
 const char *umobject_get_constant_name_pointer(const char *file, const long line, const char *func)
 {
-	return [UMObject umobject_get_constant_name_pointer:file line:line func:func];
+	const char *c = [UMObject umobject_get_constant_name_pointer:file line:line func:func];
+	return c;
 }
 
 void umobject_stat_verify_ascii_name(const char *asciiName)

@@ -28,15 +28,19 @@ static void ummemory_header_init(ummemory_header *h, size_t size,
 								 long line,
 								 const char *func)
 {
+	static const char *cname = NULL;
 	if(h)
 	{
 		memset((void *)h,0x00,sizeof(ummemory_header));
-		h->magicName = umobject_get_constant_name_pointer(file,line,func);
+		cname = umobject_get_constant_name_pointer(file,line,func);
+		assert(cname);
+		assert(*cname);
+		h->magicName = cname;
 		h->size = size;
 		h->relativeOffset = h->magicName - (char *)h;
 		h->status = UMMEMORY_HEADER_STATUS_VALID;
 		h->magic  = UMMEMORY_HEADER_MAGIC;
-		umobject_stat_external_increase_name(h->magicName);
+		umobject_stat_external_increase_name(cname);
 	}
 }
 
@@ -80,7 +84,7 @@ ummemory_header *ummemory_data_to_header(void *ptr)
 		return NULL;
 	}
 
-	uint8_t *p = ptr;
+	uint8_t *p = (uint8_t *)ptr;
 	p -= sizeof(ummemory_header);
 	ummemory_header *h = (ummemory_header *)p;
 	assert(h->magic == UMMEMORY_HEADER_MAGIC);

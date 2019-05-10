@@ -6,6 +6,9 @@
 //  Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import "UMMutex.h"
+
 #import "UMObjectStatistic.h"
 #import "UMObjectStatisticEntry.h"
 
@@ -33,7 +36,7 @@ static UMObjectStatistic *global_object_stat = NULL;
 	self = [super init];
 	if(self)
 	{
-		_lock = [[NSLock alloc]init];
+		_lock = [[UMMutex alloc]init];
 		_dict = [[NSMutableDictionary alloc]init];
 	}
 	return self;

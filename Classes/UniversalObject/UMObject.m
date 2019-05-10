@@ -350,10 +350,20 @@ BOOL umobject_object_stat_is_enabled(void)
 	return ((_objectStat==NULL) ? NO : YES );
 }
 
-@end
++ (void) umobject_stat_verify_ascii_name:(const char *)asciiName
+{
+	NSAssert(asciiName!=NULL,@"ascii name is NULL");
+	int len=0;
+	char c =asciiName[len++];
+	while((c!='\0') && (len > 64))
+	{
+		NSAssert(isprint(c),@"ascii name has unprintable character 0x%02x",c);
+		c = asciiName[len++];
+	}
+	NSAssert(len < 64,@"ascii name is longer than 63 characters",c);
+}
 
-
-const char *umobject_get_constant_name_pointer(const char *file, const long line, const char *func)
++ (const char *)umobject_get_constant_name_pointer:(const char *)file line:(long)line func:(const char *)func
 {
 	NSString *shortFileName = [@(file) lastPathComponent];
 	NSString *name = [[NSString alloc]initWithFormat:@"%@:%ld %s()",shortFileName,line,func];
@@ -361,17 +371,17 @@ const char *umobject_get_constant_name_pointer(const char *file, const long line
 	return  [magicNames asciiStringFromNSString:name];
 }
 
+@end
+
+
+const char *umobject_get_constant_name_pointer(const char *file, const long line, const char *func)
+{
+	return [UMObject umobject_get_constant_name_pointer:file line:line func:func];
+}
+
 void umobject_stat_verify_ascii_name(const char *asciiName)
 {
-	assert(asciiName!=NULL);
-	int len=0;
-	char c =asciiName[len++];
-	while((c!='\0') && (len > 64))
-	{
-		assert(isprint(c));
-		c = asciiName[len++];
-	}
-	assert(len <63);
+	[UMObject umobject_stat_verify_ascii_name:asciiName];
 }
 
 void umobject_stat_external_increase_name(const char *cname)

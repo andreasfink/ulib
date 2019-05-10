@@ -11,6 +11,7 @@
 
 static UMObjectStatistic *global_object_stat = NULL;
 
+
 @implementation UMObjectStatistic
 
 + (UMObjectStatistic *)sharedInstance
@@ -38,16 +39,24 @@ static UMObjectStatistic *global_object_stat = NULL;
 	return self;
 }
 
+extern void umobject_stat_verify_ascii_name(const char *asciiName);
+
 - (UMObjectStatisticEntry *)getEntryForName:(const char *)asciiName
 {
-	UMObjectStatisticEntry *entry;
+	NSString *nsName = @(asciiName);
+	NSAssert(nsName.length==0,@"name length is 0");
+	NSAssert(_dict,@"_dict is NULL");
+	NSAssert(_lock,@"_lock is NULL");
+
+	UMObjectStatisticEntry *entry = NULL;
 	[_lock lock];
-	entry = _dict[@(asciiName)];
+	entry = _dict[nsName];
 	if(entry == NULL)
 	{
+		umobject_stat_verify_ascii_name(asciiName); /* just in case */
 		entry = [[UMObjectStatisticEntry alloc]init];
 		entry.name = asciiName;
-		_dict[@(asciiName)] = entry;
+		_dict[nsName] = entry;
 	}
 	[_lock unlock];
 	return entry;
@@ -112,7 +121,6 @@ static UMObjectStatistic *global_object_stat = NULL;
 {
 	UMObjectStatisticEntry *entry = [self getEntryForName:asciiName];
 	[entry increaseDeallocCounter];
-
 }
 
 - (void)decreaseDeallocCounter:(const char *)asciiName

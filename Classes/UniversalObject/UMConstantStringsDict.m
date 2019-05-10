@@ -37,13 +37,6 @@ static UMConstantStringsDict *global_constant_strings = NULL;
 	const char *cptr ="\0";
 	unsigned long len = 0;
 
-#if 0
-	if (str.length > 63)
-	{
-		str = [str substringToIndex:63]; /* not more than 63 characters */
-	}
-#endif
-	
 	[_lock lock];
 	NSData *d = _dict[str];
 	if(d==NULL)

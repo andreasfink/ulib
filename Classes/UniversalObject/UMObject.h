@@ -95,7 +95,7 @@ BOOL umobject_object_stat_is_enabled(void);
 @end
 
 
-void umobject_stat_external_increase_name(const char *name);
-void umobject_stat_external_decrease_name(const char *name);
-
+void umobject_stat_verify_ascii_name(const char *asciiName);
+void umobject_stat_external_increase_name(const char *asciiName);
+void umobject_stat_external_decrease_name(const char *asciiName);
 const char *umobject_get_constant_name_pointer(const char *file, const long line, const char *func);

@@ -18,9 +18,9 @@
 #import "NSString+UniversalObject.h"
 #import "UMConstantStringsDict.h"
 #import "UMObjectStatistic.h"
+#import "UMMemoryHeader.h"
 
-
-UMObjectStatistic			*_objectStat = NULL;
+static UMObjectStatistic			*_objectStat = NULL;
 
 extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
@@ -347,42 +347,10 @@ NSArray *umobject_object_stat(BOOL sortByName)
 
 BOOL umobject_object_stat_is_enabled(void)
 {
-	if(_objectStat==NULL)
-	{
-		return NO;
-	}
-	else
-	{
-		return YES;
-	}
+	return ((_objectStat==NULL) ? NO : YES );
 }
 
 @end
-
-
-void umobject_stat_external_increase_name(const char *cname)
-{
-	if(_objectStat)
-	{
-		NSString *name = @(cname);
-
-		UMConstantStringsDict *magicNames = [UMConstantStringsDict sharedInstance];
-		const char *objectStatName = [magicNames asciiStringFromNSString:name];
-		[_objectStat increaseAllocCounter:objectStatName];
-	}
-}
-
-void umobject_stat_external_decrease_name(const char *cname)
-{
-	if(_objectStat)
-	{
-		NSString *name = @(cname);
-
-		UMConstantStringsDict *magicNames = [UMConstantStringsDict sharedInstance];
-		const char *objectStatName = [magicNames asciiStringFromNSString:name];
-		[_objectStat increaseDeallocCounter:objectStatName];
-	}
-}
 
 
 const char *umobject_get_constant_name_pointer(const char *file, const long line, const char *func)
@@ -393,5 +361,26 @@ const char *umobject_get_constant_name_pointer(const char *file, const long line
 	return  [magicNames asciiStringFromNSString:name];
 }
 
+void umobject_stat_verify_ascii_name(const char *asciiName)
+{
+	assert(asciiName!=NULL);
+	int len=0;
+	char c =asciiName[len++];
+	while((c!='\0') && (len > 64))
+	{
+		assert(isprint(c));
+		c = asciiName[len++];
+	}
+	assert(len <63);
+}
 
+void umobject_stat_external_increase_name(const char *cname)
+{
+	[_objectStat increaseAllocCounter:cname];
+}
+
+void umobject_stat_external_decrease_name(const char *cname)
+{
+	[_objectStat increaseDeallocCounter:cname];
+}
 

@@ -44,10 +44,10 @@ static UMObjectStatistic *global_object_stat = NULL;
 
 extern void umobject_stat_verify_ascii_name(const char *asciiName);
 
-- (UMObjectStatisticEntry *)getEntryForName:(const char *)asciiName
+- (UMObjectStatisticEntry *)getEntryForAsciiName:(const char *)asciiName
 {
 	NSString *nsName = @(asciiName);
-	NSAssert(nsName.length!=0,@"name length is 0");
+	NSAssert(nsName.length!=0,@"name length is 0. %s",asciiName);
 	NSAssert(_dict,@"_dict is NULL");
 	NSAssert(_lock,@"_lock is NULL");
 
@@ -107,18 +107,40 @@ extern void umobject_stat_verify_ascii_name(const char *asciiName);
 	return arr2;
 }
 
+extern NSString *UMBacktrace(void **stack_frames, size_t size);
+
+#define 	VERIFY_ASCII_NAME(asciiName) \
+{\
+	if(asciiName==NULL) \
+	{ \
+		NSString *s = UMBacktrace(NULL,0); \
+		fprintf(stderr,"asciiName==NULL\n%s",s.UTF8String); \
+		fflush(stderr); \
+		NSAssert(0,@"asciName is NULL");\
+	} \
+	if(*asciiName=='\0') \
+	{ \
+		NSString *s = UMBacktrace(NULL,0); \
+		fprintf(stderr,"asciiName==''\n%s",s.UTF8String); \
+		fflush(stderr); \
+		NSAssert(0,@"asciName points to empty string");\
+	} \
+}
+
 - (void)increaseAllocCounter:(const char *)asciiName
 {
+	VERIFY_ASCII_NAME(asciiName);
 	[_lock lock];
-	UMObjectStatisticEntry *entry = [self getEntryForName:asciiName];
+	UMObjectStatisticEntry *entry = [self getEntryForAsciiName:asciiName];
 	[entry increaseAllocCounter];
 	[_lock unlock];
 }
 
 - (void)decreaseAllocCounter:(const char *)asciiName
 {
+	VERIFY_ASCII_NAME(asciiName);
 	[_lock lock];
-	UMObjectStatisticEntry *entry = [self getEntryForName:asciiName];
+	UMObjectStatisticEntry *entry = [self getEntryForAsciiName:asciiName];
 	[entry decreaseAllocCounter];
 	[_lock unlock];
 
@@ -126,16 +148,18 @@ extern void umobject_stat_verify_ascii_name(const char *asciiName);
 
 - (void)increaseDeallocCounter:(const char *)asciiName
 {
+	VERIFY_ASCII_NAME(asciiName);
 	[_lock lock];
-	UMObjectStatisticEntry *entry = [self getEntryForName:asciiName];
+	UMObjectStatisticEntry *entry = [self getEntryForAsciiName:asciiName];
 	[entry increaseDeallocCounter];
 	[_lock unlock];
 }
 
 - (void)decreaseDeallocCounter:(const char *)asciiName
 {
+	VERIFY_ASCII_NAME(asciiName);
 	[_lock lock];
-	UMObjectStatisticEntry *entry = [self getEntryForName:asciiName];
+	UMObjectStatisticEntry *entry = [self getEntryForAsciiName:asciiName];
 	[entry decreaseDeallocCounter];
 	[_lock unlock];
 }

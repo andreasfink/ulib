@@ -27,7 +27,7 @@ static UMConstantStringsDict *global_constant_strings = NULL;
 	self = [super init];
 	if(self)
 	{
-		_lock = [[UMMutex alloc]init];
+        _lock = [[UMMutex alloc]initWithName:@"UMConstantStringsDict" saveInObjectStat:NO];
 		_dict = [[NSMutableDictionary alloc]init];
 	}
 	return self;

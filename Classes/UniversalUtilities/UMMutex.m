@@ -93,8 +93,11 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
 - (void) dealloc
 {
-    UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
-    [stat increaseDeallocCounter:_objectStatisticsName];
+    if(_safeInObjectStat)
+    {
+        UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
+        [stat increaseDeallocCounter:_objectStatisticsName];
+    }
     pthread_mutex_destroy(&_mutexLock);
     pthread_mutexattr_destroy(&_mutexAttr);
     memset(&_mutexLock,0x00,sizeof(_mutexLock));

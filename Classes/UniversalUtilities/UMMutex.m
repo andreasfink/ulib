@@ -8,6 +8,7 @@
 
 #import "UMMutex.h"
 #import "UMObjectStatistic.h"
+#import "UMConstantStringsDict.h"
 
 static NSMutableDictionary *global_ummutex_stat = NULL;
 static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
@@ -39,22 +40,11 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
     if(self)
     {
         _name = name;
-        _mutexLock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-        if(_mutexLock == NULL)
-        {
-            return NULL;
-        }
-        _mutexAttr = (pthread_mutexattr_t *)malloc(sizeof(pthread_mutexattr_t));
-        if(_mutexAttr == NULL)
-        {
-            free(_mutexLock);
-            _mutexAttr = NULL;
-            _mutexLock = NULL;
-            return NULL;
-        }
-        pthread_mutexattr_init(_mutexAttr);
-        pthread_mutexattr_settype(_mutexAttr, PTHREAD_MUTEX_RECURSIVE);
-        pthread_mutex_init(_mutexLock, _mutexAttr);
+        memset(&_mutexLock,0x00,sizeof(_mutexLock));
+        memset(&_mutexAttr,0x00,sizeof(_mutexAttr));
+        pthread_mutexattr_init(&_mutexAttr);
+        pthread_mutexattr_settype(&_mutexAttr, PTHREAD_MUTEX_RECURSIVE);
+        pthread_mutex_init(&_mutexLock, &_mutexAttr);
 
         UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
         NSString *s = [NSString stringWithFormat:@"UMMutex(%@)",name];
@@ -97,26 +87,9 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 {
     UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
     [stat increaseDeallocCounter:_objectStatisticsName];
+    pthread_mutexattr_destroy(&_mutexAttr);
+    pthread_mutex_destroy(&_mutexLock);
 
-    if(_mutexLock)
-    {
-        pthread_mutex_lock(_mutexLock);
-        pthread_mutex_t *_mutexLock2 = _mutexLock;
-        _mutexLock = NULL;
-        if(_mutexAttr)
-        {
-            pthread_mutexattr_destroy(_mutexAttr);
-            free(_mutexAttr);
-            _mutexAttr = NULL;
-        }
-        pthread_mutex_unlock(_mutexLock2);
-        if(_mutexLock2)
-        {
-            pthread_mutex_destroy(_mutexLock2);
-            free(_mutexLock2);
-        }
-    }
-    
     if(global_ummutex_stat)
     {
         pthread_mutex_lock(global_ummutex_stat_mutex);
@@ -141,11 +114,10 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
         stat.waiting_count++;
         pthread_mutex_unlock(global_ummutex_stat_mutex);
     }
-    if(_mutexLock)
-    {
-        pthread_mutex_lock(_mutexLock);
-        _lockDepth++;
-    }
+
+    pthread_mutex_lock(&_mutexLock);
+    _lockDepth++;
+
     if(global_ummutex_stat)
     {
         pthread_mutex_lock(global_ummutex_stat_mutex);
@@ -172,11 +144,8 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
         stat.currently_locked = NO;
         pthread_mutex_unlock(global_ummutex_stat_mutex);
     }
-    if(_mutexLock)
-    {
-        _lockDepth--;
-        pthread_mutex_unlock(_mutexLock);
-    }
+    _lockDepth--;
+    pthread_mutex_unlock(&_mutexLock);
 }
 
 - (int)tryLock /* returns 0 if success ful */
@@ -194,31 +163,27 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
         }
         pthread_mutex_unlock(global_ummutex_stat_mutex);
     }
-    if(_mutexLock)
+
+    int r = pthread_mutex_trylock(&_mutexLock);
+    if(r==0)
     {
-        int r = pthread_mutex_trylock(_mutexLock);
+        _lockDepth++;
+    }
+    if(global_ummutex_stat)
+    {
+        pthread_mutex_lock(global_ummutex_stat_mutex);
         if(r==0)
         {
-            _lockDepth++;
+            stat.currently_locked = YES;
+            stat.lock_count++;
         }
-        if(global_ummutex_stat)
+        else
         {
-            pthread_mutex_lock(global_ummutex_stat_mutex);
-            if(r==0)
-            {
-                stat.currently_locked = YES;
-                stat.lock_count++;
-            }
-            else
-            {
-                stat.trylock_count++;
-            }
-            pthread_mutex_unlock(global_ummutex_stat_mutex);
+            stat.trylock_count++;
         }
-        return r;
-
+        pthread_mutex_unlock(global_ummutex_stat_mutex);
     }
-    return -1;
+    return r;
 }
 
 @end

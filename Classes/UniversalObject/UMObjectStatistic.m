@@ -36,11 +36,6 @@ static UMObjectStatistic *global_object_stat = NULL;
 	return global_object_stat;
 }
 
-+ (void)destroySharedInstance
-{
-	global_object_stat = NULL;
-}
-
 - (UMObjectStatistic *)init
 {
 	self = [super init];
@@ -138,6 +133,12 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 	} \
 }
 
++ (void)increaseAllocCounter:(const char *)asciiName
+{
+    UMObjectStatistic *os = [UMObjectStatistic sharedInstance];
+    [os increaseAllocCounter:asciiName];
+}
+
 - (void)increaseAllocCounter:(const char *)asciiName
 {
 	VERIFY_ASCII_NAME(asciiName);
@@ -145,6 +146,12 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 	UMObjectStatisticEntry *entry = [self getEntryForAsciiName:asciiName];
 	[entry increaseAllocCounter];
 	[_lock unlock];
+}
+
++ (void)decreaseAllocCounter:(const char *)asciiName
+{
+    UMObjectStatistic *os = [UMObjectStatistic sharedInstance];
+    [os decreaseAllocCounter:asciiName];
 }
 
 - (void)decreaseAllocCounter:(const char *)asciiName
@@ -157,6 +164,12 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 }
 
++ (void)increaseDeallocCounter:(const char *)asciiName
+{
+    UMObjectStatistic *os = [UMObjectStatistic sharedInstance];
+    [os increaseDeallocCounter:asciiName];
+}
+
 - (void)increaseDeallocCounter:(const char *)asciiName
 {
 	VERIFY_ASCII_NAME(asciiName);
@@ -164,6 +177,12 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 	UMObjectStatisticEntry *entry = [self getEntryForAsciiName:asciiName];
 	[entry increaseDeallocCounter];
 	[_lock unlock];
+}
+
++ (void)decreaseDeallocCounter:(const char *)asciiName
+{
+    UMObjectStatistic *os = [UMObjectStatistic sharedInstance];
+    [os decreaseDeallocCounter:asciiName];
 }
 
 - (void)decreaseDeallocCounter:(const char *)asciiName

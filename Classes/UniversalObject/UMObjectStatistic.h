@@ -20,7 +20,12 @@
 + (void)enable;
 + (void)disable;
 + (UMObjectStatistic *)sharedInstance;
-+ (void)destroySharedInstance;
+
+
++ (void)increaseAllocCounter:(const char *)asciiName;
++ (void)decreaseAllocCounter:(const char *)asciiName;
++ (void)increaseDeallocCounter:(const char *)asciiName;
++ (void)decreaseDeallocCounter:(const char *)asciiName;
 
 - (void)increaseAllocCounter:(const char *)asciiName;
 - (void)decreaseAllocCounter:(const char *)asciiName;

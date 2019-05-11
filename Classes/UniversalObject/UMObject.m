@@ -20,8 +20,6 @@
 #import "UMObjectStatistic.h"
 #import "UMMemoryHeader.h"
 
-static UMObjectStatistic			*_objectStat = NULL;
-
 extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 
@@ -69,11 +67,12 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 		_magic = [magicNames asciiStringFromNSString:s];
 		_umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
 		_objectStatisticsName = _magic;
-		if(_objectStat)
-		{
-			[_objectStat increaseAllocCounter:_objectStatisticsName];
-			_umobject_flags  |= UMOBJECT_FLAG_COUNTED_IN_STAT;
-		}
+        UMObjectStatistic *os = [UMObjectStatistic sharedInstance];
+        if(os)
+        {
+            [os increaseAllocCounter:_objectStatisticsName];
+            _umobject_flags  |= UMOBJECT_FLAG_COUNTED_IN_STAT;
+        }
 		_umobject_flags  |= UMOBJECT_FLAG_IS_INITIALIZED;
 	}
 	return self;
@@ -81,12 +80,12 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 - (void)dealloc
 {
-	if((_objectStat) && (_umobject_flags & UMOBJECT_FLAG_COUNTED_IN_STAT))
+	if(_umobject_flags & UMOBJECT_FLAG_COUNTED_IN_STAT)
 	{
-		[_objectStat increaseDeallocCounter:_objectStatisticsName];
-		_magic = "deallocated";
-		_objectStatisticsName = _magic;
-	}
+		[UMObjectStatistic increaseDeallocCounter:_objectStatisticsName];
+    }
+    _magic = "deallocated";
+    _objectStatisticsName = _magic;
 	_umobject_flags  |= UMOBJECT_FLAG_IS_RELEASED;
 }
 
@@ -192,8 +191,8 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 	UMConstantStringsDict *magicNames 	= [UMConstantStringsDict sharedInstance];
 	_objectStatisticsName 				= [magicNames asciiStringFromNSString:newName];
-	[_objectStat decreaseAllocCounter:oldName];
-	[_objectStat increaseAllocCounter:_objectStatisticsName];
+	[UMObjectStatistic decreaseAllocCounter:oldName];
+	[UMObjectStatistic increaseAllocCounter:_objectStatisticsName];
 }
 
 
@@ -325,29 +324,25 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 int umobject_enable_object_stat(void)
 {
-	[UMObjectStatistic sharedInstance];
-
-	if(_objectStat == NULL)
-	{
-		_objectStat = [UMObjectStatistic sharedInstance];
-	}
+	[UMObjectStatistic enable];
 	return 1;
 }
 
 void umobject_disable_object_stat(void)
 {
-	[UMObjectStatistic destroySharedInstance];
-	_objectStat = NULL;
+	[UMObjectStatistic disable];
 }
 
 NSArray *umobject_object_stat(BOOL sortByName)
 {
-	return [_objectStat getObjectStatistic:sortByName];
+    UMObjectStatistic *objectStat = [UMObjectStatistic sharedInstance];
+	return [objectStat getObjectStatistic:sortByName];
 }
 
 BOOL umobject_object_stat_is_enabled(void)
 {
-	return ((_objectStat==NULL) ? NO : YES );
+    UMObjectStatistic *objectStat = [UMObjectStatistic sharedInstance];
+	return ((objectStat==NULL) ? NO : YES );
 }
 
 + (void) umobject_stat_verify_ascii_name:(const char *)asciiName
@@ -387,11 +382,14 @@ void umobject_stat_verify_ascii_name(const char *asciiName)
 
 void umobject_stat_external_increase_name(const char *cname)
 {
-	[_objectStat increaseAllocCounter:cname];
+    UMObjectStatistic *objectStat = [UMObjectStatistic sharedInstance];
+
+	[objectStat increaseAllocCounter:cname];
 }
 
 void umobject_stat_external_decrease_name(const char *cname)
 {
-	[_objectStat increaseDeallocCounter:cname];
+    UMObjectStatistic *objectStat = [UMObjectStatistic sharedInstance];
+	[objectStat increaseDeallocCounter:cname];
 }
 

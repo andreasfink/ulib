@@ -39,25 +39,25 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
     return [self initWithName:name saveInObjectStat:YES];
 }
 
-- (UMMutex *)initWithName:(NSString *)name saveInObjectStat:(BOOL)safeInObjectStat
+- (UMMutex *)initWithName:(NSString *)name saveInObjectStat:(BOOL)_aveInObjectStat
 {
     self = [super init];
     if(self)
     {
         _name = name;
-        _safeInObjectStat = safeInObjectStat;
+        _savedInObjectStat = saveInObjectStat;
         memset(&_mutexLock,0x00,sizeof(_mutexLock));
         memset(&_mutexAttr,0x00,sizeof(_mutexAttr));
         pthread_mutexattr_init(&_mutexAttr);
         pthread_mutexattr_settype(&_mutexAttr, PTHREAD_MUTEX_RECURSIVE);
         pthread_mutex_init(&_mutexLock, &_mutexAttr);
 
-        if(_safeInObjectStat)
+        if(_savedInObjectStat)
         {
             UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
             NSString *s = [NSString stringWithFormat:@"UMMutex(%@)",name];
             UMConstantStringsDict *magicNames   = [UMConstantStringsDict sharedInstance];
-            const char *_objectStatisticsName    = [magicNames asciiStringFromNSString:s];
+            _objectStatisticsName    = [magicNames asciiStringFromNSString:s];
             [stat increaseAllocCounter:_objectStatisticsName];
         }
         if(global_ummutex_stat)
@@ -93,7 +93,7 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
 - (void) dealloc
 {
-    if(_safeInObjectStat)
+    if((_savedInObjectStat) && (_objectStatisticsName))
     {
         UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
         [stat increaseDeallocCounter:_objectStatisticsName];

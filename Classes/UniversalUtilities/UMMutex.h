@@ -17,7 +17,7 @@
     int _lockDepth;
     NSString *_name;
     const char *_objectStatisticsName;
-    BOOL _safeInObjectStat;
+    BOOL _savedInObjectStat;
 }
 
 @property(readwrite,strong) NSString *name;
@@ -38,6 +38,7 @@
     int64_t _waiting_count;
     BOOL _currently_locked;
 }
+
 @property(readwrite,strong,atomic)  NSString *name;
 @property(readwrite,assign,atomic)  int64_t lock_count;
 @property(readwrite,assign,atomic)  int64_t trylock_count;

@@ -52,10 +52,10 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
         pthread_mutexattr_settype(&_mutexAttr, PTHREAD_MUTEX_RECURSIVE);
         pthread_mutex_init(&_mutexLock, &_mutexAttr);
 
-        UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
-        NSString *s = [NSString stringWithFormat:@"UMMutex(%@)",name];
         if(_safeInObjectStat)
         {
+            UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
+            NSString *s = [NSString stringWithFormat:@"UMMutex(%@)",name];
             UMConstantStringsDict *magicNames   = [UMConstantStringsDict sharedInstance];
             const char *_objectStatisticsName    = [magicNames asciiStringFromNSString:s];
             [stat increaseAllocCounter:_objectStatisticsName];

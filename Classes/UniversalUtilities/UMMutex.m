@@ -31,15 +31,22 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
 - (UMMutex *)init
 {
-    return [self initWithName:@"unnamed"];
+    return [self initWithName:@"unnamed" safeInObjectStat:YES];
 }
-            
+
+
 - (UMMutex *)initWithName:(NSString *)name
+{
+    return [self initWithName:name safeInObjectStat:YES];
+}
+
+- (UMMutex *)initWithName:(NSString *)name safeInObjectStat:(BOOL)safeInObjectStat
 {
     self = [super init];
     if(self)
     {
         _name = name;
+        _safeInObjectStat = safeInObjectStat;
         memset(&_mutexLock,0x00,sizeof(_mutexLock));
         memset(&_mutexAttr,0x00,sizeof(_mutexAttr));
         pthread_mutexattr_init(&_mutexAttr);
@@ -48,10 +55,12 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
         UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
         NSString *s = [NSString stringWithFormat:@"UMMutex(%@)",name];
-        UMConstantStringsDict *magicNames   = [UMConstantStringsDict sharedInstance];
-        const char *_objectStatisticsName    = [magicNames asciiStringFromNSString:s];
-        [stat increaseAllocCounter:_objectStatisticsName];
-
+        if(_safeInObjectStat)
+        {
+            UMConstantStringsDict *magicNames   = [UMConstantStringsDict sharedInstance];
+            const char *_objectStatisticsName    = [magicNames asciiStringFromNSString:s];
+            [stat increaseAllocCounter:_objectStatisticsName];
+        }
         if(global_ummutex_stat)
         {
             pthread_mutex_lock(global_ummutex_stat_mutex);
@@ -87,9 +96,10 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 {
     UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
     [stat increaseDeallocCounter:_objectStatisticsName];
-    pthread_mutexattr_destroy(&_mutexAttr);
     pthread_mutex_destroy(&_mutexLock);
-
+    pthread_mutexattr_destroy(&_mutexAttr);
+    memset(&_mutexLock,0x00,sizeof(_mutexLock));
+    memset(&_mutexAttr,0x00,sizeof(_mutexAttr));
     if(global_ummutex_stat)
     {
         pthread_mutex_lock(global_ummutex_stat_mutex);

@@ -17,13 +17,16 @@
     int _lockDepth;
     NSString *_name;
     const char *_objectStatisticsName;
+    BOOL _safeInObjectStat;
 }
 
 @property(readwrite,strong) NSString *name;
 - (void)lock;
 - (void)unlock;
 - (int)tryLock;
+- (UMMutex *)init;
 - (UMMutex *)initWithName:(NSString *)name;
+- (UMMutex *)initWithName:(NSString *)name safeInObjectStat:(BOOL)safeInObjectStat;
 @end
 
 @interface UMMutexStat : NSObject
@@ -42,6 +45,8 @@
 @property(readwrite,assign,atomic)  int64_t waiting_count;
 @property(readwrite,assign,atomic)  BOOL currently_locked;
 @end
+
+
 
 BOOL ummutex_stat_is_enabled(void);
 NSArray *ummutex_stat(BOOL sortByName);

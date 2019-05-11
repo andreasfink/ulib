@@ -14,27 +14,26 @@
 
 @implementation UMBackgrounderWithQueue
 
-@synthesize queue;
-@synthesize sharedQueue;
-
-- (UMBackgrounderWithQueue *)init
+- (UMBackgrounderWithQueue *)initWithName:(NSString *)n
 {
-    self = [super init];
+    self = [super initWithName:n workSleeper:NULL];
     if(self)
     {
-        queue = [[UMQueue alloc]init];
-        sharedQueue = NO;
+        _queue = [[UMQueue alloc]init];
+        _sharedQueue = NO;
     }
     return self;
 }
 
-- (UMBackgrounderWithQueue *)initWithSharedQueue:(UMQueue *)q name:(NSString *)n workSleeper:(UMSleeper *)ws
+- (UMBackgrounderWithQueue *)initWithSharedQueue:(UMQueue *)q
+                                            name:(NSString *)n
+                                     workSleeper:(UMSleeper *)ws
 {
     self = [super initWithName:n workSleeper:ws];
     if(self)
     {
-        self.queue = q;
-        sharedQueue = YES;
+        _queue = q;
+        _sharedQueue = YES;
     }
     return self;
 }
@@ -53,7 +52,7 @@
 {
     @autoreleasepool
     {
-        UMTask *task = [queue getFirst];
+        UMTask *task = [_queue getFirst];
         if(task)
         {
             if(_enableLogging)

@@ -9,6 +9,7 @@
 #import "UMMutex.h"
 #import "UMObjectStatistic.h"
 #import "UMConstantStringsDict.h"
+#import "UMAssert.h"
 
 static NSMutableDictionary *global_ummutex_stat = NULL;
 static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
@@ -31,6 +32,7 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
 - (UMMutex *)init
 {
+    UMAssert(0,@"call initWithName: instead");
     return [self initWithName:@"unnamed" saveInObjectStat:YES];
 }
 

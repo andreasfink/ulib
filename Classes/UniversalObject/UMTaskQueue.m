@@ -43,7 +43,9 @@
         for(i=0;i<workerThreadCount;i++)
         {
             NSString *newName = [NSString stringWithFormat:@"%@[%d]",n,i];
-            UMBackgrounderWithQueue *bg = [[UMBackgrounderWithQueue alloc]initWithSharedQueue:mainQueue name:newName workSleeper:workSleeper];
+            UMBackgrounderWithQueue *bg = [[UMBackgrounderWithQueue alloc]initWithSharedQueue:mainQueue
+                                                                                         name:newName
+                                                                                  workSleeper:workSleeper];
             bg.enableLogging = self.enableLogging;
             [workerThreads addObject:bg];
         }

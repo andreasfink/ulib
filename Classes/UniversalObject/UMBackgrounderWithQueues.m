@@ -23,7 +23,7 @@
     if(self)
     {
         _multiQueue = q;
-        sharedQueue = YES;
+        _sharedQueue = YES;
     }
     return self;
 }

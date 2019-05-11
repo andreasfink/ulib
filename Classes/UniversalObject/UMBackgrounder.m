@@ -19,6 +19,7 @@
 
 - (UMBackgrounder *)init
 {
+    UMAssert(0,@"call initWithName: workSleeper: instead");
     return [self initWithName:@"(unnamed)" workSleeper:NULL];
 }
 

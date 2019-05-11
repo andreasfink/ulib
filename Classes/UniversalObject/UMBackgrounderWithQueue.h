@@ -28,14 +28,14 @@
 
 @interface UMBackgrounderWithQueue : UMBackgrounder
 {
-    UMQueue *queue;
-    BOOL sharedQueue;
+    UMQueue *_queue;
+    BOOL    _sharedQueue;
 }
 
 @property(strong)     UMQueue   *queue;
 @property(assign)     BOOL      sharedQueue;
 
-- (UMBackgrounderWithQueue *)init;
+- (UMBackgrounderWithQueue *)initWithName:(NSString *)n;
 - (UMBackgrounderWithQueue *)initWithSharedQueue:(UMQueue *)queue
                                             name:(NSString *)name
                                      workSleeper:(UMSleeper *)ws;

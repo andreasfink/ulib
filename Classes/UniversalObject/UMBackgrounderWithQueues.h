@@ -22,7 +22,7 @@
 
 {
     UMQueueMulti *_multiQueue; /* array of UMQueue object sorted by priority */
-    NSString *_lastTask;
+    NSString     *_lastTask;
 }
 
 //@property(strong)     NSArray *queues;

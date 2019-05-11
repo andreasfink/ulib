@@ -39,7 +39,7 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
     return [self initWithName:name saveInObjectStat:YES];
 }
 
-- (UMMutex *)initWithName:(NSString *)name saveInObjectStat:(BOOL)_aveInObjectStat
+- (UMMutex *)initWithName:(NSString *)name saveInObjectStat:(BOOL)saveInObjectStat
 {
     self = [super init];
     if(self)

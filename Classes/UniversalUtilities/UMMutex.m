@@ -7,7 +7,7 @@
 //
 
 #import "UMMutex.h"
-UMGlobalMessageCache#import "UMObjectStatistic.h"
+#import "UMObjectStatistic.h"
 #import "UMConstantStringsDict.h"
 #import "UMAssert.h"
 

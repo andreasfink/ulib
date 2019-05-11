@@ -30,7 +30,7 @@
         _hardwareHandshake = NO;
         _fd = -1;
         _isOpen = NO;
-        _lock = [[UMMutex alloc]init];
+        _lock = [[UMMutex alloc]initWithName:@"UMSerialPort"];
     }
     return self;
 }
@@ -55,7 +55,8 @@
         _hardwareHandshake = handshake;
         _fd = -1;
         _isOpen = NO;
-        _lock = [[UMMutex alloc]init];
+        NSString *s = [NSString stringWithFormat:@"UMSerialPort %@",name];
+        _lock = [[UMMutex alloc]initWithName:s];
     }
     return self;
 }

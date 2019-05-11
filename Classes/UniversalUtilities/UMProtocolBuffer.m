@@ -26,7 +26,7 @@ static inline uint64_t ZigZag(int64_t a)
     if(self)
     {
         _buffer = [[NSMutableData alloc]init];
-        _lock = [[UMMutex alloc]init];
+        _lock = [[UMMutex alloc]initWithName:@"protocol-buffer"];
     }
     return self;
 }
@@ -37,7 +37,7 @@ static inline uint64_t ZigZag(int64_t a)
     if(self)
     {
         _buffer = [d mutableCopy];
-        _lock = [[UMMutex alloc]init];
+        _lock = [[UMMutex alloc]initWithName:@"protocol-buffer"];
     }
     return self;
 }

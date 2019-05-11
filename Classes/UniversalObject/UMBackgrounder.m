@@ -44,7 +44,8 @@
                                                     line:__LINE__
                                                 function:__func__];
         [_control_sleeper prepare];
-        _startStopLock = [[UMMutex alloc]init];
+        NSString *s = [NSString stringWithFormat:@"UMBackgrounder(%@)",n];
+        _startStopLock = [[UMMutex alloc]initWithName:s];
     }
     return self;
 }

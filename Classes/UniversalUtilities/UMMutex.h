@@ -26,7 +26,7 @@
 - (int)tryLock;
 - (UMMutex *)init;
 - (UMMutex *)initWithName:(NSString *)name;
-- (UMMutex *)initWithName:(NSString *)name safeInObjectStat:(BOOL)safeInObjectStat;
+- (UMMutex *)initWithName:(NSString *)name saveInObjectStat:(BOOL)safeInObjectStat;
 @end
 
 @interface UMMutexStat : NSObject

@@ -31,16 +31,15 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
 - (UMMutex *)init
 {
-    return [self initWithName:@"unnamed" safeInObjectStat:YES];
+    return [self initWithName:@"unnamed" saveInObjectStat:YES];
 }
-
 
 - (UMMutex *)initWithName:(NSString *)name
 {
-    return [self initWithName:name safeInObjectStat:YES];
+    return [self initWithName:name saveInObjectStat:YES];
 }
 
-- (UMMutex *)initWithName:(NSString *)name safeInObjectStat:(BOOL)safeInObjectStat
+- (UMMutex *)initWithName:(NSString *)name saveInObjectStat:(BOOL)safeInObjectStat
 {
     self = [super init];
     if(self)

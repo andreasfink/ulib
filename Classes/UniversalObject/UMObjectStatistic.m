@@ -47,7 +47,7 @@ static UMObjectStatistic *global_object_stat = NULL;
 	if(self)
 	{
         /* we can not save this mutex in object stat as this would potentially create a recurise loop */
-        _lock = [[UMMutex alloc]intWithName:@"UMObjectStatistic-lock" safeInObjectStat:NO];
+        _lock = [[UMMutex alloc]intWithName:@"UMObjectStatistic-lock" saveInObjectStat:NO];
 		_dict = [[NSMutableDictionary alloc]init];
 	}
 	return self;

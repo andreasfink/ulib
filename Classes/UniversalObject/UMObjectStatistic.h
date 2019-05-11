@@ -17,6 +17,8 @@
 	long long					_dealloc;
 }
 
++ (void)enable;
++ (void)disable;
 + (UMObjectStatistic *)sharedInstance;
 + (void)destroySharedInstance;
 

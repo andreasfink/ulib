@@ -16,6 +16,7 @@
     pthread_mutexattr_t *_mutexAttr;
     int _lockDepth;
     NSString *_name;
+    const char *_objectStatisticsName;
 }
 
 @property(readwrite,strong) NSString *name;

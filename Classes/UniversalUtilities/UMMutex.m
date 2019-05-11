@@ -7,6 +7,7 @@
 //
 
 #import "UMMutex.h"
+#import "UMObjectStatistic.h"
 
 static NSMutableDictionary *global_ummutex_stat = NULL;
 static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
@@ -54,7 +55,13 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
         pthread_mutexattr_init(_mutexAttr);
         pthread_mutexattr_settype(_mutexAttr, PTHREAD_MUTEX_RECURSIVE);
         pthread_mutex_init(_mutexLock, _mutexAttr);
-        
+
+        UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
+        NSString *s = [NSString stringWithFormat:@"UMMutex(%@)",name];
+        UMConstantStringsDict *magicNames   = [UMConstantStringsDict sharedInstance];
+        const char *_objectStatisticsName    = [magicNames asciiStringFromNSString:s];
+        [stat increaseAllocCounter:_objectStatisticsName];
+
         if(global_ummutex_stat)
         {
             pthread_mutex_lock(global_ummutex_stat_mutex);
@@ -88,6 +95,9 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
 - (void) dealloc
 {
+    UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
+    [stat increaseDeallocCounter:_objectStatisticsName];
+
     if(_mutexLock)
     {
         pthread_mutex_lock(_mutexLock);

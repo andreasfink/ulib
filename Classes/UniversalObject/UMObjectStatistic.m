@@ -17,12 +17,22 @@ static UMObjectStatistic *global_object_stat = NULL;
 
 @implementation UMObjectStatistic
 
++ (void)enable
+{
+    if(global_object_stat==NULL)
+    {
+        global_object_stat = [[UMObjectStatistic alloc]init];
+    }
+}
+
++ (void)disable
+{
+    global_object_stat =NULL;
+}
+
+
 + (UMObjectStatistic *)sharedInstance
 {
-	if(global_object_stat == NULL)
-	{
-		global_object_stat = [[UMObjectStatistic alloc]init];
-	}
 	return global_object_stat;
 }
 

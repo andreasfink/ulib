@@ -15,7 +15,7 @@
     if(self)
     {
         _lock = [[UMMutex alloc] initWithName:@"umqueue"];
-        queue = [[NSMutableArray alloc]init];
+        _queue = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -26,7 +26,7 @@
     if(self)
     {
         _lock = NULL;
-        queue = [[NSMutableArray alloc]init];
+        _queue = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -37,7 +37,7 @@
     if(obj)
     {
         [_lock lock];
-        [queue addObject:obj];
+        [_queue addObject:obj];
         [_lock unlock];
     }
 }
@@ -46,7 +46,7 @@
 {
     if(obj)
     {
-        [queue addObject:obj];
+        [_queue addObject:obj];
     }
 }
 
@@ -55,7 +55,7 @@
     if(obj)
     {
         [_lock lock];
-        [queue insertObject:obj atIndex:0];
+        [_queue insertObject:obj atIndex:0];
         [_lock unlock];
     }
 }
@@ -66,8 +66,8 @@
     if(obj)
     {
         [_lock lock];
-        [queue removeObject:obj]; /* should not be there twice */
-        [queue addObject:obj];
+        [_queue removeObject:obj]; /* should not be there twice */
+        [_queue addObject:obj];
         [_lock unlock];
     }
 }
@@ -78,7 +78,7 @@
     if(obj)
     {
         [_lock lock];
-        [queue removeObject:obj];
+        [_queue removeObject:obj];
         [_lock unlock];
     }
 }
@@ -87,10 +87,10 @@
 {
     id obj = NULL;
     [_lock lock];
-    if ([queue count]>0)
+    if ([_queue count]>0)
     {
-        obj = [queue objectAtIndex:0];
-        [queue removeObjectAtIndex:0];
+        obj = [_queue objectAtIndex:0];
+        [_queue removeObjectAtIndex:0];
     }
     [_lock unlock];
     return obj;
@@ -99,10 +99,10 @@
 - (id)getFirstWhileLocked
 {
     id obj = NULL;
-    if ([queue count]>0)
+    if ([_queue count]>0)
     {
-        obj = [queue objectAtIndex:0];
-        [queue removeObjectAtIndex:0];
+        obj = [_queue objectAtIndex:0];
+        [_queue removeObjectAtIndex:0];
     }
     return obj;
 }
@@ -111,7 +111,7 @@
 - (NSInteger)count
 {
     [_lock lock];
-    NSInteger i = [queue count];
+    NSInteger i = [_queue count];
     [_lock unlock];
     return i;
 }

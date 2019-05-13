@@ -12,15 +12,13 @@
 #import "UMQueueMulti.h"
 #import "UMSleeper.h"
 #import "UMTask.h"
+#import "UMQueueMulti.h"
 
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #include <string.h>
 
 @implementation UMTaskQueueMulti
-@synthesize name;
-@synthesize workSleeper;
-@synthesize enableLogging;
 
 - (UMTaskQueueMulti *)init
 {
@@ -56,20 +54,20 @@
         self.name = n;
         self.enableLogging = enableLog;
         _multiQueue = xqueues;
-        workerThreads = [[NSMutableArray alloc]init];
+        _workerThreads = [[NSMutableArray alloc]init];
         _debug = xdebug;
         xqueues.hardLimit = hardLimit;
         int i;
-        self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
-        self.workSleeper.debug = xdebug;
-        [self.workSleeper prepare];
+        _workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
+        _workSleeper.debug = xdebug;
+        [_workSleeper prepare];
         for(i=0;i<workerThreadCount;i++)
         {
             NSString *newName = [NSString stringWithFormat:@"%@[%d]",n,i];
             UMBackgrounderWithQueues *bg = [[UMBackgrounderWithQueues alloc]initWithSharedQueues:_multiQueue
-                                                                                            name:newName workSleeper:workSleeper];
-            bg.enableLogging = self.enableLogging;
-            [workerThreads addObject:bg];
+                                                                                            name:newName workSleeper:_workSleeper];
+            bg.enableLogging = _enableLogging;
+            [_workerThreads addObject:bg];
         }
     }
     return self;
@@ -104,18 +102,18 @@
         _multiQueue = [[UMQueueMulti alloc]initWithQueueCount:queueCount];
         _multiQueue.hardLimit = hardLimit;
 
-        workerThreads = [[NSMutableArray alloc]init];
+        _workerThreads = [[NSMutableArray alloc]init];
         int i;
-        self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
-        [self.workSleeper prepare];
+        _workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
+        [_workSleeper prepare];
         for(i=0;i<workerThreadCount;i++)
         {
             NSString *newName = [NSString stringWithFormat:@"%@[%d]",n,i];
             UMBackgrounderWithQueues *bg = [[UMBackgrounderWithQueues alloc]initWithSharedQueues:_multiQueue
                                                                                            name:newName
-                                                                                    workSleeper:workSleeper];
+                                                                                    workSleeper:_workSleeper];
             bg.enableLogging = self.enableLogging;
-            [workerThreads addObject:bg];
+            [_workerThreads addObject:bg];
             [bg startBackgroundTask];
         }
     }
@@ -128,12 +126,12 @@
     {
         return;
     }
-    if(enableLogging)
+    if(_enableLogging)
     {
         task.enableLogging = YES;
     }
     [_multiQueue append:task forQueueNumber:nr];
-    [workSleeper wakeUp];
+    [_workSleeper wakeUp];
 }
 
 - (NSUInteger)count
@@ -143,7 +141,7 @@
 
 - (void)start
 {
-    for(UMBackgrounderWithQueue *bg in workerThreads)
+    for(UMBackgrounderWithQueue *bg in _workerThreads)
     {
         [bg startBackgroundTask];
     }
@@ -151,7 +149,7 @@
 
 - (void)shutdown
 {
-    for(UMBackgrounderWithQueue *bg in workerThreads)
+    for(UMBackgrounderWithQueue *bg in _workerThreads)
     {
         [bg shutdownBackgroundTask];
     }
@@ -160,7 +158,7 @@
 - (NSDictionary *)status
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    dict[@"worker-threads"] = @(workerThreads.count);
+    dict[@"worker-threads"] = @(_workerThreads.count);
     dict[@"worker-threads-busy"] = @(_multiQueue.workInProgress);
     dict[@"queues"] = _multiQueue.status;
     return dict;
@@ -169,7 +167,7 @@
 - (NSDictionary *)statusByObjectType
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    dict[@"worker-threads"] = @(workerThreads.count);
+    dict[@"worker-threads"] = @(_workerThreads.count);
     dict[@"worker-threads-busy"] = @(_multiQueue.workInProgress);
     dict[@"queues"] = _multiQueue.statusByObjectType;
     return dict;

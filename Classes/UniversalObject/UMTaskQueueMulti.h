@@ -7,6 +7,8 @@
 //
 
 #import "UMObject.h"
+#import "UMQueueMulti.h"
+#import "UMThroughputCounter.h"
 
 /*!
  @class UMTaskQueueMulti
@@ -17,28 +19,26 @@
 
  */
 
-@class UMQueueMulti;
 @class UMBackgrounderWithQueue;
 @class UMTask;
 @class UMSleeper;
 @class UMThroughputCounter;
-
 @interface UMTaskQueueMulti : UMObject
 {
-    BOOL            enableLogging;
-    NSString        *name;
+    BOOL            _enableLogging;
+    NSString        *_name;
     UMQueueMulti    *_multiQueue;
-    UMSleeper       *workSleeper;
-    NSMutableArray  *workerThreads; /* UMBackgrounderWithQueues objects */
+    UMSleeper       *_workSleeper;
+    NSMutableArray  *_workerThreads; /* UMBackgrounderWithQueues objects */
     BOOL            _debug;
-    UMThroughputCounter *throughput;
+    UMThroughputCounter *_throughput;
 }
 
-@property (strong) NSString     *name;
-@property (strong) UMSleeper    *workSleeper;
-@property (assign) BOOL         enableLogging;
-@property (assign) BOOL         debug;
+@property (assign) BOOL         	enableLogging;
+@property (strong) NSString     	*name;
 @property (strong)  UMQueueMulti    *multiQueue;
+@property (strong) UMSleeper    	*workSleeper;
+@property (assign) BOOL        		debug;
 
 
 

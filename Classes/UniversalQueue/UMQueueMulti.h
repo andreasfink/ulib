@@ -13,7 +13,7 @@
 @interface UMQueueMulti : UMQueue
 {
 @private
-    NSMutableArray  *queues;
+    NSMutableArray  *_queues;
     NSUInteger      _workInProgress;
     NSUInteger      _currentlyInQueue;
     NSUInteger      _hardLimit;

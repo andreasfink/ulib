@@ -39,7 +39,7 @@
                     repeats:(BOOL)r
             runInForeground:(BOOL)inForeground
 {
-    self =[super init];
+    self = [super init];
     if(self)
     {
         UMMicroSec now  = [UMThroughputCounter microsecondTime];
@@ -195,26 +195,29 @@
 
 - (void)fire
 {
-    /* we issue the callback */
-    if(_repeats)
-    {
-        [self start];
-    }
-    else
-    {
-        [self stop];
-    }
-    if(_runCallbackInForeground)
-    {
+	@autoreleasepool
+	{
+		/* we issue the callback */
+		if(_repeats)
+		{
+			[self start];
+		}
+		else
+		{
+			[self stop];
+		}
+		if(_runCallbackInForeground)
+		{
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [_objectToCall performSelector:_selectorToCall withObject:_parameter];
+			[_objectToCall performSelector:_selectorToCall withObject:_parameter];
 #pragma clang diagnostic pop
-    }
-    else
-    {
-        [_objectToCall runSelectorInBackground:_selectorToCall withObject:_parameter];
-    }
+		}
+		else
+		{
+			[_objectToCall runSelectorInBackground:_selectorToCall withObject:_parameter];
+		}
+	}
 }
 
 @end

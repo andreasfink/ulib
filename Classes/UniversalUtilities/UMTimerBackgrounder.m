@@ -56,48 +56,55 @@ static UMTimerBackgrounder *_sharedTimerBackgrounder = NULL;
 
 - (void)removeTimer:(UMTimer *)t
 {
-    if(t)
-    {
-        [_timersLock lock];
-        [_timers removeObject:t];
-        [_timersLock unlock];
-    }
+	@autoreleasepool
+	{
+		if(t)
+		{
+			[_timersLock lock];
+			[_timers removeObject:t];
+			[_timersLock unlock];
+		}
+	}
 }
 
 
 - (UMMicroSec)backgroundWorkReturningSleepTime
 {
-    NSMutableArray *dueTimers = [[NSMutableArray alloc] init];
-    int workDone = 0;
+	UMMicroSec nextWakeupIn = 1000000; /* we wake up at least every second or earlier */
 
-    UMMicroSec now = ulib_microsecondTime();
-    UMMicroSec nextWakeupIn = 1000000; /* we wake up at least every second or earlier */
-    [_timersLock lock];
-    for(UMTimer *t in _timers)
-    {
-        UMMicroSec timeLeft = [t timeLeft:now];
-        if(timeLeft < 0)
-        {
-            [dueTimers addObject:t];
-            workDone++;
-        }
-        else if(timeLeft < nextWakeupIn)
-        {
-            nextWakeupIn = timeLeft;
-        }
-    }
-    for(UMTimer *t in dueTimers)
-    {
-        [_timers removeObject:t];
-    }
-    [_timersLock unlock];
-    for(UMTimer *t in dueTimers)
-    {
-        if([t isRunning])
-        {
-            [t fire];
-        }
-    }
+	@autoreleasepool
+	{
+		NSMutableArray *dueTimers = [[NSMutableArray alloc] init];
+		int workDone = 0;
+
+		UMMicroSec now = ulib_microsecondTime();
+		[_timersLock lock];
+		for(UMTimer *t in _timers)
+		{
+			UMMicroSec timeLeft = [t timeLeft:now];
+			if(timeLeft < 0)
+			{
+				[dueTimers addObject:t];
+				workDone++;
+			}
+			else if(timeLeft < nextWakeupIn)
+			{
+				nextWakeupIn = timeLeft;
+			}
+		}
+		for(UMTimer *t in dueTimers)
+		{
+			[_timers removeObject:t];
+		}
+		[_timersLock unlock];
+		for(UMTimer *t in dueTimers)
+		{
+			if([t isRunning])
+			{
+				[t fire];
+			}
+		}
+	}
     return nextWakeupIn;
 }
 

@@ -16,7 +16,7 @@
  To create a NSArray/NSMutableArray from UMSynchronizedArray, use mutableCopy method.
  */
 
-@interface UMSynchronizedArray : UMObject<NSCopying>
+@interface UMSynchronizedArray : UMObject<NSCopying,NSFastEnumeration>
 {
     NSMutableArray  *_array;
     UMMutex         *_mutex;

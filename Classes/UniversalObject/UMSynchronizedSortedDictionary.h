@@ -17,7 +17,7 @@
  To create a NSMutableDictionary from UMSynchronizedDictionary, use mutableCopy method.
  */
 
-@interface UMSynchronizedSortedDictionary : UMSynchronizedDictionary<NSCopying>
+@interface UMSynchronizedSortedDictionary : UMSynchronizedDictionary<NSCopying,NSFastEnumeration>
 {
     NSMutableArray *sortIndex;
 }

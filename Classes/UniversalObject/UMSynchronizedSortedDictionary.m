@@ -204,5 +204,15 @@
     return cpy;
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
+								  objects:(id __unsafe_unretained _Nullable [_Nonnull])stackbuf
+									count:(NSUInteger)len
+{
+	[_lock lock];
+	NSUInteger iu = [sortIndex countByEnumeratingWithState:state objects:stackbuf count:len];
+	[_lock unlock];
+	return iu;
+}
+
 @end
 

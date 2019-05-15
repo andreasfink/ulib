@@ -253,4 +253,15 @@
     }
     return json;
 }
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
+								  objects:(id __unsafe_unretained _Nullable [_Nonnull])stackbuf
+									count:(NSUInteger)len;
+{
+	[_mutex lock];
+	NSUInteger iu = [_array countByEnumeratingWithState:state objects:stackbuf count:len];
+	[_mutex unlock];
+	return iu;
+}
+
 @end

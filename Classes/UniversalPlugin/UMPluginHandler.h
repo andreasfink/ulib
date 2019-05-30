@@ -32,6 +32,7 @@
 @property(readwrite,strong,atomic)  NSString *filename;
 @property(readwrite,strong,atomic)  NSString *name;
 @property(readwrite,strong,atomic)  NSDictionary *info;
+@property(readwrite,strong,atomic)  NSString *error;
 
 
 - (UMPluginHandler *)initWithFile:(NSString *)filename;

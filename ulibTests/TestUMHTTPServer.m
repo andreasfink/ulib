@@ -1537,7 +1537,7 @@
     int status;
     NSString *msg, *msg1, *msg2, *msg3;
     UMHTTPCaller *caller;
-    UMLogFeed *logFeed;
+    UMLogFeed *_logFeed;
     NSString *subsection;
     int method;
     NSString *contentLength;
@@ -1557,12 +1557,12 @@
     method = [trans method];
     
     caller = [trans caller];
-    logFeed = [caller logFeed];
+    _logFeed = [caller logFeed];
     subsection = [caller subsection];
-    logFeed.copyToConsole = 1;
+    _logFeed.copyToConsole = 1;
     
     msg2 = [NSString stringWithFormat:@"Test HTTP: Done with request with method %@, number %ld\r\n",  [TestUMHTTPServer methodToString:method], *(long *) rid];
-    [self.logFeed debug:0 inSubsection:subsection withText:msg2];
+    [_logFeed debug:0 inSubsection:subsection withText:msg2];
     free(rid);
     
     [replyh getContentType:&type andCharset:&charset];
@@ -1572,10 +1572,10 @@
     
     methodString =  [TestUMHTTPServer methodToString:method];
     msg = [NSString stringWithFormat:@"Test HTTP: received %@ reply headers: allow %@ content type %@ charset %@ and content length %d \r\n", methodString, (allow ? allow : @"none"), (type ? type : @"none"), (charset ? charset : @"none"),(int) length];
-    [self.logFeed debug:0 inSubsection:subsection withText:msg];
+    [_logFeed debug:0 inSubsection:subsection withText:msg];
     
     msg1 = [NSString stringWithFormat:@"received %@ reply headers: %@\r\n", methodString, replyh ? replyh : @"none"];
-    [self.logFeed debug:0 inSubsection:subsection withText:msg1];
+    [_logFeed debug:0 inSubsection:subsection withText:msg1];
     
     if ([methodString compare:@"trace"] != NSOrderedSame)
         msg3 = [NSString stringWithFormat:@"Test HTTP: received %@ content %@\r\n", [methodString lowercaseString] ,replyb ? replyb : @"none"];
@@ -1587,7 +1587,7 @@
         [body appendString:@" trend "];
         msg3 = [NSString stringWithFormat:@"Test HTTP: received trace content %@\r\n", body ? body : @"none"];
     }
-    [self.logFeed debug:0 inSubsection:subsection withText:msg3];
+    [_logFeed debug:0 inSubsection:subsection withText:msg3];
     
     return 0;
 }

@@ -264,7 +264,7 @@
     
     handler = [[UMLogHandler alloc] init];
     dst = [[UMLogFile alloc] initWithFileName:logFile andSeparator:@"\r\n"];
-    logFeed = [[UMLogFeed alloc] initWithHandler:handler section:type subsection:ss];
+    _logFeed = [[UMLogFeed alloc] initWithHandler:handler section:type subsection:ss];
     [handler addLogDestination:dst];
     
     self.section = type;

@@ -99,7 +99,7 @@
 {
     UMLogFile *dst;
     UMLogHandler *handler;
-    UMLogFeed *logFeed;
+    UMLogFeed *_logFeed;
     NSString *logFile;
     NSMutableDictionary *text;
     NSMutableDictionary *level;
@@ -117,33 +117,33 @@
         XCTAssertNotNil(handler, @"Log handler was not allocated properly");
         dst = [[UMLogFile alloc] initWithFileName:logFile andSeparator:@"\r\n"];
         XCTAssertNotNil(dst, @"Log file reader was not allocated properly");
-        logFeed = [UMLogFile setLogHandler:handler 
+        _logFeed = [UMLogFile setLogHandler:handler
                                      withName:@"Universal tests" 
                                   withSection:@"ulib tests" 
                                withSubsection:@"UMLogFeed test"
                                andWithLogFile:dst];
-        XCTAssertNotNil(logFeed, @"log feeder was not allocated properly");
+        XCTAssertNotNil(_logFeed, @"log feeder was not allocated properly");
         
-        [self.logFeed debug:0 withText:@"log item with error\r\n"];
-        [self.logFeed info:0	withText:@"log item with error\r\n"];
-        [self.logFeed warning:0 withText:@"log item with error\r\n"];
-        [self.logFeed minorError:0 withText:@"log item with error\r\n"];
-        [self.logFeed majorError:0 withText:@"log item with error\r\n"];
-        [self.logFeed panic:0 withText:@"log item with error\r\n"];
+        [_logFeed debug:0 withText:@"log item with error\r\n"];
+        [_logFeed info:0	withText:@"log item with error\r\n"];
+        [_logFeed warning:0 withText:@"log item with error\r\n"];
+        [_logFeed minorError:0 withText:@"log item with error\r\n"];
+        [_logFeed majorError:0 withText:@"log item with error\r\n"];
+        [_logFeed panic:0 withText:@"log item with error\r\n"];
         
-        [self.logFeed debug:0 inSubsection:@"UMLogFeed test" withText:@"log item with subsection\r\n"];
-        [self.logFeed info:0 inSubsection:@"UMLogFeed test" withText:@"log item with subsection\r\n"];
-        [self.logFeed warning:0 inSubsection:@"UMLogFeed test" withText:@"log item with subsection\r\n"];
-        [self.logFeed minorError:0 inSubsection:@"UMLogFeed test" withText:@"log item with subsection\r\n"];
-        [self.logFeed majorError:0 inSubsection:@"UMLogFeed test" withText:@"log item with subsection\r\n"];
-        [self.logFeed panic:0 inSubsection:@"UMLogFeed test" withText:@"log item with subsection\r\n"];
+        [_logFeed debug:0 inSubsection:@"UMLogFeed test" withText:@"log item with subsection\r\n"];
+        [_logFeed info:0 inSubsection:@"UMLogFeed test" withText:@"log item with subsection\r\n"];
+        [_logFeed warning:0 inSubsection:@"UMLogFeed test" withText:@"log item with subsection\r\n"];
+        [_logFeed minorError:0 inSubsection:@"UMLogFeed test" withText:@"log item with subsection\r\n"];
+        [_logFeed majorError:0 inSubsection:@"UMLogFeed test" withText:@"log item with subsection\r\n"];
+        [_logFeed panic:0 inSubsection:@"UMLogFeed test" withText:@"log item with subsection\r\n"];
         
-        [self.logFeed debugText:@"log item with text\r\n"];
-        [self.logFeed infoText:@"log item with text\r\n"];
-        [self.logFeed warningText:@"log item with text\r\n"];
-        [self.logFeed minorErrorText:@"log item with text\r\n"];
-        [self.logFeed majorErrorText:@"log item with text\r\n"];
-        [self.logFeed panicText:@"log item with text\r\n"];
+        [_logFeed debugText:@"log item with text\r\n"];
+        [_logFeed infoText:@"log item with text\r\n"];
+        [_logFeed warningText:@"log item with text\r\n"];
+        [_logFeed minorErrorText:@"log item with text\r\n"];
+        [_logFeed majorErrorText:@"log item with text\r\n"];
+        [_logFeed panicText:@"log item with text\r\n"];
         
         [TestUMLogFeed messagesInLogFile:dst withText:&text withLevel:&level andWithSubsection:&ss];
         XCTAssertTrue([text count] == 6, @"we logged 6 different levels log messages");

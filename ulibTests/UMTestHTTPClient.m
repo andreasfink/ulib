@@ -224,7 +224,7 @@ error:
     NSMutableString *logRequestBody;
     NSRange headerEnd;
 
-    logFeed.copyToConsole = 1;
+    _logFeed.copyToConsole = 1;
     
     if (method == HTTP_METHOD_POST || method == HTTP_METHOD_PUT) {
         /*

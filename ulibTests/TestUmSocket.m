@@ -149,11 +149,11 @@
     *host = grp[@"remote-host"];
 }
 
-+ (void)logAtomic:(NSString *)text toLog:(UMLogFeed *)logFeed atFile:(UMLogFile *)dst
++ (void)logAtomic:(NSString *)text toLog:(UMLogFeed *)_logFeed atFile:(UMLogFile *)dst
 {
     @synchronized(dst)
     {
-        [self.logFeed info:0 withText:text];
+        [_logFeed info:0 withText:text];
         [dst flushUnlocked];
     }
 }
@@ -359,7 +359,7 @@
         *s = [NSString stringWithFormat:@"data with unknown type received (type %@)", [TestUMSocket typeToString:*dtype]];
 }
 
-- (int)handleMessage:(NSData *)msg withLogFeed:(UMLogFeed *)logFeed withLogFile:(UMLogFile *)dst withName:(NSString *)name
+- (int)handleMessage:(NSData *)msg withLogFeed:(UMLogFeed *)_logFeed withLogFile:(UMLogFile *)dst withName:(NSString *)name
 {
     unsigned char tom[4];
     NSString *stom;
@@ -377,12 +377,12 @@
         [msg getBytes:som range:NSMakeRange(4, 3)];
         NSString *ssom = [[NSString alloc] initWithBytes:som length:3 encoding:NSUTF8StringEncoding];
         NSString *text2a = [NSString stringWithFormat:@"message specifier was %@\r\n", ssom];
-        [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
     
         if ([ssom compare:@"end"] == NSOrderedSame)
         {
             NSString *text2a = [NSString stringWithFormat:@"Server socket %@ received admn message with end\r\n", name];
-            [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+            [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
             status = shuttingDown;
             return -1;
         }
@@ -408,12 +408,12 @@
             }
             text4 = [NSString stringWithFormat:@"read everything: Server socket %@ received %@ with type %@\r\n",name , dataString, [TestUMSocket typeToString:dtype]];
         }
-        [TestUMSocket logAtomic:text4 toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text4 toLog:_logFeed atFile:dst];
     }
     else
     {
         NSString *text2a = [NSString stringWithFormat:@"Server socket %@ received an unknown message <%@> (when read everything\r\n", name, msgString];
-        [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
         status = shuttingDown;
         return 0;
     }
@@ -428,7 +428,7 @@
     UMSocket *clientSocket = nil;
     NSString *name;
     UMLogHandler *handler;
-    UMLogFeed *logFeed;
+    UMLogFeed *_logFeed;
     UMSocketError sErr, sErr2;
     NSMutableData *appendToMe;
     int ret;
@@ -457,7 +457,7 @@
                                        andName:&name];
         
         handler = [[UMLogHandler alloc] initWithConsole];
-        logFeed = [UMLogFile setLogHandler:handler
+        _logFeed = [UMLogFile setLogHandler:handler
                                      withName:@"Universal tests" 
                                   withSection:@"ulib tests" 
                                withSubsection:@"UMSocket test"
@@ -482,12 +482,12 @@
         {
             status = running;
             NSString *text = [NSString stringWithFormat:@"Server socket %@ on port %ld is starting up\r\n",name, (long)[listenerSocket requestedLocalPort]];
-            [self.logFeed info:0 withText:text];
+            [_logFeed info:0 withText:text];
         }
         else
         {
             NSString *text = [NSString stringWithFormat:@"Server socket %@ on could not be started at port %ld\r\n",name, (long)[listenerSocket requestedLocalPort]];
-            [self.logFeed majorError:0 withText:text];
+            [_logFeed majorError:0 withText:text];
         }
         
         startupDone = YES;
@@ -506,7 +506,7 @@
                     
                     XCTAssertNotNil(clientSocket, @"server should accept a connecting client or return EAGAIN\r\n");
 			        NSString *text = [NSString stringWithFormat:@"Server socket %@ occepted client from <%@:%ld>\r\n",name,[listenerSocket remoteHost], (long)[listenerSocket requestedRemotePort]];
-                    [TestUMSocket logAtomic:text toLog:logFeed atFile:dst];
+                    [TestUMSocket logAtomic:text toLog:_logFeed atFile:dst];
                     status = connected;
                 }
                 else
@@ -517,13 +517,13 @@
                         sErr = [clientSocket receiveToBufferWithBufferLimit:21];
                         NSMutableData *ourReceived = [clientSocket receiveBuffer];
                         [appendToMe appendData:ourReceived];
-                        [self handleMessage:appendToMe withLogFeed:logFeed withLogFile:dst withName:name];
+                        [self handleMessage:appendToMe withLogFeed:_logFeed withLogFile:dst withName:name];
                         [clientSocket deleteFromReceiveBuffer:21];
                     }
                     else if (status == testingReadLine)
                     {
                         sErr = [clientSocket receiveLineToCRLF:&appendToMe];
-                        [self handleMessage:appendToMe withLogFeed:logFeed withLogFile:dst withName:name];
+                        [self handleMessage:appendToMe withLogFeed:_logFeed withLogFile:dst withName:name];
                         NSMutableData *ourReceived = [clientSocket receiveBuffer];
 #pragma unused(ourReceived)
                     }
@@ -536,7 +536,7 @@
                         while (TRUE)
                         {
                             msg = [appendToMe subdataWithRange:NSMakeRange(i, 21)];
-                            ret = [self handleMessage:msg withLogFeed:logFeed withLogFile:dst withName:name];
+                            ret = [self handleMessage:msg withLogFeed:_logFeed withLogFile:dst withName:name];
                             if (ret == -1)
                                 break;
                             i += 21;
@@ -571,7 +571,7 @@
                         NSString *text4 = [NSString stringWithFormat:@"received message %@ \r\n", appendString];
                     
                         if (status != testingReadEverything)
-                            [TestUMSocket logAtomic:text4 toLog:logFeed atFile:dst];
+                            [TestUMSocket logAtomic:text4 toLog:_logFeed atFile:dst];
                     
                         [appendToMe getBytes:tom range:NSMakeRange(0, 4)];
                         stom = [[NSString alloc] initWithBytes:tom length:4 encoding:NSUTF8StringEncoding];
@@ -583,35 +583,35 @@
                             if ([ssom compare:@"end"] == NSOrderedSame && status == testingReadLine)
                             {
                                 NSString *text2a = [NSString stringWithFormat:@"Server socket %@ received admn message with end\r\n", name];
-                                [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+                                [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
                                 status = shuttingDown;
                                 continue;
                             }
                             else if ([ssom compare:@"buf"] == NSOrderedSame)
                             {
                                 NSString *text2a = [NSString stringWithFormat:@"Server socket %@ received admn message with testing switch command (use receive to buffer)\r\n", name];
-                                [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+                                [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
                                 status = testingBuffer;
                                 continue;
                             }
                             else if ([ssom compare:@"lin"] == NSOrderedSame)
                             {
                                 NSString *text2a = [NSString stringWithFormat:@"Server socket %@ received admn message with testing switch command (use receive by line)\r\n", name];
-                                [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+                                [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
                                 status = testingReadLine;
                                 continue;
                             }
                             else if ([ssom compare:@"eve"] == NSOrderedSame)
                             {
                                 NSString *text2a = [NSString stringWithFormat:@"Server socket %@ received admn message with testing switch command (use receive everything in one chunk)\r\n", name];
-                                [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+                                [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
                                 status = testingReadEverything;
                                 continue;
                             }
                             else
                             {
                                 NSString *text2a = [NSString stringWithFormat:@"Server socket %@ received an unknown type of message\r\n", name];
-                                [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+                                [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
                                 status = shuttingDown;
                                 continue;
                             }
@@ -620,7 +620,7 @@
                         else if ([stom compare:@"conn"] == NSOrderedSame)
                         {
                             NSString *text2a = [NSString stringWithFormat:@"Server socket %@ received testing string for testing connection\r\n", name];
-                            [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+                            [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
                             continue;
                         }
                         else if ([stom compare:@"serv"] == NSOrderedSame)
@@ -633,7 +633,7 @@
                             if (appendToMe)
                             {
                                 NSString *text2a = [NSString stringWithFormat:@"Server socket %@ received an unknown message %@\r\n", name, appendToMe];
-                                [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+                                [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
                                 status = shuttingDown;
                             }
                             continue;
@@ -645,25 +645,25 @@
                         {
                             ++received;
                             NSString *text4 = [NSString stringWithFormat:@"Server socket %@ received %@ (as %@) with type %@ using normal receiver\r\n",name, s ? s : d ? d : md, appendString, [TestUMSocket typeToString:dtype]];
-                            [TestUMSocket logAtomic:text4 toLog:logFeed atFile:dst];
+                            [TestUMSocket logAtomic:text4 toLog:_logFeed atFile:dst];
                         }
                         else if (status == testingBuffer)
                         {
                             ++received;
                             NSString *text4 = [NSString stringWithFormat:@"Server socket %@ received %@ (as %@) with type %@ using buffer\r\n",name, s ? s : d ? d : md, appendString, [TestUMSocket typeToString:dtype]];
-                            [TestUMSocket logAtomic:text4 toLog:logFeed atFile:dst];
+                            [TestUMSocket logAtomic:text4 toLog:_logFeed atFile:dst];
                         }
                         else if (status == testingReadLine)
                         {
                             ++received;
                             NSString *text4 = [NSString stringWithFormat:@"Server socket %@ received %@ (as %@) with type %@ using read line\r\n",name, s ? s : d ? d : md, appendString, [TestUMSocket typeToString:dtype]];
-                            [TestUMSocket logAtomic:text4 toLog:logFeed atFile:dst];
+                            [TestUMSocket logAtomic:text4 toLog:_logFeed atFile:dst];
                         }
                         else if (status == testingReadEverything)
                         {
                             received += 5;      // everything in one chunk
                             NSString *text4 = [NSString stringWithFormat:@"Server socket %@ received %@ (as %@) with type %@ using read everything\r\n",name, s ? s : d ? d : md, appendString, [TestUMSocket typeToString:dtype]];
-                            [TestUMSocket logAtomic:text4 toLog:logFeed atFile:dst];
+                            [TestUMSocket logAtomic:text4 toLog:_logFeed atFile:dst];
                         }
                     }
                 }
@@ -896,7 +896,7 @@
     NSString *name;
     UMLogFile *dst;
     UMLogHandler *handler;
-    UMLogFeed *logFeed;
+    UMLogFeed *_logFeed;
     UMSocketError sErr, sErr2;
     int ret;
     NSMutableData *appendToMe;
@@ -915,7 +915,7 @@
                                        andName:&name];
         dst = [[UMLogFile alloc] initWithFileName:logFile andSeparator:@"\r\n"];
         handler = [[UMLogHandler alloc] initWithConsole];
-        logFeed = [UMLogFile setLogHandler:handler
+        _logFeed = [UMLogFile setLogHandler:handler
                                    withName:@"Universal tests"
                                 withSection:@"ulib tests"
                              withSubsection:@"UMSocket test"
@@ -968,12 +968,12 @@
         {
             status = running;
             NSString *text = [NSString stringWithFormat:@"serverSocketWithErrorAndWithLog: Server socket %@ on port %ld is starting up\r\n",name, (long)[listenerSocket requestedLocalPort]];
-            [self.logFeed info:0 withText:text];
+            [_logFeed info:0 withText:text];
         }
         else
         {
             NSString *text = [NSString stringWithFormat:@"serverSocketWithErrorAndWithLog: Server socket %@ on could not be started at port %ld\r\n",name, (long)[listenerSocket requestedLocalPort]];
-            [self.logFeed majorError:0 withText:text];
+            [_logFeed majorError:0 withText:text];
         }
         
         startupDone = YES;
@@ -992,7 +992,7 @@
                     
                     XCTAssertNotNil(clientSocket, @"server should accept a connecting client or return EAGAIN\r\n");
 			    NSString *text = [NSString stringWithFormat:@"Server socket %@ occepted client from <%@:%ld>\r\n",name,[listenerSocket remoteHost], (long)[listenerSocket requestedRemotePort]];
-                    [TestUMSocket logAtomic:text toLog:logFeed atFile:dst];
+                    [TestUMSocket logAtomic:text toLog:_logFeed atFile:dst];
                     status = connected;
                 }
                 else
@@ -1018,13 +1018,13 @@
                         
                     NSString *appendString = [[NSString alloc] initWithData:appendToMe encoding:NSUTF8StringEncoding];
                     NSString *text = [NSString stringWithFormat:@"serverSocketWithErrorAndLog:Server socket %@ received <%@> from <%@:%ld> with %@ (testing normal)\r\n",name, appendToMe, [listenerSocket remoteHost], (long)[listenerSocket requestedRemotePort], status == testingBuffer ? @"buffer" : @"normal"];
-                    [TestUMSocket logAtomic:text toLog:logFeed atFile:dst];
+                    [TestUMSocket logAtomic:text toLog:_logFeed atFile:dst];
                     
                     if (status != shuttingDown)
                     {
                         /* type of message */
                         NSString *text4 = [NSString stringWithFormat:@"serverSocketWithErrorAndLog:received message <%@> \r\n", appendString];
-                        [TestUMSocket logAtomic:text4 toLog:logFeed atFile:dst];
+                        [TestUMSocket logAtomic:text4 toLog:_logFeed atFile:dst];
                     
                         if ([appendToMe length] > 4)
                         {
@@ -1043,14 +1043,14 @@
                             if (ssom && [ssom compare:@"end"] == NSOrderedSame)
                             {
                                 NSString *text2a = [NSString stringWithFormat:@"serverSocketWithErrorAndLog:Server socket %@ received admn message with end\r\n", name];
-                                [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+                                [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
                                 status = shuttingDown;
                                 continue;
                             }
                             else if ([ssom compare:@"buf"] == NSOrderedSame)
                             {
                                 NSString *text2a = [NSString stringWithFormat:@"serverSocketWithErrorAndLog:Server socket %@ received admn message with testing switch command (use receive to buffer)\r\n", name];
-                                [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+                                [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
                                 status = testingBuffer;
                                 testErrors = 1;
                                 continue;
@@ -1059,7 +1059,7 @@
                         else if (stom && [stom compare:@"conn"] == NSOrderedSame)
                         {
                             NSString *text2a = [NSString stringWithFormat:@"Server socket %@ received testing string for testing connection\r\n", name];
-                            [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+                            [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
                             continue;
                         }
                         else if (stom && [stom compare:@"serv"] == NSOrderedSame)
@@ -1067,7 +1067,7 @@
                             /* Now we are testing erroneous messages by client*/
                             ++received;
                             NSString *text2a = [NSString stringWithFormat:@"Server socket %@ received testing string (as %@, %ld bytes) for testing connection\r\n", name, appendToMe, (long)[appendToMe length]];
-                            [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+                            [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
                             continue;
                         }
                         else
@@ -1076,7 +1076,7 @@
                             if (appendToMe)
                             {
                                 NSString *text2a = [NSString stringWithFormat:@"Server socket %@ received an unknown message %@\r\n", name, appendToMe];
-                                [TestUMSocket logAtomic:text2a toLog:logFeed atFile:dst];
+                                [TestUMSocket logAtomic:text2a toLog:_logFeed atFile:dst];
                                 long len = [[clientSocket receiveBuffer] length];
                                 [clientSocket deleteFromReceiveBuffer:(unsigned int)len];
                             }
@@ -1098,7 +1098,7 @@
 {
 	UMSocketType type;
     in_port_t port;
-    UMLogFeed *logFeed;     /* Log items are used for testing*/
+    UMLogFeed *_logFeed;     /* Log items are used for testing*/
     NSString *logFile;
     NSString *name;
     NSString *host;
@@ -1126,7 +1126,7 @@
         UMLogFile *dst = [[UMLogFile alloc] initWithFileName:logFile andSeparator:@"\r\n"];
         [dst emptyLog];
         
-        logFeed = [UMLogFile setLogHandler:handler 
+        _logFeed = [UMLogFile setLogHandler:handler
                                      withName:@"Universal tests" 
                                   withSection:@"ulib tests" 
                                withSubsection:@"UMSocket test"
@@ -1167,16 +1167,16 @@
         sErr = [clientSocket sendString:ns1];
         XCTAssertTrue(sErr == UMSocketError_no_error, @"TestUmSocket: client socket should be able to send connection test message\r\n");
         NSString *text3 = [NSString stringWithFormat:@"%@ sent %s for testing connection to <%@:%ld>\r\n", name, toBeSent, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort]];
-        [TestUMSocket logAtomic:text3 toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text3 toLog:_logFeed atFile:dst];
         
         usleep(50000);
         
         NSString *text = [NSString stringWithFormat:@"Client socket %@ on is connecting to port %ld\r\n",name, (long)[clientSocket requestedRemotePort]];
-        [TestUMSocket logAtomic:text toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text toLog:_logFeed atFile:dst];
         
         XCTAssertTrue(sErr == UMSocketError_no_error, @"TestUmSocket: client socket should be able to connect the localhost\r\n");
         NSString *text2 = [NSString stringWithFormat:@"Client socket %@ connected to <%@:%ld>\r\n",name, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort]];
-        [TestUMSocket logAtomic:text2 toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text2 toLog:_logFeed atFile:dst];
         
         UMSocketStatus ourStatus = [clientSocket status];
         NSString *ss = [UMSocket statusDescription:ourStatus];
@@ -1226,7 +1226,7 @@ again:
         {
             text3a = [NSString stringWithFormat:@"%@ sent %s (as %@) with type String to <%@:%ld> %@\r\n", name, toBeSent, ns, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort], connectionString];
         }
-        [TestUMSocket logAtomic:text3a toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text3a toLog:_logFeed atFile:dst];
             
         usleep(50000);
         
@@ -1245,7 +1245,7 @@ again:
         {
             text4 = [NSString stringWithFormat:@"%@ sent %s (as %s) with type C String to <%@:%ld> %@\r\n",name, toBeSent, s, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort], connectionString];
         }
-        [TestUMSocket logAtomic:text4 toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text4 toLog:_logFeed atFile:dst];
             
         usleep(50000);
         
@@ -1265,7 +1265,7 @@ again:
         {
             text5 = [NSString stringWithFormat:@"%@ sent %s (as %@) with type Data to <%@:%ld> %@\r\n",name, toBeSent, ns, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort], connectionString];
         }
-        [TestUMSocket logAtomic:text5 toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text5 toLog:_logFeed atFile:dst];
             
         usleep(50000);
         
@@ -1291,7 +1291,7 @@ again:
         {
            text6 = [NSString stringWithFormat:@"%@ sent %s (as %@) with type MutableData to <%@:%ld> %@\r\n",name, toBeSent, dataString,[clientSocket remoteHost], (long)[clientSocket requestedRemotePort], connectionString];
         }
-        [TestUMSocket logAtomic:text6 toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text6 toLog:_logFeed atFile:dst];
         
         usleep(50000);
         
@@ -1319,7 +1319,7 @@ again:
             [sdata replaceOccurrencesOfString:@"\r\n" withString:@"CRLF" options:NSLiteralSearch range:NSMakeRange(0, [sdata length])];
         }
         text7 = [NSString stringWithFormat:@"%@ sent %s (as %@) with type Bytes to <%@:%ld> %@\r\n",name, toBeSent, sdata,[clientSocket remoteHost], (long)[clientSocket requestedRemotePort], connectionString];
-        [TestUMSocket logAtomic:text7 toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text7 toLog:_logFeed atFile:dst];
         free(bytes);
         free(byte);
         
@@ -1336,7 +1336,7 @@ again:
             sErr = [clientSocket sendString:admin];
             XCTAssertTrue(sErr == UMSocketError_no_error, @"TestUmSocket: client socket should be able to send admin test message\r\n");
             NSString *text3a = [NSString stringWithFormat:@"%@ sent admin end to <%@:%ld>\r\n", name, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort]];
-            [TestUMSocket logAtomic:text3a toLog:logFeed atFile:dst];
+            [TestUMSocket logAtomic:text3a toLog:_logFeed atFile:dst];
         }
         else if (again == 2)
         {
@@ -1345,7 +1345,7 @@ again:
             sErr = [clientSocket sendString:admin];
             XCTAssertTrue(sErr == UMSocketError_no_error, @"TestUmSocket: client socket should be able to send admin test message\r\n");
             NSString *text3a = [NSString stringWithFormat:@"%@ sent admin switch to test read everything to <%@:%ld>\r\n", name, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort]];
-            [TestUMSocket logAtomic:text3a toLog:logFeed atFile:dst];
+            [TestUMSocket logAtomic:text3a toLog:_logFeed atFile:dst];
             again = 3;
             goto again;
         }
@@ -1355,7 +1355,7 @@ again:
             sErr = [clientSocket sendString:admin];
             XCTAssertTrue(sErr == UMSocketError_no_error, @"TestUmSocket: client socket should be able to send admin test message\r\n");
             NSString *text3a = [NSString stringWithFormat:@"%@ sent admin switch to test read line to <%@:%ld>\r\n", name, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort]];
-            [TestUMSocket logAtomic:text3a toLog:logFeed atFile:dst];
+            [TestUMSocket logAtomic:text3a toLog:_logFeed atFile:dst];
             again = 2;
             goto again;
         }
@@ -1365,7 +1365,7 @@ again:
             sErr = [clientSocket sendString:admin];
             XCTAssertTrue(sErr == UMSocketError_no_error, @"TestUmSocket: client socket should be able to send admin test message\r\n");
             NSString *text3a = [NSString stringWithFormat:@"%@ sent admin switch to test buffer to <%@:%ld>\r\n", name, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort]];
-            [TestUMSocket logAtomic:text3a toLog:logFeed atFile:dst];
+            [TestUMSocket logAtomic:text3a toLog:_logFeed atFile:dst];
             again = 1;
             goto again;
         }
@@ -1376,7 +1376,7 @@ again:
         sErr = [clientSocket close];
         XCTAssertTrue(sErr == UMSocketError_no_error, @"TestUmSocket: client should be able to close the socket\r\n");
         NSString *text8 = [NSString stringWithFormat:@"%@ closed socket to <%@:%ld>\r\n", name, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort]];
-        [TestUMSocket logAtomic:text8 toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text8 toLog:_logFeed atFile:dst];
         
         ourStatus = [clientSocket status];
         NSString *ss1 = [UMSocket statusDescription:ourStatus];
@@ -1399,7 +1399,7 @@ again:
 {
     UMSocketType type;
     in_port_t port;
-    UMLogFeed *logFeed;     /* Log items are used for testing*/
+    UMLogFeed *_logFeed;     /* Log items are used for testing*/
     NSString *logFile;
     NSString *name;
     NSString *host;
@@ -1420,7 +1420,7 @@ again:
         
         UMLogHandler *handler = [[UMLogHandler alloc] initWithConsole];
         UMLogFile *dst = [[UMLogFile alloc] initWithFileName:logFile];
-        logFeed = [UMLogFile setLogHandler:handler
+        _logFeed = [UMLogFile setLogHandler:handler
                                    withName:@"Universal tests"
                                 withSection:@"ulib tests"
                              withSubsection:@"UMSocket Error test"
@@ -1498,7 +1498,7 @@ again:
         XCTAssertTrue(sErr == UMSocketError_no_error, @"testSocketTCPError: client should be able to send Bytes as test message if lwength is too short\r\n");
         NSString *sdata = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSString *text7 = [NSString stringWithFormat:@"testSocketTCPError: %@ sent %s (as %@) with type Bytes to <%@:%ld (lenght %d)\r\n", name, toBeSent, sdata, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort], len];
-        [TestUMSocket logAtomic:text7 toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text7 toLog:_logFeed atFile:dst];
         
         usleep(50000);
         
@@ -1506,7 +1506,7 @@ again:
         XCTAssertTrue(sErr == UMSocketError_no_error, @"testSocketTCPError: client should be able to send Bytes as test message if length is too long\r\n");
         sdata = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSString *text1 = [NSString stringWithFormat:@"testSocketTCPError: %@ sent %s (as %@) with type Bytes to <%@:%ld\r\n (length %d)\r\n", name, toBeSent, sdata, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort], len + 20];
-        [TestUMSocket logAtomic:text1 toLog:logFeed atFile:dst];
+        [TestUMSocket logAtomic:text1 toLog:_logFeed atFile:dst];
         
         if (again == 1)
         {
@@ -1514,7 +1514,7 @@ again:
             sErr = [clientSocket sendString:admin];
             XCTAssertTrue(sErr == UMSocketError_no_error, @"testSocketTCPError: client socket should be able to send admin test message\r\n");
             NSString *text3a = [NSString stringWithFormat:@"testSocketTCPError: %@ sent admin end to <%@:%ld>\r\n", name, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort]];
-            [TestUMSocket logAtomic:text3a toLog:logFeed atFile:dst];
+            [TestUMSocket logAtomic:text3a toLog:_logFeed atFile:dst];
         }
         else
         {
@@ -1522,7 +1522,7 @@ again:
             sErr = [clientSocket sendString:admin];
             XCTAssertTrue(sErr == UMSocketError_no_error, @":testSocketTCPError client socket should be able to send admin test message\r\n");
             NSString *text3a = [NSString stringWithFormat:@"testSocketTCPError %@ sent admin switch to test buffer to <%@:%ld>\r\n", name, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort]];
-            [TestUMSocket logAtomic:text3a toLog:logFeed atFile:dst];
+            [TestUMSocket logAtomic:text3a toLog:_logFeed atFile:dst];
             again = 1;
             goto again;
         }
@@ -1546,5 +1546,6 @@ again:
 
     XCTAssertTrue([c isEqualToString:b], @"unifyIP mismatch #1");
 }
+
 
 @end

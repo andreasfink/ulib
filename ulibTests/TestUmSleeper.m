@@ -121,7 +121,7 @@
 - (void)testWakeupOnSignal
 {
     BOOL isShutDown = NO;
-    NSArray *signals = @[[NSNumber numberWithUnsignedInteger:UMSleeper_WakeupSignal], [NSNumber numberWithUnsignedInteger:UMSleeper_AnySignal], [NSNumber numberWithUnsignedInteger:UMSleeper_HasWorkSignal], [NSNumber numberWithUnsignedInteger:UMSleeper_StartupCompletedSignal], [NSNumber numberWithUnsignedInteger:UMSleeper_ShutdownOrderSignal], [NSNumber numberWithUnsignedInteger:UMSleeper_ShutdownCompletedSignal]];
+    NSArray *signals = @[[NSNumber numberWithUnsignedInteger:UMSleeper_WakeupSignal],  [NSNumber numberWithUnsignedInteger:UMSleeper_HasWorkSignal], [NSNumber numberWithUnsignedInteger:UMSleeper_StartupCompletedSignal], [NSNumber numberWithUnsignedInteger:UMSleeper_ShutdownOrderSignal], [NSNumber numberWithUnsignedInteger:UMSleeper_ShutdownCompletedSignal]];
     long i = 0;
     long len = [signals count];
     while (i < len)

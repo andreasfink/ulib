@@ -1993,6 +1993,8 @@
 		A6B37B811FC8319500794057 /* UMMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = A63F22A21FB725010048B329 /* UMMutex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B37B821FC8319600794057 /* UMMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = A63F22A21FB725010048B329 /* UMMutex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B37B861FC831D000794057 /* UMAverageDelay.m in Sources */ = {isa = PBXBuildFile; fileRef = A67B5189191B84A90090FC94 /* UMAverageDelay.m */; };
+		A6B5657722A27FB80047E975 /* UMObjectWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D039FA227AABF60035014D /* UMObjectWithHistory.m */; };
+		A6B5657A22A280000047E975 /* UMTestCaseBinaryIP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B5657922A280000047E975 /* UMTestCaseBinaryIP.m */; };
 		A6BA42B31FC813540099A441 /* UMPool.h in Headers */ = {isa = PBXBuildFile; fileRef = A6BA42B11FC813540099A441 /* UMPool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6BA42B41FC813540099A441 /* UMPool.h in Headers */ = {isa = PBXBuildFile; fileRef = A6BA42B11FC813540099A441 /* UMPool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6BA42B51FC813540099A441 /* UMPool.h in Headers */ = {isa = PBXBuildFile; fileRef = A6BA42B11FC813540099A441 /* UMPool.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2611,6 +2613,8 @@
 		A6AE665C1E5197FE005F3617 /* UMHTTPTask_ReadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPTask_ReadRequest.m; sourceTree = "<group>"; };
 		A6B37B181FC82D6D00794057 /* TestUMPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestUMPool.h; sourceTree = "<group>"; };
 		A6B37B191FC82D6D00794057 /* TestUMPool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestUMPool.m; sourceTree = "<group>"; };
+		A6B5657822A280000047E975 /* UMTestCaseBinaryIP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMTestCaseBinaryIP.h; sourceTree = "<group>"; };
+		A6B5657922A280000047E975 /* UMTestCaseBinaryIP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMTestCaseBinaryIP.m; sourceTree = "<group>"; };
 		A6BA42B11FC813540099A441 /* UMPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMPool.h; sourceTree = "<group>"; };
 		A6BA42B21FC813540099A441 /* UMPool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMPool.m; sourceTree = "<group>"; };
 		A6BC45642077758C008C3CEB /* tsget */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tsget; sourceTree = "<group>"; };
@@ -16825,6 +16829,8 @@
 				22AAC18E154A977A00EA7F75 /* UMTestHTTPClient.m */,
 				22A6DEBF1541443D00FCEBAA /* UMTestCase.h */,
 				22A6DEC01541443D00FCEBAA /* UMTestCase.m */,
+				A6B5657822A280000047E975 /* UMTestCaseBinaryIP.h */,
+				A6B5657922A280000047E975 /* UMTestCaseBinaryIP.m */,
 				22971F091627103200B541FE /* NSMutableData+UMTestString.h */,
 				22971F0A1627103200B541FE /* NSMutableData+UMTestString.m */,
 				22971F0616270D6E00B541FE /* NSMutableString+UMTestString.h */,
@@ -19592,6 +19598,7 @@
 				A684B42B1AB8FF4500854472 /* UMQueueNull.m in Sources */,
 				A6B37B6E1FC8314800794057 /* UMHTTPServer.m in Sources */,
 				A6827B1816AD217D0035FEEC /* UMJsonStreamParser.m in Sources */,
+				A6B5657A22A280000047E975 /* UMTestCaseBinaryIP.m in Sources */,
 				A6B37B4D1FC8311200794057 /* UMKeypair.m in Sources */,
 				A6827B1B16AD217D0035FEEC /* UMJsonStreamParserAccumulator.m in Sources */,
 				A6AC4AB41D460B6B002BAA97 /* NSArray+HierarchicalDescription.m in Sources */,
@@ -19630,6 +19637,7 @@
 				A67C389716B2D53000C9DA95 /* UMDateWithHistory.m in Sources */,
 				224F13EF1732958300D7D864 /* UMLogHandler.m in Sources */,
 				224F13F01732958800D7D864 /* UMLogFile.m in Sources */,
+				A6B5657722A27FB80047E975 /* UMObjectWithHistory.m in Sources */,
 				A667A2AE228409A40009FE66 /* UMObjectStatisticEntry.m in Sources */,
 				A6B37B7A1FC8315600794057 /* UMTokenizerWord.m in Sources */,
 				224F13F11732958D00D7D864 /* UMLogFeed.m in Sources */,

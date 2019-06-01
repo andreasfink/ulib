@@ -12,7 +12,8 @@
 
 - (BOOL)isIPv4;
 - (BOOL)isIPv6;
-- (NSData *)binaryIPaddress4;
-- (NSData *)binaryIPaddress6;
+- (NSData *)binaryIPAddress;
+- (NSData *)binaryIPAddress4;
+- (NSData *)binaryIPAddress6;
 
 @end

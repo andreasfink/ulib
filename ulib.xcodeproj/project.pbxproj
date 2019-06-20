@@ -2105,6 +2105,8 @@
 		A6CC4B961A3F24E50090FC94 /* UniversalSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B851A3F24E50090FC94 /* UniversalSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6CC4B9B1A3F24FC0090FC94 /* UMQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B981A3F24FC0090FC94 /* UMQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6CC4B9E1A3F24FC0090FC94 /* UniversalQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B991A3F24FC0090FC94 /* UniversalQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6CEB96922BA514200B2BD9D /* UMNamedList.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CEB96722BA514200B2BD9D /* UMNamedList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6CEB96A22BA514200B2BD9D /* UMNamedList.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CEB96822BA514200B2BD9D /* UMNamedList.m */; };
 		A6D039FB227AABF60035014D /* UMObjectWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D039F9227AABF60035014D /* UMObjectWithHistory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6D039FC227AABF60035014D /* UMObjectWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D039F9227AABF60035014D /* UMObjectWithHistory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6D039FD227AABF60035014D /* UMObjectWithHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D039F9227AABF60035014D /* UMObjectWithHistory.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2368,7 +2370,7 @@
 		A6590ED71FDFCA12004C8A74 /* README-Debian9-stretch.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Debian9-stretch.txt"; sourceTree = "<group>"; };
 		A6590ED81FDFCA12004C8A74 /* README-Ubuntu-16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Ubuntu-16.txt"; sourceTree = "<group>"; };
 		A6590ED91FDFCA12004C8A74 /* README-LINUX.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-LINUX.txt"; sourceTree = "<group>"; };
-		A661AB4120669EB100B0CD50 /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = ../../../../../Library/Frameworks/sctp.framework; sourceTree = "<group>"; };
+		A661AB4120669EB100B0CD50 /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = /Library/Frameworks/sctp.framework; sourceTree = "<absolute>"; };
 		A663F34621532D4100072BAA /* UMProtocolBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMProtocolBuffer.h; sourceTree = "<group>"; };
 		A663F34721532D4100072BAA /* UMProtocolBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMProtocolBuffer.m; sourceTree = "<group>"; };
 		A666EEC31E89BB17004804CB /* UMCommandActionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMCommandActionProtocol.h; path = UniversalTokenizer/UMCommandActionProtocol.h; sourceTree = "<group>"; };
@@ -9257,6 +9259,8 @@
 		A6CC4BB41A3F25450090FC94 /* UMTaskQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTaskQueue.h; sourceTree = "<group>"; };
 		A6CC4BB51A3F25450090FC94 /* UMTaskQueueMulti.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTaskQueueMulti.h; sourceTree = "<group>"; };
 		A6CC4BB61A3F25450090FC94 /* UniversalObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalObject.h; sourceTree = "<group>"; };
+		A6CEB96722BA514200B2BD9D /* UMNamedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMNamedList.h; sourceTree = "<group>"; };
+		A6CEB96822BA514200B2BD9D /* UMNamedList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMNamedList.m; sourceTree = "<group>"; };
 		A6CF25BE1A0C06C200F362FA /* UMTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTask.m; sourceTree = "<group>"; };
 		A6CFD4541EAC85700002564E /* UMPluginDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMPluginDirectory.h; sourceTree = "<group>"; };
 		A6CFD4551EAC85700002564E /* UMPluginDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMPluginDirectory.m; sourceTree = "<group>"; };
@@ -17021,6 +17025,8 @@
 			isa = PBXGroup;
 			children = (
 				A6CC4B5B1A3F24C70090FC94 /* UniversalUtilities.h */,
+				A6CEB96722BA514200B2BD9D /* UMNamedList.h */,
+				A6CEB96822BA514200B2BD9D /* UMNamedList.m */,
 				A6CC4B501A3F24C70090FC94 /* UMAverageDelay.h */,
 				A67B5189191B84A90090FC94 /* UMAverageDelay.m */,
 				A6CC4B531A3F24C70090FC94 /* UMMicroSec.h */,
@@ -17959,6 +17965,7 @@
 				A60C4D411EF7FE59007C203A /* UMHTTPConnection.h in Headers */,
 				A60C4D431EF7FE59007C203A /* UMHTTPPageHandler.h in Headers */,
 				A60C4D441EF7FE59007C203A /* UMHTTPRequest.h in Headers */,
+				A6CEB96922BA514200B2BD9D /* UMNamedList.h in Headers */,
 				A60C4D451EF7FE59007C203A /* UMSleeper.h in Headers */,
 				A60C4D471EF7FE59007C203A /* UMHTTPServer.h in Headers */,
 				A60C4D481EF7FE59007C203A /* UMHTTPServerAuthorizeResult.h in Headers */,
@@ -18514,7 +18521,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\n";
+			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\nmkdir -p /opt/ulibss7/frameworks\n";
 		};
 		A602118B1D488A3D00211137 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -18529,7 +18536,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\n";
+			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\nmkdir -p /opt/ulibss7/frameworks\n";
 		};
 		A60213111D488A5900211137 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -18544,7 +18551,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\n";
+			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\nmkdir -p /opt/ulibss7/frameworks\n";
 		};
 		A60C4C941EF7FE59007C203A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -18559,7 +18566,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\n";
+			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\nmkdir -p \"/Library/Application Support/FinkTelecomServices\"\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -18994,6 +19001,7 @@
 				A667A28D2284032B0009FE66 /* UMConstantStringsDict.m in Sources */,
 				A60C4CA11EF7FE59007C203A /* UMLogConsole.m in Sources */,
 				A63F22AC1FB72B450048B329 /* UMAtomicCounter.m in Sources */,
+				A6CEB96A22BA514200B2BD9D /* UMNamedList.m in Sources */,
 				A60C4CA21EF7FE59007C203A /* UMFileTrackingInfo.m in Sources */,
 				A60C4CA31EF7FE59007C203A /* UMLogDestination.m in Sources */,
 				A6BEA7001EF950A3007C203A /* UMHTTPSServer.m in Sources */,
@@ -19700,7 +19708,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-ios-info.plist";
-				INSTALL_PATH = /Library/Frameworks;
+				INSTALL_PATH = /opt/ulibss7/frameworks;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -19742,7 +19750,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-ios-info.plist";
-				INSTALL_PATH = /Library/Frameworks;
+				INSTALL_PATH = /opt/ulibss7/frameworks;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -19784,7 +19792,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-tvos-info.plist";
-				INSTALL_PATH = /Library/Frameworks;
+				INSTALL_PATH = /opt/ulibss7/frameworks;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
@@ -19825,7 +19833,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-tvos-info.plist";
-				INSTALL_PATH = /Library/Frameworks;
+				INSTALL_PATH = /opt/ulibss7/frameworks;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
@@ -19866,7 +19874,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-watchos-info.plist";
-				INSTALL_PATH = /Library/Frameworks;
+				INSTALL_PATH = /opt/ulibss7/frameworks;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
@@ -19908,7 +19916,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-watchos-info.plist";
-				INSTALL_PATH = /Library/Frameworks;
+				INSTALL_PATH = /opt/ulibss7/frameworks;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
@@ -19948,7 +19956,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
-				INSTALL_PATH = /Library/Frameworks;
+				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -19987,7 +19995,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
-				INSTALL_PATH = /Library/Frameworks;
+				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -20244,6 +20252,7 @@
 				DYLIB_CURRENT_VERSION = 1.5.1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = /opt/ulibss7/frameworks;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -20312,6 +20321,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1.5.1;
 				DYLIB_CURRENT_VERSION = 1.5.1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = /opt/ulibss7/frameworks;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;

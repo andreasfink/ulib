@@ -18,7 +18,7 @@
 #define PROTOBUF_WIRE_TYPE_32BIT_FIXED       5
 
 @protocol UMProtocolBufferProtocol<NSObject>
-@property(readwrite)    NSData *buffer;
+@property(readwrite,strong)    NSData *buffer;
 @end
 
 @interface UMProtocolBuffer : UMObject
@@ -27,7 +27,7 @@
     UMMutex *_lock;
 }
 
-@property(readwrite)    NSData *buffer;
+@property(readwrite,strong)    NSData *buffer;
 
 -(void)appendVarint:(uint64_t)i;
 -(void)appendTag:(int)code int32:(int32_t)i;

@@ -14,6 +14,8 @@
 #include <TargetConditionals.h>
 #include <libkern/OSByteOrder.h>
 #include <IOKit/IOTypes.h>
+#include <net/if_dl.h>
+
 #endif
 
 #ifdef LINUX
@@ -39,6 +41,7 @@
 #include <ifaddrs.h>
 #include <sys/wait.h>
 #include <errno.h>
+
 
 #if defined(HAVE_SYS_SOCKIO_H)
 #include <sys/sockio.h>

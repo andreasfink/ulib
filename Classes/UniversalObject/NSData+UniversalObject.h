@@ -18,7 +18,8 @@
 - (NSData *)sha256;         /*!< calculates the sha256 hash of the data */
 - (NSData *)sha384;         /*!< calculates the sha384 hash of the data */
 - (NSData *)sha512;         /*!< calculates the sha512 hash of the data */
-
+- (NSData *)xor:(NSData *)xor;
+- (NSString *)utf8String;
 @end
 
 @interface NSMutableData (UniversalObject)

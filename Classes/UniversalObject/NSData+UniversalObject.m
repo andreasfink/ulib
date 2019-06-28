@@ -203,6 +203,30 @@ static inline int nibbleToInt(const char a)
     return [NSData dataWithBytes:obuf length:SHA512_DIGEST_LENGTH];
 }
 
+- (NSData *)xor:(NSData *)xor
+{
+
+	NSMutableData *out = [[NSMutableData alloc]init];
+	NSInteger xor_max = xor.length;
+	NSInteger in_max = self.length;
+	uint8_t *in_bytes = (uint8_t *)self.bytes;
+	uint8_t *xor_bytes = (uint8_t *)xor.bytes;
+
+	for(NSInteger in_idx = 0; in_idx < in_max;in_idx++)
+	{
+		uint8_t inval = in_bytes[in_idx];
+		uint8_t xval = xor_bytes[in_idx % xor_max];
+		uint8_t outval = inval ^ xval;
+		[out appendByte:outval];
+	}
+	return out;
+}
+
+- (NSString *)utf8String
+{
+	return [[NSString alloc]initWithData:self encoding:NSUTF8StringEncoding];
+}
+
 @end
 
 @implementation NSMutableData (UniversalObject)

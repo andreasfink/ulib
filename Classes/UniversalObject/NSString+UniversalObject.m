@@ -348,5 +348,10 @@ NSString *sqlEscapeNSString(NSString *input)
 	}
 	return [self boolValue];
 }
+
+- (NSString *)trim
+{
+    return [self stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
+}
 @end
 

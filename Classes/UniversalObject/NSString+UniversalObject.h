@@ -26,4 +26,5 @@ NSString *sqlEscapeNSString(NSString *input);
 - (BOOL)isEqualToStringCaseInsensitive:(NSString *)aString;
 - (NSData *)sha1;
 - (BOOL)webBoolValue;
+- (NSString *)trim;
 @end

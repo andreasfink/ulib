@@ -20,7 +20,7 @@
 - (id)objectWithData:(NSData*)data;
 - (id)objectWithString:(NSString *)repr;
 - (id)objectWithString:(NSString*)jsonText
-                 error:(NSError**)error __attribute__ ((deprecated));
+                 error:(NSError**)error;
 
 @end
 

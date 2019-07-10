@@ -14,6 +14,20 @@ static NSDateFormatter *standardDateFormatter = NULL;
 
 @implementation NSDate(stringFunctions)
 
++(NSDateFormatter *)standardDateFormatter
+{
+    if(standardDateFormatter==NULL)
+    {
+        NSTimeZone *tz = [NSTimeZone timeZoneWithName:@"UTC"];
+        standardDateFormatter= [[NSDateFormatter alloc]init];
+        NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+        [standardDateFormatter setLocale:usLocale];
+        [standardDateFormatter setDateFormat:STANDARD_DATE_STRING_FORMAT];
+        [standardDateFormatter setTimeZone:tz];
+    }
+    return standardDateFormatter;
+}
+
 +(NSDate *) dateWithStandardDateString:(NSString *)str
 {
     if(str==NULL)
@@ -24,12 +38,7 @@ static NSDateFormatter *standardDateFormatter = NULL;
     {
         return [NSDate dateWithTimeIntervalSince1970:0];
     }
-    if(standardDateFormatter==NULL)
-    {
-        standardDateFormatter= [[NSDateFormatter alloc]init];
-        [standardDateFormatter setDateFormat:STANDARD_DATE_STRING_FORMAT];
-    }
-    return [standardDateFormatter dateFromString:str];
+    return [[NSDate standardDateFormatter] dateFromString:str];
 }
 
 - (NSString *)stringValue
@@ -38,13 +47,7 @@ static NSDateFormatter *standardDateFormatter = NULL;
     {
         return [NSDate zeroDateString];
     }
-
-    if(standardDateFormatter==NULL)
-    {
-        standardDateFormatter= [[NSDateFormatter alloc]init];
-        [standardDateFormatter setDateFormat:STANDARD_DATE_STRING_FORMAT];
-    }
-    return [standardDateFormatter stringFromDate:self];
+    return [[NSDate standardDateFormatter] stringFromDate:self];
 }
 
 - (NSDate *)dateValue

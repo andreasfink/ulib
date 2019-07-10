@@ -1,5 +1,5 @@
 //
-//  NSString+HTTP.h
+//  NSString+UMHTTP.h
 //  ulib
 //
 //  Created by Andreas Fink on 30.08.11.

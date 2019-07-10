@@ -23,3 +23,5 @@
 #import "UMMicroSec.h"
 #import "UMProtocolBuffer.h"
 #import "UMNamedList.h"
+#import "UMStatistic.h"
+#import "UMStatisticEntry.h"

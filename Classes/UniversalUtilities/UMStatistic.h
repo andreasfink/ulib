@@ -6,7 +6,7 @@
 //  Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/ulib.h>
+#import "UMObject.h"
 
 @class UMStatisticEntry;
 @class UMSynchronizedDictionary;

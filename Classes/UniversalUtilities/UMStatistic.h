@@ -9,14 +9,14 @@
 #import "UMObject.h"
 
 @class UMStatisticEntry;
-@class UMSynchronizedDictionary;
+@class UMSynchronizedSortedDictionary;
 @class UMMutex;
 
 @interface UMStatistic : UMObject
 {
     NSString *_path;
     NSString *_name;
-    UMSynchronizedDictionary *_entries;
+    UMSynchronizedSortedDictionary *_entries;
     UMStatisticEntry *_main_entry;
     UMMutex *_lock;
     BOOL _dirty;

@@ -8,9 +8,11 @@
 
 #import "UMStatistic.h"
 #import "UMSynchronizedDictionary.h"
+#import "UMSynchronizedSortedDictionary.h"
 #import "UMStatisticEntry.h"
 #import "UMMutex.h"
 #import "NSString+UMHTTP.h"
+#import "UMJsonParser.h"
 
 @implementation UMStatistic
 

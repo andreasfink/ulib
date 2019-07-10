@@ -83,7 +83,11 @@
 
     NSString *filePath = [NSString stringWithFormat:@"%@/%@",_path,_name.urlencode];
     NSError *err = NULL;
+#ifdef __APPLE__
     NSData *jsonData = [[NSData alloc]initWithContentsOfFile:filePath options:0 error:&err];
+#else
+    NSData *jsonData = [[NSData alloc]initWithContentsOfFile:filePath];
+#endif
     if(err)
     {
         NSLog(@"Error while reading statistics %@ to %@: %@",_name,_path,err);

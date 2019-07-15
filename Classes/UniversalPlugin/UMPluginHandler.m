@@ -35,7 +35,8 @@
         _error = @(strerror(errno));
         return -1;
     }
-    if(sinfo.st_flags & S_IFDIR)
+
+    if(S_ISDIR(sinfo.st_mode))
     {
         NSString *dir = _filename;
         NSString *name = [[_filename lastPathComponent] stringByDeletingPathExtension];
@@ -57,7 +58,7 @@
             return -1;
         }
     }
-    if(!(sinfo.st_flags & S_IFREG))
+    if(!S_ISREG(sinfo.st_mode))
     {
         _error = @(strerror(ENOTSUP));
     }

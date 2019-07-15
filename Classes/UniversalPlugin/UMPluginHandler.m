@@ -26,6 +26,7 @@
     return self;
 }
 
+
 - (int) open
 {
     struct stat sinfo;

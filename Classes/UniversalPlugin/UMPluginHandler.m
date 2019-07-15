@@ -9,8 +9,10 @@
 #import "UMPluginHandler.h"
 #import "UMSynchronizedArray.h"
 #import "UMPlugin.h"
+#import "UMSynchronizedArray.h"
 
 #include <dlfcn.h>
+#include <sys/stat.h>
 
 @implementation UMPluginHandler
 
@@ -26,6 +28,40 @@
 
 - (int) open
 {
+    struct stat sinfo;
+    int e = stat(_filename.UTF8String, &sinfo);
+    if(e<0)
+    {
+        _error = @(strerror(errno));
+        return -1;
+    }
+    if(sinfo.st_flags & S_IFDIR)
+    {
+        NSString *dir = _filename;
+        NSString *name = [[_filename lastPathComponent] stringByDeletingPathExtension];
+#if defined(__APPLE__)
+        _filename = [NSString stringWithFormat:@"%@/Contents/MacOS/%@",dir,name];
+#else
+#if defined(LINUX)
+        _filename = [NSString stringWithFormat:@"%@/Contents/Linux/%@",dir,name];
+#else
+#if defined(FREEBSD)
+        _filename = [NSString stringWithFormat:@"%@/Contents/FreeBSD/%@",dir,name];
+#endif
+#endif
+#endif
+        int e = stat(_filename.UTF8String, &sinfo);
+        if(e<0)
+        {
+            _error = @(strerror(errno));
+            return -1;
+        }
+    }
+    if(!(sinfo.st_flags & S_IFREG))
+    {
+        _error = @(strerror(ENOTSUP));
+    }
+
     _dlhandle = dlopen(_filename.UTF8String,RTLD_NOW | RTLD_LOCAL);
     if(_dlhandle == NULL)
     {

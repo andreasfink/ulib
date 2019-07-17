@@ -11,13 +11,13 @@
 
 @interface UMPlugin : UMObject
 {
-    NSArray *_config; /* textual representation */
+    NSDictionary *_config; /* textual representation */
 }
 
 + (NSDictionary *)info;
 + (NSString *)name;
-- (NSArray *)config;
-- (void)setConfig:(NSArray *)cfg;
+- (NSDictionary *)config;
+- (void)setConfig:(NSDictionary *)cfg;
 - (void)configUpdate;
 
 @end

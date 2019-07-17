@@ -34,7 +34,7 @@
     return [_config copy];
 }
 
-- (void)setConfig:(NSArray *)cfg
+- (void)setConfig:(NSDictionary *)cfg
 {
     _config = cfg;
     [self configUpdate];

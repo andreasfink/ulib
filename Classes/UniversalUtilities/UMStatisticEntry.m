@@ -28,13 +28,39 @@
 
         [self updateCurrentTimeIndexes];
         memset(&_secondsData[0],0,sizeof(_secondsData));
-        memset(&_minutesData[0],0,sizeof(_minutesData));
-        memset(&_hoursData[0],0,sizeof(_hoursData));
-        memset(&_daysData[0],0,sizeof(_daysData));
-        memset(&_weeksData[0],0,sizeof(_weeksData));
-        memset(&_monthsData[0],0,sizeof(_monthsData));
-        memset(&_yearsData[0],0,sizeof(_yearsData));
+        memset(&_secondsDataCount[0],0,sizeof(_secondsDataCount));
+        memset(&_secondsDataMax[0],0,sizeof(_secondsDataMax));
+        memset(&_secondsDataMin[0],0,sizeof(_secondsDataMin));
 
+        memset(&_minutesData[0],0,sizeof(_minutesData));
+        memset(&_minutesDataCount[0],0,sizeof(_minutesDataCount));
+        memset(&_minutesDataMax[0],0,sizeof(_minutesDataMax));
+        memset(&_minutesDataMin[0],0,sizeof(_minutesDataMin));
+
+        memset(&_hoursData[0],0,sizeof(_hoursData));
+        memset(&_hoursDataCount[0],0,sizeof(_hoursDataCount));
+        memset(&_hoursDataMax[0],0,sizeof(_hoursDataMax));
+        memset(&_hoursDataMin[0],0,sizeof(_hoursDataMin));
+
+        memset(&_daysData[0],0,sizeof(_daysData));
+        memset(&_daysDataCount[0],0,sizeof(_daysDataCount));
+        memset(&_daysDataMax[0],0,sizeof(_daysDataMax));
+        memset(&_daysDataMin[0],0,sizeof(_daysDataMin));
+
+        memset(&_weeksData[0],0,sizeof(_weeksData));
+        memset(&_weeksDataCount[0],0,sizeof(_weeksDataCount));
+        memset(&_weeksDataMax[0],0,sizeof(_weeksDataMax));
+        memset(&_weeksDataMin[0],0,sizeof(_weeksDataMin));
+
+        memset(&_monthsData[0],0,sizeof(_monthsData));
+        memset(&_monthsDataCount[0],0,sizeof(_monthsDataCount));
+        memset(&_monthsDataMax[0],0,sizeof(_monthsDataMax));
+        memset(&_monthsDataMin[0],0,sizeof(_monthsDataMin));
+
+        memset(&_yearsData[0],0,sizeof(_yearsData));
+        memset(&_yearsDataCount[0],0,sizeof(_yearsDataCount));
+        memset(&_yearsDataMax[0],0,sizeof(_yearsDataMax));
+        memset(&_yearsDataMin[0],0,sizeof(_yearsDataMin));
     }
     return self;
 }

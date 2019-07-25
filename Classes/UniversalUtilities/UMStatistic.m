@@ -46,15 +46,8 @@
 - (void)flush
 {
     [_lock lock];
-    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
 
-    NSArray *keys = [_entries allKeys];
-    dict[@"*"] = [_main_entry dictionaryValue];
-    for(NSString *key in keys)
-    {
-        UMStatisticEntry *entry = _entries[key];
-        dict[key] = [entry dictionaryValue];
-    }
+    UMSynchronizedSortedDictionary *dict = [self objectValue:YES];
     NSString *jsonString = [dict jsonString];
 
     NSString *filePath = [NSString stringWithFormat:@"%@/%@",_path,_name.urlencode];
@@ -68,20 +61,64 @@
     [_lock unlock];
 }
 
+- (UMSynchronizedSortedDictionary *)objectValue:(BOOL)includeSubs
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"name"] = _name;
+    dict[@"statistic"] = [_main_entry dictionaryValue];
+
+    if(includeSubs)
+    {
+        UMSynchronizedSortedDictionary *dict2 = [[UMSynchronizedSortedDictionary alloc]init];
+        NSArray *keys = [_entries allKeys];
+        for(NSString *key in keys)
+        {
+            UMStatisticEntry *entry = _entries[key];
+            dict2[key] = [entry dictionaryValue];
+        }
+        
+        dict[@"statistic-by-key"] = dict2;
+    }
+    return dict;
+}
+
 - (void)setValues:(NSDictionary *)dict
 {
     if(dict[@"name"])
     {
         _name = [dict[@"name"] stringValue];
     }
+    if(dict[@"statistic"])
+    {
+        id stat = dict[@"statistic"];
+        if([stat isKindOfClass:[NSDictionary class]])
+        {
+            _main_entry = [[UMStatisticEntry alloc]initWithDictionary:(NSDictionary *)stat];
+        }
+    }
+    if(dict[@"statistic-by-key"])
+    {
+        _entries = [[UMSynchronizedSortedDictionary alloc]init];
+        id stat = dict[@"statistic-by-key"];
+        if([stat isKindOfClass:[NSDictionary class]])
+        {
+            NSDictionary *dict = (NSDictionary *)stat;
+            NSArray *allkeys = [dict allKeys];
+            for(NSString *key in allkeys)
+            {
+                UMStatisticEntry *e = [[UMStatisticEntry alloc]initWithDictionary:dict[key]];
+                _entries[key]=e;
+            }
+        }
+    }
 }
 
 - (void)increaseBy:(double)number
 {
-    [self increaseBy:number key:NULL];
+    [self increaseBy:number forKey:NULL];
 }
 
-- (void)increaseBy:(double)number key:(NSString *)key
+- (void)increaseBy:(double)number forKey:(NSString *)key
 {
     [_main_entry increaseBy:number];
     if(key.length > 0)
@@ -120,33 +157,41 @@
         if([obj isKindOfClass:[NSDictionary class]])
         {
             NSDictionary *dict = (NSDictionary *)obj;
-            NSArray *keys = [dict allKeys];
-            for(NSString *key in keys)
-            {
-                id obj2 = dict[key];
-                if([obj2 isKindOfClass:[NSDictionary class]])
-                {
-                    NSDictionary *dict2 = (NSDictionary *)obj2;
-                    if([key isEqualToString:@"*"])
-                    {
-                        _main_entry = [[UMStatisticEntry alloc]initWithDictionary:dict2];
-                    }
-                    else
-                    {
-                        UMStatisticEntry *entry = [[UMStatisticEntry alloc]initWithDictionary:dict2];
-                        _entries[key] = entry;
-                    }
-                }
-            }
+            [self setValues:dict];
         }
     }
 }
 
 
-- (id)getStatisticJsonForKey:(NSString *)key noValues:(BOOL)noValues
+- (UMSynchronizedSortedDictionary *)getStatistic
 {
-    /* FIXME */
-    return NULL;
+    UMSynchronizedSortedDictionary *dict = [self objectValue:NO];
+    return dict;
+}
+
+- (UMSynchronizedSortedDictionary *)getStatistics
+{
+    UMSynchronizedSortedDictionary *dict = [self objectValue:YES];
+    return dict;
+}
+
+
+
+- (UMSynchronizedSortedDictionary *)getStatisticForKey:(NSString *)key
+{
+    UMStatisticEntry *entry;
+    entry = _entries[key];
+    
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"name"] = _name;
+
+    UMSynchronizedSortedDictionary *dict2 = [[UMSynchronizedSortedDictionary alloc]init];
+    if(entry)
+    {
+        dict2[key] = [entry dictionaryValue];
+    }
+    dict[@"statistic-by-key"] = dict2;
+    return dict;
 }
 
 @end

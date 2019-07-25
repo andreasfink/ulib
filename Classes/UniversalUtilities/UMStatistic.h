@@ -27,13 +27,19 @@
 @property(readwrite,assign,atomic)  BOOL dirty;
 
 
+
 -(UMStatistic *)initWithPath:(NSString *)path name:(NSString *)name;
 - (void)flushIfDirty;
 - (void)flush;
+- (UMSynchronizedSortedDictionary *)objectValue:(BOOL)includeSubs;
 - (void)setValues:(NSDictionary *)dict;
-- (id)getStatisticJsonForKey:(NSString *)key noValues:(BOOL)noValues;
 - (void)increaseBy:(double)number;
-- (void)increaseBy:(double)number key:(NSString *)key;
+- (void)increaseBy:(double)number forKey:(NSString *)key;
+- (void)loadFromFile;
+
+- (UMSynchronizedSortedDictionary *)getStatistic; /* main statistic */
+- (UMSynchronizedSortedDictionary *)getStatistics; /* main statistic and substats by key */
+- (UMSynchronizedSortedDictionary *)getStatisticForKey:(NSString *)key; /* only stats for a specific key */
 
 @end
 

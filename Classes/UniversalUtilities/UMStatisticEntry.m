@@ -55,7 +55,7 @@
 }
 
 
-#define shiftIndex(nowIndex,endIndex,cellCount,cells,cellSize) \
+#define shiftIndex(nowIndex,endIndex,cellCount,cells,cells2,cells3,cells4) \
 { \
     if (nowIndex != endIndex) \
     { \
@@ -64,13 +64,16 @@
         shiftIndex = nowIndex - endIndex; \
         if(shiftIndex >= cellCount) \
         { \
-            memset((void *)cells,0,cellCount * cellSize ); \
+            memset((void *)cells,0,cellCount * sizeof(um_statistic_counter_type) ); \
+            memset((void *)cells2,0,cellCount * sizeof(int) ); \
+            memset((void *)cells3,0,cellCount * sizeof(um_statistic_counter_type) ); \
+            memset((void *)cells4,0,cellCount * sizeof(um_statistic_counter_type) ); \
         } \
         else \
         { \
             for(i = endIndex + 1; i <= nowIndex; i++) \
             { \
-                cells[i % cellCount] = 0.0; \
+                cells[i % cellCount] = 0; \
             } \
         } \
         endIndex = nowIndex; \
@@ -83,14 +86,20 @@
 
     /* shifting seconds */
 
-    shiftIndex(_currentSecondsIndex,_secondsEndIndex,UMSTATISTIC_SECONDS_MAX,_secondsData,sizeof(um_statistic_counter_type));
-    shiftIndex(_currentMinutesIndex,_minutesEndIndex,UMSTATISTIC_MINUTES_MAX,_minutesData,sizeof(um_statistic_counter_type));
-    shiftIndex(_currentHoursIndex,_hoursEndIndex,UMSTATISTIC_HOURS_MAX,_hoursData,sizeof(um_statistic_counter_type));
-    shiftIndex(_currentDaysIndex,_daysEndIndex,UMSTATISTIC_DAYS_MAX,_daysData,sizeof(um_statistic_counter_type));
-    shiftIndex(_currentWeeksIndex,_weeksEndIndex,UMSTATISTIC_WEEKS_MAX,_weeksData,sizeof(um_statistic_counter_type));
-    shiftIndex(_currentMonthsIndex,_monthsEndIndex,UMSTATISTIC_MONTHS_MAX,_monthsData,sizeof(um_statistic_counter_type));
-    shiftIndex(_currentYearsIndex,_yearsEndIndex,UMSTATISTIC_YEARS_MAX,_yearsData,sizeof(um_statistic_counter_type));
-
+    shiftIndex(_currentSecondsIndex,_secondsEndIndex,UMSTATISTIC_SECONDS_MAX,
+               _secondsData,_secondsDataCount,_secondsDataMax,_secondsDataMin);
+    shiftIndex(_currentMinutesIndex,_minutesEndIndex,UMSTATISTIC_MINUTES_MAX,
+                _minutesData,_minutesDataCount,_minutesDataMax,_minutesDataMin);
+    shiftIndex(_currentHoursIndex,_hoursEndIndex,UMSTATISTIC_HOURS_MAX,
+               _hoursData,_hoursDataCount,_hoursDataMax,_hoursDataMin);
+    shiftIndex(_currentDaysIndex,_daysEndIndex,UMSTATISTIC_DAYS_MAX,
+               _daysData,_daysDataCount,_daysDataMax,_daysDataMin);
+    shiftIndex(_currentWeeksIndex,_weeksEndIndex,UMSTATISTIC_WEEKS_MAX,
+               _weeksData,_weeksDataCount,_weeksDataMax,_weeksDataMin);
+    shiftIndex(_currentMonthsIndex,_monthsEndIndex,UMSTATISTIC_MONTHS_MAX,
+               _monthsData,_monthsDataCount,_monthsDataMax,_monthsDataMin);
+    shiftIndex(_currentYearsIndex,_yearsEndIndex,UMSTATISTIC_YEARS_MAX,
+               _yearsData,_yearsDataCount,_yearsDataMax,_yearsDataMin);
 }
 
 
@@ -99,22 +108,128 @@
     [_lock lock];
     [self timeShift];
     _secondsData[_currentSecondsIndex % UMSTATISTIC_SECONDS_MAX] += count;
+    _secondsDataCount[_currentSecondsIndex % UMSTATISTIC_SECONDS_MAX] += 1;
+    if(count >  _secondsDataMax[_currentSecondsIndex % UMSTATISTIC_SECONDS_MAX])
+    {
+        _secondsDataMax[_currentSecondsIndex % UMSTATISTIC_SECONDS_MAX] = count;
+    }
+    if(count < _secondsDataMin[_currentSecondsIndex % UMSTATISTIC_SECONDS_MAX])
+    {
+        _secondsDataMin[_currentSecondsIndex % UMSTATISTIC_SECONDS_MAX] = count;
+    }
     _minutesData[_currentMinutesIndex % UMSTATISTIC_MINUTES_MAX] += count;
+    _minutesDataCount[_currentMinutesIndex % UMSTATISTIC_MINUTES_MAX] += 1;
+    if(count >  _minutesDataMax[_currentSecondsIndex % UMSTATISTIC_MINUTES_MAX])
+    {
+        _minutesDataMax[_currentSecondsIndex % UMSTATISTIC_MINUTES_MAX] = count;
+    }
+    if(count < _minutesDataMin[_currentSecondsIndex % UMSTATISTIC_MINUTES_MAX])
+    {
+        _minutesDataMin[_currentSecondsIndex % UMSTATISTIC_MINUTES_MAX] = count;
+    }
+
     _hoursData[_currentHoursIndex % UMSTATISTIC_HOURS_MAX] += count;
+    _hoursDataCount[_currentHoursIndex % UMSTATISTIC_HOURS_MAX] += 1;
+    if(count >  _hoursDataMax[_currentSecondsIndex % UMSTATISTIC_HOURS_MAX])
+    {
+        _hoursDataMax[_currentSecondsIndex % UMSTATISTIC_HOURS_MAX] = count;
+    }
+    if(count < _hoursDataMin[_currentSecondsIndex % UMSTATISTIC_HOURS_MAX])
+    {
+        _hoursDataMin[_currentSecondsIndex % UMSTATISTIC_HOURS_MAX] = count;
+    }
+
     _daysData[_currentDaysIndex % UMSTATISTIC_DAYS_MAX] += count;
+    _daysDataCount[_currentDaysIndex % UMSTATISTIC_DAYS_MAX] += 1;
+    if(count >  _daysDataMax[_currentSecondsIndex % UMSTATISTIC_DAYS_MAX])
+    {
+        _daysDataMax[_currentSecondsIndex % UMSTATISTIC_DAYS_MAX] = count;
+    }
+    if(count < _daysDataMin[_currentSecondsIndex % UMSTATISTIC_DAYS_MAX])
+    {
+        _daysDataMin[_currentSecondsIndex % UMSTATISTIC_DAYS_MAX] = count;
+    }
+
     _weeksData[_currentWeeksIndex % UMSTATISTIC_WEEKS_MAX] += count;
+    _weeksDataCount[_currentWeeksIndex % UMSTATISTIC_WEEKS_MAX] += 1;
+    if(count >  _weeksDataMax[_currentSecondsIndex % UMSTATISTIC_WEEKS_MAX])
+    {
+        _weeksDataMax[_currentSecondsIndex % UMSTATISTIC_WEEKS_MAX] = count;
+    }
+    if(count < _weeksDataMin[_currentSecondsIndex % UMSTATISTIC_WEEKS_MAX])
+    {
+        _weeksDataMin[_currentSecondsIndex % UMSTATISTIC_WEEKS_MAX] = count;
+    }
+
     _monthsData[_currentMonthsIndex % UMSTATISTIC_MONTHS_MAX] += count;
+    _monthsDataCount[_currentMonthsIndex % UMSTATISTIC_MONTHS_MAX] += 1;
+    if(count >  _monthsDataMax[_currentSecondsIndex % UMSTATISTIC_MONTHS_MAX])
+    {
+        _monthsDataMax[_currentSecondsIndex % UMSTATISTIC_MONTHS_MAX] = count;
+    }
+    if(count < _monthsDataMin[_currentSecondsIndex % UMSTATISTIC_MONTHS_MAX])
+    {
+        _monthsDataMin[_currentSecondsIndex % UMSTATISTIC_MONTHS_MAX] = count;
+    }
+
     _yearsData[_currentYearsIndex % UMSTATISTIC_YEARS_MAX] += count;
+    _yearsDataCount[_currentYearsIndex % UMSTATISTIC_YEARS_MAX] += 1;
+    if(count >  _yearsDataMax[_currentSecondsIndex % UMSTATISTIC_YEARS_MAX])
+    {
+        _yearsDataMax[_currentSecondsIndex % UMSTATISTIC_YEARS_MAX] = count;
+    }
+    if(count < _yearsDataMin[_currentSecondsIndex % UMSTATISTIC_YEARS_MAX])
+    {
+        _yearsDataMin[_currentSecondsIndex % UMSTATISTIC_YEARS_MAX] = count;
+    }
+
     [_lock unlock];
 }
 
 
+#define MAKE_DICT(dict,MAX,endIndex,currentIndex,index,values_array,counts_array,max_array,min_array) \
+UMSynchronizedArray *a = [[UMSynchronizedArray alloc]init];\
+UMSynchronizedArray *acnt = [[UMSynchronizedArray alloc]init];\
+UMSynchronizedArray *amax = [[UMSynchronizedArray alloc]init];\
+UMSynchronizedArray *amin = [[UMSynchronizedArray alloc]init];\
+for(NSInteger i=0;i>MAX;i++)\
+{\
+    [a addObject:@(values_array[i])];\
+    [acnt addObject:@(counts_array[i])];\
+    [amax addObject:@(max_array[i])];\
+    [amin addObject:@(min_array[i])];\
+}\
+UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];\
+dict[@"end"] = @(endIndex);\
+dict[@"current"] = @(currentIndex);\
+dict[@"index"] = @(index);\
+dict[@"max"] = @(MAX);\
+dict[@"values"] = a;\
+dict[@"values-count"] = acnt;\
+dict[@"values-max"] = amax;\
+dict[@"values-min"] = amin; 
+
 - (UMSynchronizedSortedDictionary *)secondsDict
 {
+    MAKE_DICT(dict,UMSTATISTIC_SECONDS_MAX,_secondsEndIndex,
+             _currentSecondsIndex,
+             _secondsIndex,
+             _secondsData,
+             _secondsDataCount,
+             _secondsDataMax,
+             _secondsDataMin)
+
+#if 0
     UMSynchronizedArray *a = [[UMSynchronizedArray alloc]init];
+    UMSynchronizedArray *acnt = [[UMSynchronizedArray alloc]init];
+    UMSynchronizedArray *amax = [[UMSynchronizedArray alloc]init];
+    UMSynchronizedArray *amin = [[UMSynchronizedArray alloc]init];
     for(NSInteger i=0;i>UMSTATISTIC_SECONDS_MAX;i++)
     {
         [a addObject:@(_secondsData[i])];
+        [acnt addObject:@(_secondsDataCount[i])];
+        [amax addObject:@(_secondsDataMax[i])];
+        [amin addObject:@(_secondsDataMin[i])];
     }
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
     dict[@"end"] = @(_secondsEndIndex);
@@ -122,12 +237,131 @@
     dict[@"index"] = @(_secondsIndex);
     dict[@"max"] = @(UMSTATISTIC_SECONDS_MAX);
     dict[@"values"] = a;
+    dict[@"values-count"] = acnt;
+    dict[@"values-max"] = amax;
+    dict[@"values-min"] = amin;
+#endif
     return dict;
 
 }
 
+
+#define SET_DICT(dict,MAX,endIndex,currentIndex,index,values_array,counts_array,max_array,min_array) \
+    if(dict[@"end"])\
+    {\
+        endIndex = [dict[@"end"] longLongValue];\
+    }\
+    if(dict[@"current"])\
+    {\
+        currentIndex = [dict[@"current"] longLongValue];\
+    }\
+    if(dict[@"index"])\
+    {\
+        index = [dict[@"index"] longLongValue];\
+    }\
+    NSArray *a = NULL;\
+    id v = dict[@"values"];\
+    if([v isKindOfClass:[NSArray class]])\
+    {\
+        a = (NSArray *)v;\
+    }\
+    else if([v isKindOfClass:[UMSynchronizedArray class]])\
+    {\
+        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;\
+        a = [sa arrayCopy];\
+    }\
+    if(a)\
+    {\
+        NSInteger max = [a count];\
+        if(max > MAX)\
+        {\
+            max = MAX;\
+        }\
+        for(NSInteger i=0;i<max;i++)\
+        {\
+            values_array[i] = [a[i] doubleValue];\
+        }\
+    }\
+    \
+    v = dict[@"values-counts"];\
+    if([v isKindOfClass:[NSArray class]])\
+    {\
+        a = (NSArray *)v;\
+    }\
+    else if([v isKindOfClass:[UMSynchronizedArray class]])\
+    {\
+        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;\
+        a = [sa arrayCopy];\
+    }\
+    if(a)\
+    {\
+        NSInteger max = [a count];\
+        if(max > MAX)\
+        {\
+            max = MAX;\
+        }\
+        for(NSInteger i=0;i<max;i++)\
+        {\
+            counts_array[i] = [a[i] longValue];\
+        }\
+    }\
+    v = dict[@"values-max"];\
+    if([v isKindOfClass:[NSArray class]])\
+    {\
+        a = (NSArray *)v;\
+    }\
+    else if([v isKindOfClass:[UMSynchronizedArray class]])\
+    {\
+        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;\
+        a = [sa arrayCopy];\
+    }\
+    if(a)\
+    {\
+        NSInteger max = [a count];\
+        if(max > MAX)\
+        {\
+            max = UMSTATISTIC_SECONDS_MAX;\
+        }\
+        for(NSInteger i=0;i<max;i++)\
+        {\
+            max_array[i] = [a[i] longValue];\
+        }\
+    }\
+    v = dict[@"values-min"];\
+    if([v isKindOfClass:[NSArray class]])\
+    {\
+        a = (NSArray *)v;\
+    }\
+    else if([v isKindOfClass:[UMSynchronizedArray class]])\
+    {\
+        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;\
+        a = [sa arrayCopy];\
+    }\
+    if(a)\
+    {\
+        NSInteger max = [a count];\
+        if(max > MAX)\
+        {\
+            max = MAX;\
+        }\
+        for(NSInteger i=0;i<max;i++)\
+        {\
+            min_array[i] = [a[i] longValue];\
+        }\
+    }\
+
+
 - (void)setSecondsDict:(UMSynchronizedSortedDictionary *)dict
 {
+    SET_DICT(dict,UMSTATISTIC_SECONDS_MAX,_secondsEndIndex,
+             _currentSecondsIndex,
+             _secondsIndex,
+             _secondsData,
+             _secondsDataCount,
+             _secondsDataMax,
+             _secondsDataMin)
+
+#if 0
     if(dict[@"end"])
     {
         _secondsEndIndex = [dict[@"end"] longLongValue];
@@ -151,7 +385,6 @@
         UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
         a = [sa arrayCopy];
     }
-
     if(a)
     {
         NSInteger max = [a count];
@@ -164,6 +397,77 @@
             _secondsData[i] = [a[i] doubleValue];
         }
     }
+    
+    v = dict[@"counts"];
+    if([v isKindOfClass:[NSArray class]])
+    {
+        a = (NSArray *)v;
+    }
+    else if([v isKindOfClass:[UMSynchronizedArray class]])
+    {
+        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
+        a = [sa arrayCopy];
+    }
+    if(a)
+    {
+        NSInteger max = [a count];
+        if(max > UMSTATISTIC_SECONDS_MAX)
+        {
+            max = UMSTATISTIC_SECONDS_MAX;
+        }
+        for(NSInteger i=0;i<max;i++)
+        {
+            _secondsDataCount[i] = [a[i] longValue];
+        }
+    }
+    
+    
+    v = dict[@"max-values"];
+    if([v isKindOfClass:[NSArray class]])
+    {
+        a = (NSArray *)v;
+    }
+    else if([v isKindOfClass:[UMSynchronizedArray class]])
+    {
+        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
+        a = [sa arrayCopy];
+    }
+    if(a)
+    {
+        NSInteger max = [a count];
+        if(max > UMSTATISTIC_SECONDS_MAX)
+        {
+            max = UMSTATISTIC_SECONDS_MAX;
+        }
+        for(NSInteger i=0;i<max;i++)
+        {
+            _secondsDataMax[i] = [a[i] longValue];
+        }
+    }
+    
+    v = dict[@"min-values"];
+    if([v isKindOfClass:[NSArray class]])
+    {
+        a = (NSArray *)v;
+    }
+    else if([v isKindOfClass:[UMSynchronizedArray class]])
+    {
+        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
+        a = [sa arrayCopy];
+    }
+    if(a)
+    {
+        NSInteger max = [a count];
+        if(max > UMSTATISTIC_SECONDS_MAX)
+        {
+            max = UMSTATISTIC_SECONDS_MAX;
+        }
+        for(NSInteger i=0;i<max;i++)
+        {
+            _secondsDataMin[i] = [a[i] longValue];
+        }
+    }
+#endif
 }
 
 - (UMSynchronizedSortedDictionary *)minutesDict

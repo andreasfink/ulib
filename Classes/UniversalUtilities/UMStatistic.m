@@ -76,6 +76,27 @@
     }
 }
 
+- (void)increaseBy:(double)number
+{
+    [self increaseBy:number key:NULL];
+}
+
+- (void)increaseBy:(double)number key:(NSString *)key
+{
+    [_main_entry increaseBy:number];
+    if(key.length > 0)
+    {
+        UMStatisticEntry *e = _entries[key];
+        if(e==0)
+        {
+            e = [[UMStatisticEntry alloc]init];
+            e.name = key;
+            _entries[key] = e;
+        }
+        [e increaseBy:number];
+    }
+}
+
 - (void)loadFromFile
 {
     _main_entry = [[UMStatisticEntry alloc]init];

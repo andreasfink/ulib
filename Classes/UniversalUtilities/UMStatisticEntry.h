@@ -61,13 +61,37 @@ typedef double um_statistic_counter_type;
     NSInteger   _yearsEndIndex;
 
     um_statistic_counter_type      _secondsData[UMSTATISTIC_SECONDS_MAX];
+    um_statistic_counter_type      _secondsDataMax[UMSTATISTIC_SECONDS_MAX];
+    um_statistic_counter_type      _secondsDataMin[UMSTATISTIC_SECONDS_MAX];
+    long                           _secondsDataCount[UMSTATISTIC_SECONDS_MAX];
     um_statistic_counter_type      _minutesData[UMSTATISTIC_MINUTES_MAX];
+    um_statistic_counter_type      _minutesDataMax[UMSTATISTIC_MINUTES_MAX];
+    um_statistic_counter_type      _minutesDataMin[UMSTATISTIC_MINUTES_MAX];
+    long                           _minutesDataCount[UMSTATISTIC_MINUTES_MAX];
     um_statistic_counter_type      _hoursData[UMSTATISTIC_HOURS_MAX];
+    um_statistic_counter_type      _hoursDataMax[UMSTATISTIC_HOURS_MAX];
+    um_statistic_counter_type      _hoursDataMin[UMSTATISTIC_HOURS_MAX];
+    long                           _hoursDataCount[UMSTATISTIC_HOURS_MAX];
     um_statistic_counter_type      _daysData[UMSTATISTIC_DAYS_MAX];
+    um_statistic_counter_type      _daysDataMax[UMSTATISTIC_DAYS_MAX];
+    um_statistic_counter_type      _daysDataMin[UMSTATISTIC_DAYS_MAX];
+    long                           _daysDataCount[UMSTATISTIC_DAYS_MAX];
     um_statistic_counter_type      _weeksData[UMSTATISTIC_WEEKS_MAX];
+    um_statistic_counter_type      _weeksDataMax[UMSTATISTIC_WEEKS_MAX];
+    um_statistic_counter_type      _weeksDataMin[UMSTATISTIC_WEEKS_MAX];
+    long                           _weeksDataCount[UMSTATISTIC_WEEKS_MAX];
     um_statistic_counter_type      _monthsData[UMSTATISTIC_MONTHS_MAX];
+    um_statistic_counter_type      _monthsDataMax[UMSTATISTIC_MONTHS_MAX];
+    um_statistic_counter_type      _monthsDataMin[UMSTATISTIC_MONTHS_MAX];
+    long                           _monthsDataCount[UMSTATISTIC_MONTHS_MAX];
     um_statistic_counter_type      _yearsData[UMSTATISTIC_YEARS_MAX];
+    um_statistic_counter_type      _yearsDataMax[UMSTATISTIC_YEARS_MAX];
+    um_statistic_counter_type      _yearsDataMin[UMSTATISTIC_YEARS_MAX];
+    long                           _yearsDataCount[UMSTATISTIC_YEARS_MAX];
 }
+
+
+@property(readwrite,strong,atomic)  NSString *name;
 
 - (UMStatisticEntry *)initWithDictionary:(NSDictionary *)dict;
 

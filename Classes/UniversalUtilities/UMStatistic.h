@@ -32,6 +32,8 @@
 - (void)flush;
 - (void)setValues:(NSDictionary *)dict;
 - (id)getStatisticJsonForKey:(NSString *)key noValues:(BOOL)noValues;
+- (void)increaseBy:(double)number;
+- (void)increaseBy:(double)number key:(NSString *)key;
 
 @end
 

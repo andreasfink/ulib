@@ -209,43 +209,6 @@ dict[@"values-count"] = acnt;\
 dict[@"values-max"] = amax;\
 dict[@"values-min"] = amin; 
 
-- (UMSynchronizedSortedDictionary *)secondsDict
-{
-    MAKE_DICT(dict,UMSTATISTIC_SECONDS_MAX,_secondsEndIndex,
-             _currentSecondsIndex,
-             _secondsIndex,
-             _secondsData,
-             _secondsDataCount,
-             _secondsDataMax,
-             _secondsDataMin)
-
-#if 0
-    UMSynchronizedArray *a = [[UMSynchronizedArray alloc]init];
-    UMSynchronizedArray *acnt = [[UMSynchronizedArray alloc]init];
-    UMSynchronizedArray *amax = [[UMSynchronizedArray alloc]init];
-    UMSynchronizedArray *amin = [[UMSynchronizedArray alloc]init];
-    for(NSInteger i=0;i>UMSTATISTIC_SECONDS_MAX;i++)
-    {
-        [a addObject:@(_secondsData[i])];
-        [acnt addObject:@(_secondsDataCount[i])];
-        [amax addObject:@(_secondsDataMax[i])];
-        [amin addObject:@(_secondsDataMin[i])];
-    }
-    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
-    dict[@"end"] = @(_secondsEndIndex);
-    dict[@"current"] = @(_currentSecondsIndex);
-    dict[@"index"] = @(_secondsIndex);
-    dict[@"max"] = @(UMSTATISTIC_SECONDS_MAX);
-    dict[@"values"] = a;
-    dict[@"values-count"] = acnt;
-    dict[@"values-max"] = amax;
-    dict[@"values-min"] = amin;
-#endif
-    return dict;
-
-}
-
-
 #define SET_DICT(dict,MAX,endIndex,currentIndex,index,values_array,counts_array,max_array,min_array) \
     if(dict[@"end"])\
     {\
@@ -350,6 +313,20 @@ dict[@"values-min"] = amin;
         }\
     }\
 
+- (UMSynchronizedSortedDictionary *)secondsDict
+{
+    MAKE_DICT(dict,UMSTATISTIC_SECONDS_MAX,_secondsEndIndex,
+             _currentSecondsIndex,
+             _secondsIndex,
+             _secondsData,
+             _secondsDataCount,
+             _secondsDataMax,
+             _secondsDataMin)
+    return dict;
+}
+
+
+
 
 - (void)setSecondsDict:(UMSynchronizedSortedDictionary *)dict
 {
@@ -360,456 +337,146 @@ dict[@"values-min"] = amin;
              _secondsDataCount,
              _secondsDataMax,
              _secondsDataMin)
-
-#if 0
-    if(dict[@"end"])
-    {
-        _secondsEndIndex = [dict[@"end"] longLongValue];
-    }
-    if(dict[@"current"])
-    {
-        _currentSecondsIndex = [dict[@"current"] longLongValue];
-    }
-    if(dict[@"index"])
-    {
-        _secondsIndex = [dict[@"index"] longLongValue];
-    }
-    NSArray *a = NULL;
-    id v = dict[@"values"];
-    if([v isKindOfClass:[NSArray class]])
-    {
-        a = (NSArray *)v;
-    }
-    else if([v isKindOfClass:[UMSynchronizedArray class]])
-    {
-        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
-        a = [sa arrayCopy];
-    }
-    if(a)
-    {
-        NSInteger max = [a count];
-        if(max > UMSTATISTIC_SECONDS_MAX)
-        {
-            max = UMSTATISTIC_SECONDS_MAX;
-        }
-        for(NSInteger i=0;i<max;i++)
-        {
-            _secondsData[i] = [a[i] doubleValue];
-        }
-    }
-    
-    v = dict[@"counts"];
-    if([v isKindOfClass:[NSArray class]])
-    {
-        a = (NSArray *)v;
-    }
-    else if([v isKindOfClass:[UMSynchronizedArray class]])
-    {
-        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
-        a = [sa arrayCopy];
-    }
-    if(a)
-    {
-        NSInteger max = [a count];
-        if(max > UMSTATISTIC_SECONDS_MAX)
-        {
-            max = UMSTATISTIC_SECONDS_MAX;
-        }
-        for(NSInteger i=0;i<max;i++)
-        {
-            _secondsDataCount[i] = [a[i] longValue];
-        }
-    }
-    
-    
-    v = dict[@"max-values"];
-    if([v isKindOfClass:[NSArray class]])
-    {
-        a = (NSArray *)v;
-    }
-    else if([v isKindOfClass:[UMSynchronizedArray class]])
-    {
-        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
-        a = [sa arrayCopy];
-    }
-    if(a)
-    {
-        NSInteger max = [a count];
-        if(max > UMSTATISTIC_SECONDS_MAX)
-        {
-            max = UMSTATISTIC_SECONDS_MAX;
-        }
-        for(NSInteger i=0;i<max;i++)
-        {
-            _secondsDataMax[i] = [a[i] longValue];
-        }
-    }
-    
-    v = dict[@"min-values"];
-    if([v isKindOfClass:[NSArray class]])
-    {
-        a = (NSArray *)v;
-    }
-    else if([v isKindOfClass:[UMSynchronizedArray class]])
-    {
-        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
-        a = [sa arrayCopy];
-    }
-    if(a)
-    {
-        NSInteger max = [a count];
-        if(max > UMSTATISTIC_SECONDS_MAX)
-        {
-            max = UMSTATISTIC_SECONDS_MAX;
-        }
-        for(NSInteger i=0;i<max;i++)
-        {
-            _secondsDataMin[i] = [a[i] longValue];
-        }
-    }
-#endif
 }
 
 - (UMSynchronizedSortedDictionary *)minutesDict
 {
-    UMSynchronizedArray *a = [[UMSynchronizedArray alloc]init];
-    for(NSInteger i=0;i>UMSTATISTIC_MINUTES_MAX;i++)
-    {
-        [a addObject:@(_minutesData[i])];
-    }
-    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
-    dict[@"end"] = @(_minutesEndIndex);
-    dict[@"current"] = @(_currentMinutesIndex);
-    dict[@"index"] = @(_minutesIndex);
-    dict[@"max"] = @(UMSTATISTIC_MINUTES_MAX);
-    dict[@"values"] = a;
+    MAKE_DICT(dict,UMSTATISTIC_MINUTES_MAX,_minutesEndIndex,
+              _currentMinutesIndex,
+              _minutesIndex,
+              _minutesData,
+              _minutesDataCount,
+              _minutesDataMax,
+              _minutesDataMin)
     return dict;
-
 }
 
 
 - (void)setMinutesDict:(UMSynchronizedSortedDictionary *)dict
 {
-    if(dict[@"end"])
-    {
-        _minutesEndIndex = [dict[@"end"] integerValue];
-    }
-    if(dict[@"current"])
-    {
-        _currentMinutesIndex = [dict[@"current"] integerValue];
-    }
-    if(dict[@"index"])
-    {
-        _minutesIndex = [dict[@"index"] integerValue];
-    }
-    NSArray *a = NULL;
-    id v = dict[@"values"];
-    if([v isKindOfClass:[NSArray class]])
-    {
-        a = (NSArray *)v;
-    }
-    else if([v isKindOfClass:[UMSynchronizedArray class]])
-    {
-        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
-        a = [sa arrayCopy];
-    }
-
-    if(a)
-    {
-        NSInteger max = [a count];
-        if(max > UMSTATISTIC_SECONDS_MAX)
-        {
-            max = UMSTATISTIC_SECONDS_MAX;
-        }
-        for(NSInteger i=0;i<max;i++)
-        {
-            _minutesData[i] = [a[i] doubleValue];
-        }
-    }
+    SET_DICT(dict,UMSTATISTIC_MINUTES_MAX,_minutesEndIndex,
+             _currentMinutesIndex,
+             _minutesIndex,
+             _minutesData,
+             _minutesDataCount,
+             _minutesDataMax,
+             _minutesDataMin)
 }
 
 - (UMSynchronizedSortedDictionary *)hoursDict
 {
-    UMSynchronizedArray *a = [[UMSynchronizedArray alloc]init];
-    for(NSInteger i=0;i>UMSTATISTIC_HOURS_MAX;i++)
-    {
-        [a addObject:@(_hoursData[i])];
-    }
-    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
-    dict[@"end"] = @(_hoursEndIndex);
-    dict[@"current"] = @(_currentHoursIndex);
-    dict[@"index"] = @(_hoursIndex);
-    dict[@"max"] = @(UMSTATISTIC_HOURS_MAX);
-    dict[@"values"] = a;
+    MAKE_DICT(dict,UMSTATISTIC_HOURS_MAX,_hoursEndIndex,
+              _currentHoursIndex,
+              _hoursIndex,
+              _hoursData,
+              _hoursDataCount,
+              _hoursDataMax,
+              _hoursDataMin)
     return dict;
-
 }
 
 - (void)setHoursDict:(UMSynchronizedSortedDictionary *)dict
 {
-    if(dict[@"end"])
-    {
-        _hoursEndIndex = [dict[@"end"] integerValue];
-    }
-    if(dict[@"current"])
-    {
-        _currentHoursIndex = [dict[@"current"] integerValue];
-    }
-    if(dict[@"index"])
-    {
-        _hoursIndex = [dict[@"index"] integerValue];
-    }
-    NSArray *a = NULL;
-    id v = dict[@"values"];
-    if([v isKindOfClass:[NSArray class]])
-    {
-        a = (NSArray *)v;
-    }
-    else if([v isKindOfClass:[UMSynchronizedArray class]])
-    {
-        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
-        a = [sa arrayCopy];
-    }
-
-    if(a)
-    {
-        NSInteger max = [a count];
-        if(max > UMSTATISTIC_SECONDS_MAX)
-        {
-            max = UMSTATISTIC_SECONDS_MAX;
-        }
-        for(NSInteger i=0;i<max;i++)
-        {
-            _hoursData[i] = [a[i] doubleValue];
-        }
-    }
+    SET_DICT(dict,UMSTATISTIC_HOURS_MAX,_hoursEndIndex,
+              _currentHoursIndex,
+              _hoursIndex,
+              _hoursData,
+              _hoursDataCount,
+              _hoursDataMax,
+              _hoursDataMin)
 }
 
 - (UMSynchronizedSortedDictionary *)daysDict
 {
-    UMSynchronizedArray *a = [[UMSynchronizedArray alloc]init];
-    for(NSInteger i=0;i>UMSTATISTIC_DAYS_MAX;i++)
-    {
-        [a addObject:@(_daysData[i])];
-    }
-    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
-    dict[@"end"] = @(_daysEndIndex);
-    dict[@"current"] = @(_currentDaysIndex);
-    dict[@"index"] = @(_daysIndex);
-    dict[@"max"] = @(UMSTATISTIC_DAYS_MAX);
-    dict[@"values"] = a;
+    MAKE_DICT(dict,UMSTATISTIC_DAYS_MAX,_daysEndIndex,
+              _currentDaysIndex,
+              _daysIndex,
+              _daysData,
+              _daysDataCount,
+              _daysDataMax,
+              _daysDataMin)
     return dict;
 }
 
 
 - (void)setDaysDict:(UMSynchronizedSortedDictionary *)dict
 {
-    if(dict[@"end"])
-    {
-        _hoursEndIndex = [dict[@"end"] integerValue];
-    }
-    if(dict[@"current"])
-    {
-        _currentHoursIndex = [dict[@"current"] integerValue];
-    }
-    if(dict[@"index"])
-    {
-        _hoursIndex = [dict[@"index"] integerValue];
-    }
-    NSArray *a = NULL;
-    id v = dict[@"values"];
-    if([v isKindOfClass:[NSArray class]])
-    {
-        a = (NSArray *)v;
-    }
-    else if([v isKindOfClass:[UMSynchronizedArray class]])
-    {
-        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
-        a = [sa arrayCopy];
-    }
-
-    if(a)
-    {
-        NSInteger max = [a count];
-        if(max > UMSTATISTIC_HOURS_MAX)
-        {
-            max = UMSTATISTIC_HOURS_MAX;
-        }
-        for(NSInteger i=0;i<max;i++)
-        {
-            _hoursData[i] = [a[i] doubleValue];
-        }
-    }
+    SET_DICT(dict,UMSTATISTIC_DAYS_MAX,_daysEndIndex,
+              _currentDaysIndex,
+              _daysIndex,
+              _daysData,
+              _daysDataCount,
+              _daysDataMax,
+             _daysDataMin);
 }
 
 - (UMSynchronizedSortedDictionary *)weeksDict
 {
-    UMSynchronizedArray *a = [[UMSynchronizedArray alloc]init];
-    for(NSInteger i=0;i>UMSTATISTIC_WEEKS_MAX;i++)
-    {
-        [a addObject:@(_weeksData[i])];
-    }
-    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
-    dict[@"end"] = @(_weeksEndIndex);
-    dict[@"current"] = @(_currentWeeksIndex);
-    dict[@"index"] = @(_weeksIndex);
-    dict[@"max"] = @(UMSTATISTIC_WEEKS_MAX);
-    dict[@"values"] = a;
+    MAKE_DICT(dict,UMSTATISTIC_WEEKS_MAX,_weeksEndIndex,
+              _currentWeeksIndex,
+              _weeksIndex,
+              _weeksData,
+              _weeksDataCount,
+              _weeksDataMax,
+              _weeksDataMin)
     return dict;
-
 }
 
 - (void)setWeeksDict:(UMSynchronizedSortedDictionary *)dict
 {
-    if(dict[@"end"])
-    {
-        _weeksEndIndex = [dict[@"end"] integerValue];
-    }
-    if(dict[@"current"])
-    {
-        _currentWeeksIndex = [dict[@"current"] integerValue];
-    }
-    if(dict[@"index"])
-    {
-        _weeksIndex = [dict[@"index"] integerValue];
-    }
-    NSArray *a = NULL;
-    id v = dict[@"values"];
-    if([v isKindOfClass:[NSArray class]])
-    {
-        a = (NSArray *)v;
-    }
-    else if([v isKindOfClass:[UMSynchronizedArray class]])
-    {
-        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
-        a = [sa arrayCopy];
-    }
-
-    if(a)
-    {
-        NSInteger max = [a count];
-        if(max > UMSTATISTIC_WEEKS_MAX)
-        {
-            max = UMSTATISTIC_WEEKS_MAX;
-        }
-        for(NSInteger i=0;i<max;i++)
-        {
-            _weeksData[i] = [a[i] doubleValue];
-        }
-    }
+    SET_DICT(dict,UMSTATISTIC_WEEKS_MAX,_weeksEndIndex,
+              _currentWeeksIndex,
+              _weeksIndex,
+              _weeksData,
+              _weeksDataCount,
+              _weeksDataMax,
+             _weeksDataMin);
 }
+
 - (UMSynchronizedSortedDictionary *)monthsDict
 {
-    UMSynchronizedArray *a = [[UMSynchronizedArray alloc]init];
-    for(NSInteger i=0;i>UMSTATISTIC_MONTHS_MAX;i++)
-    {
-        [a addObject:@(_monthsData[i])];
-    }
-    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
-    dict[@"end"] = @(_monthsEndIndex);
-    dict[@"current"] = @(_currentMonthsIndex);
-    dict[@"index"] = @(_monthsIndex);
-    dict[@"max"] = @(UMSTATISTIC_MONTHS_MAX);
-    dict[@"values"] = a;
+    MAKE_DICT(dict,UMSTATISTIC_MONTHS_MAX,_monthsEndIndex,
+              _currentMonthsIndex,
+              _monthsIndex,
+              _monthsData,
+              _monthsDataCount,
+              _monthsDataMax,
+              _monthsDataMin)
     return dict;
-
 }
 
 - (void)setMonthsDict:(UMSynchronizedSortedDictionary *)dict
 {
-    if(dict[@"end"])
-    {
-        _monthsEndIndex = [dict[@"end"] integerValue];
-    }
-    if(dict[@"current"])
-    {
-        _currentMonthsIndex = [dict[@"current"] integerValue];
-    }
-    if(dict[@"index"])
-    {
-        _monthsIndex = [dict[@"index"] integerValue];
-    }
-    NSArray *a = NULL;
-    id v = dict[@"values"];
-    if([v isKindOfClass:[NSArray class]])
-    {
-        a = (NSArray *)v;
-    }
-    else if([v isKindOfClass:[UMSynchronizedArray class]])
-    {
-        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
-        a = [sa arrayCopy];
-    }
-
-    if(a)
-    {
-        NSInteger max = [a count];
-        if(max > UMSTATISTIC_MONTHS_MAX)
-        {
-            max = UMSTATISTIC_MONTHS_MAX;
-        }
-        for(NSInteger i=0;i<max;i++)
-        {
-            _monthsData[i] = [a[i] doubleValue];
-        }
-    }
+    SET_DICT(dict,UMSTATISTIC_MONTHS_MAX,_monthsEndIndex,
+              _currentMonthsIndex,
+              _monthsIndex,
+              _monthsData,
+              _monthsDataCount,
+              _monthsDataMax,
+              _monthsDataMin)
 }
 
 - (UMSynchronizedSortedDictionary *)yearsDict
 {
-    UMSynchronizedArray *a = [[UMSynchronizedArray alloc]init];
-    for(NSInteger i=0;i>UMSTATISTIC_YEARS_MAX;i++)
-    {
-        [a addObject:@(_yearsData[i])];
-    }
-    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
-    dict[@"end"] = @(_yearsEndIndex);
-    dict[@"current"] = @(_currentYearsIndex);
-    dict[@"index"] = @(_yearsIndex);
-    dict[@"max"] = @(UMSTATISTIC_YEARS_MAX);
-    dict[@"values"] = a;
+    MAKE_DICT(dict,UMSTATISTIC_YEARS_MAX,_yearsEndIndex,
+              _currentYearsIndex,
+              _yearsIndex,
+              _yearsData,
+              _yearsDataCount,
+              _yearsDataMax,
+              _yearsDataMin)
     return dict;
-
 }
 
 - (void)setYearsDict:(UMSynchronizedSortedDictionary *)dict
 {
-    if(dict[@"end"])
-    {
-        _yearsEndIndex = [dict[@"end"] integerValue];
-    }
-    if(dict[@"current"])
-    {
-        _currentYearsIndex = [dict[@"current"] integerValue];
-    }
-    if(dict[@"index"])
-    {
-        _yearsIndex = [dict[@"index"] integerValue];
-    }
-    NSArray *a = NULL;
-    id v = dict[@"values"];
-    if([v isKindOfClass:[NSArray class]])
-    {
-        a = (NSArray *)v;
-    }
-    else if([v isKindOfClass:[UMSynchronizedArray class]])
-    {
-        UMSynchronizedArray *sa = (UMSynchronizedArray *)v;
-        a = [sa arrayCopy];
-    }
-
-    if(a)
-    {
-        NSInteger max = [a count];
-        if(max > UMSTATISTIC_YEARS_MAX)
-        {
-            max = UMSTATISTIC_YEARS_MAX;
-        }
-        for(NSInteger i=0;i<max;i++)
-        {
-            _yearsData[i] = [a[i] doubleValue];
-        }
-    }
+    SET_DICT(dict,UMSTATISTIC_YEARS_MAX,_yearsEndIndex,
+              _currentYearsIndex,
+              _yearsIndex,
+              _yearsData,
+              _yearsDataCount,
+              _yearsDataMax,
+              _yearsDataMin)
 }
 
 - (UMSynchronizedSortedDictionary *)dictionaryValue

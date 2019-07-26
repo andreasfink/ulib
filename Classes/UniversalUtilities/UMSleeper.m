@@ -17,7 +17,7 @@
 static void socket_set_blocking(int fd, int blocking)
 {
     int flags, newflags;
-	
+
     flags = fcntl(fd, F_GETFL);
     if (blocking)
     {

@@ -7,6 +7,7 @@
 
 #import "NSDictionary+HierarchicalDescription.h"
 #import "NSString+HierarchicalDescription.h"
+#import "NSString+UMHTTP.h"
 
 @implementation NSDictionary (HiearchicalDescription)
 
@@ -26,6 +27,23 @@
 		[output appendFormat:@"%@Value: %@\n",prefix,[value hierarchicalDescriptionWithPrefix:@""]];
 	}
 	return output;
+}
+
+/* takes every string in the dictionary and does urldecode it */
+- (NSDictionary *)urldecodeStringValues
+{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+    NSArray *allKeys = [self allKeys];
+    for(id key in allKeys)
+    {
+        id value = dict[key];
+        if([value isKindOfClass:[NSString class]])
+        {
+            value = [((NSString *)value) urldecode];
+        }
+        dict[key] =value;
+    }
+    return dict;
 }
 
 @end

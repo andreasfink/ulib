@@ -41,7 +41,10 @@
         {
             value = [((NSString *)value) urldecode];
         }
-        dict[key] =value;
+        if(value)
+        {
+            dict[key] =value;
+        }
     }
     return dict;
 }

@@ -414,7 +414,6 @@
     }
 
     BOOL hasData = NO;
-    UMSerialPortError returnError = UMSerialPortError_no_error;
     if((_isOpen == NO) || (_fd < 0))
     {
         if(errPtr)
@@ -424,6 +423,7 @@
         return NO;
     }
 
+    
     struct pollfd pollfds[1];
     int ret1;
     int ret2;
@@ -447,9 +447,12 @@
 
     errno = 99;
 
+    
     [_lock lock];
     ret1 = poll(pollfds, 1, timeoutInMs);
     [_lock unlock];
+
+    UMSerialPortError returnError = UMSerialPortError_no_error;
 
     if (ret1 < 0)
     {
@@ -457,16 +460,16 @@
         /* error condition */
         if (eno != EINTR)
         {
-            ret2 = [UMSerialPort errorFromErrno:EBADF];
+            returnError = [UMSerialPort errorFromErrno:EBADF];
         }
         else
         {
-            ret2 = [UMSerialPort errorFromErrno:eno];
+            returnError = [UMSerialPort errorFromErrno:eno];
         }
     }
     else if (ret1 == 0)
     {
-        ret2 = UMSerialPortError_no_data_available;
+        returnError = UMSerialPortError_no_data_available;
     }
     else
     {
@@ -508,7 +511,10 @@
         }
         /* we get alerted by poll that something happened but no data to read.
          so we either jump out of the timeout or something bad happened which we are not catching */
-        returnError = [UMSerialPort errorFromErrno:eno];
+        else
+        {
+            returnError = [UMSerialPort errorFromErrno:eno];
+        }
     }
     if(errPtr)
     {

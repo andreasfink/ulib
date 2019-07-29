@@ -1832,7 +1832,16 @@ static int SSL_smart_shutdown(SSL *ssl)
     char		tmpAddress[256];
     int has_host = 0;
     int has_device = 0;
-    
+
+    if(_sock <0)
+    {
+        self.connectedLocalAddress = @"(closed)";
+        self.connectedRemoteAddress = @"(closed)";
+        self.connectedRemotePort = 0;
+        self.connectedLocalPort = 0;
+        return;
+    }
+
     NSString *xconnectedRemoteAddress;
     //int      xconnectedRemoteAddressType;
     int      xconnectedRemotePort=0;

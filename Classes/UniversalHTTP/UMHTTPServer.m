@@ -26,8 +26,6 @@
 
 @implementation UMHTTPServer
 
-@synthesize listenerSocket;
-
 - (id) init
 {
 	return [self initWithPort:UMHTTP_DEFAULT_PORT socketType:UMSOCKET_TYPE_TCP];
@@ -122,17 +120,17 @@
 	UMSocketError	sErr;
     self.logFeed.copyToConsole = 1;
 
-    listenerSocket.objectStatisticsName = [NSString stringWithFormat: @"UMSocket(UMHTTPServer-listener:%@)",_serverName];
+    _listenerSocket.objectStatisticsName = [NSString stringWithFormat: @"UMSocket(UMHTTPServer-listener:%@)",_serverName];
 
     @autoreleasepool
     {
 		if(self.status != UMHTTPServerStatus_notRunning)
 		{
-			[self.logFeed majorError:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d failed to start because its already started",_name, [listenerSocket requestedLocalPort]]];
+			[self.logFeed majorError:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d failed to start because its already started",_name, [_listenerSocketlistenerSocket requestedLocalPort]]];
 			return UMSocketError_generic_error;
 		}
 
-		[self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is starting up\r\n",_name, [listenerSocket requestedLocalPort]]];
+		[self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is starting up\r\n",_name, [_listenerSocket requestedLocalPort]]];
 		[_lock lock];
 
 		self.status = UMHTTPServerStatus_startingUp;
@@ -165,11 +163,11 @@
     
 	    if( self.status == UMHTTPServerStatus_running)
 	    {
-            [self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is running\n",_name, [listenerSocket requestedLocalPort]]];
+            [self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is running\n",_name, l_listenerSocket requestedLocalPort]]];
 	    }
 	    else
 	    {
-		    [self.logFeed majorError:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d failed to start due to '%@'\n",_name, [listenerSocket requestedLocalPort] ,[UMSocket getSocketErrorString:sErr]]];
+		    [self.logFeed majorError:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d failed to start due to '%@'\n",_name, [_listenerSocket requestedLocalPort] ,[UMSocket getSocketErrorString:sErr]]];
 	    }
     }
 	return sErr;
@@ -199,7 +197,7 @@
         int counter = 0;
         while(counter < 60)
         {
-            sErr  = [listenerSocket bind];
+            sErr  = [_listenerSocket bind];
             if(sErr != UMSocketError_address_already_in_use)
             {
                 break;
@@ -209,7 +207,7 @@
         }
 		if(!sErr)
         {
-			sErr  = [listenerSocket listen];
+			sErr  = [_listenerSocket listen];
         }
 		if(sErr == UMSocketError_no_error)
         {
@@ -223,10 +221,10 @@
         
         if([_advertizeName length]>0)
         {
-            listenerSocket.advertizeDomain=@"";
-            listenerSocket.advertizeName=_advertizeName;
-            listenerSocket.advertizeType=@"_http._tcp";
-            [listenerSocket publish];
+            _listenerSocket.advertizeDomain=@"";
+            _listenerSocket.advertizeName=_advertizeName;
+            _listenerSocket.advertizeType=@"_http._tcp";
+            [_listenerSocket publish];
         }
 		[_sleeper wakeUp];
 		
@@ -235,7 +233,7 @@
             @autoreleasepool
             {
                 //NSLog(@"_receivePollTimeoutMs=%ld",_receivePollTimeoutMs);
-                pollResult = [listenerSocket dataIsAvailable:_receivePollTimeoutMs];
+                pollResult = [_listenerSocket dataIsAvailable:_receivePollTimeoutMs];
                 if(pollResult == UMSocketError_has_data_and_hup)
                 {
                     NSLog(@"  UMSocketError_has_data_and_hup");
@@ -247,7 +245,7 @@
                 {
                     /* we get new HTTP request */
                     UMSocketError ret1=UMSocketError_no_error;
-                    UMSocket *clientSocket = [listenerSocket accept:&ret1];
+                    UMSocket *clientSocket = [_listenerSocket accept:&ret1];
                     if(clientSocket)
                     {
                         clientSocket.useSSL=_enableSSL;
@@ -308,8 +306,8 @@
 			}
 		}
         self.status = UMHTTPServerStatus_shutDown;
-        [listenerSocket unpublish];
-		[listenerSocket close];
+        [_listenerSocket unpublish];
+		[_listenerSocket close];
 		_listenerRunning = NO;
     }
 }
@@ -328,7 +326,7 @@
 
 - (void) stop
 {
-	[self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is stopping\r\n",_name, [listenerSocket requestedLocalPort]]];
+	[self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is stopping\r\n",_name, [_listenerSocket requestedLocalPort]]];
     
     if((self.status !=UMHTTPServerStatus_running) && (_listenerRunning!=YES))
     {
@@ -341,7 +339,7 @@
 	}
 	self.status = UMHTTPServerStatus_notRunning;
     
-    [self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is stopped\r\n",_name, [listenerSocket requestedLocalPort]]];
+    [self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is stopped\r\n",_name, [_listenerSocket requestedLocalPort]]];
 }
 
 

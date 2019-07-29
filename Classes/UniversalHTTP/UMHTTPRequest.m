@@ -675,6 +675,8 @@
     }
     NSData *resp = [self extractResponse];
     [connection.socket sendData:resp];
+    connection.currentRequest = NULL; /* our answer is complete */
+
     if(connection.mustClose)
     {
 #ifdef HTTP_DEBUG

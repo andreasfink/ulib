@@ -264,15 +264,15 @@
                             con.server = self;
 
                             [_connections addObject:con];
-                            if(1)
-                            {
-                                [con runSelectorInBackground:@selector(connectionListener)];
-                            }
-                            else
-                            {
+                            //if(0)
+                            //{
+                            //    [con runSelectorInBackground:@selector(connectionListener)];
+                            //}
+                            //else
+                            //{
                                 UMHTTPTask_ReadRequest *task = [[UMHTTPTask_ReadRequest alloc]initWithConnection:con];
                                 [_taskQueue queueTask:task];
-                            }
+                            //}
                             con = nil;
                         }
 					    else

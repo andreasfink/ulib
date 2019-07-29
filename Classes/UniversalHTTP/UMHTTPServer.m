@@ -126,7 +126,7 @@
     {
 		if(self.status != UMHTTPServerStatus_notRunning)
 		{
-			[self.logFeed majorError:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d failed to start because its already started",_name, [_listenerSocketlistenerSocket requestedLocalPort]]];
+			[self.logFeed majorError:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d failed to start because its already started",_name, [_listenerSocket requestedLocalPort]]];
 			return UMSocketError_generic_error;
 		}
 
@@ -163,7 +163,7 @@
     
 	    if( self.status == UMHTTPServerStatus_running)
 	    {
-            [self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is running\n",_name, l_listenerSocket requestedLocalPort]]];
+            [self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is running\n",_name, [_listenerSocket requestedLocalPort]]];
 	    }
 	    else
 	    {

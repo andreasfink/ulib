@@ -55,6 +55,7 @@
 	{
         [lastRequestId_lock lock];
         _requestId = ++lastRequestId;
+        _completionTimeout = [NSDate dateWithTimeIntervalSinceNow:120];
         [lastRequestId_lock unlock];
         responseCode=HTTP_RESPONSE_CODE_OK;
         self.awaitingCompletion = NO;

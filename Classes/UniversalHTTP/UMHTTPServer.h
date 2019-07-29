@@ -105,25 +105,25 @@ typedef enum UMHTTPServerStatus
 
 @interface UMHTTPServer : UMObject
 {
-	UMSocket			*listenerSocket;		/* this is the main listener socket */
+	UMSocket			*_listenerSocket;		/* this is the main listener socket */
 
-	UMSynchronizedArray		*connections;			/*!< list of UMHTTPConnection objects containing the corresponding reading sockets */
-	UMSynchronizedArray		*terminatedConnections;	/*!< list of UMHTTPConnection objects containing the corresponding reading sockets */
-	NSString			*serverName;			/*!< WebServer HTTP Server: name */
+	UMSynchronizedArray	*_connections;			/*!< list of UMHTTPConnection objects containing the corresponding reading sockets */
+	UMSynchronizedArray	*_terminatedConnections;	/*!< list of UMHTTPConnection objects containing the corresponding reading sockets */
+	NSString			*_serverName;			/*!< WebServer HTTP Server: name */
 
-	NSLock				*lock;
-    NSLock              *sslLock;
-	UMSleeper			*sleeper;
+	NSLock				*_lock;
+    NSLock              *_sslLock;
+	UMSleeper			*_sleeper;
 
 	UMHTTPServerStatus	_status;
-	UMSocketError		lastErr;
-	BOOL				listenerRunning;
-	NSMutableDictionary *getPostDict;
-	NSOperationQueue	*httpOperationsQueue;
-	NSString            *name;
+	UMSocketError		_lastErr;
+	BOOL				_listenerRunning;
+	NSMutableDictionary *_getPostDict;
+	NSOperationQueue	*_httpOperationsQueue;
+	NSString            *_name;
     int                 _receivePollTimeoutMs;
-    NSString            *advertizeName;
-    BOOL                enableSSL;
+    NSString            *_advertizeName;
+    BOOL                _enableSSL;
     BOOL                _enableKeepalive;
 
     UMTaskQueue         *_taskQueue;
@@ -131,33 +131,33 @@ typedef enum UMHTTPServerStatus
 	// the delegates for authorisation
 	//
 	
-	id	<UMHTTPServerAuthorizeConnectionDelegate>	authorizeConnectionDelegate; /*!< this delegate gets called upon a new incoming connection to verify if the calling IP is allowed to connect. */
-	id	<UMHTTPServerAuthenticateRequestDelegate>	authenticateRequestDelegate;
+	id	<UMHTTPServerAuthorizeConnectionDelegate>	_authorizeConnectionDelegate; /*!< this delegate gets called upon a new incoming connection to verify if the calling IP is allowed to connect. */
+	id	<UMHTTPServerAuthenticateRequestDelegate>	_authenticateRequestDelegate;
 
 	//
 	// delegates for HTTP methods
 	//
-	id	<UMHTTPServerHttpOptionsDelegate>	httpOptionsDelegate;
-	id	<UMHTTPServerHttpGetDelegate>		httpGetDelegate;
-	id	<UMHTTPServerHttpHeadDelegate>		httpHeadDelegate;
-	id	<UMHTTPServerHttpPostDelegate>		httpPostDelegate;
-	id	<UMHTTPServerHttpPutDelegate>		httpPutDelegate;
-	id	<UMHTTPServerHttpDeleteDelegate>	httpDeleteDelegate;
-	id	<UMHTTPServerHttpTraceDelegate>		httpTraceDelegate;
-	id	<UMHTTPServerHttpConnectDelegate>	httpConnectDelegate;
-	id	<UMHTTPServerHttpGetPostDelegate>	httpGetPostDelegate;
+	id	<UMHTTPServerHttpOptionsDelegate>	_httpOptionsDelegate;
+	id	<UMHTTPServerHttpGetDelegate>		_httpGetDelegate;
+	id	<UMHTTPServerHttpHeadDelegate>		_httpHeadDelegate;
+	id	<UMHTTPServerHttpPostDelegate>		_httpPostDelegate;
+	id	<UMHTTPServerHttpPutDelegate>		_httpPutDelegate;
+	id	<UMHTTPServerHttpDeleteDelegate>	_httpDeleteDelegate;
+	id	<UMHTTPServerHttpTraceDelegate>		_httpTraceDelegate;
+	id	<UMHTTPServerHttpConnectDelegate>	_httpConnectDelegate;
+	id	<UMHTTPServerHttpGetPostDelegate>	_httpGetPostDelegate;
 
-    NSString *privateKeyFile;
-    NSData *privateKeyFileData;
+    NSString *_privateKeyFile;
+    NSData *_privateKeyFileData;
 
-    NSString *certFile;
-    NSData *certFileData;
+    NSString *_certFile;
+    NSData *_certFileData;
 
-    UMSynchronizedArray *pendingRequests;
+    UMSynchronizedArray *_pendingRequests;
     UMMutex *_connectionsLock;
 }
 
-@property(readwrite,strong)		NSString *serverName;
+@property(readwrite,strong)		        NSString *serverName;
 @property(readwrite,assign,atomic)		UMHTTPServerStatus  status;
 @property(readwrite,assign,atomic)      BOOL enableKeepalive;
 

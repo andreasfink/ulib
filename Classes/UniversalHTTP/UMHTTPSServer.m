@@ -40,7 +40,7 @@
                      taskQueue:tq];
     if(self)
     {
-        enableSSL = YES;
+        _enableSSL = YES;
     }
     return self;
 }
@@ -65,7 +65,7 @@
                      taskQueue:tq];
     if(self)
     {
-        enableSSL = YES;
+        _enableSSL = YES;
     }
     return self;
 }

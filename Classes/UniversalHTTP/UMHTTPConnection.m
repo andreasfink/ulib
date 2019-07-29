@@ -185,17 +185,14 @@
             self.mustClose = YES;
         }
     }
-    if (self.mustClose)
-    {
+    /* if we get here. we must closer */
 #ifdef HTTP_DEBUG
-        NSLog(@"UMHTTPConnection [%@]: calling connectionDone",self);
+    NSLog(@"UMHTTPConnection [%@]: calling connectionDone",self);
 #endif
-        /* we're done with this thread so we must release our pool */
-        /* tell the server process to terminate and release us */
-        [_server connectionDone:self];
-    }
+    /* we're done with this thread so we must release our pool */
+    /* tell the server process to terminate and release us */
+    [_server connectionDone:self];
 }
-
 
 /* returns error if it should exit */
 - (int) checkForIncomingData:(NSMutableData *)appendToMe requestCompleted:(BOOL *)complete

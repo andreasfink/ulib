@@ -391,9 +391,6 @@ static BOOL             _machineCPUIDsLoaded = NO;
                 sdl = (struct sockaddr_dl *)ifap->ifa_addr;
                 if (sdl)
                 {
-                    /* I was returning this from a function before converting
-                     * this snippet, which is why I make a copy here on the heap */
-                //	if_mac = malloc(sdl->sdl_alen);
                     if_mac = (unsigned char *)LLADDR(sdl);
                 }
                 NSString *ifname = @(ifap->ifa_name);

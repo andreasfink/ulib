@@ -36,7 +36,7 @@
     NSArray *allKeys = [self allKeys];
     for(id key in allKeys)
     {
-        id value = dict[key];
+        id value = [self objectForKey:key];
         if([value isKindOfClass:[NSString class]])
         {
             value = [((NSString *)value) urldecode];

@@ -6,12 +6,9 @@
 //  Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/ulib.h>
+#import "UMObject.h"
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface UMTestCaseBinaryIP : UMObject
 
 @end
-
-NS_ASSUME_NONNULL_END

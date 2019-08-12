@@ -328,8 +328,20 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
         NSString *part2 = [line substringFromIndex:r.location+1];
         part1 = [part1 stringByTrimmingCharactersInSet:whitespace];
         part1 = [part1 lowercaseString];
-        part2 = [part2 stringByTrimmingCharactersInSet:whitespace];
-        part2 = [part2 stringByTrimmingCharactersInSet:quotes];
+        NSInteger n = part1.length;
+        if(   ([part1 characterAtIndex:0] == '[')
+           && ([part1 characterAtIndex:n-1] == ']'))
+        {
+            /* this is windows ini file style  [groupname] */
+            part2 = [part1 substringWithRange:NSMakeRange(1,n-2)];
+            part1 = @"group";
+        }
+        else
+        {
+            /* this is command option or kannel style group = groupname */
+            part2 = [part2 stringByTrimmingCharactersInSet:whitespace];
+            part2 = [part2 stringByTrimmingCharactersInSet:quotes];
+        }
         if([part1 isEqualToString:@"group"])
         {
             /*

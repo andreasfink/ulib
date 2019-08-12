@@ -26,11 +26,23 @@
  
  include "some-other-config-file"
 
- group = config-group name
+ group = group1
  param = value
  param2 = value2
 
  group = group2
+ param = value
+ param2 = value2
+
+ alternative syntax (windows.ini file style)
+ 
+ include "some-other-config-file"
+ 
+[group1]
+ param = value
+ param2 = value2
+ 
+[group2]
  param = value
  param2 = value2
 

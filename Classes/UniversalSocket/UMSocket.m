@@ -1634,8 +1634,8 @@ static int SSL_smart_shutdown(SSL *ssl)
     UMSocketError ret;
     ssize_t actualReadBytes = 0;
 	unsigned char chunk[UMBLOCK_READ_SIZE];
-    
-    *toData = nil;
+
+    //*toData = nil;
     int eno = 0;
 
     if ([receiveBuffer length] == 0)
@@ -1665,10 +1665,8 @@ static int SSL_smart_shutdown(SSL *ssl)
             ret = [UMSocket umerrFromErrno:eno];
             return ret;
         }
-    }
-    
-
-    *toData = [[receiveBuffer subdataWithRange:NSMakeRange(0, [receiveBuffer length])] mutableCopy];
+    }    
+    *toData = [receiveBuffer subdataWithRange:NSMakeRange(0, [receiveBuffer length])];
     [receiveBuffer replaceBytesInRange:NSMakeRange(0, [receiveBuffer length]) withBytes:nil length:0];
     receivebufpos = 0;
         

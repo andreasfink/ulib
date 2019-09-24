@@ -131,7 +131,19 @@
 #ifdef HTTP_DEBUG
             NSLog(@"[%@]: data present",self.name);
 #endif
-            err = [_socket receiveEverythingTo:&appendToMe];
+            NSData *incomingData = NULL;
+            err = [_socket receiveEverythingTo:&incomingData];
+            if(incomingData.length>0)
+            {
+                if( appendToMe== NULL)
+                {
+                    appendToMe = [incomingData mutableCopy];
+                }
+                else
+                {
+                    [appendToMe appendData:incomingData];
+                }
+            }
             if(err != UMSocketError_no_error)
             {
 #ifdef HTTP_DEBUG

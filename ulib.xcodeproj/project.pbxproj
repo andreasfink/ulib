@@ -1451,8 +1451,8 @@
 		A6419BB81A2DF2FD0090FC94 /* UMMicroSec.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */; };
 		A6419BB91A2DF2FD0090FC94 /* UMMicroSec.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */; };
 		A657274C1B1869AA00854472 /* UMSynchronizedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A65727461B1869AA00854472 /* UMSynchronizedDictionary.m */; };
-		A661AB4220669EB100B0CD50 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; };
-		A661AB4320669EB100B0CD50 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; };
+		A661AB4220669EB100B0CD50 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A661AB4320669EB100B0CD50 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A663F34821532D4100072BAA /* UMProtocolBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A663F34621532D4100072BAA /* UMProtocolBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A663F34921532D4100072BAA /* UMProtocolBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = A663F34721532D4100072BAA /* UMProtocolBuffer.m */; };
 		A663F34A21532D5D00072BAA /* UMProtocolBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A663F34621532D4100072BAA /* UMProtocolBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2155,7 +2155,7 @@
 		A6F1E32F187D935600AD2F85 /* UMRedisStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E329187D935600AD2F85 /* UMRedisStatus.m */; };
 		A6F8755020BC327A0086FBA1 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BC45B92077758C008C3CEB /* libcrypto.a */; };
 		A6F8755120BC327A0086FBA1 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BC45BE2077758C008C3CEB /* libssl.a */; };
-		A6FA420620694B3800849F7F /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; };
+		A6FA420620694B3800849F7F /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D8AB0C149A769B0029E9CF /* Foundation.framework */; };
 		A6FFFC811B9D73F900C331B0 /* NSString+UMSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A6FFFC7D1B9D716C00C331B0 /* NSString+UMSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -18422,6 +18422,7 @@
 						ProvisioningStyle = Automatic;
 					};
 					A60C4C931EF7FE59007C203A = {
+						DevelopmentTeam = 2GSNWPNR77;
 						ProvisioningStyle = Automatic;
 					};
 					A6AC49531D460987002BAA97 = {
@@ -19956,8 +19957,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
@@ -19993,8 +19995,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
@@ -20270,7 +20273,10 @@
 				DYLIB_CURRENT_VERSION = 1.5.1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"/Library/Application Support/FinkTelecomServices/frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"/Library/Application Support/FinkTelecomServices/frameworks\"",
+					"\"/Library/Frameworks\"",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -20339,7 +20345,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1.5.1;
 				DYLIB_CURRENT_VERSION = 1.5.1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"/Library/Application Support/FinkTelecomServices/frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"/Library/Application Support/FinkTelecomServices/frameworks\"",
+					"\"/Library/Frameworks\"",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;

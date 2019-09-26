@@ -227,7 +227,7 @@
 			n -= removeLen;
 
 			line = [line stringByTrimmingCharactersInSet:whitespace];
-			if([line isEqual:@""])
+            if((line==NULL) || (line.length == 0) || ([line isEqual:@""]))
 			{
 				cSection=UMHTTPConnectionRequestSectionData;
 				break;

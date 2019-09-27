@@ -13,5 +13,6 @@
 - (NSString *)hierarchicalDescriptionWithPrefix:(NSString *)prefix; /*!< convert a NSDictionary to a string in a human readable fashion with identation (prefix) being properly handled */
 
 - (NSDictionary *)urldecodeStringValues;
+
 /* takes every string in the dictionary and does urldecode it */
 @end

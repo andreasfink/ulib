@@ -74,6 +74,7 @@
     {
         NSLog(@"Can not open plugin. dlopen fails: %@",_filename);
         _error = @(dlerror());
+        NSLog(@"dlerror = %@",_error);
         return -1;
     }
 

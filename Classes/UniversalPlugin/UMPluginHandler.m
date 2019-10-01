@@ -29,6 +29,11 @@
 
 - (int) open
 {
+    return [self openWithDictionary:@{}];
+}
+
+- (int) openWithDictionary:(NSDictionary *)dict
+{
     struct stat sinfo;
     int e = stat(_filename.UTF8String, &sinfo);
     if(e<0)
@@ -107,7 +112,7 @@
 
     if(plugin_init_func)
     {
-        int e = (*plugin_init_func)();
+        int e = (*plugin_init_func)(dict);
         if(e)
         {
             _error = [NSString stringWithFormat:@"plugin_init() returned %d",e];

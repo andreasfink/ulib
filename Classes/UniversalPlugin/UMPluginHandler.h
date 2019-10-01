@@ -22,7 +22,7 @@
     NSUInteger _instanceCount;
     UMSynchronizedArray *instances;
 
-    int (* plugin_init_func)(void);
+    int (* plugin_init_func)(NSDictionary *dict);
     int (* plugin_exit_func)(void);
     UMPlugin * (* plugin_create_func)(void);
     NSString * (* plugin_name_func)(void);
@@ -37,6 +37,7 @@
 
 - (UMPluginHandler *)initWithFile:(NSString *)filename;
 - (int)open;
+- (int) openWithDictionary:(NSDictionary *)dict;
 - (int)close;
 - (UMPlugin *)instantiate;
 - (void)destroy:(UMPlugin *)plugin;

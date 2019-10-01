@@ -13,11 +13,11 @@
 
 @interface UMPluginHandler : UMObject
 {
-    NSString *_filename;
-    void *_dlhandle;
-    NSString *_error;
-    NSString *_name;
-    NSDictionary *_info;
+    NSString        *_filename;
+    void            *_dlhandle;
+    NSString        *_error;
+    NSString        *_name;
+    NSDictionary    *_info;
 
     NSUInteger _instanceCount;
     UMSynchronizedArray *instances;

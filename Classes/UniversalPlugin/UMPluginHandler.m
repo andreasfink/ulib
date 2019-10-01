@@ -34,11 +34,13 @@
     if(e<0)
     {
         _error = @(strerror(errno));
+        NSLog(@"Can not open plugin. stat() fails on filename: %@",_filename);
         return -1;
     }
 
     if(S_ISDIR(sinfo.st_mode))
     {
+        /* its a directory */
         NSString *dir = _filename;
         NSString *name = [[_filename lastPathComponent] stringByDeletingPathExtension];
 #if defined(__APPLE__)
@@ -56,17 +58,21 @@
         if(e<0)
         {
             _error = @(strerror(errno));
+            NSLog(@"Can not open plugin. stat() fails on filename: %@",_filename);
             return -1;
         }
     }
     if(!S_ISREG(sinfo.st_mode))
     {
+
+        NSLog(@"Can not open plugin. not regular file: %@",_filename);
         _error = @(strerror(ENOTSUP));
     }
 
     _dlhandle = dlopen(_filename.UTF8String,RTLD_NOW | RTLD_LOCAL);
     if(_dlhandle == NULL)
     {
+        NSLog(@"Can not open plugin. dlopen fails: %@",_filename);
         _error = @(dlerror());
         return -1;
     }
@@ -80,18 +86,21 @@
     if(!plugin_create_func)
     {
         _error = @"plugin_create function not found";
+        NSLog(@"Can not open plugin. plugin_create() not present in  %@",_filename);
         return -2;
     }
 
     if(!plugin_name_func)
     {
         _error = @"plugin_name function not found";
+        NSLog(@"Can not open plugin. plugin_name() not present in  %@",_filename);
         return -2;
     }
 
     if(!plugin_info_func)
     {
         _error = @"plugin_info function not found";
+        NSLog(@"Can not open plugin. plugin_info() not present in  %@",_filename);
         return -2;
     }
 
@@ -113,6 +122,7 @@
     {
         _name = _info[@"name"];
     }
+
     return 0;
 }
 

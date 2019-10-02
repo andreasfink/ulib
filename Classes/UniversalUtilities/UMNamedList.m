@@ -25,7 +25,7 @@
     if(self)
     {
         _entries = [[NSMutableDictionary alloc]init];
-        _lock  = [[UMMutex alloc]init];
+        _lock  = [[UMMutex alloc]initWithName:@"UMNamedList-lock"];
         _path = path;
         _name = name;
     }

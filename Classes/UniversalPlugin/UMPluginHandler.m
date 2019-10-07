@@ -134,17 +134,24 @@
 
 - (int) close
 {
-    return(*plugin_exit_func)();
+    if(plugin_exit_func)
+    {
+        return(*plugin_exit_func)();
+    }
+    return -1;
 }
 
 
 - (UMPlugin *)instantiate
 {
-    _instanceCount++;
-    UMPlugin *plugin = (* plugin_create_func)();
-
-    [instances addObject:plugin];
-    return plugin;
+    if(plugin_create_func)
+    {
+        _instanceCount++;
+        UMPlugin *plugin = (* plugin_create_func)();
+        [instances addObject:plugin];
+        return plugin;
+    }
+    return NULL;
 }
 
 - (void)destroy:(UMPlugin *)plugin

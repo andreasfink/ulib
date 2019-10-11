@@ -101,28 +101,6 @@
     }
 }
 
-- (void)stripBlanks
-{
-    int start = 0, end, len = 0;
-    
-    /* Remove white space from the beginning of the text */
-    while ([self blankAtBeginning:start])
-        start++;
-    
-    if (start > 0)
-        [self deleteCharactersInRange:NSMakeRange(0, start)];
-    
-    /* and from the end. */
-    
-    if ((len = (int)[self length]) > 0)
-    {
-        end = len = len - 1;
-        while ([self blankAtEnd:end])
-            end--;
-        
-        [self deleteCharactersInRange:NSMakeRange(end + 1, len - end)];
-    }
-}
 
 - (void)stripQuotes
 {

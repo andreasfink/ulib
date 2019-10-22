@@ -17,7 +17,7 @@
 + (NSDictionary *)info;
 + (NSString *)name;
 - (NSDictionary *)config;
-- (void)setConfig:(NSDictionary *)cfg;
+- (int)setConfig:(NSDictionary *)cfg; /* returns 0 on Success */
 - (void)configUpdate;
 
 @end

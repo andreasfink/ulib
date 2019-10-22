@@ -16,12 +16,14 @@
     BOOL humanReadable;
     BOOL sortKeys;
     SEL sortKeysSelector;
+    BOOL _useJavaScriptKeyNames;
 }
 
 @property NSUInteger maxDepth;
 @property (readwrite, strong) NSString *error;
 @property BOOL humanReadable;
 @property BOOL sortKeys;
+@property BOOL useJavaScriptKeyNames;
 @property (readwrite,assign) SEL sortKeysSelector;
 
 - (NSString*)stringWithObject:(id)value;

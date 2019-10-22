@@ -73,7 +73,7 @@
 	streamWriter.sortKeysSelector = self.sortKeysSelector;
 	streamWriter.humanReadable = self.humanReadable;
     streamWriter.delegate = accumulator;
-	
+    streamWriter.useJavaScriptKeyNames = self.useJavaScriptKeyNames;
 	BOOL ok = NO;
     if ([object isKindOfClass:[NSString class]])
     {

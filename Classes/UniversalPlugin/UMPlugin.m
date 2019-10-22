@@ -34,10 +34,11 @@
     return [_config copy];
 }
 
-- (void)setConfig:(NSDictionary *)cfg
+- (int)setConfig:(NSDictionary *)cfg /* returns 0 on Success */
 {
     _config = cfg;
     [self configUpdate];
+    return 0;
 }
 
 

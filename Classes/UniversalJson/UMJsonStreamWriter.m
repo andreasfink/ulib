@@ -89,10 +89,24 @@ static NSNumber *kNegativeInfinity;
 			return NO;
 		}
 
-		if (![self writeString:k])
-			return NO;
+        if(_useJavaScriptKeyNames)
+        {
+            if (![self writeKeyName:k])
+            {
+                return NO;
+            }
+        }
+        else
+        {
+            if (![self writeString:k])
+            {
+                return NO;
+            }
+        }
 		if (![self writeValue:[dict objectForKey:k]])
+        {
 			return NO;
+        }
 	}
 	return [self writeObjectClose];
 }
@@ -426,6 +440,57 @@ static const char *strForChar(int c)
 	}
 	NSLog(@"TUTTUTTUT: -->'%c'<---", c);
 	return "TUTTUTTUT";
+}
+
+/* writeKeyName differs from writeString in the sense that it does not put quotes around it.
+   this is to write a JavaScript object instead of a json object.
+
+ */
+- (BOOL)writeKeyName:(NSString*)string
+{
+    if ([state isInvalidState:self])
+    {
+        return NO;
+    }
+    [state appendSeparator:self];
+    if (humanReadable)
+    {
+        [state appendWhitespace:self];
+    }
+    NSMutableData *buf = [cache objectForKey:string];
+    if (!buf)
+    {
+        NSUInteger len = [string lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+        const char *utf8 = [string UTF8String];
+        NSUInteger written = 0, i = 0;
+
+        buf = [NSMutableData dataWithCapacity:(NSUInteger)(len * 1.1f)];
+        for (i = 0; i < len; i++)
+        {
+            int c = utf8[i];
+            BOOL isControlChar = c >= 0 && c < 32;
+            if (isControlChar || c == '"' || c == '\\')
+            {
+                if (i - written)
+                {
+                    [buf appendBytes:utf8 + written length:i - written];
+                }
+                written = i + 1;
+
+                const char *t = strForChar(c);
+                [buf appendBytes:t length:strlen(t)];
+            }
+        }
+        if (i - written)
+        {
+            [buf appendBytes:utf8 + written length:i - written];
+        }
+        [cache setObject:buf forKey:string];
+    }
+
+    [delegate writer:self appendBytes:[buf bytes] length:[buf length]];
+    [state transitionState:self];
+    return YES;
 }
 
 - (BOOL)writeString:(NSString*)string

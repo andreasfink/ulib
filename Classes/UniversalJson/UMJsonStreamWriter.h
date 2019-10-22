@@ -36,7 +36,7 @@
     BOOL sortKeys;
     SEL sortKeysSelector;
     NSString *error;
-
+    BOOL _useJavaScriptKeyNames;
 }
 
 @property (nonatomic, strong) UMJsonStreamWriterState *state;
@@ -47,6 +47,7 @@
 @property BOOL sortKeys;
 @property (readwrite,assign) SEL sortKeysSelector;
 @property (readwrite,strong) NSString *error;
+@property (readwrite,assign) BOOL useJavaScriptKeyNames; /* if set, will not put quotes around the key */
 
 - (BOOL)writeObject:(NSDictionary*)dict;
 - (BOOL)writeSortedDictionary:(UMSynchronizedSortedDictionary *)dict;
@@ -59,6 +60,7 @@
 - (BOOL)writeBool:(BOOL)x;
 - (BOOL)writeNumber:(NSNumber*)n;
 - (BOOL)writeString:(NSString*)s;
+- (BOOL)writeKeyName:(NSString*)string;
 @end
 
 @interface UMJsonStreamWriter (Private)

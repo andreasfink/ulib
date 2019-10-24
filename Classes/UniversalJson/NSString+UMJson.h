@@ -10,4 +10,5 @@
 
 @interface NSString (UMJson)
 - (NSString *)jsonString;
+- (NSString *)jsonCompactString;
 @end

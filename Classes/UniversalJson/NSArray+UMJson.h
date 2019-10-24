@@ -10,4 +10,5 @@
 
 @interface NSArray (UMJson)
 - (NSString *)jsonString;
+- (NSString *)jsonCompactString;
 @end

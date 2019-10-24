@@ -41,4 +41,7 @@
 - (void) unlock;
 - (void) flush;
 
+- (NSString *)jsonCompactString;
+- (NSString *)jsonString;
+
 @end

@@ -252,6 +252,7 @@
 				_currentRequest.path = path;
 				_currentRequest.protocolVersion = protocol;
                 _currentRequest.connection = self;
+                _currentRequest.documentRoot = _server.documentRoot;
 				cSection=UMHTTPConnectionRequestSectionHeaderLine;
 				continue;
 			}

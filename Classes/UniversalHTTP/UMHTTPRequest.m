@@ -18,6 +18,7 @@
 #import "UMHTTPTask_ReadRequest.h"
 #import "UMTaskQueue.h"
 #import "UMSynchronizedArray.h"
+#import "NSString+UniversalObject.h"
 
 @implementation UMHTTPRequest
 
@@ -346,6 +347,11 @@
 - (void)setResponseTypeJson
 {
     [self setResponseHeader:@"Content-Type" withValue:@"application/json"];
+}
+
+- (void)setResponseTypeBinary
+{
+    [self setResponseHeader:@"Content-Type" withValue:@"application/octet-stream"];
 }
 
 
@@ -695,5 +701,39 @@
 }
 
 
-
+- (void)setMimeTypeFromExtension:(NSString *)extension
+{
+    if([extension isEqualToStringCaseInsensitive:@"html"])
+    {
+        [self setResponseTypeHtml];
+    }
+    else if([extension isEqualToStringCaseInsensitive:@"txt"])
+    {
+        [self setResponseTypeText];
+    }
+    else if([extension isEqualToStringCaseInsensitive:@"png"])
+    {
+        [self setResponseTypePng];
+    }
+    else if([extension isEqualToStringCaseInsensitive:@"css"])
+    {
+        [self setResponseTypeCss];
+    }
+    else if([extension isEqualToStringCaseInsensitive:@"jpeg"])
+    {
+        [self setResponseTypeJpeg];
+    }
+    else if([extension isEqualToStringCaseInsensitive:@"gif"])
+    {
+        [self setResponseTypeGif];
+    }
+    else if([extension isEqualToStringCaseInsensitive:@"json"])
+    {
+        [self setResponseTypeJson];
+    }
+    else
+    {
+        [self setResponseTypeBinary];
+    }
+}
 @end

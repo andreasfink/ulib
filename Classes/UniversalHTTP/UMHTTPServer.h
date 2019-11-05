@@ -155,6 +155,7 @@ typedef enum UMHTTPServerStatus
 
     UMSynchronizedArray *_pendingRequests;
     UMMutex *_connectionsLock;
+    NSString    *_documentRoot;
 }
 
 @property(readwrite,strong)		        NSString *serverName;
@@ -181,6 +182,7 @@ typedef enum UMHTTPServerStatus
 @property(readwrite, strong)	id	<UMHTTPServerHttpGetPostDelegate>	httpGetPostDelegate;
 @property(readwrite, strong)    NSString *name;
 @property(readwrite, strong)    NSString *advertizeName;
+@property(readwrite, strong)    NSString *documentRoot;
 
 
 @property(readonly)				UMSocket	*listenerSocket;

@@ -23,5 +23,6 @@
 - (NSTimeInterval)age;
 - (void)touch;
 - (UMAtomicDate *)copyWithZone:(NSZone *)zone;
+-(id)proxyForJson;
 
 @end

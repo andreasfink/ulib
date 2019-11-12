@@ -588,6 +588,10 @@
     UMJsonWriter *writer = [[UMJsonWriter alloc]init];
     writer.humanReadable = YES;
     NSString *string =  [writer stringWithObject:content];
+    if((string.length == 0) && (writer.error.length > 0))
+    {
+        string = writer.error;
+    }
     [self setResponseData:[string dataUsingEncoding:NSUTF8StringEncoding]];
 }
 

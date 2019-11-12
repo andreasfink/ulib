@@ -7,6 +7,7 @@
 //
 
 #import "UMAtomicDate.h"
+#import "NSDate+stringFunctions.h"
 
 @implementation UMAtomicDate
 
@@ -97,5 +98,12 @@
     [_mutex unlock];
     return s;
 }
+
+
+- (id)proxyForJson
+{
+    return [_date stringValue];
+}
+
 @end
 

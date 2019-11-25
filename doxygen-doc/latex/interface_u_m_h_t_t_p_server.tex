@@ -1,0 +1,703 @@
+\hypertarget{interface_u_m_h_t_t_p_server}{}\doxysection{U\+M\+H\+T\+T\+P\+Server Class Reference}
+\label{interface_u_m_h_t_t_p_server}\index{UMHTTPServer@{UMHTTPServer}}
+
+
+\mbox{\hyperlink{interface_u_m_h_t_t_p_server}{U\+M\+H\+T\+T\+P\+Server}} is a builtin webserver.  
+
+
+
+
+{\ttfamily \#import $<$U\+M\+H\+T\+T\+P\+Server.\+h$>$}
+
+Inheritance diagram for U\+M\+H\+T\+T\+P\+Server\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{interface_u_m_h_t_t_p_server}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a520ace0cad4976bda1f76a3b47418206}{init}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a3b4fc2225aeaba2c4f874dda85657529}{init\+With\+Port\+:}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_acc7bfb6bc3175a8a1990f90b1f428027}{init\+With\+Port\+:socket\+Type\+:}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a11187b91e4893062c2d5090e1bb549ac}{init\+With\+Port\+:socket\+Type\+:ssl\+:ssl\+Key\+File\+:ssl\+Cert\+File\+:}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a9b2ed58fb763343d46d5de1fefef0108}{init\+With\+Port\+:socket\+Type\+:ssl\+:ssl\+Key\+File\+:ssl\+Cert\+File\+:task\+Queue\+:}}
+\item 
+(\mbox{\hyperlink{_u_m_socket_defs_8h_aa2f7e70e43be716e884e046a7083f70b}{U\+M\+Socket\+Error}}) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ac86cdb04a481bf4b5522a8cadb976254}{start}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aa731bf401981cafaf705ab39c5a61ef7}{main\+Listener}}
+\item 
+(\mbox{\hyperlink{_u_m_h_t_t_p_server_authorize_result_8h_ac158190b8ea33463762e8fca208ec896}{U\+M\+H\+T\+T\+P\+Server\+Authorize\+Result}}) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ae2d8cdf4c9f5922d411aff640f240f89}{authorize\+Connection\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a64d439e957b9f879bd61f1534da1ec05}{stop}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_acd454e5aac62b3d3a61142b4ed701ac6}{connection\+Done\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a50702807a3ce631b5e9b25f4a9e4d3b5}{http\+Options\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a91668d93154eb2bc9595eab881fbe1d0}{http\+Get\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a52366d4618a2fcc0b6a3150116247d89}{http\+Head\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a58d9df08328435df2d94d63da7327278}{http\+Post\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a09d07a22812d49615dc790b7f0e7012d}{http\+Put\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ac314af965e839ca9f383411c6cbf725c}{http\+Delete\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a9d85fb65b0ac941062bff816e0632e59}{http\+Trace\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a85f46e17c9de3ff18a07a0cef4d89ccd}{http\+Connect\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a9c50009857a9630b49cd1afcd2322d01}{http\+Get\+Post\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_abb9837b34250d7627178be7758cc011f}{http\+Unknown\+Method\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a24e55bdfc74ebedf1616ca63ef1af906}{add\+Page\+Handler\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a25dcc3385f4b05da250af7c6796f32e7}{set\+Private\+Key\+File\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a8e4e7eaa25eabdfd7f4115950fc97b1a}{set\+Certificate\+File\+:}}
+\item 
+(\mbox{\hyperlink{_u_m_h_t_t_p_authentication_status_8h_ab8f0ab52a15088f5430c2a48d897e341}{U\+M\+H\+T\+T\+P\+Authentication\+Status}}) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a6ec96d570e3b0ca25feda16b6b09ba0b}{http\+Authenticate\+Request\+:realm\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_u_m_socket}{U\+M\+Socket}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a5fc41a4db75c5a2027e6955d6db9a221}{\+\_\+listener\+Socket}}
+\item 
+\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a33573ee61a89ed9109efbafd1618c051}{\+\_\+connections}}
+\item 
+\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_afcf301a1e9b6cf23c09dc1a5f5b63aa4}{\+\_\+terminated\+Connections}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aa8f7f9f625310a2c3f6f8df090392a88}{\+\_\+server\+Name}}
+\item 
+N\+S\+Lock $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a323c05aac0f3545b8a45d68e68a78160}{\+\_\+lock}}
+\item 
+N\+S\+Lock $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ae2c11d5ae9d13b435fbf26338b3e2ebc}{\+\_\+ssl\+Lock}}
+\item 
+\mbox{\hyperlink{interface_u_m_sleeper}{U\+M\+Sleeper}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a93bcff80f029bb495808890aea6442c0}{\+\_\+sleeper}}
+\item 
+\mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdb}{U\+M\+H\+T\+T\+P\+Server\+Status}} \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aadddf88c5e764ae281bcb4c619946269}{\+\_\+status}}
+\item 
+\mbox{\hyperlink{_u_m_socket_defs_8h_aa2f7e70e43be716e884e046a7083f70b}{U\+M\+Socket\+Error}} \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a1b56d34036fb31cf0f393dfaf385cff5}{\+\_\+last\+Err}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a953d5b6f18feb8d7249f3cc495d8013b}{\+\_\+listener\+Running}}
+\item 
+N\+S\+Mutable\+Dictionary $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a79b338d8c0049c73294a96d1bdc2a704}{\+\_\+get\+Post\+Dict}}
+\item 
+N\+S\+Operation\+Queue $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a2cf9858465812a6f9feda73ee08da7e1}{\+\_\+http\+Operations\+Queue}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a850777381c703a1bd52a3614db32193e}{\+\_\+name}}
+\item 
+int \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aa2cf866d4388999a0f3b9b8af06c7720}{\+\_\+receive\+Poll\+Timeout\+Ms}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a815d55a2f2109b2c185733a9d0748563}{\+\_\+advertize\+Name}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a75149e8a27c36594e8625c601e009199}{\+\_\+enable\+S\+SL}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a6dc305bdea738fde14e71768d3c4478b}{\+\_\+enable\+Keepalive}}
+\item 
+\mbox{\hyperlink{interface_u_m_task_queue}{U\+M\+Task\+Queue}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ad5e6f17d7126cf0d7ad5d43b304acae1}{\+\_\+task\+Queue}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorize_connection_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authorize\+Connection\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aa78ec917a3f4ffa3b96150bd860d6de0}{\+\_\+authorize\+Connection\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authenticate_request_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authenticate\+Request\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a1e62d87a1b22defcad4f51793f238d7e}{\+\_\+authenticate\+Request\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_options_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Options\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a6648ef37817ac8129b758b15044b20e1}{\+\_\+http\+Options\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_get_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Get\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ad7133558b275462bb9e4a6054f0c0d6c}{\+\_\+http\+Get\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_head_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Head\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a0ab70036552548df3fa341c823b111a1}{\+\_\+http\+Head\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_post_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Post\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ae2cadf8b1a6e479ad156188dfcd4039e}{\+\_\+http\+Post\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_put_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Put\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a0402b530819c1e965fdde41d6a5780ba}{\+\_\+http\+Put\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_delete_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Delete\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a8f2d29c2af3a113bb41fe1ae0e4b6dc4}{\+\_\+http\+Delete\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_trace_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Trace\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ae6b1f09c781c3a51c26c26eb3e0f5634}{\+\_\+http\+Trace\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_connect_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Connect\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ae6a3a3c843fd702e69f8d80a40f6f253}{\+\_\+http\+Connect\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_get_post_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Get\+Post\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a100af226c66536675ae9d8e2b2e78570}{\+\_\+http\+Get\+Post\+Delegate}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a300822041c2644c6c66e088ef9242aca}{\+\_\+private\+Key\+File}}
+\item 
+N\+S\+Data $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_afbf8ee9df58d34b8e040127307bce792}{\+\_\+private\+Key\+File\+Data}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a22d4893ebe8c855ca50e885878f5f31b}{\+\_\+cert\+File}}
+\item 
+N\+S\+Data $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a5b1650c1afa766cf747eb2fd0372331b}{\+\_\+cert\+File\+Data}}
+\item 
+\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a4775bf6a6a7be6e4c54b551064a1cca4}{\+\_\+pending\+Requests}}
+\item 
+\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aaae3e9639f5b64fa918831b81cbdf83a}{\+\_\+connections\+Lock}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aad707220e1f2a9fdc317735330916145}{\+\_\+document\+Root}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aeca2d8f612f9c026c3835ff39bc8c572}{server\+Name}}
+\item 
+\mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdb}{U\+M\+H\+T\+T\+P\+Server\+Status}} \mbox{\hyperlink{interface_u_m_h_t_t_p_server_af25c749153f79334ea74d5ff8c38746b}{status}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aa7b28de6b2ee7b826668f92334167b39}{enable\+Keepalive}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorize_connection_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authorize\+Connection\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ac07397827ef5d105bfe411a2e1e1d4bc}{authorize\+Connection\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authenticate_request_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authenticate\+Request\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a733dac28149e647a1dea54af3d7b4f14}{authenticate\+Request\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_options_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Options\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a9047d5afa329762765559d9d96c9be15}{http\+Options\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_get_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Get\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a2bd0ecd58fde725d8d6bbba252c75965}{http\+Get\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_head_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Head\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a902aa9b99e55da818043f6ac9ecb00c5}{http\+Head\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_post_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Post\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ad920eb19be77079f66503308dec9eaa1}{http\+Post\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_put_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Put\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ac2b2b365e4678f30fe6c48fb1f4914dd}{http\+Put\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_delete_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Delete\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_af4213e0a0bab6248ca550ef7f4ba70bc}{http\+Delete\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_trace_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Trace\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ae4b481b18f90ec8a036f65bc702b8c2f}{http\+Trace\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_connect_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Connect\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a78f18b5f35d83e5d784ffd5d5eadbc4f}{http\+Connect\+Delegate}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_get_post_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Get\+Post\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ab730cd7bd0e8893f982e1b1e9d4f8609}{http\+Get\+Post\+Delegate}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ac33e0d211d8316960e2089b33f62d066}{name}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a63a344507ef727f9af397e6e11061af5}{advertize\+Name}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a89f8eed825889c37715e163551bc7638}{document\+Root}}
+\item 
+\mbox{\hyperlink{interface_u_m_socket}{U\+M\+Socket}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a15957689af3598e16b742a9ddca83e0e}{listener\+Socket}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_h_t_t_p_server_abc562e8fd46a24a96721f474a6abe9b9}{enable\+S\+SL}}
+\item 
+\mbox{\hyperlink{interface_u_m_task_queue}{U\+M\+Task\+Queue}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ae43fcc32daa1e5e847af51b461e09c60}{task\+Queue}}
+\item 
+\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a512b984ba096843650280292fa0d3b20}{pending\+Requests}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{interface_u_m_h_t_t_p_server}{U\+M\+H\+T\+T\+P\+Server}} is a builtin webserver. 
+
+to start a webserver, instantiate \mbox{\hyperlink{interface_u_m_h_t_t_p_server}{U\+M\+H\+T\+T\+P\+Server}} and initialize it with init\+With\+Port\+:. Set its http\+Get\+Post\+Delegate to a object which will respond to the web requests and simply call the method start. 
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a24e55bdfc74ebedf1616ca63ef1af906}\label{interface_u_m_h_t_t_p_server_a24e55bdfc74ebedf1616ca63ef1af906}} 
+\index{UMHTTPServer@{UMHTTPServer}!addPageHandler:@{addPageHandler:}}
+\index{addPageHandler:@{addPageHandler:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{addPageHandler:()}{addPageHandler:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Page\+Handler\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_page_handler}{U\+M\+H\+T\+T\+P\+Page\+Handler}} $\ast$)}]{h }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ae2d8cdf4c9f5922d411aff640f240f89}\label{interface_u_m_h_t_t_p_server_ae2d8cdf4c9f5922d411aff640f240f89}} 
+\index{UMHTTPServer@{UMHTTPServer}!authorizeConnection:@{authorizeConnection:}}
+\index{authorizeConnection:@{authorizeConnection:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{authorizeConnection:()}{authorizeConnection:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_h_t_t_p_server_authorize_result_8h_ac158190b8ea33463762e8fca208ec896}{U\+M\+H\+T\+T\+P\+Server\+Authorize\+Result}}) authorize\+Connection\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_socket}{U\+M\+Socket}} $\ast$)}]{socket }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_acd454e5aac62b3d3a61142b4ed701ac6}\label{interface_u_m_h_t_t_p_server_acd454e5aac62b3d3a61142b4ed701ac6}} 
+\index{UMHTTPServer@{UMHTTPServer}!connectionDone:@{connectionDone:}}
+\index{connectionDone:@{connectionDone:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{connectionDone:()}{connectionDone:()}}
+{\footnotesize\ttfamily -\/ (void) connection\+Done\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_connection}{U\+M\+H\+T\+T\+P\+Connection}} $\ast$)}]{con }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a6ec96d570e3b0ca25feda16b6b09ba0b}\label{interface_u_m_h_t_t_p_server_a6ec96d570e3b0ca25feda16b6b09ba0b}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpAuthenticateRequest:realm:@{httpAuthenticateRequest:realm:}}
+\index{httpAuthenticateRequest:realm:@{httpAuthenticateRequest:realm:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpAuthenticateRequest:realm:()}{httpAuthenticateRequest:realm:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_h_t_t_p_authentication_status_8h_ab8f0ab52a15088f5430c2a48d897e341}{U\+M\+H\+T\+T\+P\+Authentication\+Status}}) http\+Authenticate\+Request\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_request}{U\+M\+H\+T\+T\+P\+Request}} $\ast$)}]{req }\item[{realm\+:(N\+S\+String $\ast$$\ast$)}]{realm }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a85f46e17c9de3ff18a07a0cef4d89ccd}\label{interface_u_m_h_t_t_p_server_a85f46e17c9de3ff18a07a0cef4d89ccd}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpConnect:@{httpConnect:}}
+\index{httpConnect:@{httpConnect:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpConnect:()}{httpConnect:()}}
+{\footnotesize\ttfamily -\/ (void) http\+Connect\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_request}{U\+M\+H\+T\+T\+P\+Request}} $\ast$)}]{req }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ac314af965e839ca9f383411c6cbf725c}\label{interface_u_m_h_t_t_p_server_ac314af965e839ca9f383411c6cbf725c}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpDelete:@{httpDelete:}}
+\index{httpDelete:@{httpDelete:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpDelete:()}{httpDelete:()}}
+{\footnotesize\ttfamily -\/ (void) http\+Delete\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_request}{U\+M\+H\+T\+T\+P\+Request}} $\ast$)}]{req }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a91668d93154eb2bc9595eab881fbe1d0}\label{interface_u_m_h_t_t_p_server_a91668d93154eb2bc9595eab881fbe1d0}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpGet:@{httpGet:}}
+\index{httpGet:@{httpGet:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpGet:()}{httpGet:()}}
+{\footnotesize\ttfamily -\/ (void) http\+Get\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_request}{U\+M\+H\+T\+T\+P\+Request}} $\ast$)}]{req }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a9c50009857a9630b49cd1afcd2322d01}\label{interface_u_m_h_t_t_p_server_a9c50009857a9630b49cd1afcd2322d01}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpGetPost:@{httpGetPost:}}
+\index{httpGetPost:@{httpGetPost:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpGetPost:()}{httpGetPost:()}}
+{\footnotesize\ttfamily -\/ (void) http\+Get\+Post\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_request}{U\+M\+H\+T\+T\+P\+Request}} $\ast$)}]{req }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a52366d4618a2fcc0b6a3150116247d89}\label{interface_u_m_h_t_t_p_server_a52366d4618a2fcc0b6a3150116247d89}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpHead:@{httpHead:}}
+\index{httpHead:@{httpHead:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpHead:()}{httpHead:()}}
+{\footnotesize\ttfamily -\/ (void) http\+Head\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_request}{U\+M\+H\+T\+T\+P\+Request}} $\ast$)}]{req }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a50702807a3ce631b5e9b25f4a9e4d3b5}\label{interface_u_m_h_t_t_p_server_a50702807a3ce631b5e9b25f4a9e4d3b5}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpOptions:@{httpOptions:}}
+\index{httpOptions:@{httpOptions:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpOptions:()}{httpOptions:()}}
+{\footnotesize\ttfamily -\/ (void) http\+Options\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_request}{U\+M\+H\+T\+T\+P\+Request}} $\ast$)}]{req }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a58d9df08328435df2d94d63da7327278}\label{interface_u_m_h_t_t_p_server_a58d9df08328435df2d94d63da7327278}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpPost:@{httpPost:}}
+\index{httpPost:@{httpPost:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpPost:()}{httpPost:()}}
+{\footnotesize\ttfamily -\/ (void) http\+Post\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_request}{U\+M\+H\+T\+T\+P\+Request}} $\ast$)}]{req }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a09d07a22812d49615dc790b7f0e7012d}\label{interface_u_m_h_t_t_p_server_a09d07a22812d49615dc790b7f0e7012d}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpPut:@{httpPut:}}
+\index{httpPut:@{httpPut:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpPut:()}{httpPut:()}}
+{\footnotesize\ttfamily -\/ (void) http\+Put\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_request}{U\+M\+H\+T\+T\+P\+Request}} $\ast$)}]{req }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a9d85fb65b0ac941062bff816e0632e59}\label{interface_u_m_h_t_t_p_server_a9d85fb65b0ac941062bff816e0632e59}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpTrace:@{httpTrace:}}
+\index{httpTrace:@{httpTrace:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpTrace:()}{httpTrace:()}}
+{\footnotesize\ttfamily -\/ (void) http\+Trace\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_request}{U\+M\+H\+T\+T\+P\+Request}} $\ast$)}]{req }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_abb9837b34250d7627178be7758cc011f}\label{interface_u_m_h_t_t_p_server_abb9837b34250d7627178be7758cc011f}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpUnknownMethod:@{httpUnknownMethod:}}
+\index{httpUnknownMethod:@{httpUnknownMethod:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpUnknownMethod:()}{httpUnknownMethod:()}}
+{\footnotesize\ttfamily -\/ (void) http\+Unknown\+Method\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_request}{U\+M\+H\+T\+T\+P\+Request}} $\ast$)}]{req }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a520ace0cad4976bda1f76a3b47418206}\label{interface_u_m_h_t_t_p_server_a520ace0cad4976bda1f76a3b47418206}} 
+\index{UMHTTPServer@{UMHTTPServer}!init@{init}}
+\index{init@{init}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily -\/ (id) init \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_object_aeaac514e683838e31be4c2676923bbd3}{U\+M\+Object}}.
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a3b4fc2225aeaba2c4f874dda85657529}\label{interface_u_m_h_t_t_p_server_a3b4fc2225aeaba2c4f874dda85657529}} 
+\index{UMHTTPServer@{UMHTTPServer}!initWithPort:@{initWithPort:}}
+\index{initWithPort:@{initWithPort:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{initWithPort:()}{initWithPort:()}}
+{\footnotesize\ttfamily -\/ (id) init\+With\+Port\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{_u_m_socket_8h_a285986f7b57657df010a6a11f94d9807}{in\+\_\+port\+\_\+t}})}]{port }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_acc7bfb6bc3175a8a1990f90b1f428027}\label{interface_u_m_h_t_t_p_server_acc7bfb6bc3175a8a1990f90b1f428027}} 
+\index{UMHTTPServer@{UMHTTPServer}!initWithPort:socketType:@{initWithPort:socketType:}}
+\index{initWithPort:socketType:@{initWithPort:socketType:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{initWithPort:socketType:()}{initWithPort:socketType:()}}
+{\footnotesize\ttfamily -\/ (id) \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a3b4fc2225aeaba2c4f874dda85657529}{init\+With\+Port\+:}} \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{_u_m_socket_8h_a285986f7b57657df010a6a11f94d9807}{in\+\_\+port\+\_\+t}})}]{port }\item[{socket\+Type\+:(\mbox{\hyperlink{_u_m_socket_defs_8h_a33180a84146f440c34172f04a3f579cd}{U\+M\+Socket\+Type}})}]{type }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a11187b91e4893062c2d5090e1bb549ac}\label{interface_u_m_h_t_t_p_server_a11187b91e4893062c2d5090e1bb549ac}} 
+\index{UMHTTPServer@{UMHTTPServer}!initWithPort:socketType:ssl:sslKeyFile:sslCertFile:@{initWithPort:socketType:ssl:sslKeyFile:sslCertFile:}}
+\index{initWithPort:socketType:ssl:sslKeyFile:sslCertFile:@{initWithPort:socketType:ssl:sslKeyFile:sslCertFile:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{initWithPort:socketType:ssl:sslKeyFile:sslCertFile:()}{initWithPort:socketType:ssl:sslKeyFile:sslCertFile:()}}
+{\footnotesize\ttfamily -\/ (id) \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a3b4fc2225aeaba2c4f874dda85657529}{init\+With\+Port\+:}} \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{_u_m_socket_8h_a285986f7b57657df010a6a11f94d9807}{in\+\_\+port\+\_\+t}})}]{port }\item[{socket\+Type\+:(\mbox{\hyperlink{_u_m_socket_defs_8h_a33180a84146f440c34172f04a3f579cd}{U\+M\+Socket\+Type}})}]{type }\item[{ssl\+:(B\+O\+OL)}]{do\+S\+SL }\item[{ssl\+Key\+File\+:(N\+S\+String $\ast$)}]{key\+File }\item[{ssl\+Cert\+File\+:(N\+S\+String $\ast$)}]{cert\+File }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a9b2ed58fb763343d46d5de1fefef0108}\label{interface_u_m_h_t_t_p_server_a9b2ed58fb763343d46d5de1fefef0108}} 
+\index{UMHTTPServer@{UMHTTPServer}!initWithPort:socketType:ssl:sslKeyFile:sslCertFile:taskQueue:@{initWithPort:socketType:ssl:sslKeyFile:sslCertFile:taskQueue:}}
+\index{initWithPort:socketType:ssl:sslKeyFile:sslCertFile:taskQueue:@{initWithPort:socketType:ssl:sslKeyFile:sslCertFile:taskQueue:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{initWithPort:socketType:ssl:sslKeyFile:sslCertFile:taskQueue:()}{initWithPort:socketType:ssl:sslKeyFile:sslCertFile:taskQueue:()}}
+{\footnotesize\ttfamily -\/ (id) \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a3b4fc2225aeaba2c4f874dda85657529}{init\+With\+Port\+:}} \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{_u_m_socket_8h_a285986f7b57657df010a6a11f94d9807}{in\+\_\+port\+\_\+t}})}]{port }\item[{socket\+Type\+:(\mbox{\hyperlink{_u_m_socket_defs_8h_a33180a84146f440c34172f04a3f579cd}{U\+M\+Socket\+Type}})}]{type }\item[{ssl\+:(B\+O\+OL)}]{do\+S\+SL }\item[{ssl\+Key\+File\+:(N\+S\+String $\ast$)}]{ssl\+Key\+File }\item[{ssl\+Cert\+File\+:(N\+S\+String $\ast$)}]{ssl\+Cert\+File }\item[{task\+Queue\+:(\mbox{\hyperlink{interface_u_m_task_queue}{U\+M\+Task\+Queue}} $\ast$)}]{tq }\end{DoxyParamCaption}}
+
+
+
+Reimplemented in \mbox{\hyperlink{interface_u_m_h_t_t_p_s_server_a4ed2ac2ea303456d9697b272aaaa739c}{U\+M\+H\+T\+T\+P\+S\+Server}}.
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_aa731bf401981cafaf705ab39c5a61ef7}\label{interface_u_m_h_t_t_p_server_aa731bf401981cafaf705ab39c5a61ef7}} 
+\index{UMHTTPServer@{UMHTTPServer}!mainListener@{mainListener}}
+\index{mainListener@{mainListener}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{mainListener()}{mainListener()}}
+{\footnotesize\ttfamily -\/ (void) main\+Listener \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a8e4e7eaa25eabdfd7f4115950fc97b1a}\label{interface_u_m_h_t_t_p_server_a8e4e7eaa25eabdfd7f4115950fc97b1a}} 
+\index{UMHTTPServer@{UMHTTPServer}!setCertificateFile:@{setCertificateFile:}}
+\index{setCertificateFile:@{setCertificateFile:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{setCertificateFile:()}{setCertificateFile:()}}
+{\footnotesize\ttfamily -\/ (void) set\+Certificate\+File\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{filename }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a25dcc3385f4b05da250af7c6796f32e7}\label{interface_u_m_h_t_t_p_server_a25dcc3385f4b05da250af7c6796f32e7}} 
+\index{UMHTTPServer@{UMHTTPServer}!setPrivateKeyFile:@{setPrivateKeyFile:}}
+\index{setPrivateKeyFile:@{setPrivateKeyFile:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{setPrivateKeyFile:()}{setPrivateKeyFile:()}}
+{\footnotesize\ttfamily -\/ (void) set\+Private\+Key\+File\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{filename }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ac86cdb04a481bf4b5522a8cadb976254}\label{interface_u_m_h_t_t_p_server_ac86cdb04a481bf4b5522a8cadb976254}} 
+\index{UMHTTPServer@{UMHTTPServer}!start@{start}}
+\index{start@{start}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_socket_defs_8h_aa2f7e70e43be716e884e046a7083f70b}{U\+M\+Socket\+Error}}) start \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a64d439e957b9f879bd61f1534da1ec05}\label{interface_u_m_h_t_t_p_server_a64d439e957b9f879bd61f1534da1ec05}} 
+\index{UMHTTPServer@{UMHTTPServer}!stop@{stop}}
+\index{stop@{stop}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily -\/ (void) stop \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a815d55a2f2109b2c185733a9d0748563}\label{interface_u_m_h_t_t_p_server_a815d55a2f2109b2c185733a9d0748563}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_advertizeName@{\_advertizeName}}
+\index{\_advertizeName@{\_advertizeName}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_advertizeName}{\_advertizeName}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+advertize\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a1e62d87a1b22defcad4f51793f238d7e}\label{interface_u_m_h_t_t_p_server_a1e62d87a1b22defcad4f51793f238d7e}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_authenticateRequestDelegate@{\_authenticateRequestDelegate}}
+\index{\_authenticateRequestDelegate@{\_authenticateRequestDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_authenticateRequestDelegate}{\_authenticateRequestDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authenticate_request_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authenticate\+Request\+Delegate}}$>$) \+\_\+authenticate\+Request\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_aa78ec917a3f4ffa3b96150bd860d6de0}\label{interface_u_m_h_t_t_p_server_aa78ec917a3f4ffa3b96150bd860d6de0}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_authorizeConnectionDelegate@{\_authorizeConnectionDelegate}}
+\index{\_authorizeConnectionDelegate@{\_authorizeConnectionDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_authorizeConnectionDelegate}{\_authorizeConnectionDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorize_connection_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authorize\+Connection\+Delegate}}$>$) \+\_\+authorize\+Connection\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+this delegate gets called upon a new incoming connection to verify if the calling IP is allowed to connect. \mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a22d4893ebe8c855ca50e885878f5f31b}\label{interface_u_m_h_t_t_p_server_a22d4893ebe8c855ca50e885878f5f31b}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_certFile@{\_certFile}}
+\index{\_certFile@{\_certFile}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_certFile}{\_certFile}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+cert\+File\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a5b1650c1afa766cf747eb2fd0372331b}\label{interface_u_m_h_t_t_p_server_a5b1650c1afa766cf747eb2fd0372331b}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_certFileData@{\_certFileData}}
+\index{\_certFileData@{\_certFileData}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_certFileData}{\_certFileData}}
+{\footnotesize\ttfamily -\/ (N\+S\+Data$\ast$) \+\_\+cert\+File\+Data\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a33573ee61a89ed9109efbafd1618c051}\label{interface_u_m_h_t_t_p_server_a33573ee61a89ed9109efbafd1618c051}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_connections@{\_connections}}
+\index{\_connections@{\_connections}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_connections}{\_connections}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}}$\ast$) \+\_\+connections\hspace{0.3cm}{\ttfamily [protected]}}
+
+list of \mbox{\hyperlink{interface_u_m_h_t_t_p_connection}{U\+M\+H\+T\+T\+P\+Connection}} objects containing the corresponding reading sockets \mbox{\Hypertarget{interface_u_m_h_t_t_p_server_aaae3e9639f5b64fa918831b81cbdf83a}\label{interface_u_m_h_t_t_p_server_aaae3e9639f5b64fa918831b81cbdf83a}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_connectionsLock@{\_connectionsLock}}
+\index{\_connectionsLock@{\_connectionsLock}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_connectionsLock}{\_connectionsLock}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}}$\ast$) \+\_\+connections\+Lock\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_aad707220e1f2a9fdc317735330916145}\label{interface_u_m_h_t_t_p_server_aad707220e1f2a9fdc317735330916145}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_documentRoot@{\_documentRoot}}
+\index{\_documentRoot@{\_documentRoot}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_documentRoot}{\_documentRoot}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+document\+Root\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a6dc305bdea738fde14e71768d3c4478b}\label{interface_u_m_h_t_t_p_server_a6dc305bdea738fde14e71768d3c4478b}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_enableKeepalive@{\_enableKeepalive}}
+\index{\_enableKeepalive@{\_enableKeepalive}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_enableKeepalive}{\_enableKeepalive}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+enable\+Keepalive\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a75149e8a27c36594e8625c601e009199}\label{interface_u_m_h_t_t_p_server_a75149e8a27c36594e8625c601e009199}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_enableSSL@{\_enableSSL}}
+\index{\_enableSSL@{\_enableSSL}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_enableSSL}{\_enableSSL}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+enable\+S\+SL\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a79b338d8c0049c73294a96d1bdc2a704}\label{interface_u_m_h_t_t_p_server_a79b338d8c0049c73294a96d1bdc2a704}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_getPostDict@{\_getPostDict}}
+\index{\_getPostDict@{\_getPostDict}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_getPostDict}{\_getPostDict}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Dictionary$\ast$) \+\_\+get\+Post\+Dict\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ae6a3a3c843fd702e69f8d80a40f6f253}\label{interface_u_m_h_t_t_p_server_ae6a3a3c843fd702e69f8d80a40f6f253}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_httpConnectDelegate@{\_httpConnectDelegate}}
+\index{\_httpConnectDelegate@{\_httpConnectDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_httpConnectDelegate}{\_httpConnectDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_connect_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Connect\+Delegate}}$>$) \+\_\+http\+Connect\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a8f2d29c2af3a113bb41fe1ae0e4b6dc4}\label{interface_u_m_h_t_t_p_server_a8f2d29c2af3a113bb41fe1ae0e4b6dc4}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_httpDeleteDelegate@{\_httpDeleteDelegate}}
+\index{\_httpDeleteDelegate@{\_httpDeleteDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_httpDeleteDelegate}{\_httpDeleteDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_delete_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Delete\+Delegate}}$>$) \+\_\+http\+Delete\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ad7133558b275462bb9e4a6054f0c0d6c}\label{interface_u_m_h_t_t_p_server_ad7133558b275462bb9e4a6054f0c0d6c}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_httpGetDelegate@{\_httpGetDelegate}}
+\index{\_httpGetDelegate@{\_httpGetDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_httpGetDelegate}{\_httpGetDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_get_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Get\+Delegate}}$>$) \+\_\+http\+Get\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a100af226c66536675ae9d8e2b2e78570}\label{interface_u_m_h_t_t_p_server_a100af226c66536675ae9d8e2b2e78570}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_httpGetPostDelegate@{\_httpGetPostDelegate}}
+\index{\_httpGetPostDelegate@{\_httpGetPostDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_httpGetPostDelegate}{\_httpGetPostDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_get_post_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Get\+Post\+Delegate}}$>$) \+\_\+http\+Get\+Post\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a0ab70036552548df3fa341c823b111a1}\label{interface_u_m_h_t_t_p_server_a0ab70036552548df3fa341c823b111a1}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_httpHeadDelegate@{\_httpHeadDelegate}}
+\index{\_httpHeadDelegate@{\_httpHeadDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_httpHeadDelegate}{\_httpHeadDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_head_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Head\+Delegate}}$>$) \+\_\+http\+Head\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a2cf9858465812a6f9feda73ee08da7e1}\label{interface_u_m_h_t_t_p_server_a2cf9858465812a6f9feda73ee08da7e1}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_httpOperationsQueue@{\_httpOperationsQueue}}
+\index{\_httpOperationsQueue@{\_httpOperationsQueue}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_httpOperationsQueue}{\_httpOperationsQueue}}
+{\footnotesize\ttfamily -\/ (N\+S\+Operation\+Queue$\ast$) \+\_\+http\+Operations\+Queue\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a6648ef37817ac8129b758b15044b20e1}\label{interface_u_m_h_t_t_p_server_a6648ef37817ac8129b758b15044b20e1}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_httpOptionsDelegate@{\_httpOptionsDelegate}}
+\index{\_httpOptionsDelegate@{\_httpOptionsDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_httpOptionsDelegate}{\_httpOptionsDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_options_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Options\+Delegate}}$>$) \+\_\+http\+Options\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ae2cadf8b1a6e479ad156188dfcd4039e}\label{interface_u_m_h_t_t_p_server_ae2cadf8b1a6e479ad156188dfcd4039e}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_httpPostDelegate@{\_httpPostDelegate}}
+\index{\_httpPostDelegate@{\_httpPostDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_httpPostDelegate}{\_httpPostDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_post_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Post\+Delegate}}$>$) \+\_\+http\+Post\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a0402b530819c1e965fdde41d6a5780ba}\label{interface_u_m_h_t_t_p_server_a0402b530819c1e965fdde41d6a5780ba}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_httpPutDelegate@{\_httpPutDelegate}}
+\index{\_httpPutDelegate@{\_httpPutDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_httpPutDelegate}{\_httpPutDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_put_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Put\+Delegate}}$>$) \+\_\+http\+Put\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ae6b1f09c781c3a51c26c26eb3e0f5634}\label{interface_u_m_h_t_t_p_server_ae6b1f09c781c3a51c26c26eb3e0f5634}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_httpTraceDelegate@{\_httpTraceDelegate}}
+\index{\_httpTraceDelegate@{\_httpTraceDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_httpTraceDelegate}{\_httpTraceDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_trace_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Trace\+Delegate}}$>$) \+\_\+http\+Trace\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a1b56d34036fb31cf0f393dfaf385cff5}\label{interface_u_m_h_t_t_p_server_a1b56d34036fb31cf0f393dfaf385cff5}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_lastErr@{\_lastErr}}
+\index{\_lastErr@{\_lastErr}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_lastErr}{\_lastErr}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_socket_defs_8h_aa2f7e70e43be716e884e046a7083f70b}{U\+M\+Socket\+Error}}) \+\_\+last\+Err\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a953d5b6f18feb8d7249f3cc495d8013b}\label{interface_u_m_h_t_t_p_server_a953d5b6f18feb8d7249f3cc495d8013b}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_listenerRunning@{\_listenerRunning}}
+\index{\_listenerRunning@{\_listenerRunning}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_listenerRunning}{\_listenerRunning}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+listener\+Running\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a5fc41a4db75c5a2027e6955d6db9a221}\label{interface_u_m_h_t_t_p_server_a5fc41a4db75c5a2027e6955d6db9a221}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_listenerSocket@{\_listenerSocket}}
+\index{\_listenerSocket@{\_listenerSocket}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_listenerSocket}{\_listenerSocket}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_socket}{U\+M\+Socket}}$\ast$) \+\_\+listener\+Socket\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a323c05aac0f3545b8a45d68e68a78160}\label{interface_u_m_h_t_t_p_server_a323c05aac0f3545b8a45d68e68a78160}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_lock@{\_lock}}
+\index{\_lock@{\_lock}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_lock}{\_lock}}
+{\footnotesize\ttfamily -\/ (N\+S\+Lock$\ast$) \+\_\+lock\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a850777381c703a1bd52a3614db32193e}\label{interface_u_m_h_t_t_p_server_a850777381c703a1bd52a3614db32193e}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_name@{\_name}}
+\index{\_name@{\_name}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_name}{\_name}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+name\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a4775bf6a6a7be6e4c54b551064a1cca4}\label{interface_u_m_h_t_t_p_server_a4775bf6a6a7be6e4c54b551064a1cca4}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_pendingRequests@{\_pendingRequests}}
+\index{\_pendingRequests@{\_pendingRequests}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_pendingRequests}{\_pendingRequests}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}}$\ast$) \+\_\+pending\+Requests\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a300822041c2644c6c66e088ef9242aca}\label{interface_u_m_h_t_t_p_server_a300822041c2644c6c66e088ef9242aca}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_privateKeyFile@{\_privateKeyFile}}
+\index{\_privateKeyFile@{\_privateKeyFile}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_privateKeyFile}{\_privateKeyFile}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+private\+Key\+File\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_afbf8ee9df58d34b8e040127307bce792}\label{interface_u_m_h_t_t_p_server_afbf8ee9df58d34b8e040127307bce792}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_privateKeyFileData@{\_privateKeyFileData}}
+\index{\_privateKeyFileData@{\_privateKeyFileData}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_privateKeyFileData}{\_privateKeyFileData}}
+{\footnotesize\ttfamily -\/ (N\+S\+Data$\ast$) \+\_\+private\+Key\+File\+Data\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_aa2cf866d4388999a0f3b9b8af06c7720}\label{interface_u_m_h_t_t_p_server_aa2cf866d4388999a0f3b9b8af06c7720}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_receivePollTimeoutMs@{\_receivePollTimeoutMs}}
+\index{\_receivePollTimeoutMs@{\_receivePollTimeoutMs}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_receivePollTimeoutMs}{\_receivePollTimeoutMs}}
+{\footnotesize\ttfamily -\/ (int) \+\_\+receive\+Poll\+Timeout\+Ms\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_aa8f7f9f625310a2c3f6f8df090392a88}\label{interface_u_m_h_t_t_p_server_aa8f7f9f625310a2c3f6f8df090392a88}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_serverName@{\_serverName}}
+\index{\_serverName@{\_serverName}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_serverName}{\_serverName}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+server\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+Web\+Server H\+T\+TP Server\+: name \mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a93bcff80f029bb495808890aea6442c0}\label{interface_u_m_h_t_t_p_server_a93bcff80f029bb495808890aea6442c0}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_sleeper@{\_sleeper}}
+\index{\_sleeper@{\_sleeper}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_sleeper}{\_sleeper}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_sleeper}{U\+M\+Sleeper}}$\ast$) \+\_\+sleeper\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ae2c11d5ae9d13b435fbf26338b3e2ebc}\label{interface_u_m_h_t_t_p_server_ae2c11d5ae9d13b435fbf26338b3e2ebc}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_sslLock@{\_sslLock}}
+\index{\_sslLock@{\_sslLock}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_sslLock}{\_sslLock}}
+{\footnotesize\ttfamily -\/ (N\+S\+Lock$\ast$) \+\_\+ssl\+Lock\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_aadddf88c5e764ae281bcb4c619946269}\label{interface_u_m_h_t_t_p_server_aadddf88c5e764ae281bcb4c619946269}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_status@{\_status}}
+\index{\_status@{\_status}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_status}{\_status}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdb}{U\+M\+H\+T\+T\+P\+Server\+Status}}) \+\_\+status\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ad5e6f17d7126cf0d7ad5d43b304acae1}\label{interface_u_m_h_t_t_p_server_ad5e6f17d7126cf0d7ad5d43b304acae1}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_taskQueue@{\_taskQueue}}
+\index{\_taskQueue@{\_taskQueue}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_taskQueue}{\_taskQueue}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_task_queue}{U\+M\+Task\+Queue}}$\ast$) \+\_\+task\+Queue\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_afcf301a1e9b6cf23c09dc1a5f5b63aa4}\label{interface_u_m_h_t_t_p_server_afcf301a1e9b6cf23c09dc1a5f5b63aa4}} 
+\index{UMHTTPServer@{UMHTTPServer}!\_terminatedConnections@{\_terminatedConnections}}
+\index{\_terminatedConnections@{\_terminatedConnections}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_terminatedConnections}{\_terminatedConnections}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}}$\ast$) \+\_\+terminated\+Connections\hspace{0.3cm}{\ttfamily [protected]}}
+
+list of \mbox{\hyperlink{interface_u_m_h_t_t_p_connection}{U\+M\+H\+T\+T\+P\+Connection}} objects containing the corresponding reading sockets 
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a63a344507ef727f9af397e6e11061af5}\label{interface_u_m_h_t_t_p_server_a63a344507ef727f9af397e6e11061af5}} 
+\index{UMHTTPServer@{UMHTTPServer}!advertizeName@{advertizeName}}
+\index{advertizeName@{advertizeName}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{advertizeName}{advertizeName}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) advertize\+Name\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a733dac28149e647a1dea54af3d7b4f14}\label{interface_u_m_h_t_t_p_server_a733dac28149e647a1dea54af3d7b4f14}} 
+\index{UMHTTPServer@{UMHTTPServer}!authenticateRequestDelegate@{authenticateRequestDelegate}}
+\index{authenticateRequestDelegate@{authenticateRequestDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{authenticateRequestDelegate}{authenticateRequestDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authenticate_request_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authenticate\+Request\+Delegate}}$>$) authenticate\+Request\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ac07397827ef5d105bfe411a2e1e1d4bc}\label{interface_u_m_h_t_t_p_server_ac07397827ef5d105bfe411a2e1e1d4bc}} 
+\index{UMHTTPServer@{UMHTTPServer}!authorizeConnectionDelegate@{authorizeConnectionDelegate}}
+\index{authorizeConnectionDelegate@{authorizeConnectionDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{authorizeConnectionDelegate}{authorizeConnectionDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorize_connection_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authorize\+Connection\+Delegate}}$>$) authorize\+Connection\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a89f8eed825889c37715e163551bc7638}\label{interface_u_m_h_t_t_p_server_a89f8eed825889c37715e163551bc7638}} 
+\index{UMHTTPServer@{UMHTTPServer}!documentRoot@{documentRoot}}
+\index{documentRoot@{documentRoot}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{documentRoot}{documentRoot}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) document\+Root\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_aa7b28de6b2ee7b826668f92334167b39}\label{interface_u_m_h_t_t_p_server_aa7b28de6b2ee7b826668f92334167b39}} 
+\index{UMHTTPServer@{UMHTTPServer}!enableKeepalive@{enableKeepalive}}
+\index{enableKeepalive@{enableKeepalive}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{enableKeepalive}{enableKeepalive}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) enable\+Keepalive\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_abc562e8fd46a24a96721f474a6abe9b9}\label{interface_u_m_h_t_t_p_server_abc562e8fd46a24a96721f474a6abe9b9}} 
+\index{UMHTTPServer@{UMHTTPServer}!enableSSL@{enableSSL}}
+\index{enableSSL@{enableSSL}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{enableSSL}{enableSSL}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) enable\+S\+SL\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a78f18b5f35d83e5d784ffd5d5eadbc4f}\label{interface_u_m_h_t_t_p_server_a78f18b5f35d83e5d784ffd5d5eadbc4f}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpConnectDelegate@{httpConnectDelegate}}
+\index{httpConnectDelegate@{httpConnectDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpConnectDelegate}{httpConnectDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_connect_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Connect\+Delegate}}$>$) http\+Connect\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_af4213e0a0bab6248ca550ef7f4ba70bc}\label{interface_u_m_h_t_t_p_server_af4213e0a0bab6248ca550ef7f4ba70bc}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpDeleteDelegate@{httpDeleteDelegate}}
+\index{httpDeleteDelegate@{httpDeleteDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpDeleteDelegate}{httpDeleteDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_delete_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Delete\+Delegate}}$>$) http\+Delete\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a2bd0ecd58fde725d8d6bbba252c75965}\label{interface_u_m_h_t_t_p_server_a2bd0ecd58fde725d8d6bbba252c75965}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpGetDelegate@{httpGetDelegate}}
+\index{httpGetDelegate@{httpGetDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpGetDelegate}{httpGetDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_get_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Get\+Delegate}}$>$) http\+Get\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ab730cd7bd0e8893f982e1b1e9d4f8609}\label{interface_u_m_h_t_t_p_server_ab730cd7bd0e8893f982e1b1e9d4f8609}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpGetPostDelegate@{httpGetPostDelegate}}
+\index{httpGetPostDelegate@{httpGetPostDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpGetPostDelegate}{httpGetPostDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_get_post_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Get\+Post\+Delegate}}$>$) http\+Get\+Post\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a902aa9b99e55da818043f6ac9ecb00c5}\label{interface_u_m_h_t_t_p_server_a902aa9b99e55da818043f6ac9ecb00c5}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpHeadDelegate@{httpHeadDelegate}}
+\index{httpHeadDelegate@{httpHeadDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpHeadDelegate}{httpHeadDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_head_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Head\+Delegate}}$>$) http\+Head\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a9047d5afa329762765559d9d96c9be15}\label{interface_u_m_h_t_t_p_server_a9047d5afa329762765559d9d96c9be15}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpOptionsDelegate@{httpOptionsDelegate}}
+\index{httpOptionsDelegate@{httpOptionsDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpOptionsDelegate}{httpOptionsDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_options_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Options\+Delegate}}$>$) http\+Options\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ad920eb19be77079f66503308dec9eaa1}\label{interface_u_m_h_t_t_p_server_ad920eb19be77079f66503308dec9eaa1}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpPostDelegate@{httpPostDelegate}}
+\index{httpPostDelegate@{httpPostDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpPostDelegate}{httpPostDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_post_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Post\+Delegate}}$>$) http\+Post\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ac2b2b365e4678f30fe6c48fb1f4914dd}\label{interface_u_m_h_t_t_p_server_ac2b2b365e4678f30fe6c48fb1f4914dd}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpPutDelegate@{httpPutDelegate}}
+\index{httpPutDelegate@{httpPutDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpPutDelegate}{httpPutDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_put_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Put\+Delegate}}$>$) http\+Put\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ae4b481b18f90ec8a036f65bc702b8c2f}\label{interface_u_m_h_t_t_p_server_ae4b481b18f90ec8a036f65bc702b8c2f}} 
+\index{UMHTTPServer@{UMHTTPServer}!httpTraceDelegate@{httpTraceDelegate}}
+\index{httpTraceDelegate@{httpTraceDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{httpTraceDelegate}{httpTraceDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_trace_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Http\+Trace\+Delegate}}$>$) http\+Trace\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a15957689af3598e16b742a9ddca83e0e}\label{interface_u_m_h_t_t_p_server_a15957689af3598e16b742a9ddca83e0e}} 
+\index{UMHTTPServer@{UMHTTPServer}!listenerSocket@{listenerSocket}}
+\index{listenerSocket@{listenerSocket}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{listenerSocket}{listenerSocket}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_socket}{U\+M\+Socket}}$\ast$) listener\+Socket\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ac33e0d211d8316960e2089b33f62d066}\label{interface_u_m_h_t_t_p_server_ac33e0d211d8316960e2089b33f62d066}} 
+\index{UMHTTPServer@{UMHTTPServer}!name@{name}}
+\index{name@{name}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) name\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a512b984ba096843650280292fa0d3b20}\label{interface_u_m_h_t_t_p_server_a512b984ba096843650280292fa0d3b20}} 
+\index{UMHTTPServer@{UMHTTPServer}!pendingRequests@{pendingRequests}}
+\index{pendingRequests@{pendingRequests}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{pendingRequests}{pendingRequests}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}}$\ast$) pending\+Requests\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_aeca2d8f612f9c026c3835ff39bc8c572}\label{interface_u_m_h_t_t_p_server_aeca2d8f612f9c026c3835ff39bc8c572}} 
+\index{UMHTTPServer@{UMHTTPServer}!serverName@{serverName}}
+\index{serverName@{serverName}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{serverName}{serverName}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) server\+Name\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_af25c749153f79334ea74d5ff8c38746b}\label{interface_u_m_h_t_t_p_server_af25c749153f79334ea74d5ff8c38746b}} 
+\index{UMHTTPServer@{UMHTTPServer}!status@{status}}
+\index{status@{status}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{status}{status}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdb}{U\+M\+H\+T\+T\+P\+Server\+Status}}) status\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ae43fcc32daa1e5e847af51b461e09c60}\label{interface_u_m_h_t_t_p_server_ae43fcc32daa1e5e847af51b461e09c60}} 
+\index{UMHTTPServer@{UMHTTPServer}!taskQueue@{taskQueue}}
+\index{taskQueue@{taskQueue}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{taskQueue}{taskQueue}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_task_queue}{U\+M\+Task\+Queue}}$\ast$) task\+Queue\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+H\+T\+T\+P/\mbox{\hyperlink{_u_m_h_t_t_p_server_8h}{U\+M\+H\+T\+T\+P\+Server.\+h}}\item 
+Classes/\+Universal\+H\+T\+T\+P/\mbox{\hyperlink{_u_m_h_t_t_p_server_8m}{U\+M\+H\+T\+T\+P\+Server.\+m}}\end{DoxyCompactItemize}

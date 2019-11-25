@@ -1,0 +1,257 @@
+\hypertarget{interface_u_m_syntax_token}{}\doxysection{U\+M\+Syntax\+Token Class Reference}
+\label{interface_u_m_syntax_token}\index{UMSyntaxToken@{UMSyntaxToken}}
+
+
+{\ttfamily \#import $<$U\+M\+Syntax\+Token.\+h$>$}
+
+Inheritance diagram for U\+M\+Syntax\+Token\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.456790cm]{interface_u_m_syntax_token}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{interface_u_m_syntax_token}{U\+M\+Syntax\+Token}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_ac37e3752305062a881764402e9886a35}{init\+With\+String\+:help\+:case\+Sensitive\+:}}
+\item 
+(\mbox{\hyperlink{interface_u_m_syntax_token}{U\+M\+Syntax\+Token}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_a937ab01a563afdcc89fa2848443377f8}{init\+With\+String\+:help\+:}}
+\item 
+(\mbox{\hyperlink{interface_u_m_syntax_token}{U\+M\+Syntax\+Token}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_aba6ba790ac2979a612bac26fd87df38d}{init\+With\+String\+:}}
+\item 
+(\mbox{\hyperlink{interface_u_m_syntax_token}{U\+M\+Syntax\+Token}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_a954e0c4bd3e26c36186c32db062590de}{init\+With\+Help\+:}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_a3a6877018aa5684fc1f08deba70f6440}{key}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_a6eb80d269b62880f02d1648e4429d092}{add\+Subtoken\+:}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_acf0a10a0c1f1fc78735f9b8661d4e196}{matches\+Value\+:with\+Priority\+:}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_a7bb1364998e34829254f0614b79155c3}{starts\+With\+Value\+:with\+Priority\+:full\+Value\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_a9400d1cf9f4dcf5a5e2acba29e977346}{execute\+Lines\+:using\+Context\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_ab900bd514c5536a08fce45123be5e885}{execute\+Words\+:using\+Context\+:current\+Word\+:}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_a0902ca97cb25a7be0f4d5870f10b1295}{help\+Words\+:using\+Context\+:current\+Word\+:}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_a067d22f446b51affb54b9de72a5e3e60}{autocomplete\+Words\+:using\+Context\+:current\+Word\+:}}
+\item 
+(N\+S\+Array $\ast$) -\/ \mbox{\hyperlink{interface_u_m_syntax_token_ac653f3b2132c367eaf2385bdd8469c6a}{last\+Tokens\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_syntax_token_a132cd389808d045f3940716e00607a01}{\+\_\+string}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_syntax_token_a8282bd20a4337598466700866d2682b1}{\+\_\+case\+Sensitive}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_syntax_token_a0c55f6d142963017e3b95684ebcade59}{\+\_\+help}}
+\item 
+\mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary}{U\+M\+Synchronized\+Sorted\+Dictionary}} $\ast$ \mbox{\hyperlink{interface_u_m_syntax_token_a3d7f0b22dfd7d41374938cce41f287f4}{\+\_\+subtokens}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_command_action_protocol-p}{U\+M\+Command\+Action\+Protocol}} $>$ \mbox{\hyperlink{interface_u_m_syntax_token_a39f1ff8b8298c875d9fdc3e508af1410}{\+\_\+delegate}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_syntax_token_a5bdfecf89e72658ce2d94b117604f7e7}{\+\_\+command\+Action}}
+\item 
+\mbox{\hyperlink{interface_u_m_syntax_action}{U\+M\+Syntax\+Action}} $\ast$ \mbox{\hyperlink{interface_u_m_syntax_token_abfd29be69c57f6d49620edeba09f9749}{\+\_\+action}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_u_m_syntax_action}{U\+M\+Syntax\+Action}} $\ast$ \mbox{\hyperlink{interface_u_m_syntax_token_ae97fb2f214063fc723a7c4258f8de086}{action}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_syntax_token_afbbcb2d0304abe074038ee7b54a88e8f}{string}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_syntax_token_af32855eced8ffacfb2bdcb00bdbee620}{help}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_syntax_token_a0e9efcf8fd45a87fed54e188d451e779}{case\+Sensitive}}
+\item 
+\mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary}{U\+M\+Synchronized\+Sorted\+Dictionary}} $\ast$ \mbox{\hyperlink{interface_u_m_syntax_token_ad00573689ba5c84c5f168b04f0997610}{subtokens}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_command_action_protocol-p}{U\+M\+Command\+Action\+Protocol}} $>$ \mbox{\hyperlink{interface_u_m_syntax_token_adb9599fbbd31bedf330f9b17c3c3a0b0}{delegate}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_syntax_token_ab097c2a7bd5e388970e3a67f84b80a76}{command\+Action}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_syntax_token_a6eb80d269b62880f02d1648e4429d092}\label{interface_u_m_syntax_token_a6eb80d269b62880f02d1648e4429d092}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!addSubtoken:@{addSubtoken:}}
+\index{addSubtoken:@{addSubtoken:}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{addSubtoken:()}{addSubtoken:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Subtoken\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_syntax_token}{U\+M\+Syntax\+Token}} $\ast$)}]{sub }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a067d22f446b51affb54b9de72a5e3e60}\label{interface_u_m_syntax_token_a067d22f446b51affb54b9de72a5e3e60}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!autocompleteWords:usingContext:currentWord:@{autocompleteWords:usingContext:currentWord:}}
+\index{autocompleteWords:usingContext:currentWord:@{autocompleteWords:usingContext:currentWord:}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{autocompleteWords:usingContext:currentWord:()}{autocompleteWords:usingContext:currentWord:()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) autocomplete\+Words\+: \begin{DoxyParamCaption}\item[{(N\+S\+Array $\ast$)}]{words }\item[{using\+Context\+:(\mbox{\hyperlink{interface_u_m_syntax_context}{U\+M\+Syntax\+Context}} $\ast$)}]{context }\item[{current\+Word\+:(N\+S\+String $\ast$)}]{current\+Word }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a9400d1cf9f4dcf5a5e2acba29e977346}\label{interface_u_m_syntax_token_a9400d1cf9f4dcf5a5e2acba29e977346}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!executeLines:usingContext:@{executeLines:usingContext:}}
+\index{executeLines:usingContext:@{executeLines:usingContext:}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{executeLines:usingContext:()}{executeLines:usingContext:()}}
+{\footnotesize\ttfamily -\/ (void) execute\+Lines\+: \begin{DoxyParamCaption}\item[{(N\+S\+Array $\ast$)}]{words }\item[{using\+Context\+:(\mbox{\hyperlink{interface_u_m_syntax_context}{U\+M\+Syntax\+Context}} $\ast$)}]{context }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_ab900bd514c5536a08fce45123be5e885}\label{interface_u_m_syntax_token_ab900bd514c5536a08fce45123be5e885}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!executeWords:usingContext:currentWord:@{executeWords:usingContext:currentWord:}}
+\index{executeWords:usingContext:currentWord:@{executeWords:usingContext:currentWord:}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{executeWords:usingContext:currentWord:()}{executeWords:usingContext:currentWord:()}}
+{\footnotesize\ttfamily -\/ (void) execute\+Words\+: \begin{DoxyParamCaption}\item[{(N\+S\+Array $\ast$)}]{words }\item[{using\+Context\+:(\mbox{\hyperlink{interface_u_m_syntax_context}{U\+M\+Syntax\+Context}} $\ast$)}]{context }\item[{current\+Word\+:(N\+S\+String $\ast$)}]{word }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a0902ca97cb25a7be0f4d5870f10b1295}\label{interface_u_m_syntax_token_a0902ca97cb25a7be0f4d5870f10b1295}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!helpWords:usingContext:currentWord:@{helpWords:usingContext:currentWord:}}
+\index{helpWords:usingContext:currentWord:@{helpWords:usingContext:currentWord:}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{helpWords:usingContext:currentWord:()}{helpWords:usingContext:currentWord:()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) help\+Words\+: \begin{DoxyParamCaption}\item[{(N\+S\+Array $\ast$)}]{words }\item[{using\+Context\+:(\mbox{\hyperlink{interface_u_m_syntax_context}{U\+M\+Syntax\+Context}} $\ast$)}]{context }\item[{current\+Word\+:(N\+S\+String $\ast$)}]{current\+Word }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a954e0c4bd3e26c36186c32db062590de}\label{interface_u_m_syntax_token_a954e0c4bd3e26c36186c32db062590de}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!initWithHelp:@{initWithHelp:}}
+\index{initWithHelp:@{initWithHelp:}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{initWithHelp:()}{initWithHelp:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_syntax_token}{U\+M\+Syntax\+Token}} $\ast$) init\+With\+Help\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{h }\end{DoxyParamCaption}}
+
+
+
+Reimplemented in \mbox{\hyperlink{interface_u_m_syntax_token___digits_a796c405e782e6fc5d58b117b6074586a}{U\+M\+Syntax\+Token\+\_\+\+Digits}}, and \mbox{\hyperlink{interface_u_m_syntax_token___name_ad2b109e9bab81541f4e407a8f4c8eeee}{U\+M\+Syntax\+Token\+\_\+\+Name}}.
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_aba6ba790ac2979a612bac26fd87df38d}\label{interface_u_m_syntax_token_aba6ba790ac2979a612bac26fd87df38d}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!initWithString:@{initWithString:}}
+\index{initWithString:@{initWithString:}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{initWithString:()}{initWithString:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_syntax_token}{U\+M\+Syntax\+Token}} $\ast$) init\+With\+String\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{s }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a937ab01a563afdcc89fa2848443377f8}\label{interface_u_m_syntax_token_a937ab01a563afdcc89fa2848443377f8}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!initWithString:help:@{initWithString:help:}}
+\index{initWithString:help:@{initWithString:help:}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{initWithString:help:()}{initWithString:help:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_syntax_token}{U\+M\+Syntax\+Token}} $\ast$) \mbox{\hyperlink{interface_u_m_syntax_token_aba6ba790ac2979a612bac26fd87df38d}{init\+With\+String\+:}} \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{s }\item[{help\+:(N\+S\+String $\ast$)}]{h }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_ac37e3752305062a881764402e9886a35}\label{interface_u_m_syntax_token_ac37e3752305062a881764402e9886a35}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!initWithString:help:caseSensitive:@{initWithString:help:caseSensitive:}}
+\index{initWithString:help:caseSensitive:@{initWithString:help:caseSensitive:}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{initWithString:help:caseSensitive:()}{initWithString:help:caseSensitive:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_syntax_token}{U\+M\+Syntax\+Token}} $\ast$) \mbox{\hyperlink{interface_u_m_syntax_token_aba6ba790ac2979a612bac26fd87df38d}{init\+With\+String\+:}} \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{s }\item[{help\+:(N\+S\+String $\ast$)}]{h }\item[{case\+Sensitive\+:(B\+O\+OL)}]{cs }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a3a6877018aa5684fc1f08deba70f6440}\label{interface_u_m_syntax_token_a3a6877018aa5684fc1f08deba70f6440}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!key@{key}}
+\index{key@{key}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{key()}{key()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) key \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_ac653f3b2132c367eaf2385bdd8469c6a}\label{interface_u_m_syntax_token_ac653f3b2132c367eaf2385bdd8469c6a}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!lastTokens:@{lastTokens:}}
+\index{lastTokens:@{lastTokens:}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{lastTokens:()}{lastTokens:()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Array $\ast$) last\+Tokens\+: \begin{DoxyParamCaption}\item[{(N\+S\+Array $\ast$)}]{words }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_acf0a10a0c1f1fc78735f9b8661d4e196}\label{interface_u_m_syntax_token_acf0a10a0c1f1fc78735f9b8661d4e196}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!matchesValue:withPriority:@{matchesValue:withPriority:}}
+\index{matchesValue:withPriority:@{matchesValue:withPriority:}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{matchesValue:withPriority:()}{matchesValue:withPriority:()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) matches\+Value\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{value }\item[{with\+Priority\+:(int)}]{priority }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a7bb1364998e34829254f0614b79155c3}\label{interface_u_m_syntax_token_a7bb1364998e34829254f0614b79155c3}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!startsWithValue:withPriority:fullValue:@{startsWithValue:withPriority:fullValue:}}
+\index{startsWithValue:withPriority:fullValue:@{startsWithValue:withPriority:fullValue:}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{startsWithValue:withPriority:fullValue:()}{startsWithValue:withPriority:fullValue:()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) starts\+With\+Value\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{value }\item[{with\+Priority\+:(int)}]{prio }\item[{full\+Value\+:(N\+S\+String $\ast$$\ast$)}]{full\+Value }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_syntax_token_abfd29be69c57f6d49620edeba09f9749}\label{interface_u_m_syntax_token_abfd29be69c57f6d49620edeba09f9749}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!\_action@{\_action}}
+\index{\_action@{\_action}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{\_action}{\_action}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_syntax_action}{U\+M\+Syntax\+Action}}$\ast$) \+\_\+action\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a8282bd20a4337598466700866d2682b1}\label{interface_u_m_syntax_token_a8282bd20a4337598466700866d2682b1}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!\_caseSensitive@{\_caseSensitive}}
+\index{\_caseSensitive@{\_caseSensitive}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{\_caseSensitive}{\_caseSensitive}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+case\+Sensitive\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a5bdfecf89e72658ce2d94b117604f7e7}\label{interface_u_m_syntax_token_a5bdfecf89e72658ce2d94b117604f7e7}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!\_commandAction@{\_commandAction}}
+\index{\_commandAction@{\_commandAction}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{\_commandAction}{\_commandAction}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+command\+Action\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a39f1ff8b8298c875d9fdc3e508af1410}\label{interface_u_m_syntax_token_a39f1ff8b8298c875d9fdc3e508af1410}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!\_delegate@{\_delegate}}
+\index{\_delegate@{\_delegate}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{\_delegate}{\_delegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_command_action_protocol-p}{U\+M\+Command\+Action\+Protocol}}$>$) \+\_\+delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a0c55f6d142963017e3b95684ebcade59}\label{interface_u_m_syntax_token_a0c55f6d142963017e3b95684ebcade59}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!\_help@{\_help}}
+\index{\_help@{\_help}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{\_help}{\_help}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+help\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a132cd389808d045f3940716e00607a01}\label{interface_u_m_syntax_token_a132cd389808d045f3940716e00607a01}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!\_string@{\_string}}
+\index{\_string@{\_string}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{\_string}{\_string}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+string\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a3d7f0b22dfd7d41374938cce41f287f4}\label{interface_u_m_syntax_token_a3d7f0b22dfd7d41374938cce41f287f4}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!\_subtokens@{\_subtokens}}
+\index{\_subtokens@{\_subtokens}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{\_subtokens}{\_subtokens}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary}{U\+M\+Synchronized\+Sorted\+Dictionary}}$\ast$) \+\_\+subtokens\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_syntax_token_ae97fb2f214063fc723a7c4258f8de086}\label{interface_u_m_syntax_token_ae97fb2f214063fc723a7c4258f8de086}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!action@{action}}
+\index{action@{action}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{action}{action}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_syntax_action}{U\+M\+Syntax\+Action}}$\ast$) action\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_a0e9efcf8fd45a87fed54e188d451e779}\label{interface_u_m_syntax_token_a0e9efcf8fd45a87fed54e188d451e779}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!caseSensitive@{caseSensitive}}
+\index{caseSensitive@{caseSensitive}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{caseSensitive}{caseSensitive}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) case\+Sensitive\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_ab097c2a7bd5e388970e3a67f84b80a76}\label{interface_u_m_syntax_token_ab097c2a7bd5e388970e3a67f84b80a76}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!commandAction@{commandAction}}
+\index{commandAction@{commandAction}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{commandAction}{commandAction}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) command\+Action\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_adb9599fbbd31bedf330f9b17c3c3a0b0}\label{interface_u_m_syntax_token_adb9599fbbd31bedf330f9b17c3c3a0b0}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!delegate@{delegate}}
+\index{delegate@{delegate}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{delegate}{delegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_command_action_protocol-p}{U\+M\+Command\+Action\+Protocol}}$>$) delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_af32855eced8ffacfb2bdcb00bdbee620}\label{interface_u_m_syntax_token_af32855eced8ffacfb2bdcb00bdbee620}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!help@{help}}
+\index{help@{help}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{help}{help}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) help\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_afbbcb2d0304abe074038ee7b54a88e8f}\label{interface_u_m_syntax_token_afbbcb2d0304abe074038ee7b54a88e8f}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!string@{string}}
+\index{string@{string}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{string}{string}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) string\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_syntax_token_ad00573689ba5c84c5f168b04f0997610}\label{interface_u_m_syntax_token_ad00573689ba5c84c5f168b04f0997610}} 
+\index{UMSyntaxToken@{UMSyntaxToken}!subtokens@{subtokens}}
+\index{subtokens@{subtokens}!UMSyntaxToken@{UMSyntaxToken}}
+\doxysubsubsection{\texorpdfstring{subtokens}{subtokens}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary}{U\+M\+Synchronized\+Sorted\+Dictionary}}$\ast$) subtokens\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Tokenizer/\mbox{\hyperlink{_u_m_syntax_token_8h}{U\+M\+Syntax\+Token.\+h}}\item 
+Classes/\+Universal\+Tokenizer/\mbox{\hyperlink{_u_m_syntax_token_8m}{U\+M\+Syntax\+Token.\+m}}\end{DoxyCompactItemize}

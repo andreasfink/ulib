@@ -1,0 +1,114 @@
+\hypertarget{_u_m_sleeper_8m}{}\doxysection{Classes/\+Universal\+Utilities/\+U\+M\+Sleeper.m File Reference}
+\label{_u_m_sleeper_8m}\index{Classes/UniversalUtilities/UMSleeper.m@{Classes/UniversalUtilities/UMSleeper.m}}
+{\ttfamily \#import \char`\"{}U\+M\+Sleeper.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+File\+Tracking\+Macros.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$poll.\+h$>$}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Throughput\+Counter.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_u_m_sleeper_8m_a17c0448a2238a7ab7e8920015a36de52}{R\+X\+P\+I\+PE}}~0
+\item 
+\#define \mbox{\hyperlink{_u_m_sleeper_8m_aee92ef865a3be5f1c03e89c356d96de9}{T\+X\+P\+I\+PE}}~1
+\item 
+\#define \mbox{\hyperlink{_u_m_sleeper_8m_ac94c49932035909bc92d060b33548eec}{P\+O\+L\+L\+\_\+\+N\+O\+T\+I\+M\+E\+O\+UT}}~(-\/1)
+\item 
+\#define \mbox{\hyperlink{_u_m_sleeper_8m_a67aff6bb59724fd3a09bde039cdc1119}{S\+L\+I\+C\+E\+\_\+\+T\+I\+ME}}~(1000\+LL$\ast$1000\+LL$\ast$10\+LL$\ast$60\+LL)   /$\ast$ max 10 minutes for testing $\ast$/
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_u_m_sleeper_8m_ae05128bb654463cb3c2f7d3e66e98dfd}{pollresult}}
+\item 
+int \mbox{\hyperlink{_u_m_sleeper_8m_a1853c17443a5893d3acd539b3c7a9289}{wait\+\_\+time}}
+\item 
+\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} \mbox{\hyperlink{_u_m_sleeper_8m_ad331de754e043bc99ac590e56da92039}{start\+\_\+time}} = \mbox{[}\mbox{\hyperlink{interface_u_m_throughput_counter}{U\+M\+Throughput\+Counter}} microsecond\+Time\mbox{]}
+\item 
+\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} \mbox{\hyperlink{_u_m_sleeper_8m_a0a932187c24d4eb4cead3f331b14b220}{end\+\_\+time}} = \mbox{\hyperlink{_u_m_sleeper_8m_ad331de754e043bc99ac590e56da92039}{start\+\_\+time}} + microseconds
+\item 
+\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} \mbox{\hyperlink{_u_m_sleeper_8m_acddaafc0374ce7580af87872c3fa7ef5}{now}}
+\item 
+int \mbox{\hyperlink{_u_m_sleeper_8m_a81a8a3a775bf2b769ce2a0f687a44c9f}{events}} = P\+O\+L\+L\+IN $\vert$ P\+O\+L\+L\+P\+RI $\vert$ P\+O\+L\+L\+E\+RR $\vert$ P\+O\+L\+L\+H\+UP $\vert$ P\+O\+L\+L\+N\+V\+AL
+\item 
+return \mbox{\hyperlink{_u_m_sleeper_8m_a13ee83982e03008b8acdce931a9ce6fc}{U\+M\+Sleeper\+\_\+\+Timer\+Expired}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_u_m_sleeper_8m_ac94c49932035909bc92d060b33548eec}\label{_u_m_sleeper_8m_ac94c49932035909bc92d060b33548eec}} 
+\index{UMSleeper.m@{UMSleeper.m}!POLL\_NOTIMEOUT@{POLL\_NOTIMEOUT}}
+\index{POLL\_NOTIMEOUT@{POLL\_NOTIMEOUT}!UMSleeper.m@{UMSleeper.m}}
+\doxysubsubsection{\texorpdfstring{POLL\_NOTIMEOUT}{POLL\_NOTIMEOUT}}
+{\footnotesize\ttfamily \#define P\+O\+L\+L\+\_\+\+N\+O\+T\+I\+M\+E\+O\+UT~(-\/1)}
+
+\mbox{\Hypertarget{_u_m_sleeper_8m_a17c0448a2238a7ab7e8920015a36de52}\label{_u_m_sleeper_8m_a17c0448a2238a7ab7e8920015a36de52}} 
+\index{UMSleeper.m@{UMSleeper.m}!RXPIPE@{RXPIPE}}
+\index{RXPIPE@{RXPIPE}!UMSleeper.m@{UMSleeper.m}}
+\doxysubsubsection{\texorpdfstring{RXPIPE}{RXPIPE}}
+{\footnotesize\ttfamily \#define R\+X\+P\+I\+PE~0}
+
+\mbox{\Hypertarget{_u_m_sleeper_8m_a67aff6bb59724fd3a09bde039cdc1119}\label{_u_m_sleeper_8m_a67aff6bb59724fd3a09bde039cdc1119}} 
+\index{UMSleeper.m@{UMSleeper.m}!SLICE\_TIME@{SLICE\_TIME}}
+\index{SLICE\_TIME@{SLICE\_TIME}!UMSleeper.m@{UMSleeper.m}}
+\doxysubsubsection{\texorpdfstring{SLICE\_TIME}{SLICE\_TIME}}
+{\footnotesize\ttfamily \#define S\+L\+I\+C\+E\+\_\+\+T\+I\+ME~(1000\+LL$\ast$1000\+LL$\ast$10\+LL$\ast$60\+LL)   /$\ast$ max 10 minutes for testing $\ast$/}
+
+\mbox{\Hypertarget{_u_m_sleeper_8m_aee92ef865a3be5f1c03e89c356d96de9}\label{_u_m_sleeper_8m_aee92ef865a3be5f1c03e89c356d96de9}} 
+\index{UMSleeper.m@{UMSleeper.m}!TXPIPE@{TXPIPE}}
+\index{TXPIPE@{TXPIPE}!UMSleeper.m@{UMSleeper.m}}
+\doxysubsubsection{\texorpdfstring{TXPIPE}{TXPIPE}}
+{\footnotesize\ttfamily \#define T\+X\+P\+I\+PE~1}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{_u_m_sleeper_8m_a0a932187c24d4eb4cead3f331b14b220}\label{_u_m_sleeper_8m_a0a932187c24d4eb4cead3f331b14b220}} 
+\index{UMSleeper.m@{UMSleeper.m}!end\_time@{end\_time}}
+\index{end\_time@{end\_time}!UMSleeper.m@{UMSleeper.m}}
+\doxysubsubsection{\texorpdfstring{end\_time}{end\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} end\+\_\+time = \mbox{\hyperlink{_u_m_sleeper_8m_ad331de754e043bc99ac590e56da92039}{start\+\_\+time}} + microseconds}
+
+\mbox{\Hypertarget{_u_m_sleeper_8m_a81a8a3a775bf2b769ce2a0f687a44c9f}\label{_u_m_sleeper_8m_a81a8a3a775bf2b769ce2a0f687a44c9f}} 
+\index{UMSleeper.m@{UMSleeper.m}!events@{events}}
+\index{events@{events}!UMSleeper.m@{UMSleeper.m}}
+\doxysubsubsection{\texorpdfstring{events}{events}}
+{\footnotesize\ttfamily int events = P\+O\+L\+L\+IN $\vert$ P\+O\+L\+L\+P\+RI $\vert$ P\+O\+L\+L\+E\+RR $\vert$ P\+O\+L\+L\+H\+UP $\vert$ P\+O\+L\+L\+N\+V\+AL}
+
+\mbox{\Hypertarget{_u_m_sleeper_8m_acddaafc0374ce7580af87872c3fa7ef5}\label{_u_m_sleeper_8m_acddaafc0374ce7580af87872c3fa7ef5}} 
+\index{UMSleeper.m@{UMSleeper.m}!now@{now}}
+\index{now@{now}!UMSleeper.m@{UMSleeper.m}}
+\doxysubsubsection{\texorpdfstring{now}{now}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} now}
+
+\mbox{\Hypertarget{_u_m_sleeper_8m_ae05128bb654463cb3c2f7d3e66e98dfd}\label{_u_m_sleeper_8m_ae05128bb654463cb3c2f7d3e66e98dfd}} 
+\index{UMSleeper.m@{UMSleeper.m}!pollresult@{pollresult}}
+\index{pollresult@{pollresult}!UMSleeper.m@{UMSleeper.m}}
+\doxysubsubsection{\texorpdfstring{pollresult}{pollresult}}
+{\footnotesize\ttfamily pollresult}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{struct }pollfd pollfd[2]}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{_u_m_sleeper_8m_ad331de754e043bc99ac590e56da92039}\label{_u_m_sleeper_8m_ad331de754e043bc99ac590e56da92039}} 
+\index{UMSleeper.m@{UMSleeper.m}!start\_time@{start\_time}}
+\index{start\_time@{start\_time}!UMSleeper.m@{UMSleeper.m}}
+\doxysubsubsection{\texorpdfstring{start\_time}{start\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} start\+\_\+time = \mbox{[}\mbox{\hyperlink{interface_u_m_throughput_counter}{U\+M\+Throughput\+Counter}} microsecond\+Time\mbox{]}}
+
+\mbox{\Hypertarget{_u_m_sleeper_8m_a13ee83982e03008b8acdce931a9ce6fc}\label{_u_m_sleeper_8m_a13ee83982e03008b8acdce931a9ce6fc}} 
+\index{UMSleeper.m@{UMSleeper.m}!UMSleeper\_TimerExpired@{UMSleeper\_TimerExpired}}
+\index{UMSleeper\_TimerExpired@{UMSleeper\_TimerExpired}!UMSleeper.m@{UMSleeper.m}}
+\doxysubsubsection{\texorpdfstring{UMSleeper\_TimerExpired}{UMSleeper\_TimerExpired}}
+{\footnotesize\ttfamily return U\+M\+Sleeper\+\_\+\+Timer\+Expired}
+
+\mbox{\Hypertarget{_u_m_sleeper_8m_a1853c17443a5893d3acd539b3c7a9289}\label{_u_m_sleeper_8m_a1853c17443a5893d3acd539b3c7a9289}} 
+\index{UMSleeper.m@{UMSleeper.m}!wait\_time@{wait\_time}}
+\index{wait\_time@{wait\_time}!UMSleeper.m@{UMSleeper.m}}
+\doxysubsubsection{\texorpdfstring{wait\_time}{wait\_time}}
+{\footnotesize\ttfamily int wait\+\_\+time}
+

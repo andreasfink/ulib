@@ -1,0 +1,261 @@
+\hypertarget{interface_u_m_synchronized_array}{}\doxysection{U\+M\+Synchronized\+Array Class Reference}
+\label{interface_u_m_synchronized_array}\index{UMSynchronizedArray@{UMSynchronizedArray}}
+
+
+An array who\textquotesingle{}s access is synchronized so it can be accessed from multiple threads.  
+
+
+
+
+{\ttfamily \#import $<$U\+M\+Synchronized\+Array.\+h$>$}
+
+Inheritance diagram for U\+M\+Synchronized\+Array\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_u_m_synchronized_array}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_a8da74aaec4015aa3309abda2e9795f20}{init}}
+\item 
+(\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_af2d149e669de16da367862b72170fa57}{init\+With\+Array\+:}}
+\item 
+(\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_ad88b7c4bd3a906e27d35a08a3060234d}{init\+With\+String\+Lines\+:}}
+\item 
+(N\+S\+U\+Integer) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_aa14016f13a82efb7e2d2f3bbd7539f4e}{count}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_a2c10348acde3f1603aa47da5fa37d0b2}{add\+Object\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_a40fdc53f689878bd151c80ef664034f7}{insert\+Object\+:at\+Index\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_addb017d8f66fa44ce7260d91227cd24c}{remove\+Last\+Object}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_a46df4b5555e0934a8d9af48487a4cee7}{remove\+Object\+At\+Index\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_ae63ad62debe31db8c55229563947861b}{replace\+Object\+At\+Index\+:with\+Object\+:}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_ac968298a33162a2ca7a98921a664ec99}{object\+At\+Index\+:}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_aeb0b69d2722e0e92718cf5efcac7c023}{string\+Lines}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_a928eb93a329009d37e0a631dd93c6e4d}{add\+Printable\+String\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_a0606094ba98e0bb62715af137e850f61}{remove\+Object\+:}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_a8459b686ec8351e9ba3a0466424f0c6b}{remove\+First}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_a39afe96648f34653d95e30b02d0d58e9}{set\+Object\+:at\+Indexed\+Subscript\+:}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_aa68a4afbc2d140b0b9f5cee3ad3c1e51}{object\+At\+Indexed\+Subscript\+:}}
+\item 
+(N\+S\+Mutable\+Array $\ast$) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_a045b875d165fbb23279bd402e61c59e3}{mutable\+Copy}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_a547b27bc84f35467d50541cd4eafe9fb}{append\+Array\+:}}
+\item 
+(N\+S\+Array $\ast$) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_accb7f5bf85fa3655e4ff6a4a8727c1bd}{array\+Copy}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_a42a44785bba19c4b91f807cbcf9be917}{json\+String}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_synchronized_array_a960ddee2f5d96402b69e5ff9950b90e6}{json\+Compact\+String}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(instancetype) + \mbox{\hyperlink{interface_u_m_synchronized_array_a122cc6a325ca4c3286ea510079a4c1ca}{synchronized\+Array}}
+\item 
+(instancetype) + \mbox{\hyperlink{interface_u_m_synchronized_array_ac8646b4cd53e715066c962a1f217471d}{synchronized\+Array\+With\+Array\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+Mutable\+Array $\ast$ \mbox{\hyperlink{interface_u_m_synchronized_array_a7a35c91944555e976d087e0029f6a4e2}{\+\_\+array}}
+\item 
+\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}} $\ast$ \mbox{\hyperlink{interface_u_m_synchronized_array_a268e68d28429f81bbb3ea6728875611c}{\+\_\+mutex}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+Mutable\+Array $\ast$ \mbox{\hyperlink{interface_u_m_synchronized_array_a771d6253423d2640f591aae7a9661dbc}{array}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An array who\textquotesingle{}s access is synchronized so it can be accessed from multiple threads. 
+
+\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}} can be used like N\+S\+Mutable\+Array (but its not a subclass of it). To create a \mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}} from a N\+S\+Array use the init\+With\+Array initializer. To create a N\+S\+Array/\+N\+S\+Mutable\+Array from \mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}}, use mutable\+Copy method. 
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a2c10348acde3f1603aa47da5fa37d0b2}\label{interface_u_m_synchronized_array_a2c10348acde3f1603aa47da5fa37d0b2}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!addObject:@{addObject:}}
+\index{addObject:@{addObject:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{addObject:()}{addObject:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Object\+: \begin{DoxyParamCaption}\item[{(id)}]{an\+Object }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a928eb93a329009d37e0a631dd93c6e4d}\label{interface_u_m_synchronized_array_a928eb93a329009d37e0a631dd93c6e4d}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!addPrintableString:@{addPrintableString:}}
+\index{addPrintableString:@{addPrintableString:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{addPrintableString:()}{addPrintableString:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Printable\+String\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{s }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a547b27bc84f35467d50541cd4eafe9fb}\label{interface_u_m_synchronized_array_a547b27bc84f35467d50541cd4eafe9fb}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!appendArray:@{appendArray:}}
+\index{appendArray:@{appendArray:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{appendArray:()}{appendArray:()}}
+{\footnotesize\ttfamily -\/ (void) append\+Array\+: \begin{DoxyParamCaption}\item[{(N\+S\+Array $\ast$)}]{app }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_accb7f5bf85fa3655e4ff6a4a8727c1bd}\label{interface_u_m_synchronized_array_accb7f5bf85fa3655e4ff6a4a8727c1bd}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!arrayCopy@{arrayCopy}}
+\index{arrayCopy@{arrayCopy}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{arrayCopy()}{arrayCopy()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Array $\ast$) array\+Copy \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_aa14016f13a82efb7e2d2f3bbd7539f4e}\label{interface_u_m_synchronized_array_aa14016f13a82efb7e2d2f3bbd7539f4e}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!count@{count}}
+\index{count@{count}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily -\/ (N\+S\+U\+Integer) count \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a8da74aaec4015aa3309abda2e9795f20}\label{interface_u_m_synchronized_array_a8da74aaec4015aa3309abda2e9795f20}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!init@{init}}
+\index{init@{init}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily -\/ (id) init \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_object_aeaac514e683838e31be4c2676923bbd3}{U\+M\+Object}}.
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_af2d149e669de16da367862b72170fa57}\label{interface_u_m_synchronized_array_af2d149e669de16da367862b72170fa57}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!initWithArray:@{initWithArray:}}
+\index{initWithArray:@{initWithArray:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{initWithArray:()}{initWithArray:()}}
+{\footnotesize\ttfamily -\/ (id) init\+With\+Array\+: \begin{DoxyParamCaption}\item[{(N\+S\+Array $\ast$)}]{arr }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_ad88b7c4bd3a906e27d35a08a3060234d}\label{interface_u_m_synchronized_array_ad88b7c4bd3a906e27d35a08a3060234d}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!initWithStringLines:@{initWithStringLines:}}
+\index{initWithStringLines:@{initWithStringLines:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{initWithStringLines:()}{initWithStringLines:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}} $\ast$) init\+With\+String\+Lines\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{lines }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a40fdc53f689878bd151c80ef664034f7}\label{interface_u_m_synchronized_array_a40fdc53f689878bd151c80ef664034f7}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!insertObject:atIndex:@{insertObject:atIndex:}}
+\index{insertObject:atIndex:@{insertObject:atIndex:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{insertObject:atIndex:()}{insertObject:atIndex:()}}
+{\footnotesize\ttfamily -\/ (void) insert\+Object\+: \begin{DoxyParamCaption}\item[{(id)}]{an\+Object }\item[{at\+Index\+:(N\+S\+U\+Integer)}]{index }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a960ddee2f5d96402b69e5ff9950b90e6}\label{interface_u_m_synchronized_array_a960ddee2f5d96402b69e5ff9950b90e6}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!jsonCompactString@{jsonCompactString}}
+\index{jsonCompactString@{jsonCompactString}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{jsonCompactString()}{jsonCompactString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) json\+Compact\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a42a44785bba19c4b91f807cbcf9be917}\label{interface_u_m_synchronized_array_a42a44785bba19c4b91f807cbcf9be917}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!jsonString@{jsonString}}
+\index{jsonString@{jsonString}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{jsonString()}{jsonString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) json\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a045b875d165fbb23279bd402e61c59e3}\label{interface_u_m_synchronized_array_a045b875d165fbb23279bd402e61c59e3}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!mutableCopy@{mutableCopy}}
+\index{mutableCopy@{mutableCopy}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{mutableCopy()}{mutableCopy()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Array $\ast$) mutable\+Copy \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_ac968298a33162a2ca7a98921a664ec99}\label{interface_u_m_synchronized_array_ac968298a33162a2ca7a98921a664ec99}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!objectAtIndex:@{objectAtIndex:}}
+\index{objectAtIndex:@{objectAtIndex:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{objectAtIndex:()}{objectAtIndex:()}}
+{\footnotesize\ttfamily -\/ (id) object\+At\+Index\+: \begin{DoxyParamCaption}\item[{(N\+S\+U\+Integer)}]{index }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_aa68a4afbc2d140b0b9f5cee3ad3c1e51}\label{interface_u_m_synchronized_array_aa68a4afbc2d140b0b9f5cee3ad3c1e51}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!objectAtIndexedSubscript:@{objectAtIndexedSubscript:}}
+\index{objectAtIndexedSubscript:@{objectAtIndexedSubscript:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{objectAtIndexedSubscript:()}{objectAtIndexedSubscript:()}}
+{\footnotesize\ttfamily -\/ (id) object\+At\+Indexed\+Subscript\+: \begin{DoxyParamCaption}\item[{(N\+S\+U\+Integer)}]{idx }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a8459b686ec8351e9ba3a0466424f0c6b}\label{interface_u_m_synchronized_array_a8459b686ec8351e9ba3a0466424f0c6b}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!removeFirst@{removeFirst}}
+\index{removeFirst@{removeFirst}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{removeFirst()}{removeFirst()}}
+{\footnotesize\ttfamily -\/ (id) remove\+First \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_addb017d8f66fa44ce7260d91227cd24c}\label{interface_u_m_synchronized_array_addb017d8f66fa44ce7260d91227cd24c}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!removeLastObject@{removeLastObject}}
+\index{removeLastObject@{removeLastObject}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{removeLastObject()}{removeLastObject()}}
+{\footnotesize\ttfamily -\/ (void) remove\+Last\+Object \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a0606094ba98e0bb62715af137e850f61}\label{interface_u_m_synchronized_array_a0606094ba98e0bb62715af137e850f61}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!removeObject:@{removeObject:}}
+\index{removeObject:@{removeObject:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{removeObject:()}{removeObject:()}}
+{\footnotesize\ttfamily -\/ (void) remove\+Object\+: \begin{DoxyParamCaption}\item[{(id)}]{obj }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a46df4b5555e0934a8d9af48487a4cee7}\label{interface_u_m_synchronized_array_a46df4b5555e0934a8d9af48487a4cee7}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!removeObjectAtIndex:@{removeObjectAtIndex:}}
+\index{removeObjectAtIndex:@{removeObjectAtIndex:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{removeObjectAtIndex:()}{removeObjectAtIndex:()}}
+{\footnotesize\ttfamily -\/ (void) remove\+Object\+At\+Index\+: \begin{DoxyParamCaption}\item[{(N\+S\+U\+Integer)}]{index }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_ae63ad62debe31db8c55229563947861b}\label{interface_u_m_synchronized_array_ae63ad62debe31db8c55229563947861b}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!replaceObjectAtIndex:withObject:@{replaceObjectAtIndex:withObject:}}
+\index{replaceObjectAtIndex:withObject:@{replaceObjectAtIndex:withObject:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{replaceObjectAtIndex:withObject:()}{replaceObjectAtIndex:withObject:()}}
+{\footnotesize\ttfamily -\/ (void) replace\+Object\+At\+Index\+: \begin{DoxyParamCaption}\item[{(N\+S\+U\+Integer)}]{index }\item[{with\+Object\+:(id)}]{an\+Object }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a39afe96648f34653d95e30b02d0d58e9}\label{interface_u_m_synchronized_array_a39afe96648f34653d95e30b02d0d58e9}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!setObject:atIndexedSubscript:@{setObject:atIndexedSubscript:}}
+\index{setObject:atIndexedSubscript:@{setObject:atIndexedSubscript:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{setObject:atIndexedSubscript:()}{setObject:atIndexedSubscript:()}}
+{\footnotesize\ttfamily -\/ (void) set\+Object\+: \begin{DoxyParamCaption}\item[{(id)}]{obj }\item[{at\+Indexed\+Subscript\+:(N\+S\+U\+Integer)}]{idx }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_aeb0b69d2722e0e92718cf5efcac7c023}\label{interface_u_m_synchronized_array_aeb0b69d2722e0e92718cf5efcac7c023}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!stringLines@{stringLines}}
+\index{stringLines@{stringLines}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{stringLines()}{stringLines()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) string\+Lines \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a122cc6a325ca4c3286ea510079a4c1ca}\label{interface_u_m_synchronized_array_a122cc6a325ca4c3286ea510079a4c1ca}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!synchronizedArray@{synchronizedArray}}
+\index{synchronizedArray@{synchronizedArray}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{synchronizedArray()}{synchronizedArray()}}
+{\footnotesize\ttfamily + (instancetype) synchronized\+Array \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_ac8646b4cd53e715066c962a1f217471d}\label{interface_u_m_synchronized_array_ac8646b4cd53e715066c962a1f217471d}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!synchronizedArrayWithArray:@{synchronizedArrayWithArray:}}
+\index{synchronizedArrayWithArray:@{synchronizedArrayWithArray:}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{synchronizedArrayWithArray:()}{synchronizedArrayWithArray:()}}
+{\footnotesize\ttfamily + (instancetype) synchronized\+Array\+With\+Array\+: \begin{DoxyParamCaption}\item[{(N\+S\+Array $\ast$)}]{array }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a7a35c91944555e976d087e0029f6a4e2}\label{interface_u_m_synchronized_array_a7a35c91944555e976d087e0029f6a4e2}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!\_array@{\_array}}
+\index{\_array@{\_array}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{\_array}{\_array}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Array$\ast$) \+\_\+array\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a268e68d28429f81bbb3ea6728875611c}\label{interface_u_m_synchronized_array_a268e68d28429f81bbb3ea6728875611c}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!\_mutex@{\_mutex}}
+\index{\_mutex@{\_mutex}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{\_mutex}{\_mutex}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}}$\ast$) \+\_\+mutex\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_synchronized_array_a771d6253423d2640f591aae7a9661dbc}\label{interface_u_m_synchronized_array_a771d6253423d2640f591aae7a9661dbc}} 
+\index{UMSynchronizedArray@{UMSynchronizedArray}!array@{array}}
+\index{array@{array}!UMSynchronizedArray@{UMSynchronizedArray}}
+\doxysubsubsection{\texorpdfstring{array}{array}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Array$\ast$) array\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_synchronized_array_8h}{U\+M\+Synchronized\+Array.\+h}}\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_synchronized_array_8m}{U\+M\+Synchronized\+Array.\+m}}\end{DoxyCompactItemize}

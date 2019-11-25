@@ -1,0 +1,159 @@
+\hypertarget{interface_u_m_file_tracking_info}{}\doxysection{U\+M\+File\+Tracking\+Info Class Reference}
+\label{interface_u_m_file_tracking_info}\index{UMFileTrackingInfo@{UMFileTrackingInfo}}
+
+
+A object holding the data used by \mbox{\hyperlink{interface_u_m_file_tracker}{U\+M\+File\+Tracker}}.  
+
+
+
+
+{\ttfamily \#import $<$U\+M\+File\+Tracking\+Info.\+h$>$}
+
+Inheritance diagram for U\+M\+File\+Tracking\+Info\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_u_m_file_tracking_info}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_file_tracking_info_a726273cf9ac73b72d5bbda6e20fd3a46}{key}}
+\item 
+(\mbox{\hyperlink{interface_u_m_file_tracking_info}{U\+M\+File\+Tracking\+Info}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_file_tracking_info_ac4338d7ba76c8d17b00b10d0fa89a7f1}{init\+With\+Descriptor\+:file\+:line\+:func\+:}}
+\item 
+(\mbox{\hyperlink{interface_u_m_file_tracking_info}{U\+M\+File\+Tracking\+Info}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_file_tracking_info_aa8f68a787de7d7caef4d1431502f3dfc}{init\+With\+Pipe\+:file\+:line\+:func\+:}}
+\item 
+(\mbox{\hyperlink{interface_u_m_file_tracking_info}{U\+M\+File\+Tracking\+Info}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_file_tracking_info_ad19cc250603ab331267d5af3d2be70eb}{init\+With\+Socket\+:file\+:line\+:func\+:}}
+\item 
+(\mbox{\hyperlink{interface_u_m_file_tracking_info}{U\+M\+File\+Tracking\+Info}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_file_tracking_info_adfa367301fd2c43cc44f7e85529b60b8}{init\+With\+File\+:file\+:line\+:func\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_file_tracking_info_a81e25e563c8c53c5215ee7cd485615ef}{add\+Log\+:file\+:line\+:func\+:}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_file_tracking_info_adb134384632f5d0480ac4b5980f6b40c}{description\+With\+Index\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_u_m_history_log}{U\+M\+History\+Log}} $\ast$ \mbox{\hyperlink{interface_u_m_file_tracking_info_a0784e3905c48c116f4dfb917540a55fc}{\+\_\+history}}
+\item 
+\mbox{\hyperlink{_u_m_file_tracking_info_8h_a76a236a66447850c040ae2b46b4f135f}{U\+M\+File\+Tracking\+Info\+\_\+type}} \mbox{\hyperlink{interface_u_m_file_tracking_info_adf4d98bdb3eaa42faf2a4890fb0e9d6b}{type}}
+\item 
+int \mbox{\hyperlink{interface_u_m_file_tracking_info_af652fe43613b29a51bb4653aee049c16}{fdes}}
+\item 
+F\+I\+LE $\ast$ \mbox{\hyperlink{interface_u_m_file_tracking_info_a37b842b95284e9b63c8427805abc99da}{f}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_file_tracking_info_ae17f920cd34ad44e6e115f2e545c221e}{location\+File}}
+\item 
+long \mbox{\hyperlink{interface_u_m_file_tracking_info_a72e84e6ff02b35dbf5f134e7cee165fb}{location\+Line}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_file_tracking_info_a56e8757ae16bc5a8d597cb0155f451ea}{location\+Function}}
+\item 
+\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}} $\ast$ \mbox{\hyperlink{interface_u_m_file_tracking_info_a7c944c965281b3d921639e23979438a0}{\+\_\+lock}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A object holding the data used by \mbox{\hyperlink{interface_u_m_file_tracker}{U\+M\+File\+Tracker}}. 
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_a81e25e563c8c53c5215ee7cd485615ef}\label{interface_u_m_file_tracking_info_a81e25e563c8c53c5215ee7cd485615ef}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!addLog:file:line:func:@{addLog:file:line:func:}}
+\index{addLog:file:line:func:@{addLog:file:line:func:}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{addLog:file:line:func:()}{addLog:file:line:func:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Log\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{message }\item[{file\+:(const char $\ast$)}]{file }\item[{line\+:(long)}]{line }\item[{func\+:(const char $\ast$)}]{func }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_adb134384632f5d0480ac4b5980f6b40c}\label{interface_u_m_file_tracking_info_adb134384632f5d0480ac4b5980f6b40c}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!descriptionWithIndex:@{descriptionWithIndex:}}
+\index{descriptionWithIndex:@{descriptionWithIndex:}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{descriptionWithIndex:()}{descriptionWithIndex:()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) description\+With\+Index\+: \begin{DoxyParamCaption}\item[{(int)}]{index }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_ac4338d7ba76c8d17b00b10d0fa89a7f1}\label{interface_u_m_file_tracking_info_ac4338d7ba76c8d17b00b10d0fa89a7f1}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!initWithDescriptor:file:line:func:@{initWithDescriptor:file:line:func:}}
+\index{initWithDescriptor:file:line:func:@{initWithDescriptor:file:line:func:}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{initWithDescriptor:file:line:func:()}{initWithDescriptor:file:line:func:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_file_tracking_info}{U\+M\+File\+Tracking\+Info}} $\ast$) init\+With\+Descriptor\+: \begin{DoxyParamCaption}\item[{(int)}]{desc }\item[{file\+:(N\+S\+String $\ast$)}]{file }\item[{line\+:(long)}]{line }\item[{func\+:(N\+S\+String $\ast$)}]{func }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_adfa367301fd2c43cc44f7e85529b60b8}\label{interface_u_m_file_tracking_info_adfa367301fd2c43cc44f7e85529b60b8}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!initWithFile:file:line:func:@{initWithFile:file:line:func:}}
+\index{initWithFile:file:line:func:@{initWithFile:file:line:func:}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{initWithFile:file:line:func:()}{initWithFile:file:line:func:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_file_tracking_info}{U\+M\+File\+Tracking\+Info}} $\ast$) init\+With\+File\+: \begin{DoxyParamCaption}\item[{(F\+I\+LE $\ast$)}]{f1 }\item[{file\+:(N\+S\+String $\ast$)}]{file }\item[{line\+:(long)}]{line }\item[{func\+:(N\+S\+String $\ast$)}]{func }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_aa8f68a787de7d7caef4d1431502f3dfc}\label{interface_u_m_file_tracking_info_aa8f68a787de7d7caef4d1431502f3dfc}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!initWithPipe:file:line:func:@{initWithPipe:file:line:func:}}
+\index{initWithPipe:file:line:func:@{initWithPipe:file:line:func:}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{initWithPipe:file:line:func:()}{initWithPipe:file:line:func:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_file_tracking_info}{U\+M\+File\+Tracking\+Info}} $\ast$) init\+With\+Pipe\+: \begin{DoxyParamCaption}\item[{(int)}]{desc }\item[{file\+:(N\+S\+String $\ast$)}]{file }\item[{line\+:(long)}]{line }\item[{func\+:(N\+S\+String $\ast$)}]{func }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_ad19cc250603ab331267d5af3d2be70eb}\label{interface_u_m_file_tracking_info_ad19cc250603ab331267d5af3d2be70eb}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!initWithSocket:file:line:func:@{initWithSocket:file:line:func:}}
+\index{initWithSocket:file:line:func:@{initWithSocket:file:line:func:}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{initWithSocket:file:line:func:()}{initWithSocket:file:line:func:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_file_tracking_info}{U\+M\+File\+Tracking\+Info}} $\ast$) init\+With\+Socket\+: \begin{DoxyParamCaption}\item[{(int)}]{desc }\item[{file\+:(N\+S\+String $\ast$)}]{file }\item[{line\+:(long)}]{line }\item[{func\+:(N\+S\+String $\ast$)}]{func }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_a726273cf9ac73b72d5bbda6e20fd3a46}\label{interface_u_m_file_tracking_info_a726273cf9ac73b72d5bbda6e20fd3a46}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!key@{key}}
+\index{key@{key}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{key()}{key()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) key \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_a0784e3905c48c116f4dfb917540a55fc}\label{interface_u_m_file_tracking_info_a0784e3905c48c116f4dfb917540a55fc}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!\_history@{\_history}}
+\index{\_history@{\_history}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{\_history}{\_history}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_history_log}{U\+M\+History\+Log}}$\ast$) \+\_\+history\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_a7c944c965281b3d921639e23979438a0}\label{interface_u_m_file_tracking_info_a7c944c965281b3d921639e23979438a0}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!\_lock@{\_lock}}
+\index{\_lock@{\_lock}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{\_lock}{\_lock}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}}$\ast$) \+\_\+lock\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_a37b842b95284e9b63c8427805abc99da}\label{interface_u_m_file_tracking_info_a37b842b95284e9b63c8427805abc99da}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!f@{f}}
+\index{f@{f}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{f}{f}}
+{\footnotesize\ttfamily -\/ (F\+I\+LE$\ast$) f\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_af652fe43613b29a51bb4653aee049c16}\label{interface_u_m_file_tracking_info_af652fe43613b29a51bb4653aee049c16}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!fdes@{fdes}}
+\index{fdes@{fdes}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{fdes}{fdes}}
+{\footnotesize\ttfamily -\/ (int) fdes\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_ae17f920cd34ad44e6e115f2e545c221e}\label{interface_u_m_file_tracking_info_ae17f920cd34ad44e6e115f2e545c221e}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!locationFile@{locationFile}}
+\index{locationFile@{locationFile}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{locationFile}{locationFile}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) location\+File\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_a56e8757ae16bc5a8d597cb0155f451ea}\label{interface_u_m_file_tracking_info_a56e8757ae16bc5a8d597cb0155f451ea}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!locationFunction@{locationFunction}}
+\index{locationFunction@{locationFunction}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{locationFunction}{locationFunction}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) location\+Function\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_a72e84e6ff02b35dbf5f134e7cee165fb}\label{interface_u_m_file_tracking_info_a72e84e6ff02b35dbf5f134e7cee165fb}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!locationLine@{locationLine}}
+\index{locationLine@{locationLine}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{locationLine}{locationLine}}
+{\footnotesize\ttfamily -\/ (long) location\+Line\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_file_tracking_info_adf4d98bdb3eaa42faf2a4890fb0e9d6b}\label{interface_u_m_file_tracking_info_adf4d98bdb3eaa42faf2a4890fb0e9d6b}} 
+\index{UMFileTrackingInfo@{UMFileTrackingInfo}!type@{type}}
+\index{type@{type}!UMFileTrackingInfo@{UMFileTrackingInfo}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_file_tracking_info_8h_a76a236a66447850c040ae2b46b4f135f}{U\+M\+File\+Tracking\+Info\+\_\+type}}) type\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_file_tracking_info_8h}{U\+M\+File\+Tracking\+Info.\+h}}\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_file_tracking_info_8m}{U\+M\+File\+Tracking\+Info.\+m}}\end{DoxyCompactItemize}

@@ -1,0 +1,197 @@
+\hypertarget{interface_u_m_sleeper}{}\doxysection{U\+M\+Sleeper Class Reference}
+\label{interface_u_m_sleeper}\index{UMSleeper@{UMSleeper}}
+
+
+{\ttfamily \#import $<$U\+M\+Sleeper.\+h$>$}
+
+Inheritance diagram for U\+M\+Sleeper\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_u_m_sleeper}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{interface_u_m_sleeper}{U\+M\+Sleeper}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_sleeper_a9a09739cbb0253ab430a600fa3abf1a0}{init\+From\+File\+:line\+:function\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_sleeper_a0c58aff5e6751f37d89b9ed3abde81cf}{prepare}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_sleeper_a2c0386a51cbc93fc2805fddcee97e683}{dealloc}}
+\item 
+(\mbox{\hyperlink{_u_m_sleeper_8h_a6ca00a80b0d1970abc0c9944439942bf}{U\+M\+Sleeper\+\_\+\+Signal}}) -\/ \mbox{\hyperlink{interface_u_m_sleeper_a70d3aafd106ad8437bcf548b7225fa84}{sleep\+:wake\+On\+:}}
+\item 
+(\mbox{\hyperlink{_u_m_sleeper_8h_a6ca00a80b0d1970abc0c9944439942bf}{U\+M\+Sleeper\+\_\+\+Signal}}) -\/ \mbox{\hyperlink{interface_u_m_sleeper_ad47af0b33241b9ae095e7b7e303496f3}{sleep\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_sleeper_a4f3d45984d700eb52c366be148395db2}{reset}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_sleeper_a77d00e9d78974cc0e4e56455e41e4805}{wake\+Up\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_sleeper_a0176db013aa4c8e6e3a8066e9673f71d}{wake\+Up}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{interface_u_m_sleeper_a3e909b61912f8fb207b42fbaf482f1ce}{\+\_\+rxpipe}}
+\item 
+int \mbox{\hyperlink{interface_u_m_sleeper_ae05c2e8a67360be38753f71f6875a8f3}{\+\_\+txpipe}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_sleeper_a3dc80f323060c1e5576c42d0da381446}{\+\_\+is\+Prepared}}
+\item 
+const char $\ast$ \mbox{\hyperlink{interface_u_m_sleeper_a710cd37a582a4a93e1996454c477ecf8}{\+\_\+ifile}}
+\item 
+long \mbox{\hyperlink{interface_u_m_sleeper_aea8d5d822e9b75831c17bae4d0a81d6f}{\+\_\+iline}}
+\item 
+const char $\ast$ \mbox{\hyperlink{interface_u_m_sleeper_a1323612e6cd9443f5b52ee770347d594}{\+\_\+ifunction}}
+\item 
+\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}} $\ast$ \mbox{\hyperlink{interface_u_m_sleeper_a491589644a897f2f6d5ae99e04e92b21}{\+\_\+prepare\+Lock}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_sleeper_a07b4e6d84012618b33445db8efcba4f2}{\+\_\+debug}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_sleeper_a8c22413e0c887d585473dd55d3df3c42}{is\+Prepared}}
+\item 
+int \mbox{\hyperlink{interface_u_m_sleeper_a8283d34c019dc0f91abf118bc399f442}{rxpipe}}
+\item 
+int \mbox{\hyperlink{interface_u_m_sleeper_aaf0a4d42584b86b0820a858ac4a952f8}{txpipe}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_sleeper_a61ee53b05d0553e91468d2c9cc052a94}{debug}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_sleeper_a2c0386a51cbc93fc2805fddcee97e683}\label{interface_u_m_sleeper_a2c0386a51cbc93fc2805fddcee97e683}} 
+\index{UMSleeper@{UMSleeper}!dealloc@{dealloc}}
+\index{dealloc@{dealloc}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{dealloc()}{dealloc()}}
+{\footnotesize\ttfamily -\/ (void) dealloc \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a9a09739cbb0253ab430a600fa3abf1a0}\label{interface_u_m_sleeper_a9a09739cbb0253ab430a600fa3abf1a0}} 
+\index{UMSleeper@{UMSleeper}!initFromFile:line:function:@{initFromFile:line:function:}}
+\index{initFromFile:line:function:@{initFromFile:line:function:}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{initFromFile:line:function:()}{initFromFile:line:function:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_sleeper}{U\+M\+Sleeper}} $\ast$) init\+From\+File\+: \begin{DoxyParamCaption}\item[{(const char $\ast$)}]{file }\item[{line\+:(long)}]{line }\item[{function\+:(const char $\ast$)}]{function }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a0c58aff5e6751f37d89b9ed3abde81cf}\label{interface_u_m_sleeper_a0c58aff5e6751f37d89b9ed3abde81cf}} 
+\index{UMSleeper@{UMSleeper}!prepare@{prepare}}
+\index{prepare@{prepare}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{prepare()}{prepare()}}
+{\footnotesize\ttfamily -\/ (void) prepare \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a4f3d45984d700eb52c366be148395db2}\label{interface_u_m_sleeper_a4f3d45984d700eb52c366be148395db2}} 
+\index{UMSleeper@{UMSleeper}!reset@{reset}}
+\index{reset@{reset}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily -\/ (void) reset \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_ad47af0b33241b9ae095e7b7e303496f3}\label{interface_u_m_sleeper_ad47af0b33241b9ae095e7b7e303496f3}} 
+\index{UMSleeper@{UMSleeper}!sleep:@{sleep:}}
+\index{sleep:@{sleep:}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{sleep:()}{sleep:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_sleeper_8h_a6ca00a80b0d1970abc0c9944439942bf}{U\+M\+Sleeper\+\_\+\+Signal}}) sleep\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}})}]{microseconds }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a70d3aafd106ad8437bcf548b7225fa84}\label{interface_u_m_sleeper_a70d3aafd106ad8437bcf548b7225fa84}} 
+\index{UMSleeper@{UMSleeper}!sleep:wakeOn:@{sleep:wakeOn:}}
+\index{sleep:wakeOn:@{sleep:wakeOn:}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{sleep:wakeOn:()}{sleep:wakeOn:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_sleeper_8h_a6ca00a80b0d1970abc0c9944439942bf}{U\+M\+Sleeper\+\_\+\+Signal}}) \mbox{\hyperlink{interface_u_m_sleeper_ad47af0b33241b9ae095e7b7e303496f3}{sleep\+:}} \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}})}]{microseconds }\item[{wake\+On\+:(\mbox{\hyperlink{_u_m_sleeper_8h_a6ca00a80b0d1970abc0c9944439942bf}{U\+M\+Sleeper\+\_\+\+Signal}})}]{sig }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a0176db013aa4c8e6e3a8066e9673f71d}\label{interface_u_m_sleeper_a0176db013aa4c8e6e3a8066e9673f71d}} 
+\index{UMSleeper@{UMSleeper}!wakeUp@{wakeUp}}
+\index{wakeUp@{wakeUp}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{wakeUp()}{wakeUp()}}
+{\footnotesize\ttfamily -\/ (void) wake\+Up \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a77d00e9d78974cc0e4e56455e41e4805}\label{interface_u_m_sleeper_a77d00e9d78974cc0e4e56455e41e4805}} 
+\index{UMSleeper@{UMSleeper}!wakeUp:@{wakeUp:}}
+\index{wakeUp:@{wakeUp:}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{wakeUp:()}{wakeUp:()}}
+{\footnotesize\ttfamily -\/ (void) wake\+Up\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{_u_m_sleeper_8h_a6ca00a80b0d1970abc0c9944439942bf}{U\+M\+Sleeper\+\_\+\+Signal}})}]{signal }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_sleeper_a07b4e6d84012618b33445db8efcba4f2}\label{interface_u_m_sleeper_a07b4e6d84012618b33445db8efcba4f2}} 
+\index{UMSleeper@{UMSleeper}!\_debug@{\_debug}}
+\index{\_debug@{\_debug}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{\_debug}{\_debug}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+debug\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a710cd37a582a4a93e1996454c477ecf8}\label{interface_u_m_sleeper_a710cd37a582a4a93e1996454c477ecf8}} 
+\index{UMSleeper@{UMSleeper}!\_ifile@{\_ifile}}
+\index{\_ifile@{\_ifile}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{\_ifile}{\_ifile}}
+{\footnotesize\ttfamily -\/ (const char$\ast$) \+\_\+ifile\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a1323612e6cd9443f5b52ee770347d594}\label{interface_u_m_sleeper_a1323612e6cd9443f5b52ee770347d594}} 
+\index{UMSleeper@{UMSleeper}!\_ifunction@{\_ifunction}}
+\index{\_ifunction@{\_ifunction}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{\_ifunction}{\_ifunction}}
+{\footnotesize\ttfamily -\/ (const char$\ast$) \+\_\+ifunction\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_aea8d5d822e9b75831c17bae4d0a81d6f}\label{interface_u_m_sleeper_aea8d5d822e9b75831c17bae4d0a81d6f}} 
+\index{UMSleeper@{UMSleeper}!\_iline@{\_iline}}
+\index{\_iline@{\_iline}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{\_iline}{\_iline}}
+{\footnotesize\ttfamily -\/ (long) \+\_\+iline\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a3dc80f323060c1e5576c42d0da381446}\label{interface_u_m_sleeper_a3dc80f323060c1e5576c42d0da381446}} 
+\index{UMSleeper@{UMSleeper}!\_isPrepared@{\_isPrepared}}
+\index{\_isPrepared@{\_isPrepared}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{\_isPrepared}{\_isPrepared}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+is\+Prepared\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a491589644a897f2f6d5ae99e04e92b21}\label{interface_u_m_sleeper_a491589644a897f2f6d5ae99e04e92b21}} 
+\index{UMSleeper@{UMSleeper}!\_prepareLock@{\_prepareLock}}
+\index{\_prepareLock@{\_prepareLock}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{\_prepareLock}{\_prepareLock}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}}$\ast$) \+\_\+prepare\+Lock\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a3e909b61912f8fb207b42fbaf482f1ce}\label{interface_u_m_sleeper_a3e909b61912f8fb207b42fbaf482f1ce}} 
+\index{UMSleeper@{UMSleeper}!\_rxpipe@{\_rxpipe}}
+\index{\_rxpipe@{\_rxpipe}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{\_rxpipe}{\_rxpipe}}
+{\footnotesize\ttfamily -\/ (int) \+\_\+rxpipe\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_ae05c2e8a67360be38753f71f6875a8f3}\label{interface_u_m_sleeper_ae05c2e8a67360be38753f71f6875a8f3}} 
+\index{UMSleeper@{UMSleeper}!\_txpipe@{\_txpipe}}
+\index{\_txpipe@{\_txpipe}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{\_txpipe}{\_txpipe}}
+{\footnotesize\ttfamily -\/ (int) \+\_\+txpipe\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_sleeper_a61ee53b05d0553e91468d2c9cc052a94}\label{interface_u_m_sleeper_a61ee53b05d0553e91468d2c9cc052a94}} 
+\index{UMSleeper@{UMSleeper}!debug@{debug}}
+\index{debug@{debug}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{debug}{debug}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) debug\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a8c22413e0c887d585473dd55d3df3c42}\label{interface_u_m_sleeper_a8c22413e0c887d585473dd55d3df3c42}} 
+\index{UMSleeper@{UMSleeper}!isPrepared@{isPrepared}}
+\index{isPrepared@{isPrepared}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{isPrepared}{isPrepared}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) is\+Prepared\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_a8283d34c019dc0f91abf118bc399f442}\label{interface_u_m_sleeper_a8283d34c019dc0f91abf118bc399f442}} 
+\index{UMSleeper@{UMSleeper}!rxpipe@{rxpipe}}
+\index{rxpipe@{rxpipe}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{rxpipe}{rxpipe}}
+{\footnotesize\ttfamily -\/ (int) rxpipe\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_sleeper_aaf0a4d42584b86b0820a858ac4a952f8}\label{interface_u_m_sleeper_aaf0a4d42584b86b0820a858ac4a952f8}} 
+\index{UMSleeper@{UMSleeper}!txpipe@{txpipe}}
+\index{txpipe@{txpipe}!UMSleeper@{UMSleeper}}
+\doxysubsubsection{\texorpdfstring{txpipe}{txpipe}}
+{\footnotesize\ttfamily -\/ (int) txpipe\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Utilities/\mbox{\hyperlink{_u_m_sleeper_8h}{U\+M\+Sleeper.\+h}}\item 
+Classes/\+Universal\+Utilities/\mbox{\hyperlink{_u_m_sleeper_8m}{U\+M\+Sleeper.\+m}}\end{DoxyCompactItemize}

@@ -1,0 +1,76 @@
+\hypertarget{_u_m_util_8m}{}\doxysection{Classes/\+Universal\+Utilities/\+U\+M\+Util.m File Reference}
+\label{_u_m_util_8m}\index{Classes/UniversalUtilities/UMUtil.m@{Classes/UniversalUtilities/UMUtil.m}}
+{\ttfamily \#import \char`\"{}U\+M\+Util.\+h\char`\"{}}\newline
+{\ttfamily \#import $<$pthread.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ulib\+\_\+config.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$sys/utsname.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/in.\+h$>$}\newline
+{\ttfamily \#include $<$netdb.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$execinfo.\+h$>$}\newline
+{\ttfamily \#include $<$net/if.\+h$>$}\newline
+{\ttfamily \#include $<$ifaddrs.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Socket.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_u_m_util_8m_aa3607375a6f5c56d072f7400061cfc59}{A\+F\+\_\+\+M\+A\+C\+A\+D\+DR}}~A\+F\+\_\+\+N\+E\+T\+L\+I\+NK
+\item 
+\#define \mbox{\hyperlink{_u_m_util_8m_a3e937c42922f7601edb17b747602c471}{M\+A\+X\+L\+I\+NE}}~256
+\item 
+\#define \mbox{\hyperlink{_u_m_util_8m_a17c0448a2238a7ab7e8920015a36de52}{R\+X\+P\+I\+PE}}~0
+\item 
+\#define \mbox{\hyperlink{_u_m_util_8m_aee92ef865a3be5f1c03e89c356d96de9}{T\+X\+P\+I\+PE}}~1
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{_u_m_util_8m_a59e3afaf1663fe12881e2d30da647787}{U\+M\+Backtrace}} (void $\ast$$\ast$stack\+\_\+frames, size\+\_\+t size)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_u_m_util_8m_aa3607375a6f5c56d072f7400061cfc59}\label{_u_m_util_8m_aa3607375a6f5c56d072f7400061cfc59}} 
+\index{UMUtil.m@{UMUtil.m}!AF\_MACADDR@{AF\_MACADDR}}
+\index{AF\_MACADDR@{AF\_MACADDR}!UMUtil.m@{UMUtil.m}}
+\doxysubsubsection{\texorpdfstring{AF\_MACADDR}{AF\_MACADDR}}
+{\footnotesize\ttfamily \#define A\+F\+\_\+\+M\+A\+C\+A\+D\+DR~A\+F\+\_\+\+N\+E\+T\+L\+I\+NK}
+
+\mbox{\Hypertarget{_u_m_util_8m_a3e937c42922f7601edb17b747602c471}\label{_u_m_util_8m_a3e937c42922f7601edb17b747602c471}} 
+\index{UMUtil.m@{UMUtil.m}!MAXLINE@{MAXLINE}}
+\index{MAXLINE@{MAXLINE}!UMUtil.m@{UMUtil.m}}
+\doxysubsubsection{\texorpdfstring{MAXLINE}{MAXLINE}}
+{\footnotesize\ttfamily \#define M\+A\+X\+L\+I\+NE~256}
+
+\mbox{\Hypertarget{_u_m_util_8m_a17c0448a2238a7ab7e8920015a36de52}\label{_u_m_util_8m_a17c0448a2238a7ab7e8920015a36de52}} 
+\index{UMUtil.m@{UMUtil.m}!RXPIPE@{RXPIPE}}
+\index{RXPIPE@{RXPIPE}!UMUtil.m@{UMUtil.m}}
+\doxysubsubsection{\texorpdfstring{RXPIPE}{RXPIPE}}
+{\footnotesize\ttfamily \#define R\+X\+P\+I\+PE~0}
+
+\mbox{\Hypertarget{_u_m_util_8m_aee92ef865a3be5f1c03e89c356d96de9}\label{_u_m_util_8m_aee92ef865a3be5f1c03e89c356d96de9}} 
+\index{UMUtil.m@{UMUtil.m}!TXPIPE@{TXPIPE}}
+\index{TXPIPE@{TXPIPE}!UMUtil.m@{UMUtil.m}}
+\doxysubsubsection{\texorpdfstring{TXPIPE}{TXPIPE}}
+{\footnotesize\ttfamily \#define T\+X\+P\+I\+PE~1}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_u_m_util_8m_a59e3afaf1663fe12881e2d30da647787}\label{_u_m_util_8m_a59e3afaf1663fe12881e2d30da647787}} 
+\index{UMUtil.m@{UMUtil.m}!UMBacktrace@{UMBacktrace}}
+\index{UMBacktrace@{UMBacktrace}!UMUtil.m@{UMUtil.m}}
+\doxysubsubsection{\texorpdfstring{UMBacktrace()}{UMBacktrace()}}
+{\footnotesize\ttfamily N\+S\+String$\ast$ U\+M\+Backtrace (\begin{DoxyParamCaption}\item[{void $\ast$$\ast$}]{stack\+\_\+frames,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+

@@ -1,0 +1,317 @@
+\hypertarget{interface_u_m_timer}{}\doxysection{U\+M\+Timer Class Reference}
+\label{interface_u_m_timer}\index{UMTimer@{UMTimer}}
+
+
+{\ttfamily \#import $<$U\+M\+Timer.\+h$>$}
+
+Inheritance diagram for U\+M\+Timer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_u_m_timer}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{interface_u_m_timer}{U\+M\+Timer}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_timer_a02785ab16c0439ed08256a4318397168}{init\+With\+Target\+:selector\+:object\+:seconds\+:name\+:repeats\+:run\+In\+Foreground\+:}}
+\item 
+(\mbox{\hyperlink{interface_u_m_timer}{U\+M\+Timer}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_timer_a7d937fc5bb059f3acd896b01e8a8294e}{init\+With\+Target\+:selector\+:object\+:seconds\+:name\+:repeats\+:}}
+\item 
+(\mbox{\hyperlink{interface_u_m_timer}{U\+M\+Timer}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_timer_a8f465cd20e044a5b3efc532fa5378138}{init\+With\+Target\+:selector\+:}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_timer_abf84ae3eeb90680c089fe72bf6e797eb}{is\+Expired}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_timer_ab3ee7eb2eab9733629dc76ac99af58ea}{is\+Expired\+:}}
+\item 
+(\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}}) -\/ \mbox{\hyperlink{interface_u_m_timer_a1196d74564e65fb53623d9dfedc73b46}{time\+Left\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_timer_aaa9b371fafda90d717570624cb0bd82d}{start}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_timer_a2d5d7d3f7b86ad3004f32965958a137b}{start\+If\+Not\+Running}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_timer_a9f0974b3e736c3c295abc34a06723d94}{stop}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_timer_a243378401ba4334e3ea63fc26db5ae09}{fire}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_timer_ae59777ccdeadc2e702611d254b9f450f}{set\+Seconds\+:}}
+\item 
+(N\+S\+Time\+Interval) -\/ \mbox{\hyperlink{interface_u_m_timer_ac59c13cc3a1a7daadeb6503af677d245}{seconds}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_timer_a84e09dba0126fbcd61ccdb3dc1c70798}{\+\_\+is\+Running}}
+\item 
+\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} \mbox{\hyperlink{interface_u_m_timer_a12b04049c25911c26049ced43378f867}{\+\_\+start\+Time}}
+\item 
+\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} \mbox{\hyperlink{interface_u_m_timer_a5ef42788e7a696581a9082b26524ced6}{\+\_\+last\+Checked}}
+\item 
+\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} \mbox{\hyperlink{interface_u_m_timer_acff9a1e23c7dddea62919a3b370f6a80}{\+\_\+expiry\+Time}}
+\item 
+\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} \mbox{\hyperlink{interface_u_m_timer_af8d7cf27208510c8760cc135ec2531da}{\+\_\+microsec\+Duration}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_timer_ab1c168f5884accf6f9562e7b51149e55}{\+\_\+name}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_timer_a8cf2e941b33a80a50ad2ea292dae208f}{\+\_\+repeats}}
+\item 
+\mbox{\hyperlink{interface_u_m_object}{U\+M\+Object}} $\ast$ \mbox{\hyperlink{interface_u_m_timer_a789aa99e1c0540d3de7240a823370a17}{\+\_\+object\+To\+Call}}
+\item 
+S\+EL \mbox{\hyperlink{interface_u_m_timer_a21327c6196b49bfcd3e4c3f8f381dd1e}{\+\_\+selector\+To\+Call}}
+\item 
+id \mbox{\hyperlink{interface_u_m_timer_aec105bc80f4536c90ac4c5c14466b81d}{\+\_\+parameter}}
+\item 
+\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}} $\ast$ \mbox{\hyperlink{interface_u_m_timer_a68af73fe4aa7a85addc27dd097b58ac0}{\+\_\+timer\+Mutex}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_timer_a5dae2df2529741afbb7b61c363cb9998}{\+\_\+run\+Callback\+In\+Foreground}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_timer_a2854e5d1d632ba53d21111fef7a40308}{is\+Running}}
+\item 
+\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} \mbox{\hyperlink{interface_u_m_timer_a4047ae047034d7c9a1434b3db1589038}{start\+Time}}
+\item 
+\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} \mbox{\hyperlink{interface_u_m_timer_ae5e7dfefc47f7ca11a42a5e9768857cb}{last\+Checked}}
+\item 
+\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} \mbox{\hyperlink{interface_u_m_timer_ab7fef7777af76644a876d31213dbd3f5}{expiry\+Time}}
+\item 
+\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}} \mbox{\hyperlink{interface_u_m_timer_a7f7e516af70265b8e1b0b225e0ca691d}{microsec\+Duration}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_timer_a2501d750f701548569817b0bf87625cb}{name}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_timer_aa672d78240256da31486c3998d4a20c6}{repeats}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_timer_ad49498508da7759a8306521bd5e0b2bc}{run\+Callback\+In\+Foreground}}
+\item 
+\mbox{\hyperlink{interface_u_m_object}{U\+M\+Object}} $\ast$ \mbox{\hyperlink{interface_u_m_timer_af8c4a47f533147b86c5e9f0708d1df03}{object\+To\+Call}}
+\item 
+S\+EL \mbox{\hyperlink{interface_u_m_timer_a5360fdcab0bf3cd8addf8095527c30f7}{selector\+To\+Call}}
+\item 
+id \mbox{\hyperlink{interface_u_m_timer_ad743c69b2d3f05d0c36d5c1b95d9aced}{parameter}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_timer_a243378401ba4334e3ea63fc26db5ae09}\label{interface_u_m_timer_a243378401ba4334e3ea63fc26db5ae09}} 
+\index{UMTimer@{UMTimer}!fire@{fire}}
+\index{fire@{fire}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{fire()}{fire()}}
+{\footnotesize\ttfamily -\/ (void) fire \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a8f465cd20e044a5b3efc532fa5378138}\label{interface_u_m_timer_a8f465cd20e044a5b3efc532fa5378138}} 
+\index{UMTimer@{UMTimer}!initWithTarget:selector:@{initWithTarget:selector:}}
+\index{initWithTarget:selector:@{initWithTarget:selector:}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{initWithTarget:selector:()}{initWithTarget:selector:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_timer}{U\+M\+Timer}} $\ast$) init\+With\+Target\+: \begin{DoxyParamCaption}\item[{(id)}]{target }\item[{selector\+:(S\+EL)}]{selector }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a7d937fc5bb059f3acd896b01e8a8294e}\label{interface_u_m_timer_a7d937fc5bb059f3acd896b01e8a8294e}} 
+\index{UMTimer@{UMTimer}!initWithTarget:selector:object:seconds:name:repeats:@{initWithTarget:selector:object:seconds:name:repeats:}}
+\index{initWithTarget:selector:object:seconds:name:repeats:@{initWithTarget:selector:object:seconds:name:repeats:}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{initWithTarget:selector:object:seconds:name:repeats:()}{initWithTarget:selector:object:seconds:name:repeats:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_timer}{U\+M\+Timer}} $\ast$) init\+With\+Target\+: \begin{DoxyParamCaption}\item[{(id)}]{target }\item[{selector\+:(S\+EL)}]{selector }\item[{object\+:(id)}]{object }\item[{seconds\+:(N\+S\+Time\+Interval)}]{d }\item[{name\+:(N\+S\+String $\ast$)}]{n }\item[{repeats\+:(B\+O\+OL)}]{r }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a02785ab16c0439ed08256a4318397168}\label{interface_u_m_timer_a02785ab16c0439ed08256a4318397168}} 
+\index{UMTimer@{UMTimer}!initWithTarget:selector:object:seconds:name:repeats:runInForeground:@{initWithTarget:selector:object:seconds:name:repeats:runInForeground:}}
+\index{initWithTarget:selector:object:seconds:name:repeats:runInForeground:@{initWithTarget:selector:object:seconds:name:repeats:runInForeground:}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{initWithTarget:selector:object:seconds:name:repeats:runInForeground:()}{initWithTarget:selector:object:seconds:name:repeats:runInForeground:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_timer}{U\+M\+Timer}} $\ast$) init\+With\+Target\+: \begin{DoxyParamCaption}\item[{(id)}]{target }\item[{selector\+:(S\+EL)}]{selector }\item[{object\+:(id)}]{object }\item[{seconds\+:(N\+S\+Time\+Interval)}]{d }\item[{name\+:(N\+S\+String $\ast$)}]{n }\item[{repeats\+:(B\+O\+OL)}]{r }\item[{run\+In\+Foreground\+:(B\+O\+OL)}]{in\+Foreground }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_abf84ae3eeb90680c089fe72bf6e797eb}\label{interface_u_m_timer_abf84ae3eeb90680c089fe72bf6e797eb}} 
+\index{UMTimer@{UMTimer}!isExpired@{isExpired}}
+\index{isExpired@{isExpired}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{isExpired()}{isExpired()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) is\+Expired \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_ab3ee7eb2eab9733629dc76ac99af58ea}\label{interface_u_m_timer_ab3ee7eb2eab9733629dc76ac99af58ea}} 
+\index{UMTimer@{UMTimer}!isExpired:@{isExpired:}}
+\index{isExpired:@{isExpired:}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{isExpired:()}{isExpired:()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) is\+Expired\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}})}]{now }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_ac59c13cc3a1a7daadeb6503af677d245}\label{interface_u_m_timer_ac59c13cc3a1a7daadeb6503af677d245}} 
+\index{UMTimer@{UMTimer}!seconds@{seconds}}
+\index{seconds@{seconds}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{seconds()}{seconds()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Time\+Interval) seconds \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_ae59777ccdeadc2e702611d254b9f450f}\label{interface_u_m_timer_ae59777ccdeadc2e702611d254b9f450f}} 
+\index{UMTimer@{UMTimer}!setSeconds:@{setSeconds:}}
+\index{setSeconds:@{setSeconds:}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{setSeconds:()}{setSeconds:()}}
+{\footnotesize\ttfamily -\/ (void) set\+Seconds\+: \begin{DoxyParamCaption}\item[{(N\+S\+Time\+Interval)}]{sec }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_aaa9b371fafda90d717570624cb0bd82d}\label{interface_u_m_timer_aaa9b371fafda90d717570624cb0bd82d}} 
+\index{UMTimer@{UMTimer}!start@{start}}
+\index{start@{start}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily -\/ (void) start \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a2d5d7d3f7b86ad3004f32965958a137b}\label{interface_u_m_timer_a2d5d7d3f7b86ad3004f32965958a137b}} 
+\index{UMTimer@{UMTimer}!startIfNotRunning@{startIfNotRunning}}
+\index{startIfNotRunning@{startIfNotRunning}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{startIfNotRunning()}{startIfNotRunning()}}
+{\footnotesize\ttfamily -\/ (void) start\+If\+Not\+Running \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a9f0974b3e736c3c295abc34a06723d94}\label{interface_u_m_timer_a9f0974b3e736c3c295abc34a06723d94}} 
+\index{UMTimer@{UMTimer}!stop@{stop}}
+\index{stop@{stop}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily -\/ (void) stop \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a1196d74564e65fb53623d9dfedc73b46}\label{interface_u_m_timer_a1196d74564e65fb53623d9dfedc73b46}} 
+\index{UMTimer@{UMTimer}!timeLeft:@{timeLeft:}}
+\index{timeLeft:@{timeLeft:}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{timeLeft:()}{timeLeft:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}}) time\+Left\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}})}]{now }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_timer_acff9a1e23c7dddea62919a3b370f6a80}\label{interface_u_m_timer_acff9a1e23c7dddea62919a3b370f6a80}} 
+\index{UMTimer@{UMTimer}!\_expiryTime@{\_expiryTime}}
+\index{\_expiryTime@{\_expiryTime}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{\_expiryTime}{\_expiryTime}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}}) \+\_\+expiry\+Time\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a84e09dba0126fbcd61ccdb3dc1c70798}\label{interface_u_m_timer_a84e09dba0126fbcd61ccdb3dc1c70798}} 
+\index{UMTimer@{UMTimer}!\_isRunning@{\_isRunning}}
+\index{\_isRunning@{\_isRunning}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{\_isRunning}{\_isRunning}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+is\+Running\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a5ef42788e7a696581a9082b26524ced6}\label{interface_u_m_timer_a5ef42788e7a696581a9082b26524ced6}} 
+\index{UMTimer@{UMTimer}!\_lastChecked@{\_lastChecked}}
+\index{\_lastChecked@{\_lastChecked}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{\_lastChecked}{\_lastChecked}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}}) \+\_\+last\+Checked\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_af8d7cf27208510c8760cc135ec2531da}\label{interface_u_m_timer_af8d7cf27208510c8760cc135ec2531da}} 
+\index{UMTimer@{UMTimer}!\_microsecDuration@{\_microsecDuration}}
+\index{\_microsecDuration@{\_microsecDuration}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{\_microsecDuration}{\_microsecDuration}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}}) \+\_\+microsec\+Duration\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_ab1c168f5884accf6f9562e7b51149e55}\label{interface_u_m_timer_ab1c168f5884accf6f9562e7b51149e55}} 
+\index{UMTimer@{UMTimer}!\_name@{\_name}}
+\index{\_name@{\_name}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{\_name}{\_name}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+name\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a789aa99e1c0540d3de7240a823370a17}\label{interface_u_m_timer_a789aa99e1c0540d3de7240a823370a17}} 
+\index{UMTimer@{UMTimer}!\_objectToCall@{\_objectToCall}}
+\index{\_objectToCall@{\_objectToCall}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{\_objectToCall}{\_objectToCall}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_object}{U\+M\+Object}}$\ast$) \+\_\+object\+To\+Call\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_aec105bc80f4536c90ac4c5c14466b81d}\label{interface_u_m_timer_aec105bc80f4536c90ac4c5c14466b81d}} 
+\index{UMTimer@{UMTimer}!\_parameter@{\_parameter}}
+\index{\_parameter@{\_parameter}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{\_parameter}{\_parameter}}
+{\footnotesize\ttfamily -\/ (id) \+\_\+parameter\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a8cf2e941b33a80a50ad2ea292dae208f}\label{interface_u_m_timer_a8cf2e941b33a80a50ad2ea292dae208f}} 
+\index{UMTimer@{UMTimer}!\_repeats@{\_repeats}}
+\index{\_repeats@{\_repeats}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{\_repeats}{\_repeats}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+repeats\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a5dae2df2529741afbb7b61c363cb9998}\label{interface_u_m_timer_a5dae2df2529741afbb7b61c363cb9998}} 
+\index{UMTimer@{UMTimer}!\_runCallbackInForeground@{\_runCallbackInForeground}}
+\index{\_runCallbackInForeground@{\_runCallbackInForeground}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{\_runCallbackInForeground}{\_runCallbackInForeground}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+run\+Callback\+In\+Foreground\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a21327c6196b49bfcd3e4c3f8f381dd1e}\label{interface_u_m_timer_a21327c6196b49bfcd3e4c3f8f381dd1e}} 
+\index{UMTimer@{UMTimer}!\_selectorToCall@{\_selectorToCall}}
+\index{\_selectorToCall@{\_selectorToCall}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{\_selectorToCall}{\_selectorToCall}}
+{\footnotesize\ttfamily -\/ (S\+EL) \+\_\+selector\+To\+Call\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a12b04049c25911c26049ced43378f867}\label{interface_u_m_timer_a12b04049c25911c26049ced43378f867}} 
+\index{UMTimer@{UMTimer}!\_startTime@{\_startTime}}
+\index{\_startTime@{\_startTime}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{\_startTime}{\_startTime}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}}) \+\_\+start\+Time\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a68af73fe4aa7a85addc27dd097b58ac0}\label{interface_u_m_timer_a68af73fe4aa7a85addc27dd097b58ac0}} 
+\index{UMTimer@{UMTimer}!\_timerMutex@{\_timerMutex}}
+\index{\_timerMutex@{\_timerMutex}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{\_timerMutex}{\_timerMutex}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}}$\ast$) \+\_\+timer\+Mutex\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_timer_ab7fef7777af76644a876d31213dbd3f5}\label{interface_u_m_timer_ab7fef7777af76644a876d31213dbd3f5}} 
+\index{UMTimer@{UMTimer}!expiryTime@{expiryTime}}
+\index{expiryTime@{expiryTime}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{expiryTime}{expiryTime}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}}) expiry\+Time\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a2854e5d1d632ba53d21111fef7a40308}\label{interface_u_m_timer_a2854e5d1d632ba53d21111fef7a40308}} 
+\index{UMTimer@{UMTimer}!isRunning@{isRunning}}
+\index{isRunning@{isRunning}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{isRunning}{isRunning}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) is\+Running\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_ae5e7dfefc47f7ca11a42a5e9768857cb}\label{interface_u_m_timer_ae5e7dfefc47f7ca11a42a5e9768857cb}} 
+\index{UMTimer@{UMTimer}!lastChecked@{lastChecked}}
+\index{lastChecked@{lastChecked}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{lastChecked}{lastChecked}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}}) last\+Checked\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a7f7e516af70265b8e1b0b225e0ca691d}\label{interface_u_m_timer_a7f7e516af70265b8e1b0b225e0ca691d}} 
+\index{UMTimer@{UMTimer}!microsecDuration@{microsecDuration}}
+\index{microsecDuration@{microsecDuration}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{microsecDuration}{microsecDuration}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}}) microsec\+Duration\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a2501d750f701548569817b0bf87625cb}\label{interface_u_m_timer_a2501d750f701548569817b0bf87625cb}} 
+\index{UMTimer@{UMTimer}!name@{name}}
+\index{name@{name}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) name\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_af8c4a47f533147b86c5e9f0708d1df03}\label{interface_u_m_timer_af8c4a47f533147b86c5e9f0708d1df03}} 
+\index{UMTimer@{UMTimer}!objectToCall@{objectToCall}}
+\index{objectToCall@{objectToCall}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{objectToCall}{objectToCall}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_object}{U\+M\+Object}}$\ast$) object\+To\+Call\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_ad743c69b2d3f05d0c36d5c1b95d9aced}\label{interface_u_m_timer_ad743c69b2d3f05d0c36d5c1b95d9aced}} 
+\index{UMTimer@{UMTimer}!parameter@{parameter}}
+\index{parameter@{parameter}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{parameter}{parameter}}
+{\footnotesize\ttfamily -\/ (id) parameter\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_aa672d78240256da31486c3998d4a20c6}\label{interface_u_m_timer_aa672d78240256da31486c3998d4a20c6}} 
+\index{UMTimer@{UMTimer}!repeats@{repeats}}
+\index{repeats@{repeats}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{repeats}{repeats}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) repeats\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_ad49498508da7759a8306521bd5e0b2bc}\label{interface_u_m_timer_ad49498508da7759a8306521bd5e0b2bc}} 
+\index{UMTimer@{UMTimer}!runCallbackInForeground@{runCallbackInForeground}}
+\index{runCallbackInForeground@{runCallbackInForeground}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{runCallbackInForeground}{runCallbackInForeground}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) run\+Callback\+In\+Foreground\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a5360fdcab0bf3cd8addf8095527c30f7}\label{interface_u_m_timer_a5360fdcab0bf3cd8addf8095527c30f7}} 
+\index{UMTimer@{UMTimer}!selectorToCall@{selectorToCall}}
+\index{selectorToCall@{selectorToCall}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{selectorToCall}{selectorToCall}}
+{\footnotesize\ttfamily -\/ (S\+EL) selector\+To\+Call\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_a4047ae047034d7c9a1434b3db1589038}\label{interface_u_m_timer_a4047ae047034d7c9a1434b3db1589038}} 
+\index{UMTimer@{UMTimer}!startTime@{startTime}}
+\index{startTime@{startTime}!UMTimer@{UMTimer}}
+\doxysubsubsection{\texorpdfstring{startTime}{startTime}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_micro_sec_8h_a26009db440633bda403168972e129afe}{U\+M\+Micro\+Sec}}) start\+Time\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Utilities/\mbox{\hyperlink{_u_m_timer_8h}{U\+M\+Timer.\+h}}\item 
+Classes/\+Universal\+Utilities/\mbox{\hyperlink{_u_m_timer_8m}{U\+M\+Timer.\+m}}\end{DoxyCompactItemize}

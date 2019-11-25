@@ -1,0 +1,118 @@
+\hypertarget{interface_u_m_atomic_date}{}\doxysection{U\+M\+Atomic\+Date Class Reference}
+\label{interface_u_m_atomic_date}\index{UMAtomicDate@{UMAtomicDate}}
+
+
+{\ttfamily \#import $<$U\+M\+Atomic\+Date.\+h$>$}
+
+Inheritance diagram for U\+M\+Atomic\+Date\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_u_m_atomic_date}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{interface_u_m_atomic_date}{U\+M\+Atomic\+Date}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_atomic_date_a20e986c2d349db3170110d29261c0638}{init\+With\+Date\+:}}
+\item 
+(N\+S\+Date $\ast$) -\/ \mbox{\hyperlink{interface_u_m_atomic_date_a83ef5d702e067bb5be6eab9efd926023}{date}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_atomic_date_ad3c0a5cf825fcff1c49113167247fc4a}{set\+Date\+:}}
+\item 
+(N\+S\+Time\+Interval) -\/ \mbox{\hyperlink{interface_u_m_atomic_date_a6675977d113fe17aa17708d1e4075e54}{time\+Interval\+Since\+Date\+:}}
+\item 
+(N\+S\+Time\+Interval) -\/ \mbox{\hyperlink{interface_u_m_atomic_date_acfe4b326b7a7644384ee4b6b51c35f36}{time\+Interval\+Since\+Now}}
+\item 
+(N\+S\+Time\+Interval) -\/ \mbox{\hyperlink{interface_u_m_atomic_date_a1edee1cb0dcc35d48274160292f53b1d}{age}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_atomic_date_ade66ae5b2548491f8235bc5814f003e3}{touch}}
+\item 
+(\mbox{\hyperlink{interface_u_m_atomic_date}{U\+M\+Atomic\+Date}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_atomic_date_a171869f5728c95c69c09d45923f903f0}{copy\+With\+Zone\+:}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_atomic_date_a8a51696257af8347d64c5012e96801e8}{proxy\+For\+Json}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+Date $\ast$ \mbox{\hyperlink{interface_u_m_atomic_date_a5943eddfaf4ff5c6c3ae1962f80fe276}{\+\_\+date}}
+\item 
+\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}} $\ast$ \mbox{\hyperlink{interface_u_m_atomic_date_a395bc4b45f3d6d9b2054395aefe6a01e}{\+\_\+mutex}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_atomic_date_a1edee1cb0dcc35d48274160292f53b1d}\label{interface_u_m_atomic_date_a1edee1cb0dcc35d48274160292f53b1d}} 
+\index{UMAtomicDate@{UMAtomicDate}!age@{age}}
+\index{age@{age}!UMAtomicDate@{UMAtomicDate}}
+\doxysubsubsection{\texorpdfstring{age()}{age()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Time\+Interval) age \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_atomic_date_a171869f5728c95c69c09d45923f903f0}\label{interface_u_m_atomic_date_a171869f5728c95c69c09d45923f903f0}} 
+\index{UMAtomicDate@{UMAtomicDate}!copyWithZone:@{copyWithZone:}}
+\index{copyWithZone:@{copyWithZone:}!UMAtomicDate@{UMAtomicDate}}
+\doxysubsubsection{\texorpdfstring{copyWithZone:()}{copyWithZone:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_atomic_date}{U\+M\+Atomic\+Date}} $\ast$) copy\+With\+Zone\+: \begin{DoxyParamCaption}\item[{(N\+S\+Zone $\ast$)}]{zone }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_atomic_date_a83ef5d702e067bb5be6eab9efd926023}\label{interface_u_m_atomic_date_a83ef5d702e067bb5be6eab9efd926023}} 
+\index{UMAtomicDate@{UMAtomicDate}!date@{date}}
+\index{date@{date}!UMAtomicDate@{UMAtomicDate}}
+\doxysubsubsection{\texorpdfstring{date()}{date()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Date $\ast$) date \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_atomic_date_a20e986c2d349db3170110d29261c0638}\label{interface_u_m_atomic_date_a20e986c2d349db3170110d29261c0638}} 
+\index{UMAtomicDate@{UMAtomicDate}!initWithDate:@{initWithDate:}}
+\index{initWithDate:@{initWithDate:}!UMAtomicDate@{UMAtomicDate}}
+\doxysubsubsection{\texorpdfstring{initWithDate:()}{initWithDate:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_atomic_date}{U\+M\+Atomic\+Date}} $\ast$) init\+With\+Date\+: \begin{DoxyParamCaption}\item[{(N\+S\+Date $\ast$)}]{d }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_atomic_date_a8a51696257af8347d64c5012e96801e8}\label{interface_u_m_atomic_date_a8a51696257af8347d64c5012e96801e8}} 
+\index{UMAtomicDate@{UMAtomicDate}!proxyForJson@{proxyForJson}}
+\index{proxyForJson@{proxyForJson}!UMAtomicDate@{UMAtomicDate}}
+\doxysubsubsection{\texorpdfstring{proxyForJson()}{proxyForJson()}}
+{\footnotesize\ttfamily -\/ (id) proxy\+For\+Json \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_atomic_date_ad3c0a5cf825fcff1c49113167247fc4a}\label{interface_u_m_atomic_date_ad3c0a5cf825fcff1c49113167247fc4a}} 
+\index{UMAtomicDate@{UMAtomicDate}!setDate:@{setDate:}}
+\index{setDate:@{setDate:}!UMAtomicDate@{UMAtomicDate}}
+\doxysubsubsection{\texorpdfstring{setDate:()}{setDate:()}}
+{\footnotesize\ttfamily -\/ (void) set\+Date\+: \begin{DoxyParamCaption}\item[{(N\+S\+Date $\ast$)}]{d }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_atomic_date_a6675977d113fe17aa17708d1e4075e54}\label{interface_u_m_atomic_date_a6675977d113fe17aa17708d1e4075e54}} 
+\index{UMAtomicDate@{UMAtomicDate}!timeIntervalSinceDate:@{timeIntervalSinceDate:}}
+\index{timeIntervalSinceDate:@{timeIntervalSinceDate:}!UMAtomicDate@{UMAtomicDate}}
+\doxysubsubsection{\texorpdfstring{timeIntervalSinceDate:()}{timeIntervalSinceDate:()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Time\+Interval) time\+Interval\+Since\+Date\+: \begin{DoxyParamCaption}\item[{(N\+S\+Date $\ast$)}]{since }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_atomic_date_acfe4b326b7a7644384ee4b6b51c35f36}\label{interface_u_m_atomic_date_acfe4b326b7a7644384ee4b6b51c35f36}} 
+\index{UMAtomicDate@{UMAtomicDate}!timeIntervalSinceNow@{timeIntervalSinceNow}}
+\index{timeIntervalSinceNow@{timeIntervalSinceNow}!UMAtomicDate@{UMAtomicDate}}
+\doxysubsubsection{\texorpdfstring{timeIntervalSinceNow()}{timeIntervalSinceNow()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Time\+Interval) time\+Interval\+Since\+Now \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_atomic_date_ade66ae5b2548491f8235bc5814f003e3}\label{interface_u_m_atomic_date_ade66ae5b2548491f8235bc5814f003e3}} 
+\index{UMAtomicDate@{UMAtomicDate}!touch@{touch}}
+\index{touch@{touch}!UMAtomicDate@{UMAtomicDate}}
+\doxysubsubsection{\texorpdfstring{touch()}{touch()}}
+{\footnotesize\ttfamily -\/ (void) touch \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_atomic_date_a5943eddfaf4ff5c6c3ae1962f80fe276}\label{interface_u_m_atomic_date_a5943eddfaf4ff5c6c3ae1962f80fe276}} 
+\index{UMAtomicDate@{UMAtomicDate}!\_date@{\_date}}
+\index{\_date@{\_date}!UMAtomicDate@{UMAtomicDate}}
+\doxysubsubsection{\texorpdfstring{\_date}{\_date}}
+{\footnotesize\ttfamily -\/ (N\+S\+Date$\ast$) \+\_\+date\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_atomic_date_a395bc4b45f3d6d9b2054395aefe6a01e}\label{interface_u_m_atomic_date_a395bc4b45f3d6d9b2054395aefe6a01e}} 
+\index{UMAtomicDate@{UMAtomicDate}!\_mutex@{\_mutex}}
+\index{\_mutex@{\_mutex}!UMAtomicDate@{UMAtomicDate}}
+\doxysubsubsection{\texorpdfstring{\_mutex}{\_mutex}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}}$\ast$) \+\_\+mutex\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Utilities/\mbox{\hyperlink{_u_m_atomic_date_8h}{U\+M\+Atomic\+Date.\+h}}\item 
+Classes/\+Universal\+Utilities/\mbox{\hyperlink{_u_m_atomic_date_8m}{U\+M\+Atomic\+Date.\+m}}\end{DoxyCompactItemize}

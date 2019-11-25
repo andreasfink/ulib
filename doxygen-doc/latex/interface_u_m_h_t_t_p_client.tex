@@ -1,0 +1,87 @@
+\hypertarget{interface_u_m_h_t_t_p_client}{}\doxysection{U\+M\+H\+T\+T\+P\+Client Class Reference}
+\label{interface_u_m_h_t_t_p_client}\index{UMHTTPClient@{UMHTTPClient}}
+
+
+{\ttfamily \#import $<$U\+M\+H\+T\+T\+P\+Client.\+h$>$}
+
+Inheritance diagram for U\+M\+H\+T\+T\+P\+Client\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_u_m_h_t_t_p_client}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_client_a2194fc8ca09a532c789f325131befd51}{add\+Pending\+Session\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_client_aaa58d3536de8611034514e3a2fbdbf9b}{remove\+Pending\+Session\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_client_afd47236b7c591e0c292ecc79bc9d270f}{start\+Request\+:}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_client_a1873c37a4bf50d02411d2c7a9afb2246}{simple\+Synchronous\+Request\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_client_ae5dae201841c4b3656ad44393e5abd85}{pending\+Outgoing\+Requests}}
+\item 
+\mbox{\hyperlink{interface_u_m_task_queue_multi}{U\+M\+Task\+Queue\+Multi}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_client_aabbc5c3746914871523ef2f9b572ab88}{\+\_\+task\+Queue}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_h_t_t_p_client_a921b16c52136b8169954494b2af59ce7}{\+\_\+is\+Shared\+Queue}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_client_a2194fc8ca09a532c789f325131befd51}\label{interface_u_m_h_t_t_p_client_a2194fc8ca09a532c789f325131befd51}} 
+\index{UMHTTPClient@{UMHTTPClient}!addPendingSession:@{addPendingSession:}}
+\index{addPendingSession:@{addPendingSession:}!UMHTTPClient@{UMHTTPClient}}
+\doxysubsubsection{\texorpdfstring{addPendingSession:()}{addPendingSession:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Pending\+Session\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_client_request}{U\+M\+H\+T\+T\+P\+Client\+Request}} $\ast$)}]{creq }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_client_aaa58d3536de8611034514e3a2fbdbf9b}\label{interface_u_m_h_t_t_p_client_aaa58d3536de8611034514e3a2fbdbf9b}} 
+\index{UMHTTPClient@{UMHTTPClient}!removePendingSession:@{removePendingSession:}}
+\index{removePendingSession:@{removePendingSession:}!UMHTTPClient@{UMHTTPClient}}
+\doxysubsubsection{\texorpdfstring{removePendingSession:()}{removePendingSession:()}}
+{\footnotesize\ttfamily -\/ (void) remove\+Pending\+Session\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_client_request}{U\+M\+H\+T\+T\+P\+Client\+Request}} $\ast$)}]{creq }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_client_a1873c37a4bf50d02411d2c7a9afb2246}\label{interface_u_m_h_t_t_p_client_a1873c37a4bf50d02411d2c7a9afb2246}} 
+\index{UMHTTPClient@{UMHTTPClient}!simpleSynchronousRequest:@{simpleSynchronousRequest:}}
+\index{simpleSynchronousRequest:@{simpleSynchronousRequest:}!UMHTTPClient@{UMHTTPClient}}
+\doxysubsubsection{\texorpdfstring{simpleSynchronousRequest:()}{simpleSynchronousRequest:()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) simple\+Synchronous\+Request\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_client_request}{U\+M\+H\+T\+T\+P\+Client\+Request}} $\ast$)}]{creq }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_client_afd47236b7c591e0c292ecc79bc9d270f}\label{interface_u_m_h_t_t_p_client_afd47236b7c591e0c292ecc79bc9d270f}} 
+\index{UMHTTPClient@{UMHTTPClient}!startRequest:@{startRequest:}}
+\index{startRequest:@{startRequest:}!UMHTTPClient@{UMHTTPClient}}
+\doxysubsubsection{\texorpdfstring{startRequest:()}{startRequest:()}}
+{\footnotesize\ttfamily -\/ (void) start\+Request\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_client_request}{U\+M\+H\+T\+T\+P\+Client\+Request}} $\ast$)}]{creq }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_client_a921b16c52136b8169954494b2af59ce7}\label{interface_u_m_h_t_t_p_client_a921b16c52136b8169954494b2af59ce7}} 
+\index{UMHTTPClient@{UMHTTPClient}!\_isSharedQueue@{\_isSharedQueue}}
+\index{\_isSharedQueue@{\_isSharedQueue}!UMHTTPClient@{UMHTTPClient}}
+\doxysubsubsection{\texorpdfstring{\_isSharedQueue}{\_isSharedQueue}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+is\+Shared\+Queue\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_client_aabbc5c3746914871523ef2f9b572ab88}\label{interface_u_m_h_t_t_p_client_aabbc5c3746914871523ef2f9b572ab88}} 
+\index{UMHTTPClient@{UMHTTPClient}!\_taskQueue@{\_taskQueue}}
+\index{\_taskQueue@{\_taskQueue}!UMHTTPClient@{UMHTTPClient}}
+\doxysubsubsection{\texorpdfstring{\_taskQueue}{\_taskQueue}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_task_queue_multi}{U\+M\+Task\+Queue\+Multi}}$\ast$) \+\_\+task\+Queue\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_h_t_t_p_client_ae5dae201841c4b3656ad44393e5abd85}\label{interface_u_m_h_t_t_p_client_ae5dae201841c4b3656ad44393e5abd85}} 
+\index{UMHTTPClient@{UMHTTPClient}!pendingOutgoingRequests@{pendingOutgoingRequests}}
+\index{pendingOutgoingRequests@{pendingOutgoingRequests}!UMHTTPClient@{UMHTTPClient}}
+\doxysubsubsection{\texorpdfstring{pendingOutgoingRequests}{pendingOutgoingRequests}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_synchronized_array}{U\+M\+Synchronized\+Array}}$\ast$) pending\+Outgoing\+Requests\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+H\+T\+T\+P/\mbox{\hyperlink{_u_m_h_t_t_p_client_8h}{U\+M\+H\+T\+T\+P\+Client.\+h}}\item 
+Classes/\+Universal\+H\+T\+T\+P/\mbox{\hyperlink{_u_m_h_t_t_p_client_8m}{U\+M\+H\+T\+T\+P\+Client.\+m}}\end{DoxyCompactItemize}

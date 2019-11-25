@@ -1,0 +1,107 @@
+\hypertarget{interface_u_m_pool}{}\doxysection{U\+M\+Pool Class Reference}
+\label{interface_u_m_pool}\index{UMPool@{UMPool}}
+
+
+{\ttfamily \#import $<$U\+M\+Pool.\+h$>$}
+
+Inheritance diagram for U\+M\+Pool\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_u_m_pool}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{interface_u_m_pool}{U\+M\+Pool}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_pool_a60547abd220df634121fc8c8b73048af}{init}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_pool_a30400463a8e719b7ae63e73d928af5d4}{append\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_pool_af0c0bf0cc0b0e04b8ec32ccc792dcea9}{remove\+Object\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_pool_a0da4737a88b874d71f75eb1bab0f17d7}{remove\+Object\+Identical\+To\+:}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_pool_a626329649b43ec530da2f380276ae7e5}{get\+Any}}
+\item 
+(N\+S\+Integer) -\/ \mbox{\hyperlink{interface_u_m_pool_a680d2769c1e96a02d8bbe10a56886f2d}{count}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+Mutable\+Array $\ast$ \mbox{\hyperlink{interface_u_m_pool_afbffdfc44d29c237f47a095646c05f2a}{\+\_\+queues}} \mbox{[}\mbox{\hyperlink{_u_m_pool_8h_a042176d02f13164f50b760a3ca199100}{U\+M\+P\+O\+O\+L\+\_\+\+Q\+U\+E\+U\+E\+S\+\_\+\+C\+O\+U\+NT}}\mbox{]}
+\item 
+\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}} $\ast$ \mbox{\hyperlink{interface_u_m_pool_a997c79a018ba14619418a8946dfb6b3a}{\+\_\+lock}} \mbox{[}\mbox{\hyperlink{_u_m_pool_8h_a042176d02f13164f50b760a3ca199100}{U\+M\+P\+O\+O\+L\+\_\+\+Q\+U\+E\+U\+E\+S\+\_\+\+C\+O\+U\+NT}}\mbox{]}
+\item 
+int \mbox{\hyperlink{interface_u_m_pool_a7d2283de9a6fef29396bb9d2ebd4d8ff}{\+\_\+rotary}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_pool_a30400463a8e719b7ae63e73d928af5d4}\label{interface_u_m_pool_a30400463a8e719b7ae63e73d928af5d4}} 
+\index{UMPool@{UMPool}!append:@{append:}}
+\index{append:@{append:}!UMPool@{UMPool}}
+\doxysubsubsection{\texorpdfstring{append:()}{append:()}}
+{\footnotesize\ttfamily -\/ (void) append\+: \begin{DoxyParamCaption}\item[{(id)}]{obj }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_pool_a680d2769c1e96a02d8bbe10a56886f2d}\label{interface_u_m_pool_a680d2769c1e96a02d8bbe10a56886f2d}} 
+\index{UMPool@{UMPool}!count@{count}}
+\index{count@{count}!UMPool@{UMPool}}
+\doxysubsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Integer) count \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_pool_a626329649b43ec530da2f380276ae7e5}\label{interface_u_m_pool_a626329649b43ec530da2f380276ae7e5}} 
+\index{UMPool@{UMPool}!getAny@{getAny}}
+\index{getAny@{getAny}!UMPool@{UMPool}}
+\doxysubsubsection{\texorpdfstring{getAny()}{getAny()}}
+{\footnotesize\ttfamily -\/ (id) get\+Any \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_pool_a60547abd220df634121fc8c8b73048af}\label{interface_u_m_pool_a60547abd220df634121fc8c8b73048af}} 
+\index{UMPool@{UMPool}!init@{init}}
+\index{init@{init}!UMPool@{UMPool}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_pool}{U\+M\+Pool}} $\ast$) init \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_object_aeaac514e683838e31be4c2676923bbd3}{U\+M\+Object}}.
+
+\mbox{\Hypertarget{interface_u_m_pool_af0c0bf0cc0b0e04b8ec32ccc792dcea9}\label{interface_u_m_pool_af0c0bf0cc0b0e04b8ec32ccc792dcea9}} 
+\index{UMPool@{UMPool}!removeObject:@{removeObject:}}
+\index{removeObject:@{removeObject:}!UMPool@{UMPool}}
+\doxysubsubsection{\texorpdfstring{removeObject:()}{removeObject:()}}
+{\footnotesize\ttfamily -\/ (void) remove\+Object\+: \begin{DoxyParamCaption}\item[{(id)}]{obj }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_pool_a0da4737a88b874d71f75eb1bab0f17d7}\label{interface_u_m_pool_a0da4737a88b874d71f75eb1bab0f17d7}} 
+\index{UMPool@{UMPool}!removeObjectIdenticalTo:@{removeObjectIdenticalTo:}}
+\index{removeObjectIdenticalTo:@{removeObjectIdenticalTo:}!UMPool@{UMPool}}
+\doxysubsubsection{\texorpdfstring{removeObjectIdenticalTo:()}{removeObjectIdenticalTo:()}}
+{\footnotesize\ttfamily -\/ (void) remove\+Object\+Identical\+To\+: \begin{DoxyParamCaption}\item[{(id)}]{obj }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_pool_a997c79a018ba14619418a8946dfb6b3a}\label{interface_u_m_pool_a997c79a018ba14619418a8946dfb6b3a}} 
+\index{UMPool@{UMPool}!\_lock@{\_lock}}
+\index{\_lock@{\_lock}!UMPool@{UMPool}}
+\doxysubsubsection{\texorpdfstring{\_lock}{\_lock}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}}$\ast$ \+\_\+lock\mbox{[}\mbox{\hyperlink{_u_m_pool_8h_a042176d02f13164f50b760a3ca199100}{U\+M\+P\+O\+O\+L\+\_\+\+Q\+U\+E\+U\+E\+S\+\_\+\+C\+O\+U\+NT}}\mbox{]})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_pool_afbffdfc44d29c237f47a095646c05f2a}\label{interface_u_m_pool_afbffdfc44d29c237f47a095646c05f2a}} 
+\index{UMPool@{UMPool}!\_queues@{\_queues}}
+\index{\_queues@{\_queues}!UMPool@{UMPool}}
+\doxysubsubsection{\texorpdfstring{\_queues}{\_queues}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Array$\ast$ \+\_\+queues\mbox{[}\mbox{\hyperlink{_u_m_pool_8h_a042176d02f13164f50b760a3ca199100}{U\+M\+P\+O\+O\+L\+\_\+\+Q\+U\+E\+U\+E\+S\+\_\+\+C\+O\+U\+NT}}\mbox{]})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_pool_a7d2283de9a6fef29396bb9d2ebd4d8ff}\label{interface_u_m_pool_a7d2283de9a6fef29396bb9d2ebd4d8ff}} 
+\index{UMPool@{UMPool}!\_rotary@{\_rotary}}
+\index{\_rotary@{\_rotary}!UMPool@{UMPool}}
+\doxysubsubsection{\texorpdfstring{\_rotary}{\_rotary}}
+{\footnotesize\ttfamily -\/ (int) \+\_\+rotary\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Queue/\mbox{\hyperlink{_u_m_pool_8h}{U\+M\+Pool.\+h}}\item 
+Classes/\+Universal\+Queue/\mbox{\hyperlink{_u_m_pool_8m}{U\+M\+Pool.\+m}}\end{DoxyCompactItemize}

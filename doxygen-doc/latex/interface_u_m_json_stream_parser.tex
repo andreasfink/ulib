@@ -1,0 +1,87 @@
+\hypertarget{interface_u_m_json_stream_parser}{}\doxysection{U\+M\+Json\+Stream\+Parser Class Reference}
+\label{interface_u_m_json_stream_parser}\index{UMJsonStreamParser@{UMJsonStreamParser}}
+
+
+{\ttfamily \#import $<$U\+M\+Json\+Stream\+Parser.\+h$>$}
+
+Inheritance diagram for U\+M\+Json\+Stream\+Parser\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_u_m_json_stream_parser}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{_u_m_json_stream_parser_8h_ac6fc49165d5e0eadd892c887b525b35a}{U\+M\+Json\+Stream\+Parser\+Status}}) -\/ \mbox{\hyperlink{interface_u_m_json_stream_parser_aa8f1424c71a4d7ab24249dfe3b0802af}{parse\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_u_m_json_stream_parser_state}{U\+M\+Json\+Stream\+Parser\+State}} $\ast$ \mbox{\hyperlink{interface_u_m_json_stream_parser_a3d9ad266940154e7ff3eccd6cd3fa9a7}{state}}
+\item 
+N\+S\+Mutable\+Array $\ast$ \mbox{\hyperlink{interface_u_m_json_stream_parser_a3a021e82adbfc0b15ae6f21546567938}{state\+Stack}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_json_stream_parser_ad64f6eceffd607ecadc876053eaaa39c}{support\+Multiple\+Documents}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_json_stream_parser_delegate-p}{U\+M\+Json\+Stream\+Parser\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_json_stream_parser_a6ecee2d18d2bffbffc8c3a47d8c4ce08}{delegate}}
+\item 
+N\+S\+U\+Integer \mbox{\hyperlink{interface_u_m_json_stream_parser_ae51765f48469fbdf904cbbabd960cae5}{max\+Depth}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_json_stream_parser_aea055d961d53b1a66aab95b739a3b04a}{error}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_json_stream_parser_aa8f1424c71a4d7ab24249dfe3b0802af}\label{interface_u_m_json_stream_parser_aa8f1424c71a4d7ab24249dfe3b0802af}} 
+\index{UMJsonStreamParser@{UMJsonStreamParser}!parse:@{parse:}}
+\index{parse:@{parse:}!UMJsonStreamParser@{UMJsonStreamParser}}
+\doxysubsubsection{\texorpdfstring{parse:()}{parse:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_json_stream_parser_8h_ac6fc49165d5e0eadd892c887b525b35a}{U\+M\+Json\+Stream\+Parser\+Status}}) parse\+: \begin{DoxyParamCaption}\item[{(N\+S\+Data$\ast$)}]{data }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_json_stream_parser_a6ecee2d18d2bffbffc8c3a47d8c4ce08}\label{interface_u_m_json_stream_parser_a6ecee2d18d2bffbffc8c3a47d8c4ce08}} 
+\index{UMJsonStreamParser@{UMJsonStreamParser}!delegate@{delegate}}
+\index{delegate@{delegate}!UMJsonStreamParser@{UMJsonStreamParser}}
+\doxysubsubsection{\texorpdfstring{delegate}{delegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_json_stream_parser_delegate-p}{U\+M\+Json\+Stream\+Parser\+Delegate}}$>$) delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [unsafe_unretained]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_parser_aea055d961d53b1a66aab95b739a3b04a}\label{interface_u_m_json_stream_parser_aea055d961d53b1a66aab95b739a3b04a}} 
+\index{UMJsonStreamParser@{UMJsonStreamParser}!error@{error}}
+\index{error@{error}!UMJsonStreamParser@{UMJsonStreamParser}}
+\doxysubsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) error\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [copy]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_parser_ae51765f48469fbdf904cbbabd960cae5}\label{interface_u_m_json_stream_parser_ae51765f48469fbdf904cbbabd960cae5}} 
+\index{UMJsonStreamParser@{UMJsonStreamParser}!maxDepth@{maxDepth}}
+\index{maxDepth@{maxDepth}!UMJsonStreamParser@{UMJsonStreamParser}}
+\doxysubsubsection{\texorpdfstring{maxDepth}{maxDepth}}
+{\footnotesize\ttfamily -\/ (N\+S\+U\+Integer) max\+Depth\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_parser_a3d9ad266940154e7ff3eccd6cd3fa9a7}\label{interface_u_m_json_stream_parser_a3d9ad266940154e7ff3eccd6cd3fa9a7}} 
+\index{UMJsonStreamParser@{UMJsonStreamParser}!state@{state}}
+\index{state@{state}!UMJsonStreamParser@{UMJsonStreamParser}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_json_stream_parser_state}{U\+M\+Json\+Stream\+Parser\+State}} $\ast$) state\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_parser_a3a021e82adbfc0b15ae6f21546567938}\label{interface_u_m_json_stream_parser_a3a021e82adbfc0b15ae6f21546567938}} 
+\index{UMJsonStreamParser@{UMJsonStreamParser}!stateStack@{stateStack}}
+\index{stateStack@{stateStack}!UMJsonStreamParser@{UMJsonStreamParser}}
+\doxysubsubsection{\texorpdfstring{stateStack}{stateStack}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Array $\ast$) state\+Stack\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [nonatomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_parser_ad64f6eceffd607ecadc876053eaaa39c}\label{interface_u_m_json_stream_parser_ad64f6eceffd607ecadc876053eaaa39c}} 
+\index{UMJsonStreamParser@{UMJsonStreamParser}!supportMultipleDocuments@{supportMultipleDocuments}}
+\index{supportMultipleDocuments@{supportMultipleDocuments}!UMJsonStreamParser@{UMJsonStreamParser}}
+\doxysubsubsection{\texorpdfstring{supportMultipleDocuments}{supportMultipleDocuments}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) support\+Multiple\+Documents\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Json/\mbox{\hyperlink{_u_m_json_stream_parser_8h}{U\+M\+Json\+Stream\+Parser.\+h}}\item 
+Classes/\+Universal\+Json/\mbox{\hyperlink{_u_m_json_stream_parser_8m}{U\+M\+Json\+Stream\+Parser.\+m}}\end{DoxyCompactItemize}

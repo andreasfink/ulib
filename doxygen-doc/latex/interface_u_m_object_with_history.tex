@@ -1,0 +1,151 @@
+\hypertarget{interface_u_m_object_with_history}{}\doxysection{U\+M\+Object\+With\+History Class Reference}
+\label{interface_u_m_object_with_history}\index{UMObjectWithHistory@{UMObjectWithHistory}}
+
+
+{\ttfamily \#import $<$U\+M\+Object\+With\+History.\+h$>$}
+
+Inheritance diagram for U\+M\+Object\+With\+History\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.132867cm]{interface_u_m_object_with_history}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_with_history_a16d9e00aed43095236e9afde3ae13c1e}{set\+Value\+:}}
+\item 
+(N\+S\+Object $\ast$) -\/ \mbox{\hyperlink{interface_u_m_object_with_history_a0674853f1e999c2e90f1c6270a7669a2}{value}}
+\item 
+(N\+S\+Object $\ast$) -\/ \mbox{\hyperlink{interface_u_m_object_with_history_ad592d93c291166d8e9280ec25471b457}{old\+Value}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_object_with_history_a5f342e9fc4163613d4e41dcf234d134d}{has\+Changed}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_with_history_a0ea0367fd1e456a7eabd0704353ab96b}{clear\+Changed\+Flag}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_with_history_aaf0ca870d813b3d927250ee0e7269253}{clear\+Dirty\+Flag}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_with_history_af6f6016325ba54b4753f7a22d58238be}{load\+From\+Value\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_with_history_a27683b2de81d9969baf2d303e15ecd72}{load\+From\+String\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{interface_u_m_object_with_history}{U\+M\+Object\+With\+History}} $\ast$) + \mbox{\hyperlink{interface_u_m_object_with_history_a271c8e0b064bcc71fd93eb28a38d8dd5}{object\+With\+History\+With\+Object\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+Object $\ast$ \mbox{\hyperlink{interface_u_m_object_with_history_a010a1f7b488b48e1f5a90a759c43c72a}{\+\_\+old\+Value}}
+\item 
+N\+S\+Object $\ast$ \mbox{\hyperlink{interface_u_m_object_with_history_a8a255236dc6fa0a7f0fc7c43b1f4fea1}{\+\_\+current\+Value}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_object_with_history_aa4ba71371c720ab974a4c36f74914bea}{\+\_\+is\+Modified}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+Object $\ast$ \mbox{\hyperlink{interface_u_m_object_with_history_ac1830dbebfa5ddd792884d5ade07205e}{old\+Value}}
+\item 
+N\+S\+Object $\ast$ \mbox{\hyperlink{interface_u_m_object_with_history_aec4b398b5df2ba5c94367303aad46518}{current\+Value}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_object_with_history_a0ea0367fd1e456a7eabd0704353ab96b}\label{interface_u_m_object_with_history_a0ea0367fd1e456a7eabd0704353ab96b}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!clearChangedFlag@{clearChangedFlag}}
+\index{clearChangedFlag@{clearChangedFlag}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{clearChangedFlag()}{clearChangedFlag()}}
+{\footnotesize\ttfamily -\/ (void) clear\+Changed\+Flag \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+flush the has changed flag (for example after updating db) \mbox{\Hypertarget{interface_u_m_object_with_history_aaf0ca870d813b3d927250ee0e7269253}\label{interface_u_m_object_with_history_aaf0ca870d813b3d927250ee0e7269253}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!clearDirtyFlag@{clearDirtyFlag}}
+\index{clearDirtyFlag@{clearDirtyFlag}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{clearDirtyFlag()}{clearDirtyFlag()}}
+{\footnotesize\ttfamily -\/ (void) clear\+Dirty\+Flag \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+same as clear\+Changed flag but the new value is now the old value \mbox{\Hypertarget{interface_u_m_object_with_history_a5f342e9fc4163613d4e41dcf234d134d}\label{interface_u_m_object_with_history_a5f342e9fc4163613d4e41dcf234d134d}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!hasChanged@{hasChanged}}
+\index{hasChanged@{hasChanged}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{hasChanged()}{hasChanged()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) has\+Changed \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+y the previous value has it changed since we cleared the flag? \mbox{\Hypertarget{interface_u_m_object_with_history_a27683b2de81d9969baf2d303e15ecd72}\label{interface_u_m_object_with_history_a27683b2de81d9969baf2d303e15ecd72}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!loadFromString:@{loadFromString:}}
+\index{loadFromString:@{loadFromString:}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{loadFromString:()}{loadFromString:()}}
+{\footnotesize\ttfamily -\/ (void) load\+From\+String\+: \begin{DoxyParamCaption}\item[{(N\+S\+Object $\ast$)}]{str }\end{DoxyParamCaption}}
+
+initialize with a new string object \mbox{\Hypertarget{interface_u_m_object_with_history_af6f6016325ba54b4753f7a22d58238be}\label{interface_u_m_object_with_history_af6f6016325ba54b4753f7a22d58238be}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!loadFromValue:@{loadFromValue:}}
+\index{loadFromValue:@{loadFromValue:}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{loadFromValue:()}{loadFromValue:()}}
+{\footnotesize\ttfamily -\/ (void) load\+From\+Value\+: \begin{DoxyParamCaption}\item[{(N\+S\+Object $\ast$)}]{v }\end{DoxyParamCaption}}
+
+initialize with a new object \mbox{\Hypertarget{interface_u_m_object_with_history_a271c8e0b064bcc71fd93eb28a38d8dd5}\label{interface_u_m_object_with_history_a271c8e0b064bcc71fd93eb28a38d8dd5}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!objectWithHistoryWithObject:@{objectWithHistoryWithObject:}}
+\index{objectWithHistoryWithObject:@{objectWithHistoryWithObject:}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{objectWithHistoryWithObject:()}{objectWithHistoryWithObject:()}}
+{\footnotesize\ttfamily + (\mbox{\hyperlink{interface_u_m_object_with_history}{U\+M\+Object\+With\+History}} $\ast$) object\+With\+History\+With\+Object\+: \begin{DoxyParamCaption}\item[{(N\+S\+Object $\ast$)}]{o }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_with_history_ad592d93c291166d8e9280ec25471b457}\label{interface_u_m_object_with_history_ad592d93c291166d8e9280ec25471b457}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!oldValue@{oldValue}}
+\index{oldValue@{oldValue}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{oldValue()}{oldValue()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Object $\ast$) old\+Value \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_with_history_a16d9e00aed43095236e9afde3ae13c1e}\label{interface_u_m_object_with_history_a16d9e00aed43095236e9afde3ae13c1e}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!setValue:@{setValue:}}
+\index{setValue:@{setValue:}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{setValue:()}{setValue:()}}
+{\footnotesize\ttfamily -\/ (void) set\+Value\+: \begin{DoxyParamCaption}\item[{(N\+S\+Object $\ast$)}]{new\+Value }\end{DoxyParamCaption}}
+
+set to a new value. if different the is\+Modified flag is raised \mbox{\Hypertarget{interface_u_m_object_with_history_a0674853f1e999c2e90f1c6270a7669a2}\label{interface_u_m_object_with_history_a0674853f1e999c2e90f1c6270a7669a2}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!value@{value}}
+\index{value@{value}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Object $\ast$) value \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+the current value 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_object_with_history_a8a255236dc6fa0a7f0fc7c43b1f4fea1}\label{interface_u_m_object_with_history_a8a255236dc6fa0a7f0fc7c43b1f4fea1}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!\_currentValue@{\_currentValue}}
+\index{\_currentValue@{\_currentValue}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{\_currentValue}{\_currentValue}}
+{\footnotesize\ttfamily -\/ (N\+S\+Object$\ast$) \+\_\+current\+Value\hspace{0.3cm}{\ttfamily [protected]}}
+
+the current object value \mbox{\Hypertarget{interface_u_m_object_with_history_aa4ba71371c720ab974a4c36f74914bea}\label{interface_u_m_object_with_history_aa4ba71371c720ab974a4c36f74914bea}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!\_isModified@{\_isModified}}
+\index{\_isModified@{\_isModified}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{\_isModified}{\_isModified}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+is\+Modified\hspace{0.3cm}{\ttfamily [protected]}}
+
+B\+O\+OL telling us if there was any change \mbox{\Hypertarget{interface_u_m_object_with_history_a010a1f7b488b48e1f5a90a759c43c72a}\label{interface_u_m_object_with_history_a010a1f7b488b48e1f5a90a759c43c72a}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!\_oldValue@{\_oldValue}}
+\index{\_oldValue@{\_oldValue}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{\_oldValue}{\_oldValue}}
+{\footnotesize\ttfamily -\/ (N\+S\+Object$\ast$) \+\_\+old\+Value\hspace{0.3cm}{\ttfamily [protected]}}
+
+the previous object value 
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_object_with_history_aec4b398b5df2ba5c94367303aad46518}\label{interface_u_m_object_with_history_aec4b398b5df2ba5c94367303aad46518}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!currentValue@{currentValue}}
+\index{currentValue@{currentValue}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{currentValue}{currentValue}}
+{\footnotesize\ttfamily -\/ (N\+S\+Object$\ast$) current\+Value\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_object_with_history_ac1830dbebfa5ddd792884d5ade07205e}\label{interface_u_m_object_with_history_ac1830dbebfa5ddd792884d5ade07205e}} 
+\index{UMObjectWithHistory@{UMObjectWithHistory}!oldValue@{oldValue}}
+\index{oldValue@{oldValue}!UMObjectWithHistory@{UMObjectWithHistory}}
+\doxysubsubsection{\texorpdfstring{oldValue}{oldValue}}
+{\footnotesize\ttfamily -\/ (N\+S\+Object$\ast$) old\+Value\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_object_with_history_8h}{U\+M\+Object\+With\+History.\+h}}\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_object_with_history_8m}{U\+M\+Object\+With\+History.\+m}}\end{DoxyCompactItemize}

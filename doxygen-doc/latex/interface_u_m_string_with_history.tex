@@ -1,0 +1,91 @@
+\hypertarget{interface_u_m_string_with_history}{}\doxysection{U\+M\+String\+With\+History Class Reference}
+\label{interface_u_m_string_with_history}\index{UMStringWithHistory@{UMStringWithHistory}}
+
+
+A N\+S\+String which remembers its previous value.  
+
+
+
+
+{\ttfamily \#import $<$U\+M\+String\+With\+History.\+h$>$}
+
+Inheritance diagram for U\+M\+String\+With\+History\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{interface_u_m_string_with_history}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_string_with_history_afe1ca1a90efb126b491c3bfadd9bf9e9}{set\+String\+:}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_string_with_history_a5aaaddf6101c874fe06cbc3daebeea1b}{string}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_string_with_history_a8757783322462b48f0bc88216bb15c8e}{current\+String}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_string_with_history_aca8a1da5017c50cbc6bb923e385123b7}{old\+String}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_string_with_history_a8ca2a6539f2db72d9a0467ac7be4fe0e}{non\+Null\+String}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_string_with_history_acfbf4b3f3db26daae9e3108d565ba0b7}{old\+Non\+Null\+String}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_string_with_history_a64d3c24d0a838b96f626230f0c3f98d9}{load\+From\+String\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A N\+S\+String which remembers its previous value. 
+
+\mbox{\hyperlink{interface_u_m_string_with_history}{U\+M\+String\+With\+History}} is a object holding a N\+S\+String and its previous value. It can be used to hold data which is potentially modified at some point in time and then remember if it has been modified and what the old values are. Used for example in database access to only modify the fields which have changed (and if none has changed, not doing any query at all). 
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_string_with_history_a8757783322462b48f0bc88216bb15c8e}\label{interface_u_m_string_with_history_a8757783322462b48f0bc88216bb15c8e}} 
+\index{UMStringWithHistory@{UMStringWithHistory}!currentString@{currentString}}
+\index{currentString@{currentString}!UMStringWithHistory@{UMStringWithHistory}}
+\doxysubsubsection{\texorpdfstring{currentString()}{currentString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) current\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_string_with_history_a64d3c24d0a838b96f626230f0c3f98d9}\label{interface_u_m_string_with_history_a64d3c24d0a838b96f626230f0c3f98d9}} 
+\index{UMStringWithHistory@{UMStringWithHistory}!loadFromString:@{loadFromString:}}
+\index{loadFromString:@{loadFromString:}!UMStringWithHistory@{UMStringWithHistory}}
+\doxysubsubsection{\texorpdfstring{loadFromString:()}{loadFromString:()}}
+{\footnotesize\ttfamily -\/ (void) load\+From\+String\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{str }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_string_with_history_a8ca2a6539f2db72d9a0467ac7be4fe0e}\label{interface_u_m_string_with_history_a8ca2a6539f2db72d9a0467ac7be4fe0e}} 
+\index{UMStringWithHistory@{UMStringWithHistory}!nonNullString@{nonNullString}}
+\index{nonNullString@{nonNullString}!UMStringWithHistory@{UMStringWithHistory}}
+\doxysubsubsection{\texorpdfstring{nonNullString()}{nonNullString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) non\+Null\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_string_with_history_acfbf4b3f3db26daae9e3108d565ba0b7}\label{interface_u_m_string_with_history_acfbf4b3f3db26daae9e3108d565ba0b7}} 
+\index{UMStringWithHistory@{UMStringWithHistory}!oldNonNullString@{oldNonNullString}}
+\index{oldNonNullString@{oldNonNullString}!UMStringWithHistory@{UMStringWithHistory}}
+\doxysubsubsection{\texorpdfstring{oldNonNullString()}{oldNonNullString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) old\+Non\+Null\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_string_with_history_aca8a1da5017c50cbc6bb923e385123b7}\label{interface_u_m_string_with_history_aca8a1da5017c50cbc6bb923e385123b7}} 
+\index{UMStringWithHistory@{UMStringWithHistory}!oldString@{oldString}}
+\index{oldString@{oldString}!UMStringWithHistory@{UMStringWithHistory}}
+\doxysubsubsection{\texorpdfstring{oldString()}{oldString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) old\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_string_with_history_afe1ca1a90efb126b491c3bfadd9bf9e9}\label{interface_u_m_string_with_history_afe1ca1a90efb126b491c3bfadd9bf9e9}} 
+\index{UMStringWithHistory@{UMStringWithHistory}!setString:@{setString:}}
+\index{setString:@{setString:}!UMStringWithHistory@{UMStringWithHistory}}
+\doxysubsubsection{\texorpdfstring{setString:()}{setString:()}}
+{\footnotesize\ttfamily -\/ (void) set\+String\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{new\+String }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_string_with_history_a5aaaddf6101c874fe06cbc3daebeea1b}\label{interface_u_m_string_with_history_a5aaaddf6101c874fe06cbc3daebeea1b}} 
+\index{UMStringWithHistory@{UMStringWithHistory}!string@{string}}
+\index{string@{string}!UMStringWithHistory@{UMStringWithHistory}}
+\doxysubsubsection{\texorpdfstring{string()}{string()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) string \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_string_with_history_8h}{U\+M\+String\+With\+History.\+h}}\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_string_with_history_8m}{U\+M\+String\+With\+History.\+m}}\end{DoxyCompactItemize}

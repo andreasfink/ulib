@@ -25,3 +25,6 @@
 #import "UMNamedList.h"
 #import "UMStatistic.h"
 #import "UMStatisticEntry.h"
+#import "UMRegexMatch.h"
+#import "UMRegex.h"
+

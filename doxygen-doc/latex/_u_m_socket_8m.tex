@@ -1,0 +1,120 @@
+\hypertarget{_u_m_socket_8m}{}\doxysection{Classes/\+Universal\+Socket/\+U\+M\+Socket.m File Reference}
+\label{_u_m_socket_8m}\index{Classes/UniversalSocket/UMSocket.m@{Classes/UniversalSocket/UMSocket.m}}
+{\ttfamily \#import \char`\"{}U\+M\+Socket.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Log\+Feed.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$netinet/in.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/uio.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$poll.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/tcp.\+h$>$}\newline
+{\ttfamily \#include $<$netdb.\+h$>$}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Mutex.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}N\+S\+Data+\+U\+M\+Socket.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Assert.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+File\+Tracking\+Macros.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}N\+S\+String+\+U\+M\+Socket.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Util.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}ulib\+\_\+config.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$netinet/sctp.\+h$>$}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Host.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_c_r_y_p_t_o__dynlock__value}{C\+R\+Y\+P\+T\+O\+\_\+dynlock\+\_\+value}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_u_m_socket_8m_abe71efbdc015c1d24bc5279771a80769}{S\+C\+T\+P\+\_\+\+I\+N\+\_\+\+K\+E\+R\+N\+EL}}~1
+\item 
+\#define \mbox{\hyperlink{_u_m_socket_8m_ac5d1e7463a15faa761d6800dfc0fc85c}{S\+C\+T\+P\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED}}~1
+\item 
+\#define \mbox{\hyperlink{_u_m_socket_8m_afce983cef8c9dfb0595ee46f7a955aa8}{I\+P\+P\+R\+O\+T\+O\+\_\+\+S\+C\+TP}}~132
+\item 
+\#define \mbox{\hyperlink{_u_m_socket_8m_a1b6c90c2eee9e1d702e456a9f5ebd703}{U\+M\+B\+L\+O\+C\+K\+\_\+\+R\+E\+A\+D\+\_\+\+S\+I\+ZE}}~1024
+\item 
+\#define \mbox{\hyperlink{_u_m_socket_8m_abbaffce072b3f3cfecf69734d2da9c6d}{E\+M\+P\+T\+Y\+S\+T\+R\+I\+N\+G\+F\+O\+R\+N\+IL}}(a)~(a?a\+:@\char`\"{}\char`\"{})
+\item 
+\#define \mbox{\hyperlink{_u_m_socket_8m_af40678ef929433170cf55009ab48587d}{E\+M\+P\+T\+Y\+I\+P\+F\+O\+R\+N\+IL}}(a)~((a) ? (a) \+: @\char`\"{}0.\+0.\+0.\+0\char`\"{})
+\item 
+\#define \mbox{\hyperlink{_u_m_socket_8m_a4a941b75a2cf56698a1e769d8214fd50}{R\+X\+B\+U\+F\+S\+I\+ZE}}~(32$\ast$1024)
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef unsigned long($\ast$ \mbox{\hyperlink{_u_m_socket_8m_a54f56b4a459bbe38f2ecc99d620f6586}{C\+R\+Y\+P\+T\+O\+\_\+\+C\+A\+L\+L\+B\+A\+C\+K\+\_\+\+P\+TR}}) (void)
+\item 
+typedef struct \mbox{\hyperlink{struct_c_r_y_p_t_o__dynlock__value}{C\+R\+Y\+P\+T\+O\+\_\+dynlock\+\_\+value}} \mbox{\hyperlink{_u_m_socket_8m_a5fef21b0b9c48d3477af514e18314b3d}{C\+R\+Y\+P\+T\+O\+\_\+dynlock\+\_\+value}}
+\item 
+typedef void $\ast$ \mbox{\hyperlink{_u_m_socket_8m_a243d9a90a66486f621b330367a6605eb}{ummutex\+\_\+c\+\_\+pointer}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_u_m_socket_8m_af40678ef929433170cf55009ab48587d}\label{_u_m_socket_8m_af40678ef929433170cf55009ab48587d}} 
+\index{UMSocket.m@{UMSocket.m}!EMPTYIPFORNIL@{EMPTYIPFORNIL}}
+\index{EMPTYIPFORNIL@{EMPTYIPFORNIL}!UMSocket.m@{UMSocket.m}}
+\doxysubsubsection{\texorpdfstring{EMPTYIPFORNIL}{EMPTYIPFORNIL}}
+{\footnotesize\ttfamily \#define E\+M\+P\+T\+Y\+I\+P\+F\+O\+R\+N\+IL(\begin{DoxyParamCaption}\item[{}]{a }\end{DoxyParamCaption})~((a) ? (a) \+: @\char`\"{}0.\+0.\+0.\+0\char`\"{})}
+
+\mbox{\Hypertarget{_u_m_socket_8m_abbaffce072b3f3cfecf69734d2da9c6d}\label{_u_m_socket_8m_abbaffce072b3f3cfecf69734d2da9c6d}} 
+\index{UMSocket.m@{UMSocket.m}!EMPTYSTRINGFORNIL@{EMPTYSTRINGFORNIL}}
+\index{EMPTYSTRINGFORNIL@{EMPTYSTRINGFORNIL}!UMSocket.m@{UMSocket.m}}
+\doxysubsubsection{\texorpdfstring{EMPTYSTRINGFORNIL}{EMPTYSTRINGFORNIL}}
+{\footnotesize\ttfamily \#define E\+M\+P\+T\+Y\+S\+T\+R\+I\+N\+G\+F\+O\+R\+N\+IL(\begin{DoxyParamCaption}\item[{}]{a }\end{DoxyParamCaption})~(a?a\+:@\char`\"{}\char`\"{})}
+
+\mbox{\Hypertarget{_u_m_socket_8m_afce983cef8c9dfb0595ee46f7a955aa8}\label{_u_m_socket_8m_afce983cef8c9dfb0595ee46f7a955aa8}} 
+\index{UMSocket.m@{UMSocket.m}!IPPROTO\_SCTP@{IPPROTO\_SCTP}}
+\index{IPPROTO\_SCTP@{IPPROTO\_SCTP}!UMSocket.m@{UMSocket.m}}
+\doxysubsubsection{\texorpdfstring{IPPROTO\_SCTP}{IPPROTO\_SCTP}}
+{\footnotesize\ttfamily \#define I\+P\+P\+R\+O\+T\+O\+\_\+\+S\+C\+TP~132}
+
+\mbox{\Hypertarget{_u_m_socket_8m_a4a941b75a2cf56698a1e769d8214fd50}\label{_u_m_socket_8m_a4a941b75a2cf56698a1e769d8214fd50}} 
+\index{UMSocket.m@{UMSocket.m}!RXBUFSIZE@{RXBUFSIZE}}
+\index{RXBUFSIZE@{RXBUFSIZE}!UMSocket.m@{UMSocket.m}}
+\doxysubsubsection{\texorpdfstring{RXBUFSIZE}{RXBUFSIZE}}
+{\footnotesize\ttfamily \#define R\+X\+B\+U\+F\+S\+I\+ZE~(32$\ast$1024)}
+
+\mbox{\Hypertarget{_u_m_socket_8m_abe71efbdc015c1d24bc5279771a80769}\label{_u_m_socket_8m_abe71efbdc015c1d24bc5279771a80769}} 
+\index{UMSocket.m@{UMSocket.m}!SCTP\_IN\_KERNEL@{SCTP\_IN\_KERNEL}}
+\index{SCTP\_IN\_KERNEL@{SCTP\_IN\_KERNEL}!UMSocket.m@{UMSocket.m}}
+\doxysubsubsection{\texorpdfstring{SCTP\_IN\_KERNEL}{SCTP\_IN\_KERNEL}}
+{\footnotesize\ttfamily \#define S\+C\+T\+P\+\_\+\+I\+N\+\_\+\+K\+E\+R\+N\+EL~1}
+
+\mbox{\Hypertarget{_u_m_socket_8m_ac5d1e7463a15faa761d6800dfc0fc85c}\label{_u_m_socket_8m_ac5d1e7463a15faa761d6800dfc0fc85c}} 
+\index{UMSocket.m@{UMSocket.m}!SCTP\_SUPPORTED@{SCTP\_SUPPORTED}}
+\index{SCTP\_SUPPORTED@{SCTP\_SUPPORTED}!UMSocket.m@{UMSocket.m}}
+\doxysubsubsection{\texorpdfstring{SCTP\_SUPPORTED}{SCTP\_SUPPORTED}}
+{\footnotesize\ttfamily \#define S\+C\+T\+P\+\_\+\+S\+U\+P\+P\+O\+R\+T\+ED~1}
+
+\mbox{\Hypertarget{_u_m_socket_8m_a1b6c90c2eee9e1d702e456a9f5ebd703}\label{_u_m_socket_8m_a1b6c90c2eee9e1d702e456a9f5ebd703}} 
+\index{UMSocket.m@{UMSocket.m}!UMBLOCK\_READ\_SIZE@{UMBLOCK\_READ\_SIZE}}
+\index{UMBLOCK\_READ\_SIZE@{UMBLOCK\_READ\_SIZE}!UMSocket.m@{UMSocket.m}}
+\doxysubsubsection{\texorpdfstring{UMBLOCK\_READ\_SIZE}{UMBLOCK\_READ\_SIZE}}
+{\footnotesize\ttfamily \#define U\+M\+B\+L\+O\+C\+K\+\_\+\+R\+E\+A\+D\+\_\+\+S\+I\+ZE~1024}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_u_m_socket_8m_a54f56b4a459bbe38f2ecc99d620f6586}\label{_u_m_socket_8m_a54f56b4a459bbe38f2ecc99d620f6586}} 
+\index{UMSocket.m@{UMSocket.m}!CRYPTO\_CALLBACK\_PTR@{CRYPTO\_CALLBACK\_PTR}}
+\index{CRYPTO\_CALLBACK\_PTR@{CRYPTO\_CALLBACK\_PTR}!UMSocket.m@{UMSocket.m}}
+\doxysubsubsection{\texorpdfstring{CRYPTO\_CALLBACK\_PTR}{CRYPTO\_CALLBACK\_PTR}}
+{\footnotesize\ttfamily typedef unsigned long($\ast$ C\+R\+Y\+P\+T\+O\+\_\+\+C\+A\+L\+L\+B\+A\+C\+K\+\_\+\+P\+TR) (void)}
+
+\mbox{\Hypertarget{_u_m_socket_8m_a5fef21b0b9c48d3477af514e18314b3d}\label{_u_m_socket_8m_a5fef21b0b9c48d3477af514e18314b3d}} 
+\index{UMSocket.m@{UMSocket.m}!CRYPTO\_dynlock\_value@{CRYPTO\_dynlock\_value}}
+\index{CRYPTO\_dynlock\_value@{CRYPTO\_dynlock\_value}!UMSocket.m@{UMSocket.m}}
+\doxysubsubsection{\texorpdfstring{CRYPTO\_dynlock\_value}{CRYPTO\_dynlock\_value}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_c_r_y_p_t_o__dynlock__value}{C\+R\+Y\+P\+T\+O\+\_\+dynlock\+\_\+value}}  \mbox{\hyperlink{struct_c_r_y_p_t_o__dynlock__value}{C\+R\+Y\+P\+T\+O\+\_\+dynlock\+\_\+value}}}
+
+\mbox{\Hypertarget{_u_m_socket_8m_a243d9a90a66486f621b330367a6605eb}\label{_u_m_socket_8m_a243d9a90a66486f621b330367a6605eb}} 
+\index{UMSocket.m@{UMSocket.m}!ummutex\_c\_pointer@{ummutex\_c\_pointer}}
+\index{ummutex\_c\_pointer@{ummutex\_c\_pointer}!UMSocket.m@{UMSocket.m}}
+\doxysubsubsection{\texorpdfstring{ummutex\_c\_pointer}{ummutex\_c\_pointer}}
+{\footnotesize\ttfamily typedef void$\ast$ \mbox{\hyperlink{_u_m_socket_8m_a243d9a90a66486f621b330367a6605eb}{ummutex\+\_\+c\+\_\+pointer}}}
+

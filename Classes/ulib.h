@@ -7,7 +7,6 @@
 
 #ifndef ULIB_H
 #define ULIB_H 1
-#import "UMRegex.h"
 #import "UMAssert.h"
 #import "UniversalObject.h"
 #import "UniversalConfig.h"

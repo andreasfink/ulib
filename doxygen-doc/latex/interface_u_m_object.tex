@@ -1,0 +1,213 @@
+\hypertarget{interface_u_m_object}{}\doxysection{U\+M\+Object Class Reference}
+\label{interface_u_m_object}\index{UMObject@{UMObject}}
+
+
+The root object for ulib.  
+
+
+
+
+{\ttfamily \#import $<$U\+M\+Object.\+h$>$}
+
+Inheritance diagram for U\+M\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{interface_u_m_object}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{interface_u_m_object}{U\+M\+Object}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_object_aeaac514e683838e31be4c2676923bbd3}{init}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_aa58eafcd96aa1a3d238959b0283be8bb}{add\+Log\+From\+Config\+Group\+:to\+Handler\+:logdir\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_a5daacd818386cfab13f07e039b1c8946}{add\+Log\+From\+Config\+Group\+:to\+Handler\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_aa3be64af6563ce528a615b466ec85b83}{add\+Log\+From\+Config\+Group\+:to\+Handler\+:section\+Name\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_a9374a074fcc2a46eb6ab85b727c95258}{add\+Log\+From\+Config\+Group\+:to\+Handler\+:section\+Name\+:sub\+Section\+Name\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_a15ccb25d16028c8459308566ad8e6720}{add\+Log\+From\+Config\+Group\+:to\+Handler\+:section\+Name\+:sub\+Section\+Name\+:config\+Option\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_a4b1347405e97ef30c51c0712c9abfcd8}{add\+Log\+From\+Config\+Group\+:to\+Handler\+:section\+Name\+:sub\+Section\+Name\+:config\+Option\+:logdir\+:}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_object_a02c37c381ed1ff9c8ae22620078eb62c}{description\+With\+Prefix\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_ada9e7303cc9b7874511819e5fc0b1c92}{run\+Selector\+In\+Background\+:with\+Object\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_a16180083762b911fe54a7db8e3374e4c}{run\+Selector\+In\+Background\+:with\+Object\+:file\+:line\+:function\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_a9a39549b801c65799d50422f046f0e66}{run\+Selector\+In\+Background\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(N\+S\+Character\+Set $\ast$) + \mbox{\hyperlink{interface_u_m_object_a2e1649d3b7d955393e0e05c36ccb2c58}{whitespace\+And\+Newline\+Character\+Set}}
+\item 
+(N\+S\+Character\+Set $\ast$) + \mbox{\hyperlink{interface_u_m_object_a0087f5df9e52c60b4cb6bd389d88a0b9}{newline\+Character\+Set}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{interface_u_m_object_aec30b36f99310043e891c06ba1554216}{\+\_\+magic}}
+\item 
+const char $\ast$ \mbox{\hyperlink{interface_u_m_object_a526e5ae703315044128f8d5e3e396e95}{\+\_\+object\+Statistics\+Name}}
+\item 
+\mbox{\hyperlink{interface_u_m_log_feed}{U\+M\+Log\+Feed}} $\ast$ \mbox{\hyperlink{interface_u_m_object_a9cde4965fe480ec9bb9e601788d2b494}{\+\_\+log\+Feed}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{interface_u_m_object_a5c7be87367a6ae090c48b0fec607758f}{\+\_\+umobject\+\_\+flags}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_u_m_log_feed}{U\+M\+Log\+Feed}} $\ast$ \mbox{\hyperlink{interface_u_m_object_af80bc9f8b601469a7a2945fb8b4f20cf}{log\+Feed}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_object_a42bd3a13ee70b5fb91a0ec4a11f281c5}{object\+Statistics\+Name}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{interface_u_m_object_a6f105fd0a55f8e27d361a2e314a3ff99}{umobject\+\_\+flags}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The root object for ulib. 
+
+\mbox{\hyperlink{interface_u_m_object}{U\+M\+Object}} is a replacement for \mbox{\hyperlink{class_n_s_object-p}{N\+S\+Object}}. It allows a log handler to be attached, getting instantiated from a config file and it has some debug variant U\+M\+Object\+Debug which allow to trace where objects get allocated and deallocated and it has methods to run methods in background in another thread. 
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_object_a5daacd818386cfab13f07e039b1c8946}\label{interface_u_m_object_a5daacd818386cfab13f07e039b1c8946}} 
+\index{UMObject@{UMObject}!addLogFromConfigGroup:toHandler:@{addLogFromConfigGroup:toHandler:}}
+\index{addLogFromConfigGroup:toHandler:@{addLogFromConfigGroup:toHandler:}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{addLogFromConfigGroup:toHandler:()}{addLogFromConfigGroup:toHandler:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Log\+From\+Config\+Group\+: \begin{DoxyParamCaption}\item[{(N\+S\+Dictionary $\ast$)}]{grp }\item[{to\+Handler\+:(\mbox{\hyperlink{interface_u_m_log_handler}{U\+M\+Log\+Handler}} $\ast$)}]{handler }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_aa58eafcd96aa1a3d238959b0283be8bb}\label{interface_u_m_object_aa58eafcd96aa1a3d238959b0283be8bb}} 
+\index{UMObject@{UMObject}!addLogFromConfigGroup:toHandler:logdir:@{addLogFromConfigGroup:toHandler:logdir:}}
+\index{addLogFromConfigGroup:toHandler:logdir:@{addLogFromConfigGroup:toHandler:logdir:}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{addLogFromConfigGroup:toHandler:logdir:()}{addLogFromConfigGroup:toHandler:logdir:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Log\+From\+Config\+Group\+: \begin{DoxyParamCaption}\item[{(N\+S\+Dictionary $\ast$)}]{grp }\item[{to\+Handler\+:(\mbox{\hyperlink{interface_u_m_log_handler}{U\+M\+Log\+Handler}} $\ast$)}]{handler }\item[{logdir\+:(N\+S\+String $\ast$)}]{logdir }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_aa3be64af6563ce528a615b466ec85b83}\label{interface_u_m_object_aa3be64af6563ce528a615b466ec85b83}} 
+\index{UMObject@{UMObject}!addLogFromConfigGroup:toHandler:sectionName:@{addLogFromConfigGroup:toHandler:sectionName:}}
+\index{addLogFromConfigGroup:toHandler:sectionName:@{addLogFromConfigGroup:toHandler:sectionName:}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{addLogFromConfigGroup:toHandler:sectionName:()}{addLogFromConfigGroup:toHandler:sectionName:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Log\+From\+Config\+Group\+: \begin{DoxyParamCaption}\item[{(N\+S\+Dictionary $\ast$)}]{grp }\item[{to\+Handler\+:(\mbox{\hyperlink{interface_u_m_log_handler}{U\+M\+Log\+Handler}} $\ast$)}]{handler }\item[{section\+Name\+:(N\+S\+String $\ast$)}]{sec }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_a9374a074fcc2a46eb6ab85b727c95258}\label{interface_u_m_object_a9374a074fcc2a46eb6ab85b727c95258}} 
+\index{UMObject@{UMObject}!addLogFromConfigGroup:toHandler:sectionName:subSectionName:@{addLogFromConfigGroup:toHandler:sectionName:subSectionName:}}
+\index{addLogFromConfigGroup:toHandler:sectionName:subSectionName:@{addLogFromConfigGroup:toHandler:sectionName:subSectionName:}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{addLogFromConfigGroup:toHandler:sectionName:subSectionName:()}{addLogFromConfigGroup:toHandler:sectionName:subSectionName:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Log\+From\+Config\+Group\+: \begin{DoxyParamCaption}\item[{(N\+S\+Dictionary $\ast$)}]{grp }\item[{to\+Handler\+:(\mbox{\hyperlink{interface_u_m_log_handler}{U\+M\+Log\+Handler}} $\ast$)}]{handler }\item[{section\+Name\+:(N\+S\+String $\ast$)}]{sec }\item[{sub\+Section\+Name\+:(N\+S\+String $\ast$)}]{ss }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_a15ccb25d16028c8459308566ad8e6720}\label{interface_u_m_object_a15ccb25d16028c8459308566ad8e6720}} 
+\index{UMObject@{UMObject}!addLogFromConfigGroup:toHandler:sectionName:subSectionName:configOption:@{addLogFromConfigGroup:toHandler:sectionName:subSectionName:configOption:}}
+\index{addLogFromConfigGroup:toHandler:sectionName:subSectionName:configOption:@{addLogFromConfigGroup:toHandler:sectionName:subSectionName:configOption:}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{addLogFromConfigGroup:toHandler:sectionName:subSectionName:configOption:()}{addLogFromConfigGroup:toHandler:sectionName:subSectionName:configOption:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Log\+From\+Config\+Group\+: \begin{DoxyParamCaption}\item[{(N\+S\+Dictionary $\ast$)}]{grp }\item[{to\+Handler\+:(\mbox{\hyperlink{interface_u_m_log_handler}{U\+M\+Log\+Handler}} $\ast$)}]{handler }\item[{section\+Name\+:(N\+S\+String $\ast$)}]{sec }\item[{sub\+Section\+Name\+:(N\+S\+String $\ast$)}]{ss }\item[{config\+Option\+:(N\+S\+String $\ast$)}]{config\+Option }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_a4b1347405e97ef30c51c0712c9abfcd8}\label{interface_u_m_object_a4b1347405e97ef30c51c0712c9abfcd8}} 
+\index{UMObject@{UMObject}!addLogFromConfigGroup:toHandler:sectionName:subSectionName:configOption:logdir:@{addLogFromConfigGroup:toHandler:sectionName:subSectionName:configOption:logdir:}}
+\index{addLogFromConfigGroup:toHandler:sectionName:subSectionName:configOption:logdir:@{addLogFromConfigGroup:toHandler:sectionName:subSectionName:configOption:logdir:}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{addLogFromConfigGroup:toHandler:sectionName:subSectionName:configOption:logdir:()}{addLogFromConfigGroup:toHandler:sectionName:subSectionName:configOption:logdir:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Log\+From\+Config\+Group\+: \begin{DoxyParamCaption}\item[{(N\+S\+Dictionary $\ast$)}]{grp }\item[{to\+Handler\+:(\mbox{\hyperlink{interface_u_m_log_handler}{U\+M\+Log\+Handler}} $\ast$)}]{handler }\item[{section\+Name\+:(N\+S\+String $\ast$)}]{sec }\item[{sub\+Section\+Name\+:(N\+S\+String $\ast$)}]{ss }\item[{config\+Option\+:(N\+S\+String $\ast$)}]{config\+Option }\item[{logdir\+:(N\+S\+String $\ast$)}]{logdir }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_a02c37c381ed1ff9c8ae22620078eb62c}\label{interface_u_m_object_a02c37c381ed1ff9c8ae22620078eb62c}} 
+\index{UMObject@{UMObject}!descriptionWithPrefix:@{descriptionWithPrefix:}}
+\index{descriptionWithPrefix:@{descriptionWithPrefix:}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{descriptionWithPrefix:()}{descriptionWithPrefix:()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) description\+With\+Prefix\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{prefix }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_aeaac514e683838e31be4c2676923bbd3}\label{interface_u_m_object_aeaac514e683838e31be4c2676923bbd3}} 
+\index{UMObject@{UMObject}!init@{init}}
+\index{init@{init}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_object}{U\+M\+Object}} $\ast$) init \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+Reimplemented in \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a520ace0cad4976bda1f76a3b47418206}{U\+M\+H\+T\+T\+P\+Server}}, \mbox{\hyperlink{interface_u_m_h_t_t_p_request_a30496c265b54866c2418495648cb54fe}{U\+M\+H\+T\+T\+P\+Request}}, \mbox{\hyperlink{interface_u_m_task_queue_multi_a151c7a0d572414cda4bd078e7975b69f}{U\+M\+Task\+Queue\+Multi}}, \mbox{\hyperlink{interface_u_m_task_queue_a377c38a430fc715f5c8f34c5eae68ad6}{U\+M\+Task\+Queue}}, \mbox{\hyperlink{interface_u_m_log_entry_afbe5368cfa9b3e276c7f8745ff4f226d}{U\+M\+Log\+Entry}}, \mbox{\hyperlink{interface_u_m_config_group_a0a08e347ac2bb14c014a2b68c630dba3}{U\+M\+Config\+Group}}, \mbox{\hyperlink{interface_u_m_synchronized_array_a8da74aaec4015aa3309abda2e9795f20}{U\+M\+Synchronized\+Array}}, \mbox{\hyperlink{interface_u_m_throughput_counter_ace6e26c344a86c80c3759b0e59f3b8bf}{U\+M\+Throughput\+Counter}}, \mbox{\hyperlink{interface_u_m_history_log_ad2fbf603de45be0ce10056d9ec5c0a77}{U\+M\+History\+Log}}, \mbox{\hyperlink{interface_u_m_log_handler_a09fc5d31a3d6afedf484796c3d8d145c}{U\+M\+Log\+Handler}}, \mbox{\hyperlink{interface_u_m_queue_a9c33c3befffc7346ff280ebdd7d1b824}{U\+M\+Queue}}, \mbox{\hyperlink{interface_u_m_log_destination_ab51daedde3845582206be4be85e13d5e}{U\+M\+Log\+Destination}}, \mbox{\hyperlink{interface_u_m_pool_a60547abd220df634121fc8c8b73048af}{U\+M\+Pool}}, and \mbox{\hyperlink{interface_u_m_average_delay_a249ec79764a1e680ae966b33eb179ecc}{U\+M\+Average\+Delay}}.
+
+\mbox{\Hypertarget{interface_u_m_object_a0087f5df9e52c60b4cb6bd389d88a0b9}\label{interface_u_m_object_a0087f5df9e52c60b4cb6bd389d88a0b9}} 
+\index{UMObject@{UMObject}!newlineCharacterSet@{newlineCharacterSet}}
+\index{newlineCharacterSet@{newlineCharacterSet}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{newlineCharacterSet()}{newlineCharacterSet()}}
+{\footnotesize\ttfamily + (N\+S\+Character\+Set $\ast$) newline\+Character\+Set \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_a9a39549b801c65799d50422f046f0e66}\label{interface_u_m_object_a9a39549b801c65799d50422f046f0e66}} 
+\index{UMObject@{UMObject}!runSelectorInBackground:@{runSelectorInBackground:}}
+\index{runSelectorInBackground:@{runSelectorInBackground:}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{runSelectorInBackground:()}{runSelectorInBackground:()}}
+{\footnotesize\ttfamily -\/ (void) run\+Selector\+In\+Background\+: \begin{DoxyParamCaption}\item[{(S\+EL)}]{a\+Selector }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_ada9e7303cc9b7874511819e5fc0b1c92}\label{interface_u_m_object_ada9e7303cc9b7874511819e5fc0b1c92}} 
+\index{UMObject@{UMObject}!runSelectorInBackground:withObject:@{runSelectorInBackground:withObject:}}
+\index{runSelectorInBackground:withObject:@{runSelectorInBackground:withObject:}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{runSelectorInBackground:withObject:()}{runSelectorInBackground:withObject:()}}
+{\footnotesize\ttfamily -\/ (void) \mbox{\hyperlink{interface_u_m_object_a9a39549b801c65799d50422f046f0e66}{run\+Selector\+In\+Background\+:}} \begin{DoxyParamCaption}\item[{(S\+EL)}]{a\+Selector }\item[{with\+Object\+:(id)}]{an\+Argument }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_a16180083762b911fe54a7db8e3374e4c}\label{interface_u_m_object_a16180083762b911fe54a7db8e3374e4c}} 
+\index{UMObject@{UMObject}!runSelectorInBackground:withObject:file:line:function:@{runSelectorInBackground:withObject:file:line:function:}}
+\index{runSelectorInBackground:withObject:file:line:function:@{runSelectorInBackground:withObject:file:line:function:}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{runSelectorInBackground:withObject:file:line:function:()}{runSelectorInBackground:withObject:file:line:function:()}}
+{\footnotesize\ttfamily -\/ (void) \mbox{\hyperlink{interface_u_m_object_a9a39549b801c65799d50422f046f0e66}{run\+Selector\+In\+Background\+:}} \begin{DoxyParamCaption}\item[{(S\+EL)}]{a\+Selector }\item[{with\+Object\+:(id)}]{an\+Argument }\item[{file\+:(const char $\ast$)}]{fil }\item[{line\+:(long)}]{lin }\item[{function\+:(const char $\ast$)}]{fun }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_a2e1649d3b7d955393e0e05c36ccb2c58}\label{interface_u_m_object_a2e1649d3b7d955393e0e05c36ccb2c58}} 
+\index{UMObject@{UMObject}!whitespaceAndNewlineCharacterSet@{whitespaceAndNewlineCharacterSet}}
+\index{whitespaceAndNewlineCharacterSet@{whitespaceAndNewlineCharacterSet}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{whitespaceAndNewlineCharacterSet()}{whitespaceAndNewlineCharacterSet()}}
+{\footnotesize\ttfamily + (N\+S\+Character\+Set $\ast$) whitespace\+And\+Newline\+Character\+Set \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_object_a9cde4965fe480ec9bb9e601788d2b494}\label{interface_u_m_object_a9cde4965fe480ec9bb9e601788d2b494}} 
+\index{UMObject@{UMObject}!\_logFeed@{\_logFeed}}
+\index{\_logFeed@{\_logFeed}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{\_logFeed}{\_logFeed}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_log_feed}{U\+M\+Log\+Feed}}$\ast$) \+\_\+log\+Feed\hspace{0.3cm}{\ttfamily [protected]}}
+
+The log feed this object can use to log anything related to this \mbox{\hyperlink{interface_u_m_object}{U\+M\+Object}} \mbox{\Hypertarget{interface_u_m_object_aec30b36f99310043e891c06ba1554216}\label{interface_u_m_object_aec30b36f99310043e891c06ba1554216}} 
+\index{UMObject@{UMObject}!\_magic@{\_magic}}
+\index{\_magic@{\_magic}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{\_magic}{\_magic}}
+{\footnotesize\ttfamily -\/ (const char$\ast$) \+\_\+magic\hspace{0.3cm}{\ttfamily [protected]}}
+
+c pointer to the class name which has instantiated this object \mbox{\Hypertarget{interface_u_m_object_a526e5ae703315044128f8d5e3e396e95}\label{interface_u_m_object_a526e5ae703315044128f8d5e3e396e95}} 
+\index{UMObject@{UMObject}!\_objectStatisticsName@{\_objectStatisticsName}}
+\index{\_objectStatisticsName@{\_objectStatisticsName}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{\_objectStatisticsName}{\_objectStatisticsName}}
+{\footnotesize\ttfamily -\/ (const char$\ast$) \+\_\+object\+Statistics\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+c pointer to the name which is used in object statistics. defaults to \+\_\+magic \mbox{\Hypertarget{interface_u_m_object_a5c7be87367a6ae090c48b0fec607758f}\label{interface_u_m_object_a5c7be87367a6ae090c48b0fec607758f}} 
+\index{UMObject@{UMObject}!\_umobject\_flags@{\_umobject\_flags}}
+\index{\_umobject\_flags@{\_umobject\_flags}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{\_umobject\_flags}{\_umobject\_flags}}
+{\footnotesize\ttfamily -\/ (uint32\+\_\+t) \+\_\+umobject\+\_\+flags\hspace{0.3cm}{\ttfamily [protected]}}
+
+internal flags to remember which options this object has 
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_object_af80bc9f8b601469a7a2945fb8b4f20cf}\label{interface_u_m_object_af80bc9f8b601469a7a2945fb8b4f20cf}} 
+\index{UMObject@{UMObject}!logFeed@{logFeed}}
+\index{logFeed@{logFeed}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{logFeed}{logFeed}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_log_feed}{U\+M\+Log\+Feed}}$\ast$) log\+Feed\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_object_a42bd3a13ee70b5fb91a0ec4a11f281c5}\label{interface_u_m_object_a42bd3a13ee70b5fb91a0ec4a11f281c5}} 
+\index{UMObject@{UMObject}!objectStatisticsName@{objectStatisticsName}}
+\index{objectStatisticsName@{objectStatisticsName}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{objectStatisticsName}{objectStatisticsName}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) object\+Statistics\+Name\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_object_a6f105fd0a55f8e27d361a2e314a3ff99}\label{interface_u_m_object_a6f105fd0a55f8e27d361a2e314a3ff99}} 
+\index{UMObject@{UMObject}!umobject\_flags@{umobject\_flags}}
+\index{umobject\_flags@{umobject\_flags}!UMObject@{UMObject}}
+\doxysubsubsection{\texorpdfstring{umobject\_flags}{umobject\_flags}}
+{\footnotesize\ttfamily -\/ (uint32\+\_\+t) umobject\+\_\+flags\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_object_8h}{U\+M\+Object.\+h}}\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_object_8m}{U\+M\+Object.\+m}}\end{DoxyCompactItemize}

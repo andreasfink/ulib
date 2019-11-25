@@ -1,0 +1,238 @@
+\hypertarget{_u_m_syslog_client_8h}{}\doxysection{Classes/\+Universal\+Socket/\+U\+M\+Syslog\+Client.h File Reference}
+\label{_u_m_syslog_client_8h}\index{Classes/UniversalSocket/UMSyslogClient.h@{Classes/UniversalSocket/UMSyslogClient.h}}
+{\ttfamily \#import \char`\"{}U\+M\+Object.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Host.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{interface_u_m_syslog_client}{U\+M\+Syslog\+Client}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50}{U\+M\+Syslog\+Facility}} \mbox{\hyperlink{_u_m_syslog_client_8h_acdbdab371823c5ac06474de92734b591}{U\+M\+Syslog\+Facility}}
+\item 
+typedef enum \mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40}{U\+M\+Syslog\+Severity}} \mbox{\hyperlink{_u_m_syslog_client_8h_ae4229a378a762f6f3546b342b4c8bc10}{U\+M\+Syslog\+Severity}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50}{U\+M\+Syslog\+Facility}} \{ \newline
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a9f240a19e5db91119e0c1552b97e443a}{U\+M\+Syslog\+Facility\+\_\+\+Default}} = -\/1, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a728828fa9c0d63eeb40a4f3f0e0d42bc}{U\+M\+Syslog\+Facility\+\_\+\+Kernel}} = 0, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50abdaecabc9f2c165eaf3e219a075e6918}{U\+M\+Syslog\+Facility\+\_\+\+User}} = 1, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50af5a8ab981e52857d96183f7aeb211d76}{U\+M\+Syslog\+Facility\+\_\+\+Mail}} = 2, 
+\newline
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a569c72fe21f9c6208fec6896c44b5d38}{U\+M\+Syslog\+Facility\+\_\+\+Sydstem\+Daemons}} = 3, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50abf23986779e134f5c63c1a126e7af663}{U\+M\+Syslog\+Facility\+\_\+\+Security\+Authorisation1}} = 4, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a09987cbf3769745c8ed10d9fe1271748}{U\+M\+Syslog\+Facility\+\_\+\+Internal}} = 5, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a2f36443f1900b6b226b3ec9fe64feadc}{U\+M\+Syslog\+Facility\+\_\+\+Printer}} = 6, 
+\newline
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a7e32978ea3d5e7facb894c26243edd5e}{U\+M\+Syslog\+Facility\+\_\+\+Network}} = 7, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a32b0feb43b4db3e1774a18131a4acb3a}{U\+M\+Syslog\+Facility\+\_\+\+U\+U\+CP}} = 8, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a320d448c3b4e7d7b2b277dddf3f768c8}{U\+M\+Syslog\+Facility\+\_\+\+Clock}} = 9, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50adf286834cd96422f166603d41d8fd575}{U\+M\+Syslog\+Facility\+\_\+\+Security\+Authorisation2}} = 10, 
+\newline
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a8372b9fd3487e404aedbf6a4fffec6d6}{U\+M\+Syslog\+Facility\+\_\+\+F\+TP}} = 11, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a6ea39c1551742aeae5b77ad2dac492e6}{U\+M\+Syslog\+Facility\+\_\+\+N\+TP}} = 12, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a5c6823db782fac9db010a761fa135122}{U\+M\+Syslog\+Facility\+\_\+\+Audit}} = 13, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a0f7b37dbb86972107dd911d4f02ca474}{U\+M\+Syslog\+Facility\+\_\+\+Alert}} = 14, 
+\newline
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a49f4ffce7c5a8e79045451d3d946a036}{U\+M\+Syslog\+Facility\+\_\+\+Clock\+Daemon}} = 15, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a28285da6c9b3ffa5f798f75a05807cf5}{U\+M\+Syslog\+Facility\+\_\+\+Local0}} = 16, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a2dd5305050852b34ef796e0ea117824c}{U\+M\+Syslog\+Facility\+\_\+\+Local1}} = 17, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50ad5cc2da9d99c224b18ba3f6cc3c9a5eb}{U\+M\+Syslog\+Facility\+\_\+\+Local2}} = 18, 
+\newline
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a3a8ff26e21114b4babdfa2229a723f62}{U\+M\+Syslog\+Facility\+\_\+\+Local3}} = 19, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a9662b51019825c328a78ac1dac86c377}{U\+M\+Syslog\+Facility\+\_\+\+Local4}} = 20, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a837b052e070df1414fb15e4e67fa37e3}{U\+M\+Syslog\+Facility\+\_\+\+Local5}} = 21, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a5e6e3bee4047fa406c71e4f7f6ef1fc9}{U\+M\+Syslog\+Facility\+\_\+\+Local6}} = 22, 
+\newline
+\mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50abf5d68e6e2ef29e9f852a41d761e8878}{U\+M\+Syslog\+Facility\+\_\+\+Local7}} = 23
+ \}
+\item 
+enum \mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40}{U\+M\+Syslog\+Severity}} \{ \newline
+\mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a364da63b5d5889855ddf4c3b53c110e2}{U\+M\+Syslog\+Severity\+\_\+\+Default}} = -\/1, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a89d6bc1feedf09ca89c5f22a78ecaed5}{U\+M\+Syslog\+Severity\+\_\+\+Emergency}} = 0, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a8d2b49e8835e274a6d4ae0d0ce1c4b30}{U\+M\+Syslog\+Severity\+\_\+\+Alert}} = 1, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40ac0e9cc93db32fdc35a5fecd2647b8806}{U\+M\+Syslog\+Severity\+\_\+\+Critical}} = 2, 
+\newline
+\mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40ae9e02814c767ade301e61ac173d08ae0}{U\+M\+Syslog\+Severity\+\_\+\+Error}} = 3, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a94590c4d88fea1a2e0d514ee0537ef09}{U\+M\+Syslog\+Severity\+\_\+\+Warning}} = 4, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40ace17b19ce9ec07f1034cc28058f11dba}{U\+M\+Syslog\+Severity\+\_\+\+Notice}} = 5, 
+\mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a20433d1a811480a0d1eb279277cba446}{U\+M\+Syslog\+Severity\+\_\+\+Informational}} = 6, 
+\newline
+\mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a41418a263ecb0982f77cc200139b74bd}{U\+M\+Syslog\+Severity\+\_\+\+Debug}} = 7
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_u_m_syslog_client_8h_acdbdab371823c5ac06474de92734b591}\label{_u_m_syslog_client_8h_acdbdab371823c5ac06474de92734b591}} 
+\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility@{UMSyslogFacility}}
+\index{UMSyslogFacility@{UMSyslogFacility}!UMSyslogClient.h@{UMSyslogClient.h}}
+\doxysubsubsection{\texorpdfstring{UMSyslogFacility}{UMSyslogFacility}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50}{U\+M\+Syslog\+Facility}}  \mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50}{U\+M\+Syslog\+Facility}}}
+
+\mbox{\Hypertarget{_u_m_syslog_client_8h_ae4229a378a762f6f3546b342b4c8bc10}\label{_u_m_syslog_client_8h_ae4229a378a762f6f3546b342b4c8bc10}} 
+\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogSeverity@{UMSyslogSeverity}}
+\index{UMSyslogSeverity@{UMSyslogSeverity}!UMSyslogClient.h@{UMSyslogClient.h}}
+\doxysubsubsection{\texorpdfstring{UMSyslogSeverity}{UMSyslogSeverity}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40}{U\+M\+Syslog\+Severity}}  \mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40}{U\+M\+Syslog\+Severity}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50}} 
+\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility@{UMSyslogFacility}}
+\index{UMSyslogFacility@{UMSyslogFacility}!UMSyslogClient.h@{UMSyslogClient.h}}
+\doxysubsubsection{\texorpdfstring{UMSyslogFacility}{UMSyslogFacility}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50}{U\+M\+Syslog\+Facility}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Default@{UMSyslogFacility\_Default}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Default@{UMSyslogFacility\_Default}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a9f240a19e5db91119e0c1552b97e443a}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a9f240a19e5db91119e0c1552b97e443a}} 
+U\+M\+Syslog\+Facility\+\_\+\+Default&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Kernel@{UMSyslogFacility\_Kernel}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Kernel@{UMSyslogFacility\_Kernel}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a728828fa9c0d63eeb40a4f3f0e0d42bc}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a728828fa9c0d63eeb40a4f3f0e0d42bc}} 
+U\+M\+Syslog\+Facility\+\_\+\+Kernel&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_User@{UMSyslogFacility\_User}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_User@{UMSyslogFacility\_User}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50abdaecabc9f2c165eaf3e219a075e6918}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50abdaecabc9f2c165eaf3e219a075e6918}} 
+U\+M\+Syslog\+Facility\+\_\+\+User&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Mail@{UMSyslogFacility\_Mail}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Mail@{UMSyslogFacility\_Mail}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50af5a8ab981e52857d96183f7aeb211d76}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50af5a8ab981e52857d96183f7aeb211d76}} 
+U\+M\+Syslog\+Facility\+\_\+\+Mail&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_SydstemDaemons@{UMSyslogFacility\_SydstemDaemons}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_SydstemDaemons@{UMSyslogFacility\_SydstemDaemons}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a569c72fe21f9c6208fec6896c44b5d38}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a569c72fe21f9c6208fec6896c44b5d38}} 
+U\+M\+Syslog\+Facility\+\_\+\+Sydstem\+Daemons&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_SecurityAuthorisation1@{UMSyslogFacility\_SecurityAuthorisation1}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_SecurityAuthorisation1@{UMSyslogFacility\_SecurityAuthorisation1}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50abf23986779e134f5c63c1a126e7af663}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50abf23986779e134f5c63c1a126e7af663}} 
+U\+M\+Syslog\+Facility\+\_\+\+Security\+Authorisation1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Internal@{UMSyslogFacility\_Internal}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Internal@{UMSyslogFacility\_Internal}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a09987cbf3769745c8ed10d9fe1271748}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a09987cbf3769745c8ed10d9fe1271748}} 
+U\+M\+Syslog\+Facility\+\_\+\+Internal&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Printer@{UMSyslogFacility\_Printer}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Printer@{UMSyslogFacility\_Printer}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a2f36443f1900b6b226b3ec9fe64feadc}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a2f36443f1900b6b226b3ec9fe64feadc}} 
+U\+M\+Syslog\+Facility\+\_\+\+Printer&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Network@{UMSyslogFacility\_Network}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Network@{UMSyslogFacility\_Network}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a7e32978ea3d5e7facb894c26243edd5e}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a7e32978ea3d5e7facb894c26243edd5e}} 
+U\+M\+Syslog\+Facility\+\_\+\+Network&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_UUCP@{UMSyslogFacility\_UUCP}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_UUCP@{UMSyslogFacility\_UUCP}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a32b0feb43b4db3e1774a18131a4acb3a}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a32b0feb43b4db3e1774a18131a4acb3a}} 
+U\+M\+Syslog\+Facility\+\_\+\+U\+U\+CP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Clock@{UMSyslogFacility\_Clock}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Clock@{UMSyslogFacility\_Clock}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a320d448c3b4e7d7b2b277dddf3f768c8}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a320d448c3b4e7d7b2b277dddf3f768c8}} 
+U\+M\+Syslog\+Facility\+\_\+\+Clock&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_SecurityAuthorisation2@{UMSyslogFacility\_SecurityAuthorisation2}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_SecurityAuthorisation2@{UMSyslogFacility\_SecurityAuthorisation2}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50adf286834cd96422f166603d41d8fd575}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50adf286834cd96422f166603d41d8fd575}} 
+U\+M\+Syslog\+Facility\+\_\+\+Security\+Authorisation2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_FTP@{UMSyslogFacility\_FTP}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_FTP@{UMSyslogFacility\_FTP}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a8372b9fd3487e404aedbf6a4fffec6d6}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a8372b9fd3487e404aedbf6a4fffec6d6}} 
+U\+M\+Syslog\+Facility\+\_\+\+F\+TP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_NTP@{UMSyslogFacility\_NTP}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_NTP@{UMSyslogFacility\_NTP}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a6ea39c1551742aeae5b77ad2dac492e6}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a6ea39c1551742aeae5b77ad2dac492e6}} 
+U\+M\+Syslog\+Facility\+\_\+\+N\+TP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Audit@{UMSyslogFacility\_Audit}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Audit@{UMSyslogFacility\_Audit}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a5c6823db782fac9db010a761fa135122}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a5c6823db782fac9db010a761fa135122}} 
+U\+M\+Syslog\+Facility\+\_\+\+Audit&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Alert@{UMSyslogFacility\_Alert}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Alert@{UMSyslogFacility\_Alert}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a0f7b37dbb86972107dd911d4f02ca474}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a0f7b37dbb86972107dd911d4f02ca474}} 
+U\+M\+Syslog\+Facility\+\_\+\+Alert&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_ClockDaemon@{UMSyslogFacility\_ClockDaemon}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_ClockDaemon@{UMSyslogFacility\_ClockDaemon}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a49f4ffce7c5a8e79045451d3d946a036}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a49f4ffce7c5a8e79045451d3d946a036}} 
+U\+M\+Syslog\+Facility\+\_\+\+Clock\+Daemon&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Local0@{UMSyslogFacility\_Local0}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Local0@{UMSyslogFacility\_Local0}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a28285da6c9b3ffa5f798f75a05807cf5}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a28285da6c9b3ffa5f798f75a05807cf5}} 
+U\+M\+Syslog\+Facility\+\_\+\+Local0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Local1@{UMSyslogFacility\_Local1}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Local1@{UMSyslogFacility\_Local1}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a2dd5305050852b34ef796e0ea117824c}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a2dd5305050852b34ef796e0ea117824c}} 
+U\+M\+Syslog\+Facility\+\_\+\+Local1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Local2@{UMSyslogFacility\_Local2}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Local2@{UMSyslogFacility\_Local2}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50ad5cc2da9d99c224b18ba3f6cc3c9a5eb}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50ad5cc2da9d99c224b18ba3f6cc3c9a5eb}} 
+U\+M\+Syslog\+Facility\+\_\+\+Local2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Local3@{UMSyslogFacility\_Local3}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Local3@{UMSyslogFacility\_Local3}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a3a8ff26e21114b4babdfa2229a723f62}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a3a8ff26e21114b4babdfa2229a723f62}} 
+U\+M\+Syslog\+Facility\+\_\+\+Local3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Local4@{UMSyslogFacility\_Local4}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Local4@{UMSyslogFacility\_Local4}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a9662b51019825c328a78ac1dac86c377}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a9662b51019825c328a78ac1dac86c377}} 
+U\+M\+Syslog\+Facility\+\_\+\+Local4&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Local5@{UMSyslogFacility\_Local5}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Local5@{UMSyslogFacility\_Local5}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a837b052e070df1414fb15e4e67fa37e3}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a837b052e070df1414fb15e4e67fa37e3}} 
+U\+M\+Syslog\+Facility\+\_\+\+Local5&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Local6@{UMSyslogFacility\_Local6}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Local6@{UMSyslogFacility\_Local6}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a5e6e3bee4047fa406c71e4f7f6ef1fc9}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50a5e6e3bee4047fa406c71e4f7f6ef1fc9}} 
+U\+M\+Syslog\+Facility\+\_\+\+Local6&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogFacility\_Local7@{UMSyslogFacility\_Local7}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogFacility\_Local7@{UMSyslogFacility\_Local7}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50abf5d68e6e2ef29e9f852a41d761e8878}\label{_u_m_syslog_client_8h_a36cdcaf74d261f8f1b7bd0798eaefb50abf5d68e6e2ef29e9f852a41d761e8878}} 
+U\+M\+Syslog\+Facility\+\_\+\+Local7&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40}\label{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40}} 
+\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogSeverity@{UMSyslogSeverity}}
+\index{UMSyslogSeverity@{UMSyslogSeverity}!UMSyslogClient.h@{UMSyslogClient.h}}
+\doxysubsubsection{\texorpdfstring{UMSyslogSeverity}{UMSyslogSeverity}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40}{U\+M\+Syslog\+Severity}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogSeverity\_Default@{UMSyslogSeverity\_Default}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogSeverity\_Default@{UMSyslogSeverity\_Default}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a364da63b5d5889855ddf4c3b53c110e2}\label{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a364da63b5d5889855ddf4c3b53c110e2}} 
+U\+M\+Syslog\+Severity\+\_\+\+Default&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogSeverity\_Emergency@{UMSyslogSeverity\_Emergency}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogSeverity\_Emergency@{UMSyslogSeverity\_Emergency}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a89d6bc1feedf09ca89c5f22a78ecaed5}\label{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a89d6bc1feedf09ca89c5f22a78ecaed5}} 
+U\+M\+Syslog\+Severity\+\_\+\+Emergency&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogSeverity\_Alert@{UMSyslogSeverity\_Alert}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogSeverity\_Alert@{UMSyslogSeverity\_Alert}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a8d2b49e8835e274a6d4ae0d0ce1c4b30}\label{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a8d2b49e8835e274a6d4ae0d0ce1c4b30}} 
+U\+M\+Syslog\+Severity\+\_\+\+Alert&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogSeverity\_Critical@{UMSyslogSeverity\_Critical}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogSeverity\_Critical@{UMSyslogSeverity\_Critical}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40ac0e9cc93db32fdc35a5fecd2647b8806}\label{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40ac0e9cc93db32fdc35a5fecd2647b8806}} 
+U\+M\+Syslog\+Severity\+\_\+\+Critical&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogSeverity\_Error@{UMSyslogSeverity\_Error}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogSeverity\_Error@{UMSyslogSeverity\_Error}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40ae9e02814c767ade301e61ac173d08ae0}\label{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40ae9e02814c767ade301e61ac173d08ae0}} 
+U\+M\+Syslog\+Severity\+\_\+\+Error&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogSeverity\_Warning@{UMSyslogSeverity\_Warning}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogSeverity\_Warning@{UMSyslogSeverity\_Warning}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a94590c4d88fea1a2e0d514ee0537ef09}\label{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a94590c4d88fea1a2e0d514ee0537ef09}} 
+U\+M\+Syslog\+Severity\+\_\+\+Warning&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogSeverity\_Notice@{UMSyslogSeverity\_Notice}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogSeverity\_Notice@{UMSyslogSeverity\_Notice}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40ace17b19ce9ec07f1034cc28058f11dba}\label{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40ace17b19ce9ec07f1034cc28058f11dba}} 
+U\+M\+Syslog\+Severity\+\_\+\+Notice&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogSeverity\_Informational@{UMSyslogSeverity\_Informational}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogSeverity\_Informational@{UMSyslogSeverity\_Informational}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a20433d1a811480a0d1eb279277cba446}\label{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a20433d1a811480a0d1eb279277cba446}} 
+U\+M\+Syslog\+Severity\+\_\+\+Informational&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMSyslogSeverity\_Debug@{UMSyslogSeverity\_Debug}!UMSyslogClient.h@{UMSyslogClient.h}}\index{UMSyslogClient.h@{UMSyslogClient.h}!UMSyslogSeverity\_Debug@{UMSyslogSeverity\_Debug}}}\mbox{\Hypertarget{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a41418a263ecb0982f77cc200139b74bd}\label{_u_m_syslog_client_8h_a934ff47004390f580d11408fcf895f40a41418a263ecb0982f77cc200139b74bd}} 
+U\+M\+Syslog\+Severity\+\_\+\+Debug&\\
+\hline
+
+\end{DoxyEnumFields}

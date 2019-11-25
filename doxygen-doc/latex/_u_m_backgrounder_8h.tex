@@ -1,0 +1,59 @@
+\hypertarget{_u_m_backgrounder_8h}{}\doxysection{Classes/\+Universal\+Object/\+U\+M\+Backgrounder.h File Reference}
+\label{_u_m_backgrounder_8h}\index{Classes/UniversalObject/UMBackgrounder.h@{Classes/UniversalObject/UMBackgrounder.h}}
+{\ttfamily \#import \char`\"{}U\+M\+Object.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Mutex.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{interface_u_m_backgrounder}{U\+M\+Backgrounder}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{interface_u_m_backgrounder}{U\+M\+Backgrounder}} is an object to have background tasks handled properly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \mbox{\hyperlink{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcd}{U\+M\+Backgrounder\+\_\+running\+Status}} \mbox{\hyperlink{_u_m_backgrounder_8h_a866ad7bc1c501583a4bf8c24bcb64a78}{U\+M\+Backgrounder\+\_\+running\+Status}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcd}{U\+M\+Backgrounder\+\_\+running\+Status}} \{ \mbox{\hyperlink{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcda811d089d51ab2e458c2023783d973f13}{U\+M\+Backgrounder\+\_\+not\+Running}} = 0, 
+\mbox{\hyperlink{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcda88c0ba6005db7ecd94dc0fb5d48b1337}{U\+M\+Backgrounder\+\_\+starting\+Up}} = 1, 
+\mbox{\hyperlink{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcdac1e2dc21976582eeba2046af9ea09671}{U\+M\+Backgrounder\+\_\+running}} = 2, 
+\mbox{\hyperlink{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcdac294917adc0eb9eb5d13e8674361f376}{U\+M\+Backgrounder\+\_\+shutting\+Down}} = 3
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_u_m_backgrounder_8h_a866ad7bc1c501583a4bf8c24bcb64a78}\label{_u_m_backgrounder_8h_a866ad7bc1c501583a4bf8c24bcb64a78}} 
+\index{UMBackgrounder.h@{UMBackgrounder.h}!UMBackgrounder\_runningStatus@{UMBackgrounder\_runningStatus}}
+\index{UMBackgrounder\_runningStatus@{UMBackgrounder\_runningStatus}!UMBackgrounder.h@{UMBackgrounder.h}}
+\doxysubsubsection{\texorpdfstring{UMBackgrounder\_runningStatus}{UMBackgrounder\_runningStatus}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcd}{U\+M\+Backgrounder\+\_\+running\+Status}}  \mbox{\hyperlink{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcd}{U\+M\+Backgrounder\+\_\+running\+Status}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcd}\label{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcd}} 
+\index{UMBackgrounder.h@{UMBackgrounder.h}!UMBackgrounder\_runningStatus@{UMBackgrounder\_runningStatus}}
+\index{UMBackgrounder\_runningStatus@{UMBackgrounder\_runningStatus}!UMBackgrounder.h@{UMBackgrounder.h}}
+\doxysubsubsection{\texorpdfstring{UMBackgrounder\_runningStatus}{UMBackgrounder\_runningStatus}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcd}{U\+M\+Backgrounder\+\_\+running\+Status}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMBackgrounder\_notRunning@{UMBackgrounder\_notRunning}!UMBackgrounder.h@{UMBackgrounder.h}}\index{UMBackgrounder.h@{UMBackgrounder.h}!UMBackgrounder\_notRunning@{UMBackgrounder\_notRunning}}}\mbox{\Hypertarget{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcda811d089d51ab2e458c2023783d973f13}\label{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcda811d089d51ab2e458c2023783d973f13}} 
+U\+M\+Backgrounder\+\_\+not\+Running&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMBackgrounder\_startingUp@{UMBackgrounder\_startingUp}!UMBackgrounder.h@{UMBackgrounder.h}}\index{UMBackgrounder.h@{UMBackgrounder.h}!UMBackgrounder\_startingUp@{UMBackgrounder\_startingUp}}}\mbox{\Hypertarget{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcda88c0ba6005db7ecd94dc0fb5d48b1337}\label{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcda88c0ba6005db7ecd94dc0fb5d48b1337}} 
+U\+M\+Backgrounder\+\_\+starting\+Up&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMBackgrounder\_running@{UMBackgrounder\_running}!UMBackgrounder.h@{UMBackgrounder.h}}\index{UMBackgrounder.h@{UMBackgrounder.h}!UMBackgrounder\_running@{UMBackgrounder\_running}}}\mbox{\Hypertarget{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcdac1e2dc21976582eeba2046af9ea09671}\label{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcdac1e2dc21976582eeba2046af9ea09671}} 
+U\+M\+Backgrounder\+\_\+running&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMBackgrounder\_shuttingDown@{UMBackgrounder\_shuttingDown}!UMBackgrounder.h@{UMBackgrounder.h}}\index{UMBackgrounder.h@{UMBackgrounder.h}!UMBackgrounder\_shuttingDown@{UMBackgrounder\_shuttingDown}}}\mbox{\Hypertarget{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcdac294917adc0eb9eb5d13e8674361f376}\label{_u_m_backgrounder_8h_a4ef1e8d0dbbee874b00bfd8636a10bcdac294917adc0eb9eb5d13e8674361f376}} 
+U\+M\+Backgrounder\+\_\+shutting\+Down&\\
+\hline
+
+\end{DoxyEnumFields}

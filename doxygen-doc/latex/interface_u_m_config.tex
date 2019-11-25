@@ -1,0 +1,275 @@
+\hypertarget{interface_u_m_config}{}\doxysection{U\+M\+Config Class Reference}
+\label{interface_u_m_config}\index{UMConfig@{UMConfig}}
+
+
+\mbox{\hyperlink{interface_u_m_config}{U\+M\+Config}} is an object to hold the data of config files.  
+
+
+
+
+{\ttfamily \#import $<$U\+M\+Config.\+h$>$}
+
+Inheritance diagram for U\+M\+Config\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_u_m_config}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{interface_u_m_config}{U\+M\+Config}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_config_a722d3f434b508c5c10e991500a29c57f}{init\+With\+File\+Name\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_config_aca7553ec1bb32e4420564130daa5b8f6}{read}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_config_abc42e02932b05e839f01b5285268676f}{allow\+Single\+Group\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_config_ad2b50db96b6fba067d13541c1ee5e52c}{disallow\+Single\+Group\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_config_adec40023ebea9643366ac3c5d3e26648}{allow\+Multi\+Group\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_config_a53116f3da274caf9893fd7b13acf1186}{disallow\+Multi\+Group\+:}}
+\item 
+(N\+S\+Dictionary $\ast$) -\/ \mbox{\hyperlink{interface_u_m_config_a0b8e3e21487b2e6864628fac130de985}{get\+Single\+Group\+:}}
+\item 
+(N\+S\+Array $\ast$) -\/ \mbox{\hyperlink{interface_u_m_config_a0edf998974e2cb16f61053917277542d}{get\+Multi\+Groups\+:}}
+\item 
+(\mbox{\hyperlink{interface_u_m_config_parsed_line}{U\+M\+Config\+Parsed\+Line}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_config_a0ef6a9e75af28405fc1366b48ee4e8c9}{parse\+Singe\+Line\+:file\+:line\+:}}
+\item 
+(N\+S\+Array $\ast$) -\/ \mbox{\hyperlink{interface_u_m_config_a84a2a5a1ce87a17f1e8b33272da6ce31}{read\+From\+File}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_config_a1a1d88c2e8d42537b062ada3ffeab1d4}{\+\_\+file\+Name}}
+\item 
+N\+S\+Mutable\+Dictionary $\ast$ \mbox{\hyperlink{interface_u_m_config_aad412010f2b91b4ef2e044676b8b645c}{\+\_\+single\+Groups}}
+\item 
+N\+S\+Mutable\+Dictionary $\ast$ \mbox{\hyperlink{interface_u_m_config_ac99d04709e869c2eee0bda4765f6b651}{\+\_\+multi\+Groups}}
+\item 
+int \mbox{\hyperlink{interface_u_m_config_ab71e7ab70f210b7c255577b6064568dd}{\+\_\+verbose}}
+\item 
+N\+S\+Mutable\+Dictionary $\ast$ \mbox{\hyperlink{interface_u_m_config_a90ce99b1f1b4b9e39b9b5f4a8ef37b9a}{\+\_\+allowed\+Single\+Group\+Names}}
+\item 
+N\+S\+Mutable\+Dictionary $\ast$ \mbox{\hyperlink{interface_u_m_config_a90c6c29e04db87ffd60e7e2040bd5d6d}{\+\_\+allowed\+Multi\+Group\+Names}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_config_a721fe49de24b5b3263888f1ad7b9e8a7}{\+\_\+config\+Append}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_config_a117c64dad6ffd129bb178efab2c4ad47}{\+\_\+system\+Include\+Path}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{interface_u_m_config_a013e6cf802c6bb2334a3afce4e5d7bb5}{verbose}}
+\item 
+N\+S\+Mutable\+Dictionary $\ast$ \mbox{\hyperlink{interface_u_m_config_a6dc752c7aa8f914d46c587cb0c0c7b91}{allowed\+Single\+Group\+Names}}
+\item 
+N\+S\+Mutable\+Dictionary $\ast$ \mbox{\hyperlink{interface_u_m_config_aa6384ce382e7211e234d8f4518f38b1a}{allowed\+Multi\+Group\+Names}}
+\item 
+N\+S\+Mutable\+Dictionary $\ast$ \mbox{\hyperlink{interface_u_m_config_abe872e99c6e28c45cc056024799a94f6}{single\+Groups}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_config_acd4c88fb54106540d9bd12e280b5ccbd}{file\+Name}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_config_ae760d5be91f2942167b41ea67be705b0}{config\+Append}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_config_a105f61cda73f13eb476c5c1566ae7551}{system\+Include\+Path}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{interface_u_m_config}{U\+M\+Config}} is an object to hold the data of config files. 
+
+config files are having the following syntax\+:\hypertarget{interface_u_m_config_autotoc_md0}{}\doxysubsection{commented out lines are starting with a hash}\label{interface_u_m_config_autotoc_md0}
+\hypertarget{interface_u_m_config_autotoc_md1}{}\doxysubsection{a group starts with a group statement and ends with a empty line}\label{interface_u_m_config_autotoc_md1}
+include \char`\"{}some-\/other-\/config-\/file\char`\"{}
+
+group = group1 param = value param2 = value2
+
+group = group2 param = value param2 = value2
+
+alternative syntax (windows.\+ini file style)
+
+include \char`\"{}some-\/other-\/config-\/file\char`\"{}
+
+\mbox{[}group1\mbox{]} param = value param2 = value2
+
+\mbox{[}group2\mbox{]} param = value param2 = value2
+
+Which groups are valid and read is defined while reading. The individal parameters then end up in a dictionary.
+
+You define also if a group can be defined only once or multiple times.
+
+Typical usage sequence\+:
+
+\mbox{\hyperlink{interface_u_m_config}{U\+M\+Config}} $\ast$config = \mbox{[}\mbox{[}\mbox{\hyperlink{interface_u_m_config}{U\+M\+Config}} alloc\mbox{]}init\+With\+File\+Name\+:"myconfig.\+conf\char`\"{}\mbox{]};
+  \mbox{[}config allow\+Single\+Group\+:@\char`\"{}main\char`\"{}\mbox{]};
+  \mbox{[}config allow\+Single\+Group\+:@\char`\"{}subsection\char`\"{}\mbox{]};
+  \mbox{[}config disallow\+Single\+Group\+:@\char`\"{}no-\/longer-\/supported-\/subsection\char`\"{}\mbox{]};
+  \mbox{[}config allow\+Multi\+Group\+:@\char`\"{}multisection"\mbox{]}; \mbox{[}config read\mbox{]};
+
+groups which are in the config file but not defined are simply skipped if they are in the disallowed definition it throws an exception instead. 
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_config_adec40023ebea9643366ac3c5d3e26648}\label{interface_u_m_config_adec40023ebea9643366ac3c5d3e26648}} 
+\index{UMConfig@{UMConfig}!allowMultiGroup:@{allowMultiGroup:}}
+\index{allowMultiGroup:@{allowMultiGroup:}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{allowMultiGroup:()}{allowMultiGroup:()}}
+{\footnotesize\ttfamily -\/ (void) allow\+Multi\+Group\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{name }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_config_abc42e02932b05e839f01b5285268676f}\label{interface_u_m_config_abc42e02932b05e839f01b5285268676f}} 
+\index{UMConfig@{UMConfig}!allowSingleGroup:@{allowSingleGroup:}}
+\index{allowSingleGroup:@{allowSingleGroup:}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{allowSingleGroup:()}{allowSingleGroup:()}}
+{\footnotesize\ttfamily -\/ (void) allow\+Single\+Group\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{name }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_config_a53116f3da274caf9893fd7b13acf1186}\label{interface_u_m_config_a53116f3da274caf9893fd7b13acf1186}} 
+\index{UMConfig@{UMConfig}!disallowMultiGroup:@{disallowMultiGroup:}}
+\index{disallowMultiGroup:@{disallowMultiGroup:}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{disallowMultiGroup:()}{disallowMultiGroup:()}}
+{\footnotesize\ttfamily -\/ (void) disallow\+Multi\+Group\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{name }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_config_ad2b50db96b6fba067d13541c1ee5e52c}\label{interface_u_m_config_ad2b50db96b6fba067d13541c1ee5e52c}} 
+\index{UMConfig@{UMConfig}!disallowSingleGroup:@{disallowSingleGroup:}}
+\index{disallowSingleGroup:@{disallowSingleGroup:}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{disallowSingleGroup:()}{disallowSingleGroup:()}}
+{\footnotesize\ttfamily -\/ (void) disallow\+Single\+Group\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{name }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_config_a0edf998974e2cb16f61053917277542d}\label{interface_u_m_config_a0edf998974e2cb16f61053917277542d}} 
+\index{UMConfig@{UMConfig}!getMultiGroups:@{getMultiGroups:}}
+\index{getMultiGroups:@{getMultiGroups:}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{getMultiGroups:()}{getMultiGroups:()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Array $\ast$) get\+Multi\+Groups\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{name }\end{DoxyParamCaption}}
+
+return an N\+S\+Array of N\+S\+Dictionary\textquotesingle{}s of a group of the config section group which can occur multiple times \mbox{\Hypertarget{interface_u_m_config_a0b8e3e21487b2e6864628fac130de985}\label{interface_u_m_config_a0b8e3e21487b2e6864628fac130de985}} 
+\index{UMConfig@{UMConfig}!getSingleGroup:@{getSingleGroup:}}
+\index{getSingleGroup:@{getSingleGroup:}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{getSingleGroup:()}{getSingleGroup:()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Dictionary $\ast$) get\+Single\+Group\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{name }\end{DoxyParamCaption}}
+
+return a N\+S\+Dictionary of a group of the config section group \mbox{\Hypertarget{interface_u_m_config_a722d3f434b508c5c10e991500a29c57f}\label{interface_u_m_config_a722d3f434b508c5c10e991500a29c57f}} 
+\index{UMConfig@{UMConfig}!initWithFileName:@{initWithFileName:}}
+\index{initWithFileName:@{initWithFileName:}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{initWithFileName:()}{initWithFileName:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_config}{U\+M\+Config}} $\ast$) init\+With\+File\+Name\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{file }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_config_a0ef6a9e75af28405fc1366b48ee4e8c9}\label{interface_u_m_config_a0ef6a9e75af28405fc1366b48ee4e8c9}} 
+\index{UMConfig@{UMConfig}!parseSingeLine:file:line:@{parseSingeLine:file:line:}}
+\index{parseSingeLine:file:line:@{parseSingeLine:file:line:}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{parseSingeLine:file:line:()}{parseSingeLine:file:line:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_config_parsed_line}{U\+M\+Config\+Parsed\+Line}} $\ast$) parse\+Singe\+Line\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{lin }\item[{file\+:(N\+S\+String $\ast$)}]{fn }\item[{line\+:(long)}]{ln }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_config_aca7553ec1bb32e4420564130daa5b8f6}\label{interface_u_m_config_aca7553ec1bb32e4420564130daa5b8f6}} 
+\index{UMConfig@{UMConfig}!read@{read}}
+\index{read@{read}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily -\/ (void) read \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_config_a84a2a5a1ce87a17f1e8b33272da6ce31}\label{interface_u_m_config_a84a2a5a1ce87a17f1e8b33272da6ce31}} 
+\index{UMConfig@{UMConfig}!readFromFile@{readFromFile}}
+\index{readFromFile@{readFromFile}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{readFromFile()}{readFromFile()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Array $\ast$) read\+From\+File \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_config_a90c6c29e04db87ffd60e7e2040bd5d6d}\label{interface_u_m_config_a90c6c29e04db87ffd60e7e2040bd5d6d}} 
+\index{UMConfig@{UMConfig}!\_allowedMultiGroupNames@{\_allowedMultiGroupNames}}
+\index{\_allowedMultiGroupNames@{\_allowedMultiGroupNames}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{\_allowedMultiGroupNames}{\_allowedMultiGroupNames}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Dictionary$\ast$) \+\_\+allowed\+Multi\+Group\+Names\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_config_a90ce99b1f1b4b9e39b9b5f4a8ef37b9a}\label{interface_u_m_config_a90ce99b1f1b4b9e39b9b5f4a8ef37b9a}} 
+\index{UMConfig@{UMConfig}!\_allowedSingleGroupNames@{\_allowedSingleGroupNames}}
+\index{\_allowedSingleGroupNames@{\_allowedSingleGroupNames}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{\_allowedSingleGroupNames}{\_allowedSingleGroupNames}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Dictionary$\ast$) \+\_\+allowed\+Single\+Group\+Names\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_config_a721fe49de24b5b3263888f1ad7b9e8a7}\label{interface_u_m_config_a721fe49de24b5b3263888f1ad7b9e8a7}} 
+\index{UMConfig@{UMConfig}!\_configAppend@{\_configAppend}}
+\index{\_configAppend@{\_configAppend}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{\_configAppend}{\_configAppend}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+config\+Append\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_config_a1a1d88c2e8d42537b062ada3ffeab1d4}\label{interface_u_m_config_a1a1d88c2e8d42537b062ada3ffeab1d4}} 
+\index{UMConfig@{UMConfig}!\_fileName@{\_fileName}}
+\index{\_fileName@{\_fileName}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{\_fileName}{\_fileName}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+file\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_config_ac99d04709e869c2eee0bda4765f6b651}\label{interface_u_m_config_ac99d04709e869c2eee0bda4765f6b651}} 
+\index{UMConfig@{UMConfig}!\_multiGroups@{\_multiGroups}}
+\index{\_multiGroups@{\_multiGroups}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{\_multiGroups}{\_multiGroups}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Dictionary$\ast$) \+\_\+multi\+Groups\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_config_aad412010f2b91b4ef2e044676b8b645c}\label{interface_u_m_config_aad412010f2b91b4ef2e044676b8b645c}} 
+\index{UMConfig@{UMConfig}!\_singleGroups@{\_singleGroups}}
+\index{\_singleGroups@{\_singleGroups}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{\_singleGroups}{\_singleGroups}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Dictionary$\ast$) \+\_\+single\+Groups\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_config_a117c64dad6ffd129bb178efab2c4ad47}\label{interface_u_m_config_a117c64dad6ffd129bb178efab2c4ad47}} 
+\index{UMConfig@{UMConfig}!\_systemIncludePath@{\_systemIncludePath}}
+\index{\_systemIncludePath@{\_systemIncludePath}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{\_systemIncludePath}{\_systemIncludePath}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+system\+Include\+Path\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_config_ab71e7ab70f210b7c255577b6064568dd}\label{interface_u_m_config_ab71e7ab70f210b7c255577b6064568dd}} 
+\index{UMConfig@{UMConfig}!\_verbose@{\_verbose}}
+\index{\_verbose@{\_verbose}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{\_verbose}{\_verbose}}
+{\footnotesize\ttfamily -\/ (int) \+\_\+verbose\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_config_aa6384ce382e7211e234d8f4518f38b1a}\label{interface_u_m_config_aa6384ce382e7211e234d8f4518f38b1a}} 
+\index{UMConfig@{UMConfig}!allowedMultiGroupNames@{allowedMultiGroupNames}}
+\index{allowedMultiGroupNames@{allowedMultiGroupNames}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{allowedMultiGroupNames}{allowedMultiGroupNames}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Dictionary$\ast$) allowed\+Multi\+Group\+Names\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_config_a6dc752c7aa8f914d46c587cb0c0c7b91}\label{interface_u_m_config_a6dc752c7aa8f914d46c587cb0c0c7b91}} 
+\index{UMConfig@{UMConfig}!allowedSingleGroupNames@{allowedSingleGroupNames}}
+\index{allowedSingleGroupNames@{allowedSingleGroupNames}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{allowedSingleGroupNames}{allowedSingleGroupNames}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Dictionary$\ast$) allowed\+Single\+Group\+Names\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_config_ae760d5be91f2942167b41ea67be705b0}\label{interface_u_m_config_ae760d5be91f2942167b41ea67be705b0}} 
+\index{UMConfig@{UMConfig}!configAppend@{configAppend}}
+\index{configAppend@{configAppend}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{configAppend}{configAppend}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) config\+Append\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_config_acd4c88fb54106540d9bd12e280b5ccbd}\label{interface_u_m_config_acd4c88fb54106540d9bd12e280b5ccbd}} 
+\index{UMConfig@{UMConfig}!fileName@{fileName}}
+\index{fileName@{fileName}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{fileName}{fileName}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) file\+Name\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_config_abe872e99c6e28c45cc056024799a94f6}\label{interface_u_m_config_abe872e99c6e28c45cc056024799a94f6}} 
+\index{UMConfig@{UMConfig}!singleGroups@{singleGroups}}
+\index{singleGroups@{singleGroups}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{singleGroups}{singleGroups}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Dictionary$\ast$) single\+Groups\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_config_a105f61cda73f13eb476c5c1566ae7551}\label{interface_u_m_config_a105f61cda73f13eb476c5c1566ae7551}} 
+\index{UMConfig@{UMConfig}!systemIncludePath@{systemIncludePath}}
+\index{systemIncludePath@{systemIncludePath}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{systemIncludePath}{systemIncludePath}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) system\+Include\+Path\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_config_a013e6cf802c6bb2334a3afce4e5d7bb5}\label{interface_u_m_config_a013e6cf802c6bb2334a3afce4e5d7bb5}} 
+\index{UMConfig@{UMConfig}!verbose@{verbose}}
+\index{verbose@{verbose}!UMConfig@{UMConfig}}
+\doxysubsubsection{\texorpdfstring{verbose}{verbose}}
+{\footnotesize\ttfamily -\/ (int) verbose\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Config/\mbox{\hyperlink{_u_m_config_8h}{U\+M\+Config.\+h}}\item 
+Classes/\+Universal\+Config/\mbox{\hyperlink{_u_m_config_8m}{U\+M\+Config.\+m}}\end{DoxyCompactItemize}

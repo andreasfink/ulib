@@ -1,0 +1,102 @@
+\hypertarget{interface_u_m_double_with_history}{}\doxysection{U\+M\+Double\+With\+History Class Reference}
+\label{interface_u_m_double_with_history}\index{UMDoubleWithHistory@{UMDoubleWithHistory}}
+
+
+A N\+S\+Data which remembers its previous value and if it has been modified.  
+
+
+
+
+{\ttfamily \#import $<$U\+M\+Double\+With\+History.\+h$>$}
+
+Inheritance diagram for U\+M\+Double\+With\+History\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{interface_u_m_double_with_history}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_double_with_history_aa66cd6bea691b7f14b4ee6577bd05533}{set\+Double\+:}}
+\item 
+(double) -\/ \mbox{\hyperlink{interface_u_m_double_with_history_aeae89c2f880360e6db63dbd233d55022}{double}}
+\item 
+(\mbox{\hyperlink{interface_u_m_double_with_history_aeae89c2f880360e6db63dbd233d55022}{double}}) -\/ \mbox{\hyperlink{interface_u_m_double_with_history_ae1ba1edf4f96984a85c20ad93b3719d1}{current\+Double}}
+\item 
+(\mbox{\hyperlink{interface_u_m_double_with_history_aeae89c2f880360e6db63dbd233d55022}{double}}) -\/ \mbox{\hyperlink{interface_u_m_double_with_history_a9f204c96ddfe3d40bdb5457007bcb486}{old\+Double}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_double_with_history_a15df1267bcb973c2a63b79bb1e4f4b8f}{non\+Null\+String}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_double_with_history_a1439a97c5a15cb7a150f25a86704ea85}{old\+Non\+Null\+String}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_double_with_history_aecf2edef8375e4c96ca0724fde25ca8b}{load\+From\+String\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{interface_u_m_double_with_history}{U\+M\+Double\+With\+History}} $\ast$) + \mbox{\hyperlink{interface_u_m_double_with_history_a95a5acf35c6bb08bc6f67f2e90d870a6}{double\+With\+History\+With\+Double\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A N\+S\+Data which remembers its previous value and if it has been modified. 
+
+\mbox{\hyperlink{interface_u_m_double_with_history}{U\+M\+Double\+With\+History}} is a object holding a double value and its previous value. It can be used to hold data which is potentially modified at some point in time and then remember if it has been modified and what the old values are. Used for example in database access to only modify the fields which have changed (and if none has changed, not doing any query at all). 
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_double_with_history_ae1ba1edf4f96984a85c20ad93b3719d1}\label{interface_u_m_double_with_history_ae1ba1edf4f96984a85c20ad93b3719d1}} 
+\index{UMDoubleWithHistory@{UMDoubleWithHistory}!currentDouble@{currentDouble}}
+\index{currentDouble@{currentDouble}!UMDoubleWithHistory@{UMDoubleWithHistory}}
+\doxysubsubsection{\texorpdfstring{currentDouble()}{currentDouble()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_double_with_history_aeae89c2f880360e6db63dbd233d55022}{double}}) current\+Double \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_double_with_history_aeae89c2f880360e6db63dbd233d55022}\label{interface_u_m_double_with_history_aeae89c2f880360e6db63dbd233d55022}} 
+\index{UMDoubleWithHistory@{UMDoubleWithHistory}!double@{double}}
+\index{double@{double}!UMDoubleWithHistory@{UMDoubleWithHistory}}
+\doxysubsubsection{\texorpdfstring{double()}{double()}}
+{\footnotesize\ttfamily -\/ (double) double \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_double_with_history_a95a5acf35c6bb08bc6f67f2e90d870a6}\label{interface_u_m_double_with_history_a95a5acf35c6bb08bc6f67f2e90d870a6}} 
+\index{UMDoubleWithHistory@{UMDoubleWithHistory}!doubleWithHistoryWithDouble:@{doubleWithHistoryWithDouble:}}
+\index{doubleWithHistoryWithDouble:@{doubleWithHistoryWithDouble:}!UMDoubleWithHistory@{UMDoubleWithHistory}}
+\doxysubsubsection{\texorpdfstring{doubleWithHistoryWithDouble:()}{doubleWithHistoryWithDouble:()}}
+{\footnotesize\ttfamily + (\mbox{\hyperlink{interface_u_m_double_with_history}{U\+M\+Double\+With\+History}} $\ast$) double\+With\+History\+With\+Double\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_double_with_history_aeae89c2f880360e6db63dbd233d55022}{double}})}]{d }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_double_with_history_aecf2edef8375e4c96ca0724fde25ca8b}\label{interface_u_m_double_with_history_aecf2edef8375e4c96ca0724fde25ca8b}} 
+\index{UMDoubleWithHistory@{UMDoubleWithHistory}!loadFromString:@{loadFromString:}}
+\index{loadFromString:@{loadFromString:}!UMDoubleWithHistory@{UMDoubleWithHistory}}
+\doxysubsubsection{\texorpdfstring{loadFromString:()}{loadFromString:()}}
+{\footnotesize\ttfamily -\/ (void) load\+From\+String\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{str }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_double_with_history_a15df1267bcb973c2a63b79bb1e4f4b8f}\label{interface_u_m_double_with_history_a15df1267bcb973c2a63b79bb1e4f4b8f}} 
+\index{UMDoubleWithHistory@{UMDoubleWithHistory}!nonNullString@{nonNullString}}
+\index{nonNullString@{nonNullString}!UMDoubleWithHistory@{UMDoubleWithHistory}}
+\doxysubsubsection{\texorpdfstring{nonNullString()}{nonNullString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) non\+Null\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_double_with_history_a9f204c96ddfe3d40bdb5457007bcb486}\label{interface_u_m_double_with_history_a9f204c96ddfe3d40bdb5457007bcb486}} 
+\index{UMDoubleWithHistory@{UMDoubleWithHistory}!oldDouble@{oldDouble}}
+\index{oldDouble@{oldDouble}!UMDoubleWithHistory@{UMDoubleWithHistory}}
+\doxysubsubsection{\texorpdfstring{oldDouble()}{oldDouble()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_double_with_history_aeae89c2f880360e6db63dbd233d55022}{double}}) old\+Double \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_double_with_history_a1439a97c5a15cb7a150f25a86704ea85}\label{interface_u_m_double_with_history_a1439a97c5a15cb7a150f25a86704ea85}} 
+\index{UMDoubleWithHistory@{UMDoubleWithHistory}!oldNonNullString@{oldNonNullString}}
+\index{oldNonNullString@{oldNonNullString}!UMDoubleWithHistory@{UMDoubleWithHistory}}
+\doxysubsubsection{\texorpdfstring{oldNonNullString()}{oldNonNullString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) old\+Non\+Null\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_double_with_history_aa66cd6bea691b7f14b4ee6577bd05533}\label{interface_u_m_double_with_history_aa66cd6bea691b7f14b4ee6577bd05533}} 
+\index{UMDoubleWithHistory@{UMDoubleWithHistory}!setDouble:@{setDouble:}}
+\index{setDouble:@{setDouble:}!UMDoubleWithHistory@{UMDoubleWithHistory}}
+\doxysubsubsection{\texorpdfstring{setDouble:()}{setDouble:()}}
+{\footnotesize\ttfamily -\/ (void) set\+Double\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_double_with_history_aeae89c2f880360e6db63dbd233d55022}{double}})}]{new\+Value }\end{DoxyParamCaption}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_double_with_history_8h}{U\+M\+Double\+With\+History.\+h}}\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_double_with_history_8m}{U\+M\+Double\+With\+History.\+m}}\end{DoxyCompactItemize}

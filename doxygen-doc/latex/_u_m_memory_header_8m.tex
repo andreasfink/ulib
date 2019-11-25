@@ -1,0 +1,100 @@
+\hypertarget{_u_m_memory_header_8m}{}\doxysection{Classes/\+Universal\+Object/\+U\+M\+Memory\+Header.m File Reference}
+\label{_u_m_memory_header_8m}\index{Classes/UniversalObject/UMMemoryHeader.m@{Classes/UniversalObject/UMMemoryHeader.m}}
+{\ttfamily \#import $<$Foundation/\+Foundation.\+h$>$}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Memory\+Header.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Constant\+Strings\+Dict.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_u_m_memory_header_8m_af1d1df38a1266a5d7a4328c85348b31f}{umobject\+\_\+stat\+\_\+external\+\_\+increase\+\_\+name}} (const char $\ast$cname)
+\item 
+void \mbox{\hyperlink{_u_m_memory_header_8m_ab6af42733e3feeba99c2d0ddda077769}{umobject\+\_\+stat\+\_\+external\+\_\+decrease\+\_\+name}} (const char $\ast$cname)
+\item 
+const char $\ast$ \mbox{\hyperlink{_u_m_memory_header_8m_adf3d55370b2a1a8cf3bee1de1d2bf88d}{umobject\+\_\+get\+\_\+constant\+\_\+name\+\_\+pointer}} (const char $\ast$file, const long line, const char $\ast$func)
+\item 
+void $\ast$ \mbox{\hyperlink{_u_m_memory_header_8m_aa0eb7821ab140bd0885a9d24a0696bdc}{ummemory\+\_\+header\+\_\+to\+\_\+data}} (\mbox{\hyperlink{structummemory__header}{ummemory\+\_\+header}} $\ast$h)
+\item 
+\mbox{\hyperlink{structummemory__header}{ummemory\+\_\+header}} $\ast$ \mbox{\hyperlink{_u_m_memory_header_8m_a82cf9ba99d8efee0fcba310e9df5e229}{ummemory\+\_\+data\+\_\+to\+\_\+header}} (void $\ast$ptr)
+\item 
+void \mbox{\hyperlink{_u_m_memory_header_8m_abd5453c7d72b409e6d10c1cc59103098}{umpointer\+\_\+check\+\_\+real}} (void $\ast$ptr, const char $\ast$file, const long line, const char $\ast$function)
+\item 
+void $\ast$ \mbox{\hyperlink{_u_m_memory_header_8m_ab3c14cb6d1dcc7ecb2fe4c4da72d9c7b}{umcalloc\+\_\+real}} (size\+\_\+t count, size\+\_\+t size, const char $\ast$file, const long line, const char $\ast$function)
+\item 
+void $\ast$ \mbox{\hyperlink{_u_m_memory_header_8m_a7bc9be53550b100f5cc130442179f494}{ummalloc\+\_\+real}} (size\+\_\+t size, const char $\ast$file, const long line, const char $\ast$function)
+\item 
+void $\ast$ \mbox{\hyperlink{_u_m_memory_header_8m_a0060d3890722f5e5ea78fe9e85172a71}{umrealloc\+\_\+real}} (void $\ast$ptr, size\+\_\+t size, const char $\ast$file, const long line, const char $\ast$function)
+\item 
+void \mbox{\hyperlink{_u_m_memory_header_8m_a92f453d992e2131373145d8bf99d826c}{umfree\+\_\+real}} (void $\ast$ptr, const char $\ast$file, const long line, const char $\ast$function)
+\item 
+char $\ast$ \mbox{\hyperlink{_u_m_memory_header_8m_afcdde8c3efa51fa7eb99e39334652832}{umstrdup\+\_\+real}} (const char $\ast$str, const char $\ast$file, const long line, const char $\ast$function)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_u_m_memory_header_8m_ab3c14cb6d1dcc7ecb2fe4c4da72d9c7b}\label{_u_m_memory_header_8m_ab3c14cb6d1dcc7ecb2fe4c4da72d9c7b}} 
+\index{UMMemoryHeader.m@{UMMemoryHeader.m}!umcalloc\_real@{umcalloc\_real}}
+\index{umcalloc\_real@{umcalloc\_real}!UMMemoryHeader.m@{UMMemoryHeader.m}}
+\doxysubsubsection{\texorpdfstring{umcalloc\_real()}{umcalloc\_real()}}
+{\footnotesize\ttfamily void$\ast$ umcalloc\+\_\+real (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count,  }\item[{size\+\_\+t}]{size,  }\item[{const char $\ast$}]{file,  }\item[{const long}]{line,  }\item[{const char $\ast$}]{function }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_memory_header_8m_a92f453d992e2131373145d8bf99d826c}\label{_u_m_memory_header_8m_a92f453d992e2131373145d8bf99d826c}} 
+\index{UMMemoryHeader.m@{UMMemoryHeader.m}!umfree\_real@{umfree\_real}}
+\index{umfree\_real@{umfree\_real}!UMMemoryHeader.m@{UMMemoryHeader.m}}
+\doxysubsubsection{\texorpdfstring{umfree\_real()}{umfree\_real()}}
+{\footnotesize\ttfamily void umfree\+\_\+real (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{const char $\ast$}]{file,  }\item[{const long}]{line,  }\item[{const char $\ast$}]{function }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_memory_header_8m_a7bc9be53550b100f5cc130442179f494}\label{_u_m_memory_header_8m_a7bc9be53550b100f5cc130442179f494}} 
+\index{UMMemoryHeader.m@{UMMemoryHeader.m}!ummalloc\_real@{ummalloc\_real}}
+\index{ummalloc\_real@{ummalloc\_real}!UMMemoryHeader.m@{UMMemoryHeader.m}}
+\doxysubsubsection{\texorpdfstring{ummalloc\_real()}{ummalloc\_real()}}
+{\footnotesize\ttfamily void$\ast$ ummalloc\+\_\+real (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size,  }\item[{const char $\ast$}]{file,  }\item[{const long}]{line,  }\item[{const char $\ast$}]{function }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_memory_header_8m_a82cf9ba99d8efee0fcba310e9df5e229}\label{_u_m_memory_header_8m_a82cf9ba99d8efee0fcba310e9df5e229}} 
+\index{UMMemoryHeader.m@{UMMemoryHeader.m}!ummemory\_data\_to\_header@{ummemory\_data\_to\_header}}
+\index{ummemory\_data\_to\_header@{ummemory\_data\_to\_header}!UMMemoryHeader.m@{UMMemoryHeader.m}}
+\doxysubsubsection{\texorpdfstring{ummemory\_data\_to\_header()}{ummemory\_data\_to\_header()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structummemory__header}{ummemory\+\_\+header}}$\ast$ ummemory\+\_\+data\+\_\+to\+\_\+header (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_memory_header_8m_aa0eb7821ab140bd0885a9d24a0696bdc}\label{_u_m_memory_header_8m_aa0eb7821ab140bd0885a9d24a0696bdc}} 
+\index{UMMemoryHeader.m@{UMMemoryHeader.m}!ummemory\_header\_to\_data@{ummemory\_header\_to\_data}}
+\index{ummemory\_header\_to\_data@{ummemory\_header\_to\_data}!UMMemoryHeader.m@{UMMemoryHeader.m}}
+\doxysubsubsection{\texorpdfstring{ummemory\_header\_to\_data()}{ummemory\_header\_to\_data()}}
+{\footnotesize\ttfamily void$\ast$ ummemory\+\_\+header\+\_\+to\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structummemory__header}{ummemory\+\_\+header}} $\ast$}]{h }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_memory_header_8m_adf3d55370b2a1a8cf3bee1de1d2bf88d}\label{_u_m_memory_header_8m_adf3d55370b2a1a8cf3bee1de1d2bf88d}} 
+\index{UMMemoryHeader.m@{UMMemoryHeader.m}!umobject\_get\_constant\_name\_pointer@{umobject\_get\_constant\_name\_pointer}}
+\index{umobject\_get\_constant\_name\_pointer@{umobject\_get\_constant\_name\_pointer}!UMMemoryHeader.m@{UMMemoryHeader.m}}
+\doxysubsubsection{\texorpdfstring{umobject\_get\_constant\_name\_pointer()}{umobject\_get\_constant\_name\_pointer()}}
+{\footnotesize\ttfamily const char$\ast$ umobject\+\_\+get\+\_\+constant\+\_\+name\+\_\+pointer (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file,  }\item[{const long}]{line,  }\item[{const char $\ast$}]{func }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_memory_header_8m_ab6af42733e3feeba99c2d0ddda077769}\label{_u_m_memory_header_8m_ab6af42733e3feeba99c2d0ddda077769}} 
+\index{UMMemoryHeader.m@{UMMemoryHeader.m}!umobject\_stat\_external\_decrease\_name@{umobject\_stat\_external\_decrease\_name}}
+\index{umobject\_stat\_external\_decrease\_name@{umobject\_stat\_external\_decrease\_name}!UMMemoryHeader.m@{UMMemoryHeader.m}}
+\doxysubsubsection{\texorpdfstring{umobject\_stat\_external\_decrease\_name()}{umobject\_stat\_external\_decrease\_name()}}
+{\footnotesize\ttfamily void umobject\+\_\+stat\+\_\+external\+\_\+decrease\+\_\+name (\begin{DoxyParamCaption}\item[{const char $\ast$}]{cname }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_memory_header_8m_af1d1df38a1266a5d7a4328c85348b31f}\label{_u_m_memory_header_8m_af1d1df38a1266a5d7a4328c85348b31f}} 
+\index{UMMemoryHeader.m@{UMMemoryHeader.m}!umobject\_stat\_external\_increase\_name@{umobject\_stat\_external\_increase\_name}}
+\index{umobject\_stat\_external\_increase\_name@{umobject\_stat\_external\_increase\_name}!UMMemoryHeader.m@{UMMemoryHeader.m}}
+\doxysubsubsection{\texorpdfstring{umobject\_stat\_external\_increase\_name()}{umobject\_stat\_external\_increase\_name()}}
+{\footnotesize\ttfamily void umobject\+\_\+stat\+\_\+external\+\_\+increase\+\_\+name (\begin{DoxyParamCaption}\item[{const char $\ast$}]{cname }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_memory_header_8m_abd5453c7d72b409e6d10c1cc59103098}\label{_u_m_memory_header_8m_abd5453c7d72b409e6d10c1cc59103098}} 
+\index{UMMemoryHeader.m@{UMMemoryHeader.m}!umpointer\_check\_real@{umpointer\_check\_real}}
+\index{umpointer\_check\_real@{umpointer\_check\_real}!UMMemoryHeader.m@{UMMemoryHeader.m}}
+\doxysubsubsection{\texorpdfstring{umpointer\_check\_real()}{umpointer\_check\_real()}}
+{\footnotesize\ttfamily void umpointer\+\_\+check\+\_\+real (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{const char $\ast$}]{file,  }\item[{const long}]{line,  }\item[{const char $\ast$}]{function }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_memory_header_8m_a0060d3890722f5e5ea78fe9e85172a71}\label{_u_m_memory_header_8m_a0060d3890722f5e5ea78fe9e85172a71}} 
+\index{UMMemoryHeader.m@{UMMemoryHeader.m}!umrealloc\_real@{umrealloc\_real}}
+\index{umrealloc\_real@{umrealloc\_real}!UMMemoryHeader.m@{UMMemoryHeader.m}}
+\doxysubsubsection{\texorpdfstring{umrealloc\_real()}{umrealloc\_real()}}
+{\footnotesize\ttfamily void$\ast$ umrealloc\+\_\+real (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{size\+\_\+t}]{size,  }\item[{const char $\ast$}]{file,  }\item[{const long}]{line,  }\item[{const char $\ast$}]{function }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_memory_header_8m_afcdde8c3efa51fa7eb99e39334652832}\label{_u_m_memory_header_8m_afcdde8c3efa51fa7eb99e39334652832}} 
+\index{UMMemoryHeader.m@{UMMemoryHeader.m}!umstrdup\_real@{umstrdup\_real}}
+\index{umstrdup\_real@{umstrdup\_real}!UMMemoryHeader.m@{UMMemoryHeader.m}}
+\doxysubsubsection{\texorpdfstring{umstrdup\_real()}{umstrdup\_real()}}
+{\footnotesize\ttfamily char$\ast$ umstrdup\+\_\+real (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str,  }\item[{const char $\ast$}]{file,  }\item[{const long}]{line,  }\item[{const char $\ast$}]{function }\end{DoxyParamCaption})}
+

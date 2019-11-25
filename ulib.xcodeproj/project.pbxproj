@@ -2340,6 +2340,7 @@
 		A618E7981FC58860001106C3 /* UMThreadHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMThreadHelpers.h; sourceTree = "<group>"; };
 		A618E7991FC58860001106C3 /* UMThreadHelpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMThreadHelpers.m; sourceTree = "<group>"; };
 		A61F7D551A2CB4F70090FC94 /* UMLayerUserProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMLayerUserProtocol.h; sourceTree = "<group>"; };
+		A627D6C0238B382B00257324 /* doxygen-doc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "doxygen-doc"; sourceTree = "<group>"; };
 		A628C8B71CB9270C00211137 /* Makefile.osx.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx.in; sourceTree = "<group>"; };
 		A62A7E2618AAD20D00EA8A2A /* UMHTTPPageRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPPageRef.h; sourceTree = "<group>"; };
 		A62A7E2718AAD20D00EA8A2A /* UMHTTPPageRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPPageRef.m; sourceTree = "<group>"; };
@@ -9356,6 +9357,8 @@
 		A6DDD9BD163611F3002FA7CC /* NSData+UMLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+UMLog.h"; sourceTree = "<group>"; };
 		A6DDD9BE163611F3002FA7CC /* NSData+UMLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+UMLog.m"; sourceTree = "<group>"; };
 		A6DDD9C31636154A002FA7CC /* NSData+UMSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+UMSocket.m"; sourceTree = "<group>"; };
+		A6DF60B6238B28DB007647F6 /* ulib copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ulib copy-Info.plist"; path = "/Users/afink/development/gitlab/ulib/ulib copy-Info.plist"; sourceTree = "<absolute>"; };
+		A6DF60B7238B298D007647F6 /* make_documentation.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = make_documentation.sh; sourceTree = "<group>"; };
 		A6DF84071A0BCA2C0090FC94 /* UMBackgrounderWithQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBackgrounderWithQueue.m; sourceTree = "<group>"; };
 		A6EB479F1A35C73A0090FC94 /* UMBackgrounderWithQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBackgrounderWithQueues.m; sourceTree = "<group>"; };
 		A6EB47A71A35C9530090FC94 /* UMTaskQueueMulti.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTaskQueueMulti.m; sourceTree = "<group>"; };
@@ -16750,6 +16753,7 @@
 				A6F694141B4E85020090FC94 /* ulib.pc.in */,
 				A628C8B71CB9270C00211137 /* Makefile.osx.in */,
 				A677B75A19C804A10090FC94 /* Makefile.linux.in */,
+				A6DF60B7238B298D007647F6 /* make_documentation.sh */,
 				A6F693EA1B4E82FA0090FC94 /* configure.in */,
 				A6D8AB34149A76BB0029E9CF /* Classes */,
 				22FAD7181636CDD9007AE9BB /* ulibTestsLinux */,
@@ -16759,7 +16763,9 @@
 				A6DDD91D1635F83E002FA7CC /* SupportingFiles */,
 				A682E4071AA7CB4100854472 /* libs */,
 				A637FFA31DBEDFE7000A6A21 /* doc */,
+				A627D6C0238B382B00257324 /* doxygen-doc */,
 				A60C4E251EF7FE59007C203A /* ulibios copy-Info.plist */,
+				A6DF60B6238B28DB007647F6 /* ulib copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -16865,10 +16871,6 @@
 			isa = PBXGroup;
 			children = (
 				A60B7660226E0166003F1F0E /* UniversalSerial */,
-				A6D42E491D2F9C5F00211137 /* UMRegexMatch.h */,
-				A6D42E4A1D2F9C5F00211137 /* UMRegexMatch.m */,
-				A6D42E411D2F8BC900211137 /* UMRegex.h */,
-				A6D42E421D2F8BC900211137 /* UMRegex.m */,
 				A6A143F5149B4F5000B007D0 /* ulib.h */,
 				A6DB3E6F191E40770090FC94 /* ulib.m */,
 				A6A7A2431CF81EE600211137 /* ulib_config.h */,
@@ -17033,6 +17035,10 @@
 			isa = PBXGroup;
 			children = (
 				A6CC4B5B1A3F24C70090FC94 /* UniversalUtilities.h */,
+				A6D42E491D2F9C5F00211137 /* UMRegexMatch.h */,
+				A6D42E4A1D2F9C5F00211137 /* UMRegexMatch.m */,
+				A6D42E411D2F8BC900211137 /* UMRegex.h */,
+				A6D42E421D2F8BC900211137 /* UMRegex.m */,
 				A6CEB96722BA514200B2BD9D /* UMNamedList.h */,
 				A6CEB96822BA514200B2BD9D /* UMNamedList.m */,
 				A6CC4B501A3F24C70090FC94 /* UMAverageDelay.h */,

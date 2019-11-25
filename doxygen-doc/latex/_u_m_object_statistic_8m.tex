@@ -1,0 +1,40 @@
+\hypertarget{_u_m_object_statistic_8m}{}\doxysection{Classes/\+Universal\+Object/\+U\+M\+Object\+Statistic.m File Reference}
+\label{_u_m_object_statistic_8m}\index{Classes/UniversalObject/UMObjectStatistic.m@{Classes/UniversalObject/UMObjectStatistic.m}}
+{\ttfamily \#import $<$Foundation/\+Foundation.\+h$>$}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Mutex.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Object\+Statistic.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Object\+Statistic\+Entry.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_u_m_object_statistic_8m_a01b77de4bb6f5c233182204ebf536d93}{V\+E\+R\+I\+F\+Y\+\_\+\+A\+S\+C\+I\+I\+\_\+\+N\+A\+ME}}(ascii\+Name)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_u_m_object_statistic_8m_a01b77de4bb6f5c233182204ebf536d93}\label{_u_m_object_statistic_8m_a01b77de4bb6f5c233182204ebf536d93}} 
+\index{UMObjectStatistic.m@{UMObjectStatistic.m}!VERIFY\_ASCII\_NAME@{VERIFY\_ASCII\_NAME}}
+\index{VERIFY\_ASCII\_NAME@{VERIFY\_ASCII\_NAME}!UMObjectStatistic.m@{UMObjectStatistic.m}}
+\doxysubsubsection{\texorpdfstring{VERIFY\_ASCII\_NAME}{VERIFY\_ASCII\_NAME}}
+{\footnotesize\ttfamily \#define V\+E\+R\+I\+F\+Y\+\_\+\+A\+S\+C\+I\+I\+\_\+\+N\+A\+ME(\begin{DoxyParamCaption}\item[{}]{ascii\+Name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{\(\backslash\)}
+\DoxyCodeLine{    if(asciiName==NULL) \(\backslash\)}
+\DoxyCodeLine{    \{ \(\backslash\)}
+\DoxyCodeLine{        NSString *s = \mbox{\hyperlink{_u_m_config_8m_a59e3afaf1663fe12881e2d30da647787}{UMBacktrace}}(NULL,0); \(\backslash\)}
+\DoxyCodeLine{        fprintf(stderr,\textcolor{stringliteral}{"asciiName==NULL\(\backslash\)n\%s"},s.UTF8String); \(\backslash\)}
+\DoxyCodeLine{        fflush(stderr); \(\backslash\)}
+\DoxyCodeLine{        NSAssert(0,\textcolor{stringliteral}{@"asciName is NULL"});\(\backslash\)}
+\DoxyCodeLine{    \} \(\backslash\)}
+\DoxyCodeLine{    if(*asciiName==\textcolor{charliteral}{'\(\backslash\)0'}) \(\backslash\)}
+\DoxyCodeLine{    \{ \(\backslash\)}
+\DoxyCodeLine{        NSString *s = \mbox{\hyperlink{_u_m_config_8m_a59e3afaf1663fe12881e2d30da647787}{UMBacktrace}}(NULL,0); \(\backslash\)}
+\DoxyCodeLine{        fprintf(stderr,\textcolor{stringliteral}{"asciiName==''\(\backslash\)n\%s"},s.UTF8String); \(\backslash\)}
+\DoxyCodeLine{        fflush(stderr); \(\backslash\)}
+\DoxyCodeLine{        NSAssert(0,\textcolor{stringliteral}{@"asciName points to empty string"});\(\backslash\)}
+\DoxyCodeLine{    \} \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

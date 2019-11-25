@@ -1,0 +1,66 @@
+\hypertarget{_u_m_object_8m}{}\doxysection{Classes/\+Universal\+Object/\+U\+M\+Object.m File Reference}
+\label{_u_m_object_8m}\index{Classes/UniversalObject/UMObject.m@{Classes/UniversalObject/UMObject.m}}
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Object.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+History\+Log.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Config.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Log\+Handler.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Log\+Feed.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Log\+File.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}N\+S\+String+\+Universal\+Object.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Constant\+Strings\+Dict.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Object\+Statistic.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Memory\+Header.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{interface_u_m_object_thread_starter}{U\+M\+Object\+Thread\+Starter}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{_u_m_object_8m_a59e3afaf1663fe12881e2d30da647787}{U\+M\+Backtrace}} (void $\ast$$\ast$stack\+\_\+frames, size\+\_\+t size)
+\item 
+const char $\ast$ \mbox{\hyperlink{_u_m_object_8m_adf3d55370b2a1a8cf3bee1de1d2bf88d}{umobject\+\_\+get\+\_\+constant\+\_\+name\+\_\+pointer}} (const char $\ast$file, const long line, const char $\ast$func)
+\item 
+void \mbox{\hyperlink{_u_m_object_8m_a2c2cf03c0d64ec80e3264587f11358af}{umobject\+\_\+stat\+\_\+verify\+\_\+ascii\+\_\+name}} (const char $\ast$ascii\+Name)
+\item 
+void \mbox{\hyperlink{_u_m_object_8m_af1d1df38a1266a5d7a4328c85348b31f}{umobject\+\_\+stat\+\_\+external\+\_\+increase\+\_\+name}} (const char $\ast$cname)
+\item 
+void \mbox{\hyperlink{_u_m_object_8m_ab6af42733e3feeba99c2d0ddda077769}{umobject\+\_\+stat\+\_\+external\+\_\+decrease\+\_\+name}} (const char $\ast$cname)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_u_m_object_8m_a59e3afaf1663fe12881e2d30da647787}\label{_u_m_object_8m_a59e3afaf1663fe12881e2d30da647787}} 
+\index{UMObject.m@{UMObject.m}!UMBacktrace@{UMBacktrace}}
+\index{UMBacktrace@{UMBacktrace}!UMObject.m@{UMObject.m}}
+\doxysubsubsection{\texorpdfstring{UMBacktrace()}{UMBacktrace()}}
+{\footnotesize\ttfamily N\+S\+String$\ast$ U\+M\+Backtrace (\begin{DoxyParamCaption}\item[{void $\ast$$\ast$}]{stack\+\_\+frames,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_object_8m_adf3d55370b2a1a8cf3bee1de1d2bf88d}\label{_u_m_object_8m_adf3d55370b2a1a8cf3bee1de1d2bf88d}} 
+\index{UMObject.m@{UMObject.m}!umobject\_get\_constant\_name\_pointer@{umobject\_get\_constant\_name\_pointer}}
+\index{umobject\_get\_constant\_name\_pointer@{umobject\_get\_constant\_name\_pointer}!UMObject.m@{UMObject.m}}
+\doxysubsubsection{\texorpdfstring{umobject\_get\_constant\_name\_pointer()}{umobject\_get\_constant\_name\_pointer()}}
+{\footnotesize\ttfamily const char$\ast$ umobject\+\_\+get\+\_\+constant\+\_\+name\+\_\+pointer (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file,  }\item[{const long}]{line,  }\item[{const char $\ast$}]{func }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_object_8m_ab6af42733e3feeba99c2d0ddda077769}\label{_u_m_object_8m_ab6af42733e3feeba99c2d0ddda077769}} 
+\index{UMObject.m@{UMObject.m}!umobject\_stat\_external\_decrease\_name@{umobject\_stat\_external\_decrease\_name}}
+\index{umobject\_stat\_external\_decrease\_name@{umobject\_stat\_external\_decrease\_name}!UMObject.m@{UMObject.m}}
+\doxysubsubsection{\texorpdfstring{umobject\_stat\_external\_decrease\_name()}{umobject\_stat\_external\_decrease\_name()}}
+{\footnotesize\ttfamily void umobject\+\_\+stat\+\_\+external\+\_\+decrease\+\_\+name (\begin{DoxyParamCaption}\item[{const char $\ast$}]{cname }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_object_8m_af1d1df38a1266a5d7a4328c85348b31f}\label{_u_m_object_8m_af1d1df38a1266a5d7a4328c85348b31f}} 
+\index{UMObject.m@{UMObject.m}!umobject\_stat\_external\_increase\_name@{umobject\_stat\_external\_increase\_name}}
+\index{umobject\_stat\_external\_increase\_name@{umobject\_stat\_external\_increase\_name}!UMObject.m@{UMObject.m}}
+\doxysubsubsection{\texorpdfstring{umobject\_stat\_external\_increase\_name()}{umobject\_stat\_external\_increase\_name()}}
+{\footnotesize\ttfamily void umobject\+\_\+stat\+\_\+external\+\_\+increase\+\_\+name (\begin{DoxyParamCaption}\item[{const char $\ast$}]{cname }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_u_m_object_8m_a2c2cf03c0d64ec80e3264587f11358af}\label{_u_m_object_8m_a2c2cf03c0d64ec80e3264587f11358af}} 
+\index{UMObject.m@{UMObject.m}!umobject\_stat\_verify\_ascii\_name@{umobject\_stat\_verify\_ascii\_name}}
+\index{umobject\_stat\_verify\_ascii\_name@{umobject\_stat\_verify\_ascii\_name}!UMObject.m@{UMObject.m}}
+\doxysubsubsection{\texorpdfstring{umobject\_stat\_verify\_ascii\_name()}{umobject\_stat\_verify\_ascii\_name()}}
+{\footnotesize\ttfamily void umobject\+\_\+stat\+\_\+verify\+\_\+ascii\+\_\+name (\begin{DoxyParamCaption}\item[{const char $\ast$}]{ascii\+Name }\end{DoxyParamCaption})}
+

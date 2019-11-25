@@ -1,0 +1,160 @@
+\hypertarget{interface_u_m_synchronized_sorted_dictionary}{}\doxysection{U\+M\+Synchronized\+Sorted\+Dictionary Class Reference}
+\label{interface_u_m_synchronized_sorted_dictionary}\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+
+
+\mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary}{U\+M\+Synchronized\+Sorted\+Dictionary}} is like \mbox{\hyperlink{interface_u_m_synchronized_dictionary}{U\+M\+Synchronized\+Dictionary}} but it keeps the sequence of the entries in the order they where added. Useful for dictionaries which have a natural order such as the order it was written in a config file or a specification.  
+
+
+
+
+{\ttfamily \#import $<$U\+M\+Synchronized\+Sorted\+Dictionary.\+h$>$}
+
+Inheritance diagram for U\+M\+Synchronized\+Sorted\+Dictionary\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.301887cm]{interface_u_m_synchronized_sorted_dictionary}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary_acfb8b2a9414da6d00b2c49f85f1c3639}{object\+At\+Index\+:}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary_a2b7589fb5e6ca6a0d9f4c2c1e4d72183}{key\+At\+Index\+:}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary_a3875264e4f8d60131e083f822c570867}{object\+For\+Keyed\+Subscript\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary_a290abbcd318b28eba7912cb9c89c876b}{remove\+Object\+For\+Key\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary_aa105bf57d121a8f091dad52b2808fd55}{add\+Object\+:for\+Key\+:}}
+\item 
+(N\+S\+Array $\ast$) -\/ \mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary_af10ef36027535d479ab4f0de915ce460}{sorted\+Keys}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary_a3e8b4beee2272221d9df7946dbcb20c1}{json\+String}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary_a9040066960ea94e4e64c4f0cd1b3c974}{json\+Compact\+String}}
+\item 
+(\mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary}{U\+M\+Synchronized\+Sorted\+Dictionary}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary_a019de6690f19d2d07b9b6a7068640df4}{copy\+With\+Zone\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(instancetype) + \mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary_a220f4e86b4236f593f6b58c3d2f136b9}{synchronized\+Sorted\+Dictionary}}
+\item 
+(instancetype) + \mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary_a33e7690017c56c4c0ffe7ae2c024b5c2}{synchronized\+Sorted\+Dictionary\+With\+Dictionary\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+Mutable\+Array $\ast$ \mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary_a177ffd31b0e2203d164438b09d10373a}{sort\+Index}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary}{U\+M\+Synchronized\+Sorted\+Dictionary}} is like \mbox{\hyperlink{interface_u_m_synchronized_dictionary}{U\+M\+Synchronized\+Dictionary}} but it keeps the sequence of the entries in the order they where added. Useful for dictionaries which have a natural order such as the order it was written in a config file or a specification. 
+
+\mbox{\hyperlink{interface_u_m_synchronized_dictionary}{U\+M\+Synchronized\+Dictionary}} can be used like N\+S\+Mutable\+Dictionary (but its not a subclass of it). To create a \mbox{\hyperlink{interface_u_m_synchronized_dictionary}{U\+M\+Synchronized\+Dictionary}} from a N\+S\+Dictionary use the init\+With\+Dictionary initializer. To create a N\+S\+Mutable\+Dictionary from \mbox{\hyperlink{interface_u_m_synchronized_dictionary}{U\+M\+Synchronized\+Dictionary}}, use mutable\+Copy method. 
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_synchronized_sorted_dictionary_aa105bf57d121a8f091dad52b2808fd55}\label{interface_u_m_synchronized_sorted_dictionary_aa105bf57d121a8f091dad52b2808fd55}} 
+\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}!addObject:forKey:@{addObject:forKey:}}
+\index{addObject:forKey:@{addObject:forKey:}!UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+\doxysubsubsection{\texorpdfstring{addObject:forKey:()}{addObject:forKey:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Object\+: \begin{DoxyParamCaption}\item[{(id)}]{o }\item[{for\+Key\+:(id)}]{key }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_sorted_dictionary_a019de6690f19d2d07b9b6a7068640df4}\label{interface_u_m_synchronized_sorted_dictionary_a019de6690f19d2d07b9b6a7068640df4}} 
+\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}!copyWithZone:@{copyWithZone:}}
+\index{copyWithZone:@{copyWithZone:}!UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+\doxysubsubsection{\texorpdfstring{copyWithZone:()}{copyWithZone:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary}{U\+M\+Synchronized\+Sorted\+Dictionary}} $\ast$) copy\+With\+Zone\+: \begin{DoxyParamCaption}\item[{(N\+S\+Zone $\ast$)}]{zone }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_synchronized_dictionary_add9c975ce3543292529c597ebaf560bc}{U\+M\+Synchronized\+Dictionary}}.
+
+\mbox{\Hypertarget{interface_u_m_synchronized_sorted_dictionary_a9040066960ea94e4e64c4f0cd1b3c974}\label{interface_u_m_synchronized_sorted_dictionary_a9040066960ea94e4e64c4f0cd1b3c974}} 
+\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}!jsonCompactString@{jsonCompactString}}
+\index{jsonCompactString@{jsonCompactString}!UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+\doxysubsubsection{\texorpdfstring{jsonCompactString()}{jsonCompactString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) json\+Compact\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_synchronized_dictionary_ac298624ecf74cb83e179217da49ceaee}{U\+M\+Synchronized\+Dictionary}}.
+
+\mbox{\Hypertarget{interface_u_m_synchronized_sorted_dictionary_a3e8b4beee2272221d9df7946dbcb20c1}\label{interface_u_m_synchronized_sorted_dictionary_a3e8b4beee2272221d9df7946dbcb20c1}} 
+\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}!jsonString@{jsonString}}
+\index{jsonString@{jsonString}!UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+\doxysubsubsection{\texorpdfstring{jsonString()}{jsonString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) json\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_synchronized_dictionary_a1ea8150664269c7f02a2f897b9c9b44b}{U\+M\+Synchronized\+Dictionary}}.
+
+\mbox{\Hypertarget{interface_u_m_synchronized_sorted_dictionary_a2b7589fb5e6ca6a0d9f4c2c1e4d72183}\label{interface_u_m_synchronized_sorted_dictionary_a2b7589fb5e6ca6a0d9f4c2c1e4d72183}} 
+\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}!keyAtIndex:@{keyAtIndex:}}
+\index{keyAtIndex:@{keyAtIndex:}!UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+\doxysubsubsection{\texorpdfstring{keyAtIndex:()}{keyAtIndex:()}}
+{\footnotesize\ttfamily -\/ (id) key\+At\+Index\+: \begin{DoxyParamCaption}\item[{(N\+S\+U\+Integer)}]{index }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_sorted_dictionary_acfb8b2a9414da6d00b2c49f85f1c3639}\label{interface_u_m_synchronized_sorted_dictionary_acfb8b2a9414da6d00b2c49f85f1c3639}} 
+\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}!objectAtIndex:@{objectAtIndex:}}
+\index{objectAtIndex:@{objectAtIndex:}!UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+\doxysubsubsection{\texorpdfstring{objectAtIndex:()}{objectAtIndex:()}}
+{\footnotesize\ttfamily -\/ (id) object\+At\+Index\+: \begin{DoxyParamCaption}\item[{(N\+S\+U\+Integer)}]{index }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_sorted_dictionary_a3875264e4f8d60131e083f822c570867}\label{interface_u_m_synchronized_sorted_dictionary_a3875264e4f8d60131e083f822c570867}} 
+\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}!objectForKeyedSubscript:@{objectForKeyedSubscript:}}
+\index{objectForKeyedSubscript:@{objectForKeyedSubscript:}!UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+\doxysubsubsection{\texorpdfstring{objectForKeyedSubscript:()}{objectForKeyedSubscript:()}}
+{\footnotesize\ttfamily -\/ (id) object\+For\+Keyed\+Subscript\+: \begin{DoxyParamCaption}\item[{(id)}]{key }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_synchronized_dictionary_a656e827e8e810d7d3692e59e45984c70}{U\+M\+Synchronized\+Dictionary}}.
+
+\mbox{\Hypertarget{interface_u_m_synchronized_sorted_dictionary_a290abbcd318b28eba7912cb9c89c876b}\label{interface_u_m_synchronized_sorted_dictionary_a290abbcd318b28eba7912cb9c89c876b}} 
+\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}!removeObjectForKey:@{removeObjectForKey:}}
+\index{removeObjectForKey:@{removeObjectForKey:}!UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+\doxysubsubsection{\texorpdfstring{removeObjectForKey:()}{removeObjectForKey:()}}
+{\footnotesize\ttfamily -\/ (void) remove\+Object\+For\+Key\+: \begin{DoxyParamCaption}\item[{(id)}]{a\+Key }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_synchronized_dictionary_ac6b82bfbc5b855f0a2fc178121ce3176}{U\+M\+Synchronized\+Dictionary}}.
+
+\mbox{\Hypertarget{interface_u_m_synchronized_sorted_dictionary_af10ef36027535d479ab4f0de915ce460}\label{interface_u_m_synchronized_sorted_dictionary_af10ef36027535d479ab4f0de915ce460}} 
+\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}!sortedKeys@{sortedKeys}}
+\index{sortedKeys@{sortedKeys}!UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+\doxysubsubsection{\texorpdfstring{sortedKeys()}{sortedKeys()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Array $\ast$) sorted\+Keys \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_sorted_dictionary_a220f4e86b4236f593f6b58c3d2f136b9}\label{interface_u_m_synchronized_sorted_dictionary_a220f4e86b4236f593f6b58c3d2f136b9}} 
+\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}!synchronizedSortedDictionary@{synchronizedSortedDictionary}}
+\index{synchronizedSortedDictionary@{synchronizedSortedDictionary}!UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+\doxysubsubsection{\texorpdfstring{synchronizedSortedDictionary()}{synchronizedSortedDictionary()}}
+{\footnotesize\ttfamily + (instancetype) synchronized\+Sorted\+Dictionary \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_synchronized_sorted_dictionary_a33e7690017c56c4c0ffe7ae2c024b5c2}\label{interface_u_m_synchronized_sorted_dictionary_a33e7690017c56c4c0ffe7ae2c024b5c2}} 
+\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}!synchronizedSortedDictionaryWithDictionary:@{synchronizedSortedDictionaryWithDictionary:}}
+\index{synchronizedSortedDictionaryWithDictionary:@{synchronizedSortedDictionaryWithDictionary:}!UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+\doxysubsubsection{\texorpdfstring{synchronizedSortedDictionaryWithDictionary:()}{synchronizedSortedDictionaryWithDictionary:()}}
+{\footnotesize\ttfamily + (instancetype) synchronized\+Sorted\+Dictionary\+With\+Dictionary\+: \begin{DoxyParamCaption}\item[{(N\+S\+Dictionary $\ast$)}]{xd }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_synchronized_sorted_dictionary_a177ffd31b0e2203d164438b09d10373a}\label{interface_u_m_synchronized_sorted_dictionary_a177ffd31b0e2203d164438b09d10373a}} 
+\index{UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}!sortIndex@{sortIndex}}
+\index{sortIndex@{sortIndex}!UMSynchronizedSortedDictionary@{UMSynchronizedSortedDictionary}}
+\doxysubsubsection{\texorpdfstring{sortIndex}{sortIndex}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Array $\ast$) sort\+Index\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [strong]}, {\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_synchronized_sorted_dictionary_8h}{U\+M\+Synchronized\+Sorted\+Dictionary.\+h}}\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_synchronized_sorted_dictionary_8m}{U\+M\+Synchronized\+Sorted\+Dictionary.\+m}}\end{DoxyCompactItemize}

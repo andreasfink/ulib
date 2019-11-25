@@ -1,0 +1,150 @@
+\hypertarget{interface_u_m_date_with_history}{}\doxysection{U\+M\+Date\+With\+History Class Reference}
+\label{interface_u_m_date_with_history}\index{UMDateWithHistory@{UMDateWithHistory}}
+
+
+A N\+S\+Date which remembers its previous value and if it has been modified.  
+
+
+
+
+{\ttfamily \#import $<$U\+M\+Date\+With\+History.\+h$>$}
+
+Inheritance diagram for U\+M\+Date\+With\+History\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{interface_u_m_date_with_history}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_date_with_history_a826d6a9b1af91486535b3c221e357a5c}{set\+Date\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_date_with_history_aca5febb65c8b361c5baf005ef35956d4}{set\+Date\+From\+String\+:}}
+\item 
+(N\+S\+Date $\ast$) -\/ \mbox{\hyperlink{interface_u_m_date_with_history_a522a746b84ce0692d1bc9cf905ba0f18}{date}}
+\item 
+(N\+S\+Date $\ast$) -\/ \mbox{\hyperlink{interface_u_m_date_with_history_afb8107b01354d94e76ac942da173ef00}{current\+Date}}
+\item 
+(N\+S\+Date $\ast$) -\/ \mbox{\hyperlink{interface_u_m_date_with_history_ad393e09985a98a5c695ab2513a966349}{old\+Date}}
+\item 
+(N\+S\+Date $\ast$) -\/ \mbox{\hyperlink{interface_u_m_date_with_history_a06d6e0757033a5064ba93d169d906748}{non\+Null\+Date}}
+\item 
+(N\+S\+Date $\ast$) -\/ \mbox{\hyperlink{interface_u_m_date_with_history_a52587840b8c2423ef12dd63b959f2b12}{old\+Non\+Null\+Date}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_date_with_history_a9e88d2080267f0ba7a1353480e7b60ab}{load\+From\+String\+:}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_date_with_history_aae2b8a9d9ef7817e00f9c4803829f8e9}{non\+Null\+Date\+As\+String}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_date_with_history_aa8e196177ca5bee64f332d9c8dfbdef8}{old\+Non\+Null\+Date\+As\+String}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_date_with_history_a21e7985ff04cdd2357c5f07e3f2f0516}{date\+As\+String}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_date_with_history_afb2aaae46edfba88f18116c052d26231}{is\+Null\+Date}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(N\+S\+Date $\ast$) + \mbox{\hyperlink{interface_u_m_date_with_history_a107b0348e7c4448f1a8977667e2e5899}{zero\+Date}}
+\item 
+(B\+O\+OL) + \mbox{\hyperlink{interface_u_m_date_with_history_a0c40993df9903be9ea105efe7136ffd2}{is\+Null\+Date\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A N\+S\+Date which remembers its previous value and if it has been modified. 
+
+\mbox{\hyperlink{interface_u_m_date_with_history}{U\+M\+Date\+With\+History}} is a object holding a N\+S\+Date and its previous value. It can be used to hold data which is potentially modified at some point in time and then remember if it has been modified and what the old values are. Used for example in database access to only modify the fields which have changed (and if none has changed, not doing any query at all). 
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_date_with_history_afb8107b01354d94e76ac942da173ef00}\label{interface_u_m_date_with_history_afb8107b01354d94e76ac942da173ef00}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!currentDate@{currentDate}}
+\index{currentDate@{currentDate}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{currentDate()}{currentDate()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Date $\ast$) current\+Date \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_a522a746b84ce0692d1bc9cf905ba0f18}\label{interface_u_m_date_with_history_a522a746b84ce0692d1bc9cf905ba0f18}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!date@{date}}
+\index{date@{date}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{date()}{date()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Date $\ast$) date \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_a21e7985ff04cdd2357c5f07e3f2f0516}\label{interface_u_m_date_with_history_a21e7985ff04cdd2357c5f07e3f2f0516}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!dateAsString@{dateAsString}}
+\index{dateAsString@{dateAsString}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{dateAsString()}{dateAsString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) date\+As\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_afb2aaae46edfba88f18116c052d26231}\label{interface_u_m_date_with_history_afb2aaae46edfba88f18116c052d26231}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!isNullDate@{isNullDate}}
+\index{isNullDate@{isNullDate}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{isNullDate()}{isNullDate()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) is\+Null\+Date \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_a0c40993df9903be9ea105efe7136ffd2}\label{interface_u_m_date_with_history_a0c40993df9903be9ea105efe7136ffd2}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!isNullDate:@{isNullDate:}}
+\index{isNullDate:@{isNullDate:}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{isNullDate:()}{isNullDate:()}}
+{\footnotesize\ttfamily + (B\+O\+OL) is\+Null\+Date\+: \begin{DoxyParamCaption}\item[{(N\+S\+Date $\ast$)}]{date }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_a9e88d2080267f0ba7a1353480e7b60ab}\label{interface_u_m_date_with_history_a9e88d2080267f0ba7a1353480e7b60ab}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!loadFromString:@{loadFromString:}}
+\index{loadFromString:@{loadFromString:}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{loadFromString:()}{loadFromString:()}}
+{\footnotesize\ttfamily -\/ (void) load\+From\+String\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{str }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_a06d6e0757033a5064ba93d169d906748}\label{interface_u_m_date_with_history_a06d6e0757033a5064ba93d169d906748}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!nonNullDate@{nonNullDate}}
+\index{nonNullDate@{nonNullDate}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{nonNullDate()}{nonNullDate()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Date $\ast$) non\+Null\+Date \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_aae2b8a9d9ef7817e00f9c4803829f8e9}\label{interface_u_m_date_with_history_aae2b8a9d9ef7817e00f9c4803829f8e9}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!nonNullDateAsString@{nonNullDateAsString}}
+\index{nonNullDateAsString@{nonNullDateAsString}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{nonNullDateAsString()}{nonNullDateAsString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) non\+Null\+Date\+As\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_ad393e09985a98a5c695ab2513a966349}\label{interface_u_m_date_with_history_ad393e09985a98a5c695ab2513a966349}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!oldDate@{oldDate}}
+\index{oldDate@{oldDate}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{oldDate()}{oldDate()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Date $\ast$) old\+Date \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_a52587840b8c2423ef12dd63b959f2b12}\label{interface_u_m_date_with_history_a52587840b8c2423ef12dd63b959f2b12}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!oldNonNullDate@{oldNonNullDate}}
+\index{oldNonNullDate@{oldNonNullDate}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{oldNonNullDate()}{oldNonNullDate()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Date $\ast$) old\+Non\+Null\+Date \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_aa8e196177ca5bee64f332d9c8dfbdef8}\label{interface_u_m_date_with_history_aa8e196177ca5bee64f332d9c8dfbdef8}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!oldNonNullDateAsString@{oldNonNullDateAsString}}
+\index{oldNonNullDateAsString@{oldNonNullDateAsString}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{oldNonNullDateAsString()}{oldNonNullDateAsString()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) old\+Non\+Null\+Date\+As\+String \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_a826d6a9b1af91486535b3c221e357a5c}\label{interface_u_m_date_with_history_a826d6a9b1af91486535b3c221e357a5c}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!setDate:@{setDate:}}
+\index{setDate:@{setDate:}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{setDate:()}{setDate:()}}
+{\footnotesize\ttfamily -\/ (void) set\+Date\+: \begin{DoxyParamCaption}\item[{(N\+S\+Date $\ast$)}]{new\+Value }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_aca5febb65c8b361c5baf005ef35956d4}\label{interface_u_m_date_with_history_aca5febb65c8b361c5baf005ef35956d4}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!setDateFromString:@{setDateFromString:}}
+\index{setDateFromString:@{setDateFromString:}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{setDateFromString:()}{setDateFromString:()}}
+{\footnotesize\ttfamily -\/ (void) set\+Date\+From\+String\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{str }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_date_with_history_a107b0348e7c4448f1a8977667e2e5899}\label{interface_u_m_date_with_history_a107b0348e7c4448f1a8977667e2e5899}} 
+\index{UMDateWithHistory@{UMDateWithHistory}!zeroDate@{zeroDate}}
+\index{zeroDate@{zeroDate}!UMDateWithHistory@{UMDateWithHistory}}
+\doxysubsubsection{\texorpdfstring{zeroDate()}{zeroDate()}}
+{\footnotesize\ttfamily + (N\+S\+Date $\ast$) zero\+Date \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_date_with_history_8h}{U\+M\+Date\+With\+History.\+h}}\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_date_with_history_8m}{U\+M\+Date\+With\+History.\+m}}\end{DoxyCompactItemize}

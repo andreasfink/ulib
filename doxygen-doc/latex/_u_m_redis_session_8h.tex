@@ -1,0 +1,95 @@
+\hypertarget{_u_m_redis_session_8h}{}\doxysection{Classes/\+Universal\+Redis/\+U\+M\+Redis\+Session.h File Reference}
+\label{_u_m_redis_session_8h}\index{Classes/UniversalRedis/UMRedisSession.h@{Classes/UniversalRedis/UMRedisSession.h}}
+{\ttfamily \#import \char`\"{}U\+M\+Object.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}Universal\+Socket.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{interface_u_m_redis_session}{U\+M\+Redis\+Session}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_u_m_redis_session_8h_a8aae1fedf76d616ce2ca0ce8de2ff175}{R\+E\+D\+I\+S\+\_\+\+P\+O\+RT}}~6379
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725}{Redis\+Status}} \mbox{\hyperlink{_u_m_redis_session_8h_a0e7cb785c11d6a71aaef1b270bb69fa9}{Redis\+Status}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725}{Redis\+Status}} \{ \newline
+\mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725aa68bcad33c1bc3055993cfacdcf48ce8}{R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+O\+FF}} = 100, 
+\mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a25a6e5852797b61bad7f2f4c66a5bf7a}{R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+H\+A\+S\+\_\+\+S\+O\+C\+K\+ET}} = 101, 
+\mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a26cfa9a58b3e835f6a7798bdbfcdd109}{R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+M\+A\+J\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE}} = 102, 
+\mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a35727f07232ecab5abe9274760f1bebe}{R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+M\+A\+J\+O\+R\+\_\+\+F\+A\+I\+L\+U\+R\+E\+\_\+\+R\+E\+T\+R\+Y\+\_\+\+T\+I\+M\+ER}} = 103, 
+\newline
+\mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725af0ef876425ed66fdc7a4e45d0ad8a65b}{R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+NG}} = 104, 
+\mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a68f552b579755a4c9d3889d2a3ff3492}{R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED}} = 105, 
+\mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a9bfa292916e36ab3101160c0c5c474c6}{R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+A\+C\+T\+I\+VE}} = 106, 
+\mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a021e4569d751f05d7f716742c3a98e22}{R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+T\+R\+Y\+\_\+\+T\+I\+M\+ER}} = 107
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_u_m_redis_session_8h_a8aae1fedf76d616ce2ca0ce8de2ff175}\label{_u_m_redis_session_8h_a8aae1fedf76d616ce2ca0ce8de2ff175}} 
+\index{UMRedisSession.h@{UMRedisSession.h}!REDIS\_PORT@{REDIS\_PORT}}
+\index{REDIS\_PORT@{REDIS\_PORT}!UMRedisSession.h@{UMRedisSession.h}}
+\doxysubsubsection{\texorpdfstring{REDIS\_PORT}{REDIS\_PORT}}
+{\footnotesize\ttfamily \#define R\+E\+D\+I\+S\+\_\+\+P\+O\+RT~6379}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_u_m_redis_session_8h_a0e7cb785c11d6a71aaef1b270bb69fa9}\label{_u_m_redis_session_8h_a0e7cb785c11d6a71aaef1b270bb69fa9}} 
+\index{UMRedisSession.h@{UMRedisSession.h}!RedisStatus@{RedisStatus}}
+\index{RedisStatus@{RedisStatus}!UMRedisSession.h@{UMRedisSession.h}}
+\doxysubsubsection{\texorpdfstring{RedisStatus}{RedisStatus}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725}{Redis\+Status}}  \mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725}{Redis\+Status}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725}\label{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725}} 
+\index{UMRedisSession.h@{UMRedisSession.h}!RedisStatus@{RedisStatus}}
+\index{RedisStatus@{RedisStatus}!UMRedisSession.h@{UMRedisSession.h}}
+\doxysubsubsection{\texorpdfstring{RedisStatus}{RedisStatus}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725}{Redis\+Status}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{REDIS\_STATUS\_OFF@{REDIS\_STATUS\_OFF}!UMRedisSession.h@{UMRedisSession.h}}\index{UMRedisSession.h@{UMRedisSession.h}!REDIS\_STATUS\_OFF@{REDIS\_STATUS\_OFF}}}\mbox{\Hypertarget{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725aa68bcad33c1bc3055993cfacdcf48ce8}\label{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725aa68bcad33c1bc3055993cfacdcf48ce8}} 
+R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+O\+FF&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{REDIS\_STATUS\_HAS\_SOCKET@{REDIS\_STATUS\_HAS\_SOCKET}!UMRedisSession.h@{UMRedisSession.h}}\index{UMRedisSession.h@{UMRedisSession.h}!REDIS\_STATUS\_HAS\_SOCKET@{REDIS\_STATUS\_HAS\_SOCKET}}}\mbox{\Hypertarget{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a25a6e5852797b61bad7f2f4c66a5bf7a}\label{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a25a6e5852797b61bad7f2f4c66a5bf7a}} 
+R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+H\+A\+S\+\_\+\+S\+O\+C\+K\+ET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{REDIS\_STATUS\_MAJOR\_FAILURE@{REDIS\_STATUS\_MAJOR\_FAILURE}!UMRedisSession.h@{UMRedisSession.h}}\index{UMRedisSession.h@{UMRedisSession.h}!REDIS\_STATUS\_MAJOR\_FAILURE@{REDIS\_STATUS\_MAJOR\_FAILURE}}}\mbox{\Hypertarget{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a26cfa9a58b3e835f6a7798bdbfcdd109}\label{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a26cfa9a58b3e835f6a7798bdbfcdd109}} 
+R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+M\+A\+J\+O\+R\+\_\+\+F\+A\+I\+L\+U\+RE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{REDIS\_STATUS\_MAJOR\_FAILURE\_RETRY\_TIMER@{REDIS\_STATUS\_MAJOR\_FAILURE\_RETRY\_TIMER}!UMRedisSession.h@{UMRedisSession.h}}\index{UMRedisSession.h@{UMRedisSession.h}!REDIS\_STATUS\_MAJOR\_FAILURE\_RETRY\_TIMER@{REDIS\_STATUS\_MAJOR\_FAILURE\_RETRY\_TIMER}}}\mbox{\Hypertarget{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a35727f07232ecab5abe9274760f1bebe}\label{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a35727f07232ecab5abe9274760f1bebe}} 
+R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+M\+A\+J\+O\+R\+\_\+\+F\+A\+I\+L\+U\+R\+E\+\_\+\+R\+E\+T\+R\+Y\+\_\+\+T\+I\+M\+ER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{REDIS\_STATUS\_CONNECTING@{REDIS\_STATUS\_CONNECTING}!UMRedisSession.h@{UMRedisSession.h}}\index{UMRedisSession.h@{UMRedisSession.h}!REDIS\_STATUS\_CONNECTING@{REDIS\_STATUS\_CONNECTING}}}\mbox{\Hypertarget{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725af0ef876425ed66fdc7a4e45d0ad8a65b}\label{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725af0ef876425ed66fdc7a4e45d0ad8a65b}} 
+R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{REDIS\_STATUS\_CONNECTED@{REDIS\_STATUS\_CONNECTED}!UMRedisSession.h@{UMRedisSession.h}}\index{UMRedisSession.h@{UMRedisSession.h}!REDIS\_STATUS\_CONNECTED@{REDIS\_STATUS\_CONNECTED}}}\mbox{\Hypertarget{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a68f552b579755a4c9d3889d2a3ff3492}\label{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a68f552b579755a4c9d3889d2a3ff3492}} 
+R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{REDIS\_STATUS\_ACTIVE@{REDIS\_STATUS\_ACTIVE}!UMRedisSession.h@{UMRedisSession.h}}\index{UMRedisSession.h@{UMRedisSession.h}!REDIS\_STATUS\_ACTIVE@{REDIS\_STATUS\_ACTIVE}}}\mbox{\Hypertarget{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a9bfa292916e36ab3101160c0c5c474c6}\label{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a9bfa292916e36ab3101160c0c5c474c6}} 
+R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+A\+C\+T\+I\+VE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{REDIS\_STATUS\_CONNECT\_RETRY\_TIMER@{REDIS\_STATUS\_CONNECT\_RETRY\_TIMER}!UMRedisSession.h@{UMRedisSession.h}}\index{UMRedisSession.h@{UMRedisSession.h}!REDIS\_STATUS\_CONNECT\_RETRY\_TIMER@{REDIS\_STATUS\_CONNECT\_RETRY\_TIMER}}}\mbox{\Hypertarget{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a021e4569d751f05d7f716742c3a98e22}\label{_u_m_redis_session_8h_a556deaf9fe0001f5c5dd902fe4056725a021e4569d751f05d7f716742c3a98e22}} 
+R\+E\+D\+I\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+O\+N\+N\+E\+C\+T\+\_\+\+R\+E\+T\+R\+Y\+\_\+\+T\+I\+M\+ER&\\
+\hline
+
+\end{DoxyEnumFields}

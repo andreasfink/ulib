@@ -1,0 +1,34 @@
+\hypertarget{_u_m_json_tokeniser_8m}{}\doxysection{Classes/\+Universal\+Json/\+U\+M\+Json\+Tokeniser.m File Reference}
+\label{_u_m_json_tokeniser_8m}\index{Classes/UniversalJson/UMJsonTokeniser.m@{Classes/UniversalJson/UMJsonTokeniser.m}}
+{\ttfamily \#import \char`\"{}U\+M\+Json\+Tokeniser.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Json\+U\+T\+F8\+Stream.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_u_m_json_tokeniser_8m_a1eb7b3785a75bcda25a4c23ba723a741}{U\+M\+String\+Is\+Illegal\+Surrogate\+High\+Character}}(character)~(((character) $>$= 0x\+D800\+UL) \&\& ((character) $<$= 0x\+D\+F\+F\+F\+UL))
+\item 
+\#define \mbox{\hyperlink{_u_m_json_tokeniser_8m_ac5c8b2202dd17684eadc9767ab104f28}{U\+M\+String\+Is\+Surrogate\+Low\+Character}}(character)~((character $>$= 0x\+D\+C00\+UL) \&\& (character $<$= 0x\+D\+F\+F\+F\+UL))
+\item 
+\#define \mbox{\hyperlink{_u_m_json_tokeniser_8m_af1796e969ee41ec45a93ffecb38bad1b}{U\+M\+String\+Is\+Surrogate\+High\+Character}}(character)~((character $>$= 0x\+D800\+UL) \&\& (character $<$= 0x\+D\+B\+F\+F\+UL))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_u_m_json_tokeniser_8m_a1eb7b3785a75bcda25a4c23ba723a741}\label{_u_m_json_tokeniser_8m_a1eb7b3785a75bcda25a4c23ba723a741}} 
+\index{UMJsonTokeniser.m@{UMJsonTokeniser.m}!UMStringIsIllegalSurrogateHighCharacter@{UMStringIsIllegalSurrogateHighCharacter}}
+\index{UMStringIsIllegalSurrogateHighCharacter@{UMStringIsIllegalSurrogateHighCharacter}!UMJsonTokeniser.m@{UMJsonTokeniser.m}}
+\doxysubsubsection{\texorpdfstring{UMStringIsIllegalSurrogateHighCharacter}{UMStringIsIllegalSurrogateHighCharacter}}
+{\footnotesize\ttfamily \#define U\+M\+String\+Is\+Illegal\+Surrogate\+High\+Character(\begin{DoxyParamCaption}\item[{}]{character }\end{DoxyParamCaption})~(((character) $>$= 0x\+D800\+UL) \&\& ((character) $<$= 0x\+D\+F\+F\+F\+UL))}
+
+\mbox{\Hypertarget{_u_m_json_tokeniser_8m_af1796e969ee41ec45a93ffecb38bad1b}\label{_u_m_json_tokeniser_8m_af1796e969ee41ec45a93ffecb38bad1b}} 
+\index{UMJsonTokeniser.m@{UMJsonTokeniser.m}!UMStringIsSurrogateHighCharacter@{UMStringIsSurrogateHighCharacter}}
+\index{UMStringIsSurrogateHighCharacter@{UMStringIsSurrogateHighCharacter}!UMJsonTokeniser.m@{UMJsonTokeniser.m}}
+\doxysubsubsection{\texorpdfstring{UMStringIsSurrogateHighCharacter}{UMStringIsSurrogateHighCharacter}}
+{\footnotesize\ttfamily \#define U\+M\+String\+Is\+Surrogate\+High\+Character(\begin{DoxyParamCaption}\item[{}]{character }\end{DoxyParamCaption})~((character $>$= 0x\+D800\+UL) \&\& (character $<$= 0x\+D\+B\+F\+F\+UL))}
+
+\mbox{\Hypertarget{_u_m_json_tokeniser_8m_ac5c8b2202dd17684eadc9767ab104f28}\label{_u_m_json_tokeniser_8m_ac5c8b2202dd17684eadc9767ab104f28}} 
+\index{UMJsonTokeniser.m@{UMJsonTokeniser.m}!UMStringIsSurrogateLowCharacter@{UMStringIsSurrogateLowCharacter}}
+\index{UMStringIsSurrogateLowCharacter@{UMStringIsSurrogateLowCharacter}!UMJsonTokeniser.m@{UMJsonTokeniser.m}}
+\doxysubsubsection{\texorpdfstring{UMStringIsSurrogateLowCharacter}{UMStringIsSurrogateLowCharacter}}
+{\footnotesize\ttfamily \#define U\+M\+String\+Is\+Surrogate\+Low\+Character(\begin{DoxyParamCaption}\item[{}]{character }\end{DoxyParamCaption})~((character $>$= 0x\+D\+C00\+UL) \&\& (character $<$= 0x\+D\+F\+F\+F\+UL))}
+

@@ -1,0 +1,253 @@
+\hypertarget{interface_u_m_json_stream_writer}{}\doxysection{U\+M\+Json\+Stream\+Writer Class Reference}
+\label{interface_u_m_json_stream_writer}\index{UMJsonStreamWriter@{UMJsonStreamWriter}}
+
+
+{\ttfamily \#import $<$U\+M\+Json\+Stream\+Writer.\+h$>$}
+
+Inheritance diagram for U\+M\+Json\+Stream\+Writer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_u_m_json_stream_writer}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_a92279ff1ad924fe49042225f7bea7320}{write\+Object\+:}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_a992aa2369afc327e9f6188288442c9e0}{write\+Sorted\+Dictionary\+:}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_ac1e89bb7a9ad4fd79c84800c7809722a}{write\+Array\+:}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_a687be0754c7b4bf10fe5f1368bc74e1e}{write\+Object\+Open}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_ab1bac55c272191c39d1bd80c880c05ad}{write\+Object\+Close}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_adb54ff70f2bf3bd83f7bef9729206fb8}{write\+Array\+Open}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_a8875e3d98f9e2a486cfde06742939e88}{write\+Array\+Close}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_a710a1411f5b096046d8546e97b898045}{write\+Null}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_a4ed6181872eb2a044423c32dc2e6127e}{write\+Bool\+:}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_ab8a3da2c88106e3e0c2a57b43b9a72a1}{write\+Number\+:}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_a09f51a09d6375b4217459f3f83403eb8}{write\+String\+:}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_aa87dc8bff1c9e7cda909f74132b4f73b}{write\+Key\+Name\+:}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_ae41c7e4b99f892c2c4105a1d83bc61d8}{write\+Value\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_json_stream_writer_a9ff92f5b8e10b919606ecf5751dd32c2}{append\+Bytes\+:length\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+Mutable\+Dictionary $\ast$ \mbox{\hyperlink{interface_u_m_json_stream_writer_a43b7ed70ae4f69194a636b4e860a07fb}{cache}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_json_stream_writer_delegate-p}{U\+M\+Json\+Stream\+Writer\+Delegate}} $>$ \+\_\+\+\_\+unsafe\+\_\+unretained \mbox{\hyperlink{interface_u_m_json_stream_writer_a325a28ae2fe039acee7d518e40f00fa2}{delegate}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_json_stream_writer_a0d5e05c8cde5a595c143b5434828045a}{\+\_\+use\+Java\+Script\+Key\+Names}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface_u_m_json_stream_writer_state}{U\+M\+Json\+Stream\+Writer\+State}} $\ast$ \mbox{\hyperlink{interface_u_m_json_stream_writer_abfa983a5e53bea8b410bc84a0967878e}{state}}
+\item 
+N\+S\+Mutable\+Array $\ast$ \mbox{\hyperlink{interface_u_m_json_stream_writer_a3817ebc2e66df8b59c45fe8925a86276}{state\+Stack}}
+\item 
+id$<$ \mbox{\hyperlink{protocol_u_m_json_stream_writer_delegate-p}{U\+M\+Json\+Stream\+Writer\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_json_stream_writer_aa32ff0e4c69184802c6001a2d223df1e}{delegate}}
+\item 
+N\+S\+U\+Integer \mbox{\hyperlink{interface_u_m_json_stream_writer_ae170dc51c9f41e7b793262cdc5183868}{max\+Depth}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_json_stream_writer_ae683794d1b2fdfb3895614d3708e5f0e}{human\+Readable}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_json_stream_writer_a2c0f457ff47b6e2aab6ab55c7d9aa483}{sort\+Keys}}
+\item 
+S\+EL \mbox{\hyperlink{interface_u_m_json_stream_writer_a89e5fb0abd37ebf7b041d9b8acaaebe7}{sort\+Keys\+Selector}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_json_stream_writer_a849b35675d320874e3cb4feb54c537c5}{error}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_json_stream_writer_a452127fcef8d890c3883de5a6f44d87f}{use\+Java\+Script\+Key\+Names}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a9ff92f5b8e10b919606ecf5751dd32c2}\label{interface_u_m_json_stream_writer_a9ff92f5b8e10b919606ecf5751dd32c2}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!appendBytes:length:@{appendBytes:length:}}
+\index{appendBytes:length:@{appendBytes:length:}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{appendBytes:length:()}{appendBytes:length:()}}
+{\footnotesize\ttfamily -\/ (void) append\+Bytes\+: \begin{DoxyParamCaption}\item[{(const void $\ast$)}]{bytes }\item[{length\+:(N\+S\+U\+Integer)}]{length }\end{DoxyParamCaption}}
+
+
+
+Provided by category \mbox{\hyperlink{category_u_m_json_stream_writer_07_private_08_a9ff92f5b8e10b919606ecf5751dd32c2}{U\+M\+Json\+Stream\+Writer(\+Private)}}.
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_ac1e89bb7a9ad4fd79c84800c7809722a}\label{interface_u_m_json_stream_writer_ac1e89bb7a9ad4fd79c84800c7809722a}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeArray:@{writeArray:}}
+\index{writeArray:@{writeArray:}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeArray:()}{writeArray:()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+Array\+: \begin{DoxyParamCaption}\item[{(N\+S\+Array $\ast$)}]{array }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a8875e3d98f9e2a486cfde06742939e88}\label{interface_u_m_json_stream_writer_a8875e3d98f9e2a486cfde06742939e88}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeArrayClose@{writeArrayClose}}
+\index{writeArrayClose@{writeArrayClose}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeArrayClose()}{writeArrayClose()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+Array\+Close \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_adb54ff70f2bf3bd83f7bef9729206fb8}\label{interface_u_m_json_stream_writer_adb54ff70f2bf3bd83f7bef9729206fb8}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeArrayOpen@{writeArrayOpen}}
+\index{writeArrayOpen@{writeArrayOpen}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeArrayOpen()}{writeArrayOpen()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+Array\+Open \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a4ed6181872eb2a044423c32dc2e6127e}\label{interface_u_m_json_stream_writer_a4ed6181872eb2a044423c32dc2e6127e}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeBool:@{writeBool:}}
+\index{writeBool:@{writeBool:}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeBool:()}{writeBool:()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+Bool\+: \begin{DoxyParamCaption}\item[{(B\+O\+OL)}]{x }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_aa87dc8bff1c9e7cda909f74132b4f73b}\label{interface_u_m_json_stream_writer_aa87dc8bff1c9e7cda909f74132b4f73b}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeKeyName:@{writeKeyName:}}
+\index{writeKeyName:@{writeKeyName:}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeKeyName:()}{writeKeyName:()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+Key\+Name\+: \begin{DoxyParamCaption}\item[{(N\+S\+String$\ast$)}]{string }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a710a1411f5b096046d8546e97b898045}\label{interface_u_m_json_stream_writer_a710a1411f5b096046d8546e97b898045}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeNull@{writeNull}}
+\index{writeNull@{writeNull}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeNull()}{writeNull()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+Null \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_ab8a3da2c88106e3e0c2a57b43b9a72a1}\label{interface_u_m_json_stream_writer_ab8a3da2c88106e3e0c2a57b43b9a72a1}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeNumber:@{writeNumber:}}
+\index{writeNumber:@{writeNumber:}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeNumber:()}{writeNumber:()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+Number\+: \begin{DoxyParamCaption}\item[{(N\+S\+Number$\ast$)}]{n }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a92279ff1ad924fe49042225f7bea7320}\label{interface_u_m_json_stream_writer_a92279ff1ad924fe49042225f7bea7320}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeObject:@{writeObject:}}
+\index{writeObject:@{writeObject:}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeObject:()}{writeObject:()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+Object\+: \begin{DoxyParamCaption}\item[{(N\+S\+Dictionary$\ast$)}]{dict }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_ab1bac55c272191c39d1bd80c880c05ad}\label{interface_u_m_json_stream_writer_ab1bac55c272191c39d1bd80c880c05ad}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeObjectClose@{writeObjectClose}}
+\index{writeObjectClose@{writeObjectClose}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeObjectClose()}{writeObjectClose()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+Object\+Close \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a687be0754c7b4bf10fe5f1368bc74e1e}\label{interface_u_m_json_stream_writer_a687be0754c7b4bf10fe5f1368bc74e1e}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeObjectOpen@{writeObjectOpen}}
+\index{writeObjectOpen@{writeObjectOpen}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeObjectOpen()}{writeObjectOpen()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+Object\+Open \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a992aa2369afc327e9f6188288442c9e0}\label{interface_u_m_json_stream_writer_a992aa2369afc327e9f6188288442c9e0}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeSortedDictionary:@{writeSortedDictionary:}}
+\index{writeSortedDictionary:@{writeSortedDictionary:}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeSortedDictionary:()}{writeSortedDictionary:()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+Sorted\+Dictionary\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_synchronized_sorted_dictionary}{U\+M\+Synchronized\+Sorted\+Dictionary}} $\ast$)}]{dict }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a09f51a09d6375b4217459f3f83403eb8}\label{interface_u_m_json_stream_writer_a09f51a09d6375b4217459f3f83403eb8}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeString:@{writeString:}}
+\index{writeString:@{writeString:}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeString:()}{writeString:()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+String\+: \begin{DoxyParamCaption}\item[{(N\+S\+String$\ast$)}]{s }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_ae41c7e4b99f892c2c4105a1d83bc61d8}\label{interface_u_m_json_stream_writer_ae41c7e4b99f892c2c4105a1d83bc61d8}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!writeValue:@{writeValue:}}
+\index{writeValue:@{writeValue:}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{writeValue:()}{writeValue:()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) write\+Value\+: \begin{DoxyParamCaption}\item[{(id)}]{v }\end{DoxyParamCaption}}
+
+
+
+Provided by category \mbox{\hyperlink{category_u_m_json_stream_writer_07_private_08_ae41c7e4b99f892c2c4105a1d83bc61d8}{U\+M\+Json\+Stream\+Writer(\+Private)}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a0d5e05c8cde5a595c143b5434828045a}\label{interface_u_m_json_stream_writer_a0d5e05c8cde5a595c143b5434828045a}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!\_useJavaScriptKeyNames@{\_useJavaScriptKeyNames}}
+\index{\_useJavaScriptKeyNames@{\_useJavaScriptKeyNames}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{\_useJavaScriptKeyNames}{\_useJavaScriptKeyNames}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+use\+Java\+Script\+Key\+Names\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a43b7ed70ae4f69194a636b4e860a07fb}\label{interface_u_m_json_stream_writer_a43b7ed70ae4f69194a636b4e860a07fb}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!cache@{cache}}
+\index{cache@{cache}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{cache}{cache}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Dictionary$\ast$) cache\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a325a28ae2fe039acee7d518e40f00fa2}\label{interface_u_m_json_stream_writer_a325a28ae2fe039acee7d518e40f00fa2}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!delegate@{delegate}}
+\index{delegate@{delegate}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{delegate}{delegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_json_stream_writer_delegate-p}{U\+M\+Json\+Stream\+Writer\+Delegate}}$>$ \+\_\+\+\_\+unsafe\+\_\+unretained) delegate\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_aa32ff0e4c69184802c6001a2d223df1e}\label{interface_u_m_json_stream_writer_aa32ff0e4c69184802c6001a2d223df1e}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!delegate@{delegate}}
+\index{delegate@{delegate}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{delegate}{delegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_json_stream_writer_delegate-p}{U\+M\+Json\+Stream\+Writer\+Delegate}}$>$) delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [unsafe_unretained]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a849b35675d320874e3cb4feb54c537c5}\label{interface_u_m_json_stream_writer_a849b35675d320874e3cb4feb54c537c5}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!error@{error}}
+\index{error@{error}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) error\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_ae683794d1b2fdfb3895614d3708e5f0e}\label{interface_u_m_json_stream_writer_ae683794d1b2fdfb3895614d3708e5f0e}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!humanReadable@{humanReadable}}
+\index{humanReadable@{humanReadable}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{humanReadable}{humanReadable}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) human\+Readable\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_ae170dc51c9f41e7b793262cdc5183868}\label{interface_u_m_json_stream_writer_ae170dc51c9f41e7b793262cdc5183868}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!maxDepth@{maxDepth}}
+\index{maxDepth@{maxDepth}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{maxDepth}{maxDepth}}
+{\footnotesize\ttfamily -\/ (N\+S\+U\+Integer) max\+Depth\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a2c0f457ff47b6e2aab6ab55c7d9aa483}\label{interface_u_m_json_stream_writer_a2c0f457ff47b6e2aab6ab55c7d9aa483}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!sortKeys@{sortKeys}}
+\index{sortKeys@{sortKeys}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{sortKeys}{sortKeys}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) sort\+Keys\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a89e5fb0abd37ebf7b041d9b8acaaebe7}\label{interface_u_m_json_stream_writer_a89e5fb0abd37ebf7b041d9b8acaaebe7}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!sortKeysSelector@{sortKeysSelector}}
+\index{sortKeysSelector@{sortKeysSelector}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{sortKeysSelector}{sortKeysSelector}}
+{\footnotesize\ttfamily -\/ (S\+EL) sort\+Keys\+Selector\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_abfa983a5e53bea8b410bc84a0967878e}\label{interface_u_m_json_stream_writer_abfa983a5e53bea8b410bc84a0967878e}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!state@{state}}
+\index{state@{state}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_json_stream_writer_state}{U\+M\+Json\+Stream\+Writer\+State}} $\ast$) state\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a3817ebc2e66df8b59c45fe8925a86276}\label{interface_u_m_json_stream_writer_a3817ebc2e66df8b59c45fe8925a86276}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!stateStack@{stateStack}}
+\index{stateStack@{stateStack}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{stateStack}{stateStack}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Array $\ast$) state\+Stack\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [nonatomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_json_stream_writer_a452127fcef8d890c3883de5a6f44d87f}\label{interface_u_m_json_stream_writer_a452127fcef8d890c3883de5a6f44d87f}} 
+\index{UMJsonStreamWriter@{UMJsonStreamWriter}!useJavaScriptKeyNames@{useJavaScriptKeyNames}}
+\index{useJavaScriptKeyNames@{useJavaScriptKeyNames}!UMJsonStreamWriter@{UMJsonStreamWriter}}
+\doxysubsubsection{\texorpdfstring{useJavaScriptKeyNames}{useJavaScriptKeyNames}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) use\+Java\+Script\+Key\+Names\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Json/\mbox{\hyperlink{_u_m_json_stream_writer_8h}{U\+M\+Json\+Stream\+Writer.\+h}}\item 
+Classes/\+Universal\+Json/\mbox{\hyperlink{_u_m_json_stream_writer_8m}{U\+M\+Json\+Stream\+Writer.\+m}}\end{DoxyCompactItemize}

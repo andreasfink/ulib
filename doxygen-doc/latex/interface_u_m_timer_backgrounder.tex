@@ -1,0 +1,74 @@
+\hypertarget{interface_u_m_timer_backgrounder}{}\doxysection{U\+M\+Timer\+Backgrounder Class Reference}
+\label{interface_u_m_timer_backgrounder}\index{UMTimerBackgrounder@{UMTimerBackgrounder}}
+
+
+{\ttfamily \#import $<$U\+M\+Timer\+Backgrounder.\+h$>$}
+
+Inheritance diagram for U\+M\+Timer\+Backgrounder\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{interface_u_m_timer_backgrounder}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_timer_backgrounder_a33daa3db785c9427a6c65e5360d23cd2}{add\+Timer\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_timer_backgrounder_a05a26f9b94b4937dabd43d5857a19511}{remove\+Timer\+:}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{interface_u_m_timer_backgrounder}{U\+M\+Timer\+Backgrounder}} $\ast$) + \mbox{\hyperlink{interface_u_m_timer_backgrounder_aca7c4ec470dd838cd0255752ed1135a3}{shared\+Instance}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+Mutable\+Array $\ast$ \mbox{\hyperlink{interface_u_m_timer_backgrounder_a67e7ecb3a276899daa92953c7a8916f7}{\+\_\+timers}}
+\item 
+\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}} $\ast$ \mbox{\hyperlink{interface_u_m_timer_backgrounder_afc6f26afc3f06e3a788687209e6b8e0a}{\+\_\+timers\+Lock}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_timer_backgrounder_a33daa3db785c9427a6c65e5360d23cd2}\label{interface_u_m_timer_backgrounder_a33daa3db785c9427a6c65e5360d23cd2}} 
+\index{UMTimerBackgrounder@{UMTimerBackgrounder}!addTimer:@{addTimer:}}
+\index{addTimer:@{addTimer:}!UMTimerBackgrounder@{UMTimerBackgrounder}}
+\doxysubsubsection{\texorpdfstring{addTimer:()}{addTimer:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Timer\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_timer}{U\+M\+Timer}} $\ast$)}]{t }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_backgrounder_a05a26f9b94b4937dabd43d5857a19511}\label{interface_u_m_timer_backgrounder_a05a26f9b94b4937dabd43d5857a19511}} 
+\index{UMTimerBackgrounder@{UMTimerBackgrounder}!removeTimer:@{removeTimer:}}
+\index{removeTimer:@{removeTimer:}!UMTimerBackgrounder@{UMTimerBackgrounder}}
+\doxysubsubsection{\texorpdfstring{removeTimer:()}{removeTimer:()}}
+{\footnotesize\ttfamily -\/ (void) remove\+Timer\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_timer}{U\+M\+Timer}} $\ast$)}]{t }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_timer_backgrounder_aca7c4ec470dd838cd0255752ed1135a3}\label{interface_u_m_timer_backgrounder_aca7c4ec470dd838cd0255752ed1135a3}} 
+\index{UMTimerBackgrounder@{UMTimerBackgrounder}!sharedInstance@{sharedInstance}}
+\index{sharedInstance@{sharedInstance}!UMTimerBackgrounder@{UMTimerBackgrounder}}
+\doxysubsubsection{\texorpdfstring{sharedInstance()}{sharedInstance()}}
+{\footnotesize\ttfamily + (\mbox{\hyperlink{interface_u_m_timer_backgrounder}{U\+M\+Timer\+Backgrounder}} $\ast$) shared\+Instance \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_timer_backgrounder_a67e7ecb3a276899daa92953c7a8916f7}\label{interface_u_m_timer_backgrounder_a67e7ecb3a276899daa92953c7a8916f7}} 
+\index{UMTimerBackgrounder@{UMTimerBackgrounder}!\_timers@{\_timers}}
+\index{\_timers@{\_timers}!UMTimerBackgrounder@{UMTimerBackgrounder}}
+\doxysubsubsection{\texorpdfstring{\_timers}{\_timers}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Array$\ast$) \+\_\+timers\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_timer_backgrounder_afc6f26afc3f06e3a788687209e6b8e0a}\label{interface_u_m_timer_backgrounder_afc6f26afc3f06e3a788687209e6b8e0a}} 
+\index{UMTimerBackgrounder@{UMTimerBackgrounder}!\_timersLock@{\_timersLock}}
+\index{\_timersLock@{\_timersLock}!UMTimerBackgrounder@{UMTimerBackgrounder}}
+\doxysubsubsection{\texorpdfstring{\_timersLock}{\_timersLock}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}}$\ast$) \+\_\+timers\+Lock\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Utilities/\mbox{\hyperlink{_u_m_timer_backgrounder_8h}{U\+M\+Timer\+Backgrounder.\+h}}\item 
+Classes/\+Universal\+Utilities/\mbox{\hyperlink{_u_m_timer_backgrounder_8m}{U\+M\+Timer\+Backgrounder.\+m}}\end{DoxyCompactItemize}

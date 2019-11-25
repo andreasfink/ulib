@@ -1,0 +1,151 @@
+\hypertarget{interface_u_m_log_destination}{}\doxysection{U\+M\+Log\+Destination Class Reference}
+\label{interface_u_m_log_destination}\index{UMLogDestination@{UMLogDestination}}
+
+
+{\ttfamily \#import $<$U\+M\+Log\+Destination.\+h$>$}
+
+Inheritance diagram for U\+M\+Log\+Destination\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{interface_u_m_log_destination}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_log_destination_a62efb4e22fc03b8641821fe0df5b0760}{log\+An\+Entry\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_log_destination_ab056715a6414c84524b0a1cb6355d5fe}{unlocked\+Log\+An\+Entry\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_log_destination_a5a2c2feefb244636e7c21b226e22a7a2}{log\+Now\+:}}
+\item 
+(\mbox{\hyperlink{interface_u_m_log_destination}{U\+M\+Log\+Destination}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_log_destination_ab51daedde3845582206be4be85e13d5e}{init}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_log_destination_ad022789ed2b3f33f88df835bc7c5a3a1}{description}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_log_destination_ab6070b90ef38670e0784c51f8017de3a}{lock}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_log_destination_a2d2c8296d36e3da7cba18fa4f1532290}{unlock}}
+\item 
+(N\+S\+String $\ast$) -\/ \mbox{\hyperlink{interface_u_m_log_destination_a6ab9d165c1d548a1e512b3819b63c224}{one\+Line\+Description}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_u_m_log_level_8h_aa5d504cf5df159a770462f829ae8c301}{U\+M\+Log\+Level}} \mbox{\hyperlink{interface_u_m_log_destination_a9b830b52f9e2552f369e00b881270de9}{level}}
+\item 
+N\+S\+Lock $\ast$ \mbox{\hyperlink{interface_u_m_log_destination_a07c9c8992d235c340e2f5e4350789d53}{\+\_\+lock}}
+\item 
+N\+S\+Mutable\+Array $\ast$ \mbox{\hyperlink{interface_u_m_log_destination_a8ac25aa028a28c754d1cec3939581c73}{debug\+Sections}}
+\item 
+N\+S\+Mutable\+Array $\ast$ \mbox{\hyperlink{interface_u_m_log_destination_a1e9c8f64abbf28a916a5e2ada8da8241}{only\+Log\+Subsections}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_log_destination_ad022789ed2b3f33f88df835bc7c5a3a1}\label{interface_u_m_log_destination_ad022789ed2b3f33f88df835bc7c5a3a1}} 
+\index{UMLogDestination@{UMLogDestination}!description@{description}}
+\index{description@{description}!UMLogDestination@{UMLogDestination}}
+\doxysubsubsection{\texorpdfstring{description()}{description()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) description \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+Reimplemented in \mbox{\hyperlink{interface_u_m_log_file_a87846111062a216df755e4a28bbfd6cf}{U\+M\+Log\+File}}.
+
+\mbox{\Hypertarget{interface_u_m_log_destination_ab51daedde3845582206be4be85e13d5e}\label{interface_u_m_log_destination_ab51daedde3845582206be4be85e13d5e}} 
+\index{UMLogDestination@{UMLogDestination}!init@{init}}
+\index{init@{init}!UMLogDestination@{UMLogDestination}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_log_destination}{U\+M\+Log\+Destination}} $\ast$) init \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_object_aeaac514e683838e31be4c2676923bbd3}{U\+M\+Object}}.
+
+\mbox{\Hypertarget{interface_u_m_log_destination_ab6070b90ef38670e0784c51f8017de3a}\label{interface_u_m_log_destination_ab6070b90ef38670e0784c51f8017de3a}} 
+\index{UMLogDestination@{UMLogDestination}!lock@{lock}}
+\index{lock@{lock}!UMLogDestination@{UMLogDestination}}
+\doxysubsubsection{\texorpdfstring{lock()}{lock()}}
+{\footnotesize\ttfamily -\/ (void) lock \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_log_destination_a62efb4e22fc03b8641821fe0df5b0760}\label{interface_u_m_log_destination_a62efb4e22fc03b8641821fe0df5b0760}} 
+\index{UMLogDestination@{UMLogDestination}!logAnEntry:@{logAnEntry:}}
+\index{logAnEntry:@{logAnEntry:}!UMLogDestination@{UMLogDestination}}
+\doxysubsubsection{\texorpdfstring{logAnEntry:()}{logAnEntry:()}}
+{\footnotesize\ttfamily -\/ (void) log\+An\+Entry\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_log_entry}{U\+M\+Log\+Entry}} $\ast$)}]{log\+Entry }\end{DoxyParamCaption}}
+
+
+
+Reimplemented in \mbox{\hyperlink{interface_u_m_log_file_a8da42e01360d54ee9ec8338586b3f08f}{U\+M\+Log\+File}}, and \mbox{\hyperlink{interface_u_m_log_console_a3a75bfc49b859de29b89a3395fd09d28}{U\+M\+Log\+Console}}.
+
+\mbox{\Hypertarget{interface_u_m_log_destination_a5a2c2feefb244636e7c21b226e22a7a2}\label{interface_u_m_log_destination_a5a2c2feefb244636e7c21b226e22a7a2}} 
+\index{UMLogDestination@{UMLogDestination}!logNow:@{logNow:}}
+\index{logNow:@{logNow:}!UMLogDestination@{UMLogDestination}}
+\doxysubsubsection{\texorpdfstring{logNow:()}{logNow:()}}
+{\footnotesize\ttfamily -\/ (void) log\+Now\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_log_entry}{U\+M\+Log\+Entry}} $\ast$)}]{message }\end{DoxyParamCaption}}
+
+
+
+Reimplemented in \mbox{\hyperlink{interface_u_m_log_file_af78a76a383d5fcd85a2440e2c8631184}{U\+M\+Log\+File}}, and \mbox{\hyperlink{interface_u_m_log_console_a6fff4b4ba60aef729e0b6823c118d442}{U\+M\+Log\+Console}}.
+
+\mbox{\Hypertarget{interface_u_m_log_destination_a6ab9d165c1d548a1e512b3819b63c224}\label{interface_u_m_log_destination_a6ab9d165c1d548a1e512b3819b63c224}} 
+\index{UMLogDestination@{UMLogDestination}!oneLineDescription@{oneLineDescription}}
+\index{oneLineDescription@{oneLineDescription}!UMLogDestination@{UMLogDestination}}
+\doxysubsubsection{\texorpdfstring{oneLineDescription()}{oneLineDescription()}}
+{\footnotesize\ttfamily -\/ (N\+S\+String $\ast$) one\+Line\+Description \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+Reimplemented in \mbox{\hyperlink{interface_u_m_log_console_ad0ad2a706ece62d67640e92cf7e01016}{U\+M\+Log\+Console}}.
+
+\mbox{\Hypertarget{interface_u_m_log_destination_a2d2c8296d36e3da7cba18fa4f1532290}\label{interface_u_m_log_destination_a2d2c8296d36e3da7cba18fa4f1532290}} 
+\index{UMLogDestination@{UMLogDestination}!unlock@{unlock}}
+\index{unlock@{unlock}!UMLogDestination@{UMLogDestination}}
+\doxysubsubsection{\texorpdfstring{unlock()}{unlock()}}
+{\footnotesize\ttfamily -\/ (void) unlock \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_log_destination_ab056715a6414c84524b0a1cb6355d5fe}\label{interface_u_m_log_destination_ab056715a6414c84524b0a1cb6355d5fe}} 
+\index{UMLogDestination@{UMLogDestination}!unlockedLogAnEntry:@{unlockedLogAnEntry:}}
+\index{unlockedLogAnEntry:@{unlockedLogAnEntry:}!UMLogDestination@{UMLogDestination}}
+\doxysubsubsection{\texorpdfstring{unlockedLogAnEntry:()}{unlockedLogAnEntry:()}}
+{\footnotesize\ttfamily -\/ (void) unlocked\+Log\+An\+Entry\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_log_entry}{U\+M\+Log\+Entry}} $\ast$)}]{log\+Entry }\end{DoxyParamCaption}}
+
+
+
+Reimplemented in \mbox{\hyperlink{interface_u_m_log_file_a55949e0fcb7e4cbddf2bbeafba87f4e7}{U\+M\+Log\+File}}, and \mbox{\hyperlink{interface_u_m_log_console_a6630ca70c56ca6ab5100145cd5f42688}{U\+M\+Log\+Console}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_log_destination_a07c9c8992d235c340e2f5e4350789d53}\label{interface_u_m_log_destination_a07c9c8992d235c340e2f5e4350789d53}} 
+\index{UMLogDestination@{UMLogDestination}!\_lock@{\_lock}}
+\index{\_lock@{\_lock}!UMLogDestination@{UMLogDestination}}
+\doxysubsubsection{\texorpdfstring{\_lock}{\_lock}}
+{\footnotesize\ttfamily -\/ (N\+S\+Lock$\ast$) \+\_\+lock\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_log_destination_a8ac25aa028a28c754d1cec3939581c73}\label{interface_u_m_log_destination_a8ac25aa028a28c754d1cec3939581c73}} 
+\index{UMLogDestination@{UMLogDestination}!debugSections@{debugSections}}
+\index{debugSections@{debugSections}!UMLogDestination@{UMLogDestination}}
+\doxysubsubsection{\texorpdfstring{debugSections}{debugSections}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Array $\ast$) debug\+Sections\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [strong]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_log_destination_a9b830b52f9e2552f369e00b881270de9}\label{interface_u_m_log_destination_a9b830b52f9e2552f369e00b881270de9}} 
+\index{UMLogDestination@{UMLogDestination}!level@{level}}
+\index{level@{level}!UMLogDestination@{UMLogDestination}}
+\doxysubsubsection{\texorpdfstring{level}{level}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_log_level_8h_aa5d504cf5df159a770462f829ae8c301}{U\+M\+Log\+Level}}) level\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [assign]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_log_destination_a1e9c8f64abbf28a916a5e2ada8da8241}\label{interface_u_m_log_destination_a1e9c8f64abbf28a916a5e2ada8da8241}} 
+\index{UMLogDestination@{UMLogDestination}!onlyLogSubsections@{onlyLogSubsections}}
+\index{onlyLogSubsections@{onlyLogSubsections}!UMLogDestination@{UMLogDestination}}
+\doxysubsubsection{\texorpdfstring{onlyLogSubsections}{onlyLogSubsections}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Array$\ast$) only\+Log\+Subsections\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Log/\mbox{\hyperlink{_u_m_log_destination_8h}{U\+M\+Log\+Destination.\+h}}\item 
+Classes/\+Universal\+Log/\mbox{\hyperlink{_u_m_log_destination_8m}{U\+M\+Log\+Destination.\+m}}\end{DoxyCompactItemize}

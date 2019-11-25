@@ -1,0 +1,113 @@
+\hypertarget{_u_m_h_t_t_p_server_8h}{}\doxysection{Classes/\+Universal\+H\+T\+T\+P/\+U\+M\+H\+T\+T\+P\+Server.h File Reference}
+\label{_u_m_h_t_t_p_server_8h}\index{Classes/UniversalHTTP/UMHTTPServer.h@{Classes/UniversalHTTP/UMHTTPServer.h}}
+{\ttfamily \#import \char`\"{}U\+M\+Object.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+H\+T\+T\+P\+Server\+Authorize\+Result.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+H\+T\+T\+P\+Authentication\+Status.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Socket\+Defs.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Synchronized\+Array.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Mutex.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/in.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+protocol \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorize_connection_delegate-p}{$<$\+U\+M\+H\+T\+T\+P\+Server\+Authorize\+Connection\+Delegate$>$}}
+\item 
+protocol \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authenticate_request_delegate-p}{$<$\+U\+M\+H\+T\+T\+P\+Server\+Authenticate\+Request\+Delegate$>$}}
+\item 
+protocol \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_options_delegate-p}{$<$\+U\+M\+H\+T\+T\+P\+Server\+Http\+Options\+Delegate$>$}}
+\item 
+protocol \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_get_delegate-p}{$<$\+U\+M\+H\+T\+T\+P\+Server\+Http\+Get\+Delegate$>$}}
+\item 
+protocol \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_head_delegate-p}{$<$\+U\+M\+H\+T\+T\+P\+Server\+Http\+Head\+Delegate$>$}}
+\item 
+protocol \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_post_delegate-p}{$<$\+U\+M\+H\+T\+T\+P\+Server\+Http\+Post\+Delegate$>$}}
+\item 
+protocol \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_put_delegate-p}{$<$\+U\+M\+H\+T\+T\+P\+Server\+Http\+Put\+Delegate$>$}}
+\item 
+protocol \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_delete_delegate-p}{$<$\+U\+M\+H\+T\+T\+P\+Server\+Http\+Delete\+Delegate$>$}}
+\item 
+protocol \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_trace_delegate-p}{$<$\+U\+M\+H\+T\+T\+P\+Server\+Http\+Trace\+Delegate$>$}}
+\item 
+protocol \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_connect_delegate-p}{$<$\+U\+M\+H\+T\+T\+P\+Server\+Http\+Connect\+Delegate$>$}}
+\item 
+protocol \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_http_get_post_delegate-p}{$<$\+U\+M\+H\+T\+T\+P\+Server\+Http\+Get\+Post\+Delegate$>$}}
+\item 
+class \mbox{\hyperlink{interface_u_m_h_t_t_p_server}{U\+M\+H\+T\+T\+P\+Server}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{interface_u_m_h_t_t_p_server}{U\+M\+H\+T\+T\+P\+Server}} is a builtin webserver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_u_m_h_t_t_p_server_8h_aaf91cf9c0d3ce6f8bc898eee71cc9f19}{U\+M\+H\+T\+T\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+O\+RT}}~8080
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdb}{U\+M\+H\+T\+T\+P\+Server\+Status}} \mbox{\hyperlink{_u_m_h_t_t_p_server_8h_ab929394ba418c93743cfc9d47772d478}{U\+M\+H\+T\+T\+P\+Server\+Status}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdb}{U\+M\+H\+T\+T\+P\+Server\+Status}} \{ \newline
+\mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdba3811be0e180879f82a3e838e140a4846}{U\+M\+H\+T\+T\+P\+Server\+Status\+\_\+not\+Running}} = 0, 
+\mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdba1e9a8fa8a2bfdabf0b40edc1366bb98d}{U\+M\+H\+T\+T\+P\+Server\+Status\+\_\+starting\+Up}}, 
+\mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdbaff3684337b6796a692696d37c3005fba}{U\+M\+H\+T\+T\+P\+Server\+Status\+\_\+running}}, 
+\mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdbaeae49e467605d5faffd2b3e12d6409cf}{U\+M\+H\+T\+T\+P\+Server\+Status\+\_\+shutting\+Down}}, 
+\newline
+\mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdba9a15619b14449d501f5024d5f6436ef2}{U\+M\+H\+T\+T\+P\+Server\+Status\+\_\+shut\+Down}}, 
+\mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdba9d1b5dd8fbb1c2b71600d444bd8786b2}{U\+M\+H\+T\+T\+P\+Server\+Status\+\_\+failed}}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_u_m_h_t_t_p_server_8h_aaf91cf9c0d3ce6f8bc898eee71cc9f19}\label{_u_m_h_t_t_p_server_8h_aaf91cf9c0d3ce6f8bc898eee71cc9f19}} 
+\index{UMHTTPServer.h@{UMHTTPServer.h}!UMHTTP\_DEFAULT\_PORT@{UMHTTP\_DEFAULT\_PORT}}
+\index{UMHTTP\_DEFAULT\_PORT@{UMHTTP\_DEFAULT\_PORT}!UMHTTPServer.h@{UMHTTPServer.h}}
+\doxysubsubsection{\texorpdfstring{UMHTTP\_DEFAULT\_PORT}{UMHTTP\_DEFAULT\_PORT}}
+{\footnotesize\ttfamily \#define U\+M\+H\+T\+T\+P\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+O\+RT~8080}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_u_m_h_t_t_p_server_8h_ab929394ba418c93743cfc9d47772d478}\label{_u_m_h_t_t_p_server_8h_ab929394ba418c93743cfc9d47772d478}} 
+\index{UMHTTPServer.h@{UMHTTPServer.h}!UMHTTPServerStatus@{UMHTTPServerStatus}}
+\index{UMHTTPServerStatus@{UMHTTPServerStatus}!UMHTTPServer.h@{UMHTTPServer.h}}
+\doxysubsubsection{\texorpdfstring{UMHTTPServerStatus}{UMHTTPServerStatus}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdb}{U\+M\+H\+T\+T\+P\+Server\+Status}}  \mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdb}{U\+M\+H\+T\+T\+P\+Server\+Status}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdb}\label{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdb}} 
+\index{UMHTTPServer.h@{UMHTTPServer.h}!UMHTTPServerStatus@{UMHTTPServerStatus}}
+\index{UMHTTPServerStatus@{UMHTTPServerStatus}!UMHTTPServer.h@{UMHTTPServer.h}}
+\doxysubsubsection{\texorpdfstring{UMHTTPServerStatus}{UMHTTPServerStatus}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdb}{U\+M\+H\+T\+T\+P\+Server\+Status}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMHTTPServerStatus\_notRunning@{UMHTTPServerStatus\_notRunning}!UMHTTPServer.h@{UMHTTPServer.h}}\index{UMHTTPServer.h@{UMHTTPServer.h}!UMHTTPServerStatus\_notRunning@{UMHTTPServerStatus\_notRunning}}}\mbox{\Hypertarget{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdba3811be0e180879f82a3e838e140a4846}\label{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdba3811be0e180879f82a3e838e140a4846}} 
+U\+M\+H\+T\+T\+P\+Server\+Status\+\_\+not\+Running&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMHTTPServerStatus\_startingUp@{UMHTTPServerStatus\_startingUp}!UMHTTPServer.h@{UMHTTPServer.h}}\index{UMHTTPServer.h@{UMHTTPServer.h}!UMHTTPServerStatus\_startingUp@{UMHTTPServerStatus\_startingUp}}}\mbox{\Hypertarget{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdba1e9a8fa8a2bfdabf0b40edc1366bb98d}\label{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdba1e9a8fa8a2bfdabf0b40edc1366bb98d}} 
+U\+M\+H\+T\+T\+P\+Server\+Status\+\_\+starting\+Up&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMHTTPServerStatus\_running@{UMHTTPServerStatus\_running}!UMHTTPServer.h@{UMHTTPServer.h}}\index{UMHTTPServer.h@{UMHTTPServer.h}!UMHTTPServerStatus\_running@{UMHTTPServerStatus\_running}}}\mbox{\Hypertarget{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdbaff3684337b6796a692696d37c3005fba}\label{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdbaff3684337b6796a692696d37c3005fba}} 
+U\+M\+H\+T\+T\+P\+Server\+Status\+\_\+running&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMHTTPServerStatus\_shuttingDown@{UMHTTPServerStatus\_shuttingDown}!UMHTTPServer.h@{UMHTTPServer.h}}\index{UMHTTPServer.h@{UMHTTPServer.h}!UMHTTPServerStatus\_shuttingDown@{UMHTTPServerStatus\_shuttingDown}}}\mbox{\Hypertarget{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdbaeae49e467605d5faffd2b3e12d6409cf}\label{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdbaeae49e467605d5faffd2b3e12d6409cf}} 
+U\+M\+H\+T\+T\+P\+Server\+Status\+\_\+shutting\+Down&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMHTTPServerStatus\_shutDown@{UMHTTPServerStatus\_shutDown}!UMHTTPServer.h@{UMHTTPServer.h}}\index{UMHTTPServer.h@{UMHTTPServer.h}!UMHTTPServerStatus\_shutDown@{UMHTTPServerStatus\_shutDown}}}\mbox{\Hypertarget{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdba9a15619b14449d501f5024d5f6436ef2}\label{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdba9a15619b14449d501f5024d5f6436ef2}} 
+U\+M\+H\+T\+T\+P\+Server\+Status\+\_\+shut\+Down&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UMHTTPServerStatus\_failed@{UMHTTPServerStatus\_failed}!UMHTTPServer.h@{UMHTTPServer.h}}\index{UMHTTPServer.h@{UMHTTPServer.h}!UMHTTPServerStatus\_failed@{UMHTTPServerStatus\_failed}}}\mbox{\Hypertarget{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdba9d1b5dd8fbb1c2b71600d444bd8786b2}\label{_u_m_h_t_t_p_server_8h_af29796f7750d4fe4f9d78febb44adfdba9d1b5dd8fbb1c2b71600d444bd8786b2}} 
+U\+M\+H\+T\+T\+P\+Server\+Status\+\_\+failed&\\
+\hline
+
+\end{DoxyEnumFields}

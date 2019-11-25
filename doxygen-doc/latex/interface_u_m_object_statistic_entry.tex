@@ -1,0 +1,140 @@
+\hypertarget{interface_u_m_object_statistic_entry}{}\doxysection{U\+M\+Object\+Statistic\+Entry Class Reference}
+\label{interface_u_m_object_statistic_entry}\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+
+
+{\ttfamily \#import $<$U\+M\+Object\+Statistic\+Entry.\+h$>$}
+
+Inheritance diagram for U\+M\+Object\+Statistic\+Entry\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_u_m_object_statistic_entry}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_statistic_entry_a51474b0f8eeda0c5aa40a88441daedb1}{increase\+Alloc\+Counter}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_statistic_entry_a5acafef8033e5bb336e309dd7510827e}{decrease\+Alloc\+Counter}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_statistic_entry_a8388bfe91ba49d54a9fa180c076d1d81}{increase\+Dealloc\+Counter}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_object_statistic_entry_a82ee08a32132565e961be1f2e5f4b58d}{decrease\+Dealloc\+Counter}}
+\item 
+(long long) -\/ \mbox{\hyperlink{interface_u_m_object_statistic_entry_ad0dd3ca157a48f84ff9e5d2057f4cfbf}{alloc\+Counter}}
+\item 
+(long long) -\/ \mbox{\hyperlink{interface_u_m_object_statistic_entry_ac9f0d2392235ba38a344ae84073ec5b1}{dealloc\+Counter}}
+\item 
+(long long) -\/ \mbox{\hyperlink{interface_u_m_object_statistic_entry_af0b2a00701697321473adf77b4a6244a}{in\+Use\+Counter}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+Lock $\ast$ \mbox{\hyperlink{interface_u_m_object_statistic_entry_a415b8f9977ee2a87cbba168b659dc8f4}{\+\_\+lock}}
+\item 
+long long \mbox{\hyperlink{interface_u_m_object_statistic_entry_abb968cc7d78eed94d280a921f82b5180}{\+\_\+alloc\+Counter}}
+\item 
+long long \mbox{\hyperlink{interface_u_m_object_statistic_entry_af37cdb89c7cecef1ac3a5d36bcb45a0f}{\+\_\+dealloc\+Counter}}
+\item 
+long long \mbox{\hyperlink{interface_u_m_object_statistic_entry_ad05e05a67006283becfe61a2d3f816c5}{\+\_\+in\+Use\+Counter}}
+\item 
+const char $\ast$ \mbox{\hyperlink{interface_u_m_object_statistic_entry_a8d22d5ffb18eb3e08d751a58767b32e3}{\+\_\+name}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{interface_u_m_object_statistic_entry_abaa06e122c17071ca03d890614f4b38e}{name}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_ad0dd3ca157a48f84ff9e5d2057f4cfbf}\label{interface_u_m_object_statistic_entry_ad0dd3ca157a48f84ff9e5d2057f4cfbf}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!allocCounter@{allocCounter}}
+\index{allocCounter@{allocCounter}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{allocCounter()}{allocCounter()}}
+{\footnotesize\ttfamily -\/ (long long) alloc\+Counter \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_ac9f0d2392235ba38a344ae84073ec5b1}\label{interface_u_m_object_statistic_entry_ac9f0d2392235ba38a344ae84073ec5b1}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!deallocCounter@{deallocCounter}}
+\index{deallocCounter@{deallocCounter}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{deallocCounter()}{deallocCounter()}}
+{\footnotesize\ttfamily -\/ (long long) dealloc\+Counter \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_a5acafef8033e5bb336e309dd7510827e}\label{interface_u_m_object_statistic_entry_a5acafef8033e5bb336e309dd7510827e}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!decreaseAllocCounter@{decreaseAllocCounter}}
+\index{decreaseAllocCounter@{decreaseAllocCounter}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{decreaseAllocCounter()}{decreaseAllocCounter()}}
+{\footnotesize\ttfamily -\/ (void) decrease\+Alloc\+Counter \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_a82ee08a32132565e961be1f2e5f4b58d}\label{interface_u_m_object_statistic_entry_a82ee08a32132565e961be1f2e5f4b58d}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!decreaseDeallocCounter@{decreaseDeallocCounter}}
+\index{decreaseDeallocCounter@{decreaseDeallocCounter}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{decreaseDeallocCounter()}{decreaseDeallocCounter()}}
+{\footnotesize\ttfamily -\/ (void) decrease\+Dealloc\+Counter \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_a51474b0f8eeda0c5aa40a88441daedb1}\label{interface_u_m_object_statistic_entry_a51474b0f8eeda0c5aa40a88441daedb1}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!increaseAllocCounter@{increaseAllocCounter}}
+\index{increaseAllocCounter@{increaseAllocCounter}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{increaseAllocCounter()}{increaseAllocCounter()}}
+{\footnotesize\ttfamily -\/ (void) increase\+Alloc\+Counter \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_a8388bfe91ba49d54a9fa180c076d1d81}\label{interface_u_m_object_statistic_entry_a8388bfe91ba49d54a9fa180c076d1d81}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!increaseDeallocCounter@{increaseDeallocCounter}}
+\index{increaseDeallocCounter@{increaseDeallocCounter}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{increaseDeallocCounter()}{increaseDeallocCounter()}}
+{\footnotesize\ttfamily -\/ (void) increase\+Dealloc\+Counter \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_af0b2a00701697321473adf77b4a6244a}\label{interface_u_m_object_statistic_entry_af0b2a00701697321473adf77b4a6244a}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!inUseCounter@{inUseCounter}}
+\index{inUseCounter@{inUseCounter}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{inUseCounter()}{inUseCounter()}}
+{\footnotesize\ttfamily -\/ (long long) in\+Use\+Counter \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_abb968cc7d78eed94d280a921f82b5180}\label{interface_u_m_object_statistic_entry_abb968cc7d78eed94d280a921f82b5180}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!\_allocCounter@{\_allocCounter}}
+\index{\_allocCounter@{\_allocCounter}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{\_allocCounter}{\_allocCounter}}
+{\footnotesize\ttfamily -\/ (long long) \+\_\+alloc\+Counter\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_af37cdb89c7cecef1ac3a5d36bcb45a0f}\label{interface_u_m_object_statistic_entry_af37cdb89c7cecef1ac3a5d36bcb45a0f}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!\_deallocCounter@{\_deallocCounter}}
+\index{\_deallocCounter@{\_deallocCounter}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{\_deallocCounter}{\_deallocCounter}}
+{\footnotesize\ttfamily -\/ (long long) \+\_\+dealloc\+Counter\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_ad05e05a67006283becfe61a2d3f816c5}\label{interface_u_m_object_statistic_entry_ad05e05a67006283becfe61a2d3f816c5}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!\_inUseCounter@{\_inUseCounter}}
+\index{\_inUseCounter@{\_inUseCounter}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{\_inUseCounter}{\_inUseCounter}}
+{\footnotesize\ttfamily -\/ (long long) \+\_\+in\+Use\+Counter\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_a415b8f9977ee2a87cbba168b659dc8f4}\label{interface_u_m_object_statistic_entry_a415b8f9977ee2a87cbba168b659dc8f4}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!\_lock@{\_lock}}
+\index{\_lock@{\_lock}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{\_lock}{\_lock}}
+{\footnotesize\ttfamily -\/ (N\+S\+Lock$\ast$) \+\_\+lock\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_a8d22d5ffb18eb3e08d751a58767b32e3}\label{interface_u_m_object_statistic_entry_a8d22d5ffb18eb3e08d751a58767b32e3}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!\_name@{\_name}}
+\index{\_name@{\_name}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{\_name}{\_name}}
+{\footnotesize\ttfamily -\/ (const char$\ast$) \+\_\+name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_object_statistic_entry_abaa06e122c17071ca03d890614f4b38e}\label{interface_u_m_object_statistic_entry_abaa06e122c17071ca03d890614f4b38e}} 
+\index{UMObjectStatisticEntry@{UMObjectStatisticEntry}!name@{name}}
+\index{name@{name}!UMObjectStatisticEntry@{UMObjectStatisticEntry}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily -\/ (const char$\ast$) name\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_object_statistic_entry_8h}{U\+M\+Object\+Statistic\+Entry.\+h}}\item 
+Classes/\+Universal\+Object/\mbox{\hyperlink{_u_m_object_statistic_entry_8m}{U\+M\+Object\+Statistic\+Entry.\+m}}\end{DoxyCompactItemize}

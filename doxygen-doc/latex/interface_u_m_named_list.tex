@@ -1,0 +1,181 @@
+\hypertarget{interface_u_m_named_list}{}\doxysection{U\+M\+Named\+List Class Reference}
+\label{interface_u_m_named_list}\index{UMNamedList@{UMNamedList}}
+
+
+{\ttfamily \#import $<$U\+M\+Named\+List.\+h$>$}
+
+Inheritance diagram for U\+M\+Named\+List\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_u_m_named_list}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{interface_u_m_named_list}{U\+M\+Named\+List}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_named_list_a592374857e9dfcdb782bed07c9a3aff1}{init\+With\+Directory\+:name\+:}}
+\item 
+(\mbox{\hyperlink{interface_u_m_named_list}{U\+M\+Named\+List}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_named_list_adeee243c09eaa0a1d222f7d30541bc21}{init\+With\+Path\+:name\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_named_list_a911af323ea7e1d3e8df9ce6c7714837e}{add\+Entry\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_named_list_ae746a30f4a1c3bce5472b568d547205e}{remove\+Entry\+:}}
+\item 
+(B\+O\+OL) -\/ \mbox{\hyperlink{interface_u_m_named_list_a1c4fbb173289144c740052a7d41459ae}{contains\+Entry\+:}}
+\item 
+(N\+S\+Array $\ast$) -\/ \mbox{\hyperlink{interface_u_m_named_list_aa00e6201fd757ba3907f5bc717dd5664}{all\+Entries}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_named_list_abc1b45ca7a9477d44f1bcab3a7498582}{flush}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_named_list_ae62b369cd65eaebe4ae7ee83fb5db203}{reload}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_named_list_a007e5a2e4d788559702cccc6c0055117}{\+\_\+name}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_named_list_ae5e80a8c4baf9ce07fd422121a7898aa}{\+\_\+path}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_named_list_ab6199113d29f50a699939aecd0c590bb}{\+\_\+dirty}}
+\item 
+N\+S\+Mutable\+Dictionary $\ast$ \mbox{\hyperlink{interface_u_m_named_list_a7d9b9d5bd3362a200958950f6ca24bd9}{\+\_\+entries}}
+\item 
+\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}} $\ast$ \mbox{\hyperlink{interface_u_m_named_list_a8fdf84fe69e4d8c0e7d0118b6fd24dae}{\+\_\+lock}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_named_list_a6d205a2b3194fe23e646a7ed62ee713e}{name}}
+\item 
+N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_named_list_a386bc945299e8386c2ab3f15f5938753}{path}}
+\item 
+B\+O\+OL \mbox{\hyperlink{interface_u_m_named_list_a08313a1dfd3f86b704069c7ede17b1ac}{dirty}}
+\item 
+N\+S\+Mutable\+Dictionary $\ast$ \mbox{\hyperlink{interface_u_m_named_list_a1da1c8c1d41413747d5de13d70344bfa}{entries}}
+\item 
+\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}} $\ast$ \mbox{\hyperlink{interface_u_m_named_list_a4ec3451486a43eb52eb71ce339d1d2c4}{lock}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_named_list_a911af323ea7e1d3e8df9ce6c7714837e}\label{interface_u_m_named_list_a911af323ea7e1d3e8df9ce6c7714837e}} 
+\index{UMNamedList@{UMNamedList}!addEntry:@{addEntry:}}
+\index{addEntry:@{addEntry:}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{addEntry:()}{addEntry:()}}
+{\footnotesize\ttfamily -\/ (void) add\+Entry\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{str }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_aa00e6201fd757ba3907f5bc717dd5664}\label{interface_u_m_named_list_aa00e6201fd757ba3907f5bc717dd5664}} 
+\index{UMNamedList@{UMNamedList}!allEntries@{allEntries}}
+\index{allEntries@{allEntries}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{allEntries()}{allEntries()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Array $\ast$) all\+Entries \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_a1c4fbb173289144c740052a7d41459ae}\label{interface_u_m_named_list_a1c4fbb173289144c740052a7d41459ae}} 
+\index{UMNamedList@{UMNamedList}!containsEntry:@{containsEntry:}}
+\index{containsEntry:@{containsEntry:}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{containsEntry:()}{containsEntry:()}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) contains\+Entry\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{str }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_abc1b45ca7a9477d44f1bcab3a7498582}\label{interface_u_m_named_list_abc1b45ca7a9477d44f1bcab3a7498582}} 
+\index{UMNamedList@{UMNamedList}!flush@{flush}}
+\index{flush@{flush}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{flush()}{flush()}}
+{\footnotesize\ttfamily -\/ (void) flush \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_a592374857e9dfcdb782bed07c9a3aff1}\label{interface_u_m_named_list_a592374857e9dfcdb782bed07c9a3aff1}} 
+\index{UMNamedList@{UMNamedList}!initWithDirectory:name:@{initWithDirectory:name:}}
+\index{initWithDirectory:name:@{initWithDirectory:name:}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{initWithDirectory:name:()}{initWithDirectory:name:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_named_list}{U\+M\+Named\+List}} $\ast$) init\+With\+Directory\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{dir }\item[{name\+:(N\+S\+String $\ast$)}]{name }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_adeee243c09eaa0a1d222f7d30541bc21}\label{interface_u_m_named_list_adeee243c09eaa0a1d222f7d30541bc21}} 
+\index{UMNamedList@{UMNamedList}!initWithPath:name:@{initWithPath:name:}}
+\index{initWithPath:name:@{initWithPath:name:}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{initWithPath:name:()}{initWithPath:name:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_named_list}{U\+M\+Named\+List}} $\ast$) init\+With\+Path\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{path }\item[{name\+:(N\+S\+String $\ast$)}]{name }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_ae62b369cd65eaebe4ae7ee83fb5db203}\label{interface_u_m_named_list_ae62b369cd65eaebe4ae7ee83fb5db203}} 
+\index{UMNamedList@{UMNamedList}!reload@{reload}}
+\index{reload@{reload}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{reload()}{reload()}}
+{\footnotesize\ttfamily -\/ (void) reload \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_ae746a30f4a1c3bce5472b568d547205e}\label{interface_u_m_named_list_ae746a30f4a1c3bce5472b568d547205e}} 
+\index{UMNamedList@{UMNamedList}!removeEntry:@{removeEntry:}}
+\index{removeEntry:@{removeEntry:}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{removeEntry:()}{removeEntry:()}}
+{\footnotesize\ttfamily -\/ (void) remove\+Entry\+: \begin{DoxyParamCaption}\item[{(N\+S\+String $\ast$)}]{str }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{interface_u_m_named_list_ab6199113d29f50a699939aecd0c590bb}\label{interface_u_m_named_list_ab6199113d29f50a699939aecd0c590bb}} 
+\index{UMNamedList@{UMNamedList}!\_dirty@{\_dirty}}
+\index{\_dirty@{\_dirty}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{\_dirty}{\_dirty}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) \+\_\+dirty\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_a7d9b9d5bd3362a200958950f6ca24bd9}\label{interface_u_m_named_list_a7d9b9d5bd3362a200958950f6ca24bd9}} 
+\index{UMNamedList@{UMNamedList}!\_entries@{\_entries}}
+\index{\_entries@{\_entries}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{\_entries}{\_entries}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Dictionary$\ast$) \+\_\+entries\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_a8fdf84fe69e4d8c0e7d0118b6fd24dae}\label{interface_u_m_named_list_a8fdf84fe69e4d8c0e7d0118b6fd24dae}} 
+\index{UMNamedList@{UMNamedList}!\_lock@{\_lock}}
+\index{\_lock@{\_lock}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{\_lock}{\_lock}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}}$\ast$) \+\_\+lock\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_a007e5a2e4d788559702cccc6c0055117}\label{interface_u_m_named_list_a007e5a2e4d788559702cccc6c0055117}} 
+\index{UMNamedList@{UMNamedList}!\_name@{\_name}}
+\index{\_name@{\_name}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{\_name}{\_name}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+name\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_ae5e80a8c4baf9ce07fd422121a7898aa}\label{interface_u_m_named_list_ae5e80a8c4baf9ce07fd422121a7898aa}} 
+\index{UMNamedList@{UMNamedList}!\_path@{\_path}}
+\index{\_path@{\_path}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{\_path}{\_path}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) \+\_\+path\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_named_list_a08313a1dfd3f86b704069c7ede17b1ac}\label{interface_u_m_named_list_a08313a1dfd3f86b704069c7ede17b1ac}} 
+\index{UMNamedList@{UMNamedList}!dirty@{dirty}}
+\index{dirty@{dirty}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{dirty}{dirty}}
+{\footnotesize\ttfamily -\/ (B\+O\+OL) dirty\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_a1da1c8c1d41413747d5de13d70344bfa}\label{interface_u_m_named_list_a1da1c8c1d41413747d5de13d70344bfa}} 
+\index{UMNamedList@{UMNamedList}!entries@{entries}}
+\index{entries@{entries}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{entries}{entries}}
+{\footnotesize\ttfamily -\/ (N\+S\+Mutable\+Dictionary$\ast$) entries\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_a4ec3451486a43eb52eb71ce339d1d2c4}\label{interface_u_m_named_list_a4ec3451486a43eb52eb71ce339d1d2c4}} 
+\index{UMNamedList@{UMNamedList}!lock@{lock}}
+\index{lock@{lock}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{lock}{lock}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_mutex}{U\+M\+Mutex}}$\ast$) lock\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_a6d205a2b3194fe23e646a7ed62ee713e}\label{interface_u_m_named_list_a6d205a2b3194fe23e646a7ed62ee713e}} 
+\index{UMNamedList@{UMNamedList}!name@{name}}
+\index{name@{name}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) name\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_named_list_a386bc945299e8386c2ab3f15f5938753}\label{interface_u_m_named_list_a386bc945299e8386c2ab3f15f5938753}} 
+\index{UMNamedList@{UMNamedList}!path@{path}}
+\index{path@{path}!UMNamedList@{UMNamedList}}
+\doxysubsubsection{\texorpdfstring{path}{path}}
+{\footnotesize\ttfamily -\/ (N\+S\+String$\ast$) path\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Utilities/\mbox{\hyperlink{_u_m_named_list_8h}{U\+M\+Named\+List.\+h}}\item 
+Classes/\+Universal\+Utilities/\mbox{\hyperlink{_u_m_named_list_8m}{U\+M\+Named\+List.\+m}}\end{DoxyCompactItemize}

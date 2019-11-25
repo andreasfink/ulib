@@ -1,0 +1,219 @@
+\hypertarget{interface_u_m_queue_multi}{}\doxysection{U\+M\+Queue\+Multi Class Reference}
+\label{interface_u_m_queue_multi}\index{UMQueueMulti@{UMQueueMulti}}
+
+
+{\ttfamily \#import $<$U\+M\+Queue\+Multi.\+h$>$}
+
+Inheritance diagram for U\+M\+Queue\+Multi\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{interface_u_m_queue_multi}
+\end{center}
+\end{figure}
+\doxysubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a81499e3eab78cedd3804af1d81fb3f24}{start\+Work}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a937abd80ad29b52d05bd0307dee818eb}{end\+Work}}
+\item 
+(\mbox{\hyperlink{interface_u_m_queue_multi}{U\+M\+Queue\+Multi}} $\ast$) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a7217f9ff575e3c5e895163eee2c7f85b}{init\+With\+Queue\+Count\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a821270445f2faaf54e961f599c099854}{append\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a92937687b2b50d865565200c034eaab4}{append\+:for\+Queue\+Number\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a2574e7f22b447b4750b822f49df7ae7e}{append\+Unique\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_ab81dae0d3243346a95ea6df191412da4}{append\+Unique\+:for\+Queue\+Number\+:}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_aeba8d737ada51058328f4577b4e51eb5}{get\+First}}
+\item 
+(id) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a0342211b5ea3fca1fe7c2bf5cb678488}{get\+First\+While\+Locked}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a0d8942c3a87f169a5f1d751b37b6e623}{insert\+First\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a065561a2b56c4bc411d95354b00c3089}{insert\+First\+:for\+Queue\+Number\+:}}
+\item 
+(N\+S\+Integer) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a2bb458344cf84290562449686a82b67d}{count}}
+\item 
+(N\+S\+Integer) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a0c8deb8275a863180094c4aa5dbecabf}{count\+For\+Queue\+Number\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_ad8a2a473d473f5b61fa5da1426a7f9c2}{remove\+Object\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_aa4bae692289f3f2884f4a58022bf861a}{remove\+Object\+:for\+Queue\+Number\+:}}
+\item 
+(N\+S\+Dictionary $\ast$) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a44057500ba09f9b165ccb5fd7f5e29c8}{status}}
+\item 
+(N\+S\+Dictionary $\ast$) -\/ \mbox{\hyperlink{interface_u_m_queue_multi_a726c89b82c2301de9aa12c4433477904}{status\+By\+Object\+Type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+N\+S\+U\+Integer \mbox{\hyperlink{interface_u_m_queue_multi_aca6034fb9a52895ffaa1d8778bd964ac}{work\+In\+Progress}}
+\item 
+N\+S\+U\+Integer \mbox{\hyperlink{interface_u_m_queue_multi_a783c91ecaca0ae72c5a71b9b7cfe5317}{hard\+Limit}}
+\item 
+\mbox{\hyperlink{interface_u_m_throughput_counter}{U\+M\+Throughput\+Counter}} $\ast$ \mbox{\hyperlink{interface_u_m_queue_multi_aeed1c102a2bc4022016d2195720e911e}{processing\+Throughput}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Method Documentation}
+\mbox{\Hypertarget{interface_u_m_queue_multi_a821270445f2faaf54e961f599c099854}\label{interface_u_m_queue_multi_a821270445f2faaf54e961f599c099854}} 
+\index{UMQueueMulti@{UMQueueMulti}!append:@{append:}}
+\index{append:@{append:}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{append:()}{append:()}}
+{\footnotesize\ttfamily -\/ (void) append\+: \begin{DoxyParamCaption}\item[{(id)}]{obj }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_queue_ad3b6c112a94843d15c6c7d45518fc7f1}{U\+M\+Queue}}.
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_a92937687b2b50d865565200c034eaab4}\label{interface_u_m_queue_multi_a92937687b2b50d865565200c034eaab4}} 
+\index{UMQueueMulti@{UMQueueMulti}!append:forQueueNumber:@{append:forQueueNumber:}}
+\index{append:forQueueNumber:@{append:forQueueNumber:}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{append:forQueueNumber:()}{append:forQueueNumber:()}}
+{\footnotesize\ttfamily -\/ (void) \mbox{\hyperlink{interface_u_m_queue_multi_a821270445f2faaf54e961f599c099854}{append\+:}} \begin{DoxyParamCaption}\item[{(id)}]{obj }\item[{for\+Queue\+Number\+:(N\+S\+U\+Integer)}]{index }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_a2574e7f22b447b4750b822f49df7ae7e}\label{interface_u_m_queue_multi_a2574e7f22b447b4750b822f49df7ae7e}} 
+\index{UMQueueMulti@{UMQueueMulti}!appendUnique:@{appendUnique:}}
+\index{appendUnique:@{appendUnique:}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{appendUnique:()}{appendUnique:()}}
+{\footnotesize\ttfamily -\/ (void) append\+Unique\+: \begin{DoxyParamCaption}\item[{(id)}]{obj }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_queue_abd5c5bbe8017198b4968086c79bab06a}{U\+M\+Queue}}.
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_ab81dae0d3243346a95ea6df191412da4}\label{interface_u_m_queue_multi_ab81dae0d3243346a95ea6df191412da4}} 
+\index{UMQueueMulti@{UMQueueMulti}!appendUnique:forQueueNumber:@{appendUnique:forQueueNumber:}}
+\index{appendUnique:forQueueNumber:@{appendUnique:forQueueNumber:}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{appendUnique:forQueueNumber:()}{appendUnique:forQueueNumber:()}}
+{\footnotesize\ttfamily -\/ (void) \mbox{\hyperlink{interface_u_m_queue_multi_a2574e7f22b447b4750b822f49df7ae7e}{append\+Unique\+:}} \begin{DoxyParamCaption}\item[{(id)}]{obj }\item[{for\+Queue\+Number\+:(N\+S\+U\+Integer)}]{index }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_a2bb458344cf84290562449686a82b67d}\label{interface_u_m_queue_multi_a2bb458344cf84290562449686a82b67d}} 
+\index{UMQueueMulti@{UMQueueMulti}!count@{count}}
+\index{count@{count}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Integer) count \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_queue_a1e452cb7ea3ca21cc1369d16820fbbcd}{U\+M\+Queue}}.
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_a0c8deb8275a863180094c4aa5dbecabf}\label{interface_u_m_queue_multi_a0c8deb8275a863180094c4aa5dbecabf}} 
+\index{UMQueueMulti@{UMQueueMulti}!countForQueueNumber:@{countForQueueNumber:}}
+\index{countForQueueNumber:@{countForQueueNumber:}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{countForQueueNumber:()}{countForQueueNumber:()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Integer) count\+For\+Queue\+Number\+: \begin{DoxyParamCaption}\item[{(N\+S\+U\+Integer)}]{index }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_a937abd80ad29b52d05bd0307dee818eb}\label{interface_u_m_queue_multi_a937abd80ad29b52d05bd0307dee818eb}} 
+\index{UMQueueMulti@{UMQueueMulti}!endWork@{endWork}}
+\index{endWork@{endWork}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{endWork()}{endWork()}}
+{\footnotesize\ttfamily -\/ (void) end\+Work \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_aeba8d737ada51058328f4577b4e51eb5}\label{interface_u_m_queue_multi_aeba8d737ada51058328f4577b4e51eb5}} 
+\index{UMQueueMulti@{UMQueueMulti}!getFirst@{getFirst}}
+\index{getFirst@{getFirst}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{getFirst()}{getFirst()}}
+{\footnotesize\ttfamily -\/ (id) get\+First \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_queue_a130229669a5b2ca84273f9b6fd2b7a05}{U\+M\+Queue}}.
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_a0342211b5ea3fca1fe7c2bf5cb678488}\label{interface_u_m_queue_multi_a0342211b5ea3fca1fe7c2bf5cb678488}} 
+\index{UMQueueMulti@{UMQueueMulti}!getFirstWhileLocked@{getFirstWhileLocked}}
+\index{getFirstWhileLocked@{getFirstWhileLocked}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{getFirstWhileLocked()}{getFirstWhileLocked()}}
+{\footnotesize\ttfamily -\/ (id) get\+First\+While\+Locked \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_queue_a6cce0ab63375ab8a8b3be30fec45d6ed}{U\+M\+Queue}}.
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_a7217f9ff575e3c5e895163eee2c7f85b}\label{interface_u_m_queue_multi_a7217f9ff575e3c5e895163eee2c7f85b}} 
+\index{UMQueueMulti@{UMQueueMulti}!initWithQueueCount:@{initWithQueueCount:}}
+\index{initWithQueueCount:@{initWithQueueCount:}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{initWithQueueCount:()}{initWithQueueCount:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_queue_multi}{U\+M\+Queue\+Multi}} $\ast$) init\+With\+Queue\+Count\+: \begin{DoxyParamCaption}\item[{(N\+S\+U\+Integer)}]{index }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_a0d8942c3a87f169a5f1d751b37b6e623}\label{interface_u_m_queue_multi_a0d8942c3a87f169a5f1d751b37b6e623}} 
+\index{UMQueueMulti@{UMQueueMulti}!insertFirst:@{insertFirst:}}
+\index{insertFirst:@{insertFirst:}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{insertFirst:()}{insertFirst:()}}
+{\footnotesize\ttfamily -\/ (void) insert\+First\+: \begin{DoxyParamCaption}\item[{(id)}]{obj }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_queue_a66860ffc83056c02554e7f6bf899afcf}{U\+M\+Queue}}.
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_a065561a2b56c4bc411d95354b00c3089}\label{interface_u_m_queue_multi_a065561a2b56c4bc411d95354b00c3089}} 
+\index{UMQueueMulti@{UMQueueMulti}!insertFirst:forQueueNumber:@{insertFirst:forQueueNumber:}}
+\index{insertFirst:forQueueNumber:@{insertFirst:forQueueNumber:}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{insertFirst:forQueueNumber:()}{insertFirst:forQueueNumber:()}}
+{\footnotesize\ttfamily -\/ (void) \mbox{\hyperlink{interface_u_m_queue_multi_a0d8942c3a87f169a5f1d751b37b6e623}{insert\+First\+:}} \begin{DoxyParamCaption}\item[{(id)}]{obj }\item[{for\+Queue\+Number\+:(N\+S\+U\+Integer)}]{index }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_ad8a2a473d473f5b61fa5da1426a7f9c2}\label{interface_u_m_queue_multi_ad8a2a473d473f5b61fa5da1426a7f9c2}} 
+\index{UMQueueMulti@{UMQueueMulti}!removeObject:@{removeObject:}}
+\index{removeObject:@{removeObject:}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{removeObject:()}{removeObject:()}}
+{\footnotesize\ttfamily -\/ (void) remove\+Object\+: \begin{DoxyParamCaption}\item[{(id)}]{object }\end{DoxyParamCaption}}
+
+
+
+Reimplemented from \mbox{\hyperlink{interface_u_m_queue_ac91b40f5a74351c18c501063ece9c1aa}{U\+M\+Queue}}.
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_aa4bae692289f3f2884f4a58022bf861a}\label{interface_u_m_queue_multi_aa4bae692289f3f2884f4a58022bf861a}} 
+\index{UMQueueMulti@{UMQueueMulti}!removeObject:forQueueNumber:@{removeObject:forQueueNumber:}}
+\index{removeObject:forQueueNumber:@{removeObject:forQueueNumber:}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{removeObject:forQueueNumber:()}{removeObject:forQueueNumber:()}}
+{\footnotesize\ttfamily -\/ (void) \mbox{\hyperlink{interface_u_m_queue_multi_ad8a2a473d473f5b61fa5da1426a7f9c2}{remove\+Object\+:}} \begin{DoxyParamCaption}\item[{(id)}]{object }\item[{for\+Queue\+Number\+:(N\+S\+U\+Integer)}]{index }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_a81499e3eab78cedd3804af1d81fb3f24}\label{interface_u_m_queue_multi_a81499e3eab78cedd3804af1d81fb3f24}} 
+\index{UMQueueMulti@{UMQueueMulti}!startWork@{startWork}}
+\index{startWork@{startWork}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{startWork()}{startWork()}}
+{\footnotesize\ttfamily -\/ (void) start\+Work \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_a44057500ba09f9b165ccb5fd7f5e29c8}\label{interface_u_m_queue_multi_a44057500ba09f9b165ccb5fd7f5e29c8}} 
+\index{UMQueueMulti@{UMQueueMulti}!status@{status}}
+\index{status@{status}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{status()}{status()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Dictionary $\ast$) status \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_a726c89b82c2301de9aa12c4433477904}\label{interface_u_m_queue_multi_a726c89b82c2301de9aa12c4433477904}} 
+\index{UMQueueMulti@{UMQueueMulti}!statusByObjectType@{statusByObjectType}}
+\index{statusByObjectType@{statusByObjectType}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{statusByObjectType()}{statusByObjectType()}}
+{\footnotesize\ttfamily -\/ (N\+S\+Dictionary $\ast$) status\+By\+Object\+Type \begin{DoxyParamCaption}{ }\end{DoxyParamCaption}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{interface_u_m_queue_multi_a783c91ecaca0ae72c5a71b9b7cfe5317}\label{interface_u_m_queue_multi_a783c91ecaca0ae72c5a71b9b7cfe5317}} 
+\index{UMQueueMulti@{UMQueueMulti}!hardLimit@{hardLimit}}
+\index{hardLimit@{hardLimit}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{hardLimit}{hardLimit}}
+{\footnotesize\ttfamily -\/ (N\+S\+U\+Integer) hard\+Limit\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_aeed1c102a2bc4022016d2195720e911e}\label{interface_u_m_queue_multi_aeed1c102a2bc4022016d2195720e911e}} 
+\index{UMQueueMulti@{UMQueueMulti}!processingThroughput@{processingThroughput}}
+\index{processingThroughput@{processingThroughput}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{processingThroughput}{processingThroughput}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{interface_u_m_throughput_counter}{U\+M\+Throughput\+Counter}}$\ast$) processing\+Throughput\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+
+\mbox{\Hypertarget{interface_u_m_queue_multi_aca6034fb9a52895ffaa1d8778bd964ac}\label{interface_u_m_queue_multi_aca6034fb9a52895ffaa1d8778bd964ac}} 
+\index{UMQueueMulti@{UMQueueMulti}!workInProgress@{workInProgress}}
+\index{workInProgress@{workInProgress}!UMQueueMulti@{UMQueueMulti}}
+\doxysubsubsection{\texorpdfstring{workInProgress}{workInProgress}}
+{\footnotesize\ttfamily -\/ (N\+S\+U\+Integer) work\+In\+Progress\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [assign]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/\+Universal\+Queue/\mbox{\hyperlink{_u_m_queue_multi_8h}{U\+M\+Queue\+Multi.\+h}}\item 
+Classes/\+Universal\+Queue/\mbox{\hyperlink{_u_m_queue_multi_8m}{U\+M\+Queue\+Multi.\+m}}\end{DoxyCompactItemize}

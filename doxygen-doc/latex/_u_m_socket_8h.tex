@@ -1,0 +1,73 @@
+\hypertarget{_u_m_socket_8h}{}\doxysection{Classes/\+Universal\+Socket/\+U\+M\+Socket.h File Reference}
+\label{_u_m_socket_8h}\index{Classes/UniversalSocket/UMSocket.h@{Classes/UniversalSocket/UMSocket.h}}
+{\ttfamily \#import \char`\"{}U\+M\+Object.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Crypto.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Socket\+Defs.\+h\char`\"{}}\newline
+{\ttfamily \#import \char`\"{}U\+M\+Mutex.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ulib\+\_\+config.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{interface_u_m_socket}{U\+M\+Socket}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_u_m_socket_8h_a285986f7b57657df010a6a11f94d9807}{in\+\_\+port\+\_\+t}}~uint16\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \mbox{\hyperlink{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250f}{Socket\+Blocking\+Mode}} \mbox{\hyperlink{_u_m_socket_8h_aa600445d2a35ec4acb275e7c57679d96}{Socket\+Blocking\+Mode}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250f}{Socket\+Blocking\+Mode}} \{ \mbox{\hyperlink{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250fa25b4f7380a52d48be9b8f800db4e93d0}{Socket\+Blocking\+Mode\+\_\+unknown}} = 0, 
+\mbox{\hyperlink{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250faceb84ad4b1e86122142c4fdbebaf24c8}{Socket\+Blocking\+Mode\+\_\+is\+Not\+Blocking}} = -\/1, 
+\mbox{\hyperlink{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250fa8ccaae05d6190ee2ad779e1695a729f3}{Socket\+Blocking\+Mode\+\_\+is\+Blocking}} = 1
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_u_m_socket_8h_a285986f7b57657df010a6a11f94d9807}\label{_u_m_socket_8h_a285986f7b57657df010a6a11f94d9807}} 
+\index{UMSocket.h@{UMSocket.h}!in\_port\_t@{in\_port\_t}}
+\index{in\_port\_t@{in\_port\_t}!UMSocket.h@{UMSocket.h}}
+\doxysubsubsection{\texorpdfstring{in\_port\_t}{in\_port\_t}}
+{\footnotesize\ttfamily \#define in\+\_\+port\+\_\+t~uint16\+\_\+t}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_u_m_socket_8h_aa600445d2a35ec4acb275e7c57679d96}\label{_u_m_socket_8h_aa600445d2a35ec4acb275e7c57679d96}} 
+\index{UMSocket.h@{UMSocket.h}!SocketBlockingMode@{SocketBlockingMode}}
+\index{SocketBlockingMode@{SocketBlockingMode}!UMSocket.h@{UMSocket.h}}
+\doxysubsubsection{\texorpdfstring{SocketBlockingMode}{SocketBlockingMode}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250f}{Socket\+Blocking\+Mode}}  \mbox{\hyperlink{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250f}{Socket\+Blocking\+Mode}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250f}\label{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250f}} 
+\index{UMSocket.h@{UMSocket.h}!SocketBlockingMode@{SocketBlockingMode}}
+\index{SocketBlockingMode@{SocketBlockingMode}!UMSocket.h@{UMSocket.h}}
+\doxysubsubsection{\texorpdfstring{SocketBlockingMode}{SocketBlockingMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250f}{Socket\+Blocking\+Mode}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SocketBlockingMode\_unknown@{SocketBlockingMode\_unknown}!UMSocket.h@{UMSocket.h}}\index{UMSocket.h@{UMSocket.h}!SocketBlockingMode\_unknown@{SocketBlockingMode\_unknown}}}\mbox{\Hypertarget{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250fa25b4f7380a52d48be9b8f800db4e93d0}\label{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250fa25b4f7380a52d48be9b8f800db4e93d0}} 
+Socket\+Blocking\+Mode\+\_\+unknown&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SocketBlockingMode\_isNotBlocking@{SocketBlockingMode\_isNotBlocking}!UMSocket.h@{UMSocket.h}}\index{UMSocket.h@{UMSocket.h}!SocketBlockingMode\_isNotBlocking@{SocketBlockingMode\_isNotBlocking}}}\mbox{\Hypertarget{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250faceb84ad4b1e86122142c4fdbebaf24c8}\label{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250faceb84ad4b1e86122142c4fdbebaf24c8}} 
+Socket\+Blocking\+Mode\+\_\+is\+Not\+Blocking&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SocketBlockingMode\_isBlocking@{SocketBlockingMode\_isBlocking}!UMSocket.h@{UMSocket.h}}\index{UMSocket.h@{UMSocket.h}!SocketBlockingMode\_isBlocking@{SocketBlockingMode\_isBlocking}}}\mbox{\Hypertarget{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250fa8ccaae05d6190ee2ad779e1695a729f3}\label{_u_m_socket_8h_a35831b965fe09d3383bb3ace05df250fa8ccaae05d6190ee2ad779e1695a729f3}} 
+Socket\+Blocking\+Mode\+\_\+is\+Blocking&\\
+\hline
+
+\end{DoxyEnumFields}

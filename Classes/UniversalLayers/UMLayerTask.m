@@ -23,8 +23,10 @@
       requiresSynchronisation:(BOOL)reqsync
 {
 
-    NSAssert(rx != NULL,@"receiver can not be NULL");
-
+    if(rx==NULL)
+    {
+        NSAssert(rx != NULL,@"receiver can not be NULL");
+    }
     if(n==NULL)
     {
         n = [[self class]description];

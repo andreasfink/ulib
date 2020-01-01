@@ -42,10 +42,10 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
 -------------------------------------------
 
 
-echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main"         > /etc/apt/sources.list.d/llvm.list
-echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main"     >> /etc/apt/sources.list.d/llvm.list
-echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-snapshot main"         >> /etc/apt/sources.list.d/llvm.list
-echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-snapshot main"     >> /etc/apt/sources.list.d/llvm.list
+echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main"			> /etc/apt/sources.list.d/llvm.list
+echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main"		>> /etc/apt/sources.list.d/llvm.list
+echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-snapshot main"			>> /etc/apt/sources.list.d/llvm.list
+echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-snapshot main"		>> /etc/apt/sources.list.d/llvm.list
 apt-get update
 
 apt-get install clang-7 lldb-7 llvm-7 libc++-7-dev lld-7 python-lldb-7

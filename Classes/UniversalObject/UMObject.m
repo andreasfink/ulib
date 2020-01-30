@@ -204,6 +204,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 	if(_charset==NULL)
 	{
 		NSMutableCharacterSet *c  = [[NSCharacterSet whitespaceAndNewlineCharacterSet] mutableCopy];
+		[c addCharactersInRange:NSMakeRange((unsigned int) 0x0000 ,1)]; /*  NULL */
 		[c addCharactersInRange:NSMakeRange((unsigned int) 0x0009 ,1)]; /*  CHARACTER TABULATION */
 		[c addCharactersInRange:NSMakeRange((unsigned int) 0x000A ,1)]; /*  LINE FEED (LF) */
 		[c addCharactersInRange:NSMakeRange((unsigned int) 0x000B ,1)]; /*  LINE TABULATION */

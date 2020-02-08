@@ -85,7 +85,7 @@
 
 - (void)setObject:(id)anObject forKeyedSubscript:(id<NSCopying>)key
 {
-    if(key)
+    if((key) &&(anObject))
     {
         [_lock lock];
         [_underlyingDictionary setObject:anObject forKey:key];

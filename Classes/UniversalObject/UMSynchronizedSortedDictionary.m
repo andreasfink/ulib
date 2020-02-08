@@ -60,7 +60,7 @@
     {
         if(anObject)
         {
-            [_underlyingDictionary setObject:anObject forKey:key];
+            [super setObject:anObject forKeyedSubscript:key];
             [sortIndex addObject:key];
         }
     }
@@ -68,7 +68,7 @@
     {
         if(anObject)
         {
-            [_underlyingDictionary setObject:anObject forKey:key];
+            [super setObject:anObject forKeyedSubscript:key];
         }
     }
     [_lock unlock];
@@ -199,8 +199,8 @@
 - (id)copyWithZone:(nullable NSZone *)zone
 {
     UMSynchronizedSortedDictionary *cpy = [[UMSynchronizedSortedDictionary allocWithZone:zone]init];
-    cpy->_underlyingDictionary = [_underlyingDictionary copy];
-    cpy->sortIndex = [sortIndex copy];
+    cpy->_underlyingDictionary = [_underlyingDictionary mutableCopy];
+    cpy->sortIndex = [sortIndex mutableCopy];
     return cpy;
 }
 

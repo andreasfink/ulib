@@ -47,7 +47,23 @@ static NSDateFormatter *standardDateFormatter = NULL;
     {
         return [NSDate zeroDateString];
     }
-    return [[NSDate standardDateFormatter] stringFromDate:self];
+    NSString *s = [[NSDate standardDateFormatter] stringFromDate:self];
+    NSTimeInterval ti = [self timeIntervalSinceReferenceDate];
+    ti = ti  - (int)ti; /* only fractions */
+    int microsecs = ti * 1000000;
+
+    if(microsecs % 1000  == 0) /* if the last 3 digits (microseconds) are all null, we're done */
+    {
+        return s;
+    }
+    else
+    {
+        /* for some reason microseconds are not shown with this date formatter. only miliseconds. */
+        /* so we remove last 6 digits and replace it with the real microseconds */
+        s = [s substringToIndex:(s.length-6)];
+        s = [NSString stringWithFormat:@"%@%06d",s,microsecs];
+    }
+    return s;
 }
 
 - (NSDate *)dateValue

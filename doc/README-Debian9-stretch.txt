@@ -42,10 +42,10 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
 -------------------------------------------
 
 
-echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main"         > /etc/apt/sources.list.d/llvm.list
-echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main"     >> /etc/apt/sources.list.d/llvm.list
-echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-snapshot main"         >> /etc/apt/sources.list.d/llvm.list
-echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-snapshot main"     >> /etc/apt/sources.list.d/llvm.list
+echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main"			> /etc/apt/sources.list.d/llvm.list
+echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main"		>> /etc/apt/sources.list.d/llvm.list
+echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-snapshot main"			>> /etc/apt/sources.list.d/llvm.list
+echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-snapshot main"		>> /etc/apt/sources.list.d/llvm.list
 apt-get update
 
 apt-get install clang-7 lldb-7 llvm-7 libc++-7-dev lld-7 python-lldb-7
@@ -63,7 +63,6 @@ popd
 (run as root or use sudo in front)
 
  apt-get install build-essential git subversion  \
-        libpthread-workqueue0 libpthread-workqueue-dev \
         libxml2 libxml2-dev \
         libffi6 libffi-dev\
         libicu-dev \
@@ -97,11 +96,9 @@ popd
         libxmu6 libxpm4 wmaker-common\
         libgnutls30 libgnutls28-dev\
         libpng-dev libpng16-16\
-        libstdc++-6-dev \
         libreadline7 libreadline-dev \
-        gobjc-6 gobjc++-6 \
-        libgif7 libgif-dev libwings3 libwings-dev libwraster5 libwraster-dev libwutil5 \
-        libcups2-dev  libicu57 libicu-dev \
+        libgif7 libgif-dev libwings3 libwings-dev  libwraster-dev libwutil5 \
+        libcups2-dev  libicu63 libicu-dev \
         gobjc++\
         xorg \
         libfreetype6 libfreetype6-dev \
@@ -109,8 +106,7 @@ popd
         libcairo2-dev \
         libxt-dev libssl-dev \
         libasound2-dev libjack-dev libjack0 libportaudio2 libportaudiocpp0 portaudio19-dev \
-        libstdc++-6-dev libstdc++-6-doc libstdc++-6-pic libstdc++6 wmaker cmake cmake-curses-gui
-
+         wmaker cmake cmake-curses-gui
 
 
 

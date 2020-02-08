@@ -1415,6 +1415,9 @@
 		A60C4E621EF80098007C203A /* UMPluginDirectory.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CFD4541EAC85700002564E /* UMPluginDirectory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4E631EF80098007C203A /* UMPluginDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CFD4551EAC85700002564E /* UMPluginDirectory.m */; };
 		A610866D163530F700D0D9C6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A610866B163530F700D0D9C6 /* Security.framework */; };
+		A611796523EEA82D008FAF41 /* UMHTTPWebSocketFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = A611796323EEA82D008FAF41 /* UMHTTPWebSocketFrame.h */; };
+		A611796623EEA82D008FAF41 /* UMHTTPWebSocketFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = A611796423EEA82D008FAF41 /* UMHTTPWebSocketFrame.m */; };
+		A611796923EEE00A008FAF41 /* UMHTTPWebSocketDelegateProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A611796723EEE00A008FAF41 /* UMHTTPWebSocketDelegateProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A618E79A1FC58860001106C3 /* UMThreadHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = A618E7981FC58860001106C3 /* UMThreadHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A618E79B1FC58860001106C3 /* UMThreadHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A618E7991FC58860001106C3 /* UMThreadHelpers.m */; };
 		A629A7A420C52B7B008F3CE8 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BC45B92077758C008C3CEB /* libcrypto.a */; };
@@ -2334,6 +2337,9 @@
 		A60C4E241EF7FE59007C203A /* ulib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ulib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A60C4E251EF7FE59007C203A /* ulibios copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ulibios copy-Info.plist"; path = "/Users/afink/development/git/ulib/ulibios copy-Info.plist"; sourceTree = "<absolute>"; };
 		A610866B163530F700D0D9C6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A611796323EEA82D008FAF41 /* UMHTTPWebSocketFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMHTTPWebSocketFrame.h; sourceTree = "<group>"; };
+		A611796423EEA82D008FAF41 /* UMHTTPWebSocketFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMHTTPWebSocketFrame.m; sourceTree = "<group>"; };
+		A611796723EEE00A008FAF41 /* UMHTTPWebSocketDelegateProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMHTTPWebSocketDelegateProtocol.h; sourceTree = "<group>"; };
 		A615D9161B4D6CF300854472 /* UMHistoryLogEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHistoryLogEntry.h; sourceTree = "<group>"; };
 		A615D9171B4D6CF300854472 /* UMHistoryLogEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHistoryLogEntry.m; sourceTree = "<group>"; };
 		A61635171A0C0E0400074D29 /* UMTaskQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTaskQueue.m; sourceTree = "<group>"; };
@@ -17096,6 +17102,9 @@
 				A6C954971DC95AF00036AC39 /* NSData+UMHTTP.m */,
 				A6D8AC5A149AA4AC0029E9CF /* UMHTTPConnection.h */,
 				A6D8AC5B149AA4AC0029E9CF /* UMHTTPConnection.m */,
+				A611796723EEE00A008FAF41 /* UMHTTPWebSocketDelegateProtocol.h */,
+				A611796323EEA82D008FAF41 /* UMHTTPWebSocketFrame.h */,
+				A611796423EEA82D008FAF41 /* UMHTTPWebSocketFrame.m */,
 				A69AB262182BC060001D0FE8 /* UMHTTPCookie.h */,
 				A69AB263182BC060001D0FE8 /* UMHTTPCookie.m */,
 				A62A7E2E18AAD6AD00EA8A2A /* UMHTTPPageCache.h */,
@@ -18009,6 +18018,7 @@
 				A60C4D711EF7FE59007C203A /* UMRegex.h in Headers */,
 				A6C4781F22D325CE007F395C /* UMStatistic.h in Headers */,
 				A60C4D721EF7FE59007C203A /* UMJsonStreamParserAdapter.h in Headers */,
+				A611796523EEA82D008FAF41 /* UMHTTPWebSocketFrame.h in Headers */,
 				A60C4D741EF7FE59007C203A /* UMCrypto.h in Headers */,
 				A60C4D751EF7FE59007C203A /* NSObject+HierarchicalDescription.h in Headers */,
 				A60C4D771EF7FE59007C203A /* NSData+HierarchicalDescription.h in Headers */,
@@ -18027,6 +18037,7 @@
 				A60C4D8E1EF7FE59007C203A /* UMScannerChar.h in Headers */,
 				A60C4D921EF7FE59007C203A /* UMRegexMatch.h in Headers */,
 				A60C4D931EF7FE59007C203A /* UMTimerBackgrounder.h in Headers */,
+				A611796923EEE00A008FAF41 /* UMHTTPWebSocketDelegateProtocol.h in Headers */,
 				A60C4D941EF7FE59007C203A /* UMSynchronizedArray.h in Headers */,
 				A6C4781B22D325C8007F395C /* UMStatisticEntry.h in Headers */,
 				A60C4D961EF7FE59007C203A /* UMTaskQueue.h in Headers */,
@@ -19075,6 +19086,7 @@
 				A60C4CCC1EF7FE59007C203A /* UMHTTPConnection.m in Sources */,
 				A62DC2301FD08593001ACCC7 /* UMQueueMulti.m in Sources */,
 				A63F22A51FB725010048B329 /* UMMutex.m in Sources */,
+				A611796623EEA82D008FAF41 /* UMHTTPWebSocketFrame.m in Sources */,
 				A60C4CCD1EF7FE59007C203A /* UMHTTPPageHandler.m in Sources */,
 				A60C4CCE1EF7FE59007C203A /* UMHTTPRequest.m in Sources */,
 				A60C4CCF1EF7FE59007C203A /* UMHTTPServer.m in Sources */,

@@ -38,36 +38,37 @@
     NSDate              *_completionTimeout;
     BOOL                _awaitingCompletion; /* set to YES if data is returned later */
 
-	UMHTTPConnection	*connection; /* we own the connection while processing it */
-	NSString			*method;
-	NSString			*protocolVersion;
-    NSString			*connectionValue;
-	NSString			*path;
-	NSURL				*url;
-	NSMutableDictionary	*requestHeaders;
-	NSMutableDictionary	*responseHeaders;
-	NSData				*requestData;
-	NSData				*responseData;
-	NSDictionary		*params;
-	UMHTTPResponseCode	responseCode;
-    UMHTTPAuthenticationStatus authenticationStatus;
-    UMSleeper           *sleeper;  /* wake up this sleeper once data is returned by calling resumePendingRequest */
-    NSMutableDictionary *requestCookies;
-    NSMutableDictionary *responseCookies;
-    NSString            *authUsername;
-    NSString            *authPassword;
+	UMHTTPConnection	*_connection; /* we own the connection while processing it */
+	NSString			*_method; /* GET/POST etc */
+	NSString			*_protocolVersion;
+    NSString			*_connectionValue;
+	NSString			*_path;
+	NSURL				*_url;
+	NSMutableDictionary	*_requestHeaders;
+	NSMutableDictionary	*_responseHeaders;
+	NSData				*_requestData;
+	NSData				*_responseData;
+	NSDictionary		*_params;
+	UMHTTPResponseCode	_responseCode;
+    UMHTTPAuthenticationStatus _authenticationStatus;
+    UMSleeper           *_sleeper;  /* wake up this sleeper once data is returned by calling resumePendingRequest */
+    NSMutableDictionary *_requestCookies;
+    NSMutableDictionary *_responseCookies;
+    NSString            *_authUsername;
+    NSString            *_authPassword;
     
     id<UMHTTPRequest_TimeoutProtocol>    _timeoutDelegate;
     BOOL                _mustClose; /* if set, it means after answering this request the connection shall close */
     UMMutex             *_pendingRequestLock;
     NSString            *_documentRoot;
+    BOOL                _isWebSocketRequest;
 }
 
 @property (readwrite,assign,atomic)uint64_t            requestId;
 @property (readwrite,strong,atomic)NSDate               *completionTimeout;
 @property (readwrite,assign,atomic) BOOL                awaitingCompletion;
 
-@property (readwrite,strong,atomic) UMHTTPConnection			*connection;
+@property (readwrite,strong,atomic) UMHTTPConnection	*connection;
 //@property (readonly,assign) CFHTTPMessageRef			request;
 //@property (readonly,assign) CFHTTPMessageRef			response;
 @property (readwrite,strong) NSString					*protocolVersion;
@@ -83,12 +84,13 @@
 @property (readwrite,assign) UMHTTPAuthenticationStatus authenticationStatus;
 @property (readwrite,strong) NSMutableDictionary        *requestCookies;
 @property (readwrite,strong) NSMutableDictionary		*responseCookies;
-@property (readonly,strong) NSDictionary               *params;
+@property (readwrite,strong) NSDictionary               *params;
 @property (readwrite,strong,atomic) id<UMHTTPRequest_TimeoutProtocol>    timeoutDelegate;
 @property (readwrite,strong) NSString                   *authUsername;
 @property (readwrite,strong) NSString                   *authPassword;
-@property (readwrite,assign,atomic)     BOOL                mustClose;
+@property (readwrite,assign,atomic)     BOOL            mustClose;
 @property (readwrite,strong) NSString                   *documentRoot;
+@property (readwrite,assign) BOOL                       isWebSocketRequest;
 
 
 - (NSString *)name;

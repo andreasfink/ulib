@@ -13,7 +13,7 @@
 #import "UMSocketDefs.h"
 #import "UMSynchronizedArray.h"
 #import "UMMutex.h"
-
+#import "UMHTTPWebSocketDelegateProtocol.h"
 #include <sys/types.h>
 #include <netinet/in.h>
 
@@ -145,7 +145,8 @@ typedef enum UMHTTPServerStatus
 	id	<UMHTTPServerHttpDeleteDelegate>	_httpDeleteDelegate;
 	id	<UMHTTPServerHttpTraceDelegate>		_httpTraceDelegate;
 	id	<UMHTTPServerHttpConnectDelegate>	_httpConnectDelegate;
-	id	<UMHTTPServerHttpGetPostDelegate>	_httpGetPostDelegate;
+    id <UMHTTPServerHttpGetPostDelegate>    _httpGetPostDelegate;
+    id <UMHTTPWebSocketDelegateProtocol>    _httpWebSocketDelegate;
 
     NSString *_privateKeyFile;
     NSData *_privateKeyFileData;
@@ -180,6 +181,8 @@ typedef enum UMHTTPServerStatus
 @property(readwrite, strong)	id	<UMHTTPServerHttpTraceDelegate>		httpTraceDelegate;
 @property(readwrite, strong)	id	<UMHTTPServerHttpConnectDelegate>	httpConnectDelegate;
 @property(readwrite, strong)	id	<UMHTTPServerHttpGetPostDelegate>	httpGetPostDelegate;
+@property(readwrite, strong)    id  <UMHTTPWebSocketDelegateProtocol>   httpWebSocketDelegate;
+
 @property(readwrite, strong)    NSString *name;
 @property(readwrite, strong)    NSString *advertizeName;
 @property(readwrite, strong)    NSString *documentRoot;

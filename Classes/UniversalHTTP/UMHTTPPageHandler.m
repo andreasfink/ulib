@@ -80,15 +80,15 @@
 {
     if(_requiresAuthentication==NO)
     {
-        [req setAuthenticationStatus:UMHTTP_AUTHENTICATION_STATUS_NOT_REQUESTED];
+        req.authenticationStatus = UMHTTP_AUTHENTICATION_STATUS_NOT_REQUESTED;
     }
     if(!_authenticationDelegate)
     {
-        [req setAuthenticationStatus:UMHTTP_AUTHENTICATION_STATUS_FAILED];
+        req.authenticationStatus=UMHTTP_AUTHENTICATION_STATUS_FAILED;
     }
 	if(![_authenticationDelegate respondsToSelector:_authenticationSelector] )
     {
-        [req setAuthenticationStatus:UMHTTP_AUTHENTICATION_STATUS_FAILED];
+        req.authenticationStatus=UMHTTP_AUTHENTICATION_STATUS_FAILED;
     }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"

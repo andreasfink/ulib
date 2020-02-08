@@ -19,6 +19,9 @@
 #import "UMSynchronizedArray.h"
 #import "UMThreadHelpers.h"
 #import "UMTaskQueue.h"
+#import "NSData+UniversalObject.h"
+#import "NSData+UMHTTP.h"
+#import "UMHTTPWebSocketDelegateProtocol.h"
 
 #include <poll.h>
 @implementation UMHTTPConnection
@@ -276,7 +279,7 @@
                 }
                 else if ([header isEqual:@"Connection"])
                 {
-                    [_currentRequest setConnectionValue:value];
+                    _currentRequest.connectionValue = value;
                 }
             }
 			continue;
@@ -288,7 +291,7 @@
 		{
 			NSData *data = [[NSData alloc]initWithBytes:ptr length:n];
 			[appendToMe replaceBytesInRange:NSMakeRange(0,n) withBytes:nil length:0];
-			[_currentRequest setRequestData:data];
+			_currentRequest.requestData=data;
             self.lastActivity = [NSDate date];
 
             _currentRequest.mustClose = self.mustClose;
@@ -316,9 +319,10 @@
 
 - (void) processHTTPRequest:(UMHTTPRequest *)req
 {
-	NSString *protocolVersion = [req protocolVersion];
-    NSString *connectionValue = [req connectionValue];
-    NSString *method = [req method];
+	NSString *protocolVersion = req.protocolVersion;
+    NSString *connectionValue = req.connectionValue;
+    NSString *method = req.method; /* GET, POST etc */
+    NSMutableDictionary *headers = req.requestHeaders;
     
 	if([protocolVersion isEqual:@"HTTP/1.0"])
     {
@@ -328,6 +332,45 @@
 
 		self.mustClose = YES;
     }
+    
+    if (([method isEqualToString:@"GET"]) &&  (![protocolVersion isEqual:@"HTTP/1.0"]))
+    {
+        if(([headers[@"Connection"] isEqualToString:@"Upgrade"])
+         && ([headers[@"Upgrade"] isEqualToString:@"WebSocket"]))
+        {
+            if(_server.httpWebSocketDelegate==NULL)
+            {
+                [req setResponseHtmlString:@"Error: no websocket delegate defined"];
+                req.responseCode =HTTP_RESPONSE_CODE_METHOD_NOT_ALLOWED;
+                self.mustClose = YES;
+            }
+            else
+            {
+                _inWebSocketMode = YES;
+                NSString *webSocketKeyString = headers[@"Sec-WebSocket-Key"];
+                _webSocketProtocol = headers[@"Sec-WebSocket-Protocol"];
+                _webSocketVersion = headers[@"Sec-WebSocket-Version"];
+                _webSocketOrigin = headers[@"Origin"];
+            
+                
+
+                req.responseCode =HTTP_RESPONSE_CODE_SWITCHING_PROTOCOLS;
+                [req setResponseHeader:@"Upgrade" withValue:@"WebSocket"];
+                [req setResponseHeader:@"Connection" withValue:@"Upgrade"];
+                NSData *d = [[webSocketKeyString stringByAppendingString:
+                              @"258EAFA5-E914-47DA-95CA-C5AB0DC85B11"] dataUsingEncoding:NSASCIIStringEncoding];
+                d = [d sha1];
+                NSString *keyResponse = [d encodeBase64];
+                [req setResponseHeader:@"Sec-WebSocket-Accept" withValue:keyResponse];
+                self.mustClose = NO;
+                _httpWebSocketDelegate = [_server.httpWebSocketDelegate openWebSocketProtocol:_webSocketProtocol
+                                                                                      version:_webSocketVersion
+                                                                                       origin:_webSocketOrigin
+                                                                                      request:req];
+            }
+        }
+    }
+        
     if(_enableKeepalive==NO)
     {
 #ifdef HTTP_DEBUG
@@ -346,7 +389,7 @@
     
     if (!protocolVersion || !(([protocolVersion isEqual:@"HTTP/1.1"]) || ([protocolVersion isEqual:@"HTTP/1.0"])))
 	{
-		[req setResponseCode:HTTP_RESPONSE_CODE_HTTP_VERSION_NOT_SUPPORTED];
+		req.responseCode =HTTP_RESPONSE_CODE_HTTP_VERSION_NOT_SUPPORTED;
 #ifdef HTTP_DEBUG
         NSLog(@"[%@] Error 505 (Protocol Version not supported). mustClose set",self.name);
 #endif
@@ -359,7 +402,7 @@
 #ifdef HTTP_DEBUG
         NSLog(@"[%@]: Error 400 (BadRequest). mustClose set",self.name);
 #endif
-		[req setResponseCode:HTTP_RESPONSE_CODE_BAD_REQUEST];
+		req.responseCode =HTTP_RESPONSE_CODE_BAD_REQUEST;
 		return;
 	}
 	else
@@ -379,7 +422,7 @@
         if(req.authenticationStatus == UMHTTP_AUTHENTICATION_STATUS_FAILED)
         {
             [req setNotAuthorizedForRealm:realm];
-            [req setResponseCode:HTTP_RESPONSE_CODE_UNAUTHORIZED];
+            req.responseCode = HTTP_RESPONSE_CODE_UNAUTHORIZED;
             [req setResponseHtmlString:@"Authentication failed"];
             req.awaitingCompletion = NO;
         }
@@ -419,7 +462,7 @@
             }
             else
             {
-                [req setResponseCode:HTTP_RESPONSE_CODE_BAD_REQUEST];
+                req.responseCode = HTTP_RESPONSE_CODE_BAD_REQUEST;
                 [req setResponseHtmlString:[NSString stringWithFormat:@"Unknown method '%@'",method]];
 #ifdef HTTP_DEBUG
                 NSLog(@"[%@]: error 400. unknown method",self.name);

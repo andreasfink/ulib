@@ -7,6 +7,7 @@
 //
 
 #import "UMObject.h"
+#import "UMHTTPWebSocketDelegateProtocol.h"
 
 @class UMHTTPServer;
 @class UMHTTPRequest;
@@ -38,17 +39,27 @@ typedef enum UMHTTPConnectionRequestSection
 	ssize_t			_awaitingBytes;
     BOOL            _enableKeepalive;
     UMHTTPRequest    *_currentRequest;
+    BOOL            _inWebSocketMode;
+    NSString        *_webSocketKeyString;
+    NSData          *_webSocketKey;
+    NSString        *_webSocketProtocol;
+    NSString        *_webSocketVersion;
+    NSString        *_webSocketOrigin;
+    NSString        *_webSocketKeyResponseString;
+    id<UMHTTPWebSocketDelegateProtocol> _httpWebSocketDelegate;
 }
 
-@property(readwrite,strong,atomic)      NSString        *name;
-@property (readwrite,strong,atomic)     UMHTTPServer	*server;
-@property (readonly,strong,atomic)	    UMSocket		*socket;
-@property (readwrite,assign,atomic)     BOOL            mustClose;
-@property (readwrite,assign,atomic)     BOOL            inputClosed;
-@property (readwrite,assign,atomic)     int				timeout;
-@property (readwrite,strong,atomic)     NSDate			*lastActivity;
-@property (readwrite,strong,atomic)     UMHTTPRequest	*currentRequest;
-@property (readwrite,assign,atomic)     BOOL            enableKeepalive;
+@property(readwrite,strong,atomic)  NSString        *name;
+@property (readwrite,strong,atomic) UMHTTPServer	*server;
+@property (readonly,strong,atomic)  UMSocket		*socket;
+@property (readwrite,assign,atomic) BOOL            mustClose;
+@property (readwrite,assign,atomic) BOOL            inputClosed;
+@property (readwrite,assign,atomic) int				timeout;
+@property (readwrite,strong,atomic) NSDate			*lastActivity;
+@property (readwrite,strong,atomic) UMHTTPRequest	*currentRequest;
+@property (readwrite,assign,atomic) BOOL            enableKeepalive;
+@property (readwrite,assign,atomic) BOOL            inWebSocketMode;
+@property(readwrite, strong,atomic) id <UMHTTPWebSocketDelegateProtocol> httpWebSocketDelegate;
 
 
 - (UMHTTPConnection *) initWithSocket:(UMSocket *)socket server:(UMHTTPServer *)server;

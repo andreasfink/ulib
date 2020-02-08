@@ -10,6 +10,7 @@
 
 @implementation NSData (UMHTTP)
 
+
 - (NSString *)encodeBase64
 {
     return [self base64EncodedStringWithOptions:0];

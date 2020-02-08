@@ -22,25 +22,6 @@
 
 @implementation UMHTTPRequest
 
-@synthesize connection;
-@synthesize method;
-@synthesize protocolVersion;
-@synthesize connectionValue;
-@synthesize path;
-@synthesize url;
-@synthesize requestData;
-@synthesize responseData;
-@synthesize requestHeaders;
-@synthesize responseHeaders;
-@synthesize responseCode;
-@synthesize authenticationStatus;
-@synthesize requestCookies;
-@synthesize responseCookies;
-@synthesize params;
-@synthesize timeoutDelegate;
-@synthesize authUsername;
-@synthesize authPassword;
-
 - (id) init
 {
     static uint64_t lastRequestId = 0;
@@ -58,9 +39,9 @@
         _requestId = ++lastRequestId;
         _completionTimeout = [NSDate dateWithTimeIntervalSinceNow:120];
         [lastRequestId_lock unlock];
-        responseCode=HTTP_RESPONSE_CODE_OK;
+        _responseCode=HTTP_RESPONSE_CODE_OK;
         self.awaitingCompletion = NO;
-        responseHeaders = [[NSMutableDictionary alloc]init];
+        _responseHeaders = [[NSMutableDictionary alloc]init];
 
     }
     return self;
@@ -76,84 +57,84 @@
     NSMutableString *desc;
     
     desc = [[NSMutableString alloc] initWithString:@"UMHTTPRequest dump starts\n"];
-    [desc appendFormat:@"listening connection %p\n", connection];
-	[desc appendFormat:@"request method was <%@>\n", method ? method : @""];
-	[desc appendFormat:@"protocol version was <%@>\n", protocolVersion ? protocolVersion : @""];
-    [desc appendFormat:@"connection header had value <%@>\n", connectionValue ? connectionValue : @""];
-	[desc appendFormat:@"path was <%@>\n", path ? path : @""];
-	[desc appendFormat:@"url was <%@>\n",url ? url : @""];
-    if (requestHeaders)
+    [desc appendFormat:@"listening connection %p\n", _connection];
+	[desc appendFormat:@"request method was <%@>\n", _method ? _method : @""];
+	[desc appendFormat:@"protocol version was <%@>\n", _protocolVersion ? _protocolVersion : @""];
+    [desc appendFormat:@"connection header had value <%@>\n", _connectionValue ? _connectionValue : @""];
+	[desc appendFormat:@"path was <%@>\n", _path ? _path : @""];
+	[desc appendFormat:@"url was <%@>\n",_url ? _url : @""];
+    if (_requestHeaders)
     {
-	    [desc appendFormat:@"request headers were %@\n", requestHeaders];
+	    [desc appendFormat:@"request headers were %@\n", _requestHeaders];
     }
-    if (responseHeaders)
+    if (_responseHeaders)
     {
-	    [desc appendFormat:@"response headers were %@\n", responseHeaders];
+	    [desc appendFormat:@"response headers were %@\n", _responseHeaders];
     }
-    if (requestCookies)
+    if (_requestCookies)
     {
-	    [desc appendFormat:@"request cookies were %@\n", requestCookies];
+	    [desc appendFormat:@"request cookies were %@\n", _requestCookies];
     }
-    if (responseCookies)
+    if (_responseCookies)
     {
-	    [desc appendFormat:@"response cookies were %@\n", responseCookies];
+	    [desc appendFormat:@"response cookies were %@\n", _responseCookies];
     }
-	[desc appendFormat:@"request data was <%@>\n", requestData ? requestData : @""];
-	[desc appendFormat:@"response data was <%@>\n", responseData ? responseData : @""];
-    if (params)
-	    [desc appendFormat:@"params were %@\n", params];
+	[desc appendFormat:@"request data was <%@>\n", _requestData ? _requestData : @""];
+	[desc appendFormat:@"response data was <%@>\n", _responseData ? _responseData : @""];
+    if (_params)
+	    [desc appendFormat:@"params were %@\n", _params];
 	[desc appendFormat:@"response code was %@\n", [self responseCodeAsString]];
     [desc appendFormat:@"authentication status was %@\n", [self authenticationStatusAsString]];
     [desc appendFormat:@"awaitingCompletion %@\n", (self.awaitingCompletion ? @"YES" : @"NO")];
-    [desc appendFormat:@"sleeper %@\n", (sleeper ? @"SET" : @"NULL")];    
+    [desc appendFormat:@"sleeper %@\n", (_sleeper ? @"SET" : @"NULL")];    
     [desc appendString:@"UMHTTPRequest dump ends\n"];
     return desc;
 }
 
 - (void) setNotFound
 {
-    responseCode = HTTP_RESPONSE_CODE_NOT_FOUND;
+    _responseCode = HTTP_RESPONSE_CODE_NOT_FOUND;
 }
 
 - (void) setRequireAuthentication
 {
-    responseCode = HTTP_RESPONSE_CODE_UNAUTHORIZED;
+    _responseCode = HTTP_RESPONSE_CODE_UNAUTHORIZED;
 }
 
 - (void) extractGetParams
 {
-    self.url = [[NSURL alloc]initWithString:path];
+    self.url = [[NSURL alloc]initWithString:_path];
     if(self.url==NULL)
     {
-        NSLog(@"can not decode URL %@",path);
+        NSLog(@"can not decode URL %@",_path);
     }
-	[self extractParams:[url query]];
+	[self extractParams:[_url query]];
 }
 
 - (void) extractPutParams
 {
-    self.url = [[NSURL alloc]initWithString:path];
+    self.url = [[NSURL alloc]initWithString:_path];
     if(self.url==NULL)
     {
-        NSLog(@"can not decode URL %@",path);
+        NSLog(@"can not decode URL %@",_path);
     }
-	[self extractParams:[url query]];
+	[self extractParams:[_url query]];
 }
 
 - (void) extractPostParams;
 {
-    self.url = [[NSURL alloc]initWithString:path];
+    self.url = [[NSURL alloc]initWithString:_path];
     if(self.url==NULL)
     {
-        NSLog(@"can not decode URL %@",path);
+        NSLog(@"can not decode URL %@",_path);
     }
-    NSString *requestDataString = [[NSString alloc]initWithBytes:[requestData bytes] length:[requestData length] encoding:NSUTF8StringEncoding];
+    NSString *requestDataString = [[NSString alloc]initWithBytes:[_requestData bytes] length:[_requestData length] encoding:NSUTF8StringEncoding];
 	[self extractParams:requestDataString];
 }
 
 - (NSMutableDictionary *)paramsMutableCopy
 {
-    return [[NSMutableDictionary alloc]initWithDictionary:params];
+    return [[NSMutableDictionary alloc]initWithDictionary:_params];
 }
 
 - (void) extractParams:(NSString *)query
@@ -165,7 +146,7 @@
 	NSString	*tag;
 	NSString	*value;
 
-	params = nil;
+	_params = nil;
 	if(query == nil)
     {
 		return;
@@ -183,16 +164,16 @@
 		    [d setObject:value forKey:tag];;
         }
 	}
-	params = [[NSDictionary alloc] initWithDictionary:d];
+	_params = [[NSDictionary alloc] initWithDictionary:d];
 }
 
 - (void) setRequestHeader:(NSString *)name withValue:(NSString *)value
 {
-	if(requestHeaders==nil)
+	if(_requestHeaders==nil)
     {
-		requestHeaders = [[NSMutableDictionary alloc]init];
+		_requestHeaders = [[NSMutableDictionary alloc]init];
     }
-	[requestHeaders setObject:value forKey:name];
+	[_requestHeaders setObject:value forKey:name];
 
     if([name isEqualToString:@"Authorization"])
     {
@@ -204,8 +185,8 @@
             NSArray *parts = [user_and_pass componentsSeparatedByString:@":"];
             if([parts count]==2)
             {
-                self.authUsername = parts[0];
-                self.authPassword = parts[1];
+                _authUsername = parts[0];
+                _authPassword = parts[1];
             }
         }
     }
@@ -232,21 +213,21 @@
 
 - (void)setRequestCookie:(UMHTTPCookie *)cookie
 {
-	if(requestCookies==nil)
+	if(_requestCookies==nil)
     {
-		requestCookies = [[NSMutableDictionary alloc]init];
+		_requestCookies = [[NSMutableDictionary alloc]init];
     }
-	[requestCookies setObject:cookie forKey:cookie.name];
+	[_requestCookies setObject:cookie forKey:cookie.name];
 }
 
 
 - (void)setResponseCookie:(UMHTTPCookie *)cookie
 {
-	if(responseCookies==nil)
+	if(_responseCookies==nil)
     {
-		responseCookies = [[NSMutableDictionary alloc]init];
+		_responseCookies = [[NSMutableDictionary alloc]init];
     }
-	[responseCookies setObject:cookie forKey:cookie.name];
+	[_responseCookies setObject:cookie forKey:cookie.name];
 }
 
 - (void) setRequestHeadersFromArray:(NSMutableArray *)array
@@ -279,18 +260,18 @@
                 }
 
             }
-            id currentHeader = [requestHeaders objectForKey:value];
+            id currentHeader = [_requestHeaders objectForKey:value];
             if(currentHeader == NULL)
             {
                 NSMutableArray *currentArray = [[NSMutableArray alloc]init];
                 [currentArray addObject:value];
-                [requestHeaders setObject:currentArray forKey:name];
+                [_requestHeaders setObject:currentArray forKey:name];
             }
             else
             {
                 NSMutableArray *currentArray = currentHeader;
                 [currentArray addObject:value];
-                [requestHeaders setObject:currentArray forKey:name];
+                [_requestHeaders setObject:currentArray forKey:name];
             }
         }
     }
@@ -298,7 +279,7 @@
 
 - (void) removeRequestHeader:(NSString *)name
 {
-    [requestHeaders removeObjectForKey:name];
+    [_requestHeaders removeObjectForKey:name];
 }
 
 - (void) setResponseHeader:(NSString *)name withValue:(NSString *)value
@@ -307,7 +288,7 @@
     {
         value = @"";
     }
-	[responseHeaders setObject:value forKey:name];
+	[_responseHeaders setObject:value forKey:name];
 }
 
 
@@ -383,12 +364,12 @@
 
 - (UMHTTPCookie *)getCookie:(NSString *)name
 {
-    return [requestCookies objectForKey:name];
+    return [_requestCookies objectForKey:name];
 }
 
 - (NSString *)responseCodeAsString
 {
-    switch(responseCode)
+    switch(_responseCode)
     {
         case HTTP_RESPONSE_CODE_CONTINUE:
             return @"Continue";
@@ -479,7 +460,7 @@
 
 - (NSString *)authenticationStatusAsString
 {
-    switch(authenticationStatus)
+    switch(_authenticationStatus)
     {
         case UMHTTP_AUTHENTICATION_STATUS_UNTESTED:
             return @"untested";
@@ -497,7 +478,7 @@
 - (NSData *)extractResponse
 {
     NSMutableData *d = [NSMutableData dataWithData:[self extractResponseHeader]];
-    [d appendData:responseData];
+    [d appendData:_responseData];
     return (NSData *)d;
 }
 
@@ -506,13 +487,13 @@
     BOOL lengthSet = NO;
     NSString *eol = @"\r\n";
     
-    NSMutableString *s = [NSMutableString stringWithFormat: @"%@ %03d %@%@",protocolVersion,responseCode,[self responseCodeAsString],eol];
-    for(NSString *key in responseHeaders)
+    NSMutableString *s = [NSMutableString stringWithFormat: @"%@ %03d %@%@",_protocolVersion,_responseCode,[self responseCodeAsString],eol];
+    for(NSString *key in _responseHeaders)
     {
-        NSObject *value = [responseHeaders objectForKey:key];
-        if([key isEqualToString:@"Content-Length"] && ![method isEqualToString:@"HEAD"])
+        NSObject *value = [_responseHeaders objectForKey:key];
+        if([key isEqualToString:@"Content-Length"] && ![_method isEqualToString:@"HEAD"])
         {
-            [s appendFormat:@"Content-Length: %lu%@",(unsigned long)[responseData length],eol];
+            [s appendFormat:@"Content-Length: %lu%@",(unsigned long)[_responseData length],eol];
             lengthSet = YES;
         }
         else
@@ -532,18 +513,18 @@
         }
     }
 
-    for(NSString *cookieKey in responseCookies)
+    for(NSString *cookieKey in _responseCookies)
     {
-        UMHTTPCookie *cookie = [responseCookies objectForKey:cookieKey];
+        UMHTTPCookie *cookie = [_responseCookies objectForKey:cookieKey];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.dateFormat = @"EEE, dd MMM yyyy HH:mm:ss Z"; //RFC2822-Format
         NSString *dateString = [dateFormatter stringFromDate:cookie.expiration];
         [s appendFormat:@"Set-Cookie: %@=%@; path=%@; expires=%@%@",cookie.name,cookie.value,cookie.path,dateString,eol];
     }
 
-    if(lengthSet==NO && ![method isEqualToString:@"HEAD"])
+    if(lengthSet==NO && ![_method isEqualToString:@"HEAD"])
     {
-        [s appendFormat:@"Content-Length: %lu%@",(unsigned long)[responseData length],eol];
+        [s appendFormat:@"Content-Length: %lu%@",(unsigned long)[_responseData length],eol];
     }
     [s appendFormat:@"%@",eol];
     return [s dataUsingEncoding:NSUTF8StringEncoding];
@@ -552,34 +533,34 @@
 - (void) setResponseHtmlString:(NSString *)content
 {
     [self setContentType:@"text/html; charset=UTF-8"];
-    [self setResponseData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+    _responseData = [content dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 - (void) setResponsePlainText:(NSString *)content
 {
     [self setResponseTypeText];
-    [self setResponseData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+    _responseData = [content dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 - (void) appendResponsePlainText:(NSString *)content
 {
     [self setResponseTypeText];
-    NSMutableData *mdata = [responseData mutableCopy];
+    NSMutableData *mdata = [_responseData mutableCopy];
     [mdata appendData:[content dataUsingEncoding:NSUTF8StringEncoding]];
-    [self setResponseData:[mdata copy]];
+    _responseData=[mdata copy];
 }
 
 - (void) setResponseCssString:(NSString *)content
 { 
     [self setResponseTypeCss];
-    [self setResponseData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+    _responseData=[content dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 
 - (void) setResponseJsonString:(NSString *)content
 {
     [self setResponseTypeJson];
-    [self setResponseData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+    _responseData=[content dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 - (void) setResponseJsonObject:(id)content
@@ -592,7 +573,7 @@
     {
         string = writer.error;
     }
-    [self setResponseData:[string dataUsingEncoding:NSUTF8StringEncoding]];
+    _responseData=[string dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 - (void)setContentType:(NSString *)ct
@@ -602,7 +583,7 @@
 
 - (void)setNotAuthorizedForRealm:(NSString *)realm
 {
-    [self setResponseCode:HTTP_RESPONSE_CODE_UNAUTHORIZED];
+    _responseCode = HTTP_RESPONSE_CODE_UNAUTHORIZED;
     [self setResponseHeader:@"WWW-Authenticate" withValue:[NSString stringWithFormat:@"Basic real=\"%@\"",realm]];
     NSString *text =
         @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\r\n"
@@ -653,15 +634,15 @@
 - (void)sleepUntilCompleted
 {
     self.awaitingCompletion  = YES;
-    [connection.server.pendingRequests addObject:self];
+    [_connection.server.pendingRequests addObject:self];
 }
 
 - (void)redirect:(NSString *)newPath
 {
     [self setResponseHeader:@"Location" withValue:newPath];
     NSString *responseText = [NSString stringWithFormat:@"<h4>Redirecting to <a href=\"%@\">%@</a></h4>",newPath,newPath];
-    self.responseData = [responseText dataUsingEncoding:NSUTF8StringEncoding];
-    self.responseCode = HTTP_RESPONSE_CODE_TEMPORARY_REDIRECT;
+    _responseData = [responseText dataUsingEncoding:NSUTF8StringEncoding];
+    _responseCode = HTTP_RESPONSE_CODE_TEMPORARY_REDIRECT;
 }
 
 - (void)finishRequest
@@ -670,11 +651,11 @@
     NSLog(@"[%@]: finishRequest called",self.name);
 #endif
 
-    [connection.server.pendingRequests removeObject:self];
-    NSString *serverName = connection.server.serverName;
+    [_connection.server.pendingRequests removeObject:self];
+    NSString *serverName = _connection.server.serverName;
 
     [self setResponseHeader:@"Server" withValue:serverName];
-    if(connection.enableKeepalive)
+    if(_connection.enableKeepalive)
     {
         [self setResponseHeader:@"Keep-Alive" withValue:@"timeout=4, max=100"];
         [self setResponseHeader:@"Connection" withValue:@"Keep-Alive"];
@@ -684,23 +665,23 @@
         [self setResponseHeader:@"Connection" withValue:@"close"];
     }
     NSData *resp = [self extractResponse];
-    [connection.socket sendData:resp];
-    connection.currentRequest = NULL; /* our answer is complete */
+    [_connection.socket sendData:resp];
+    _connection.currentRequest = NULL; /* our answer is complete */
 
-    if(connection.mustClose)
+    if(_connection.mustClose)
     {
 #ifdef HTTP_DEBUG
         NSLog(@"[%@]: connection.mustClose is set. listener should now terminate",self.name);
 #endif
-        connection = NULL; /* we give up ownership of the connection */
+        _connection = NULL; /* we give up ownership of the connection */
     }
     else
     {
 #ifdef HTTP_DEBUG
         NSLog(@"[%@]: connection.mustClose is not set. requeuing read request",self.name);
 #endif
-        UMHTTPTask_ReadRequest *task = [[UMHTTPTask_ReadRequest alloc]initWithConnection:connection];
-        [connection.server.taskQueue queueTask:task];
+        UMHTTPTask_ReadRequest *task = [[UMHTTPTask_ReadRequest alloc]initWithConnection:_connection];
+        [_connection.server.taskQueue queueTask:task];
     }
 }
 
@@ -739,5 +720,35 @@
     {
         [self setResponseTypeBinary];
     }
+}
+
+- (UMHTTPRequest *)copyWithZone:(NSZone *)zone
+{
+    UMHTTPRequest *r = [[UMHTTPRequest allocWithZone:zone]init];
+    r.requestId = _requestId;
+    r.completionTimeout = _completionTimeout;
+    r.awaitingCompletion = _awaitingCompletion;
+    r.connection = _connection;
+    r.method = _method;
+    r.protocolVersion = _protocolVersion;
+    r.connectionValue = _connectionValue;
+    r.path = _path;
+    r.url = _url;
+    r.requestHeaders = [_requestHeaders copy];
+    r.responseHeaders = [_responseHeaders copy];
+    r.requestData = _requestData;
+    r.responseData = _responseData;
+    r.params = _params;
+    r.responseCode = _responseCode;
+    r.authenticationStatus = _authenticationStatus;
+    r.requestCookies = [_requestCookies copy];
+    r.responseCookies = [_responseCookies copy];
+    r.authUsername = _authUsername;
+    r.authPassword = _authPassword;
+    r.timeoutDelegate = _timeoutDelegate;
+    r.mustClose = _mustClose;
+    r.documentRoot = _documentRoot;
+    r.isWebSocketRequest = _isWebSocketRequest;
+    return r;
 }
 @end

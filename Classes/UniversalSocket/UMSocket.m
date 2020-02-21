@@ -895,6 +895,11 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
 }
 
+- (UMSocket *) init
+{
+    return [self initWithName:@"untitled"];
+}
+
 - (UMSocket *) initWithName:(NSString *)name
 {
     self = [super init];
@@ -1047,7 +1052,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         
         if(newsock >= 0)
         {
-            newcon = [[UMSocket alloc]init];
+            newcon = [[UMSocket alloc]initWithName:[NSString stringWithFormat:@"%@ copy",_socketName]];
             newcon.type = type;
 
             if((type == UMSOCKET_TYPE_TCP) || (type == UMSOCKET_TYPE_TCP4ONLY) || (type == UMSOCKET_TYPE_TCP6ONLY))

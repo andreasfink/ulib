@@ -36,7 +36,7 @@
 
 @property (assign) BOOL         	enableLogging;
 @property (strong) NSString     	*name;
-@property (strong)  UMQueueMulti    *multiQueue;
+@property (strong) UMQueueMulti     *multiQueue;
 @property (strong) UMSleeper    	*workSleeper;
 @property (assign) BOOL        		debug;
 

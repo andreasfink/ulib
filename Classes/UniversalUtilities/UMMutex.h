@@ -14,10 +14,10 @@
 {
     pthread_mutex_t     _mutexLock;
     pthread_mutexattr_t _mutexAttr;
-    int _lockDepth;
-    NSString *_name;
-    const char *_objectStatisticsName;
-    BOOL _savedInObjectStat;
+    int                 _lockDepth;
+    NSString            *_name;
+    const char          *_objectStatisticsName;
+    BOOL                _savedInObjectStat;
 }
 
 @property(readwrite,strong) NSString *name;
@@ -36,7 +36,7 @@
     int64_t _trylock_count;
     int64_t _unlock_count;
     int64_t _waiting_count;
-    BOOL _currently_locked;
+    BOOL    _currently_locked;
 }
 
 @property(readwrite,strong,atomic)  NSString *name;

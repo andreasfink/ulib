@@ -606,7 +606,7 @@ static NSArray *        _machineCPUIDs = NULL;
 
 #define MAXLINE 256
     NSMutableString *serialNumber = NULL;
-    NSArray *cmd = @"/usr/sbin/dmidecode",@"-t",@"system"];
+    NSArray *cmd = @[@"/usr/sbin/dmidecode",@"-t",@"system"];
     NSArray *lines = [UMUtil readChildProcess:cmd];
     for (NSString *line in lines)
     {

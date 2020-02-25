@@ -607,7 +607,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
 
 #define MAXLINE 256
     NSMutableString *serialNumber = NULL;
-    NSArray *cmd = [NSArray arrayWithObjects:@"/usr/sbin/dmidecode",@"-t",@"system",NULL];
+    NSArray *cmd = @"/usr/sbin/dmidecode",@"-t",@"system"];
     NSArray *lines = [UMUtil readChildProcess:cmd];
     for (NSString *line in lines)
     {
@@ -634,6 +634,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
                 }
             }
             found=YES;
+			break;
         }
     }
 #endif
@@ -645,7 +646,6 @@ static BOOL             _machineCPUIDsLoaded = NO;
     }
     return @"unknown";
 }
-
 
 + (NSString *)getMachineUUID
 {
@@ -713,26 +713,22 @@ static BOOL             _machineCPUIDsLoaded = NO;
         
         char  **cmd=NULL;
         int n = (int)[args count];
-        int i;
+        int i=0;
+		unsigned long j=0;
         cmd = calloc(n+1,sizeof (char *));
         for(i=0;i<n;i++)
         {
-            cmd[i]=(char *)[args[i] UTF8String];
+			NSString *s = args[i];
+			const char *str = s.UTF8String;
+			j = strlen(str);
+            cmd[i]=calloc(j+1,1);
+			strncpy(cmd[i],str,j);
         }
         if (execvp(cmd[0], cmd) == -1)
         {
-            if(cmd)
-            {
-                free(cmd);
-                cmd=NULL;
-            }
+			fprintf(stderr,"execvp(%s) fails with errno %d %s",cmd[0],errno,strerror(errno));
         }
         /* we actually should never get here.*/
-        if(cmd)
-        {
-            free(cmd);
-            cmd=NULL;
-        }
         exit(0);
     }
     else

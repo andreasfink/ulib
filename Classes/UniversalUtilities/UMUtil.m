@@ -726,14 +726,25 @@ static BOOL             _machineCPUIDsLoaded = NO;
                 free(cmd);
                 cmd=NULL;
             }
+            usleep(100000); /* give other thread a chance to catch up */
             exit(-1);
         }
+        if(cmd)
+        {
+            free(cmd);
+            cmd=NULL;
+        }
+        usleep(100000); /* give other thread a chance to catch up */
         exit(0);
     }
     else
     {
         int returnStatus=0;
-        waitpid(pid, &returnStatus, 0);
+        int waitpid_options = 0;
+#if defined(LINUX)
+        waitpid_options = WIFEXITED;
+#endif
+        waitpid(pid, &returnStatus, waitpid_options);
         close(pipefds[TXPIPE]);
         
         FILE *fromChild = fdopen(pipefds[RXPIPE], "r");

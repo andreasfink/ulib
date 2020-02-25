@@ -726,40 +726,25 @@ static BOOL             _machineCPUIDsLoaded = NO;
                 free(cmd);
                 cmd=NULL;
             }
-            usleep(100000); /* give other thread a chance to catch up */
-            exit(-1);
         }
+        /* we actually should never get here.*/
         if(cmd)
         {
             free(cmd);
             cmd=NULL;
         }
-        usleep(100000); /* give other thread a chance to catch up */
         exit(0);
     }
     else
     {
-        int returnStatus=0;
-        int waitpid_options = 0;
-#if defined(LINUX)
-        waitpid_options = WIFEXITED;
-#endif
-        waitpid(pid, &returnStatus, waitpid_options);
         close(pipefds[TXPIPE]);
-        
         FILE *fromChild = fdopen(pipefds[RXPIPE], "r");
-        
+        usleep(1000);
+        int returnStatus=0;
+        waitpid(pid, &returnStatus, 0);
         result = [[NSMutableArray alloc]init];
-        
         char line[257];
         size_t linecap=255;
-        
-        /*
-         char *line=NULL;
-         size_t linecap=255;
-         ssize_t linelen;
-         while ((linelen = getline(&line, &linecap, fromChild)) > 0)
-         */
         while(fgets(line, (int)linecap, fromChild))
         {
             [result addObject:@(line)];

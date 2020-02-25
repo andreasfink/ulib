@@ -96,7 +96,6 @@ static BOOL             _machineSerialNumberLoaded = NO;
 static NSString *       _machineUUID = NULL;
 static BOOL             _machineUUIDLoaded = NO;
 static NSArray *        _machineCPUIDs = NULL;
-static BOOL             _machineCPUIDsLoaded = NO;
 
 @implementation UMUtil
 
@@ -607,7 +606,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
 
 #define MAXLINE 256
     NSMutableString *serialNumber = NULL;
-    NSArray *cmd = [NSArray arrayWithObjects:@"/usr/sbin/dmidecode",@"-t",@"system",NULL];
+    NSArray *cmd = @[@"/usr/sbin/dmidecode",@"-t",@"system"];
     NSArray *lines = [UMUtil readChildProcess:cmd];
     for (NSString *line in lines)
     {
@@ -634,6 +633,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
                 }
             }
             found=YES;
+			break;
         }
     }
 #endif
@@ -645,7 +645,6 @@ static BOOL             _machineCPUIDsLoaded = NO;
     }
     return @"unknown";
 }
-
 
 + (NSString *)getMachineUUID
 {
@@ -713,28 +712,22 @@ static BOOL             _machineCPUIDsLoaded = NO;
         
         char  **cmd=NULL;
         int n = (int)[args count];
-        int i;
-        cmd = calloc(sizeof (char *),n+1);
+        int i=0;
+		unsigned long j=0;
+        cmd = calloc(n+1,sizeof (char *));
         for(i=0;i<n;i++)
         {
-            cmd[i]=(char *)[args[i] UTF8String];
+			NSString *s = args[i];
+			const char *str = s.UTF8String;
+			j = strlen(str);
+            cmd[i]=calloc(j+1,1);
+			strncpy(cmd[i],str,j);
         }
         if (execvp(cmd[0], cmd) == -1)
         {
-            if(cmd)
-            {
-                free(cmd);
-                cmd=NULL;
-            }
-            usleep(100000); /* give other thread a chance to catch up */
-            exit(-1);
+			fprintf(stderr,"execvp(%s) fails with errno %d %s",cmd[0],errno,strerror(errno));
         }
-        if(cmd)
-        {
-            free(cmd);
-            cmd=NULL;
-        }
-        usleep(100000); /* give other thread a chance to catch up */
+        /* we actually should never get here.*/
         exit(0);
     }
     else
@@ -742,20 +735,10 @@ static BOOL             _machineCPUIDsLoaded = NO;
         int returnStatus=0;
         waitpid(pid, &returnStatus,0);
         close(pipefds[TXPIPE]);
-        
         FILE *fromChild = fdopen(pipefds[RXPIPE], "r");
-        
         result = [[NSMutableArray alloc]init];
-        
         char line[257];
         size_t linecap=255;
-        
-        /*
-         char *line=NULL;
-         size_t linecap=255;
-         ssize_t linelen;
-         while ((linelen = getline(&line, &linecap, fromChild)) > 0)
-         */
         while(fgets(line, (int)linecap, fromChild))
         {
             [result addObject:@(line)];
@@ -773,59 +756,21 @@ static BOOL             _machineCPUIDsLoaded = NO;
     return result;
 }
 
+
 + (NSArray *)getCPUSerialNumbers
 {
-    if(_machineCPUIDsLoaded)
-    {
-        return _machineCPUIDs;
-    }
-    
-    
-    NSArray *cmd = [NSArray arrayWithObjects:@"/usr/sbin/dmidecode",@"-t",@"processor",NULL];
-    NSArray *lines = [UMUtil readChildProcess:cmd];
-    NSMutableArray  *serialNumbers = [[NSMutableArray alloc]init];
-    int found = 0;
-    
-    for(NSString *line in lines)
-    {
-        const char *s = strstr([line UTF8String],"ID: ");
-        if(s)
-        {
-            s += strlen("ID: ");
-            size_t len = strlen(s);
-            int i;
-            NSMutableString *serialNumber = [[NSMutableString alloc] init];
-            for(i=0;i<len;i++)
-            {
-                switch(s[i])
-                {
-                    case '\0':
-                    case '\n':
-                    case '\r':
-                    case '\t':
-                    case ' ':
-                        break;
-                    default:
-                        [serialNumber appendFormat:@"%c",s[i]];
-                        break;
-                }
-            }
-            if([serialNumbers indexOfObjectIdenticalTo:serialNumber]==NSNotFound)
-            {
-                [serialNumbers addObject:serialNumber];
-            }
-            serialNumber = NULL;
-            found++;
-        }
-    }
-    if(found==0)
-    {
-        serialNumbers=NULL;
-        return NULL;
-    }
-    _machineCPUIDsLoaded = YES;
-    _machineCPUIDs = serialNumbers;
-    return serialNumbers;
+#if defined(__i386__) || defined(__AMD64__)
+        int i = 3;
+        uint32_t regs[4];
+        asm volatile
+          ("cpuid" : "=a" (regs[0]), "=b" (regs[1]), "=c" (regs[2]), "=d" (regs[3])
+           : "a" (i), "c" (0));
+        // ECX is set to zero for CPUID function 4
+    NSString *s = [ [NSString stringWithFormat:@"%08X-%08X-%08X",regs[1],regs[2],regs[3]]];
+    return @[s];
+#else
+    return NULL;
+#endif
 }
 @end
 

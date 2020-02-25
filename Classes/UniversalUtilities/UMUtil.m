@@ -714,7 +714,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
         char  **cmd=NULL;
         int n = (int)[args count];
         int i;
-        cmd = calloc(sizeof (char *),n+1);
+        cmd = calloc(n+1,sizeof (char *));
         for(i=0;i<n;i++)
         {
             cmd[i]=(char *)[args[i] UTF8String];

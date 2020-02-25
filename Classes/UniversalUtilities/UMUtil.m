@@ -740,11 +740,7 @@ static BOOL             _machineCPUIDsLoaded = NO;
     else
     {
         int returnStatus=0;
-        int waitpid_options = 0;
-#if defined(LINUX)
-        waitpid_options = WIFEXITED;
-#endif
-        waitpid(pid, &returnStatus, waitpid_options);
+        waitpid(pid, &returnStatus,0);
         close(pipefds[TXPIPE]);
         
         FILE *fromChild = fdopen(pipefds[RXPIPE], "r");

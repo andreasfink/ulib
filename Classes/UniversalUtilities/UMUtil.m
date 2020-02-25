@@ -96,7 +96,6 @@ static BOOL             _machineSerialNumberLoaded = NO;
 static NSString *       _machineUUID = NULL;
 static BOOL             _machineUUIDLoaded = NO;
 static NSArray *        _machineCPUIDs = NULL;
-static BOOL             _machineCPUIDsLoaded = NO;
 
 @implementation UMUtil
 
@@ -762,59 +761,21 @@ static BOOL             _machineCPUIDsLoaded = NO;
     return result;
 }
 
+
 + (NSArray *)getCPUSerialNumbers
 {
-    if(_machineCPUIDsLoaded)
-    {
-        return _machineCPUIDs;
-    }
-    
-    
-    NSArray *cmd = [NSArray arrayWithObjects:@"/usr/sbin/dmidecode",@"-t",@"processor",NULL];
-    NSArray *lines = [UMUtil readChildProcess:cmd];
-    NSMutableArray  *serialNumbers = [[NSMutableArray alloc]init];
-    int found = 0;
-    
-    for(NSString *line in lines)
-    {
-        const char *s = strstr([line UTF8String],"ID: ");
-        if(s)
-        {
-            s += strlen("ID: ");
-            size_t len = strlen(s);
-            int i;
-            NSMutableString *serialNumber = [[NSMutableString alloc] init];
-            for(i=0;i<len;i++)
-            {
-                switch(s[i])
-                {
-                    case '\0':
-                    case '\n':
-                    case '\r':
-                    case '\t':
-                    case ' ':
-                        break;
-                    default:
-                        [serialNumber appendFormat:@"%c",s[i]];
-                        break;
-                }
-            }
-            if([serialNumbers indexOfObjectIdenticalTo:serialNumber]==NSNotFound)
-            {
-                [serialNumbers addObject:serialNumber];
-            }
-            serialNumber = NULL;
-            found++;
-        }
-    }
-    if(found==0)
-    {
-        serialNumbers=NULL;
-        return NULL;
-    }
-    _machineCPUIDsLoaded = YES;
-    _machineCPUIDs = serialNumbers;
-    return serialNumbers;
+#if defined(__i386__) || defined(__AMD64__)
+        int i = 3;
+        uint32_t regs[4];
+        asm volatile
+          ("cpuid" : "=a" (regs[0]), "=b" (regs[1]), "=c" (regs[2]), "=d" (regs[3])
+           : "a" (i), "c" (0));
+        // ECX is set to zero for CPUID function 4
+    NSString *s = [ [NSString stringWithFormat:@"%08X-%08X-%08X",regs[1],regs[2],regs[3]]];
+    return @[s];
+#else
+    return NULL;
+#endif
 }
 @end
 

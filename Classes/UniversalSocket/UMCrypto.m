@@ -16,7 +16,12 @@
 #include <unistd.h>
 #include "ulib_config.h"
 
-#ifdef HAVE_OPENSSL
+#ifdef __APPLE__
+#include "TargetConditionals.h"
+#if TARGET_OS_WATCH
+#define HAVE_COMMON_CRYPTO 1
+#else
+#include <openssl/bn.h>
 #include <openssl/rsa.h>
 #include <openssl/pem.h>
 #include <openssl/evp.h>
@@ -26,8 +31,11 @@
 #include <openssl/rsa.h>
 #include <openssl/x509.h>
 #include <openssl/rand.h>
-#include <string.h>
 #endif
+#endif
+
+#include <string.h>
+
 
 
 #ifdef HAVE_COMMON_CRYPTO
@@ -438,7 +446,7 @@
         return nil;
     }
     
-    EVP_CIPHER_CTX_init(e);
+    EVP_CIPHER_CTX_reset(e);
     EVP_EncryptInit_ex(e, EVP_des_cbc(), NULL, DESKey, DESIV);
     _iv = [[NSData alloc] initWithBytes:DESIV length:DES_BLOCK_SIZE];
     
@@ -469,7 +477,7 @@
     unsigned char *ciphertext = OPENSSL_malloc(cLen);
     EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
     
-    EVP_CIPHER_CTX_init(e);
+    EVP_CIPHER_CTX_reset(e);
     EVP_EncryptInit_ex(e, EVP_des_cbc(), NULL,  (unsigned char *)[password bytes], NULL);
     
     /* update ciphertext, cLen is filled with the length of ciphertext generated,
@@ -498,7 +506,7 @@
     int ret;
     EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
 
-    EVP_CIPHER_CTX_init(e);
+    EVP_CIPHER_CTX_reset(e);
     ret = EVP_DecryptInit_ex(e, EVP_des_cbc(), NULL, (unsigned char *)[key bytes], (unsigned char *)[_iv bytes]);
     if (ret == 0)
     {
@@ -538,7 +546,7 @@
     int ret;
     EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
 
-    EVP_CIPHER_CTX_init(e);
+    EVP_CIPHER_CTX_reset(e);
     EVP_DecryptInit_ex(e, EVP_rc4(), NULL, (unsigned char *)[key bytes], (unsigned char *)[_iv bytes]);
     
     ret = EVP_DecryptUpdate(e, plaintext, &pLen, (unsigned char *)[ciphertext bytes], *len);
@@ -573,7 +581,7 @@
     int ret;
     EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
 
-    EVP_CIPHER_CTX_init(e);
+    EVP_CIPHER_CTX_reset(e);
     ret = EVP_DecryptInit_ex(e, EVP_des_ede3_cbc(), NULL, (unsigned char *)[key bytes], (unsigned char *)[_iv bytes]);
     if (ret == 0)
     {
@@ -616,7 +624,7 @@
     int ret;
     EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
 
-    EVP_CIPHER_CTX_init(e);
+    EVP_CIPHER_CTX_reset(e);
     ret = EVP_DecryptInit_ex(e, EVP_cast5_cbc(), NULL, (unsigned char *)[key bytes], (unsigned char *)[_iv bytes]);
     if (ret == 0)
     {
@@ -726,11 +734,7 @@
     }
 
     // 1. generate rsa key
-#ifdef HAVE_BN_SECURE_NEW
     bne = BN_secure_new();
-#else
-    bne = BN_new();
-#endif
     if(bne==NULL)
     {
 #ifdef HAS_BN_SECURE_NEW

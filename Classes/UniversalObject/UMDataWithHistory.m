@@ -19,7 +19,7 @@
     NSData *oldData = (NSData *)_oldValue;
     NSData *currentData = (NSData *)_currentValue;
 
-    if([oldData isEqualTo:currentData])
+    if([oldData isEqualToData:currentData])
     {
         _isModified = YES;
     }

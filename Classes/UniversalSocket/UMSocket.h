@@ -28,7 +28,7 @@ typedef enum SocketBlockingMode
     SocketBlockingMode_isBlocking = 1,
 } SocketBlockingMode;
 
-#if defined(TARGET_OS_WATCH)
+#if TARGET_OS_WATCH
 @interface UMSocket : UMObject
 #else
 @interface UMSocket : UMObject<NSNetServiceDelegate>
@@ -83,7 +83,7 @@ typedef enum SocketBlockingMode
 @protected
     int                 ip_version;
     NSString            *name;
-#if !defined(TARGET_OS_WATCH)
+#if !TARGET_OS_WATCH
     NSNetService        *netService;
 #endif
     NSString            *advertizeName;

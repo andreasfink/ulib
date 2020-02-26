@@ -27,16 +27,24 @@
 #import "UMUtil.h" /* for UMBacktrace */
 
 #if defined(HAVE_OPENSSL)
-#include "openssl/opensslconf.h"
-#include "openssl/ssl.h"
-#include "openssl/err.h"
+#include <openssl/opensslconf.h>
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+#include <openssl/crypto.h>
 #endif
 
 #import "ulib_config.h" /* for HAVE_SOCKADDR_IN etc */
 
 typedef unsigned long (*CRYPTO_CALLBACK_PTR)(void);
 
+#ifdef __APPLE__
+#if TARGET_OS_OSX
 #define SCTP_IN_KERNEL  1
+#endif
+#endif
+#ifdef LINUX
+#define SCTP_IN_KERNEL  1
+#endif
 
 #ifdef SCTP_IN_KERNEL
 #ifdef __APPLE__
@@ -53,7 +61,9 @@ typedef unsigned long (*CRYPTO_CALLBACK_PTR)(void);
 #endif
 
 #ifdef SCTP_IN_KERNEL
+#if TARGET_OS_OSX
 #define	SCTP_SUPPORTED	1
+#endif
 #endif
 
 #ifdef SCTP_IN_USERSPACE
@@ -81,8 +91,8 @@ typedef struct CRYPTO_dynlock_value
 } CRYPTO_dynlock_value;
 
 struct usocket;
-typedef void *ummutex_c_pointer;
-static ummutex_c_pointer *ssl_static_locks;
+//typedef void *ummutex_c_pointer;
+//static ummutex_c_pointer *ssl_static_locks;
 
 #ifdef SCTP_IN_USERSPACE
 
@@ -2932,9 +2942,14 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 {
     if(global_server_ssl_context == NULL)
     {
+        #if OPENSSL_VERSION_NUMBER < 0x10100000L
         SSL_library_init();
         SSLeay_add_ssl_algorithms();
         SSL_load_error_strings();
+        #else
+        OPENSSL_init_ssl(0, NULL);
+        #endif
+
 #if  defined(HAVE_TLS_METHOD) || defined(__APPLE__)
         global_generic_ssl_context = SSL_CTX_new(TLS_method());
         global_server_ssl_context = SSL_CTX_new(TLS_server_method());
@@ -2967,7 +2982,8 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
                                           userInfo:@{@"backtrace": UMBacktrace(NULL,0)}]);
 
         }
-        
+
+#ifdef NO_LONGER_USED
         int maxlocks = CRYPTO_num_locks();
         ssl_static_locks = (ummutex_c_pointer *)malloc(sizeof(ummutex_c_pointer) * maxlocks);
         for (int c = 0; c < maxlocks; c++)
@@ -2975,6 +2991,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
             UMMutex *lck = [[UMMutex alloc]initWithName: [NSString stringWithFormat:@"ssl_static_locks[%d]",c]];
             ssl_static_locks[c] = (__bridge_retained ummutex_c_pointer)lck;
         }
+#endif
     }
 }
 

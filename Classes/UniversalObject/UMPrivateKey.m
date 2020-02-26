@@ -8,12 +8,20 @@
 
 #import "UMPrivateKey.h"
 
+#if defined(__APPLE__)
+#include "TargetConditionals.h"
+#if TARGET_OS_WATCH
+#define HAVE_COMMON_CRYPTO 1
+#undef HAVE_OPENSSL
+#else
 #include <openssl/pem.h>
 #include <openssl/ssl.h>
 #include <openssl/rsa.h>
 #include <openssl/evp.h>
 #include <openssl/bio.h>
 #include <openssl/err.h>
+#endif
+#endif
 
 static int password_read_callback(char *buf, int size, int rwflag, void *u);
 
@@ -62,7 +70,9 @@ static int password_read_callback(char *buf, int size, int rwflag, void *u);
 {
     if(_pkey)
     {
+#ifdef HAVE_OPENSSL
         EVP_PKEY_free((EVP_PKEY *)_pkey);
+#endif
     }
     _pkey = NULL;
 }

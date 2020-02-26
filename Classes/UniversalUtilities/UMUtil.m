@@ -10,10 +10,25 @@
 #include "ulib_config.h"
 
 /* byte order stuff: we use macros under MacOS X */
+
 #if defined __APPLE__
+
 #include <TargetConditionals.h>
 #include <libkern/OSByteOrder.h>
+
+#if TARGET_OS_IOS  || TARGET_OS_TV
+#include <UIKit/UIKit.h>
+#endif
+
+#if TARGET_OS_WATCH
+#include <WatchKit/WatchKit.h>
+#endif
+
+
+#if TARGET_OS_OSX
 #include <IOKit/IOTypes.h>
+#endif
+
 #include <net/if_dl.h>
 
 #endif
@@ -392,6 +407,10 @@ static NSArray *        _machineCPUIDs = NULL;
                 {
                     if_mac = (unsigned char *)LLADDR(sdl);
                 }
+                else
+                {
+                    if_mac = (unsigned char *)"\0\0\0\0\0\0";
+                }
                 NSString *ifname = @(ifap->ifa_name);
                 NSString *macaddr= [NSString stringWithFormat: @"%02X%02X%02X%02X%02X%02X",
                                     if_mac[0],if_mac[1], if_mac[2],if_mac[3],if_mac[4],if_mac[5]];
@@ -572,9 +591,20 @@ static NSArray *        _machineCPUIDs = NULL;
 
 #if defined(__APPLE__)
     NSString *serialNumber = NULL;
-#if defined(TARGETOSIPHONE)
-    serialNumber = [[UIDevice currentDevice] uniqueIdentifier];
-#else
+
+#if TARGET_OS_IOS || TARGET_OS_TV
+    _machineSerialNumber = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    _machineSerialNumberLoaded=YES;
+    return _machineSerialNumber;
+#endif
+    
+#if TARGET_OS_WATCH
+    _machineSerialNumber = @"watch";
+    _machineSerialNumberLoaded=YES;
+    return _machineSerialNumber;
+#endif
+
+#if TARGET_OS_OSX
     CFStringRef cfSerialNumber = NULL;
     io_service_t platformExpert = IOServiceGetMatchingService(   kIOMasterPortDefault,
                                                               IOServiceMatching("IOPlatformExpertDevice")
@@ -600,9 +630,8 @@ static NSArray *        _machineCPUIDs = NULL;
     {
         serialNumber = @"unknown";
     }
-#endif
-#else /* ! __APPLE___ */
-
+#endif /* TARGET_OS_.. */
+#else /*__APPLE__ */
 
 #define MAXLINE 256
     NSMutableString *serialNumber = NULL;
@@ -689,6 +718,7 @@ static NSArray *        _machineCPUIDs = NULL;
 #define RXPIPE    0
 #define TXPIPE    1
 
+#if!defined(TARGET_OS_TV)
 
 +(NSArray *)readChildProcess:(NSArray *)args
 {
@@ -755,6 +785,7 @@ static NSArray *        _machineCPUIDs = NULL;
     }
     return result;
 }
+#endif
 
 
 + (NSArray *)getCPUSerialNumbers

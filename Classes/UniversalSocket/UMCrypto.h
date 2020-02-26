@@ -23,12 +23,6 @@
 #define RSA_EXPONENT 65537
 #define RSA_PADDING_LEN 41
 
-/* note: under OS X we use a framework packaged openssl1.0.x, not the OS installed old 0.9 version of SSL which is there for backwards compatibility. Due to name conflict of the headerfiles, the frameworks version of openssl has its header files in openssl1 instead.
- 
-    if this framework version is used, then HAVE_OPENSSL_AS_FRAMEWORK is defined. This is checked in ./configure and sets ulib_config.h accordingly
- */
-
-
 
 @class UMSocket;
 

@@ -26,7 +26,7 @@
 {
     _oldValue = _currentValue;
     _currentValue = newValue;
-    if(![_currentValue isEqualTo:_oldValue])
+    if(![_currentValue isEqual:_oldValue])
     {
         _isModified = YES;
     }

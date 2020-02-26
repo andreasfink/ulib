@@ -926,8 +926,6 @@
 		A6419BB81A2DF2FD0090FC94 /* UMMicroSec.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */; };
 		A6419BB91A2DF2FD0090FC94 /* UMMicroSec.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */; };
 		A657274C1B1869AA00854472 /* UMSynchronizedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A65727461B1869AA00854472 /* UMSynchronizedDictionary.m */; };
-		A661AB4220669EB100B0CD50 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		A661AB4320669EB100B0CD50 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A663F34821532D4100072BAA /* UMProtocolBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A663F34621532D4100072BAA /* UMProtocolBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A663F34921532D4100072BAA /* UMProtocolBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = A663F34721532D4100072BAA /* UMProtocolBuffer.m */; };
 		A663F34A21532D5D00072BAA /* UMProtocolBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A663F34621532D4100072BAA /* UMProtocolBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1110,6 +1108,7 @@
 		A684B4271AB8FF4500854472 /* UMQueueNull.h in Headers */ = {isa = PBXBuildFile; fileRef = A684B4241AB8FF4500854472 /* UMQueueNull.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A684B42B1AB8FF4500854472 /* UMQueueNull.m in Sources */ = {isa = PBXBuildFile; fileRef = A684B4251AB8FF4500854472 /* UMQueueNull.m */; };
 		A684B42C1AB8FF4500854472 /* UMQueueNull.m in Sources */ = {isa = PBXBuildFile; fileRef = A684B4251AB8FF4500854472 /* UMQueueNull.m */; };
+		A69BCFF3240675A00083657F /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69BCFF2240675A00083657F /* sctp.framework */; };
 		A6A7A23C1CF7506600211137 /* UMPKI.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A7A2361CF71D7D00211137 /* UMPKI.m */; };
 		A6A7A2401CF7511F00211137 /* UMSSLCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A7A23D1CF7511F00211137 /* UMSSLCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6A7A2421CF7511F00211137 /* UMSSLCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A7A23E1CF7511F00211137 /* UMSSLCertificate.m */; };
@@ -1858,7 +1857,6 @@
 		A6F1E322187D448700AD2F85 /* UMRedisSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E31C187D448700AD2F85 /* UMRedisSession.m */; };
 		A6F1E32E187D935600AD2F85 /* UMRedisStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E329187D935600AD2F85 /* UMRedisStatus.m */; };
 		A6F1E32F187D935600AD2F85 /* UMRedisStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E329187D935600AD2F85 /* UMRedisStatus.m */; };
-		A6FA420620694B3800849F7F /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A661AB4120669EB100B0CD50 /* sctp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D8AB0C149A769B0029E9CF /* Foundation.framework */; };
 		A6FFFC811B9D73F900C331B0 /* NSString+UMSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A6FFFC7D1B9D716C00C331B0 /* NSString+UMSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -2080,7 +2078,6 @@
 		A6590ED71FDFCA12004C8A74 /* README-Debian9-stretch.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Debian9-stretch.txt"; sourceTree = "<group>"; };
 		A6590ED81FDFCA12004C8A74 /* README-Ubuntu-16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Ubuntu-16.txt"; sourceTree = "<group>"; };
 		A6590ED91FDFCA12004C8A74 /* README-LINUX.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-LINUX.txt"; sourceTree = "<group>"; };
-		A661AB4120669EB100B0CD50 /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = /Library/Frameworks/sctp.framework; sourceTree = "<absolute>"; };
 		A663F34621532D4100072BAA /* UMProtocolBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMProtocolBuffer.h; sourceTree = "<group>"; };
 		A663F34721532D4100072BAA /* UMProtocolBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMProtocolBuffer.m; sourceTree = "<group>"; };
 		A666EEC31E89BB17004804CB /* UMCommandActionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMCommandActionProtocol.h; path = UniversalTokenizer/UMCommandActionProtocol.h; sourceTree = "<group>"; };
@@ -2154,6 +2151,7 @@
 		A6971C8016356C0B004E9B50 /* UniversalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalConfig.h; sourceTree = "<group>"; };
 		A69AB262182BC060001D0FE8 /* UMHTTPCookie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPCookie.h; sourceTree = "<group>"; };
 		A69AB263182BC060001D0FE8 /* UMHTTPCookie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPCookie.m; sourceTree = "<group>"; };
+		A69BCFF2240675A00083657F /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = "../../../../../Library/Application Support/FinkTelecomServices/frameworks/sctp.framework"; sourceTree = "<group>"; };
 		A69F08FF149D3A4C0009F272 /* UMConfigParsedLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMConfigParsedLine.h; sourceTree = "<group>"; };
 		A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMConfigParsedLine.m; sourceTree = "<group>"; };
 		A6A143F5149B4F5000B007D0 /* ulib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ulib.h; sourceTree = "<group>"; };
@@ -2394,10 +2392,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A60C4D061EF7FE59007C203A /* Foundation.framework in Frameworks */,
+				A69BCFF3240675A00083657F /* sctp.framework in Frameworks */,
 				A6E1DB6824062E1E001FB7FF /* libcrypto.a in Frameworks */,
 				A6E1DB6924062E22001FB7FF /* libssl.a in Frameworks */,
 				A60C4D071EF7FE59007C203A /* Security.framework in Frameworks */,
-				A661AB4220669EB100B0CD50 /* sctp.framework in Frameworks */,
 				A6DBF0C320BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2406,7 +2404,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A661AB4320669EB100B0CD50 /* sctp.framework in Frameworks */,
 				A6DBF0C720BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2434,7 +2431,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */,
-				A6FA420620694B3800849F7F /* sctp.framework in Frameworks */,
 				A610866D163530F700D0D9C6 /* Security.framework in Frameworks */,
 				A6DBF0CA20BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 			);
@@ -2781,6 +2777,7 @@
 		A6D8AB06149A769B0029E9CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A69BCFF2240675A00083657F /* sctp.framework */,
 				A6E1DB6224062B1E001FB7FF /* UIKit.framework */,
 				A6E1DB60240628A6001FB7FF /* libssl-tvOS.a */,
 				A6E1DB5E2406289F001FB7FF /* libcrypto-tvOS.a */,
@@ -2789,7 +2786,6 @@
 				A6E1DB5C24062881001FB7FF /* libssl.a */,
 				A6E1DB5A2406287A001FB7FF /* libcrypto.a */,
 				A6DBF0C220BEFE4F00B38DAF /* IOKit.framework */,
-				A661AB4120669EB100B0CD50 /* sctp.framework */,
 				A610866B163530F700D0D9C6 /* Security.framework */,
 				A6D8AB0C149A769B0029E9CF /* Foundation.framework */,
 			);
@@ -5588,6 +5584,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -5628,6 +5625,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;

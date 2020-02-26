@@ -6,7 +6,9 @@
 //
 
 #import "UMObject.h"
+#if defined(__APPLE__)
 #import <TargetConditionals.h>
+#endif
 
 @interface UMUtil : UMObject
 {

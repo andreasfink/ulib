@@ -20,6 +20,7 @@
 #include "TargetConditionals.h"
 #if TARGET_OS_WATCH
 #define HAVE_COMMON_CRYPTO 1
+#endif
 #else
 #include <openssl/bn.h>
 #include <openssl/rsa.h>
@@ -32,6 +33,12 @@
 #include <openssl/x509.h>
 #include <openssl/rand.h>
 #endif
+
+
+#if OPENSSL_VERSION_NUMBER < 0x1010104fL
+#error you need at least openssl 1.1.1d
+#else
+#define HAVE_TLS_METHOD 1
 #endif
 
 #include <string.h>

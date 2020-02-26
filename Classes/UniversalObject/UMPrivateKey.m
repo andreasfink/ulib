@@ -9,10 +9,11 @@
 #import "UMPrivateKey.h"
 
 #if defined(__APPLE__)
-#include "TargetConditionals.h"
-#if TARGET_OS_WATCH
-#define HAVE_COMMON_CRYPTO 1
-#undef HAVE_OPENSSL
+  #include "TargetConditionals.h"
+  #if TARGET_OS_WATCH
+    #define HAVE_COMMON_CRYPTO 1
+    #undef HAVE_OPENSSL
+  #endif
 #else
 #include <openssl/pem.h>
 #include <openssl/ssl.h>
@@ -21,7 +22,12 @@
 #include <openssl/bio.h>
 #include <openssl/err.h>
 #endif
+
+#if OPENSSL_VERSION_NUMBER < 0x1010104fL
+#error(your OpenSSL version number is older than 1.1.1.d)
+
 #endif
+
 
 static int password_read_callback(char *buf, int size, int rwflag, void *u);
 

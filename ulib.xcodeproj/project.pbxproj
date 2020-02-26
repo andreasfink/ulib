@@ -19989,7 +19989,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.0h-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
@@ -19997,7 +19997,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0h-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
 					"$(inherited)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
@@ -20028,7 +20028,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.0h-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
@@ -20036,7 +20036,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0h-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
 					"$(inherited)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
@@ -20065,17 +20065,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "SupportingFiles/ulib-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.0h-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libressl/osx/lib",
-					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0f-binary/usr/local/lib",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0h-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
@@ -20100,17 +20096,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "SupportingFiles/ulib-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.0h-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libressl/osx/lib",
-					"$(PROJECT_DIR)/libs/osx/openssl1.0.2h/lib",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0f-binary/usr/local/lib",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0h-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.$(PRODUCT_NAME:rfc1034identifier)";
@@ -20430,9 +20422,7 @@
 				INFOPLIST_FILE = "ulibTests/ulibTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/ilb",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0h-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.ulibtests.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -20467,9 +20457,7 @@
 				INFOPLIST_FILE = "ulibTests/ulibTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/ilb",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0g-binary/usr/local/lib",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.0h-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.ulibtests.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -13,20 +13,25 @@
   #if TARGET_OS_WATCH
     #define HAVE_COMMON_CRYPTO 1
     #undef HAVE_OPENSSL
+    #else
+    #undef HAVE_COMMON_CRYPTO
+    #define HAVE_OPENSSL 1
   #endif
-#else
+#endif
+
+#ifdef HAVE_OPENSSL
+#include <openssl/opensslv.h>
 #include <openssl/pem.h>
 #include <openssl/ssl.h>
 #include <openssl/rsa.h>
 #include <openssl/evp.h>
 #include <openssl/bio.h>
 #include <openssl/err.h>
-#endif
-
 #if OPENSSL_VERSION_NUMBER < 0x1010104fL
 #error(your OpenSSL version number is older than 1.1.1.d)
-
 #endif
+#endif
+
 
 
 static int password_read_callback(char *buf, int size, int rwflag, void *u);

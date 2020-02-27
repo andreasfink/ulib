@@ -2601,6 +2601,7 @@ case "$host" in
 	else
 		GNUSTEP_CONFIG=/usr/bin/gnustep-config
 	fi
+	LIBS="$LIBS -ldl"
 	CFLAGS="$CFLAGS `$GNUSTEP_CONFIG --objc-flags`"
 	LDFLAGS="$LDFLAGS `/usr/local/bin/gnustep-config --base-libs --objc-libs`"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"

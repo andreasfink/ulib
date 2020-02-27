@@ -14,5 +14,6 @@
 - (NSString *)stringValue;  /*!< returns a string representation. returns 0000-00-00 00:00:00.000000 instead of 1970-01-0100:00:00.000000 for a value of 0 */
 
 + (NSString *)zeroDateString; /*!< returns 0000-00-00 00:00:00.000000 */
++ (NSDateFormatter *)standardDateFormatter;
 
 @end

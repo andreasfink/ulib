@@ -10,22 +10,23 @@
 
 #define STANDARD_DATE_STRING_FORMAT     @"yyyy-MM-dd HH:mm:ss.SSSSSS"
 
-static NSDateFormatter *standardDateFormatter = NULL;
+static NSDateFormatter *_standardDateFormatter = NULL;
 
 @implementation NSDate(stringFunctions)
 
 +(NSDateFormatter *)standardDateFormatter
 {
-    if(standardDateFormatter==NULL)
+    if(_standardDateFormatter==NULL)
     {
         NSTimeZone *tz = [NSTimeZone timeZoneWithName:@"UTC"];
-        standardDateFormatter= [[NSDateFormatter alloc]init];
+        NSDateFormatter *sf= [[NSDateFormatter alloc]init];
         NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-        [standardDateFormatter setLocale:usLocale];
-        [standardDateFormatter setDateFormat:STANDARD_DATE_STRING_FORMAT];
-        [standardDateFormatter setTimeZone:tz];
+        [sf setLocale:usLocale];
+        [sf setDateFormat:STANDARD_DATE_STRING_FORMAT];
+        [sf setTimeZone:tz];
+        _standardDateFormatter = sf;
     }
-    return standardDateFormatter;
+    return _standardDateFormatter;
 }
 
 +(NSDate *) dateWithStandardDateString:(NSString *)str

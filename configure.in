@@ -46,7 +46,7 @@ dnl Set the LIBTOOL to be used to create libs
 EXE_EXT=""
 LIBTOOL="ar rc"
 RANLIB="ranlib"
-LIBS=""
+LIBS="-ldl"
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
 DEPENDENT_PKGCONFIGS="libssl libcrypto"

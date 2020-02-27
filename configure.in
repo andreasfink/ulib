@@ -28,7 +28,7 @@ VERSION=`head -n 1 VERSION`
 MAJORVER=`echo $VERSION | cut -f1 -d.`
 MINORVER=`echo $VERSION | cut -f2 -d.`
 REVISION=`echo $VERSION | cut -f3 -d.`
- 
+
 dnl Set user who runs ./configure
 CUSER=`id -un`
 AC_SUBST(VERSION)
@@ -49,7 +49,7 @@ RANLIB="ranlib"
 LIBS="-ldl"
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
-DEPENDENT_PKGCONFIGS="libssl libcrypto"
+DEPENDENT_PKGCONFIGS="openssl"
 
 PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export PKG_CONFIG_PATH
@@ -112,6 +112,7 @@ case "$host" in
 	else
 		GNUSTEP_CONFIG=/usr/bin/gnustep-config
 	fi
+	LIBS="$LIBS -ldl"
 	CFLAGS="$CFLAGS `$GNUSTEP_CONFIG --objc-flags`"
 	LDFLAGS="$LDFLAGS `/usr/local/bin/gnustep-config --base-libs --objc-libs`"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"

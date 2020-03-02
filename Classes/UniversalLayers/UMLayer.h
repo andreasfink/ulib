@@ -35,7 +35,6 @@
     UMThroughputCounter					*_adminQueueThroughput;
     NSString                            *_logFileName;
     UMHistoryLog                        *_layerHistory;
-
     UMLogLevel                          _logLevel;
     BOOL                                _enable;
     BOOL                                _isSharedQueue;

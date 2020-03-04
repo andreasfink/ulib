@@ -945,11 +945,11 @@ static int SSL_smart_shutdown(SSL *ssl)
 /* we do not copy the socket on purpose as this is used from accept() */
     newsock->_sock=-1;
     newsock->_hasSocket=NO;
-     newsock.isBound=isBound;
-	newsock.isListening=self.isListening;
-	newsock.isConnecting=self.isConnecting;
-	newsock.isConnected=self.isConnected;
-	return newsock;
+    newsock.isBound=isBound;
+    newsock.isListening=self.isListening;
+    newsock.isConnecting=self.isConnecting;
+    newsock.isConnected=self.isConnected;
+    return newsock;
 }
 
 - (void) setLocalPort:(in_port_t) port
@@ -1073,18 +1073,19 @@ static int SSL_smart_shutdown(SSL *ssl)
 
             if((type == UMSOCKET_TYPE_TCP) || (type == UMSOCKET_TYPE_TCP4ONLY) || (type == UMSOCKET_TYPE_TCP6ONLY))
             {
-                newcon.configuredTcpMaxSegmentSize = _configuredTcpMaxSegmentSize;
-                int activeTcpMaxSegmentSize = 0;
-                socklen_t tcp_maxseg_len = sizeof(activeTcpMaxSegmentSize);
-                if(getsockopt(_sock, IPPROTO_TCP, TCP_MAXSEG, &activeTcpMaxSegmentSize, &tcp_maxseg_len) == 0)
+                newcon.configuredMaxSegmentSize = _configuredMaxSegmentSize;
+                newcon.activeMaxSegmentSize = _activeMaxSegmentSize;
+                int currentActiveMaxSegmentSize = 0;
+                socklen_t tcp_maxseg_len = sizeof(currentActiveMaxSegmentSize);
+                if(getsockopt(_sock, IPPROTO_TCP, TCP_MAXSEG, &currentActiveMaxSegmentSize, &tcp_maxseg_len) == 0)
                 {
-                    newcon.activeTcpMaxSegmentSize = activeTcpMaxSegmentSize;
-                    if((_configuredTcpMaxSegmentSize > 0) && (_configuredTcpMaxSegmentSize < activeTcpMaxSegmentSize))
+                    newcon.activeMaxSegmentSize = _activeMaxSegmentSize;
+                    if((_configuredMaxSegmentSize > 0) && (_configuredMaxSegmentSize < currentActiveMaxSegmentSize))
                     {
-                        activeTcpMaxSegmentSize = _configuredTcpMaxSegmentSize;
-                        if(setsockopt(_sock, IPPROTO_TCP, TCP_MAXSEG, &activeTcpMaxSegmentSize, tcp_maxseg_len))
+                        _activeMaxSegmentSize = _configuredMaxSegmentSize;
+                        if(setsockopt(_sock, IPPROTO_TCP, TCP_MAXSEG, &_activeMaxSegmentSize, tcp_maxseg_len))
                         {
-                            newcon.activeTcpMaxSegmentSize = _configuredTcpMaxSegmentSize;
+                            newcon.activeMaxSegmentSize = _configuredMaxSegmentSize;
                         }
                     }
                 }

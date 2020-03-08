@@ -38,7 +38,18 @@
             prefix = [UMHTTPPageRef defaultPrefix];
         }
         _path = thePath;
-        int i = chdir(prefix.UTF8String);
+        if(thePath.length == 0)
+        {
+            return NULL;
+        }
+
+        NSString *oldPath   = [[NSFileManager defaultManager] currentDirectoryPath];
+        #ifdef LINUX
+            int i = chdir(prefix.UTF8String);
+        #else
+            int i = ![[NSFileManager defaultManager] changeCurrentDirectoryPath:prefix];
+        #endif
+
         int eno = errno;
         if(i !=0)
         {
@@ -46,10 +57,6 @@
             return NULL;
         }
 
-        if(thePath.length == 0)
-        {
-            return NULL;
-        }
         if([thePath characterAtIndex:0]=='/')
         {
             thePath = [thePath substringFromIndex:1];
@@ -64,6 +71,13 @@
         thePath = [thePath fileNameRelativeToPath:prefix];
         self.data = [NSData dataWithContentsOfFile:thePath];
         self.mimeType = [self mimeTypeForExtension:thePath];
+
+        #ifdef LINUX
+            chdir(oldPath.UTF8String);
+        #else
+            [[NSFileManager defaultManager] changeCurrentDirectoryPath:oldPath];
+        #endif
+
     }
     return self;
 }

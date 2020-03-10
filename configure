@@ -2533,7 +2533,7 @@ case $host_os in *\ *) host_os=`echo "$host_os" | sed 's/ /-/g'`;; esac
 EXE_EXT=""
 LIBTOOL="ar rc"
 RANLIB="ranlib"
-LIBS=""
+LIBS="-ldl"
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
 DEPENDENT_PKGCONFIGS="openssl"
@@ -2580,7 +2580,7 @@ case "$host" in
     ;;
 
   *-linux-*)
-	CFLAGS="$CFLAGS -std=c99 -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_POSIX_SOURCE"
+	CFLAGS="$CFLAGS -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_POSIX_SOURCE"
 	DEBIAN_VERSION=`cat /etc/debian_version | cut -f1 -d.`
 	if [ "$DEBIAN_VERSION" == "8" ]
 	then

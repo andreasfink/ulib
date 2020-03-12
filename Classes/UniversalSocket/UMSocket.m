@@ -532,7 +532,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) bind
 {
-    UMAssert(_requestedLocalPort != 0,@"bind to port 0 not allowed");
+    //UMAssert(_requestedLocalPort != 0,@"bind to port 0 not allowed");
 
     [_controlLock lock];
     @try

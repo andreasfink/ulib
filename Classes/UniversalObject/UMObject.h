@@ -81,7 +81,7 @@ BOOL umobject_object_stat_is_enabled(void);
                                                        in it as well (UTF8 E280AD) */
 + (NSCharacterSet *)newlineCharacterSet; /* this differs from NSCharacterSet version by having LINE SEPARATOR' (U+2028)
                                                        in it as well (UTF8 E280AD) */
-
++ (NSCharacterSet *)bracketsAndWhitespaceCharacterSet;  /* includes [ and ]  and whitespace */
 - (NSString *) descriptionWithPrefix:(NSString *)prefix;
 - (void)runSelectorInBackground:(SEL)aSelector
                      withObject:(id)anArgument;

@@ -236,6 +236,20 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 	return _charset;
 }
 
++ (NSCharacterSet *)bracketsAndWhitespaceCharacterSet /* includes [ and ]  and whitespace*/
+{
+    static NSCharacterSet *_charset=NULL;
+
+    if(_charset==NULL)
+    {
+        NSMutableCharacterSet *c  = [[UMObject whitespaceAndNewlineCharacterSet] mutableCopy];
+        [c addCharactersInRange:NSMakeRange((unsigned int) ']' ,1)];
+        [c addCharactersInRange:NSMakeRange((unsigned int) '[' ,1)];
+        _charset = [((NSCharacterSet *)c) copy];
+    }
+    return _charset;
+}
+
 + (NSCharacterSet *)newlineCharacterSet /* this differs from NSCharacterSet version by having LINE SEPARATOR' (U+2028)
 										 in it as well (UTF8 E280AD) */
 {

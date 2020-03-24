@@ -66,7 +66,6 @@ apt-get install clang lldb llvm libc++-dev lld python-lldb
 (run as root or use sudo in front)
 
  apt-get install build-essential git subversion  \
-        libpthread-workqueue0 libpthread-workqueue-dev \
         libxml2 libxml2-dev \
         libffi6 libffi-dev\
         libicu-dev \
@@ -88,7 +87,6 @@ apt-get install clang lldb llvm libc++-dev lld python-lldb
         libxt-dev \
         libgl1-mesa-dev \
         libpcap-dev \
-        libc-dev libc++-dev libc++1 \
         python-dev swig \
         libedit-dev libeditline0  libeditline-dev  readline-common \
         binfmt-support libtinfo-dev \
@@ -109,12 +107,15 @@ apt-get install clang lldb llvm libc++-dev lld python-lldb
         libcairo2-dev \
         libxt-dev libssl-dev \
         libasound2-dev libjack-dev libjack0 libportaudio2 libportaudiocpp0 portaudio19-dev \
-         libc++-dev \
         wmaker cmake cmake-curses-gui \
         libwraster6 libwraster-dev \
         libicu63 libicu-dev \
         ninja-build \
+        gobjc gobjc-8 \
+        gobjc++ gobjc++-8 \
         libc++1-11 libc++-11-dev \
+        default-libmysqlclient-dev \
+        libpq-dev libpq5
 
 
 
@@ -134,13 +135,10 @@ Download the sourcecode of gnustep and dependencies
     git clone https://github.com/gnustep/corebase
     git clone https://github.com/gnustep/gui
     git clone https://github.com/gnustep/back
-    ./scripts/install-dependencies
+    ./scripts/install-dependencies-linux
 	
 	
-Lets purge the gcc stuff in case its installed
-----------------------------------------------
 
-apt-get purge libblocksruntime-dev libblocksruntime0
 
 
 Build  libiconv

@@ -6,12 +6,12 @@
 //  Copyright © 2020 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/ulib.h>
 
-NS_ASSUME_NONNULL_BEGIN
+#import <XCTest/XCTest.h>
 
-@interface TestUMDate : UMObject
+@interface TestUMDate : XCTestCase
+
+
 
 @end
 
-NS_ASSUME_NONNULL_END

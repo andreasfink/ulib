@@ -7,7 +7,29 @@
 //
 
 #import "TestUMDate.h"
+#import "NSDate+stringFunctions.h"
 
 @implementation TestUMDate
+
+
+
+- (void)setUp
+{
+    [super setUp];
+}
+
+- (void)tearDown
+{
+    // Tear-down code here.
+    [super tearDown];
+}
+
+- (void)testDate
+{
+    NSString *s = @"2020-30-05 12:00:00";
+
+    NSDate *d = [NSDate dateWithStandardDateString:s];
+    XCTAssertNotNil(d,@"can not convert date string");
+}
 
 @end

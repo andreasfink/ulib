@@ -51,15 +51,24 @@
         sslCertFile:(NSString *)sslCertFile
           taskQueue:(UMTaskQueue *)tq
 {
-
     if((sslKeyFile==NULL) || (sslCertFile==NULL))
     {
         @throw([NSException exceptionWithName:@"HTTPS_CERTIFICATE_MISSING" reason:@"call initWithPort:sslKeyFile:sslCertFile:sslCertFile and not init on UMHTTPSServer"
                                      userInfo:NULL ]);
     }
+    BOOL doSSL;
+
+    if((sslKeyFile==NULL) || (sslCertFile==NULL))
+    {
+        doSSL=NO;
+    }
+    else
+    {
+        doSSL=YES;
+    }
     self = [super initWithPort:port
                     socketType:type
-                           ssl:YES
+                           ssl:doSSL
                     sslKeyFile:sslKeyFile
                    sslCertFile:sslCertFile
                      taskQueue:tq];
@@ -78,14 +87,14 @@
         sslCertFile:(NSString *)sslCertFile
           taskQueue:(UMTaskQueue *)tq
 {
-    if((doSSL==NO) || (sslKeyFile==NULL) || (sslCertFile==NULL))
+    if((doSSL==YES) && ((sslKeyFile==NULL) || (sslCertFile==NULL)))
     {
         @throw([NSException exceptionWithName:@"HTTPS_CERTIFICATE_MISSING" reason:@"call initWithPort:sslKeyFile:sslCertFile:sslCertFile and not init on UMHTTPSServer"
                                      userInfo:NULL ]);
     }
     self = [super initWithPort:port
                     socketType:type
-                           ssl:YES
+                           ssl:doSSL
                     sslKeyFile:sslKeyFile
                    sslCertFile:sslCertFile
                      taskQueue:tq];

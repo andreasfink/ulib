@@ -29,6 +29,8 @@ static NSDateFormatter *_standardDateFormatter = NULL;
     return _standardDateFormatter;
 }
 
+/* FIXME: this funciton does only work on  UTC timestamps. Timestamps with Timzeones other than UTC are not respected yet */
+
 +(NSDate *) dateWithStandardDateString:(NSString *)str
 {
     if(str==NULL)
@@ -39,7 +41,56 @@ static NSDateFormatter *_standardDateFormatter = NULL;
     {
         return [NSDate dateWithTimeIntervalSince1970:0];
     }
-    return [[NSDate standardDateFormatter] dateFromString:str];
+    /* Tis doesnt work it seems: */
+    //return [[NSDate standardDateFormatter] dateFromString:str];
+    const char *cstr = str.UTF8String;
+    struct tm tm;
+    int microsec  = 0;
+    int milisec = 0;
+
+    if(strlen(cstr) >= 26) /* yyyy-MM-dd HH:mm:ss.SSSSSS */
+    {
+        sscanf(cstr,"%04d-%02d-%02d %02d:%02d:%02d.%06d",
+              &tm.tm_year,
+              &tm.tm_mon,
+              &tm.tm_mday,
+              &tm.tm_hour,
+              &tm.tm_min,
+              &tm.tm_sec,
+              &microsec);
+    }
+    else if(strlen(cstr)==23) /* yyyy-MM-dd HH:mm:ss.SSS*/
+    {
+        sscanf(cstr,"%04d-%02d-%02d %02d:%02d:%02d.%03d",
+               &tm.tm_year,
+               &tm.tm_mon,
+               &tm.tm_mday,
+               &tm.tm_hour,
+               &tm.tm_min,
+               &tm.tm_sec,
+               &milisec);
+    }
+    else if(strlen(cstr)==19) /* yyyy-MM-dd HH:mm:ss */
+    {
+        sscanf(cstr,"%04d-%02d-%02d %02d:%02d:%02d",
+               &tm.tm_year,
+               &tm.tm_mon,
+               &tm.tm_mday,
+               &tm.tm_hour,
+               &tm.tm_min,
+               &tm.tm_sec);
+    }
+    else
+    {
+        return NULL;
+    }
+    double subsecond = milisec/1000.0 + microsec / 1000000.0;
+
+    tm.tm_mday--; /* from 1...12 to 0..11 */
+    tm.tm_year -= 1900; /* year since 1900 */
+    time_t t = mktime(&tm);
+    NSTimeInterval ti = (double)t + subsecond;
+    return [NSDate dateWithTimeIntervalSince1970:ti];
 }
 
 - (NSString *)stringValue

@@ -298,11 +298,12 @@
     NSMutableString *value;
     long len;
     
-    len = [requestHeaders count];
+    len = [headers count];
     /*
      * Avoid doing this scan if old_headers is empty anyway.
      */
-    if ([headers count] > 0) {
+    if ([headers count] > 0)
+    {
         for (i = 0; i < len; i++) {
             [headers getHeaderAtIndex:i withName:&name andValue:&value];
             [self removeRequestHeader:name];

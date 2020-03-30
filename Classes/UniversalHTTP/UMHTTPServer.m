@@ -36,12 +36,14 @@
 	return [self initWithPort:port socketType:UMSOCKET_TYPE_TCP];
 }
 
-- (id) initWithPort:(in_port_t)port socketType:(UMSocketType)type
+- (id) initWithPort:(in_port_t)port
+         socketType:(UMSocketType)type
 {
     return [self initWithPort:port socketType:type ssl:NO sslKeyFile:NULL sslCertFile:NULL];
 }
 
-- (id) initWithPort:(in_port_t)port socketType:(UMSocketType)type ssl:(BOOL)doSSL sslKeyFile:(NSString *)sslKeyFile sslCertFile:(NSString *)sslCertFile
+- (id) initWithPort:(in_port_t)port
+         socketType:(UMSocketType)type ssl:(BOOL)doSSL sslKeyFile:(NSString *)sslKeyFile sslCertFile:(NSString *)sslCertFile
 {
     return [self initWithPort:port socketType:type ssl:doSSL sslKeyFile:sslKeyFile sslCertFile:sslCertFile  taskQueue:NULL];
 }

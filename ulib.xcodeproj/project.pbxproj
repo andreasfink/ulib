@@ -1078,6 +1078,11 @@
 		A67AA9F71CF8BD0C00211137 /* ulib_config.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A7A2431CF81EE600211137 /* ulib_config.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A67C389516B2D53000C9DA95 /* UMDataWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C389216B2D53000C9DA95 /* UMDataWithHistory.m */; };
 		A67C389716B2D53000C9DA95 /* UMDateWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C389316B2D53000C9DA95 /* UMDateWithHistory.m */; };
+		A67D14182431DDB9003CB94D /* TestUMDate.m in Sources */ = {isa = PBXBuildFile; fileRef = A67D14172431DDB9003CB94D /* TestUMDate.m */; };
+		A67D141A2431DF78003CB94D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB562406285D001FB7FF /* libcrypto.a */; };
+		A67D141B2431DF85003CB94D /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5C24062881001FB7FF /* libssl.a */; };
+		A67D141C2431DF9E003CB94D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5A2406287A001FB7FF /* libcrypto.a */; };
+		A67D141D2431DFAF003CB94D /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69BCFF2240675A00083657F /* sctp.framework */; };
 		A67D3DEA1AFA01BB0090FC94 /* NSArray+UMJson.h in Headers */ = {isa = PBXBuildFile; fileRef = A67D3DE21AF9FF1D0090FC94 /* NSArray+UMJson.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A67D3DED1AFA01C70090FC94 /* NSString+UMJson.h in Headers */ = {isa = PBXBuildFile; fileRef = A67D3DE61AF9FF2B0090FC94 /* NSString+UMJson.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A67D3DF01AFA01D10090FC94 /* NSArray+UMJson.m in Sources */ = {isa = PBXBuildFile; fileRef = A67D3DE31AF9FF1D0090FC94 /* NSArray+UMJson.m */; };
@@ -2122,6 +2127,8 @@
 		A67C388A16B2C2C300C9DA95 /* UMHTTPResponseCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPResponseCode.h; sourceTree = "<group>"; };
 		A67C389216B2D53000C9DA95 /* UMDataWithHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMDataWithHistory.m; sourceTree = "<group>"; };
 		A67C389316B2D53000C9DA95 /* UMDateWithHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMDateWithHistory.m; sourceTree = "<group>"; };
+		A67D14162431DDB9003CB94D /* TestUMDate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestUMDate.h; sourceTree = "<group>"; };
+		A67D14172431DDB9003CB94D /* TestUMDate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestUMDate.m; sourceTree = "<group>"; };
 		A67D3DDE1AF9FEC90090FC94 /* NSDictionary+UMJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UMJson.h"; sourceTree = "<group>"; };
 		A67D3DDF1AF9FEC90090FC94 /* NSDictionary+UMJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UMJson.m"; sourceTree = "<group>"; };
 		A67D3DE21AF9FF1D0090FC94 /* NSArray+UMJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+UMJson.h"; sourceTree = "<group>"; };
@@ -2430,6 +2437,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A67D141A2431DF78003CB94D /* libcrypto.a in Frameworks */,
+				A67D141D2431DFAF003CB94D /* sctp.framework in Frameworks */,
+				A67D141B2431DF85003CB94D /* libssl.a in Frameworks */,
+				A67D141C2431DF9E003CB94D /* libcrypto.a in Frameworks */,
 				A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */,
 				A610866D163530F700D0D9C6 /* Security.framework in Frameworks */,
 				A6DBF0CA20BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
@@ -2816,6 +2827,8 @@
 				22A73B1D158240160085F1F7 /* post-content.txt */,
 				2240D6191577591B00F15C1B /* reply.txt */,
 				2214E4B115EBC761006F66A4 /* test-crypt.txt */,
+				A67D14162431DDB9003CB94D /* TestUMDate.h */,
+				A67D14172431DDB9003CB94D /* TestUMDate.m */,
 				2214E4A815EB6C97006F66A4 /* TestUMCrypto.h */,
 				2214E4A915EB6C97006F66A4 /* TestUMCrypto.m */,
 				22AA382015482188007450BE /* TestUMHTTPServer.h */,
@@ -5123,6 +5136,7 @@
 				22A6DEBE1541425100FCEBAA /* TestUMLogFeed.m in Sources */,
 				A6B37B391FC830BE00794057 /* UMAtomicCounter.m in Sources */,
 				22A6DEC11541443D00FCEBAA /* UMTestCase.m in Sources */,
+				A67D14182431DDB9003CB94D /* TestUMDate.m in Sources */,
 				A6AC4AB51D460B6B002BAA97 /* NSData+HierarchicalDescription.m in Sources */,
 				A6AC4B9A1D460BB9002BAA97 /* UMCrypto.m in Sources */,
 				A6B37B611FC8312D00794057 /* UMLayer.m in Sources */,
@@ -6008,6 +6022,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
+				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
@@ -6024,6 +6042,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.ulibtests.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6043,6 +6062,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
+				);
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
@@ -6059,6 +6082,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.ulibtests.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

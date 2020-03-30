@@ -60,7 +60,12 @@ typedef enum UMHTTPConnectionRequestSection
 @property (readwrite,assign,atomic) BOOL            enableKeepalive;
 @property (readwrite,assign,atomic) BOOL            inWebSocketMode;
 @property(readwrite, strong,atomic) id <UMHTTPWebSocketDelegateProtocol> httpWebSocketDelegate;
-
+@property (readwrite,strong,atomic) NSString        *webSocketKeyString;
+@property (readwrite,strong,atomic) NSData          *webSocketKey;
+@property (readwrite,strong,atomic) NSString        *webSocketProtocol;
+@property (readwrite,strong,atomic) NSString        *webSocketVersion;
+@property (readwrite,strong,atomic) NSString        *webSocketOrigin;
+@property (readwrite,strong,atomic) NSString        *webSocketKeyResponseString;
 
 - (UMHTTPConnection *) initWithSocket:(UMSocket *)socket server:(UMHTTPServer *)server;
 - (NSString *)description;

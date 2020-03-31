@@ -16,6 +16,8 @@
 #include <uuid/uuid.h>
 #endif
 
+#import "NSData+UniversalObject.h"
+
 @implementation UMUUID
 
 #ifdef	FREEBSD
@@ -93,5 +95,25 @@
     return uniqueId;
 }
 #endif
+
+
++(NSString *)UUID16String
+{
+    return [[UMUUID UUID16] hexString];
+    
+}
+
++(NSData *)UUID16
+{
+    uuid_t uu;
+#ifdef FREEBSD
+    uint32_t status;
+    uuid_create(&uu,&status);
+#else
+    uuid_generate(uu);
+#endif
+    NSData *d = [NSData dataWithBytes:&uu length:sizeof(uu)];
+    return d;
+}
 
 @end

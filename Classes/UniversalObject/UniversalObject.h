@@ -38,3 +38,5 @@
 #import "UMDateTimeStuff.h"
 #import "UMObjectStatisticEntry.h"
 #import "UMObjectStatistic.h"
+#import "UMPublicKey.h"
+#import "UMPrivateKey.h"

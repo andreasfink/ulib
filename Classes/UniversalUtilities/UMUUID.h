@@ -8,5 +8,8 @@
 #import "UMObject.h"
 
 @interface UMUUID : UMObject
-+(NSString *)UUID;
++ (NSString *)UUID;
++ (NSString *)UUID16String;
++ (NSData *)UUID16;
+
 @end

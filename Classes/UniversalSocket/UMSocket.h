@@ -52,12 +52,12 @@ typedef enum SocketBlockingMode
     int                 _socketProto;
     int                 _socketType;
     
-	int					_isBound;
-	int					_isListening;
-	int					_isConnecting;
+	BOOL    			_isBound;
+	BOOL                _isListening;
+	BOOL                _isConnecting;
 	BOOL                _isConnected;
 	SocketBlockingMode  _blockingMode;
-    int                 _hasSocket;
+    BOOL                 _hasSocket;
 	NSString			*device;
 	int					lastPollEvent;
 	NSMutableData		*receiveBuffer;
@@ -90,6 +90,7 @@ typedef enum SocketBlockingMode
     NSString            *advertizeDomain;
     int                 _configuredMaxSegmentSize;
     int                 _activeMaxSegmentSize;
+    id __weak           _customUser; /* a user can use this field as a reference to its user */
 }
 
 @property(readwrite,strong,atomic)  NSString    *socketName;
@@ -109,15 +110,15 @@ typedef enum SocketBlockingMode
 @property(readwrite,assign,atomic)  in_port_t			requestedRemotePort;
 @property(readwrite,assign,atomic)  int					sock;
 
-@property(readwrite,assign,atomic)  int					isBound;
-@property(readwrite,assign,atomic)  int					isListening;
-@property(readwrite,assign,atomic)  int					isConnecting;
+@property(readwrite,assign,atomic)  BOOL    			isBound;
+@property(readwrite,assign,atomic)  BOOL                isListening;
+@property(readwrite,assign,atomic)  BOOL				isConnecting;
 @property(readwrite,assign,atomic)  BOOL	            isConnected;
 @property(readwrite,strong,atomic)  NSMutableData *		receiveBuffer;
 @property(readwrite,strong,atomic)  NSString *          lastError;
 @property(readwrite,strong,atomic)  id					reportDelegate;
 @property(readwrite,strong,atomic)  NSString            *name;
-@property(readwrite,assign,atomic)  int                 hasSocket;
+@property(readwrite,assign,atomic)  BOOL                hasSocket;
 @property(readwrite,strong,atomic)  NSString            *advertizeName;
 @property(readwrite,strong,atomic)  NSString            *advertizeType;
 @property(readwrite,strong,atomic)  NSString            *advertizeDomain;
@@ -139,6 +140,7 @@ typedef enum SocketBlockingMode
 
 @property(readwrite,assign,atomic)  int                configuredMaxSegmentSize;
 @property(readwrite,assign,atomic)  int                activeMaxSegmentSize;
+@property (weak) id customUser;
 
 
 

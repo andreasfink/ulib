@@ -272,7 +272,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 - (void)threadStarter:(UMObjectThreadStarter *)ts
 {
 	SEL sel = ts.selector;
-	id obj = ts;
+	id obj = ts.obj;
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"

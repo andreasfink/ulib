@@ -1,0 +1,8 @@
+#
+# build instructions
+#
+
+./Configure linux-x86_64-clang sctp no-shared
+make -j8
+make install
+make DESTDIR=../openssl1.1.d-binary install

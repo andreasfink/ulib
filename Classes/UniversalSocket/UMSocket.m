@@ -831,7 +831,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
         [address getCString:addr maxLength:255 encoding:NSUTF8StringEncoding];
         //	inet_aton(addr, &sa.sin_addr);
-
+        
         if( inet_pton(AF_INET6, addr, &sa6.sin6_addr) == 1)
         {
             ip_version = 6;
@@ -843,6 +843,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         else
         {
             fprintf(stderr,"[UMSocket connect] EADDRNOTAVAIL (unknown IP family) during connect");
+            fprintf(stderr," address=%s",address.UTF8String);
             _isConnecting = NO;
             self.isConnected = NO;
             return UMSocketError_address_not_available;

@@ -50,7 +50,7 @@ typedef enum SocketBlockingMode
     int                 _socketDomain;
     int                 _socketFamily;
     int                 _socketProto;
-    int                 _socketType;
+    int                 _socketType; /* STREAM | DATAGRAM | SEQPACKET*/
     
 	BOOL    			_isBound;
 	BOOL                _isListening;
@@ -146,7 +146,6 @@ typedef enum SocketBlockingMode
 
 - (UMSocket *) initWithType:(UMSocketType)t;
 - (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name;
-
 
 //+ (void) initSSL;
 + (NSString *) statusDescription:(UMSocketStatus)s;

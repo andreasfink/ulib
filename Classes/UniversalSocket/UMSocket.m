@@ -828,7 +828,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             self.isConnected = NO;
             return UMSocketError_address_not_available;
         }
-
+        address = [UMSocket deunifyIp:address];
         [address getCString:addr maxLength:255 encoding:NSUTF8StringEncoding];
         //	inet_aton(addr, &sa.sin_addr);
         

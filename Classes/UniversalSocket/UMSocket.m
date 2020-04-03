@@ -23,6 +23,7 @@
 #import "UMAssert.h"
 #import "UMFileTrackingMacros.h"
 #import "NSString+UMSocket.h"
+#import "UMSocketDefs.h"
 
 #import "UMUtil.h" /* for UMBacktrace */
 
@@ -242,9 +243,15 @@ static int SSL_smart_shutdown(SSL *ssl)
                 }
             }
             break;
-        case UMSOCKET_TYPE_SCTP4ONLY:
-        case UMSOCKET_TYPE_SCTP6ONLY:
-        case UMSOCKET_TYPE_SCTP:
+        case UMSOCKET_TYPE_SCTP4ONLY_SEQPACKET:
+        case UMSOCKET_TYPE_SCTP6ONLY_SEQPACKET:
+        case UMSOCKET_TYPE_SCTP_SEQPACKET:
+        case UMSOCKET_TYPE_SCTP4ONLY_STREAM:
+        case UMSOCKET_TYPE_SCTP6ONLY_STREAM:
+        case UMSOCKET_TYPE_SCTP_STREAM:
+        case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
+        case UMSOCKET_TYPE_SCTP6ONLY_DGRAM:
+        case UMSOCKET_TYPE_SCTP_DGRAM:
                 /*we handle this in subclass UMSocketSCTP in ulibsctp */
             break;
         default:
@@ -313,41 +320,53 @@ static int SSL_smart_shutdown(SSL *ssl)
 {
 	switch(t)
 	{
-		case UMSOCKET_TYPE_NONE:
-			return @"none";
-		case UMSOCKET_TYPE_TCP4ONLY:
-			return @"tcp4only";
-		case UMSOCKET_TYPE_TCP6ONLY:
-			return @"tcp6only";
-		case UMSOCKET_TYPE_TCP:
-			return @"tcp";
-		case UMSOCKET_TYPE_UDP4ONLY:
-			return @"udp4only";
-		case UMSOCKET_TYPE_UDP6ONLY:
-			return @"udp6only";
-		case UMSOCKET_TYPE_UDP:
-			return @"udp";
-		case UMSOCKET_TYPE_SCTP:
-			return @"sctp";
-		case UMSOCKET_TYPE_SCTP4ONLY:
-			return @"sctp4only";
-		case UMSOCKET_TYPE_SCTP6ONLY:
-			return @"sctp6only";
-		case UMSOCKET_TYPE_USCTP:
-			return @"usctp";
-		case UMSOCKET_TYPE_USCTP4ONLY:
-			return @"usctp4only";
-		case UMSOCKET_TYPE_USCTP6ONLY:
-			return @"usctp6only";
-		case UMSOCKET_TYPE_DNSTUN:
-			return @"dtun";
-		case UMSOCKET_TYPE_UNIX:
-			return @"unix";
-		case UMSOCKET_TYPE_MEMORY:
-			return @"memory";
-		case UMSOCKET_TYPE_SERIAL:
-			return @"serial";
-	}
+        case UMSOCKET_TYPE_NONE:
+            return @"none";
+        case UMSOCKET_TYPE_TCP4ONLY:
+            return @"tcp4only";
+        case UMSOCKET_TYPE_TCP6ONLY:
+            return @"tcp6only";
+        case UMSOCKET_TYPE_TCP:
+            return @"tcp";
+        case UMSOCKET_TYPE_UDP4ONLY:
+            return @"udp4only";
+        case UMSOCKET_TYPE_UDP6ONLY:
+            return @"udp6only";
+        case UMSOCKET_TYPE_UDP:
+            return @"udp";
+        case UMSOCKET_TYPE_SCTP_SEQPACKET:
+            return @"sctp-seqpacket";
+        case UMSOCKET_TYPE_SCTP4ONLY_SEQPACKET:
+             return @"sctp4only-seqpacket";
+        case UMSOCKET_TYPE_SCTP6ONLY_SEQPACKET:
+             return @"sctp6only-seqpacket";
+        case UMSOCKET_TYPE_SCTP_STREAM:
+             return @"sctp-stream";
+         case UMSOCKET_TYPE_SCTP4ONLY_STREAM:
+             return @"sctp4only-stream";
+        case UMSOCKET_TYPE_SCTP6ONLY_STREAM:
+             return @"sctp6only-stream";
+         case UMSOCKET_TYPE_SCTP_DGRAM:
+              return @"sctp-dgram";
+         case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
+              return @"sctp4only-dgram";
+         case UMSOCKET_TYPE_SCTP6ONLY_DGRAM:
+              return @"sctp6only-dgram";
+        case UMSOCKET_TYPE_USCTP:
+            return @"usctp";
+        case UMSOCKET_TYPE_USCTP4ONLY:
+            return @"usctp4only";
+        case UMSOCKET_TYPE_USCTP6ONLY:
+            return @"usctp6only";
+        case UMSOCKET_TYPE_DNSTUN:
+            return @"dtun";
+        case UMSOCKET_TYPE_UNIX:
+            return @"unix";
+        case UMSOCKET_TYPE_MEMORY:
+            return @"memory";
+        case UMSOCKET_TYPE_SERIAL:
+            return @"serial";
+    }
 	return @"unknown";
 }
 
@@ -367,8 +386,10 @@ static int SSL_smart_shutdown(SSL *ssl)
 		   
 - (BOOL)	isSctpSocket
 {
-	if((type==UMSOCKET_TYPE_SCTP4ONLY) || (type==UMSOCKET_TYPE_SCTP6ONLY) || (type==UMSOCKET_TYPE_SCTP) ||
-	   (type==UMSOCKET_TYPE_USCTP4ONLY) || (type==UMSOCKET_TYPE_USCTP6ONLY) || (type==UMSOCKET_TYPE_USCTP))
+	if((type==UMSOCKET_TYPE_SCTP4ONLY_SEQPACKET) || (type==UMSOCKET_TYPE_SCTP6ONLY_SEQPACKET) || (type==UMSOCKET_TYPE_SCTP_SEQPACKET) ||
+          (type==UMSOCKET_TYPE_USCTP4ONLY) || (type==UMSOCKET_TYPE_USCTP6ONLY) || (type==UMSOCKET_TYPE_USCTP) ||
+          (type==UMSOCKET_TYPE_SCTP4ONLY_STREAM) || (type==UMSOCKET_TYPE_SCTP6ONLY_STREAM) || (type==UMSOCKET_TYPE_SCTP_STREAM) ||
+          (type==UMSOCKET_TYPE_SCTP4ONLY_DGRAM) || (type==UMSOCKET_TYPE_SCTP6ONLY_DGRAM) || (type==UMSOCKET_TYPE_SCTP_DGRAM))
 		return YES;
 	return NO;
 }
@@ -488,9 +509,15 @@ static int SSL_smart_shutdown(SSL *ssl)
                 case UMSOCKET_TYPE_UDP:
                     fprintf(stderr,"[UMSocket: init] socket(IPPROTO_UDP) returns %d errno = %d (%s)",_sock,errno,strerror(errno));
                     break;
-                case UMSOCKET_TYPE_SCTP4ONLY:
-                case UMSOCKET_TYPE_SCTP6ONLY:
-                case UMSOCKET_TYPE_SCTP:
+                case UMSOCKET_TYPE_SCTP4ONLY_SEQPACKET:
+                case UMSOCKET_TYPE_SCTP6ONLY_SEQPACKET:
+                case UMSOCKET_TYPE_SCTP_SEQPACKET:
+                case UMSOCKET_TYPE_SCTP4ONLY_STREAM:
+                case UMSOCKET_TYPE_SCTP6ONLY_STREAM:
+                case UMSOCKET_TYPE_SCTP_STREAM:
+                case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
+                case UMSOCKET_TYPE_SCTP6ONLY_DGRAM:
+                case UMSOCKET_TYPE_SCTP_DGRAM:
                     fprintf(stderr,"[UMSocket: init] socket(IPPROTO_SCTP) returns %d errno = %d (%s)",_sock,errno,strerror(errno));
                     break;
                 default:
@@ -575,23 +602,22 @@ static int SSL_smart_shutdown(SSL *ssl)
         switch(type)
         {
 #ifdef	SCTP_SUPPORTED
-            case UMSOCKET_TYPE_SCTP:
+/* FIXME:  what about IPv4/IPv6 specifics? */
+            case UMSOCKET_TYPE_SCTP_SEQPACKET:
+            case UMSOCKET_TYPE_SCTP_STREAM:
+            case UMSOCKET_TYPE_SCTP_DGRAM:
+            case UMSOCKET_TYPE_SCTP4ONLY_SEQPACKET:
+            case UMSOCKET_TYPE_SCTP4ONLY_STREAM:
+            case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
             {
                 int i;
                 for(i=0;i< [localAddresses count];i++)
                 {
-                    memset(&sa,0x00,sizeof(sa));
-                    sa.sin_family   = AF_INET;
-#ifdef	HAS_SOCKADDR_LEN
-                    sa.sin_len  = sizeof(struct sockaddr_in);
-#endif
-                    sa.sin_port = htons(_requestedLocalPort);
-
                     ipAddr = [localAddresses objectAtIndex:i];
-                    [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
-
-                    inet_aton(addressString, &sa.sin_addr);
-                    int err = sctp_bindx(_sock, (struct sockaddr *)&sa,1,SCTP_BINDX_ADD_ADDR);
+                    NSData *d = [UMSocket sockaddrFromAddress:ipAddr
+                                                     port:_requestedLocalPort
+                                             socketFamily:AF_INET];
+                    int err = sctp_bindx(_sock, (struct sockaddr *)d.bytes,1,SCTP_BINDX_ADD_ADDR);
                     if(!err)
                     {
                         [useableLocalAddresses addObject:ipAddr];
@@ -604,7 +630,33 @@ static int SSL_smart_shutdown(SSL *ssl)
                 }
                 break;
             }
+                case UMSOCKET_TYPE_SCTP6ONLY_SEQPACKET:
+                case UMSOCKET_TYPE_SCTP6ONLY_STREAM:
+                case UMSOCKET_TYPE_SCTP6ONLY_DGRAM:
+            {
+                int i;
+                for(i=0;i< [localAddresses count];i++)
+                {
+                    ipAddr = [localAddresses objectAtIndex:i];
+                    NSData *d = [UMSocket sockaddrFromAddress:ipAddr
+                                                     port:_requestedLocalPort
+                                             socketFamily:AF_INET6];
+                    int err = sctp_bindx(_sock, (struct sockaddr *)d.bytes,1,SCTP_BINDX_ADD_ADDR);
+                    if(!err)
+                    {
+                        [useableLocalAddresses addObject:ipAddr];
+                    }
+                }
+
+                if( [useableLocalAddresses count] == 0)
+                {
+                    return UMSocketError_sctp_bindx_failed_for_all;
+                }
+                break;
+            }
+
 #endif
+
             case UMSOCKET_TYPE_TCP4ONLY:
             case UMSOCKET_TYPE_UDP4ONLY:
             {
@@ -1011,9 +1063,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         UMSocket *newcon =NULL;
         NSString *remoteAddress=@"";
         in_port_t remotePort=0;
-        if( (type == UMSOCKET_TYPE_TCP4ONLY) ||
-           (type == UMSOCKET_TYPE_UDP4ONLY) ||
-           (type == UMSOCKET_TYPE_SCTP4ONLY))
+        if(UMSOCKET_IS_IPV4_ONLY_TYPE(type))
         {
             struct	sockaddr_in sa4;
             socklen_t slen4 = sizeof(sa4);
@@ -1332,6 +1382,11 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
 #if defined(UM_TRANSPORT_SCTP_SUPPORTED)
         case UMSOCKET_TYPE_SCTP:
+        case UMSOCKET_TYPE_SCTP_DGRAM:
+        case UMSOCKET_TYPE_SCTP_STREAM:
+        case UMSOCKET_TYPE_SCTP4ONLY:
+        case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
+        case UMSOCKET_TYPE_SCTP4ONLY_STREAM:
             [self sendSctp:data withStreamID: 0 withProtocolID: 0]
             break;
 #endif
@@ -1951,9 +2006,15 @@ static int SSL_smart_shutdown(SSL *ssl)
             has_host = 1;
             has_device = 0;
             break;
-        case UMSOCKET_TYPE_SCTP4ONLY:
-        case UMSOCKET_TYPE_SCTP6ONLY:
-        case UMSOCKET_TYPE_SCTP:
+        case UMSOCKET_TYPE_SCTP_SEQPACKET:
+        case UMSOCKET_TYPE_SCTP_DGRAM:
+        case UMSOCKET_TYPE_SCTP_STREAM:
+        case UMSOCKET_TYPE_SCTP4ONLY_SEQPACKET:
+        case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
+        case UMSOCKET_TYPE_SCTP4ONLY_STREAM:
+        case UMSOCKET_TYPE_SCTP6ONLY_SEQPACKET:
+        case UMSOCKET_TYPE_SCTP6ONLY_DGRAM:
+        case UMSOCKET_TYPE_SCTP6ONLY_STREAM:
             has_host = 1;
             has_device = 0;
             break;

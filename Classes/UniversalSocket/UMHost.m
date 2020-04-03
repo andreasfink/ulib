@@ -203,13 +203,11 @@
     {
         if (_isLocalHost)
         {
-            if (type == UMSOCKET_TYPE_TCP4ONLY || type == UMSOCKET_TYPE_UDP4ONLY ||
-                    type == UMSOCKET_TYPE_SCTP4ONLY || type == UMSOCKET_TYPE_USCTP4ONLY)
+            if (UMSOCKET_IS_IPV4_ONLY_TYPE(type))
             {
                 addr = [_addresses objectAtIndex:1];
             }
-            else if (type == UMSOCKET_TYPE_TCP6ONLY || type == UMSOCKET_TYPE_UDP6ONLY ||
-                    type == UMSOCKET_TYPE_SCTP6ONLY || type == UMSOCKET_TYPE_USCTP6ONLY)
+            else if (UMSOCKET_IS_IPV6_ONLY_TYPE(type))
             {
                 addr = [_addresses objectAtIndex:2];
             }

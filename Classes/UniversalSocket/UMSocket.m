@@ -312,6 +312,8 @@ static int SSL_smart_shutdown(SSL *ssl)
 		return @"oos";
 	case UMSOCKET_STATUS_IS:
 		return @"is";
+    case UMSOCKET_STATUS_LISTENING:
+          return @"listening";
 	}
 	return @"unknown";	
 }
@@ -1236,7 +1238,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         }
         _sock=-1;
         self.hasSocket=NO;
-        status = UMSOCKET_STATUS_OOS;
+        status = UMSOCKET_STATUS_OFF;
         self.isConnected = NO;
         [_controlLock unlock];
     }

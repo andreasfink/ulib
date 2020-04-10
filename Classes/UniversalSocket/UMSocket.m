@@ -55,8 +55,8 @@ typedef unsigned long (*CRYPTO_CALLBACK_PTR)(void);
 
 #ifdef SCTP_IN_KERNEL
 #ifdef __APPLE__
-#include "/Library/Frameworks/sctp.framework/Headers/sctp_uio.h"
-#include "/Library/Frameworks/sctp.framework/Headers/sctp.h"
+#include "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework/Headers/sctp_uio.h"
+#include "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework/Headers/sctp.h"
 #else
 #include <netinet/sctp.h>
 #endif

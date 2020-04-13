@@ -17,7 +17,8 @@ with
 
 
 #ifdef __APPLE__
-#include "/Library/Frameworks/sctp.framework/Versions/A/Headers/sctp.h"
+#include <sctp/sctp.h>
+#include "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework/Versions/A/Headers/sctp.h"
 #else
 #include <netinet/sctp.h>
 #endif

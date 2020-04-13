@@ -79,6 +79,8 @@ BOOL umobject_object_stat_is_enabled(void);
                         logdir:(NSString *)logdir;
 + (NSCharacterSet *)whitespaceAndNewlineCharacterSet; /* this differs from NSCharacterSet version by having LINE SEPARATOR' (U+2028)
                                                        in it as well (UTF8 E280AD) */
++ (NSCharacterSet *)whitespaceAndNewlineAndCommaCharacterSet; /* used for separating list of items in strings */
+
 + (NSCharacterSet *)newlineCharacterSet; /* this differs from NSCharacterSet version by having LINE SEPARATOR' (U+2028)
                                                        in it as well (UTF8 E280AD) */
 + (NSCharacterSet *)bracketsAndWhitespaceCharacterSet;  /* includes [ and ]  and whitespace */

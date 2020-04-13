@@ -236,6 +236,20 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 	return _charset;
 }
 
++ (NSCharacterSet *)whitespaceAndNewlineAndCommaCharacterSet
+{
+    static NSCharacterSet *_charset=NULL;
+
+    if(_charset==NULL)
+    {
+        NSMutableCharacterSet *c  = [[NSCharacterSet whitespaceAndNewlineCharacterSet] mutableCopy];
+        [c addCharactersInRange:NSMakeRange((unsigned int) ',' ,1)]; /*  NULL */
+        _charset = [((NSCharacterSet *)c) copy];
+    }
+    return _charset;
+}
+
+
 + (NSCharacterSet *)bracketsAndWhitespaceCharacterSet /* includes [ and ]  and whitespace*/
 {
     static NSCharacterSet *_charset=NULL;

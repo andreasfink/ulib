@@ -12,7 +12,9 @@
 
 static NSDateFormatter *_standardDateFormatter = NULL;
 static NSDate *dateFromStringNSCalendar(NSString *str, const char *ctimezone_str);
+#ifdef LINUX
 static NSDate *dateFromStringMktime(NSString *str);
+#endif
 
 @implementation NSDate(stringFunctions)
 

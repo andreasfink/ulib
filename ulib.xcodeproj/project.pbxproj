@@ -1079,9 +1079,8 @@
 		A67C389516B2D53000C9DA95 /* UMDataWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C389216B2D53000C9DA95 /* UMDataWithHistory.m */; };
 		A67C389716B2D53000C9DA95 /* UMDateWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C389316B2D53000C9DA95 /* UMDateWithHistory.m */; };
 		A67D14182431DDB9003CB94D /* TestUMDate.m in Sources */ = {isa = PBXBuildFile; fileRef = A67D14172431DDB9003CB94D /* TestUMDate.m */; };
-		A67D141A2431DF78003CB94D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB562406285D001FB7FF /* libcrypto.a */; };
 		A67D141B2431DF85003CB94D /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5C24062881001FB7FF /* libssl.a */; };
-		A67D141C2431DF9E003CB94D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5A2406287A001FB7FF /* libcrypto.a */; };
+		A67D141C2431DF9E003CB94D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5A2406287A001FB7FF /* libcrypto.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A67D141D2431DFAF003CB94D /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69BCFF2240675A00083657F /* sctp.framework */; };
 		A67D3DEA1AFA01BB0090FC94 /* NSArray+UMJson.h in Headers */ = {isa = PBXBuildFile; fileRef = A67D3DE21AF9FF1D0090FC94 /* NSArray+UMJson.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A67D3DED1AFA01C70090FC94 /* NSString+UMJson.h in Headers */ = {isa = PBXBuildFile; fileRef = A67D3DE61AF9FF2B0090FC94 /* NSString+UMJson.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2158,11 +2157,11 @@
 		A6971C8016356C0B004E9B50 /* UniversalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalConfig.h; sourceTree = "<group>"; };
 		A69AB262182BC060001D0FE8 /* UMHTTPCookie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPCookie.h; sourceTree = "<group>"; };
 		A69AB263182BC060001D0FE8 /* UMHTTPCookie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPCookie.m; sourceTree = "<group>"; };
-		A69BCFF2240675A00083657F /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework"; sourceTree = "<group>"; };
 		A69BCFEA240664200083657F /* BUILD-OPENSSL-1.1.1d.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "BUILD-OPENSSL-1.1.1d.txt"; sourceTree = "<group>"; };
 		A69BCFEB240664280083657F /* openssl-1.1.1d.tar.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = "openssl-1.1.1d.tar.gz"; sourceTree = "<group>"; };
 		A69BCFEC240664B30083657F /* debian-x86_64 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "debian-x86_64"; sourceTree = "<group>"; };
 		A69BCFED240664BD0083657F /* redhat-x86_64 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "redhat-x86_64"; sourceTree = "<group>"; };
+		A69BCFF2240675A00083657F /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework"; sourceTree = "<group>"; };
 		A69F08FF149D3A4C0009F272 /* UMConfigParsedLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMConfigParsedLine.h; sourceTree = "<group>"; };
 		A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMConfigParsedLine.m; sourceTree = "<group>"; };
 		A6A143F5149B4F5000B007D0 /* ulib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ulib.h; sourceTree = "<group>"; };
@@ -2441,7 +2440,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A67D141A2431DF78003CB94D /* libcrypto.a in Frameworks */,
 				A67D141D2431DFAF003CB94D /* sctp.framework in Frameworks */,
 				A67D141B2431DF85003CB94D /* libssl.a in Frameworks */,
 				A67D141C2431DF9E003CB94D /* libcrypto.a in Frameworks */,

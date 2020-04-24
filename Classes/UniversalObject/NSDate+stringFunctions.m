@@ -154,6 +154,12 @@ static NSDate *dateFromStringMktime(NSString *str)
     }
     tm.tm_zone = (char *)ctimezone_str;
     
+    
+    const char *tzstring = getenv("TZ");
+    if((tzstring==NULL) || (strncmp("UTC",tzstring,3)!=0))
+    {
+        setenv("TZ","UTC",1);
+    }
     time_t t = mktime(&tm);
     if(t==-1)
     {
@@ -166,11 +172,6 @@ static NSDate *dateFromStringMktime(NSString *str)
 
 static NSDate *dateFromStringNSCalendar(NSString *str, const char *ctimezone_str)
 {
-    const char *tzstring = getenv("TZ");
-    if((tzstring==NULL) || (strncmp("UTC",tzstring,3)!=0))
-    {
-        setenv("TZ","UTC",1);
-    }
     int year;
     int month;
     int day;

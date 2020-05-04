@@ -8,6 +8,7 @@
 
 #import "UMNamedList.h"
 #import "NSString+UMHTTP.h"
+#import "UMSynchronizedSortedDictionary.h"
 
 @implementation UMNamedList
 
@@ -24,7 +25,7 @@
     self = [super init];
     if(self)
     {
-        _entries = [[NSMutableDictionary alloc]init];
+        _entries = [[UMSynchronizedSortedDictionary alloc]init];
         _lock  = [[UMMutex alloc]initWithName:@"UMNamedList-lock"];
         _path = path;
         _name = name;
@@ -41,6 +42,7 @@
 {
     [_lock lock];
     _entries[str] = str;
+    _dirty=YES;
     [_lock unlock];
 }
 
@@ -48,6 +50,7 @@
 {
     [_lock lock];
     [_entries removeObjectForKey:str];
+    _dirty=YES;
     [_lock unlock];
 }
 
@@ -107,7 +110,7 @@
         return;
     }
     NSArray *lines = [s componentsSeparatedByString:@"\n"];
-    NSMutableDictionary *list = [[NSMutableDictionary alloc]init];
+    UMSynchronizedSortedDictionary *list = [[UMSynchronizedSortedDictionary alloc]init];
     for(NSString *line in lines)
     {
         NSString *value = [line stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];

@@ -65,7 +65,6 @@ popd
  apt-get install build-essential git subversion  \
         libxml2 libxml2-dev \
         libffi6 libffi-dev\
-        libicu-dev \
         libuuid1 uuid-dev uuid-runtime \
         libsctp1 libsctp-dev lksctp-tools \
         libavahi-core7  libavahi-core-dev\
@@ -98,7 +97,7 @@ popd
         libpng-dev libpng16-16\
         libreadline7 libreadline-dev \
         libgif7 libgif-dev libwings3 libwings-dev  libwraster-dev libwutil5 \
-        libcups2-dev  libicu63 libicu-dev \
+        libcups2-dev  libicu57 libicu-dev \
         gobjc++\
         xorg \
         libfreetype6 libfreetype6-dev \
@@ -116,7 +115,7 @@ Download the sourcecode of gnustep and dependencies
 
     mkdir gnustep
     cd gnustep
-    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz
+    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
     git clone https://github.com/apple/swift-corelibs-libdispatch
     git clone https://github.com/gnustep/scripts
     git clone https://github.com/gnustep/make
@@ -125,7 +124,7 @@ Download the sourcecode of gnustep and dependencies
     git clone https://github.com/gnustep/corebase
     git clone https://github.com/gnustep/gui
     git clone https://github.com/gnustep/back
-    ./scripts/install-dependencies
+   # ./scripts/install-dependencies
 	
 	
 Lets purge the gcc stuff in case its installed

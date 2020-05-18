@@ -42,20 +42,23 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
 -------------------------------------------
 
 
-echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main"			> /etc/apt/sources.list.d/llvm.list
-echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-7 main"		>> /etc/apt/sources.list.d/llvm.list
-echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-snapshot main"			>> /etc/apt/sources.list.d/llvm.list
-echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-snapshot main"		>> /etc/apt/sources.list.d/llvm.list
+
+echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch main"        > /etc/apt/sources.list.d/llvm.list
+echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch main"    >> /etc/apt/sources.list.d/llvm.list
+echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-9 main"      >> /etc/apt/sources.list.d/llvm.list
+echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-9 main"  >> /etc/apt/sources.list.d/llvm.list
+echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-10 main"     >> /etc/apt/sources.list.d/llvm.list
+echo "deb-src http://apt.llvm.org/stretch/ llvm-toolchain-stretch-10 main" >> /etc/apt/sources.list.d/llvm.list
+
 apt-get update
 
-apt-get install clang-7 lldb-7 llvm-7 libc++-7-dev lld-7 python-lldb-7
-apt-get install clang-8 lldb-8 llvm-8 libc++-8-dev lld-8 python-lldb-8
+apt-get install clang-10 lldb-10 llvm-10 libc++-10-dev lld-10
 pushd /usr/bin
 rm -f clang clang++ clang-cpp lldb
-ln -s clang-8 clang
-ln -s clang++-8 clang++
-ln -s clang-cpp-8 clang-cpp
-ln -s lldb-8 lldb
+ln -s clang-10 clang
+ln -s clang++-10 clang++
+ln -s clang-cpp-10 clang-cpp
+ln -s lldb-10 lldb
 popd
 
 2. Install depenencies
@@ -137,9 +140,9 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 
 #   Note libiconf does not build if the compiler is set to clang or the linker to lld.
 
-    tar -xvzf libiconv-1.15.tar.gz
-    cd libiconv-1.15
-    ./configure --enable-static --enable-dynamic
+    tar -xvzf libiconv-1.16.tar.gz
+    cd libiconv-1.16
+    CC=gcc LDFLAGS="-fuse-ld=gold" CXX="gcc++" CFLAGS="" CPPFLAGS="" ./configure --enable-static --enable-dynamic
     make
     make install
     cd ..
@@ -148,16 +151,14 @@ apt-get purge libblocksruntime-dev libblocksruntime0
 3. Setting some defaults
 ------------------------------------------------
 
-export CC="/usr/bin/clang-8"
-export CXX="/usr/bin/clang++-8"
-export PREFIX="/opt/universalss7"
+export CC="/usr/bin/clang-10"
+export CXX="/usr/bin/clang++-10"
 export PREFIX="/usr/local"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"
 export RUNTIME_VERSION="gnustep-2.0"
 export CPPFLAGS="-L/usr/local/lib -L${PREFIX}/lib"
-#export LD="/usr/bin/lld-7"
-#export LDFLAGS="-fuse-ld=${LD}"
+export LDFLAGS="-fuse-ld=gold"
 export OBJCFLAGS="-fblocks"
 export CFLAGS="-I ${PREFIX}/include"
 
@@ -168,7 +169,7 @@ mkdir -p ${PREFIX}/bin
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    cmake .. -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX}
+    cmake .. -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX}    
     make
     make install
     
@@ -178,6 +179,9 @@ mkdir -p ${PREFIX}/bin
 5. install libobjc2 runtime
 
     cd libobjc2
+    git submodule init 
+    git submodule sync 
+    git submodule update 
     mkdir Build
     cd Build
     cmake ..  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=${PREFIX}
@@ -191,11 +195,6 @@ mkdir -p ${PREFIX}/bin
 6. install gnustep-make
 
     cd make
-
-	cat FilesystemLayouts/fhs | sed 's/^GNUSTEP_DEFAULT_PREFIX=.*$/GNUSTEP_DEFAULT_PREFIX=\/opt\/universalss7/g' > FilesystemLayouts/universalss7
-
-
-with standard /usr/local layout...
     ./configure \
             --with-layout=fhs \
             --disable-importing-config-file \
@@ -207,21 +206,6 @@ with standard /usr/local layout...
             --with-user-config-file='.GNUstep.conf' \
             --with-user-defaults-dir='GNUstep/Library/Defaults' \
             --with-objc-lib-flag="-l:libobjc.so.4.6"
-
-
-    ./configure \
-    		--includedir=${PREFIX}/include \
-    		--libdir=${PREFIX}/lib \
-            --with-layout=universalss7 \
-            --disable-importing-config-file \
-            --enable-native-objc-exceptions \
-            --enable-objc-arc \
-            --enable-install-ld-so-conf \
-            --with-library-combo=ng-gnu-gnu \
-            --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf \
-            --with-user-config-file='.GNUstep.conf' \
-            --with-user-defaults-dir='GNUstep/Library/Defaults' \
-          #  --with-objc-lib-flag="-l:libobjc.so.4.6"
     make install
     source ${PREFIX}/etc/GNUstep/GNUstep.conf
     cd ..
@@ -230,7 +214,7 @@ with standard /usr/local layout...
 
 
     cd base
-    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf --disable-mixedabi --with-libiconv-library=
+    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf
 	echo "# universalss7 libraries" > /etc/ld.so.conf.d/universalss7.conf
 	echo "${PREFIX}/lib" >> /etc/ld.so.conf.d/universalss7.conf
 	ldconfig

@@ -58,7 +58,7 @@ echo "deb-src http://apt.llvm.org/${DEBIAN_NICKNAME}/ llvm-toolchain-${DEBIAN_NI
 
 apt-get update
 
-apt-get install clang lldb llvm libc++-dev lld python-lldb
+apt-get install clang-10 lldb-10 lld-10
 
 
 2. Install depenencies
@@ -149,7 +149,7 @@ Build  libiconv
     wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
     tar -xvzf libiconv-1.16.tar.gz
     cd libiconv-1.16
-    ./configure --enable-static --enable-dynamic
+    CC=gcc LDFLAGS="-fuse-ld=gold" CXX="gcc++" CFLAGS="" CPPFLAGS="" ./configure --enable-static --enable-dynamic
     make
     make install
     cd ..
@@ -158,15 +158,15 @@ Build  libiconv
 3. Setting some defaults
 ------------------------------------------------
 
-export CC="/usr/bin/clang"
-export CXX="/usr/bin/clang++"
+export CC="/usr/bin/clang-10"
+export CXX="/usr/bin/clang++-10"
 export PREFIX="/usr/local"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"
 export RUNTIME_VERSION="gnustep-2.0"
 export OBJCFLAGS="-fblocks"
 export CFLAGS="-I ${PREFIX}/include -stdlib=libstdc++"
-export LDFLAGS="-fuse-ld=/usr/bin/ld.gold"
+export LDFLAGS="-fuse-ld=gold"
 
 mkdir -p ${PREFIX}/lib
 mkdir -p ${PREFIX}/etc
@@ -176,9 +176,9 @@ mkdir -p ${PREFIX}/bin
     mkdir build
     cd build
     #cmake .. -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX}
-    cmake -G Ninja -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX} ..
-    ninja
-    ninja install
+    cmake  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX} ..
+    make
+    make install
 
 
 5. install libobjc2 runtime
@@ -189,7 +189,9 @@ mkdir -p ${PREFIX}/bin
     mkdir Build
     cd Build
     /usr/bin/cmake  .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=${PREFIX}
-    make -j8
+    make 
+    #if you get errors here
+    # edif the file CMakeCache.txt  and remove the -stlib... thing in line CMAKE_C_FLAGS:STRING=-I /usr/local/include
     make install
     cd ..
     ldconfig

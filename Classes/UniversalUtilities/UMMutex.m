@@ -162,7 +162,7 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
     pthread_mutex_unlock(&_mutexLock);
 }
 
-- (int)tryLock /* returns 0 if success ful */
+- (int)tryLock /* returns 0 if successful */
 {
     UMMutexStat *stat;
     if(global_ummutex_stat)

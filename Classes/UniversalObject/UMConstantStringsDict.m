@@ -35,20 +35,20 @@ static UMConstantStringsDict *global_constant_strings = NULL;
 
 - (const char *)asciiStringFromNSString:(NSString *)str
 {
-	const char *cptr ="\0";
-	unsigned long len = 0;
-
-	[_lock lock];
-	NSData *d = _dict[str];
-	if(d==NULL)
-	{
-		cptr = [str cStringUsingEncoding:NSASCIIStringEncoding];
-		len = strlen(cptr);
-		d = [NSData dataWithBytes:cptr length:len+1]; /* We  include the null byte */
-		_dict[str] = d;
-	}
+    /* We save constant strings into an array (always adding) and return a cont cptr
+     if the string is already there we just return the already existing pointer */
+    [_lock lock];
+    NSData *d = _dict[str];
+    if(d)
+    {
+        [_lock unlock];
+        return     d.bytes;
+    }
+	const char *cptr = [str cStringUsingEncoding:NSASCIIStringEncoding];
+	unsigned long len = strlen(cptr);
+    d = [NSData dataWithBytes:cptr length:len+1]; /* We  include the null byte */
+    _dict[str] = d;
 	[_lock unlock];
 	return 	d.bytes;
-;
 }
 @end

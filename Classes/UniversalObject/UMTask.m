@@ -41,7 +41,10 @@
         if(_synchronizeMutex)
         {
             [_synchronizeMutex lock];
-            [self main];
+            @autoreleasepool
+            {
+                [self main];
+            }
             [_synchronizeMutex unlock];
         }
         else
@@ -50,12 +53,18 @@
             {
                 @synchronized(_synchronizeObject)
                 {
-                    [self main];
+                    @autoreleasepool
+                    {
+                        [self main];
+                    }
                 }
             }
             else
             {
-                [self main];
+                @autoreleasepool
+                {
+                    [self main];
+                }
             }
         }
     }
@@ -70,7 +79,10 @@
 
 - (void)main
 {
-    NSLog(@"empty task");
+    @autoreleasepool
+    {
+        NSLog(@"empty task");
+    }
 }
 
 @end

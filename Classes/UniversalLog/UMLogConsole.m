@@ -58,11 +58,13 @@
 
 - (void) logNow:(UMLogEntry *)logEntry
 {
-	NSString	*s;
-	
-	s = [logEntry description];
-	fprintf(stdout,"%s\r\n", [s UTF8String] );
-	fflush(stdout);
+    @autoreleasepool
+    {
+        NSString	*s;
+        s = [logEntry description];
+        fprintf(stdout,"%s\r\n", [s UTF8String] );
+        fflush(stdout);
+    }
 }
 
 

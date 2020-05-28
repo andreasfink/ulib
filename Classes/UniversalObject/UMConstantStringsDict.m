@@ -27,8 +27,11 @@ static UMConstantStringsDict *global_constant_strings = NULL;
 	self = [super init];
 	if(self)
 	{
-        _lock = [[UMMutex alloc]initWithName:@"UMConstantStringsDict" saveInObjectStat:NO];
-		_dict = [[NSMutableDictionary alloc]init];
+        for(int i=0;i<MAX_CSTRING_DICTS;i++)
+        {
+            _lock[i] = [[UMMutex alloc]initWithName:@"UMConstantStringsDict" saveInObjectStat:NO];
+            _dict[i] = [[NSMutableDictionary alloc]init];
+        }
 	}
 	return self;
 }
@@ -36,19 +39,28 @@ static UMConstantStringsDict *global_constant_strings = NULL;
 - (const char *)asciiStringFromNSString:(NSString *)str
 {
     /* We save constant strings into an array (always adding) and return a cont cptr
-     if the string is already there we just return the already existing pointer */
-    [_lock lock];
-    NSData *d = _dict[str];
+     if the string is already there we just return the already existing pointer
+    we spread the dictionary to reduce the chance of locking collisions
+    */
+    const char *cptr = [str cStringUsingEncoding:NSASCIIStringEncoding];
+    unsigned long len = strlen(cptr);
+    int sum = 0;
+    for(int i=0;i<len;i++)
+    {
+        sum += cptr[i++];
+    }
+    int index = sum % MAX_CSTRING_DICTS;
+    [_lock[index] lock];
+    NSData *d = _dict[index][str];
     if(d)
     {
-        [_lock unlock];
+        [_lock[index] unlock];
         return     d.bytes;
     }
-	const char *cptr = [str cStringUsingEncoding:NSASCIIStringEncoding];
-	unsigned long len = strlen(cptr);
     d = [NSData dataWithBytes:cptr length:len+1]; /* We  include the null byte */
-    _dict[str] = d;
-	[_lock unlock];
+    _dict[index][str] = d;
+	[_lock[index] unlock];
 	return 	d.bytes;
 }
+
 @end

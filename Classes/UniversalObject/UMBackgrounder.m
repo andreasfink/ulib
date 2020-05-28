@@ -175,7 +175,11 @@
         }
         if(!mustQuit)
         {
-            int status = [self work]; /* > 0 means we had work processed */
+            int status;
+            @autoreleasepool
+            {
+                status = [self work]; /* > 0 means we had work processed */
+            }
             if(status < 0)
             {
                 if(_enableLogging)
@@ -207,7 +211,10 @@
 
 - (int)work
 {
-    NSLog(@"UMBackgrounder work method is not overwritten");
+    @autoreleasepool
+    {
+        NSLog(@"UMBackgrounder work method is not overwritten");
+    }
     return -1;
 }
 

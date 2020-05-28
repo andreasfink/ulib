@@ -37,7 +37,7 @@ BOOL umobject_object_stat_is_enabled(void);
 
 @interface UMObject : NSObject 
 {
-    const char	*_magic;        			/*!< c pointer to the class name which has instantiated this object */
+    const char	*_magic;        			/*!< c pointer to the class name which has instantiated this object . Optional set*/
 	const char  *_objectStatisticsName;		/*!< c pointer to the name which is used in object statistics. defaults to _magic */
 	UMLogFeed   *_logFeed;                  /*!< The log feed this object can use to log anything related to this UMObject */
     uint32_t    _umobject_flags; 			/*!< internal flags to remember which options this object has */
@@ -48,6 +48,7 @@ BOOL umobject_object_stat_is_enabled(void);
 @property (readonly,assign,atomic)  uint32_t    umobject_flags;
 
 - (UMObject *) init;
+- (void)setupMagic; /* !< populates the magic c pointer */
 
 - (void) addLogFromConfigGroup:(NSDictionary *)grp
                      toHandler:(UMLogHandler *)handler

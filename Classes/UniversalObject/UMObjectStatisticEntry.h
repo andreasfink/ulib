@@ -11,11 +11,11 @@
 
 @interface UMObjectStatisticEntry : NSObject
 {
-	NSLock *_lock;
-	long long _allocCounter;
-	long long _deallocCounter;
-	long long _inUseCounter;
-	const char *_name;
+	NSLock      *_lock;
+	long long   _allocCounter;
+	long long   _deallocCounter;
+	long long   _inUseCounter;
+	const char  *_name;
 }
 
 @property(readwrite,assign) const char *name;

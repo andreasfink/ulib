@@ -22,9 +22,6 @@
 
 extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
-
-
-
 @interface UMObjectThreadStarter : NSObject
 {
 	SEL         _selector;
@@ -59,23 +56,39 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
 - (UMObject *) init
 {
-	UMConstantStringsDict *magicNames = [UMConstantStringsDict sharedInstance];
 	self = [super init];
 	if(self)
 	{
-		NSString *s = [[self class] description];
-		_magic = [magicNames asciiStringFromNSString:s];
-		_umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
-		_objectStatisticsName = _magic;
         UMObjectStatistic *os = [UMObjectStatistic sharedInstance];
         if(os)
         {
+            if(_objectStatisticsName==NULL)
+            {
+                [self setupObjectStatisticsName];
+            }
             [os increaseAllocCounter:_objectStatisticsName];
             _umobject_flags  |= UMOBJECT_FLAG_COUNTED_IN_STAT;
         }
 		_umobject_flags  |= UMOBJECT_FLAG_IS_INITIALIZED;
 	}
 	return self;
+}
+
+- (void)setupMagic
+{
+    UMConstantStringsDict *magicNames = [UMConstantStringsDict sharedInstance];
+    NSString *s = [[self class] description];
+    _magic = [magicNames asciiStringFromNSString:s];
+    _umobject_flags  |= UMOBJECT_FLAG_HAS_MAGIC;
+}
+
+- (void)setupObjectStatisticsName
+{
+    if(_magic == NULL)
+    {
+        [self setupMagic];
+        _objectStatisticsName = _magic;
+    }
 }
 
 - (void)dealloc

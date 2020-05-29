@@ -20,13 +20,16 @@
 
 - (UMSynchronizedDictionary *)init
 {
-    self = [super init];
-    if(self)
+    @autoreleasepool
     {
-        _underlyingDictionary = [[NSMutableDictionary alloc] init];
-        _lock = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
+        self = [super init];
+        if(self)
+        {
+            _underlyingDictionary = [[NSMutableDictionary alloc] init];
+            _lock = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
+        }
+        return self;
     }
-    return self;
 }
 
 - (void)flush
@@ -38,13 +41,16 @@
 
 - (UMSynchronizedDictionary *)initWithDictionary:(NSDictionary *)sd
 {
-    self = [super init];
-    if(self)
+    @autoreleasepool
     {
-        _underlyingDictionary = [sd mutableCopy];
-        _lock = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
+        self = [super init];
+        if(self)
+        {
+            _underlyingDictionary = [sd mutableCopy];
+            _lock = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
+        }
+        return self;
     }
-    return self;
 }
 
 - (void)lock

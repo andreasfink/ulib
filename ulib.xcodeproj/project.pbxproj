@@ -1560,8 +1560,8 @@
 		A6DDD9BC16360D89002FA7CC /* NSDictionary+UMHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9B916360D88002FA7CC /* NSDictionary+UMHTTP.m */; };
 		A6DDD9C1163611F3002FA7CC /* NSData+UMLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9BE163611F3002FA7CC /* NSData+UMLog.m */; };
 		A6DDD9C61636154A002FA7CC /* NSData+UMSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9C31636154A002FA7CC /* NSData+UMSocket.m */; };
-		A6E1DB4024061583001FB7FF /* openssl-1.1.1d-binary in Resources */ = {isa = PBXBuildFile; fileRef = A6E1DB3F24061582001FB7FF /* openssl-1.1.1d-binary */; };
-		A6E1DB4124061583001FB7FF /* openssl-1.1.1d-binary in Resources */ = {isa = PBXBuildFile; fileRef = A6E1DB3F24061582001FB7FF /* openssl-1.1.1d-binary */; };
+		A6E1DB4024061583001FB7FF /* openssl-1.1.1g-binary in Resources */ = {isa = PBXBuildFile; fileRef = A6E1DB3F24061582001FB7FF /* openssl-1.1.1g-binary */; };
+		A6E1DB4124061583001FB7FF /* openssl-1.1.1g-binary in Resources */ = {isa = PBXBuildFile; fileRef = A6E1DB3F24061582001FB7FF /* openssl-1.1.1g-binary */; };
 		A6E1DB572406285D001FB7FF /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB562406285D001FB7FF /* libcrypto.a */; platformFilter = ios; };
 		A6E1DB5D24062881001FB7FF /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5C24062881001FB7FF /* libssl.a */; platformFilter = maccatalyst; };
 		A6E1DB5F2406289F001FB7FF /* libcrypto-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5E2406289F001FB7FF /* libcrypto-tvOS.a */; };
@@ -2157,8 +2157,8 @@
 		A6971C8016356C0B004E9B50 /* UniversalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalConfig.h; sourceTree = "<group>"; };
 		A69AB262182BC060001D0FE8 /* UMHTTPCookie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPCookie.h; sourceTree = "<group>"; };
 		A69AB263182BC060001D0FE8 /* UMHTTPCookie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPCookie.m; sourceTree = "<group>"; };
-		A69BCFEA240664200083657F /* BUILD-OPENSSL-1.1.1d.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "BUILD-OPENSSL-1.1.1d.txt"; sourceTree = "<group>"; };
-		A69BCFEB240664280083657F /* openssl-1.1.1d.tar.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = "openssl-1.1.1d.tar.gz"; sourceTree = "<group>"; };
+		A69BCFEA240664200083657F /* BUILD-OPENSSL-1.1.1g.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "BUILD-OPENSSL-1.1.1g.txt"; sourceTree = "<group>"; };
+		A69BCFEB240664280083657F /* openssl-1.1.1g.tar.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = "openssl-1.1.1g.tar.gz"; sourceTree = "<group>"; };
 		A69BCFEC240664B30083657F /* debian-x86_64 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "debian-x86_64"; sourceTree = "<group>"; };
 		A69BCFED240664BD0083657F /* redhat-x86_64 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "redhat-x86_64"; sourceTree = "<group>"; };
 		A69BCFF2240675A00083657F /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework"; sourceTree = "<group>"; };
@@ -2345,15 +2345,15 @@
 		A6DF60B6238B28DB007647F6 /* ulib copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ulib copy-Info.plist"; path = "/Users/afink/development/gitlab/ulib/ulib copy-Info.plist"; sourceTree = "<absolute>"; };
 		A6DF60B7238B298D007647F6 /* make_documentation.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = make_documentation.sh; sourceTree = "<group>"; };
 		A6DF84071A0BCA2C0090FC94 /* UMBackgrounderWithQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBackgrounderWithQueue.m; sourceTree = "<group>"; };
-		A6E1DB3F24061582001FB7FF /* openssl-1.1.1d-binary */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "openssl-1.1.1d-binary"; sourceTree = "<group>"; };
-		A6E1DB4A24061BDA001FB7FF /* openssl-1.1.1d */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "openssl-1.1.1d"; path = "libs/tvos/openssl-1.1.1d"; sourceTree = SOURCE_ROOT; };
-		A6E1DB4C24061C8B001FB7FF /* openssl-1.1.1d */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "openssl-1.1.1d"; sourceTree = "<group>"; };
-		A6E1DB562406285D001FB7FF /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "libs/ios/openssl-1.1.1d/lib/libcrypto.a"; sourceTree = "<group>"; };
-		A6E1DB5824062869001FB7FF /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "libs/ios/openssl-1.1.1d/lib/libssl.a"; sourceTree = "<group>"; };
-		A6E1DB5A2406287A001FB7FF /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "libs/osx/openssl-1.1.1d-binary/usr/local/lib/libcrypto.a"; sourceTree = "<group>"; };
-		A6E1DB5C24062881001FB7FF /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "libs/osx/openssl-1.1.1d-binary/usr/local/lib/libssl.a"; sourceTree = "<group>"; };
-		A6E1DB5E2406289F001FB7FF /* libcrypto-tvOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcrypto-tvOS.a"; path = "libs/tvos/openssl-1.1.1d/lib/libcrypto-tvOS.a"; sourceTree = "<group>"; };
-		A6E1DB60240628A6001FB7FF /* libssl-tvOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libssl-tvOS.a"; path = "libs/tvos/openssl-1.1.1d/lib/libssl-tvOS.a"; sourceTree = "<group>"; };
+		A6E1DB3F24061582001FB7FF /* openssl-1.1.1g-binary */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "openssl-1.1.1g-binary"; sourceTree = "<group>"; };
+		A6E1DB4A24061BDA001FB7FF /* openssl-1.1.1g */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "openssl-1.1.1g"; path = "libs/tvos/openssl-1.1.1g"; sourceTree = SOURCE_ROOT; };
+		A6E1DB4C24061C8B001FB7FF /* openssl-1.1.1g */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "openssl-1.1.1g"; sourceTree = "<group>"; };
+		A6E1DB562406285D001FB7FF /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "libs/ios/openssl-1.1.1g/lib/libcrypto.a"; sourceTree = "<group>"; };
+		A6E1DB5824062869001FB7FF /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "libs/ios/openssl-1.1.1g/lib/libssl.a"; sourceTree = "<group>"; };
+		A6E1DB5A2406287A001FB7FF /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "libs/osx/openssl-1.1.1g-binary/usr/local/lib/libcrypto.a"; sourceTree = "<group>"; };
+		A6E1DB5C24062881001FB7FF /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "libs/osx/openssl-1.1.1g-binary/usr/local/lib/libssl.a"; sourceTree = "<group>"; };
+		A6E1DB5E2406289F001FB7FF /* libcrypto-tvOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcrypto-tvOS.a"; path = "libs/tvos/openssl-1.1.1/lib/libcrypto-tvOS.a"; sourceTree = "<group>"; };
+		A6E1DB60240628A6001FB7FF /* libssl-tvOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libssl-tvOS.a"; path = "libs/tvos/openssl-1.1.1g/lib/libssl-tvOS.a"; sourceTree = "<group>"; };
 		A6E1DB6224062B1E001FB7FF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = ../../../../../System/iOSSupport/System/Library/Frameworks/UIKit.framework; sourceTree = "<group>"; };
 		A6E1DC932406310B001FB7FF /* ulibtvos copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ulibtvos copy-Info.plist"; path = "/Users/afink/development/gitlab/ulib/ulibtvos copy-Info.plist"; sourceTree = "<absolute>"; };
 		A6E1DDB924063158001FB7FF /* ulibwatchos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ulibwatchos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2716,7 +2716,7 @@
 			children = (
 				A69BCFED240664BD0083657F /* redhat-x86_64 */,
 				A69BCFEC240664B30083657F /* debian-x86_64 */,
-				A69BCFEB240664280083657F /* openssl-1.1.1d.tar.gz */,
+				A69BCFEB240664280083657F /* openssl-1.1.1g.tar.gz */,
 				A602149A1D488CF400211137 /* watchos */,
 				A6AC480A1D4608FC002BAA97 /* tvos */,
 				A6AC46D11D4608F0002BAA97 /* ios */,
@@ -2728,8 +2728,8 @@
 		A682E4AA1AA7CB4100854472 /* osx */ = {
 			isa = PBXGroup;
 			children = (
-				A69BCFEA240664200083657F /* BUILD-OPENSSL-1.1.1d.txt */,
-				A6E1DB3F24061582001FB7FF /* openssl-1.1.1d-binary */,
+				A69BCFEA240664200083657F /* BUILD-OPENSSL-1.1.1.txt */,
+				A6E1DB3F24061582001FB7FF /* openssl-1.1.1g-binary */,
 			);
 			name = osx;
 			path = ../libs/osx;
@@ -2738,7 +2738,7 @@
 		A6AC46D11D4608F0002BAA97 /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				A6E1DB4C24061C8B001FB7FF /* openssl-1.1.1d */,
+				A6E1DB4C24061C8B001FB7FF /* openssl-1.1.1g */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -2746,7 +2746,7 @@
 		A6AC480A1D4608FC002BAA97 /* tvos */ = {
 			isa = PBXGroup;
 			children = (
-				A6E1DB4A24061BDA001FB7FF /* openssl-1.1.1d */,
+				A6E1DB4A24061BDA001FB7FF /* openssl-1.1.1g */,
 			);
 			path = tvos;
 			sourceTree = "<group>";
@@ -4202,7 +4202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6E1DB4024061583001FB7FF /* openssl-1.1.1d-binary in Resources */,
+				A6E1DB4024061583001FB7FF /* openssl-1.1.1g-binary in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4228,7 +4228,7 @@
 				22A73B1E158240170085F1F7 /* post-content.txt in Resources */,
 				22A73B21158245470085F1F7 /* http-post-test.conf in Resources */,
 				22B235AB1585E0DB00E9D4C6 /* http-get-content.txt in Resources */,
-				A6E1DB4124061583001FB7FF /* openssl-1.1.1d-binary in Resources */,
+				A6E1DB4124061583001FB7FF /* openssl-1.1.1g-binary in Resources */,
 				226AEE7415A1F3DF00192C30 /* http-post-server.conf in Resources */,
 				22FA261415D0FF9200E5C8C0 /* many-singles.conf in Resources */,
 				22FA261515D0FFBC00E5C8C0 /* http-test-get-with-content.conf in Resources */,
@@ -5440,7 +5440,7 @@
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
@@ -5448,16 +5448,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/ios/openssl-1.1.1d/include/",
+					"$(SRCROOT)/libs/ios/openssl-1.1.1g/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-ios-info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5484,7 +5484,7 @@
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
@@ -5492,16 +5492,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/ios/openssl-1.1.1d/include/",
+					"$(SRCROOT)/libs/ios/openssl-1.1.1g/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-ios-info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5534,14 +5534,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/tvos/openssl-1.1.1d/include/",
+					"$(SRCROOT)/libs/tvos/openssl-1.1.1g/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-tvos-info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1g/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5572,14 +5572,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/tvos/openssl-1.1.1d/include/",
+					"$(SRCROOT)/libs/tvos/openssl-1.1.1g/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-tvos-info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1g/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5601,7 +5601,7 @@
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
@@ -5610,16 +5610,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5628,7 +5628,7 @@
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = macosx;
-				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/";
+				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -5643,7 +5643,7 @@
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
@@ -5652,16 +5652,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5670,7 +5670,7 @@
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = macosx;
-				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/";
+				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -5690,13 +5690,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "SupportingFiles/ulib-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
@@ -5721,13 +5721,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "SupportingFiles/ulib-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.$(PRODUCT_NAME:rfc1034identifier)";
@@ -5751,13 +5751,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/tvos/openssl-1.1.1d/include",
+					"$(SRCROOT)/libs/tvos/openssl-1.1.1g/include",
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1g/lib",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -5785,13 +5785,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/tvos/openssl-1.1.1d/include",
+					"$(SRCROOT)/libs/tvos/openssl-1.1.1g/include",
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1g/lib",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -5819,14 +5819,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/ios/openssl-1.1.1d/include",
+					"$(SRCROOT)/libs/ios/openssl-1.1.1g/include",
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -5856,14 +5856,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/ios/openssl-1.1.1d/include",
+					"$(SRCROOT)/libs/ios/openssl-1.1.1g/include",
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
@@ -5942,7 +5942,7 @@
 				PRODUCT_NAME = ulib;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
-				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/";
+				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/";
 				USER_HEADER_SEARCH_PATHS = "";
 				USE_HEADERMAP = YES;
 				WRAPPER_EXTENSION = framework;
@@ -6011,7 +6011,7 @@
 				PRODUCT_NAME = ulib;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
-				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/";
+				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/";
 				USER_HEADER_SEARCH_PATHS = "";
 				USE_HEADERMAP = YES;
 				WRAPPER_EXTENSION = framework;
@@ -6041,14 +6041,14 @@
 					"SENTEST=1",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibTests/ulibTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.ulibtests.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6081,14 +6081,14 @@
 					"SENTEST=1",
 				);
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.1d-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibTests/ulibTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.ulibtests.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6110,7 +6110,7 @@
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
@@ -6118,16 +6118,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/ios/openssl-1.1.1d/include/",
+					"$(SRCROOT)/libs/ios/openssl-1.1.1g/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibios copy2-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -6153,7 +6153,7 @@
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
@@ -6161,16 +6161,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/ios/openssl-1.1.1d/include/",
+					"$(SRCROOT)/libs/ios/openssl-1.1.1g/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibios copy2-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1d/lib",
+					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1d-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;

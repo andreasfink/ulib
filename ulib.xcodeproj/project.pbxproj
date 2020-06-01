@@ -2728,7 +2728,7 @@
 		A682E4AA1AA7CB4100854472 /* osx */ = {
 			isa = PBXGroup;
 			children = (
-				A69BCFEA240664200083657F /* BUILD-OPENSSL-1.1.1.txt */,
+				A69BCFEA240664200083657F /* BUILD-OPENSSL-1.1.1g.txt */,
 				A6E1DB3F24061582001FB7FF /* openssl-1.1.1g-binary */,
 			);
 			name = osx;
@@ -5619,7 +5619,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5661,7 +5660,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;

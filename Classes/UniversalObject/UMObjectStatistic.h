@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "UMObjectStatisticEntry.h"
+
+#define     UMOBJECT_STATISTIC_SPREAD   64
+
 @class UMMutex;
 @interface UMObjectStatistic : NSObject
 {
-	NSMutableDictionary 		*_dict;
-	UMMutex						*_lock;
+	NSMutableDictionary 		*_dict[UMOBJECT_STATISTIC_SPREAD];
+	UMMutex						*_lock[UMOBJECT_STATISTIC_SPREAD];
 	long long					_allocCount;
 	long long					_dealloc;
 }

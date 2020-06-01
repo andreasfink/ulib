@@ -25,6 +25,9 @@
 
 - (void)main
 {
-    [con connectionListener];
+    @autoreleasepool
+    {
+        [con connectionListener];
+    }
 }
 @end

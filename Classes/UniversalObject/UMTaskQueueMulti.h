@@ -69,6 +69,7 @@
                                     hardLimit:(NSUInteger)hardLimit;
 
 - (void)queueTask:(UMTask *)task toQueueNumber:(int)nr;
+- (void)queueArrayOfTasks:(NSArray<UMTask *>*)tasks toQueueNumber:(int)nr;
 
 - (void)start;
 - (void)shutdown;

@@ -2591,36 +2591,68 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 
 +(NSString *)unifyIP:(NSString *)addr
 {
-    if(addr == NULL)
-    {
-        return NULL;
-    }
-    else if([addr isEqualToString:@"0.0.0.0"])
-    {
-        return @"ipv4:0.0.0.0";
-    }
-    else if([addr length]==0)
-    {
-        return @"ipv6:[::]";
-    }
+    @autoreleasepool
+        {
+        if(addr == NULL)
+        {
+            return NULL;
+        }
+        else if([addr isEqualToString:@"0.0.0.0"])
+        {
+            return @"ipv4:0.0.0.0";
+        }
+        else if([addr length]==0)
+        {
+            return @"ipv6:[::]";
+        }
 
-    else if(([addr isEqualToString:@"::1"]) || ([addr isEqualToString:@"ipv6[::1]"]))
-    {
-        return @"ipv6:localhost";
-    }
+        else if(([addr isEqualToString:@"::1"]) || ([addr isEqualToString:@"ipv6[::1]"]))
+        {
+            return @"ipv6:localhost";
+        }
 
-    else if(
-            [addr isEqualToString:@"127.0.0.1"] ||
-            [addr isEqualToString:@"::ffff:127.0.0.1"] ||
-            [addr isEqualToString:@"ipv4:127.0.0.1"] ||
-            [addr isEqualToString:@"ipv6:[::ffff:127.0.0.1]"])
-    {
-        return @"ipv4:localhost";
-    }
+        else if(
+                [addr isEqualToString:@"127.0.0.1"] ||
+                [addr isEqualToString:@"::ffff:127.0.0.1"] ||
+                [addr isEqualToString:@"ipv4:127.0.0.1"] ||
+                [addr isEqualToString:@"ipv6:[::ffff:127.0.0.1]"])
+        {
+            return @"ipv4:localhost";
+        }
 
-    else if ([addr hasPrefix:@"ipv4:"])
-    {
-        addr = [addr substringFromIndex:5];
+        else if ([addr hasPrefix:@"ipv4:"])
+        {
+            addr = [addr substringFromIndex:5];
+            NSArray *a = [addr componentsSeparatedByString:@"."];
+            if([a count]==4)
+            {
+                int a1 = [[a objectAtIndex:0] intValue];
+                int a2 = [[a objectAtIndex:1] intValue];
+                int a3 = [[a objectAtIndex:2] intValue];
+                int a4 = [[a objectAtIndex:3] intValue];
+                a1 = a1 % 256;
+                a2 = a2 % 256;
+                a3 = a3 % 256;
+                a4 = a4 % 256;
+                return [NSString stringWithFormat:@"ipv4:%d.%d.%d.%d",a1,a2,a3,a4];
+            }
+        }
+        else if ([addr hasPrefix:@"ipv6:"])
+        {
+            addr = [addr substringFromIndex:5];
+            if([addr length]>7)
+            {
+                if([[addr substringToIndex:7]isEqualToString:@"::ffff:"])
+                {
+                    return [NSString stringWithFormat:@"ipv4:%@",[addr substringFromIndex:7]];
+                }
+            }
+            return [NSString stringWithFormat:@"ipv6:[%@]", addr];
+        }
+        if([addr hasPrefix:@"::ffff:"])
+        {
+            addr = [addr substringFromIndex:7];
+        }
         NSArray *a = [addr componentsSeparatedByString:@"."];
         if([a count]==4)
         {
@@ -2634,48 +2666,19 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
             a4 = a4 % 256;
             return [NSString stringWithFormat:@"ipv4:%d.%d.%d.%d",a1,a2,a3,a4];
         }
-    }
-    else if ([addr hasPrefix:@"ipv6:"])
-    {
-        addr = [addr substringFromIndex:5];
-        if([addr length]>7)
+        else
         {
-            if([[addr substringToIndex:7]isEqualToString:@"::ffff:"])
+            if([addr length]>7)
             {
-                return [NSString stringWithFormat:@"ipv4:%@",[addr substringFromIndex:7]];
+                if([[addr substringToIndex:7]isEqualToString:@"::ffff:"])
+                {
+                    return [NSString stringWithFormat:@"ipv4:%@",[addr substringFromIndex:7]];
+                }
             }
+            return [NSString stringWithFormat:@"ipv6:[%@]", addr];
         }
-        return [NSString stringWithFormat:@"ipv6:[%@]", addr];
+        return [NSString stringWithFormat:@"ipv4:%@",addr];
     }
-    if([addr hasPrefix:@"::ffff:"])
-    {
-        addr = [addr substringFromIndex:7];
-    }
-    NSArray *a = [addr componentsSeparatedByString:@"."];
-    if([a count]==4)
-    {
-        int a1 = [[a objectAtIndex:0] intValue];
-        int a2 = [[a objectAtIndex:1] intValue];
-        int a3 = [[a objectAtIndex:2] intValue];
-        int a4 = [[a objectAtIndex:3] intValue];
-        a1 = a1 % 256;
-        a2 = a2 % 256;
-        a3 = a3 % 256;
-        a4 = a4 % 256;
-        return [NSString stringWithFormat:@"ipv4:%d.%d.%d.%d",a1,a2,a3,a4];
-    }
-    else
-    {
-        if([addr length]>7)
-        {
-            if([[addr substringToIndex:7]isEqualToString:@"::ffff:"])
-            {
-                return [NSString stringWithFormat:@"ipv4:%@",[addr substringFromIndex:7]];
-            }
-        }
-        return [NSString stringWithFormat:@"ipv6:[%@]", addr];
-    }
-    return [NSString stringWithFormat:@"ipv4:%@",addr];
 }
 
 +(NSString *)deunifyIp:(NSString *)addr
@@ -2685,40 +2688,71 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 
 +(NSString *)deunifyIp:(NSString *)addr type:(int *)t
 {
-    if([addr isEqualToString:@"ipv6:[::]"])
+    @autoreleasepool
     {
-        if(t)
+        if([addr isEqualToString:@"ipv6:[::]"])
         {
-            *t = 6;
+            if(t)
+            {
+                *t = 6;
+            }
+            return @"::";
         }
-        return @"::";
-    }
-    if([addr isEqualToString:@"ipv6:localhost"])
-    {
-        if(t)
+        if([addr isEqualToString:@"ipv6:localhost"])
         {
-            *t = 6;
+            if(t)
+            {
+                *t = 6;
+            }
+            return @"localhost";
         }
-        return @"localhost";
-    }
-    if([addr isEqualToString:@"ipv4:localhost"])
-    {
-        if(t)
+        if([addr isEqualToString:@"ipv4:localhost"])
         {
-            *t = 4;
+            if(t)
+            {
+                *t = 4;
+            }
+            return @"localhost";
         }
-        return @"localhost";
-    }
-    NSString *addrtype =   [addr substringToIndex:4];
-    if([addrtype isEqualToString:@"ipv4"])
-    {
-        if(t)
+        NSString *addrtype =   [addr substringToIndex:4];
+        if([addrtype isEqualToString:@"ipv4"])
         {
-            *t = 4;
+            if(t)
+            {
+                *t = 4;
+            }
+            NSInteger start = 5;
+            NSInteger len = [addr length] - start;
+            if(len < 1)
+            {
+                if(t)
+                {
+                    *t = 0;
+                }
+                return @"";
+            }
+            return [addr substringWithRange:NSMakeRange(start,len)];
         }
-        NSInteger start = 5;
-        NSInteger len = [addr length] - start;
-        if(len < 1)
+        
+        else if([addrtype isEqualToString:@"ipv6"])  /* format: ipv6:[xxx:xxx:xxx...:xxxx] */
+        {
+            if(t)
+            {
+                *t = 6;
+            }
+            NSInteger start = 5;
+            NSInteger len = [addr length] -1 - start;
+            if(len < 1)
+            {
+                if(t)
+                {
+                    *t = 0;
+                }
+                return NULL;
+            }
+            return [addr substringWithRange:NSMakeRange(start,len)];
+        }
+        else
         {
             if(t)
             {
@@ -2726,34 +2760,6 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
             }
             return @"";
         }
-        return [addr substringWithRange:NSMakeRange(start,len)];
-    }
-    
-    else if([addrtype isEqualToString:@"ipv6"])  /* format: ipv6:[xxx:xxx:xxx...:xxxx] */
-    {
-        if(t)
-        {
-            *t = 6;
-        }
-        NSInteger start = 5;
-        NSInteger len = [addr length] -1 - start;
-        if(len < 1)
-        {
-            if(t)
-            {
-                *t = 0;
-            }
-            return NULL;
-        }
-        return [addr substringWithRange:NSMakeRange(start,len)];
-    }
-    else
-    {
-        if(t)
-        {
-            *t = 0;
-        }
-        return @"";
     }
 }
 

@@ -134,6 +134,16 @@
     [_workSleeper wakeUp];
 }
 
+- (void)queueArrayOfTasks:(NSArray<UMTask *>*)tasks toQueueNumber:(int)nr
+{
+    if(tasks==NULL)
+    {
+        return;
+    }
+    [_multiQueue appendArray:tasks forQueueNumber:nr];
+    [_workSleeper wakeUp];
+}
+
 - (NSUInteger)count
 {
     return [_multiQueue count];;

@@ -58,8 +58,14 @@
 @property(readwrite,assign) BOOL                isSharedQueue;
 
 - (void)queueFromLower:(UMLayerTask *)task;
+- (void)queueMultiFromLower:(NSArray<UMLayerTask *>*)job;
+
 - (void)queueFromUpper:(UMLayerTask *)task;
+- (void)queueMultiFromUpper:(NSArray<UMLayerTask *>*)job;
+
 - (void)queueFromAdmin:(UMLayerTask *)task;
+- (void)queueMultiFromAdmin:(NSArray<UMLayerTask *>*)job;
+
 - (void)queueFromLowerWithPriority:(UMLayerTask *)task;
 - (void)queueFromUpperWithPriority:(UMLayerTask *)task;
 

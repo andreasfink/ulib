@@ -54,7 +54,10 @@
             }
             _lastTask = task.name;
             [_multiQueue startWork];
-            [task runOnBackgrounder:self];
+            @autoreleasepool
+            {
+                [task runOnBackgrounder:self];
+            }
             [_multiQueue endWork];
             ulib_set_thread_name([NSString stringWithFormat:@"%@ (idle)",self.name]);
             r = 1;

@@ -79,6 +79,31 @@
     }
 }
 
+- (void)appendArray:(NSArray *)objects forQueueNumber:(NSUInteger)index
+{
+    if(objects.count > 0)
+    {
+        BOOL limitReached = NO;
+        [_lock lock];
+        _currentlyInQueue += objects.count;
+        if((_hardLimit > 0) && (_currentlyInQueue > _hardLimit))
+        {
+            _currentlyInQueue -= objects.count;
+            limitReached = YES;
+        }
+        if(limitReached == NO)
+        {
+            NSMutableArray *subqueue = _queues[index];
+            [subqueue addObjectsFromArray:objects];
+        }
+        [_lock unlock];
+        if(limitReached)
+        {
+            @throw([NSException exceptionWithName:@"QUEUE-LIMIT-REACHED" reason:NULL userInfo:NULL]);
+        }
+    }
+}
+
 - (void)appendUnlocked:(id)obj
 {
     [self appendUnlocked:obj forQueueNumber:0];
@@ -190,8 +215,8 @@
         if (subqueue.count>0)
         {
             obj = [subqueue objectAtIndex:0];
-            [subqueue removeObjectAtIndex:0];
             _currentlyInQueue--;
+            [subqueue removeObjectAtIndex:0];
             break;
         }
     }

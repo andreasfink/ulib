@@ -30,6 +30,8 @@
 - (UMQueueMulti *)initWithQueueCount:(NSUInteger)index;
 - (void)append:(id)obj;
 - (void)append:(id)obj forQueueNumber:(NSUInteger)index;
+- (void)appendArray:(NSArray *)objects forQueueNumber:(NSUInteger)index;
+
 - (void)appendUnique:(id)obj;
 - (void)appendUnique:(id)obj forQueueNumber:(NSUInteger)index;
 - (id)getFirst;

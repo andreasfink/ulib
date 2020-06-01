@@ -13,7 +13,7 @@
 #import "UMObjectStatisticEntry.h"
 
 static UMObjectStatistic *global_object_stat = NULL;
-
+static int umobject_stat_index_from_ascii(const char *asciiName);
 
 @implementation UMObjectStatistic
 
@@ -27,7 +27,7 @@ static UMObjectStatistic *global_object_stat = NULL;
 
 + (void)disable
 {
-    global_object_stat =NULL;
+    global_object_stat = NULL;
 }
 
 
@@ -42,13 +42,27 @@ static UMObjectStatistic *global_object_stat = NULL;
 	if(self)
 	{
         /* we can not save this mutex in object stat as this would potentially create a recurise loop */
-        _lock = [[UMMutex alloc]initWithName:@"UMObjectStatistic-lock" saveInObjectStat:NO];
-		_dict = [[NSMutableDictionary alloc]init];
+        for(int i=0;i<UMOBJECT_STATISTIC_SPREAD;i++)
+        {
+            _lock[i] = [[UMMutex alloc]initWithName:@"UMObjectStatistic-lock" saveInObjectStat:NO];
+            _dict[i] = [[NSMutableDictionary alloc]init];
+        }
 	}
 	return self;
 }
 
 extern void umobject_stat_verify_ascii_name(const char *asciiName);
+
+static int umobject_stat_index_from_ascii(const char *asciiName)
+{
+    int i=0;
+    int sum=0;
+    while(asciiName[i]!=0)
+    {
+        sum += asciiName[i++];
+    }
+    return (sum % UMOBJECT_STATISTIC_SPREAD);
+}
 
 - (UMObjectStatisticEntry *)getEntryForAsciiName:(const char *)asciiName
 {
@@ -56,31 +70,35 @@ extern void umobject_stat_verify_ascii_name(const char *asciiName);
 	NSAssert(nsName.length!=0,@"name length is 0. %s",asciiName);
 	NSAssert(_dict,@"_dict is NULL");
 	NSAssert(_lock,@"_lock is NULL");
-
+    int index = umobject_stat_index_from_ascii(asciiName);
 	UMObjectStatisticEntry *entry = NULL;
-	[_lock lock];
-	entry = _dict[nsName];
+	[_lock[index] lock];
+	entry = _dict[index][nsName];
 	if(entry == NULL)
 	{
 		umobject_stat_verify_ascii_name(asciiName); /* just in case */
 		entry = [[UMObjectStatisticEntry alloc]init];
 		entry.name = asciiName;
-		_dict[nsName] = entry;
+		_dict[index][nsName] = entry;
 	}
-	[_lock unlock];
+	[_lock[index] unlock];
 	return entry;
 }
 
 - (NSArray<UMObjectStatisticEntry *> *)getObjectStatistic:(BOOL)sortByName
 {
 	NSMutableArray *arr = [[NSMutableArray alloc]init];
-	[_lock lock];
-
-	NSArray *keys = [_dict allKeys];
-	for(NSString *key in keys)
-	{
-		[arr addObject: [_dict[key] copy] ];
-	}
+    for(int index=0;index<UMOBJECT_STATISTIC_SPREAD;index++)
+    {
+        [_lock[index] lock];
+        NSArray *keys = [_dict[index] allKeys];
+        for(NSString *key in keys)
+        {
+            UMObjectStatisticEntry *e = _dict[index][key];
+            [arr addObject: [e copy] ];
+        }
+        [_lock[index] unlock];
+    }
 	NSArray *arr2 = [arr sortedArrayUsingComparator: ^(UMObjectStatisticEntry *a, UMObjectStatisticEntry *b)
 					 {
 						 if(sortByName)
@@ -109,7 +127,6 @@ extern void umobject_stat_verify_ascii_name(const char *asciiName);
 							 return NSOrderedAscending;
 						 }
 					 }];
-	[_lock unlock];
 	return arr2;
 }
 
@@ -142,10 +159,8 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 - (void)increaseAllocCounter:(const char *)asciiName
 {
 	VERIFY_ASCII_NAME(asciiName);
-	[_lock lock];
 	UMObjectStatisticEntry *entry = [self getEntryForAsciiName:asciiName];
 	[entry increaseAllocCounter];
-	[_lock unlock];
 }
 
 + (void)decreaseAllocCounter:(const char *)asciiName
@@ -157,11 +172,8 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 - (void)decreaseAllocCounter:(const char *)asciiName
 {
 	VERIFY_ASCII_NAME(asciiName);
-	[_lock lock];
 	UMObjectStatisticEntry *entry = [self getEntryForAsciiName:asciiName];
 	[entry decreaseAllocCounter];
-	[_lock unlock];
-
 }
 
 + (void)increaseDeallocCounter:(const char *)asciiName
@@ -173,10 +185,8 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 - (void)increaseDeallocCounter:(const char *)asciiName
 {
 	VERIFY_ASCII_NAME(asciiName);
-	[_lock lock];
 	UMObjectStatisticEntry *entry = [self getEntryForAsciiName:asciiName];
 	[entry increaseDeallocCounter];
-	[_lock unlock];
 }
 
 + (void)decreaseDeallocCounter:(const char *)asciiName
@@ -188,10 +198,8 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 - (void)decreaseDeallocCounter:(const char *)asciiName
 {
 	VERIFY_ASCII_NAME(asciiName);
-	[_lock lock];
 	UMObjectStatisticEntry *entry = [self getEntryForAsciiName:asciiName];
 	[entry decreaseDeallocCounter];
-	[_lock unlock];
 }
 
 @end

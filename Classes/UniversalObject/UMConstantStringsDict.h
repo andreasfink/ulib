@@ -19,11 +19,12 @@
  	constant string and we are sure the cstring never is deallocated.
 
 */
+#define MAX_CSTRING_DICTS   32
 
 @interface UMConstantStringsDict : NSObject
 {
-	NSMutableDictionary 		*_dict;
-	UMMutex						*_lock;
+	NSMutableDictionary 		*_dict[MAX_CSTRING_DICTS];
+	UMMutex						*_lock[MAX_CSTRING_DICTS];
 }
 
 + (UMConstantStringsDict *)sharedInstance;

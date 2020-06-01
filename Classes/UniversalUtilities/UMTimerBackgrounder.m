@@ -42,16 +42,19 @@ static UMTimerBackgrounder *_sharedTimerBackgrounder = NULL;
 
 - (void)addTimer:(UMTimer *)t
 {
-    if (t.objectToCall == NULL)
+    @autoreleasepool
     {
-        @throw([NSException exceptionWithName:@"INVALID_TIMER"
-                                       reason:@"trying to add timer with no target"
-                                     userInfo:@{    @"backtrace":   UMBacktrace(NULL,0) }]);
+        if (t.objectToCall == NULL)
+        {
+            @throw([NSException exceptionWithName:@"INVALID_TIMER"
+                                           reason:@"trying to add timer with no target"
+                                         userInfo:@{    @"backtrace":   UMBacktrace(NULL,0) }]);
+        }
+        [_timersLock lock];
+        [_timers removeObject:t]; /* in case its already there */
+        [_timers addObject:t];
+        [_timersLock unlock];
     }
-    [_timersLock lock];
-    [_timers removeObject:t]; /* in case its already there */
-    [_timers addObject:t];
-    [_timersLock unlock];
 }
 
 - (void)removeTimer:(UMTimer *)t

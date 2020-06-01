@@ -111,12 +111,25 @@
 }
 
 
+- (void)queueMultiFromAdmin:(NSArray<UMLayerTask *>*)job
+{
+    [_taskQueue queueArrayOfTasks:job toQueueNumber:UMLAYER_ADMIN_QUEUE];
+}
+
+- (void)queueMultiFromLower:(NSArray<UMLayerTask *>*)job
+{
+    [_taskQueue queueArrayOfTasks:job toQueueNumber:UMLAYER_LOWER_QUEUE];
+}
+
+- (void)queueMultiFromUpper:(NSArray<UMLayerTask *>*)job
+{
+    [_taskQueue queueArrayOfTasks:job toQueueNumber:UMLAYER_UPPER_QUEUE];
+}
+
 - (UMLayer *)init
 {
     return [self initWithTaskQueueMulti:NULL];
 }
-
-
 
 - (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq
 {

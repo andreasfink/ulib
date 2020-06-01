@@ -1,12 +1,13 @@
-# You should build openssl 1.1.1d under MacOS X as following
+# You should build openssl 1.1.1g under MacOS X as following
 
 1. unpack the tar apply, the patch and change the directory
 
-wget https://www.openssl.org/source/openssl-1.1.1d.tar.gz
+wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz
 
 patch the follwoing files
 
 crypto/bio/bss_dgram.c
+crypto/bn/bn_dh.c
 test/handshake_helper.c
 
 and replace 
@@ -17,7 +18,6 @@ with
 
 
 #ifdef __APPLE__
-#include <sctp/sctp.h>
 #include "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework/Versions/A/Headers/sctp.h"
 #else
 #include <netinet/sctp.h>
@@ -33,5 +33,5 @@ with
 3. install it into the binary directory and to the system
 
 make install
-make DESTDIR=../openssl-1.1.1d-binary  install
+make DESTDIR=../openssl-1.1.g-binary  install
 

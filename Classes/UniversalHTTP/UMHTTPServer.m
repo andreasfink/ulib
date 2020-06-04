@@ -337,7 +337,7 @@
 	self.status = UMHTTPServerStatus_shuttingDown;
 	while(self.status == UMHTTPServerStatus_shuttingDown)
 	{
-		[_sleeper sleep:100]; /* wait 100ms */
+		[_sleeper sleep:100000]; /* wait 100ms */
 	}
 	self.status = UMHTTPServerStatus_notRunning;
     

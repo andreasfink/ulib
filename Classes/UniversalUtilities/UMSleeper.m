@@ -248,6 +248,13 @@ static void flushpipe(int fd)
     return [self sleep:microseconds wakeOn:UMSleeper_AnySignalMask];
 };	/* returns signal if signal was received, 0 on timer epxiry, -1 on error  */
 
+- (UMSleeper_Signal) sleepSeconds:(double)sec
+{
+    long long microseconds = (long long)(sec * 1000000.0);
+    return [self sleep:microseconds wakeOn:UMSleeper_AnySignalMask];
+};    /* returns signal if signal was received, 0 on timer epxiry, -1 on error  */
+
+
 - (void) reset
 {
     if(_isPrepared)

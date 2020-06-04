@@ -41,6 +41,8 @@ typedef uint8_t UMSleeper_Signal; /* note Sleeper signal is a bitmask */
 - (void) dealloc;
 - (UMSleeper_Signal) sleep:(UMMicroSec) microseconds wakeOn:(UMSleeper_Signal)sig;	/* returns signal number if signal was received, 0 on timer epxiry, or UMSleeper_Error  */
 - (UMSleeper_Signal) sleep:(UMMicroSec) microseconds;	/* returns returns signal number (1-0xFFFF)if interrupted, 0 if timer expired */
+
+- (UMSleeper_Signal) sleepSeconds:(double)sec;
 - (void) reset;
 - (void) wakeUp:(UMSleeper_Signal)signal;
 - (void) wakeUp;

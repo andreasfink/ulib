@@ -1857,6 +1857,14 @@
 		A6E1DDB424063158001FB7FF /* UMLayerUserProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A61F7D551A2CB4F70090FC94 /* UMLayerUserProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E1DDBD24063260001FB7FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB6224062B1E001FB7FF /* UIKit.framework */; };
 		A6E1DDBE24063263001FB7FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB6224062B1E001FB7FF /* UIKit.framework */; };
+		A6F1C602247BC56200FE7402 /* UMDigitTree.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C600247BC56200FE7402 /* UMDigitTree.h */; };
+		A6F1C603247BC56200FE7402 /* UMDigitTree.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C601247BC56200FE7402 /* UMDigitTree.m */; };
+		A6F1C606247BC56C00FE7402 /* UMDigitTreeEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C604247BC56C00FE7402 /* UMDigitTreeEntry.h */; };
+		A6F1C607247BC56C00FE7402 /* UMDigitTreeEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C605247BC56C00FE7402 /* UMDigitTreeEntry.m */; };
+		A6F1C60A247BCCB400FE7402 /* UMCountryDigitTree.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C608247BCCB400FE7402 /* UMCountryDigitTree.h */; };
+		A6F1C60B247BCCB400FE7402 /* UMCountryDigitTree.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C609247BCCB400FE7402 /* UMCountryDigitTree.m */; };
+		A6F1C60E247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C60C247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.h */; };
+		A6F1C60F247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C60D247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.m */; };
 		A6F1E321187D448700AD2F85 /* UMRedisSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E31C187D448700AD2F85 /* UMRedisSession.m */; };
 		A6F1E322187D448700AD2F85 /* UMRedisSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E31C187D448700AD2F85 /* UMRedisSession.m */; };
 		A6F1E32E187D935600AD2F85 /* UMRedisStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E329187D935600AD2F85 /* UMRedisStatus.m */; };
@@ -2360,6 +2368,14 @@
 		A6E1DDBA24063158001FB7FF /* ulibios copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ulibios copy2-Info.plist"; path = "/Users/afink/development/gitlab/ulib/ulibios copy2-Info.plist"; sourceTree = "<absolute>"; };
 		A6EB479F1A35C73A0090FC94 /* UMBackgrounderWithQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBackgrounderWithQueues.m; sourceTree = "<group>"; };
 		A6EB47A71A35C9530090FC94 /* UMTaskQueueMulti.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTaskQueueMulti.m; sourceTree = "<group>"; };
+		A6F1C600247BC56200FE7402 /* UMDigitTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDigitTree.h; sourceTree = "<group>"; };
+		A6F1C601247BC56200FE7402 /* UMDigitTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDigitTree.m; sourceTree = "<group>"; };
+		A6F1C604247BC56C00FE7402 /* UMDigitTreeEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDigitTreeEntry.h; sourceTree = "<group>"; };
+		A6F1C605247BC56C00FE7402 /* UMDigitTreeEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDigitTreeEntry.m; sourceTree = "<group>"; };
+		A6F1C608247BCCB400FE7402 /* UMCountryDigitTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMCountryDigitTree.h; sourceTree = "<group>"; };
+		A6F1C609247BCCB400FE7402 /* UMCountryDigitTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMCountryDigitTree.m; sourceTree = "<group>"; };
+		A6F1C60C247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMCountryCodePrefixDigitTree.h; sourceTree = "<group>"; };
+		A6F1C60D247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMCountryCodePrefixDigitTree.m; sourceTree = "<group>"; };
 		A6F1E31C187D448700AD2F85 /* UMRedisSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMRedisSession.m; sourceTree = "<group>"; };
 		A6F1E329187D935600AD2F85 /* UMRedisStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMRedisStatus.m; path = ../Classes/UniversalRedis/UMRedisStatus.m; sourceTree = "<group>"; };
 		A6F48CF31AF71F4E00854472 /* UMFileTrackingMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFileTrackingMacros.h; sourceTree = "<group>"; };
@@ -3089,6 +3105,14 @@
 				A6C4781A22D325C8007F395C /* UMStatisticEntry.m */,
 				A6C4781D22D325CE007F395C /* UMStatistic.h */,
 				A6C4781E22D325CE007F395C /* UMStatistic.m */,
+				A6F1C600247BC56200FE7402 /* UMDigitTree.h */,
+				A6F1C601247BC56200FE7402 /* UMDigitTree.m */,
+				A6F1C604247BC56C00FE7402 /* UMDigitTreeEntry.h */,
+				A6F1C605247BC56C00FE7402 /* UMDigitTreeEntry.m */,
+				A6F1C608247BCCB400FE7402 /* UMCountryDigitTree.h */,
+				A6F1C609247BCCB400FE7402 /* UMCountryDigitTree.m */,
+				A6F1C60C247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.h */,
+				A6F1C60D247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.m */,
 			);
 			path = UniversalUtilities;
 			sourceTree = "<group>";
@@ -3592,6 +3616,7 @@
 				A60C4D8E1EF7FE59007C203A /* UMScannerChar.h in Headers */,
 				A60C4D921EF7FE59007C203A /* UMRegexMatch.h in Headers */,
 				A60C4D931EF7FE59007C203A /* UMTimerBackgrounder.h in Headers */,
+				A6F1C60A247BCCB400FE7402 /* UMCountryDigitTree.h in Headers */,
 				A611796923EEE00A008FAF41 /* UMHTTPWebSocketDelegateProtocol.h in Headers */,
 				A60C4D941EF7FE59007C203A /* UMSynchronizedArray.h in Headers */,
 				A6C4781B22D325C8007F395C /* UMStatisticEntry.h in Headers */,
@@ -3636,6 +3661,7 @@
 				A60C4DD81EF7FE59007C203A /* UMQueue.h in Headers */,
 				A60C4DD91EF7FE59007C203A /* NSDictionary+UMHTTP.h in Headers */,
 				A60C4DDA1EF7FE59007C203A /* ulib_config.h in Headers */,
+				A6F1C602247BC56200FE7402 /* UMDigitTree.h in Headers */,
 				A60B766E226E0166003F1F0E /* UniversalSerial.h in Headers */,
 				A60C4E461EF80094007C203A /* UMPlugin.h in Headers */,
 				A60C4DDC1EF7FE59007C203A /* NSData+UMLog.h in Headers */,
@@ -3643,6 +3669,7 @@
 				A60C4DDF1EF7FE59007C203A /* UMConfigGroup.h in Headers */,
 				A60C4DE11EF7FE59007C203A /* UMConfigParsedLine.h in Headers */,
 				A60C4DE81EF7FE59007C203A /* UMTokenizer.h in Headers */,
+				A6F1C60E247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.h in Headers */,
 				A60C4DEB1EF7FE59007C203A /* UniversalSocket.h in Headers */,
 				A60C4DEC1EF7FE59007C203A /* UMUtil.h in Headers */,
 				A60C4DF11EF7FE59007C203A /* UMHTTPCookie.h in Headers */,
@@ -3667,6 +3694,7 @@
 				A607CE031F2A9A46006A832B /* UMPublicKey.h in Headers */,
 				A60C4E191EF7FE59007C203A /* UMFileTrackingMacros.h in Headers */,
 				A60C4E1B1EF7FE59007C203A /* UMQueueNull.h in Headers */,
+				A6F1C606247BC56C00FE7402 /* UMDigitTreeEntry.h in Headers */,
 				A60C4E1D1EF7FE59007C203A /* UMFileTracker.h in Headers */,
 				A60C4E1E1EF7FE59007C203A /* UMLayerUserProtocol.h in Headers */,
 			);
@@ -4590,6 +4618,7 @@
 				A60C4C961EF7FE59007C203A /* UMObject.m in Sources */,
 				A60C4C971EF7FE59007C203A /* UMHistoryLog.m in Sources */,
 				A60C4C981EF7FE59007C203A /* UMHTTPCookie.m in Sources */,
+				A6F1C603247BC56200FE7402 /* UMDigitTree.m in Sources */,
 				A60C4C991EF7FE59007C203A /* UMIntegerWithHistory.m in Sources */,
 				A607CE041F2A9A46006A832B /* UMPublicKey.m in Sources */,
 				A607CE0C1F2A9A60006A832B /* UMKeypair.m in Sources */,
@@ -4603,6 +4632,7 @@
 				A60C4CA11EF7FE59007C203A /* UMLogConsole.m in Sources */,
 				A63F22AC1FB72B450048B329 /* UMAtomicCounter.m in Sources */,
 				A6CEB96A22BA514200B2BD9D /* UMNamedList.m in Sources */,
+				A6F1C60F247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.m in Sources */,
 				A60C4CA21EF7FE59007C203A /* UMFileTrackingInfo.m in Sources */,
 				A60C4CA31EF7FE59007C203A /* UMLogDestination.m in Sources */,
 				A6BEA7001EF950A3007C203A /* UMHTTPSServer.m in Sources */,
@@ -4656,6 +4686,7 @@
 				A62DC2301FD08593001ACCC7 /* UMQueueMulti.m in Sources */,
 				A63F22A51FB725010048B329 /* UMMutex.m in Sources */,
 				A611796623EEA82D008FAF41 /* UMHTTPWebSocketFrame.m in Sources */,
+				A6F1C60B247BCCB400FE7402 /* UMCountryDigitTree.m in Sources */,
 				A60C4CCD1EF7FE59007C203A /* UMHTTPPageHandler.m in Sources */,
 				A60C4CCE1EF7FE59007C203A /* UMHTTPRequest.m in Sources */,
 				A60C4CCF1EF7FE59007C203A /* UMHTTPServer.m in Sources */,
@@ -4671,6 +4702,7 @@
 				A60C4CD61EF7FE59007C203A /* UMSocket.m in Sources */,
 				A60C4CD71EF7FE59007C203A /* UMConfig.m in Sources */,
 				A60C4CD81EF7FE59007C203A /* UMSyntaxToken_Digits.m in Sources */,
+				A6F1C607247BC56C00FE7402 /* UMDigitTreeEntry.m in Sources */,
 				A60C4CD91EF7FE59007C203A /* UMConfigGroup.m in Sources */,
 				A60C4CDA1EF7FE59007C203A /* UMScannerChar.m in Sources */,
 				A60C4CDB1EF7FE59007C203A /* UMTokenizer.m in Sources */,

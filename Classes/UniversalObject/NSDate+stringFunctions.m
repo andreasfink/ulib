@@ -179,8 +179,8 @@ static NSDate *dateFromStringNSCalendar(NSString *str, const char *ctimezone_str
     int minute;
     int seconds;
     double subsecond = 0;
-    const char *cdate_str;
-    const char *ctime_str;
+    const char *cdate_str="";
+    const char *ctime_str="";
     
     if( (str==NULL) ||
        ([str isEqualToString:@"0000-00-00 00:00:00.000000 UTC"]) ||

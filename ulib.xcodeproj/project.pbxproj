@@ -1857,9 +1857,9 @@
 		A6E1DDB424063158001FB7FF /* UMLayerUserProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A61F7D551A2CB4F70090FC94 /* UMLayerUserProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E1DDBD24063260001FB7FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB6224062B1E001FB7FF /* UIKit.framework */; };
 		A6E1DDBE24063263001FB7FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB6224062B1E001FB7FF /* UIKit.framework */; };
-		A6F1C602247BC56200FE7402 /* UMDigitTree.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C600247BC56200FE7402 /* UMDigitTree.h */; };
+		A6F1C602247BC56200FE7402 /* UMDigitTree.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C600247BC56200FE7402 /* UMDigitTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6F1C603247BC56200FE7402 /* UMDigitTree.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C601247BC56200FE7402 /* UMDigitTree.m */; };
-		A6F1C606247BC56C00FE7402 /* UMDigitTreeEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C604247BC56C00FE7402 /* UMDigitTreeEntry.h */; };
+		A6F1C606247BC56C00FE7402 /* UMDigitTreeEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C604247BC56C00FE7402 /* UMDigitTreeEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6F1C607247BC56C00FE7402 /* UMDigitTreeEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C605247BC56C00FE7402 /* UMDigitTreeEntry.m */; };
 		A6F1C60A247BCCB400FE7402 /* UMCountryDigitTree.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C608247BCCB400FE7402 /* UMCountryDigitTree.h */; };
 		A6F1C60B247BCCB400FE7402 /* UMCountryDigitTree.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C609247BCCB400FE7402 /* UMCountryDigitTree.m */; };

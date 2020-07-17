@@ -618,7 +618,7 @@ static int SSL_smart_shutdown(SSL *ssl)
                     NSData *d = [UMSocket sockaddrFromAddress:ipAddr
                                                      port:_requestedLocalPort
                                              socketFamily:AF_INET];
-                    int err = sctp_bindx(_sock, (struct sockaddr *)d.bytes,1,SCTP_BINDX_ADD_ADDR);
+                    int err = [self bindx:(struct sockaddr *)d.bytes];
                     if(!err)
                     {
                         [useableLocalAddresses addObject:ipAddr];
@@ -642,7 +642,7 @@ static int SSL_smart_shutdown(SSL *ssl)
                     NSData *d = [UMSocket sockaddrFromAddress:ipAddr
                                                      port:_requestedLocalPort
                                              socketFamily:AF_INET6];
-                    int err = sctp_bindx(_sock, (struct sockaddr *)d.bytes,1,SCTP_BINDX_ADD_ADDR);
+                    int err = [self bindx:(struct sockaddr *)d.bytes];
                     if(!err)
                     {
                         [useableLocalAddresses addObject:ipAddr];
@@ -709,6 +709,11 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
         [_controlLock unlock];
     }
+}
+
+-(int)bindx:(struct sockaddr *)sockaddr
+{
+    return UMSocketError_not_supported_operation;
 }
 
 - (UMSocketError) openAsync

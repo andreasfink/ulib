@@ -234,6 +234,8 @@ typedef enum SocketBlockingMode
 + (NSData *)sockaddrFromAddress:(NSString *)theAddr
                            port:(int)thePort
                    socketFamily:(int)socketFamily;
+- (int)bindx:(struct sockaddr *)localAddress;
+
 @end
 
 

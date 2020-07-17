@@ -1081,7 +1081,6 @@
 		A67D14182431DDB9003CB94D /* TestUMDate.m in Sources */ = {isa = PBXBuildFile; fileRef = A67D14172431DDB9003CB94D /* TestUMDate.m */; };
 		A67D141B2431DF85003CB94D /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5C24062881001FB7FF /* libssl.a */; };
 		A67D141C2431DF9E003CB94D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5A2406287A001FB7FF /* libcrypto.a */; settings = {ATTRIBUTES = (Weak, ); }; };
-		A67D141D2431DFAF003CB94D /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69BCFF2240675A00083657F /* sctp.framework */; };
 		A67D3DEA1AFA01BB0090FC94 /* NSArray+UMJson.h in Headers */ = {isa = PBXBuildFile; fileRef = A67D3DE21AF9FF1D0090FC94 /* NSArray+UMJson.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A67D3DED1AFA01C70090FC94 /* NSString+UMJson.h in Headers */ = {isa = PBXBuildFile; fileRef = A67D3DE61AF9FF2B0090FC94 /* NSString+UMJson.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A67D3DF01AFA01D10090FC94 /* NSArray+UMJson.m in Sources */ = {isa = PBXBuildFile; fileRef = A67D3DE31AF9FF1D0090FC94 /* NSArray+UMJson.m */; };
@@ -1112,7 +1111,6 @@
 		A684B4271AB8FF4500854472 /* UMQueueNull.h in Headers */ = {isa = PBXBuildFile; fileRef = A684B4241AB8FF4500854472 /* UMQueueNull.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A684B42B1AB8FF4500854472 /* UMQueueNull.m in Sources */ = {isa = PBXBuildFile; fileRef = A684B4251AB8FF4500854472 /* UMQueueNull.m */; };
 		A684B42C1AB8FF4500854472 /* UMQueueNull.m in Sources */ = {isa = PBXBuildFile; fileRef = A684B4251AB8FF4500854472 /* UMQueueNull.m */; };
-		A69BCFF3240675A00083657F /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69BCFF2240675A00083657F /* sctp.framework */; };
 		A6A7A23C1CF7506600211137 /* UMPKI.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A7A2361CF71D7D00211137 /* UMPKI.m */; };
 		A6A7A2401CF7511F00211137 /* UMSSLCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A7A23D1CF7511F00211137 /* UMSSLCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6A7A2421CF7511F00211137 /* UMSSLCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A7A23E1CF7511F00211137 /* UMSSLCertificate.m */; };
@@ -2169,7 +2167,6 @@
 		A69BCFEB240664280083657F /* openssl-1.1.1g.tar.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = "openssl-1.1.1g.tar.gz"; sourceTree = "<group>"; };
 		A69BCFEC240664B30083657F /* debian-x86_64 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "debian-x86_64"; sourceTree = "<group>"; };
 		A69BCFED240664BD0083657F /* redhat-x86_64 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "redhat-x86_64"; sourceTree = "<group>"; };
-		A69BCFF2240675A00083657F /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework"; sourceTree = "<group>"; };
 		A69F08FF149D3A4C0009F272 /* UMConfigParsedLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMConfigParsedLine.h; sourceTree = "<group>"; };
 		A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMConfigParsedLine.m; sourceTree = "<group>"; };
 		A6A143F5149B4F5000B007D0 /* ulib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ulib.h; sourceTree = "<group>"; };
@@ -2418,7 +2415,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A60C4D061EF7FE59007C203A /* Foundation.framework in Frameworks */,
-				A69BCFF3240675A00083657F /* sctp.framework in Frameworks */,
 				A6E1DB6824062E1E001FB7FF /* libcrypto.a in Frameworks */,
 				A6E1DB6924062E22001FB7FF /* libssl.a in Frameworks */,
 				A60C4D071EF7FE59007C203A /* Security.framework in Frameworks */,
@@ -2456,7 +2452,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A67D141D2431DFAF003CB94D /* sctp.framework in Frameworks */,
 				A67D141B2431DF85003CB94D /* libssl.a in Frameworks */,
 				A67D141C2431DF9E003CB94D /* libcrypto.a in Frameworks */,
 				A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */,
@@ -2810,7 +2805,6 @@
 		A6D8AB06149A769B0029E9CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A69BCFF2240675A00083657F /* sctp.framework */,
 				A6E1DB6224062B1E001FB7FF /* UIKit.framework */,
 				A6E1DB60240628A6001FB7FF /* libssl-tvOS.a */,
 				A6E1DB5E2406289F001FB7FF /* libcrypto-tvOS.a */,

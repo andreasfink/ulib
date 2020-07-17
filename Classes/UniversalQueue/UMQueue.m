@@ -96,6 +96,18 @@
     return obj;
 }
 
+- (id)peekFirst
+{
+    id obj = NULL;
+    [_lock lock];
+    if ([_queue count]>0)
+    {
+        obj = [_queue objectAtIndex:0];
+    }
+    [_lock unlock];
+    return obj;
+}
+
 - (id)getFirstWhileLocked
 {
     id obj = NULL;

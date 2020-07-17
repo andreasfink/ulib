@@ -27,4 +27,6 @@
 #import "UMStatisticEntry.h"
 #import "UMRegexMatch.h"
 #import "UMRegex.h"
+#import "UMDigitTree.h"
+#import "UMDigitTreeEntry.h"
 

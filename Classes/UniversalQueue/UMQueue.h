@@ -27,6 +27,7 @@
 - (void)append:(id)obj;
 - (void)appendUnique:(id)obj;
 - (id)getFirst;
+- (id)peekFirst; /* access first entry without removing it */
 - (id)getFirstWhileLocked;
 - (void)insertFirst:(id)obj;
 - (NSInteger)count;

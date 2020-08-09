@@ -24,6 +24,7 @@
 #import "UMFileTrackingMacros.h"
 #import "NSString+UMSocket.h"
 #import "UMSocketDefs.h"
+#import "UMPacket.h"
 
 #import "UMUtil.h" /* for UMBacktrace */
 
@@ -3211,5 +3212,49 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     return resultData;
 }
 
+- (UMPacket *)receivePacket
+{
+#define MAXBUF 65536
+    
+    struct sockaddr_in6     remote_address6;
+    struct sockaddr_in      remote_address4;
+    struct sockaddr *       remote_address_ptr;
+    socklen_t               remote_address_len;
+    if(_socketFamily==AF_INET)
+    {
+        remote_address_ptr = (struct sockaddr *)&remote_address4;
+        remote_address_len = sizeof(struct sockaddr_in);
+    }
+    else
+    {
+        remote_address_ptr = (struct sockaddr *)&remote_address6;
+        remote_address_len = sizeof(struct sockaddr_in6);
+    }
+
+    ssize_t                 bytes_read = 0;
+    char                    buffer[MAXBUF];
+    int                     flags=0;
+
+    memset(&buffer[0],0xFA,sizeof(buffer));
+    memset(remote_address_ptr,0x00,sizeof(remote_address_len));
+
+    UMPacket *rx = [[UMPacket alloc]init];
+    bytes_read = recvfrom(_sock, buffer, sizeof(buffer), flags,
+        remote_address_ptr, &remote_address_len);
+
+    rx.socket = @(_sock);
+
+    if(bytes_read <= 0)
+    {
+        rx.err = [UMSocket umerrFromErrno:errno];
+    }
+    else
+    {
+        rx.remoteAddress = [UMSocket addressOfSockAddr:remote_address_ptr];
+        rx.remotePort = [UMSocket portOfSockAddr:remote_address_ptr];
+        rx.data = [NSData dataWithBytes:&buffer length:bytes_read];
+    }
+    return rx;
+}
 
 @end

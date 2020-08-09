@@ -14,4 +14,4 @@
 #import "NSString+UMSocket.h"
 #import "NSData+UMSocket.h"
 #import "UMSyslogClient.h"
-
+#import "UMPacket.h"

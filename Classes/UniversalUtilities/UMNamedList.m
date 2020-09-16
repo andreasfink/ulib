@@ -10,6 +10,8 @@
 #import "NSString+UMHTTP.h"
 #import "UMSynchronizedSortedDictionary.h"
 
+#define DEBUG   1
+
 @implementation UMNamedList
 
 
@@ -44,6 +46,10 @@
     _entries[str] = str;
     _dirty=YES;
     [_lock unlock];
+#ifdef DEBUG
+    NSLog(@"UMNamedList addEntry:%@",str);
+    [self dump];
+#endif
 }
 
 - (void)removeEntry:(NSString *)str
@@ -52,6 +58,10 @@
     [_entries removeObjectForKey:str];
     _dirty=YES;
     [_lock unlock];
+#ifdef DEBUG
+    NSLog(@"UMNamedList removeEntry:%@",str);
+    [self dump];
+#endif
 }
 
 - (BOOL)containsEntry:(NSString *)str
@@ -90,15 +100,19 @@
         {
             NSLog(@"Error while writing namedlist %@ to %@: %@",_name,_path,err);
         }
-#if defined(CONFIG_DEBUG)
+#ifdef DEBUG
         else
         {
-            NSLog(@"Written namedlist '%@0 to file '%@'\nContent:\n%@",_name,_path,output);
+            NSLog(@"Written namedlist '%@ to file '%@'\nContent:\n%@",_name,_path,output);
         }
 #endif
         _dirty = NO;
     }
     [_lock unlock];
+#ifdef DEBUG
+    NSLog(@"UMNamedList flush");
+    [self dump];
+#endif
 }
 
 - (void)reload
@@ -129,6 +143,24 @@
     _entries = list;
     _dirty = NO;
     [_lock unlock];
+#ifdef DEBUG
+    [self dump];
+#endif
+}
+
+- (void)dump
+{
+    NSLog(@"[UMNamedList dump] %@",[self description]);
+}
+
+- (NSString *)description
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"_name"] = _name;
+    dict[@"_path"] = _path;
+    dict[@"_dirty"] = @(_dirty);
+    dict[@"_entries"] = _entries;
+    return [dict jsonString];
 }
 
 @end

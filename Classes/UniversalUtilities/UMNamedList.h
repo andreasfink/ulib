@@ -1,3 +1,4 @@
+
 //
 //  UMNamedList.h
 //  ulib
@@ -34,4 +35,7 @@
 - (NSArray *)allEntries;
 - (void)flush;
 - (void)reload;
+- (void)dump;
+- (NSString *)description;
+
 @end

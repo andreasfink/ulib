@@ -90,6 +90,12 @@
         {
             NSLog(@"Error while writing namedlist %@ to %@: %@",_name,_path,err);
         }
+#if defined(CONFIG_DEBUG)
+        else
+        {
+            NSLog(@"Written namedlist '%@0 to file '%@'\nContent:\n%@",_name,_path,output);
+        }
+#endif
         _dirty = NO;
     }
     [_lock unlock];

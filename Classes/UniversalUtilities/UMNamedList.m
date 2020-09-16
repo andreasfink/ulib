@@ -150,17 +150,27 @@
 
 - (void)dump
 {
-    NSLog(@"[UMNamedList dump] %@",[self description]);
+    NSLog(@"[UMNamedList %p dump] %@",self,[self description]);
 }
 
 - (NSString *)description
 {
     UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
-    dict[@"_name"] = _name;
-    dict[@"_path"] = _path;
-    dict[@"_dirty"] = @(_dirty);
-    dict[@"_entries"] = _entries;
+    dict[@"_name"] = (_name ? _name : @"(null)");
+    dict[@"_path"] = (_path ? _path : @"(null)");
+    dict[@"_dirty"] = (_dirty ? @"YES" : @"NO");
+    dict[@"_entries"] = (_entries ? _entries : @"(null)");
     return [dict jsonString];
+}
+
+- (UMNamedList *)copyWithZone:(NSZone *)zone
+{
+    UMNamedList *n = [[UMNamedList allocWithZone:zone]init];
+    n->_name = _name;
+    n->_path = _path;
+    n->_dirty = _dirty;
+    n->_entries = [_entries copyWithZone:zone];
+    return n;
 }
 
 @end

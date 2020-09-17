@@ -11,7 +11,7 @@
 #import "UMSynchronizedSortedDictionary.h"
 #import "UMAssert.h"
 
-#define DEBUG   1
+//#define DEBUG   1
 
 @implementation UMNamedList
 

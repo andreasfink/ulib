@@ -66,6 +66,9 @@ doc:
 
 .SUFFIXES: .m.o .o .m .c
 
+build/testcase1:	testcase1.m.o
+	${CC} -o build/testcase1  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
+
 %.m.o:	%.m
 	${CC} -c ${CFLAGS} -x objective-c -fobjc-arc $<  ${INCLUDEDIRS} -o $@
 

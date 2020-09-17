@@ -28,7 +28,7 @@
     self = [super init];
     if(self)
     {
-        _entries = [[UMSynchronizedSortedDictionary alloc]init];
+        _namedlistEntries = [[UMSynchronizedSortedDictionary alloc]init];
         _lock  = [[UMMutex alloc]initWithName:@"UMNamedList-lock"];
         _path = path;
         _name = name;
@@ -43,9 +43,13 @@
 
 - (void)addEntry:(NSString *)str
 {
-    UMAssert(_entries!=NULL,@"_entries can not be NULL");
+    UMAssert(_namedlistEntries!=NULL,@"_entries can not be NULL");
     UMAssert(_lock!=NULL,@"_lock should not be NULL");
-
+    if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
+    {
+        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", [_namedlistEntries className]);
+        return;
+    }
     if(![str isKindOfClass:[NSString class]])
     {
         NSLog(@"you can not add anything else than a string");
@@ -58,7 +62,7 @@
     }
     UMAssert(_lock!=NULL,@"_lock is NULL");
     [_lock lock];
-    _entries[str] = str;
+    _namedlistEntries[str] = str;
     _dirty=YES;
     [_lock unlock];
 #ifdef DEBUG
@@ -69,8 +73,13 @@
 
 - (void)removeEntry:(NSString *)str
 {
-    UMAssert(_entries!=NULL,@"_entries can not be NULL");
+    UMAssert(_namedlistEntries!=NULL,@"_entries can not be NULL");
     UMAssert(_lock!=NULL,@"_lock should not be NULL");
+    if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
+    {
+        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", [_namedlistEntries className]);
+        return;
+    }
 
     if(![str isKindOfClass:[NSString class]])
     {
@@ -83,7 +92,7 @@
         return;
     }
     [_lock lock];
-    [_entries removeObjectForKey:str];
+    [_namedlistEntries removeObjectForKey:str];
     _dirty=YES;
     [_lock unlock];
 #ifdef DEBUG
@@ -96,7 +105,7 @@
 {
     BOOL found = NO;
     [_lock lock];
-    NSString *s =  _entries[str];
+    NSString *s =  _namedlistEntries[str];
     if(s!=NULL)
     {
         found = YES;
@@ -110,7 +119,7 @@
 {
     NSArray *a;
     [_lock lock];
-    a = [_entries allKeys];
+    a = [_namedlistEntries allKeys];
     [_lock unlock];
     return a;
 }
@@ -120,7 +129,7 @@
     [_lock lock];
     if(_dirty)
     {
-        NSArray *keys = [_entries allKeys];
+        NSArray *keys = [_namedlistEntries allKeys];
         NSString *output = [keys componentsJoinedByString:@"\n"];
         NSError *err = NULL;
         [output writeToFile:_path atomically:YES encoding:NSUTF8StringEncoding error:&err];
@@ -168,7 +177,7 @@
         }
     }
     [_lock lock];
-    _entries = list;
+    _namedlistEntries = list;
     _dirty = NO;
     [_lock unlock];
 #ifdef DEBUG
@@ -187,7 +196,14 @@
     dict[@"_name"] = (_name ? _name : @"(null)");
     dict[@"_path"] = (_path ? _path : @"(null)");
     dict[@"_dirty"] = (_dirty ? @"YES" : @"NO");
-    dict[@"_entries"] = (_entries ? _entries : @"(null)");
+    if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
+    {
+        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", [_namedlistEntries className]);
+    }
+    else
+    {
+        dict[@"_namedlistEntries"] = (_namedlistEntries ? _namedlistEntries : @"(null)");
+    }
     return [dict jsonString];
 }
 

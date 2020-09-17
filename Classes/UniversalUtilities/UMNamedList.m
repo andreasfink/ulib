@@ -9,6 +9,7 @@
 #import "UMNamedList.h"
 #import "NSString+UMHTTP.h"
 #import "UMSynchronizedSortedDictionary.h"
+#import "UMAssert.h"
 
 #define DEBUG   1
 
@@ -42,6 +43,20 @@
 
 - (void)addEntry:(NSString *)str
 {
+    UMAssert(_entries!=NULL,@"_entries can not be NULL");
+    UMAssert(_lock!=NULL,@"_lock should not be NULL");
+
+    if([str isKindOfClass:[NSString class]])
+    {
+        NSLog(@"you can not add anything else than a string");
+        return;
+    }
+    if(str.length == 0)
+    {
+        NSLog(@"you can not add empty string");
+        return;
+    }
+    UMAssert(_lock!=NULL,@"_lock is NULL");
     [_lock lock];
     _entries[str] = str;
     _dirty=YES;
@@ -54,6 +69,19 @@
 
 - (void)removeEntry:(NSString *)str
 {
+    UMAssert(_entries!=NULL,@"_entries can not be NULL");
+    UMAssert(_lock!=NULL,@"_lock should not be NULL");
+
+    if([str isKindOfClass:[NSString class]])
+    {
+        NSLog(@"you can not remove anything else than a string");
+        return;
+    }
+    if(str.length == 0)
+    {
+        NSLog(@"you can not remove empty string");
+        return;
+    }
     [_lock lock];
     [_entries removeObjectForKey:str];
     _dirty=YES;
@@ -110,8 +138,8 @@
     }
     [_lock unlock];
 #ifdef DEBUG
-    NSLog(@"UMNamedList flush");
-    [self dump];
+//    NSLog(@"UMNamedList flush");
+//    [self dump];
 #endif
 }
 

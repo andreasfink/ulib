@@ -213,7 +213,7 @@
     n->_name = _name;
     n->_path = _path;
     n->_dirty = _dirty;
-    n->_entries = [_entries copyWithZone:zone];
+    n->_namedlistEntries = [_namedlistEntries copyWithZone:zone];
     return n;
 }
 

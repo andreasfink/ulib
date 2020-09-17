@@ -11,14 +11,12 @@
 @implementation UMSynchronizedSortedDictionary
 
 
-@synthesize sortIndex;
-
 - (UMSynchronizedSortedDictionary *)init
 {
     self = [super init];
     if(self)
     {
-        sortIndex = [[NSMutableArray alloc]init];
+        _sortIndex = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -28,10 +26,10 @@
     self = [super initWithDictionary:sd];
     if(self)
     {
-        sortIndex = [[NSMutableArray alloc]init];
+        _sortIndex = [[NSMutableArray alloc]init];
         for(id key in _underlyingDictionary)
         {
-            [sortIndex addObject:key];
+            [_sortIndex addObject:key];
         }
     }
     return self;
@@ -61,7 +59,7 @@
         if(anObject)
         {
             [super setObject:anObject forKeyedSubscript:key];
-            [sortIndex addObject:key];
+            [_sortIndex addObject:key];
         }
     }
     else
@@ -90,7 +88,7 @@
 {
     id r = NULL;
     [_lock lock];
-    id key = sortIndex[index];
+    id key = _sortIndex[index];
     if(key)
     {
         r = [_underlyingDictionary objectForKey:key];
@@ -103,7 +101,7 @@
 {
     id key = NULL;
     [_lock lock];
-    key = sortIndex[index];
+    key = _sortIndex[index];
     [_lock unlock];
     return key;
 }
@@ -112,7 +110,7 @@
 - (NSArray *)allKeys
 {
     [_lock lock];
-    NSArray *r = [sortIndex copy];
+    NSArray *r = [_sortIndex copy];
     [_lock unlock];
     return r;
 }
@@ -125,7 +123,7 @@
     }
     [_lock lock];
     [_underlyingDictionary removeObjectForKey:aKey];
-    [sortIndex removeObjectIdenticalTo:aKey];
+    [_sortIndex removeObjectIdenticalTo:aKey];
     [_lock unlock];
 }
 
@@ -138,13 +136,13 @@
 
 - (NSArray *)sortedKeys
 {
-    return [sortIndex copy];
+    return [_sortIndex copy];
 }
 - (NSString *)description
 {
     NSMutableString *s = [[NSMutableString alloc]init];
     [s appendFormat:@"UMSynchronizedSortedDictionary {\n"];
-    for(id key in sortIndex)
+    for(id key in _sortIndex)
     {
         id entry = _underlyingDictionary[key];
         [s appendFormat:@"%@ = %@\n",key,entry];
@@ -165,6 +163,8 @@
         if (!json)
         {
             NSLog(@"jsonString encoding failed. Error is: %@", writer.error);
+            NSLog(@"_underlyingDictionary = %@",_underlyingDictionary);
+            NSLog(@"_sortIndex = %@",_sortIndex);
         }
     }
     @finally
@@ -200,7 +200,7 @@
 {
     UMSynchronizedSortedDictionary *cpy = [[UMSynchronizedSortedDictionary allocWithZone:zone]init];
     cpy->_underlyingDictionary = [_underlyingDictionary mutableCopy];
-    cpy->sortIndex = [sortIndex mutableCopy];
+    cpy->_sortIndex = [_sortIndex mutableCopy];
     return cpy;
 }
 
@@ -209,7 +209,7 @@
 									count:(NSUInteger)len
 {
 	[_lock lock];
-	NSUInteger iu = [sortIndex countByEnumeratingWithState:state objects:stackbuf count:len];
+	NSUInteger iu = [_sortIndex countByEnumeratingWithState:state objects:stackbuf count:len];
 	[_lock unlock];
 	return iu;
 }

@@ -19,7 +19,7 @@
 
 @interface UMSynchronizedSortedDictionary : UMSynchronizedDictionary<NSCopying,NSFastEnumeration>
 {
-    NSMutableArray *sortIndex;
+    NSMutableArray *_sortIndex;
 }
 
 @property (readonly,strong) NSMutableArray *sortIndex;

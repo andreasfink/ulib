@@ -46,7 +46,7 @@
     UMAssert(_entries!=NULL,@"_entries can not be NULL");
     UMAssert(_lock!=NULL,@"_lock should not be NULL");
 
-    if([str isKindOfClass:[NSString class]])
+    if(![str isKindOfClass:[NSString class]])
     {
         NSLog(@"you can not add anything else than a string");
         return;
@@ -72,7 +72,7 @@
     UMAssert(_entries!=NULL,@"_entries can not be NULL");
     UMAssert(_lock!=NULL,@"_lock should not be NULL");
 
-    if([str isKindOfClass:[NSString class]])
+    if(![str isKindOfClass:[NSString class]])
     {
         NSLog(@"you can not remove anything else than a string");
         return;

@@ -123,7 +123,7 @@
     }
     [_lock lock];
     [_underlyingDictionary removeObjectForKey:aKey];
-    [_sortIndex removeObjectIdenticalTo:aKey];
+    [_sortIndex removeObject:aKey];
     [_lock unlock];
 }
 

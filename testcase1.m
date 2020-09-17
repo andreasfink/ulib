@@ -7,13 +7,31 @@
 //
 
 #import <ulib/ulib.h>
+#include <stdio.h>
 
 int main(int argc, const char * argv[])
 {
     @autoreleasepool
     {
-	UMNamedList *nl = [[UMNamedList alloc]initWithPath:@"/opt/estp/named-lists//jimtest" name:@"jimtest"];
-	[nl reload];
+        char buffer[256];
+        const char *tmpnam(&buffer);
+        const char *tmpcontent = "test2\neeee";
+
+        FILE *f = fopen(tmpnam,"w+");
+        if(f==NULL)
+        {
+            fprintf(stderr,"tmpfile creation failed");
+            exit(-1);
+        }
+        if(1!=fwrite(tmpcontent,sizeof(tmpcontent),1,f))
+        {
+            fprintf(stderr,"tmpfile writing failed");
+            exit(-1);
+        }
+        fclose(f);
+        fopen("")
+        UMNamedList *nl = [[UMNamedList alloc]initWithPath:@(tmpcontent) name:@"jimtest"];
+        [nl reload];
         [nl dump];
         [nl removeEntry:@"test2"];
         [nl dump];

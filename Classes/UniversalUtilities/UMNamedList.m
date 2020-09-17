@@ -187,7 +187,14 @@
 
 - (void)dump
 {
-    NSLog(@"[UMNamedList %p dump] %@",self,[self description]);
+    NSLog(@"UMNamedList dump:");
+    NSLog(@"_name: %@",_name);
+    NSLog(@"_path: %@",_path);
+    NSLog(@"_dirty: %@",@(_dirty));
+    NSLog(@"_name: %@",_name);
+    NSLog(@"_namedlistEntries: %@",_namedlistEntries);
+
+//    NSLog(@"[UMNamedList %p dump] %@",self,[self description]);
 }
 
 - (NSString *)description

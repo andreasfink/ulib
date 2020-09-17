@@ -305,7 +305,12 @@ static NSNumber *kNegativeInfinity;
 
 - (BOOL)writeValue:(id)o
 {
-    if ([o isKindOfClass:[UMSynchronizedSortedDictionary class]])
+    if(o==NULL)
+    {
+        self.error = [NSString stringWithFormat:@"JSON serialisation not supported. can not write NULL"];
+        return NO;
+    }
+    else if ([o isKindOfClass:[UMSynchronizedSortedDictionary class]])
     {
         return [self writeSortedDictionary:o];
     }
@@ -316,52 +321,43 @@ static NSNumber *kNegativeInfinity;
 	else if ([o isKindOfClass:[NSDictionary class]])
     {
 		return [self writeObject:o];
-
 	}
     else if ([o isKindOfClass:[UMSynchronizedArray class]])
     {
         return [self writeArray:[o mutableCopy]];
-
     }
     else if ([o isKindOfClass:[NSArray class]])
     {
 		return [self writeArray:o];
-
 	}
     else if ([o isKindOfClass:[NSString class]])
     {
 		[self writeString:o];
 		return YES;
-
 	}
     else if ([o isKindOfClass:[NSData class]])
     {
         NSData *d = (NSData *)o;
         [self writeString:[d hexString]];
         return YES;
-        
     }
     else if ([o isKindOfClass:[NSNumber class]])
     {
 		return [self writeNumber:o];
-
-	}
+    }
     else if ([o isKindOfClass:[NSDate class]])
     {
         return [self writeDate:o];
-        
     }
     else if ([o isKindOfClass:[NSNull class]])
     {
 		return [self writeNull];
-
 	}
     else if ([o respondsToSelector:@selector(proxyForJson)])
     {
 		return [self writeValue:[o proxyForJson]];
-
 	}
-	self.error = [NSString stringWithFormat:@"JSON serialisation not supported for %@", [o class]];
+	self.error = [NSString stringWithFormat:@"JSON serialisation not supported for class '%@'. implement proxyForJson class", [o className]];
 	return NO;
 }
 

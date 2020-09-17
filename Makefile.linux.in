@@ -67,7 +67,7 @@ doc:
 .SUFFIXES: .m.o .o .m .c
 
 testcase1:	testcase1.m.o
-	${CC} -o testcase1  ${CFLAGS} ${CFLAGS}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS} testcase1.m.o `pkg-config --libs ulib`
+	${CC} -o testcase1  ${CFLAGS} ${CFLAGS}  ${LDFLAGS} ${LIBS} ${STATIC_LIBS} testcase1.m.o `pkg-config --libs ulib`
 
 %.m.o:	%.m
 	${CC} -c ${CFLAGS} -x objective-c -fobjc-arc $<  ${INCLUDEDIRS} -o $@

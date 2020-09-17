@@ -14,10 +14,9 @@ int main(int argc, const char * argv[])
     @autoreleasepool
     {
         char buffer[256];
-        const char *tmpnam(&buffer);
         const char *tmpcontent = "test2\neeee";
-
-        FILE *f = fopen(tmpnam,"w+");
+        const char *s = tmpnam(&buffer[0]);
+        FILE *f = fopen(s,"w+");
         if(f==NULL)
         {
             fprintf(stderr,"tmpfile creation failed");
@@ -29,8 +28,8 @@ int main(int argc, const char * argv[])
             exit(-1);
         }
         fclose(f);
-        fopen("")
-        UMNamedList *nl = [[UMNamedList alloc]initWithPath:@(tmpcontent) name:@"jimtest"];
+
+        UMNamedList *nl = [[UMNamedList alloc]initWithPath:@(s) name:@"jimtest"];
         [nl reload];
         [nl dump];
         [nl removeEntry:@"test2"];

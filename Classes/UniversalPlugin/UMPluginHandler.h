@@ -39,6 +39,7 @@
 - (int)open;
 - (int) openWithDictionary:(NSDictionary *)dict;
 - (int)close;
+- (NSString *)reload; /* return NULL or NSString with error */
 - (UMPlugin *)instantiate;
 - (void)destroy:(UMPlugin *)plugin;
 

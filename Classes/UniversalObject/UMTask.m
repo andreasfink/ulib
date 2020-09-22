@@ -55,7 +55,9 @@
                 {
                     @autoreleasepool
                     {
+                        [self startup];
                         [self main];
+                        [self shutdown];
                     }
                 }
             }
@@ -63,7 +65,9 @@
             {
                 @autoreleasepool
                 {
+                    [self startup];
                     [self main];
+                    [self shutdown];
                 }
             }
         }
@@ -84,5 +88,15 @@
         NSLog(@"empty task");
     }
 }
+
+- (void)startup
+{
+}
+
+
+- (void)shutdown
+{
+}
+
 
 @end

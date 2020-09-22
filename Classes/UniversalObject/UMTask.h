@@ -41,6 +41,7 @@
 
 - (UMTask *)initWithName:(NSString *)name;
 - (void)runOnBackgrounder:(UMBackgrounder *)bg;
+- (void)startup;
 - (void)main;
-
+- (void)shutdown;
 @end

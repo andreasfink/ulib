@@ -24,11 +24,11 @@
 
 @interface UMTaskQueue : UMObject
 {
-    BOOL            enableLogging;
-    NSString        *name;
-    UMQueue         *mainQueue;
-    UMSleeper       *workSleeper;
-    NSMutableArray  *workerThreads; /* UMBackgrounderWithQueue objects */
+    BOOL            _enableLogging;
+    NSString        *_name;
+    UMQueue         *_mainQueue;
+    UMSleeper       *_workSleeper;
+    NSMutableArray  *_workerThreads; /* UMBackgrounderWithQueue objects */
 }
 
 @property (strong) NSString     *name;

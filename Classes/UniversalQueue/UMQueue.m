@@ -15,7 +15,8 @@
     if(self)
     {
         _lock = [[UMMutex alloc] initWithName:@"umqueue"];
-        _queue = [[NSMutableArray alloc]init];
+        NSMutableArray *q = [[NSMutableArray alloc]init];
+        _queue = q;
     }
     return self;
 }

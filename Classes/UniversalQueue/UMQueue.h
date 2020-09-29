@@ -17,10 +17,11 @@
 
 @interface UMQueue : UMObject
 {
-@protected
-    NSMutableArray  *_queue;
     UMMutex          *_lock;
+    NSMutableArray   *_queue;
 }
+
+@property(readwrite,strong,atomic) NSMutableArray *queue;
 
 - (UMQueue *)init;
 - (UMQueue *)initWithoutLock;

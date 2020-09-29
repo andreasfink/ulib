@@ -61,6 +61,7 @@
         {
             task.enableLogging = YES;
         }
+        task.taskQueue = self;
         [mainQueue append:task];
         [workSleeper wakeUp];
     }

@@ -45,9 +45,6 @@
 @property(readwrite,weak)   UMTaskQueueMulti *taskQueueMulti;
 @property(assign,atomic)    int taskQueueMultiSubqueueIndex;
 
-
-
-
 - (UMTask *)initWithName:(NSString *)name;
 - (void)runOnBackgrounder:(UMBackgrounder *)bg;
 - (void)startup;

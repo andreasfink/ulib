@@ -27,4 +27,5 @@ NSString *sqlEscapeNSString(NSString *input);
 - (NSData *)sha1;
 - (BOOL)webBoolValue;
 - (NSString *)trim;
+- (NSInteger)intergerValueSupportingHex;
 @end

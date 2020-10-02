@@ -353,5 +353,27 @@ NSString *sqlEscapeNSString(NSString *input)
 {
     return [self stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
 }
+
+- (NSInteger)intergerValueSupportingHex
+{
+    if([self hasPrefix:@"0x"])
+    {
+        NSString *d = [self substringFromIndex:2];
+        NSData *d2 = [d unhexedData];
+        const uint8_t *bytes = d2.bytes;
+        NSInteger n = 0;
+        for(NSInteger i=0; i<d2.length;i++)
+        {
+            n = (n << 8) | bytes[i];
+        }
+        return n;
+    }
+    else
+    {
+        return [self integerValue];
+    }
+}
+
+
 @end
 

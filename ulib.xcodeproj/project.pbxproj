@@ -5491,7 +5491,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -5535,7 +5535,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -5575,7 +5575,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1g/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -5613,7 +5613,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1g/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -5728,7 +5728,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5759,7 +5759,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -6159,7 +6159,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -6202,7 +6202,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;

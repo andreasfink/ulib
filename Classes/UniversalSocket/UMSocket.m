@@ -2409,6 +2409,9 @@ static int SSL_smart_shutdown(SSL *ssl)
         case ENETUNREACH:
             return UMSocketError_network_unreachable;
         case ENOSPC:
+#if defined(EMSGSIZE)
+        case EMSGSIZE:
+#endif
             return UMSocketError_no_space_left;
         case EPIPE:
             return UMSocketError_pipe_error;
@@ -2421,6 +2424,9 @@ static int SSL_smart_shutdown(SSL *ssl)
         case ECONNABORTED:
             return UMSocketError_connection_aborted;
         case EINPROGRESS:
+#if defined EALREADY
+        case EALREADY:
+#endif
             return UMSocketError_in_progress;
         case EISCONN:
             return UMSocketError_is_already_connected;

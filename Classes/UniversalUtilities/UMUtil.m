@@ -418,7 +418,7 @@ static NSArray *        _machineCPUIDs = NULL;
             }
 #else
             struct ifreq buffer;
-            int s = socket(PF_INET, SOCK_DGRAM, 0);
+            int s = socket(AF_INET, SOCK_DGRAM, 0);
             memset(&buffer, 0x00, sizeof(buffer));
             strcpy(buffer.ifr_name, ifap->ifa_name);
             ioctl(s, SIOCGIFHWADDR, &buffer);

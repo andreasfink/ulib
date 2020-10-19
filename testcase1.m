@@ -1,5 +1,5 @@
 //
-//  main.m
+//  main.c
 //  testcase1
 //
 //  Created by Andreas Fink on 16.04.2020.

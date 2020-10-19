@@ -19,9 +19,11 @@ SLIB=lib@PROJECT_NAME@.a
 PKGCONFIGFILE=ulib.pc
 
 MFILES = $(wildcard Classes/*.m) $(wildcard Classes/*/*.m)
+CFILES = $(wildcard Classes/*.c) $(wildcard Classes/*/*.c)
 HFILES = version.h $(wildcard Classes/*.h) $(wildcard Classes/*/*.h)
 MOFILES  = $(MFILES:.m=.m.o)
-OFILES = $(MOFILES)
+COFILES  = $(CFILES:.m=.c.o)
+OFILES = $(MOFILES) $(COFILES)
 
 INCLUDEDIRS=-I/usr/include/postgresql -I/usr/include/mysql-I/usr/include/libxml2 -I Classes/UniversalConfig -I Classes/UniversalHTTP -I Classes/UniversalJson -I Classes/UniversalLayers -I Classes/UniversalLog -I Classes/UniversalObject -I Classes/UniversalQueue -I Classes/UniversalRedis -I Classes/UniversalSocket -I Classes/UniversalUtilities -I Classes/UniversalTokenizer -I Classes/UniversalPlugin -I Classes/UniversalSerial -I Classes 
 
@@ -71,6 +73,9 @@ testcase1:	testcase1.m.o
 
 %.m.o:	%.m
 	${CC} -c ${CFLAGS} -x objective-c -fobjc-arc $<  ${INCLUDEDIRS} -o $@
+
+%.c.o:    %.c
+    ${CC} -c ${CFLAGS} -x c -std=c17 $<  ${INCLUDEDIRS} -o $@
 
 
 

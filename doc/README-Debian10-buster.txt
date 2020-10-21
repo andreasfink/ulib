@@ -143,7 +143,7 @@ Download the sourcecode of gnustep and dependencies
 Build  libiconv
 -----------------
 
-#   Note libiconf does not build if the compiler is set to clang or the linker to lld.
+#   Note libiconv does not build if the compiler is set to clang or the linker to lld.
 
     wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
     tar -xvzf libiconv-1.16.tar.gz

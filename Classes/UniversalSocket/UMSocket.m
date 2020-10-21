@@ -515,7 +515,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         if(linger_time)
         {
             struct    linger xlinger;
-            bzero(&xlinger,sizeof(xlinger));
+            memset(&xlinger,0,sizeof(xlinger));
             xlinger.l_onoff = 1;
             xlinger.l_linger = linger_time;
             int err = setsockopt(_sock, SOL_SOCKET, SO_LINGER,  &xlinger,sizeof(xlinger));

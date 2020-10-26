@@ -75,7 +75,7 @@ testcase1:	testcase1.m.o
 	${CC} -c ${CFLAGS} -x objective-c -fobjc-arc $<  ${INCLUDEDIRS} -o $@
 
 %.c.o:    %.c
-    ${CC} -c ${CFLAGS} -x c -std=c17 $<  ${INCLUDEDIRS} -o $@
+	${CC} -c ${CFLAGS} -x c -std=c17 $<  ${INCLUDEDIRS} -o $@
 
 
 

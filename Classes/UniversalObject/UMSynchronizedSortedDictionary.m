@@ -138,6 +138,8 @@
 {
     return [_sortIndex copy];
 }
+
+
 - (NSString *)description
 {
     NSMutableString *s = [[NSMutableString alloc]init];
@@ -213,6 +215,18 @@
 	[_lock unlock];
 	return iu;
 }
+
+static NSInteger keySort(id a, id b, void *context)
+{
+    return [a compare:b];
+}
+
+- (void)sortKeys
+{
+    NSArray *sortedIndex =  [_sortIndex sortedArrayUsingFunction:keySort context:NULL];
+    _sortIndex = [sortedIndex mutableCopy];
+}
+
 
 @end
 

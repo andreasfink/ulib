@@ -35,6 +35,7 @@
 - (NSString *)jsonString;
 - (NSString *)jsonCompactString;
 - (UMSynchronizedSortedDictionary *)copyWithZone:(NSZone *)zone;
+- (void)sortKeys;
 
 @end
 

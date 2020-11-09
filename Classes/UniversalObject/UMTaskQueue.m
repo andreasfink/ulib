@@ -17,9 +17,6 @@
 #include <string.h>
 
 @implementation UMTaskQueue
-@synthesize name;
-@synthesize workSleeper;
-@synthesize enableLogging;
 
 - (UMTaskQueue *)init
 {
@@ -33,21 +30,21 @@
     self = [super init];
     if(self)
     {
-        self.name = n;
-        self.enableLogging = enableLog;
-        mainQueue = [[UMQueue alloc]init];
-        workerThreads = [[NSMutableArray alloc]init];
+        _name = n;
+        _enableLogging = enableLog;
+        _mainQueue = [[UMQueue alloc]init];
+        _workerThreads = [[NSMutableArray alloc]init];
         int i;
-        self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
-        [self.workSleeper prepare];
+        _workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
+        [_workSleeper prepare];
         for(i=0;i<workerThreadCount;i++)
         {
             NSString *newName = [NSString stringWithFormat:@"%@[%d]",n,i];
-            UMBackgrounderWithQueue *bg = [[UMBackgrounderWithQueue alloc]initWithSharedQueue:mainQueue
+            UMBackgrounderWithQueue *bg = [[UMBackgrounderWithQueue alloc]initWithSharedQueue:_mainQueue
                                                                                          name:newName
-                                                                                  workSleeper:workSleeper];
+                                                                                  workSleeper:_workSleeper];
             bg.enableLogging = self.enableLogging;
-            [workerThreads addObject:bg];
+            [_workerThreads addObject:bg];
         }
     }
     return self;
@@ -57,12 +54,13 @@
 {
     @autoreleasepool
     {
-        if(enableLogging)
+        if(_enableLogging)
         {
             task.enableLogging = YES;
         }
-        [mainQueue append:task];
-        [workSleeper wakeUp];
+        task.taskQueue = self;
+        [_mainQueue append:task];
+        [_workSleeper wakeUp];
     }
     
 }
@@ -71,7 +69,7 @@
 {
     @autoreleasepool
     {
-        for(UMBackgrounderWithQueue *bg in workerThreads)
+        for(UMBackgrounderWithQueue *bg in _workerThreads)
         {
             [bg startBackgroundTask];
         }
@@ -80,7 +78,7 @@
 
 - (NSUInteger)count
 {
-    return [mainQueue count];
+    return [_mainQueue count];
 }
 
 - (void)shutdown
@@ -88,7 +86,7 @@
     @autoreleasepool
     {
         
-        for(UMBackgrounderWithQueue *bg in workerThreads)
+        for(UMBackgrounderWithQueue *bg in _workerThreads)
         {
             [bg shutdownBackgroundTask];
         }

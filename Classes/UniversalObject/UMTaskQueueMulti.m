@@ -130,6 +130,8 @@
     {
         task.enableLogging = YES;
     }
+    task.taskQueueMulti = self;
+    task.taskQueueMultiSubqueueIndex = nr;
     [_multiQueue append:task forQueueNumber:nr];
     [_workSleeper wakeUp];
 }

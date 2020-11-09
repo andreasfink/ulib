@@ -113,7 +113,6 @@ apt-get install clang-10 lldb-10 lld-10
         ninja-build \
         gobjc gobjc-8 \
         gobjc++ gobjc++-8 \
-        libc++1-11 libc++-11-dev \
         default-libmysqlclient-dev \
         libpq-dev libpq5
 
@@ -144,7 +143,7 @@ Download the sourcecode of gnustep and dependencies
 Build  libiconv
 -----------------
 
-#   Note libiconf does not build if the compiler is set to clang or the linker to lld.
+#   Note libiconv does not build if the compiler is set to clang or the linker to lld.
 
     wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
     tar -xvzf libiconv-1.16.tar.gz
@@ -165,7 +164,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREF
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"
 export RUNTIME_VERSION="gnustep-2.0"
 export OBJCFLAGS="-fblocks"
-export CFLAGS="-I ${PREFIX}/include -stdlib=libstdc++"
+export CFLAGS="-I ${PREFIX}/include"
 export LDFLAGS="-fuse-ld=gold"
 
 mkdir -p ${PREFIX}/lib
@@ -179,7 +178,6 @@ mkdir -p ${PREFIX}/bin
     cmake  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX} ..
     make
     make install
-
 
 5. install libobjc2 runtime
 

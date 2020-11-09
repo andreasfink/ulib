@@ -9,6 +9,7 @@
 #import "UMCrypto.h"
 #import "UMSocketDefs.h"
 #import "UMMutex.h"
+#import "UMPacket.h"
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -234,6 +235,10 @@ typedef enum SocketBlockingMode
 + (NSData *)sockaddrFromAddress:(NSString *)theAddr
                            port:(int)thePort
                    socketFamily:(int)socketFamily;
+- (int)bindx:(struct sockaddr *)localAddress;
+
+- (UMPacket *)receivePacket;
+
 @end
 
 

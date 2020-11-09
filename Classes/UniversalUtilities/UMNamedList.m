@@ -9,6 +9,9 @@
 #import "UMNamedList.h"
 #import "NSString+UMHTTP.h"
 #import "UMSynchronizedSortedDictionary.h"
+#import "UMAssert.h"
+
+//#define DEBUG   1
 
 @implementation UMNamedList
 
@@ -25,7 +28,7 @@
     self = [super init];
     if(self)
     {
-        _entries = [[UMSynchronizedSortedDictionary alloc]init];
+        _namedlistEntries = [[UMSynchronizedSortedDictionary alloc]init];
         _lock  = [[UMMutex alloc]initWithName:@"UMNamedList-lock"];
         _path = path;
         _name = name;
@@ -40,25 +43,69 @@
 
 - (void)addEntry:(NSString *)str
 {
+    UMAssert(_namedlistEntries!=NULL,@"_entries can not be NULL");
+    UMAssert(_lock!=NULL,@"_lock should not be NULL");
+    if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
+    {
+        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", [_namedlistEntries className]);
+        return;
+    }
+    if(![str isKindOfClass:[NSString class]])
+    {
+        NSLog(@"you can not add anything else than a string");
+        return;
+    }
+    if(str.length == 0)
+    {
+        NSLog(@"you can not add empty string");
+        return;
+    }
+    UMAssert(_lock!=NULL,@"_lock is NULL");
     [_lock lock];
-    _entries[str] = str;
+    _namedlistEntries[str] = str;
     _dirty=YES;
     [_lock unlock];
+#ifdef DEBUG
+    NSLog(@"UMNamedList addEntry:%@",str);
+    [self dump];
+#endif
 }
 
 - (void)removeEntry:(NSString *)str
 {
+    UMAssert(_namedlistEntries!=NULL,@"_entries can not be NULL");
+    UMAssert(_lock!=NULL,@"_lock should not be NULL");
+    if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
+    {
+        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", [_namedlistEntries className]);
+        return;
+    }
+
+    if(![str isKindOfClass:[NSString class]])
+    {
+        NSLog(@"you can not remove anything else than a string");
+        return;
+    }
+    if(str.length == 0)
+    {
+        NSLog(@"you can not remove empty string");
+        return;
+    }
     [_lock lock];
-    [_entries removeObjectForKey:str];
+    [_namedlistEntries removeObjectForKey:str];
     _dirty=YES;
     [_lock unlock];
+#ifdef DEBUG
+    NSLog(@"UMNamedList removeEntry:%@",str);
+    [self dump];
+#endif
 }
 
 - (BOOL)containsEntry:(NSString *)str
 {
     BOOL found = NO;
     [_lock lock];
-    NSString *s =  _entries[str];
+    NSString *s =  _namedlistEntries[str];
     if(s!=NULL)
     {
         found = YES;
@@ -72,7 +119,7 @@
 {
     NSArray *a;
     [_lock lock];
-    a = [_entries allKeys];
+    a = [_namedlistEntries allKeys];
     [_lock unlock];
     return a;
 }
@@ -82,7 +129,7 @@
     [_lock lock];
     if(_dirty)
     {
-        NSArray *keys = [_entries allKeys];
+        NSArray *keys = [_namedlistEntries allKeys];
         NSString *output = [keys componentsJoinedByString:@"\n"];
         NSError *err = NULL;
         [output writeToFile:_path atomically:YES encoding:NSUTF8StringEncoding error:&err];
@@ -90,9 +137,19 @@
         {
             NSLog(@"Error while writing namedlist %@ to %@: %@",_name,_path,err);
         }
+#ifdef DEBUG
+        else
+        {
+            NSLog(@"Written namedlist '%@ to file '%@'\nContent:\n%@",_name,_path,output);
+        }
+#endif
         _dirty = NO;
     }
     [_lock unlock];
+#ifdef DEBUG
+//    NSLog(@"UMNamedList flush");
+//    [self dump];
+#endif
 }
 
 - (void)reload
@@ -120,9 +177,51 @@
         }
     }
     [_lock lock];
-    _entries = list;
+    _namedlistEntries = list;
     _dirty = NO;
     [_lock unlock];
+#ifdef DEBUG
+    [self dump];
+#endif
+}
+
+- (void)dump
+{
+    NSLog(@"UMNamedList dump:");
+    NSLog(@"_name: %@",_name);
+    NSLog(@"_path: %@",_path);
+    NSLog(@"_dirty: %@",@(_dirty));
+    NSLog(@"_name: %@",_name);
+    NSLog(@"_namedlistEntries: %@",_namedlistEntries);
+
+//    NSLog(@"[UMNamedList %p dump] %@",self,[self description]);
+}
+
+- (NSString *)description
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"_name"] = (_name ? _name : @"(null)");
+    dict[@"_path"] = (_path ? _path : @"(null)");
+    dict[@"_dirty"] = (_dirty ? @"YES" : @"NO");
+    if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
+    {
+        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", [_namedlistEntries className]);
+    }
+    else
+    {
+        dict[@"_namedlistEntries"] = (_namedlistEntries ? _namedlistEntries : @"(null)");
+    }
+    return [dict jsonString];
+}
+
+- (UMNamedList *)copyWithZone:(NSZone *)zone
+{
+    UMNamedList *n = [[UMNamedList allocWithZone:zone]init];
+    n->_name = _name;
+    n->_path = _path;
+    n->_dirty = _dirty;
+    n->_namedlistEntries = [_namedlistEntries copyWithZone:zone];
+    return n;
 }
 
 @end

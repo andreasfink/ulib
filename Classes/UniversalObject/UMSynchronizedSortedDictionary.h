@@ -19,7 +19,7 @@
 
 @interface UMSynchronizedSortedDictionary : UMSynchronizedDictionary<NSCopying,NSFastEnumeration>
 {
-    NSMutableArray *sortIndex;
+    NSMutableArray *_sortIndex;
 }
 
 @property (readonly,strong) NSMutableArray *sortIndex;
@@ -35,6 +35,7 @@
 - (NSString *)jsonString;
 - (NSString *)jsonCompactString;
 - (UMSynchronizedSortedDictionary *)copyWithZone:(NSZone *)zone;
+- (void)sortKeys;
 
 @end
 

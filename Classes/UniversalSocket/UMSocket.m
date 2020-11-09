@@ -24,6 +24,7 @@
 #import "UMFileTrackingMacros.h"
 #import "NSString+UMSocket.h"
 #import "UMSocketDefs.h"
+#import "UMPacket.h"
 
 #import "UMUtil.h" /* for UMBacktrace */
 
@@ -44,37 +45,6 @@
 
 typedef unsigned long (*CRYPTO_CALLBACK_PTR)(void);
 
-#ifdef __APPLE__
-#if TARGET_OS_OSX
-#define SCTP_IN_KERNEL  1
-#endif
-#endif
-#ifdef LINUX
-#define SCTP_IN_KERNEL  1
-#endif
-
-#ifdef SCTP_IN_KERNEL
-#ifdef __APPLE__
-#include "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework/Versions/A/Headers/sctp.h"
-#else
-#include <netinet/sctp.h>
-#endif
-//#include <netinet/sctp_uio.h>
-#endif
-
-#ifdef	SCTP_IN_USERSPACE
-#include "/usr/local/include/usrsctp.h"
-#endif
-
-#ifdef SCTP_IN_KERNEL
-#if TARGET_OS_OSX
-#define	SCTP_SUPPORTED	1
-#endif
-#endif
-
-#ifdef SCTP_IN_USERSPACE
-#define	SCTP_SUPPORTED	1
-#endif
 
 #ifndef	IPPROTO_SCTP
 #define	IPPROTO_SCTP	132
@@ -175,7 +145,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     switch(type)
     {
         case UMSOCKET_TYPE_TCP4ONLY:
-            _socketDomain=PF_INET;
+            _socketDomain=AF_INET;
             _socketFamily=AF_INET;
             _socketType = SOCK_STREAM;
             _socketProto = 0;//IPPROTO_TCP;
@@ -183,33 +153,33 @@ static int SSL_smart_shutdown(SSL *ssl)
             TRACK_FILE_SOCKET(_sock,@"tcp");
             break;
         case UMSOCKET_TYPE_TCP6ONLY:
-            _socketDomain=PF_INET6;
+            _socketDomain=AF_INET6;
             _socketFamily=AF_INET6;
             _socketType = SOCK_STREAM;
             _socketProto = 0;//IPPROTO_TCP;
-            _sock = socket(_socketDomain, _socketType, _socketProto);
+            _sock = socket(_socketFamily, _socketType, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"tcp");
             break;
         case UMSOCKET_TYPE_TCP:
-            _socketDomain=PF_INET6;
+            _socketDomain=AF_INET6;
             _socketFamily=AF_INET6;
             _socketType = SOCK_STREAM;
             _socketProto = 0;//IPPROTO_TCP;
-            _sock = socket(_socketDomain, SOCK_STREAM, _socketProto);
+            _sock = socket(_socketFamily, SOCK_STREAM, _socketProto);
             TRACK_FILE_SOCKET(_sock,@"tcp");
             if(_sock < 0)
             {
                 if(errno==EAFNOSUPPORT)
                 {
-                    _socketDomain=PF_INET;
+                    _socketDomain=AF_INET;
                     _socketFamily=AF_INET;
-                    _sock = socket(_socketDomain, _socketType, _socketProto);
+                    _sock = socket(_socketFamily, _socketType, _socketProto);
                     TRACK_FILE_SOCKET(_sock,@"tcp");
                 }
             }
             break;
         case UMSOCKET_TYPE_UDP4ONLY:
-            _socketDomain=PF_INET;
+            _socketDomain=AF_INET;
             _socketFamily=AF_INET;
             _socketType = SOCK_DGRAM;
             _socketProto = 0;//IPPROTO_UDP;
@@ -217,7 +187,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             TRACK_FILE_SOCKET(_sock,@"udp");
             break;
         case UMSOCKET_TYPE_UDP6ONLY:
-            _socketDomain=PF_INET6;
+            _socketDomain=AF_INET6;
             _socketFamily=AF_INET6;
             _socketType = SOCK_DGRAM;
             _socketProto = 0;//IPPROTO_UDP;
@@ -225,7 +195,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             TRACK_FILE_SOCKET(_sock,@"udp");
             break;
         case UMSOCKET_TYPE_UDP:
-            _socketDomain = PF_INET6;
+            _socketDomain = AF_INET6;
             _socketFamily=AF_INET6;
             _socketType = SOCK_DGRAM;
             _socketProto = 0;//IPPROTO_UDP;
@@ -235,7 +205,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             {
                 if(errno==EAFNOSUPPORT)
                 {
-                    _socketDomain = PF_INET;
+                    _socketDomain = AF_INET;
                     _socketFamily=AF_INET;
                     _sock = socket(_socketFamily, _socketType, _socketProto);
                     TRACK_FILE_SOCKET(_sock,@"udp");
@@ -545,7 +515,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         if(linger_time)
         {
             struct    linger xlinger;
-            bzero(&xlinger,sizeof(xlinger));
+            memset(&xlinger,0,sizeof(xlinger));
             xlinger.l_onoff = 1;
             xlinger.l_linger = linger_time;
             int err = setsockopt(_sock, SOL_SOCKET, SO_LINGER,  &xlinger,sizeof(xlinger));
@@ -618,7 +588,7 @@ static int SSL_smart_shutdown(SSL *ssl)
                     NSData *d = [UMSocket sockaddrFromAddress:ipAddr
                                                      port:_requestedLocalPort
                                              socketFamily:AF_INET];
-                    int err = sctp_bindx(_sock, (struct sockaddr *)d.bytes,1,SCTP_BINDX_ADD_ADDR);
+                    int err = [self bindx:(struct sockaddr *)d.bytes];
                     if(!err)
                     {
                         [useableLocalAddresses addObject:ipAddr];
@@ -642,7 +612,7 @@ static int SSL_smart_shutdown(SSL *ssl)
                     NSData *d = [UMSocket sockaddrFromAddress:ipAddr
                                                      port:_requestedLocalPort
                                              socketFamily:AF_INET6];
-                    int err = sctp_bindx(_sock, (struct sockaddr *)d.bytes,1,SCTP_BINDX_ADD_ADDR);
+                    int err = [self bindx:(struct sockaddr *)d.bytes];
                     if(!err)
                     {
                         [useableLocalAddresses addObject:ipAddr];
@@ -709,6 +679,11 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
         [_controlLock unlock];
     }
+}
+
+-(int)bindx:(struct sockaddr *)sockaddr
+{
+    return UMSocketError_not_supported_operation;
 }
 
 - (UMSocketError) openAsync
@@ -2434,6 +2409,9 @@ static int SSL_smart_shutdown(SSL *ssl)
         case ENETUNREACH:
             return UMSocketError_network_unreachable;
         case ENOSPC:
+#if defined(EMSGSIZE)
+        case EMSGSIZE:
+#endif
             return UMSocketError_no_space_left;
         case EPIPE:
             return UMSocketError_pipe_error;
@@ -2446,11 +2424,14 @@ static int SSL_smart_shutdown(SSL *ssl)
         case ECONNABORTED:
             return UMSocketError_connection_aborted;
         case EINPROGRESS:
+#if defined EALREADY
+        case EALREADY:
+#endif
             return UMSocketError_in_progress;
         case EISCONN:
             return UMSocketError_is_already_connected;
         default:
-            fprintf(stderr,"Unknown errno code %d\n",e);
+            fprintf(stderr,"Unknown errno code %d %s\n",e,strerror(e));
             return UMSocketError_not_known;
             break;
     }
@@ -3237,5 +3218,49 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     return resultData;
 }
 
+- (UMPacket *)receivePacket
+{
+#define MAXBUF 65536
+    
+    struct sockaddr_in6     remote_address6;
+    struct sockaddr_in      remote_address4;
+    struct sockaddr *       remote_address_ptr;
+    socklen_t               remote_address_len;
+    if(_socketFamily==AF_INET)
+    {
+        remote_address_ptr = (struct sockaddr *)&remote_address4;
+        remote_address_len = sizeof(struct sockaddr_in);
+    }
+    else
+    {
+        remote_address_ptr = (struct sockaddr *)&remote_address6;
+        remote_address_len = sizeof(struct sockaddr_in6);
+    }
+
+    ssize_t                 bytes_read = 0;
+    char                    buffer[MAXBUF];
+    int                     flags=0;
+
+    memset(&buffer[0],0xFA,sizeof(buffer));
+    memset(remote_address_ptr,0x00,sizeof(remote_address_len));
+
+    UMPacket *rx = [[UMPacket alloc]init];
+    bytes_read = recvfrom(_sock, buffer, sizeof(buffer), flags,
+        remote_address_ptr, &remote_address_len);
+
+    rx.socket = @(_sock);
+
+    if(bytes_read <= 0)
+    {
+        rx.err = [UMSocket umerrFromErrno:errno];
+    }
+    else
+    {
+        rx.remoteAddress = [UMSocket addressOfSockAddr:remote_address_ptr];
+        rx.remotePort = [UMSocket portOfSockAddr:remote_address_ptr];
+        rx.data = [NSData dataWithBytes:&buffer length:bytes_read];
+    }
+    return rx;
+}
 
 @end

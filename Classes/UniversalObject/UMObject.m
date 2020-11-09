@@ -360,7 +360,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 	UMObject *r = [[UMObject allocWithZone:zone]init];
 
 	r->_magic = _magic;
-	[r setObjectStatisticsName:@(_objectStatisticsName)];
+    r->_objectStatisticsName = _objectStatisticsName;
 	r->_umobject_flags = _umobject_flags;
 	r->_umobject_flags |= UMOBJECT_FLAG_IS_COPIED;
 	r.logFeed = _logFeed;

@@ -125,7 +125,7 @@ typedef enum UMHTTPServerStatus
     NSString            *_advertizeName;
     BOOL                _enableSSL;
     BOOL                _enableKeepalive;
-
+    BOOL                _disableAuthentication; /* can be set by config to switch off http auth  but has to be interpreted by application */
     UMTaskQueue         *_taskQueue;
 	//
 	// the delegates for authorisation
@@ -157,11 +157,13 @@ typedef enum UMHTTPServerStatus
     UMSynchronizedArray *_pendingRequests;
     UMMutex *_connectionsLock;
     NSString    *_documentRoot;
+
 }
 
 @property(readwrite,strong)		        NSString *serverName;
 @property(readwrite,assign,atomic)		UMHTTPServerStatus  status;
 @property(readwrite,assign,atomic)      BOOL enableKeepalive;
+@property(readwrite,assign,atomic)      BOOL disableAuthentication; /* can be set by config to switch off http auth  but has to be interpreted by application */
 
 //
 // the delegates for authorisation

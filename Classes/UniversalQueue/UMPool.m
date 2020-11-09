@@ -70,7 +70,7 @@
         _rotary = ++_rotary % UMPOOL_QUEUES_COUNT;
     }
 }
-
+/*
 - (void)removeObjectIdenticalTo:(id)obj
 {
     if(obj)
@@ -87,7 +87,7 @@
         _rotary = ++_rotary % UMPOOL_QUEUES_COUNT;
     }
 }
-
+*/
 - (id)getAny
 {
     id obj = NULL;

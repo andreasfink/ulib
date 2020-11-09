@@ -18,6 +18,8 @@
     A UMTask can be synchronized to another object (the "synchronizeObject") have a name and 
     can have logging.
 */
+@class UMTaskQueue;
+@class UMTaskQueueMulti;
 
 @interface UMTask : UMObject
 {
@@ -28,6 +30,9 @@
     UMMutex         *_synchronizeMutex; /* preferred */
     id              _retainObject; /* object to hold until task ends */
     UMMutex         *_runMutex;
+    UMTaskQueue         __weak *_taskQueue;
+    UMTaskQueueMulti    __weak *_taskQueueMulti;
+    int                 _taskQueueMultiSubqueueIndex;
 }
 @property(strong)           NSString *name;
 @property(assign,atomic)    BOOL enableLogging;
@@ -36,11 +41,13 @@
 @property(readwrite,strong) UMMutex   *synchronizeMutex; /* preferred */
 @property(strong)           id retainObject;
 @property(readwrite,strong) UMMutex   *runMutex; /* preferred */
-
-
+@property(readwrite,weak)   UMTaskQueue *taskQueue;
+@property(readwrite,weak)   UMTaskQueueMulti *taskQueueMulti;
+@property(assign,atomic)    int taskQueueMultiSubqueueIndex;
 
 - (UMTask *)initWithName:(NSString *)name;
 - (void)runOnBackgrounder:(UMBackgrounder *)bg;
+- (void)startup;
 - (void)main;
-
+- (void)shutdown;
 @end

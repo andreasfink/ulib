@@ -40,12 +40,12 @@ typedef enum UMBackgrounder_runningStatus
 
 @interface UMBackgrounder : UMObject
 {
-    NSString *_name;
-    UMBackgrounder_runningStatus _runningStatus;
-    UMSleeper *_control_sleeper; /* feedback from the backgrounder */
-    UMSleeper *_workSleeper;    /* messages to the backgrounder */
-    BOOL _enableLogging;
-    UMMutex *_startStopLock;
+    NSString                        *_name;
+    UMBackgrounder_runningStatus    _runningStatus;
+    UMSleeper                       *_control_sleeper; /* feedback from the backgrounder */
+    UMSleeper                       *_workSleeper;    /* messages to the backgrounder */
+    BOOL                            _enableLogging;
+    UMMutex                         *_startStopLock;
 }
 
 @property(readwrite,strong,atomic) NSString *name;

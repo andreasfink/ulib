@@ -1,3 +1,4 @@
+
 //
 //  UMNamedList.h
 //  ulib
@@ -15,7 +16,7 @@
     NSString                        *_name;
     NSString                        *_path;
     BOOL                            _dirty;
-    UMSynchronizedSortedDictionary  *_entries;
+    UMSynchronizedSortedDictionary  *_namedlistEntries;
     UMMutex                         *_lock;
 }
 
@@ -34,4 +35,7 @@
 - (NSArray *)allEntries;
 - (void)flush;
 - (void)reload;
+- (void)dump;
+- (NSString *)description;
+
 @end

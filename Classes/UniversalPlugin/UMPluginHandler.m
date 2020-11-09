@@ -160,4 +160,12 @@
     _instanceCount = [instances count];
 }
 
+
+- (NSString *)reload
+{
+    [self close];
+    [self open];
+    return NULL;
+}
+
 @end

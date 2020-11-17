@@ -14,6 +14,11 @@
 
 @implementation UMBackgrounderWithQueue
 
+- (UMBackgrounder *)init
+{
+    return [self initWithName:@"(unnamed)"];
+}
+
 - (UMBackgrounderWithQueue *)initWithName:(NSString *)n
 {
     self = [super initWithName:n workSleeper:NULL];

@@ -35,3 +35,32 @@ export CFLAGS=-mmacosx-version-min=10.8
 make install
 make DESTDIR=../openssl-1.1.h-binary  install
 
+
+
+
+# to build under AppleSilicon:
+
+
+add the following into Configuration/10-main.conf
+
+a
+
+
+    "darwin64-arm64-cc" => {
+        inherit_from     => [ "darwin-common" ],
+        CFLAGS           => add("-Wall"),
+        cflags           => add("-arch arm64"),
+        lib_cppflags     => add("-DL_ENDIAN"),
+        bn_ops           => "SIXTY_FOUR_BIT_LONG",
+        perlasm_scheme   => "ios64",
+    },
+    
+and then compile like this
+
+
+export CFLAGS=-mmacosx-version-min=11.0
+./Configure darwin64-x86_64-cc no-shared
+
+
+Note: sctp is not supported under MacOS  11.0 yet so we cant build with it.
+Also asm optimisation is not enabled yet (which I leave to add later)

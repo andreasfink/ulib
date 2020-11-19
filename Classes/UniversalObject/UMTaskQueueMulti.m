@@ -11,7 +11,7 @@
 #import "UMBackgrounderWithQueues.h"
 #import "UMQueueMulti.h"
 #import "UMSleeper.h"
-#import "UMTask.h"
+#import "UMTaskQueueTask.h"
 #import "UMQueueMulti.h"
 
 #include <sys/types.h>
@@ -120,7 +120,7 @@
     return self;
 }
 
-- (void)queueTask:(UMTask *)task toQueueNumber:(int)nr
+- (void)queueTask:(UMTaskQueueTask *)task toQueueNumber:(int)nr
 {
     if(task==NULL)
     {
@@ -136,7 +136,7 @@
     [_workSleeper wakeUp];
 }
 
-- (void)queueArrayOfTasks:(NSArray<UMTask *>*)tasks toQueueNumber:(int)nr
+- (void)queueArrayOfTasks:(NSArray<UMTaskQueueTask *>*)tasks toQueueNumber:(int)nr
 {
     if(tasks==NULL)
     {

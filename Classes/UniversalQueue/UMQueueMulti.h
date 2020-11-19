@@ -6,11 +6,11 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import "UMQueue.h"
+#import "UMQueueSingle.h"
 
 @class UMThroughputCounter;
 
-@interface UMQueueMulti : UMQueue
+@interface UMQueueMulti : UMQueueSingle
 {
 @private
     NSMutableArray  *_queues;

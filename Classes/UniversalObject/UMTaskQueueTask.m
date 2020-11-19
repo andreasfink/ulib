@@ -1,19 +1,19 @@
 //
-//  UMTask.m
+//  UMTaskQueueTask.m
 //  ulib
 //
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 //
 
-#import "UMTask.h"
+#import "UMTaskQueueTask.h"
 #import "UMMutex.h"
 #import "UMBackgrounder.h"
 #import "UMThreadHelpers.h"
 
-@implementation UMTask
+@implementation UMTaskQueueTask
 
-- (UMTask *)initWithName:(NSString *)n
+- (UMTaskQueueTask *)initWithName:(NSString *)n
 {
     self = [super init];
     if(self)

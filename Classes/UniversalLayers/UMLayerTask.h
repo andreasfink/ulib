@@ -5,7 +5,7 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
 #import <Foundation/Foundation.h>
-#import "UMTask.h"
+#import "UMTaskQueueTask.h"
 #import "UMLayerUserProtocol.h"
 
 @class UMThroughputCounter;
@@ -13,7 +13,7 @@
 @class UMLayer;
 
 
-@interface UMLayerTask : UMTask
+@interface UMLayerTask : UMTaskQueueTask
 {
     UMLayer                 *receiver;
     id<UMLayerUserProtocol> sender;

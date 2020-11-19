@@ -10,7 +10,7 @@
 #import "UMLogLevel.h"
 
 @class UMThroughputCounter;
-@class UMTask;
+@class UMTaskQueueTask;
 @class UMTaskQueue;
 @class UMTaskQueueMulti;
 @class UMLayerTask;

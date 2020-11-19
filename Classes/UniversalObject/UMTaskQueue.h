@@ -13,20 +13,20 @@
  @class UMTaskQueue
  @brief UMTaskQueue is an object to deal with background queues
  It holds a bunch of UMBackgrounderWithQueue objecs which share a
- common queue where you can stuff UMTask objects into.
+ common queue where you can stuff UMTaskQueueTask objects into.
 
  */
 
-@class UMQueue;
+@class UMQueueSingle;
 @class UMBackgrounderWithQueue;
-@class UMTask;
+@class UMTaskQueueTask;
 @class UMSleeper;
 
 @interface UMTaskQueue : UMObject
 {
     BOOL            _enableLogging;
     NSString        *_name;
-    UMQueue         *_mainQueue;
+    UMQueueSingle         *_mainQueue;
     UMSleeper       *_workSleeper;
     NSMutableArray  *_workerThreads; /* UMBackgrounderWithQueue objects */
 }
@@ -37,7 +37,7 @@
 
 - (UMTaskQueue *)init;
 - (UMTaskQueue *)initWithNumberOfThreads:(int)workerThreadCount name:(NSString *)n enableLogging:(BOOL)enableLog;
-- (void)queueTask:(UMTask *)task;
+- (void)queueTask:(UMTaskQueueTask *)task;
 
 - (void)start;
 - (void)shutdown;

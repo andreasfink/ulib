@@ -1,5 +1,5 @@
 //
-//  UMQueue.h
+//  UMQueueSingle.h
 //  thread safe generic Fifo queue
 //  ulib.framework
 //
@@ -9,13 +9,13 @@
 @class UMMutex;
 
 /*!
- @class UMQueue
- @brief A UMQueue is a queue where you can stuff things into and pull stuff from it.
+ @class UMSingleQueue
+ @brief A UMSingleQueue is a queue where you can stuff things into and pull stuff from it.
   it is synchronized and thus save to use multithreaded (unless created with initWithoutLock)
  */
 
 
-@interface UMQueue : UMObject
+@interface UMQueueSingle : UMObject
 {
     UMMutex          *_lock;
     NSMutableArray   *_queue;
@@ -23,8 +23,8 @@
 
 @property(readwrite,strong,atomic) NSMutableArray *queue;
 
-- (UMQueue *)init;
-- (UMQueue *)initWithoutLock;
+- (UMQueueSingle *)init;
+- (UMQueueSingle *)initWithoutLock;
 - (void)append:(id)obj;
 - (void)appendUnique:(id)obj;
 - (id)getFirst;

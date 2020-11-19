@@ -9,7 +9,7 @@
 #import "UMQueueMulti.h"
 #import "UMMutex.h"
 #import "UMThroughputCounter.h"
-#import "UMTask.h"
+#import "UMTaskQueueTask.h"
 
 @implementation UMQueueMulti
 
@@ -283,9 +283,9 @@
     {
         NSString *name;
         id obj = subqueue[i];
-        if([obj isKindOfClass:[UMTask class]])
+        if([obj isKindOfClass:[UMTaskQueueTask class]])
         {
-            UMTask *task = (UMTask *)obj;
+            UMTaskQueueTask *task = (UMTaskQueueTask *)obj;
             name = task.name;
         }
         else

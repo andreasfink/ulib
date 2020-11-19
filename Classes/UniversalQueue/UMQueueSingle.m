@@ -1,15 +1,16 @@
 //
-//  UMQueue.m
+//  UMSingleQueue.m
 //  ulib
 //
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
-#import "UMQueue.h"
+#import "UMQueueSingle.h"
 #import "UMMutex.h"
+#import "UMAssert.h"
 
-@implementation UMQueue
+@implementation UMQueueSingle
 
-- (UMQueue *)init
+- (UMQueueSingle *)init
 {
     self=[super init];
     if(self)
@@ -21,7 +22,7 @@
     return self;
 }
 
-- (UMQueue *)initWithoutLock
+- (UMQueueSingle *)initWithoutLock
 {
     self=[super init];
     if(self)
@@ -35,6 +36,7 @@
 
 - (void)append:(id)obj
 {
+    UMAssert(_queue!=NULL,@"Queue is not set");
     if(obj)
     {
         [_lock lock];

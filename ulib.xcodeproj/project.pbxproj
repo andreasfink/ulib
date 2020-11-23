@@ -5981,6 +5981,7 @@
 				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/";
 				USER_HEADER_SEARCH_PATHS = "";
 				USE_HEADERMAP = YES;
+				WARNING_CFLAGS = "-Wimplicit-fallthrough=3";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -6050,6 +6051,7 @@
 				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/";
 				USER_HEADER_SEARCH_PATHS = "";
 				USE_HEADERMAP = YES;
+				WARNING_CFLAGS = "-Wimplicit-fallthrough=3";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;

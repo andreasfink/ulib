@@ -6,11 +6,11 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import "UMTask.h"
+#import "UMTaskQueueTask.h"
 
 @class UMHTTPConnection;
 
-@interface UMHTTPTask_ReadRequest : UMTask
+@interface UMHTTPTask_ReadRequest : UMTaskQueueTask
 {
     UMHTTPConnection *con;
 }

@@ -19,24 +19,24 @@
 
  To have a proper task queue to throw work objects to it you should use UMTaskQueue
  which instantiates a certain amount of UMBackgrounderWithQueueObject attached
- to a single queue which you then can stuff UMTask objects into to get executed.
+ to a single queue which you then can stuff UMTaskQueueTask objects into to get executed.
 
 */
 
-@class UMQueue;
+@class UMQueueSingle;
 @class UMSleeper;
 
 @interface UMBackgrounderWithQueue : UMBackgrounder
 {
-    UMQueue *_queue;
+    UMQueueSingle *_queue;
     BOOL    _sharedQueue;
 }
 
-@property(strong)     UMQueue   *queue;
+@property(strong)     UMQueueSingle   *queue;
 @property(assign)     BOOL      sharedQueue;
 
 - (UMBackgrounderWithQueue *)initWithName:(NSString *)n;
-- (UMBackgrounderWithQueue *)initWithSharedQueue:(UMQueue *)queue
+- (UMBackgrounderWithQueue *)initWithSharedQueue:(UMQueueSingle *)queue
                                             name:(NSString *)name
                                      workSleeper:(UMSleeper *)ws;
 

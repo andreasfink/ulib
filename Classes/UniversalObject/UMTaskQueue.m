@@ -8,9 +8,9 @@
 
 #import "UMTaskQueue.h"
 #import "UMBackgrounderWithQueue.h"
-#import "UMQueue.h"
+#import "UMQueueSingle.h"
 #import "UMSleeper.h"
-#import "UMTask.h"
+#import "UMTaskQueueTask.h"
 #import "UMFileTrackingMacros.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
@@ -32,7 +32,7 @@
     {
         _name = n;
         _enableLogging = enableLog;
-        _mainQueue = [[UMQueue alloc]init];
+        _mainQueue = [[UMQueueSingle alloc]init];
         _workerThreads = [[NSMutableArray alloc]init];
         int i;
         _workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
@@ -50,7 +50,7 @@
     return self;
 }
 
-- (void)queueTask:(UMTask *)task
+- (void)queueTask:(UMTaskQueueTask *)task
 {
     @autoreleasepool
     {

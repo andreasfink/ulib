@@ -7,8 +7,8 @@
 //
 
 #import "UMBackgrounderWithQueues.h"
-#import "UMQueue.h"
-#import "UMTask.h"
+#import "UMQueueSingle.h"
+#import "UMTaskQueueTask.h"
 #import "UMSleeper.h"
 #import "UMThreadHelpers.h"
 #import "UMQueueMulti.h"
@@ -44,7 +44,7 @@
 
     @autoreleasepool
     {
-        UMTask *task = [_multiQueue getFirst];
+        UMTaskQueueTask *task = [_multiQueue getFirst];
         if(task)
         {
             ulib_set_thread_name(task.name);

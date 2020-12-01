@@ -21,7 +21,7 @@
 @interface UMBackgrounderWithQueues : UMBackgrounderWithQueue
 
 {
-    UMQueueMulti *_multiQueue; /* array of UMQueue object sorted by priority */
+    UMQueueMulti *_multiQueue; /* array of UMQueueSingle object sorted by priority */
     NSString     *_lastTask;
 }
 

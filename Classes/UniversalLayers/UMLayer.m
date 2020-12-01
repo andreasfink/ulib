@@ -7,7 +7,7 @@
 #import "UMLayer.h"
 
 #import "UMThroughputCounter.h"
-#import "UMTask.h"
+#import "UMTaskQueueTask.h"
 #import "UMTaskQueue.h"
 #import "UMTaskQueueMulti.h"
 #import "UMAssert.h"

@@ -7,7 +7,7 @@
 //
 
 #include "UMObject.h"
-#include "UMTask.h"
+#include "UMTaskQueueTask.h"
 
 @class UMHTTPClient;
 
@@ -16,7 +16,7 @@
 - (void) urlLoadCompletedForReference:(id)ref data:(NSData *)data status:(NSInteger)statusCode;
 @end
     
-@interface UMHTTPClientRequest : UMTask
+@interface UMHTTPClientRequest : UMTaskQueueTask
 {
     NSURLRequest *theRequest;
     NSString *urlString;

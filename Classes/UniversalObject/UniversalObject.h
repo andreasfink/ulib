@@ -30,7 +30,7 @@
 #import "UMBackgrounderWithQueue.h"
 #import "UMTaskQueue.h"
 #import "UMTaskQueueMulti.h"
-#import "UMTask.h"
+#import "UMTaskQueueTask.h"
 #import "UMFileTracker.h"
 #import "UMSynchronizedDictionary.h"
 #import "UMSynchronizedSortedDictionary.h"

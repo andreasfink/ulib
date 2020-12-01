@@ -7,25 +7,30 @@
 //
 
 #import "UMBackgrounderWithQueue.h"
-#import "UMQueue.h"
-#import "UMTask.h"
+#import "UMQueueSingle.h"
+#import "UMTaskQueueTask.h"
 #import "UMSleeper.h"
 #import "UMThreadHelpers.h"
 
 @implementation UMBackgrounderWithQueue
+
+- (UMBackgrounder *)init
+{
+    return [self initWithName:@"(unnamed)"];
+}
 
 - (UMBackgrounderWithQueue *)initWithName:(NSString *)n
 {
     self = [super initWithName:n workSleeper:NULL];
     if(self)
     {
-        _queue = [[UMQueue alloc]init];
+        _queue = [[UMQueueSingle alloc]init];
         _sharedQueue = NO;
     }
     return self;
 }
 
-- (UMBackgrounderWithQueue *)initWithSharedQueue:(UMQueue *)q
+- (UMBackgrounderWithQueue *)initWithSharedQueue:(UMQueueSingle *)q
                                             name:(NSString *)n
                                      workSleeper:(UMSleeper *)ws
 {
@@ -52,7 +57,7 @@
 {
     @autoreleasepool
     {
-        UMTask *task = [_queue getFirst];
+        UMTaskQueueTask *task = [_queue getFirst];
         if(task)
         {
             if(_enableLogging)

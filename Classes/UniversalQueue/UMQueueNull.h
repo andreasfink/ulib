@@ -6,14 +6,14 @@
 //
 //
 
-#import "UMQueue.h"
+#import "UMQueueSingle.h"
 
 /*!
  @class UMQueueNull
- @brief A UMQueueNull is a variant of UMQueue where everything is discarded.
+ @brief A UMQueueNull is a variant of UMQueueSingle where everything is discarded.
  Useful if you need to pass a queue but you dont really need the output.
  */
 
-@interface UMQueueNull : UMQueue
+@interface UMQueueNull : UMQueueSingle
 
 @end

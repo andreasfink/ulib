@@ -7,7 +7,7 @@
 //
 
 #import "TestUMQueue.h"
-#import "UMQueue.h"
+#import "UMSingleQueue.h"
 
 @implementation TestUMQueue
 
@@ -26,7 +26,7 @@
 {
      @autoreleasepool
     {
-        UMQueue *queue = [[UMQueue alloc] init];
+        UMQueueSingle *queue = [[UMQueueSingle alloc] init];
         [queue append:@"first"];
         [queue append:@"second"];
         [queue append:@"third"];

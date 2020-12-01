@@ -14,13 +14,13 @@
  @class UMTaskQueueMulti
  @brief UMTaskQueueMulti is an object to deal with background queues
  It holds a bunch of UMBackgrounderWithQueue objecs which share a
- common queue where you can stuff UMTask objects into. In comparison to UMTaskQueue
+ common queue where you can stuff UMTaskQueueTask objects into. In comparison to UMTaskQueue
  a UMTaskQueueMulti has multiple priority queues instead of only one queue.
 
  */
 
 @class UMBackgrounderWithQueue;
-@class UMTask;
+@class UMTaskQueueTask;
 @class UMSleeper;
 @class UMThroughputCounter;
 @interface UMTaskQueueMulti : UMObject
@@ -68,8 +68,8 @@
                                         debug:(BOOL)xdebug
                                     hardLimit:(NSUInteger)hardLimit;
 
-- (void)queueTask:(UMTask *)task toQueueNumber:(int)nr;
-- (void)queueArrayOfTasks:(NSArray<UMTask *>*)tasks toQueueNumber:(int)nr;
+- (void)queueTask:(UMTaskQueueTask *)task toQueueNumber:(int)nr;
+- (void)queueArrayOfTasks:(NSArray<UMTaskQueueTask *>*)tasks toQueueNumber:(int)nr;
 
 - (void)start;
 - (void)shutdown;

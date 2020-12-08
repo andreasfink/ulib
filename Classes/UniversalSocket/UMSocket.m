@@ -25,7 +25,7 @@
 #import "NSString+UMSocket.h"
 #import "UMSocketDefs.h"
 #import "UMPacket.h"
-
+#import "UMHistoryLog.h"
 #import "UMUtil.h" /* for UMBacktrace */
 
 #if defined(HAVE_OPENSSL)

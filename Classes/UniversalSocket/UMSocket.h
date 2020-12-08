@@ -21,6 +21,7 @@
 
 
 @class UMHost;
+@class UMHistoryLog;
 
 typedef enum SocketBlockingMode
 {
@@ -92,6 +93,7 @@ typedef enum SocketBlockingMode
     int                 _configuredMaxSegmentSize;
     int                 _activeMaxSegmentSize;
     id __weak           _customUser; /* a user can use this field as a reference to its user */
+    UMHistoryLog         *_historyLog;
 }
 
 @property(readwrite,strong,atomic)  NSString    *socketName;
@@ -142,6 +144,7 @@ typedef enum SocketBlockingMode
 @property(readwrite,assign,atomic)  int                configuredMaxSegmentSize;
 @property(readwrite,assign,atomic)  int                activeMaxSegmentSize;
 @property (weak) id customUser;
+@property(readwrite,strong,atomic) UMHistoryLog         *historyLog;
 
 
 

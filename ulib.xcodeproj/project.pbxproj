@@ -21806,7 +21806,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.14.0;
+				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -21852,7 +21852,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.14.0;
+				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -21894,7 +21894,7 @@
 					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1g/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.14.0;
+				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -21934,7 +21934,7 @@
 					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1g/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.14.0;
+				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -21975,7 +21975,7 @@
 					"$(inherited)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.14.0;
+				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -22018,7 +22018,7 @@
 					"$(inherited)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.14.0;
+				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -22499,7 +22499,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.14.0;
+				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -22545,7 +22545,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.14.0;
+				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";

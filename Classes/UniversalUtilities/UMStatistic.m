@@ -26,7 +26,8 @@
         _dirty = YES;
         _entries = [[UMSynchronizedSortedDictionary alloc]init];
         _main_entry = [[UMStatisticEntry alloc]init];
-        _lock = [[UMMutex alloc]init];
+        _lock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"stat<%@>",name]];
+
     }
     return self;
 }

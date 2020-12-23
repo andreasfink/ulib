@@ -42,4 +42,11 @@
     }
     return out;
 }
+
+- (NSString *)stringValue
+{
+    return [[NSString alloc]initWithData:self encoding:NSUTF8StringEncoding];
+}
+
+
 @end

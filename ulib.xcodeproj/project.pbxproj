@@ -904,6 +904,14 @@
 		A62A7E3418AAD6AD00EA8A2A /* UMHTTPPageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A7E2F18AAD6AD00EA8A2A /* UMHTTPPageCache.m */; };
 		A62DC22F1FD08593001ACCC7 /* UMQueueMulti.h in Headers */ = {isa = PBXBuildFile; fileRef = A62DC22D1FD08593001ACCC7 /* UMQueueMulti.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A62DC2301FD08593001ACCC7 /* UMQueueMulti.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DC22E1FD08593001ACCC7 /* UMQueueMulti.m */; };
+		A6343090259C9A56006E3F2E /* UMHTTP2Session.h in Headers */ = {isa = PBXBuildFile; fileRef = A634308E259C9A55006E3F2E /* UMHTTP2Session.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6343091259C9A56006E3F2E /* UMHTTP2Session.m in Sources */ = {isa = PBXBuildFile; fileRef = A634308F259C9A56006E3F2E /* UMHTTP2Session.m */; };
+		A63430AC259CB20A006E3F2E /* UMHTTP2Connection.h in Headers */ = {isa = PBXBuildFile; fileRef = A63430AA259CB20A006E3F2E /* UMHTTP2Connection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A63430AD259CB20A006E3F2E /* UMHTTP2Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = A63430AB259CB20A006E3F2E /* UMHTTP2Connection.m */; };
+		A63430C8259CB22B006E3F2E /* UMHTTP2Server.h in Headers */ = {isa = PBXBuildFile; fileRef = A63430C6259CB22B006E3F2E /* UMHTTP2Server.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A63430C9259CB22B006E3F2E /* UMHTTP2Server.m in Sources */ = {isa = PBXBuildFile; fileRef = A63430C7259CB22B006E3F2E /* UMHTTP2Server.m */; };
+		A63430DC259CBDAF006E3F2E /* UMHTTP2Frame.h in Headers */ = {isa = PBXBuildFile; fileRef = A63430DA259CBDAF006E3F2E /* UMHTTP2Frame.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A63430DD259CBDAF006E3F2E /* UMHTTP2Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = A63430DB259CBDAF006E3F2E /* UMHTTP2Frame.m */; };
 		A63F22A41FB725010048B329 /* UMMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = A63F22A21FB725010048B329 /* UMMutex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A63F22A51FB725010048B329 /* UMMutex.m in Sources */ = {isa = PBXBuildFile; fileRef = A63F22A31FB725010048B329 /* UMMutex.m */; };
 		A63F22A61FB7272F0048B329 /* UMMutex.m in Sources */ = {isa = PBXBuildFile; fileRef = A63F22A31FB725010048B329 /* UMMutex.m */; };
@@ -10117,6 +10125,14 @@
 		A62DC22D1FD08593001ACCC7 /* UMQueueMulti.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMQueueMulti.h; sourceTree = "<group>"; };
 		A62DC22E1FD08593001ACCC7 /* UMQueueMulti.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMQueueMulti.m; sourceTree = "<group>"; };
 		A6327C6D19ED2C6C0090FC94 /* UMBackgrounder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBackgrounder.m; sourceTree = "<group>"; };
+		A634308E259C9A55006E3F2E /* UMHTTP2Session.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMHTTP2Session.h; sourceTree = "<group>"; };
+		A634308F259C9A56006E3F2E /* UMHTTP2Session.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMHTTP2Session.m; sourceTree = "<group>"; };
+		A63430AA259CB20A006E3F2E /* UMHTTP2Connection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMHTTP2Connection.h; sourceTree = "<group>"; };
+		A63430AB259CB20A006E3F2E /* UMHTTP2Connection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMHTTP2Connection.m; sourceTree = "<group>"; };
+		A63430C6259CB22B006E3F2E /* UMHTTP2Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMHTTP2Server.h; sourceTree = "<group>"; };
+		A63430C7259CB22B006E3F2E /* UMHTTP2Server.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMHTTP2Server.m; sourceTree = "<group>"; };
+		A63430DA259CBDAF006E3F2E /* UMHTTP2Frame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMHTTP2Frame.h; sourceTree = "<group>"; };
+		A63430DB259CBDAF006E3F2E /* UMHTTP2Frame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMHTTP2Frame.m; sourceTree = "<group>"; };
 		A637FF9D1DBEC33B000A6A21 /* ulib-ios-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ulib-ios-info.plist"; sourceTree = "<group>"; };
 		A637FF9E1DBEC33B000A6A21 /* ulib-macos-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ulib-macos-info.plist"; sourceTree = "<group>"; };
 		A637FFA01DBEC33B000A6A21 /* ulib-tvos-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ulib-tvos-info.plist"; sourceTree = "<group>"; };
@@ -19475,6 +19491,14 @@
 				A6DC79271DE5766F003BBA67 /* UMHTTPClient.m */,
 				A6DC792A1DE576D5003BBA67 /* UMHTTPClientRequest.h */,
 				A6DC792B1DE576D5003BBA67 /* UMHTTPClientRequest.m */,
+				A634308E259C9A55006E3F2E /* UMHTTP2Session.h */,
+				A634308F259C9A56006E3F2E /* UMHTTP2Session.m */,
+				A63430AA259CB20A006E3F2E /* UMHTTP2Connection.h */,
+				A63430AB259CB20A006E3F2E /* UMHTTP2Connection.m */,
+				A63430C6259CB22B006E3F2E /* UMHTTP2Server.h */,
+				A63430C7259CB22B006E3F2E /* UMHTTP2Server.m */,
+				A63430DA259CBDAF006E3F2E /* UMHTTP2Frame.h */,
+				A63430DB259CBDAF006E3F2E /* UMHTTP2Frame.m */,
 			);
 			path = UniversalHTTP;
 			sourceTree = "<group>";
@@ -19878,8 +19902,10 @@
 				A6BA42B31FC813540099A441 /* UMPool.h in Headers */,
 				A62DC22F1FD08593001ACCC7 /* UMQueueMulti.h in Headers */,
 				A60C4D371EF7FE59007C203A /* UniversalHTTP.h in Headers */,
+				A63430DC259CBDAF006E3F2E /* UMHTTP2Frame.h in Headers */,
 				A6BEA6FB1EF95093007C203A /* UMHTTPSServer.h in Headers */,
 				A60C4D3D1EF7FE59007C203A /* UMSynchronizedDictionary.h in Headers */,
+				A63430AC259CB20A006E3F2E /* UMHTTP2Connection.h in Headers */,
 				A60C4D3F1EF7FE59007C203A /* UniversalLayers.h in Headers */,
 				A60C4D401EF7FE59007C203A /* NSString+UMHTTP.h in Headers */,
 				A60C4D411EF7FE59007C203A /* UMHTTPConnection.h in Headers */,
@@ -19930,6 +19956,7 @@
 				A60C4D8D1EF7FE59007C203A /* UMJsonWriter.h in Headers */,
 				A60C4D8E1EF7FE59007C203A /* UMScannerChar.h in Headers */,
 				A60C4D921EF7FE59007C203A /* UMRegexMatch.h in Headers */,
+				A6343090259C9A56006E3F2E /* UMHTTP2Session.h in Headers */,
 				A60C4D931EF7FE59007C203A /* UMTimerBackgrounder.h in Headers */,
 				A6F1C60A247BCCB400FE7402 /* UMCountryDigitTree.h in Headers */,
 				A611796923EEE00A008FAF41 /* UMHTTPWebSocketDelegateProtocol.h in Headers */,
@@ -19959,6 +19986,7 @@
 				A60C4DB21EF7FE59007C203A /* UMUUID.h in Headers */,
 				A607CE071F2A9A55006A832B /* UMPrivateKey.h in Headers */,
 				A60C4DB61EF7FE59007C203A /* NSArray+HierarchicalDescription.h in Headers */,
+				A63430C8259CB22B006E3F2E /* UMHTTP2Server.h in Headers */,
 				A60C4DB71EF7FE59007C203A /* UMDateWithHistory.h in Headers */,
 				A60C4DB81EF7FE59007C203A /* UMBackgrounderWithQueues.h in Headers */,
 				A60C4DBA1EF7FE59007C203A /* NSDictionary+HierarchicalDescription.h in Headers */,
@@ -20936,6 +20964,7 @@
 				A607CE041F2A9A46006A832B /* UMPublicKey.m in Sources */,
 				A607CE0C1F2A9A60006A832B /* UMKeypair.m in Sources */,
 				A60C4C9A1EF7FE59007C203A /* UMHistoryLogEntry.m in Sources */,
+				A63430DD259CBDAF006E3F2E /* UMHTTP2Frame.m in Sources */,
 				A60C4C9C1EF7FE59007C203A /* UMScanner.m in Sources */,
 				A60C4C9D1EF7FE59007C203A /* UMBackgrounderWithQueue.m in Sources */,
 				A60C4C9E1EF7FE59007C203A /* UMStringWithHistory.m in Sources */,
@@ -21004,6 +21033,7 @@
 				A60C4CCD1EF7FE59007C203A /* UMHTTPPageHandler.m in Sources */,
 				A60C4CCE1EF7FE59007C203A /* UMHTTPRequest.m in Sources */,
 				A60C4CCF1EF7FE59007C203A /* UMHTTPServer.m in Sources */,
+				A63430AD259CB20A006E3F2E /* UMHTTP2Connection.m in Sources */,
 				A60C4CD01EF7FE59007C203A /* UMRedisStatus.m in Sources */,
 				A60C4CD11EF7FE59007C203A /* UMAverageDelay.m in Sources */,
 				A60C4CD21EF7FE59007C203A /* UMHTTPURLHandler.m in Sources */,
@@ -21019,6 +21049,7 @@
 				A6F1C607247BC56C00FE7402 /* UMDigitTreeEntry.m in Sources */,
 				A60C4CD91EF7FE59007C203A /* UMConfigGroup.m in Sources */,
 				A60C4CDA1EF7FE59007C203A /* UMScannerChar.m in Sources */,
+				A63430C9259CB22B006E3F2E /* UMHTTP2Server.m in Sources */,
 				A60C4CDB1EF7FE59007C203A /* UMTokenizer.m in Sources */,
 				A60C4CDC1EF7FE59007C203A /* UMConfigParsedLine.m in Sources */,
 				A60C4CDD1EF7FE59007C203A /* NSMutableArray+UMHTTP.m in Sources */,
@@ -21028,6 +21059,7 @@
 				A60C4CE01EF7FE59007C203A /* UMHTTPPageCache.m in Sources */,
 				A60C4CE11EF7FE59007C203A /* NSMutableData+UMHTTP.m in Sources */,
 				A60C4CE21EF7FE59007C203A /* NSDictionary+UMHTTP.m in Sources */,
+				A6343091259C9A56006E3F2E /* UMHTTP2Session.m in Sources */,
 				A60C4CE31EF7FE59007C203A /* NSData+UMLog.m in Sources */,
 				A63F22B31FB72DEB0048B329 /* UMAtomicDate.m in Sources */,
 				A60C4CE41EF7FE59007C203A /* UMSSLCertificate.m in Sources */,

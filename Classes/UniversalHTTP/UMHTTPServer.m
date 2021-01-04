@@ -250,19 +250,17 @@
                     UMSocket *clientSocket = [_listenerSocket accept:&ret1];
                     if(clientSocket)
                     {
-                        clientSocket.useSSL=_enableSSL;
+                        clientSocket.useSSL =_enableSSL;
                         clientSocket.serverSideKeyFilename  = _privateKeyFile;
                         clientSocket.serverSideKeyData      = _privateKeyFileData;
                         clientSocket.serverSideCertFilename = _certFile;
                         clientSocket.serverSideCertData     = _certFileData;
                         if ([self authorizeConnection:clientSocket] == UMHTTPServerAuthorize_successful)
                         {
-                            
                             UMHTTPConnection *con = [[UMHTTPConnection alloc] initWithSocket:clientSocket server:self];
                             con.name = [NSString stringWithFormat:@"HTTPConnection %@:%d",clientSocket.connectedRemoteAddress,clientSocket.connectedRemotePort];
                             con.enableKeepalive = _enableKeepalive;
                             con.server = self;
-
                             [_connections addObject:con];
                             //if(0)
                             //{

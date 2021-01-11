@@ -55,6 +55,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 {
     [_allowedSingleGroupNames setObject:@"allowed" forKey:n];
 }
+
 - (void)disallowSingleGroup:(NSString *)n
 {
     [_allowedSingleGroupNames removeObjectForKey:n];
@@ -428,4 +429,13 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
     return [_multiGroups objectForKey:n];
 }
 
++ (NSString *)environmentFilter:(NSString *)str
+{
+    NSRange r = [str rangeOfString:@"$"];
+    if(r.location == NSNotFound)
+    {
+        return str;
+    }
+    
+}
 @end

@@ -436,6 +436,6 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
     {
         return str;
     }
-    
+    return str;
 }
 @end

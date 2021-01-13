@@ -18,9 +18,16 @@
     NSString            *_name;
     const char          *_objectStatisticsName;
     BOOL                _savedInObjectStat;
+    const char          *_lockedInFile;
+    long                 _lockedAtLine;
+    const char          *_lockedInFunction;
 }
 
-@property(readwrite,strong) NSString *name;
+@property(readwrite,strong) NSString        *name;
+@property(readwrite,assign) const char      *lockedInFile;
+@property(readwrite,assign) long            lockedAtLine;
+@property(readwrite,assign) const char      *lockedInFunction;
+
 - (void)lock;
 - (void)unlock;
 - (int)tryLock;
@@ -53,3 +60,17 @@ BOOL ummutex_stat_is_enabled(void);
 NSArray *ummutex_stat(BOOL sortByName);
 int ummutex_stat_enable(void);
 void ummutex_stat_disable(void);
+
+#define UMMUTEX_LOCK(a)  \
+{ \
+    [a lock]; \
+    a.lockedInFile = __FILE__;  \
+    a.lockedAtLine = __LINE__;   \
+    a.lockedInFunction =  __func__;  \
+}
+
+#define UMMUTEX_UNLOCK(a) \
+{  \
+    [a unlock];  \
+    a.lockedInFunction =  NULL; \
+}

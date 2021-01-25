@@ -25,7 +25,7 @@
     return [self initWithNumberOfThreads:ulib_cpu_count() * 2 name:@"UMBackgroundQueue" enableLogging:NO];
 }
 
-- (UMTaskQueue *)initWithNumberOfThreads:(int)workerThreadCount name:(NSString *)n enableLogging:(BOOL)enableLog
+- (UMTaskQueue *)initWithNumberOfThreads:(NSUInteger)workerThreadCount name:(NSString *)n enableLogging:(BOOL)enableLog
 {
     self = [super init];
     if(self)

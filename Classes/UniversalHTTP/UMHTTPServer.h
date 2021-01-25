@@ -158,6 +158,7 @@ typedef enum UMHTTPServerStatus
     UMMutex *_connectionsLock;
     NSString    *_documentRoot;
 
+    NSUInteger   _processingThreadCount;
 }
 
 @property(readwrite,strong)		        NSString *serverName;
@@ -192,8 +193,11 @@ typedef enum UMHTTPServerStatus
 
 @property(readonly)				UMSocket	*listenerSocket;
 @property(readwrite,assign)     BOOL    enableSSL;
-@property(readwrite,strong,atomic)     UMTaskQueue *taskQueue;
+@property(readwrite,strong,atomic)      UMTaskQueue *taskQueue;
 @property(readwrite,strong,atomic)      UMSynchronizedArray *pendingRequests;
+
+@property(readwrite,assign,atomic)      NSUInteger   processingThreadCount;
+
 
 - (id)init;
 - (id)initWithPort:(in_port_t) port;

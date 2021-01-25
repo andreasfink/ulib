@@ -36,7 +36,7 @@
 @property (assign) BOOL         enableLogging;
 
 - (UMTaskQueue *)init;
-- (UMTaskQueue *)initWithNumberOfThreads:(int)workerThreadCount name:(NSString *)n enableLogging:(BOOL)enableLog;
+- (UMTaskQueue *)initWithNumberOfThreads:(NSUInteger)workerThreadCount name:(NSString *)n enableLogging:(BOOL)enableLog;
 - (void)queueTask:(UMTaskQueueTask *)task;
 
 - (void)start;

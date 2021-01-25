@@ -52,7 +52,13 @@
 {
     self = [super init];
     if(self)
-    {	
+    {
+        _processingThreadCount = ulib_cpu_count();
+        if(_processingThreadCount > 8)
+        {
+            _processingThreadCount = 8;
+        }
+
         _getPostDict = [[NSMutableDictionary alloc]init];
         _httpOperationsQueue = [NSOperationQueue mainQueue]; // [[NSOperationQueue alloc] init];
         _listenerSocket = [[UMSocket alloc] initWithType:type name:@"listener"];
@@ -85,12 +91,7 @@
             {
                 tqname = @"HTTP_TaskQueue";
             }
-            NSUInteger webThreadsCount=ulib_cpu_count();
-            if(webThreadsCount > 16)
-            {
-                webThreadsCount = 16;
-            }
-            _taskQueue = [[UMTaskQueue alloc]initWithNumberOfThreads:webThreadsCount name:tqname enableLogging:NO];
+            _taskQueue = [[UMTaskQueue alloc]initWithNumberOfThreads:_processingThreadCount name:tqname enableLogging:NO];
             [_taskQueue start];
         }
         if(doSSL)

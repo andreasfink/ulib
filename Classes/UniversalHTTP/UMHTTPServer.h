@@ -186,17 +186,15 @@ typedef enum UMHTTPServerStatus
 @property(readwrite, strong)	id	<UMHTTPServerHttpGetPostDelegate>	httpGetPostDelegate;
 @property(readwrite, strong)    id  <UMHTTPWebSocketDelegateProtocol>   httpWebSocketDelegate;
 
-@property(readwrite, strong)    NSString *name;
-@property(readwrite, strong)    NSString *advertizeName;
-@property(readwrite, strong)    NSString *documentRoot;
+@property(readwrite, strong)            NSString            *name;
+@property(readwrite, strong)            NSString            *advertizeName;
+@property(readwrite, strong)            NSString            *documentRoot;
 
-
-@property(readonly)				UMSocket	*listenerSocket;
-@property(readwrite,assign)     BOOL    enableSSL;
-@property(readwrite,strong,atomic)      UMTaskQueue *taskQueue;
+@property(readonly)				        UMSocket	        *listenerSocket;
+@property(readwrite,assign)             BOOL                enableSSL;
+@property(readwrite,strong,atomic)      UMTaskQueue         *taskQueue;
 @property(readwrite,strong,atomic)      UMSynchronizedArray *pendingRequests;
-
-@property(readwrite,assign,atomic)      NSUInteger   processingThreadCount;
+@property(readwrite,assign,atomic)      NSUInteger          processingThreadCount;
 
 
 - (id)init;

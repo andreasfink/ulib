@@ -85,7 +85,12 @@
             {
                 tqname = @"HTTP_TaskQueue";
             }
-            _taskQueue = [[UMTaskQueue alloc]initWithNumberOfThreads:ulib_cpu_count() name:tqname enableLogging:NO];
+            NSUInteger webThreadsCount=ulib_cpu_count();
+            if(webThreadsCount > 16)
+            {
+                webThreadsCount = 16;
+            }
+            _taskQueue = [[UMTaskQueue alloc]initWithNumberOfThreads:webThreadsCount name:tqname enableLogging:NO];
             [_taskQueue start];
         }
         if(doSSL)

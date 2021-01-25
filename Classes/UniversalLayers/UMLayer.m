@@ -219,7 +219,7 @@
             [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ ENFILE: The system file table is full.",location]];
             break;
 #endif
-#if defined(EMFILE)
+#if defined(EBADF)
         case EBADF:
             [self.logFeed majorErrorText:[NSString stringWithFormat:@"%@ EBADF: An invalid descriptor was specified",location]];
             break;

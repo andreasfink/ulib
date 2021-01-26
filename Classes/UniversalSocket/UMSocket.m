@@ -2549,6 +2549,8 @@ static int SSL_smart_shutdown(SSL *ssl)
             return @"socket is already connected";
         case UMSocketError_file_descriptor_not_open:
             return @"file descriptor is not open";
+        case UMSocketError_protocol_violation:
+            return @"protocol violation";
         case UMSocketError_not_known:
             return @"not known";
         default:

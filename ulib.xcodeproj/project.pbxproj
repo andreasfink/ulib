@@ -20503,7 +20503,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Andreas Fink (andreas@fink.org)";
 				TargetAttributes = {
 					A60210041D488A2F00211137 = {
@@ -22336,6 +22336,7 @@
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1i-binary/usr/local/include/";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				USER_HEADER_SEARCH_PATHS = "";
 				USE_HEADERMAP = YES;
 				WARNING_CFLAGS = "-Wimplicit-fallthrough";
@@ -22411,6 +22412,7 @@
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1i-binary/usr/local/include/";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				USER_HEADER_SEARCH_PATHS = "";
 				USE_HEADERMAP = YES;
 				WARNING_CFLAGS = "-Wimplicit-fallthrough";
@@ -22540,6 +22542,7 @@
 				SUPPORTED_PLATFORMS = "watchsimulator watchos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -22586,6 +22589,7 @@
 				SUPPORTED_PLATFORMS = "watchsimulator watchos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;

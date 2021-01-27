@@ -2101,20 +2101,24 @@ static int SSL_smart_shutdown(SSL *ssl)
             wantReadBytes = UMBLOCK_READ_SIZE;
         }
 
+        eno = 0;
         actualReadBytes = [cryptoStream readBytes:chunk
                                            length:wantReadBytes
                                         errorCode:&eno];
-        
+        totalReadBytes += actualReadBytes;
         if(actualReadBytes == 0) /* SIGHUP */
         {
             if(totalReadBytes==0)
             {
-                e = UMSocketError_connection_reset;
+                e = UMSocketError_try_again;
+                if(eno)
+                {
+                    e = [UMSocket umerrFromErrno:eno];
+                }
             }
             else
             {
                 e = UMSocketError_has_data_and_hup;
-
             }
             break;
         }

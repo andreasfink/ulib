@@ -2102,8 +2102,8 @@ static int SSL_smart_shutdown(SSL *ssl)
         }
 
         actualReadBytes = [cryptoStream readBytes:chunk
-                                       length:wantReadBytes
-                                    errorCode:&eno];
+                                           length:wantReadBytes
+                                        errorCode:&eno];
         
         if(actualReadBytes == 0) /* SIGHUP */
         {

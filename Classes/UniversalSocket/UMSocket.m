@@ -3277,4 +3277,32 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     return  [UMSocket umerrFromErrno:eno];
 }
 
+- (int)configuredMaxSegmentSize
+{
+    return _configuredMaxSegmentSize;
+}
+
+- (void)setConfiguredMaxSegmentSize:(int)max
+{
+    _configuredMaxSegmentSize = max;
+    if((type == UMSOCKET_TYPE_TCP) || (type == UMSOCKET_TYPE_TCP4ONLY) || (type == UMSOCKET_TYPE_TCP6ONLY))
+    {
+        int currentActiveMaxSegmentSize = 0;
+        socklen_t tcp_maxseg_len = sizeof(currentActiveMaxSegmentSize);
+        if(getsockopt(_sock, IPPROTO_TCP, TCP_MAXSEG, &currentActiveMaxSegmentSize, &tcp_maxseg_len) == 0)
+        {
+            _activeMaxSegmentSize = currentActiveMaxSegmentSize;
+            if((_configuredMaxSegmentSize > 0) && (_configuredMaxSegmentSize < currentActiveMaxSegmentSize))
+            {
+                _activeMaxSegmentSize = _configuredMaxSegmentSize;
+                tcp_maxseg_len = sizeof(currentActiveMaxSegmentSize);
+                if(setsockopt(_sock, IPPROTO_TCP, TCP_MAXSEG, &_configuredMaxSegmentSize, tcp_maxseg_len))
+                {
+                    _activeMaxSegmentSize = _configuredMaxSegmentSize;
+                }
+            }
+        }
+    }
+}
+
 @end

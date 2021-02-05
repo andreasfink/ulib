@@ -11,6 +11,7 @@
 #import "UMTimerBackgrounder.h"
 #import "UMBackgrounder.h"
 #import "UMMutex.h"
+#import "UMUtil.h"
 
 #include <time.h>
 @implementation UMTimer
@@ -154,6 +155,20 @@
     self.isRunning = YES;
     UMMicroSec now  = [UMThroughputCounter microsecondTime];
     self.expiryTime = now + _microsecDuration;
+    if(_jitter != 0)
+    {
+        UMMicroSec variationMsec = (UMMicroSec)((double)_microsecDuration) * _jitter;
+        UMMicroSec offset;
+        if(variationMsec <= 1000000)
+        {
+            offset = (UMMicroSec)[UMUtil randomFrom:0 to:(uint32_t)variationMsec];
+        }
+        else
+        {
+            offset = (UMMicroSec)(1000000 * [UMUtil randomFrom:0 to:(uint32_t)(variationMsec/1000000)]);
+        }
+        self.expiryTime =  self.expiryTime  - offset;
+    }
     [[UMTimerBackgrounder sharedInstance]addTimer:self];
 }
 

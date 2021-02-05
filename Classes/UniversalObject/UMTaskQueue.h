@@ -26,7 +26,7 @@
 {
     BOOL            _enableLogging;
     NSString        *_name;
-    UMQueueSingle         *_mainQueue;
+    UMQueueSingle   *_mainQueue;
     UMSleeper       *_workSleeper;
     NSMutableArray  *_workerThreads; /* UMBackgrounderWithQueue objects */
 }

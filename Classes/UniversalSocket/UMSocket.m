@@ -3305,4 +3305,38 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     }
 }
 
+
+
+- (void)setReceiveBufferSize:(int)bufsize
+{
+    setsockopt(_sock, SOL_SOCKET, SO_RCVBUF, &bufsize, sizeof(bufsize));
+}
+
+- (void)setSendBufferSize:(int)bufsize
+{
+    setsockopt(_sock, SOL_SOCKET, SO_SNDBUF, &bufsize, sizeof(bufsize));
+}
+
+- (int)receiveBufferSize
+{
+    int bufsize = 0;
+    socklen_t len = sizeof(bufsize);
+    if(getsockopt(_sock, SOL_SOCKET, SO_RCVBUF, &bufsize, &len) != 0)
+    {
+        return -1;
+    }
+    return bufsize;
+}
+
+- (int)sendBufferSize
+{
+    int bufsize = 0;
+    socklen_t len = sizeof(bufsize);
+    if(getsockopt(_sock, SOL_SOCKET, SO_SNDBUF, &bufsize, &len) != 0)
+    {
+        return -1;
+    }
+    return bufsize;
+}
+
 @end

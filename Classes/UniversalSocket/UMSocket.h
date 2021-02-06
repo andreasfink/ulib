@@ -245,6 +245,10 @@ typedef enum SocketBlockingMode
 - (UMPacket *)receivePacket;
 - (UMSocketError) getSocketError;
 
+- (void)setReceiveBufferSize:(int)bufsize;
+- (void)setSendBufferSize:(int)bufsize;
+- (int)receiveBufferSize;
+- (int)sendBufferSize;
 @end
 
 

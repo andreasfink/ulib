@@ -3304,8 +3304,6 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         }
     }
 }
-<<<<<<< HEAD
-=======
 
 
 
@@ -3341,5 +3339,4 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     return bufsize;
 }
 
->>>>>>> 32d2f97f7d6964219e8abbb0a796eb2c95a1af11
 @end

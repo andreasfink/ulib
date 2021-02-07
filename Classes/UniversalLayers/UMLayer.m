@@ -507,6 +507,10 @@
     {
         _logLevel = [cfg[@"log-level"]intValue];
     }
+    else
+    {
+        _logLevel = UMLOG_MINOR;
+    }
 }
 
 - (void)dump:(NSFileHandle *)filehandler

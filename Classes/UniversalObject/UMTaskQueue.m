@@ -62,7 +62,6 @@
         [_mainQueue append:task];
         [_workSleeper wakeUp];
     }
-    
 }
 
 - (void)start

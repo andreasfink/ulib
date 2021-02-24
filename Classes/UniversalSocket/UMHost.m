@@ -69,7 +69,7 @@
 
 }
 
-- (UMHost *)  initWithLocalhostAddresses:(NSArray *)permittedAddresses
+- (UMHost *)    initWithLocalhostAddresses:(NSArray *)permittedAddresses
 {
     self = [super init];
     if(self)

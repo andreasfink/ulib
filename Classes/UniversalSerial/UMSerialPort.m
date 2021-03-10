@@ -112,7 +112,7 @@
 
 - (UMSerialPortError)open
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
 
     if(_isOpen)
     {
@@ -122,7 +122,7 @@
     if(_fd < 0)
     {
         UMSerialPortError err =  [UMSerialPort errorFromErrno:errno];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_lock);
         return err;
     }
     _isOpen = YES;
@@ -233,7 +233,7 @@
     tcflush(_fd, TCIOFLUSH);
     [self changeSpeed:_speed];
 
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
     return UMSerialPortError_no_error;
 }
 
@@ -246,7 +246,7 @@
         return;
     }
 
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     struct termios tios;
     memset(&tios,0x00,sizeof(tios));
     tcgetattr(_fd, &tios);
@@ -325,16 +325,16 @@
         NSLog(@"failed to set termios attribute(speed) on device %@",_deviceName);
     }
     tcflush(_fd, TCIOFLUSH);
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
 }
 
 - (void)close
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     close(_fd);
     _fd = -1;
     _isOpen = NO;
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
 }
 
 - (UMSerialPortError)writeData:(NSData *)data
@@ -351,9 +351,9 @@
     }
 
     const uint8_t *bytes = data.bytes;
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     ssize_t len2 = write(_fd,bytes,len);
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
 
     if(len2 < 0)
     {
@@ -384,7 +384,7 @@
     NSMutableData *data = [[NSMutableData alloc]init];
     uint8_t buffer[256];
     ssize_t r=1;
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     while(r>0)
     {
         /* we need to be in non blocking mode here */
@@ -394,7 +394,7 @@
             [data appendBytes:buffer length:r];
         }
     }
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
     if((r < 0) && (errPtr != NULL))
     {
         *errPtr = [UMSerialPort errorFromErrno:errno];
@@ -448,9 +448,9 @@
     errno = 99;
 
     
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     ret1 = poll(pollfds, 1, timeoutInMs);
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
 
     UMSerialPortError returnError = UMSerialPortError_no_error;
 

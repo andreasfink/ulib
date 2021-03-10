@@ -96,7 +96,7 @@
 
 - (NSArray *)tokensFromChars:(NSArray *)chars
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     [self reset];
     NSInteger len = chars.count;
     
@@ -137,7 +137,7 @@
     [self pushLine];
     NSArray *result = _lines;
     _lines = [[NSMutableArray alloc]init];
-    [_lock unlock];
+   UMMUTEX_UNLOCK(_lock);
     return result;
 }
 

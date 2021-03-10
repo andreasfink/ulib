@@ -139,7 +139,8 @@
 		}
 
 		[self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is starting up\r\n",_name, [_listenerSocket requestedLocalPort]]];
-		[_lock lock];
+
+        [_lock lock];
 
 		self.status = UMHTTPServerStatus_startingUp;
         [self runSelectorInBackground:@selector(mainListener)
@@ -166,8 +167,7 @@
 		    sErr = _lastErr;
 		    self.status = UMHTTPServerStatus_notRunning;
 	    }
-    
-	    [_lock unlock];
+        [_lock unlock];
     
 	    if( self.status == UMHTTPServerStatus_running)
 	    {
@@ -353,10 +353,10 @@
 {
     if(con)
     {
-        [_connectionsLock lock];
+        UMMUTEX_LOCK(_connectionsLock);
         [_connections removeObject:con];
         [_terminatedConnections addObject:con];
-        [_connectionsLock unlock];
+        UMMUTEX_UNLOCK(_connectionsLock);
     }
 }
 

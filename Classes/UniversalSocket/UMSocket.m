@@ -929,6 +929,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         int eno = errno;
 
         fprintf(stderr,"[UMSocket connect] failed with errno %d (%s)", eno, strerror(eno));
+        fflush(stderr);
         return [UMSocket umerrFromErrno:eno];
     }
     @finally

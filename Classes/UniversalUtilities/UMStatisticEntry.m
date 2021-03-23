@@ -24,7 +24,7 @@
     if(self)
     {
         _name = name;
-        _lock = [[UMMutex alloc]init];
+        _lock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"stat-entry<%@>",name]];
 
         [self updateCurrentTimeIndexes];
         memset(&_secondsData[0],0,sizeof(_secondsData));

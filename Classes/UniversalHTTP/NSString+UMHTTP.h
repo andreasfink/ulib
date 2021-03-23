@@ -15,4 +15,5 @@
 - (NSData *)urldecodeData;
 - (NSString *) urlencode;
 - (NSData *)decodeBase64;
+- (NSData *)dataValue;
 @end

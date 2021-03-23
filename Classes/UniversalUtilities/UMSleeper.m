@@ -49,6 +49,11 @@ static void socket_set_blocking(int fd, int blocking)
         _ifunction = function;
         _prepareLock = [[UMMutex alloc]initWithName:@"sleeper-mutex"];
     }
+//#define SLEEEPER_INIT_DEBUG 1
+#ifdef SLEEEPER_INIT_DEBUG
+    fprintf(stdout,"sleeper init: %s:%ld\r\n",file,line);
+    fflush(stdout);
+#endif
     return self;
 }
 

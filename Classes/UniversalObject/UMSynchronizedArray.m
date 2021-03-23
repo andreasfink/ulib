@@ -67,6 +67,15 @@
     [_mutex unlock];
 }
 
+
+- (void)addObjectUnique:(id)anObject
+{
+    [_mutex lock];
+    [_array removeObject:anObject];
+    [_array addObject:anObject];
+    [_mutex unlock];
+}
+
 - (void)addPrintableString:(NSString *)s
 {
     NSString *ps = [s printable];

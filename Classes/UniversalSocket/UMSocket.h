@@ -21,6 +21,7 @@
 
 
 @class UMHost;
+@class UMHistoryLog;
 
 typedef enum SocketBlockingMode
 {
@@ -61,7 +62,7 @@ typedef enum SocketBlockingMode
     BOOL                 _hasSocket;
 	NSString			*device;
 	int					lastPollEvent;
-	NSMutableData		*receiveBuffer;
+	NSMutableData		*_receiveBuffer;
 	int					rx_crypto_enable;
 	int					tx_crypto_enable;
 	NSString			*lastError;
@@ -92,6 +93,7 @@ typedef enum SocketBlockingMode
     int                 _configuredMaxSegmentSize;
     int                 _activeMaxSegmentSize;
     id __weak           _customUser; /* a user can use this field as a reference to its user */
+    UMHistoryLog         *_historyLog;
 }
 
 @property(readwrite,strong,atomic)  NSString    *socketName;
@@ -115,7 +117,7 @@ typedef enum SocketBlockingMode
 @property(readwrite,assign,atomic)  BOOL                isListening;
 @property(readwrite,assign,atomic)  BOOL				isConnecting;
 @property(readwrite,assign,atomic)  BOOL	            isConnected;
-@property(readwrite,strong,atomic)  NSMutableData *		receiveBuffer;
+@property(readwrite,strong,atomic)  NSMutableData *		receiveBuffer; /* use dataLock when accessing */
 @property(readwrite,strong,atomic)  NSString *          lastError;
 @property(readwrite,strong,atomic)  id					reportDelegate;
 @property(readwrite,strong,atomic)  NSString            *name;
@@ -126,6 +128,8 @@ typedef enum SocketBlockingMode
 @property(readwrite,strong,atomic)  UMCrypto            *cryptoStream;
 @property(readwrite,assign,atomic)  BOOL                useSSL;
 @property(readwrite,assign,atomic)  BOOL                sslActive;
+@property(readwrite,strong,atomic)  UMMutex             *controlLock;
+@property(readwrite,strong,atomic)  UMMutex             *dataLock;
 
 @property(readwrite,strong,atomic) NSString            *serverSideCertFilename;
 @property(readwrite,strong,atomic) NSString            *serverSideKeyFilename;
@@ -142,6 +146,7 @@ typedef enum SocketBlockingMode
 @property(readwrite,assign,atomic)  int                configuredMaxSegmentSize;
 @property(readwrite,assign,atomic)  int                activeMaxSegmentSize;
 @property (weak) id customUser;
+@property(readwrite,strong,atomic) UMHistoryLog         *historyLog;
 
 
 
@@ -238,7 +243,12 @@ typedef enum SocketBlockingMode
 - (int)bindx:(struct sockaddr *)localAddress;
 
 - (UMPacket *)receivePacket;
+- (UMSocketError) getSocketError;
 
+- (void)setReceiveBufferSize:(int)bufsize;
+- (void)setSendBufferSize:(int)bufsize;
+- (int)receiveBufferSize;
+- (int)sendBufferSize;
 @end
 
 

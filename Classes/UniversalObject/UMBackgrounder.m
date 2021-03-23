@@ -29,6 +29,10 @@
     self = [super init];
     if(self)
     {
+#if 0
+        fprintf(stdout,"backgrounder init: %s\r\n",n.UTF8String);
+        fflush(stdout);
+#endif
         if(ws==NULL)
         {
             _workSleeper = [[UMSleeper alloc]initFromFile:__FILE__
@@ -41,6 +45,7 @@
             _workSleeper = ws;
         }
         self.name = n;
+        
         _control_sleeper = [[UMSleeper alloc]initFromFile:__FILE__
                                                     line:__LINE__
                                                 function:__func__];

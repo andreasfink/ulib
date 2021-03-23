@@ -357,7 +357,7 @@ static NSNumber *kNegativeInfinity;
     {
 		return [self writeValue:[o proxyForJson]];
 	}
-	self.error = [NSString stringWithFormat:@"JSON serialisation not supported for class '%@'. implement proxyForJson class", [o className]];
+	self.error = [NSString stringWithFormat:@"JSON serialisation not supported for class '%@'. implement proxyForJson class", [[o class] description]];
 	return NO;
 }
 

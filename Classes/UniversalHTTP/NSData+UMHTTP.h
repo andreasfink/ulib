@@ -11,4 +11,6 @@
 @interface NSData (UMHTTP)
 - (NSString *)encodeBase64;
 - (NSString *)urlencode;
+- (NSString *)stringValue;
+
 @end

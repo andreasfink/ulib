@@ -26,9 +26,28 @@
 
 @implementation UMHost
 
+- (UMHost *)init
+{
+    self = [super init];
+    if(self)
+    {
+        _addresses = [[NSMutableArray alloc]init];
+        _lock = [[UMMutex alloc] initWithName:@"umhost"];
+    }
+    return self;
+}
+
 - (void) addAddress:(NSString *)a
 {
+    if(_lock == NULL)
+    {
+        _lock = [[UMMutex alloc] initWithName:@"umhost"];
+    }
     [_lock lock];
+    if(_addresses == NULL)
+    {
+        _addresses = [[NSMutableArray alloc]init];
+    }
 	[_addresses addObject:a];
     [_lock unlock];
 }
@@ -69,7 +88,7 @@
 
 }
 
-- (UMHost *)  initWithLocalhostAddresses:(NSArray *)permittedAddresses
+- (UMHost *) initWithLocalhostAddresses:(NSArray *)permittedAddresses
 {
     self = [super init];
     if(self)

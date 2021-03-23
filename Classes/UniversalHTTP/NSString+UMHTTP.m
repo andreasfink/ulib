@@ -55,6 +55,11 @@ static inline int nibbleToInt(const char a)
     return result;
 }
 
+- (NSData *)dataValue
+{
+    return [self dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+}
+
 
 - (NSData *)urldecodeData
 {

@@ -375,5 +375,66 @@ NSString *sqlEscapeNSString(NSString *input)
 }
 
 
+/* this is used to clean names. They are all returned in lowercase
+  only lowercase is allowed. Uppercase is converted
+  . is not allowed in first place
+  Allowed punctioations are - _ + , = %
+*/
+- (NSString *)filterNameWithMaxLength:(int)maxlen
+{
+    UMAssert(maxlen>0,@"maximum length must be bigger than zero");
+    UMAssert(maxlen<255,@"maximum length can not be 255 or above");
+    char out[256];
+    out[255] = '\0';
+    NSInteger i;
+    NSInteger j = 0;
+    NSInteger n = self.length;
+    if(n>maxlen)
+    {
+        n = maxlen;
+    }
+    memset(out,0x00,sizeof(out));
+    for(i=0;i<n;i++)
+    {
+        unichar c = [self characterAtIndex:i];
+        if((c>='a') && (c<='z'))
+        {
+            out[j++]=c;
+        }
+        else if((c>='A') && (c<='Z'))
+        {
+            out[j++]=c-'A'+'a';
+        }
+        else if((c>='0') && (c<='9'))
+        {
+            out[j++]=c;
+        }
+        else
+        {
+            switch(c)
+            {
+                case '.':
+                    if(i>0)
+                    {
+                        out[j++]=c;
+                    }
+                    break;
+                case '_':
+                case '-':
+                case '+':
+                case ',':
+                case '=':
+                case '%':
+                    out[j++]=c;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    NSString *result = @(out);
+    return result;
+}
+
 @end
 

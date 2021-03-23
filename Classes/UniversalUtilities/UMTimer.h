@@ -25,6 +25,7 @@
     id                  _parameter;
     UMMutex             *_timerMutex;
     BOOL                _runCallbackInForeground;
+    double              _jitter;
 }
 
 @property(readwrite,assign,atomic) BOOL                isRunning;
@@ -38,6 +39,7 @@
 @property(readwrite,strong)                            UMObject *objectToCall;
 @property(readwrite,assign,atomic) SEL                 selectorToCall;
 @property(readwrite,strong,atomic) id                  parameter;
+@property(readwrite,assign,atomic) double              jitter;
 
 - (UMTimer *)initWithTarget:(id)target
                    selector:(SEL)selector
@@ -67,6 +69,5 @@
 - (void)fire;
 - (void)setSeconds:(NSTimeInterval)sec;
 - (NSTimeInterval)seconds;
-
 
 @end

@@ -25,7 +25,7 @@
 #import "NSString+UMSocket.h"
 #import "UMSocketDefs.h"
 #import "UMPacket.h"
-
+#import "UMHistoryLog.h"
 #import "UMUtil.h" /* for UMBacktrace */
 
 #if defined(HAVE_OPENSSL)
@@ -124,7 +124,6 @@ static int SSL_smart_shutdown(SSL *ssl)
 @synthesize status;
 
 @synthesize isBound;
-@synthesize receiveBuffer;
 @synthesize lastError;
 @synthesize reportDelegate;
 @synthesize name;
@@ -413,9 +412,9 @@ static int SSL_smart_shutdown(SSL *ssl)
     NSString* l6 = [NSString localizedStringWithFormat:@"Local Port:           %d", _connectedLocalPort];
     NSString* l7 = [NSString localizedStringWithFormat:@"Remote Port:          %d", _connectedRemotePort];
     NSString* l8;
-    [_controlLock lock];
+    UMMUTEX_LOCK(_controlLock);
     l8 = [NSString localizedStringWithFormat:@"Socket:               %d", _sock];
-    [_controlLock unlock];
+    UMMUTEX_UNLOCK(_controlLock);
     return [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n",l0,l1,l2,l3,l4,l5,l6,l7,l8];
 }
 
@@ -501,7 +500,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             self.hasSocket=YES;
             cryptoStream.fileDescriptor = _sock;
         }
-        receiveBuffer = [[NSMutableData alloc] init];
+        _receiveBuffer = [[NSMutableData alloc] init];
         if(reuse)
         {
             /* see https://stackoverflow.com/questions/14388706/socket-options-so-reuseaddr-and-so-reuseport-how-do-they-differ-do-they-mean-t#14388707 */
@@ -530,7 +529,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) bind
 {
-    [_controlLock lock];
+    UMMUTEX_LOCK(_controlLock);
     @try
     {
         int eno = 0;
@@ -677,7 +676,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
     @finally
     {
-        [_controlLock unlock];
+        UMMUTEX_UNLOCK(_controlLock);
     }
 }
 
@@ -711,9 +710,9 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
     self.isListening = NO;
     
-    [_controlLock lock];
+    UMMUTEX_LOCK(_controlLock);
     err = listen(_sock,backlog);
-    [_controlLock unlock];
+    UMMUTEX_UNLOCK(_controlLock);
 
     direction = direction | UMSOCKET_DIRECTION_INBOUND;
     if(err)
@@ -806,7 +805,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) connect
 {
-    [_controlLock lock];
+    UMMUTEX_LOCK(_controlLock);
     @try
     {
         struct sockaddr_in	sa;
@@ -930,11 +929,12 @@ static int SSL_smart_shutdown(SSL *ssl)
         int eno = errno;
 
         fprintf(stderr,"[UMSocket connect] failed with errno %d (%s)", eno, strerror(eno));
+        fflush(stderr);
         return [UMSocket umerrFromErrno:eno];
     }
     @finally
     {
-        [_controlLock unlock];
+        UMMUTEX_UNLOCK(_controlLock);
     }
 }
 
@@ -1007,7 +1007,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 - (void) doInitReceiveBuffer
 {
     [_dataLock lock];
-    receiveBuffer = [[NSMutableData alloc] init];
+    _receiveBuffer = [[NSMutableData alloc] init];
     receivebufpos = 0;
     [_dataLock unlock];
 }
@@ -1017,11 +1017,11 @@ static int SSL_smart_shutdown(SSL *ssl)
     [_dataLock lock];
     long len;
 
-    if (bytes > (len = [receiveBuffer length]))
+    if (bytes > (len = [_receiveBuffer length]))
     {
         bytes = (unsigned int)len;
     }
-    [receiveBuffer replaceBytesInRange:NSMakeRange(0, bytes) withBytes:nil length:0];
+    [_receiveBuffer replaceBytesInRange:NSMakeRange(0, bytes) withBytes:nil length:0];
     receivebufpos -= bytes;
     if (receivebufpos < 0)
     {
@@ -1032,7 +1032,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocket *) accept:(UMSocketError *)ret
 {
-    [_controlLock lock];
+    UMMUTEX_LOCK(_controlLock);
     @try
     {
         int		newsock = -1;
@@ -1144,7 +1144,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
     @finally
     {
-        [_controlLock unlock];
+        UMMUTEX_UNLOCK(_controlLock);
     }
 }
 
@@ -1156,10 +1156,10 @@ static int SSL_smart_shutdown(SSL *ssl)
 
     if(_blockingMode != SocketBlockingMode_isNotBlocking)
     {
-        [_controlLock lock];
+        UMMUTEX_LOCK(_controlLock);
         flags = fcntl(_sock, F_GETFL, 0);
         err = fcntl(_sock, F_SETFL, flags  | O_NONBLOCK);
-        [_controlLock unlock];
+        UMMUTEX_UNLOCK(_controlLock);
         if(err<0)
         {
             returnValue = [UMSocket umerrFromErrno:errno];
@@ -1180,10 +1180,10 @@ static int SSL_smart_shutdown(SSL *ssl)
 
     if(_blockingMode != SocketBlockingMode_isBlocking)
     {
-        [_controlLock lock];
+        UMMUTEX_LOCK(_controlLock);
         flags = fcntl(_sock, F_GETFL, 0);
         err = fcntl(_sock, F_SETFL, flags  & ~O_NONBLOCK);
-        [_controlLock unlock];
+        UMMUTEX_UNLOCK(_controlLock);
         if(err<0)
         {
             returnValue = [UMSocket umerrFromErrno:errno];
@@ -1193,7 +1193,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             _blockingMode = SocketBlockingMode_isBlocking;
         }
     }
-    [_controlLock unlock];
+    UMMUTEX_UNLOCK(_controlLock);
     return returnValue;
 }
 
@@ -1202,7 +1202,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     UMSocketError err = UMSocketError_no_error;
     if((self.hasSocket) && (_sock >=0))
     {
-        [_controlLock lock];
+        UMMUTEX_LOCK(_controlLock);
         TRACK_FILE_CLOSE(_sock);
         int res = close(_sock);
         if (res)
@@ -1214,7 +1214,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         self.hasSocket=NO;
         status = UMSOCKET_STATUS_OFF;
         self.isConnected = NO;
-        [_controlLock unlock];
+        UMMUTEX_UNLOCK(_controlLock);
     }
     return err;
 }
@@ -1455,9 +1455,9 @@ static int SSL_smart_shutdown(SSL *ssl)
 
     errno = 99;
 
-    [_controlLock lock];
+    UMMUTEX_LOCK(_controlLock);
     ret1 = poll(pollfds, 1, timeoutInMs);
-    [_controlLock unlock];
+    UMMUTEX_UNLOCK(_controlLock);
 
     if (ret1 < 0)
     {
@@ -1690,7 +1690,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     //*toData = nil;
     int eno = 0;
 
-    if ([receiveBuffer length] == 0)
+    if ([_receiveBuffer length] == 0)
     {
         
         actualReadBytes = [cryptoStream readBytes:chunk length:sizeof(chunk) errorCode:&eno];
@@ -1711,15 +1711,15 @@ static int SSL_smart_shutdown(SSL *ssl)
         {
             return UMSocketError_no_data;
         }
-        [receiveBuffer appendBytes:chunk length:actualReadBytes];
-        if ([receiveBuffer length] == 0) 
+        [_receiveBuffer appendBytes:chunk length:actualReadBytes];
+        if ([_receiveBuffer length] == 0) 
         {
             ret = [UMSocket umerrFromErrno:eno];
             return ret;
         }
     }    
-    *toData = [receiveBuffer subdataWithRange:NSMakeRange(0, [receiveBuffer length])];
-    [receiveBuffer replaceBytesInRange:NSMakeRange(0, [receiveBuffer length]) withBytes:nil length:0];
+    *toData = [_receiveBuffer subdataWithRange:NSMakeRange(0, [_receiveBuffer length])];
+    [_receiveBuffer replaceBytesInRange:NSMakeRange(0, [_receiveBuffer length]) withBytes:nil length:0];
     receivebufpos = 0;
         
     return UMSocketError_no_error;
@@ -1917,9 +1917,9 @@ static int SSL_smart_shutdown(SSL *ssl)
     memset(&sa_remote_in6,0x00,sizeof(sa_remote_in6));
     
     len = sizeof(sa_local);
-    [_controlLock lock];
+    UMMUTEX_LOCK(_controlLock);
     getsockname(_sock, &sa_local, &len);
-    [_controlLock unlock];
+    UMMUTEX_UNLOCK(_controlLock);
 
     switch(sa_local.sa_family)
     {
@@ -2090,7 +2090,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
         NSLog(@"can not switch to non blocking mode");
     }
-    remainingBytes = max - [receiveBuffer length];
+    remainingBytes = max - [_receiveBuffer length];
     while (remainingBytes > 0)
     {
         if(remainingBytes < UMBLOCK_READ_SIZE)
@@ -2102,20 +2102,24 @@ static int SSL_smart_shutdown(SSL *ssl)
             wantReadBytes = UMBLOCK_READ_SIZE;
         }
 
+        eno = 0;
         actualReadBytes = [cryptoStream readBytes:chunk
-                                       length:wantReadBytes
-                                    errorCode:&eno];
-        
+                                           length:wantReadBytes
+                                        errorCode:&eno];
+        totalReadBytes += actualReadBytes;
         if(actualReadBytes == 0) /* SIGHUP */
         {
             if(totalReadBytes==0)
             {
-                e = UMSocketError_connection_reset;
+                e = UMSocketError_try_again;
+                if(eno)
+                {
+                    e = [UMSocket umerrFromErrno:eno];
+                }
             }
             else
             {
                 e = UMSocketError_has_data_and_hup;
-
             }
             break;
         }
@@ -2135,7 +2139,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         }
         else
         {
-            [receiveBuffer appendBytes:chunk length:actualReadBytes];
+            [_receiveBuffer appendBytes:chunk length:actualReadBytes];
             remainingBytes -= actualReadBytes;
             totalReadBytes += actualReadBytes;
             if(actualReadBytes == wantReadBytes)	/* we have read a full chunk. but there might be more. lets continue */
@@ -2215,7 +2219,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     
     *toData = nil;
 
-    pos = [receiveBuffer rangeOfData_dd:eol startingFrom:receivebufpos];
+    pos = [_receiveBuffer rangeOfData_dd:eol startingFrom:receivebufpos];
     if (pos.location == NSNotFound)
     {
         actualReadBytes = [cryptoStream readBytes:chunk
@@ -2236,8 +2240,8 @@ static int SSL_smart_shutdown(SSL *ssl)
             }
         }
         
-        [receiveBuffer appendBytes:chunk length:actualReadBytes];
-        pos = [receiveBuffer rangeOfData_dd:eol startingFrom:receivebufpos];
+        [_receiveBuffer appendBytes:chunk length:actualReadBytes];
+        pos = [_receiveBuffer rangeOfData_dd:eol startingFrom:receivebufpos];
         if (pos.location == NSNotFound)
         {
             fprintf(stderr,"we have no eol");
@@ -2245,7 +2249,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         }
     }
     
-    NSMutableData *tmp = [[receiveBuffer subdataWithRange:NSMakeRange(receivebufpos, pos.location - receivebufpos)]mutableCopy];
+    NSMutableData *tmp = [[_receiveBuffer subdataWithRange:NSMakeRange(receivebufpos, pos.location - receivebufpos)]mutableCopy];
     if([tmp length]==0)
     {
         *toData = NULL;
@@ -2279,13 +2283,13 @@ static int SSL_smart_shutdown(SSL *ssl)
     if(receivebufpos > 0)
     {
         /* remove heading */
-        [receiveBuffer replaceBytesInRange:NSMakeRange(0, receivebufpos) withBytes:nil length:0];
+        [_receiveBuffer replaceBytesInRange:NSMakeRange(0, receivebufpos) withBytes:nil length:0];
         receivebufpos = 0;
     }
 
     i = receivebufpos;
-    const unsigned char *c = receiveBuffer.bytes;
-    NSUInteger len = receiveBuffer.length;
+    const unsigned char *c = _receiveBuffer.bytes;
+    NSUInteger len = _receiveBuffer.length;
     while(i<len)
     {
         if (!isspace(c[0]))
@@ -2299,9 +2303,9 @@ static int SSL_smart_shutdown(SSL *ssl)
     size_t start = receivebufpos;
     size_t end = bytes + receivebufpos;
     int eno = 0;
-    while ([receiveBuffer length] < end)
+    while ([_receiveBuffer length] < end)
     {
-        size_t remainingSize =  end - start - [receiveBuffer length];
+        size_t remainingSize =  end - start - [_receiveBuffer length];
         if(remainingSize > sizeof(chunk))
         {
             actualReadBytes = [cryptoStream readBytes:chunk
@@ -2330,14 +2334,14 @@ static int SSL_smart_shutdown(SSL *ssl)
         }
         else
         {
-            [receiveBuffer appendBytes:&chunk[0] length:actualReadBytes];
+            [_receiveBuffer appendBytes:&chunk[0] length:actualReadBytes];
         }
     }
     
-    NSData *resultData = [receiveBuffer subdataWithRange:NSMakeRange(receivebufpos, bytes)];
+    NSData *resultData = [_receiveBuffer subdataWithRange:NSMakeRange(receivebufpos, bytes)];
     *returningData  = resultData;
     
-    [receiveBuffer replaceBytesInRange:NSMakeRange(0, end) withBytes:nil length:0];
+    [_receiveBuffer replaceBytesInRange:NSMakeRange(0, end) withBytes:nil length:0];
     receivebufpos = 0;
     return UMSocketError_no_error;
 }
@@ -2550,6 +2554,8 @@ static int SSL_smart_shutdown(SSL *ssl)
             return @"socket is already connected";
         case UMSocketError_file_descriptor_not_open:
             return @"file descriptor is not open";
+        case UMSocketError_protocol_violation:
+            return @"protocol violation";
         case UMSocketError_not_known:
             return @"not known";
         default:
@@ -2739,7 +2745,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
             {
                 *t = 0;
             }
-            return @"";
+            return addr;
         }
     }
 }
@@ -3261,6 +3267,77 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         rx.data = [NSData dataWithBytes:&buffer length:bytes_read];
     }
     return rx;
+}
+
+
+- (UMSocketError) getSocketError
+{
+    int eno = 0;
+    socklen_t len = sizeof(int);
+    getsockopt(_sock, SOL_SOCKET, SO_ERROR, &eno, &len);
+    return  [UMSocket umerrFromErrno:eno];
+}
+
+- (int)configuredMaxSegmentSize
+{
+    return _configuredMaxSegmentSize;
+}
+
+- (void)setConfiguredMaxSegmentSize:(int)max
+{
+    _configuredMaxSegmentSize = max;
+    if((type == UMSOCKET_TYPE_TCP) || (type == UMSOCKET_TYPE_TCP4ONLY) || (type == UMSOCKET_TYPE_TCP6ONLY))
+    {
+        int currentActiveMaxSegmentSize = 0;
+        socklen_t tcp_maxseg_len = sizeof(currentActiveMaxSegmentSize);
+        if(getsockopt(_sock, IPPROTO_TCP, TCP_MAXSEG, &currentActiveMaxSegmentSize, &tcp_maxseg_len) == 0)
+        {
+            _activeMaxSegmentSize = currentActiveMaxSegmentSize;
+            if((_configuredMaxSegmentSize > 0) && (_configuredMaxSegmentSize < currentActiveMaxSegmentSize))
+            {
+                _activeMaxSegmentSize = _configuredMaxSegmentSize;
+                tcp_maxseg_len = sizeof(currentActiveMaxSegmentSize);
+                if(setsockopt(_sock, IPPROTO_TCP, TCP_MAXSEG, &_configuredMaxSegmentSize, tcp_maxseg_len))
+                {
+                    _activeMaxSegmentSize = _configuredMaxSegmentSize;
+                }
+            }
+        }
+    }
+}
+
+
+
+- (void)setReceiveBufferSize:(int)bufsize
+{
+    setsockopt(_sock, SOL_SOCKET, SO_RCVBUF, &bufsize, sizeof(bufsize));
+}
+
+- (void)setSendBufferSize:(int)bufsize
+{
+    setsockopt(_sock, SOL_SOCKET, SO_SNDBUF, &bufsize, sizeof(bufsize));
+}
+
+- (int)receiveBufferSize
+{
+    int bufsize = 0;
+    socklen_t len = sizeof(bufsize);
+    if(getsockopt(_sock, SOL_SOCKET, SO_RCVBUF, &bufsize, &len) != 0)
+    {
+        return -1;
+    }
+    return bufsize;
+}
+
+- (int)sendBufferSize
+{
+    int bufsize = 0;
+    socklen_t len = sizeof(bufsize);
+    if(getsockopt(_sock, SOL_SOCKET, SO_SNDBUF, &bufsize, &len) != 0)
+    {
+        return -1;
+    }
+    return bufsize;
 }
 
 @end

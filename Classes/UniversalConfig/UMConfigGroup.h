@@ -19,7 +19,7 @@
     NSMutableDictionary *_vars;
     NSString *_configFile;
     NSString *_name;
-    long _line;
+    long     _line;
 }
 
 @property(readwrite,strong) NSMutableDictionary *vars;

@@ -34,6 +34,7 @@
 - (NSUInteger)count;
 
 - (void)addObject:(id)anObject;
+- (void)addObjectUnique:(id)anObject;
 - (void)insertObject:(id)anObject atIndex:(NSUInteger)index;
 - (void)removeLastObject;
 - (void)removeObjectAtIndex:(NSUInteger)index;

@@ -52,7 +52,13 @@
 {
     self = [super init];
     if(self)
-    {	
+    {
+        _processingThreadCount = ulib_cpu_count();
+        if(_processingThreadCount > 8)
+        {
+            _processingThreadCount = 8;
+        }
+
         _getPostDict = [[NSMutableDictionary alloc]init];
         _httpOperationsQueue = [NSOperationQueue mainQueue]; // [[NSOperationQueue alloc] init];
         _listenerSocket = [[UMSocket alloc] initWithType:type name:@"listener"];
@@ -85,7 +91,7 @@
             {
                 tqname = @"HTTP_TaskQueue";
             }
-            _taskQueue = [[UMTaskQueue alloc]initWithNumberOfThreads:ulib_cpu_count() name:tqname enableLogging:NO];
+            _taskQueue = [[UMTaskQueue alloc]initWithNumberOfThreads:_processingThreadCount name:tqname enableLogging:NO];
             [_taskQueue start];
         }
         if(doSSL)
@@ -133,7 +139,8 @@
 		}
 
 		[self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is starting up\r\n",_name, [_listenerSocket requestedLocalPort]]];
-		[_lock lock];
+
+        [_lock lock];
 
 		self.status = UMHTTPServerStatus_startingUp;
         [self runSelectorInBackground:@selector(mainListener)
@@ -160,8 +167,7 @@
 		    sErr = _lastErr;
 		    self.status = UMHTTPServerStatus_notRunning;
 	    }
-    
-	    [_lock unlock];
+        [_lock unlock];
     
 	    if( self.status == UMHTTPServerStatus_running)
 	    {
@@ -250,19 +256,17 @@
                     UMSocket *clientSocket = [_listenerSocket accept:&ret1];
                     if(clientSocket)
                     {
-                        clientSocket.useSSL=_enableSSL;
+                        clientSocket.useSSL =_enableSSL;
                         clientSocket.serverSideKeyFilename  = _privateKeyFile;
                         clientSocket.serverSideKeyData      = _privateKeyFileData;
                         clientSocket.serverSideCertFilename = _certFile;
                         clientSocket.serverSideCertData     = _certFileData;
                         if ([self authorizeConnection:clientSocket] == UMHTTPServerAuthorize_successful)
                         {
-                            
                             UMHTTPConnection *con = [[UMHTTPConnection alloc] initWithSocket:clientSocket server:self];
                             con.name = [NSString stringWithFormat:@"HTTPConnection %@:%d",clientSocket.connectedRemoteAddress,clientSocket.connectedRemotePort];
                             con.enableKeepalive = _enableKeepalive;
                             con.server = self;
-
                             [_connections addObject:con];
                             //if(0)
                             //{
@@ -349,10 +353,10 @@
 {
     if(con)
     {
-        [_connectionsLock lock];
+        UMMUTEX_LOCK(_connectionsLock);
         [_connections removeObject:con];
         [_terminatedConnections addObject:con];
-        [_connectionsLock unlock];
+        UMMUTEX_UNLOCK(_connectionsLock);
     }
 }
 

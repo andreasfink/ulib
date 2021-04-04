@@ -857,8 +857,6 @@ static int SSL_smart_shutdown(SSL *ssl)
         }
         address = [UMSocket deunifyIp:address];
         [address getCString:addr maxLength:255 encoding:NSUTF8StringEncoding];
-        //	inet_aton(addr, &sa.sin_addr);
-        
         if( inet_pton(AF_INET6, addr, &sa6.sin6_addr) == 1)
         {
             ip_version = 6;

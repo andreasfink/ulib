@@ -3338,6 +3338,14 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     return bufsize;
 }
 
+- (void)setDscpString:(int)dscp
+{
+    
+}
+- (NSString *)dscpString
+{
+    
+}
 - (void)setDscp:(int)dscp
 {
 #ifdef __APPLE__

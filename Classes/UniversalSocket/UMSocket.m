@@ -3338,4 +3338,28 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     return bufsize;
 }
 
+- (void)setDscp:(int)dscp
+{
+#ifdef __APPLE__
+    return;
+#else
+    setsockopt(_sock, SOL_SOCKET, SO_PRIORITY, &dscp, sizeof(dscp));
+#endif
+}
+
+- (int)dscp
+{
+#ifdef __APPLE__
+    return -1;
+#else
+    int dscp = 0;
+    socklen_t len = sizeof(dscp);
+    if(getsockopt(_sock, SOL_SOCKET, SO_PRIORITY, &dscp, &len) != 0)
+    {
+        return -1;
+    }
+    return dscp;
+#endif
+}
+
 @end

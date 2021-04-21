@@ -249,7 +249,7 @@ typedef enum SocketBlockingMode
 - (int)receiveBufferSize;
 - (int)sendBufferSize;
 
-- (void)setDscpString:(int)dscp;
+- (void)setDscpString:(NSString *)dscp;
 - (NSString *)dscpString;
 
 @end

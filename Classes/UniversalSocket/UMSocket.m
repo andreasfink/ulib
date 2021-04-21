@@ -3338,14 +3338,105 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     return bufsize;
 }
 
-- (void)setDscpString:(int)dscp
+
+- (void)setDscpString:(NSString *)dscp
 {
-    
+    dscp = [dscp uppercaseString];
+    if([dscp isEqualToString:@"AF11"])
+    {
+        [self setDscp:10];
+    }
+    else if([dscp isEqualToString:@"AF12"])
+    {
+        [self setDscp:12];
+    }
+    else if([dscp isEqualToString:@"AF13"])
+    {
+        [self setDscp:14];
+    }
+    else if([dscp isEqualToString:@"AF21"])
+    {
+        [self setDscp:18];
+    }
+    else if([dscp isEqualToString:@"AF22"])
+    {
+        [self setDscp:20];
+    }
+    else if([dscp isEqualToString:@"AF23"])
+    {
+        [self setDscp:22];
+    }
+    else if([dscp isEqualToString:@"AF31"])
+    {
+        [self setDscp:26];
+    }
+    else if([dscp isEqualToString:@"AF32"])
+    {
+        [self setDscp:28];
+    }
+    else if([dscp isEqualToString:@"AF33"])
+    {
+        [self setDscp:30];
+    }
+    else if([dscp isEqualToString:@"AF41"])
+    {
+        [self setDscp:34];
+    }
+    else if([dscp isEqualToString:@"AF42"])
+    {
+        [self setDscp:36];
+    }
+    else if([dscp isEqualToString:@"AF43"])
+    {
+        [self setDscp:38];
+    }
+    else
+    {
+        int a = [dscp intValue];
+        NSString *s = [NSString stringWithFormat:@"%d",a];
+        if([s isEqualToString:dscp])
+        {
+            [self setDscp:a];
+        }
+    }
 }
+
 - (NSString *)dscpString
 {
-    
+    int dscp = [self dscp];
+    switch(dscp)
+    {
+        case 10:
+            return @"AF11";
+        case 12:
+            return @"AF12";
+        case 14:
+            return @"AF13";
+        case 18:
+            return @"AF21";
+        case 20:
+            return @"AF22";
+        case 22:
+            return @"AF23";
+        case 26:
+            return @"AF31";
+        case 28:
+            return @"AF32";
+        case 30:
+            return @"AF33";
+        case 34:
+            return @"AF41";
+        case 36:
+            return @"AF42";
+        default:
+            if(dscp > 0)
+            {
+                return [NSString stringWithFormat:@"%d",dscp];
+            }
+    }
+    return NULL;
 }
+
 - (void)setDscp:(int)dscp
 {
 #ifdef __APPLE__

@@ -220,7 +220,7 @@ mkdir -p ${PREFIX}/bin
 
 
     cd base
-    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf --disable-mixedabi --with-libiconv-library=/usr/local/lib/libiconv.a
+    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf --with-libiconv-library=/usr/local/lib/libiconv.a
     make -j8
     make install
     ldconfig

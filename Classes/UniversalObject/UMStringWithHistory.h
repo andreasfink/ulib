@@ -26,7 +26,6 @@
 
 - (void)setString:(NSString *)newString;
 - (NSString *)string;
-
 - (NSString *)currentString;
 - (NSString *)oldString;
 - (NSString *)nonNullString;

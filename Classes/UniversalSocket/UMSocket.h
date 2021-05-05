@@ -146,9 +146,8 @@ typedef enum SocketBlockingMode
 @property(readwrite,assign,atomic)  int                configuredMaxSegmentSize;
 @property(readwrite,assign,atomic)  int                activeMaxSegmentSize;
 @property (weak) id customUser;
-@property(readwrite,strong,atomic) UMHistoryLog         *historyLog;
-
-
+@property(readwrite,strong,atomic) UMHistoryLog        *historyLog;
+@property(readwrite,assign,atomic) int                 dscp;
 
 - (UMSocket *) initWithType:(UMSocketType)t;
 - (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name;
@@ -249,6 +248,10 @@ typedef enum SocketBlockingMode
 - (void)setSendBufferSize:(int)bufsize;
 - (int)receiveBufferSize;
 - (int)sendBufferSize;
+
+- (void)setDscpString:(NSString *)dscp;
+- (NSString *)dscpString;
+
 @end
 
 

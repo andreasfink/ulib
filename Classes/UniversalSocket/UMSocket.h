@@ -53,7 +53,7 @@ typedef enum SocketBlockingMode
     int                 _socketFamily;
     int                 _socketProto;
     int                 _socketType; /* STREAM | DATAGRAM | SEQPACKET*/
-    
+
 	BOOL    			_isBound;
 	BOOL                _isListening;
 	BOOL                _isConnecting;

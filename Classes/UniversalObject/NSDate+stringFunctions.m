@@ -11,9 +11,10 @@
 #define STANDARD_DATE_STRING_FORMAT     @"yyyy-MM-dd HH:mm:ss.SSSSSS"
 
 static NSDateFormatter *_standardDateFormatter = NULL;
-static NSDate *dateFromStringNSCalendar(NSString *str, const char *ctimezone_str);
 #ifdef LINUX
 static NSDate *dateFromStringMktime(NSString *str);
+#else
+static NSDate *dateFromStringNSCalendar(NSString *str, const char *ctimezone_str);
 #endif
 
 @implementation NSDate(stringFunctions)

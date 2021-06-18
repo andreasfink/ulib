@@ -935,6 +935,24 @@
 		A6419BB91A2DF2FD0090FC94 /* UMMicroSec.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */; };
 		A6467B7E24DD904C00191557 /* UMPacket.h in Headers */ = {isa = PBXBuildFile; fileRef = A6467B7C24DD904C00191557 /* UMPacket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6467B7F24DD904C00191557 /* UMPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = A6467B7D24DD904C00191557 /* UMPacket.m */; };
+		A64D44EA267CA4DC00540708 /* UMPrometheus.h in Headers */ = {isa = PBXBuildFile; fileRef = A64D44E8267CA4DC00540708 /* UMPrometheus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64D44EB267CA4DC00540708 /* UMPrometheus.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D44E9267CA4DC00540708 /* UMPrometheus.m */; };
+		A64D44EE267CA4E600540708 /* UMPrometheusMetric.h in Headers */ = {isa = PBXBuildFile; fileRef = A64D44EC267CA4E600540708 /* UMPrometheusMetric.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64D44EF267CA4E600540708 /* UMPrometheusMetric.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D44ED267CA4E600540708 /* UMPrometheusMetric.m */; };
+		A64D44F0267CA56200540708 /* UMPrometheusMetric.h in Headers */ = {isa = PBXBuildFile; fileRef = A64D44EC267CA4E600540708 /* UMPrometheusMetric.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64D44F1267CA56300540708 /* UMPrometheusMetric.h in Headers */ = {isa = PBXBuildFile; fileRef = A64D44EC267CA4E600540708 /* UMPrometheusMetric.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64D44F2267CA56400540708 /* UMPrometheusMetric.h in Headers */ = {isa = PBXBuildFile; fileRef = A64D44EC267CA4E600540708 /* UMPrometheusMetric.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64D44F3267CA57300540708 /* UMPrometheusMetric.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D44ED267CA4E600540708 /* UMPrometheusMetric.m */; };
+		A64D44F4267CA57300540708 /* UMPrometheusMetric.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D44ED267CA4E600540708 /* UMPrometheusMetric.m */; };
+		A64D44F5267CA57400540708 /* UMPrometheusMetric.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D44ED267CA4E600540708 /* UMPrometheusMetric.m */; };
+		A64D44F6267CA57700540708 /* UMPrometheus.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D44E9267CA4DC00540708 /* UMPrometheus.m */; };
+		A64D44F7267CA57800540708 /* UMPrometheus.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D44E9267CA4DC00540708 /* UMPrometheus.m */; };
+		A64D44F8267CA57800540708 /* UMPrometheus.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D44E9267CA4DC00540708 /* UMPrometheus.m */; };
+		A64D44F9267CA57900540708 /* UMPrometheus.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D44E9267CA4DC00540708 /* UMPrometheus.m */; };
+		A64D44FA267CA57A00540708 /* UMPrometheus.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D44E9267CA4DC00540708 /* UMPrometheus.m */; };
+		A64D44FB267CA57A00540708 /* UMPrometheus.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D44E9267CA4DC00540708 /* UMPrometheus.m */; };
+		A64D4513267CC88F00540708 /* UMPrometheusThroughputMetric.h in Headers */ = {isa = PBXBuildFile; fileRef = A64D4511267CC88F00540708 /* UMPrometheusThroughputMetric.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64D4514267CC88F00540708 /* UMPrometheusThroughputMetric.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D4512267CC88F00540708 /* UMPrometheusThroughputMetric.m */; };
 		A657274C1B1869AA00854472 /* UMSynchronizedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A65727461B1869AA00854472 /* UMSynchronizedDictionary.m */; };
 		A663F34821532D4100072BAA /* UMProtocolBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A663F34621532D4100072BAA /* UMProtocolBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A663F34921532D4100072BAA /* UMProtocolBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = A663F34721532D4100072BAA /* UMProtocolBuffer.m */; };
@@ -10151,6 +10169,12 @@
 		A6467B7C24DD904C00191557 /* UMPacket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMPacket.h; sourceTree = "<group>"; };
 		A6467B7D24DD904C00191557 /* UMPacket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMPacket.m; sourceTree = "<group>"; };
 		A64C9C4D172DD45D000C9F55 /* libulib-static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libulib-static.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A64D44E8267CA4DC00540708 /* UMPrometheus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMPrometheus.h; sourceTree = "<group>"; };
+		A64D44E9267CA4DC00540708 /* UMPrometheus.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMPrometheus.m; sourceTree = "<group>"; };
+		A64D44EC267CA4E600540708 /* UMPrometheusMetric.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMPrometheusMetric.h; sourceTree = "<group>"; };
+		A64D44ED267CA4E600540708 /* UMPrometheusMetric.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMPrometheusMetric.m; sourceTree = "<group>"; };
+		A64D4511267CC88F00540708 /* UMPrometheusThroughputMetric.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMPrometheusThroughputMetric.h; sourceTree = "<group>"; };
+		A64D4512267CC88F00540708 /* UMPrometheusThroughputMetric.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMPrometheusThroughputMetric.m; sourceTree = "<group>"; };
 		A65112D61A33BD650090FC94 /* UMLogLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMLogLevel.h; sourceTree = "<group>"; };
 		A65112D81A33BD860090FC94 /* UMLogLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMLogLevel.m; sourceTree = "<group>"; };
 		A65326DF25135A5C009B4425 /* testcase1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testcase1.m; sourceTree = "<group>"; };
@@ -19403,13 +19427,13 @@
 				A6CEB96822BA514200B2BD9D /* UMNamedList.m */,
 				A6CC4B501A3F24C70090FC94 /* UMAverageDelay.h */,
 				A67B5189191B84A90090FC94 /* UMAverageDelay.m */,
+				A6CC4B571A3F24C70090FC94 /* UMTimer.h */,
 				A6CC4B531A3F24C70090FC94 /* UMMicroSec.h */,
 				A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */,
 				A6CC4B551A3F24C70090FC94 /* UMSleeper.h */,
 				A6D8AB9F149A786E0029E9CF /* UMSleeper.m */,
 				A6CC4B561A3F24C70090FC94 /* UMThroughputCounter.h */,
 				A6D8ABA1149A786E0029E9CF /* UMThroughputCounter.m */,
-				A6CC4B571A3F24C70090FC94 /* UMTimer.h */,
 				A6419BA11A2DE3740090FC94 /* UMTimer.m */,
 				A6CC4B581A3F24C70090FC94 /* UMTimerBackgrounder.h */,
 				A6419BAA1A2DE8040090FC94 /* UMTimerBackgrounder.m */,
@@ -19441,6 +19465,12 @@
 				A6F1C609247BCCB400FE7402 /* UMCountryDigitTree.m */,
 				A6F1C60C247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.h */,
 				A6F1C60D247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.m */,
+				A64D44E8267CA4DC00540708 /* UMPrometheus.h */,
+				A64D44E9267CA4DC00540708 /* UMPrometheus.m */,
+				A64D44EC267CA4E600540708 /* UMPrometheusMetric.h */,
+				A64D44ED267CA4E600540708 /* UMPrometheusMetric.m */,
+				A64D4511267CC88F00540708 /* UMPrometheusThroughputMetric.h */,
+				A64D4512267CC88F00540708 /* UMPrometheusThroughputMetric.m */,
 			);
 			path = UniversalUtilities;
 			sourceTree = "<group>";
@@ -19663,6 +19693,7 @@
 				A602111F1D488A2F00211137 /* NSDictionary+HierarchicalDescription.h in Headers */,
 				A666EF4A1E89BB17004804CB /* UMTokenizerWord.h in Headers */,
 				A60211201D488A2F00211137 /* UMHistoryLog.h in Headers */,
+				A64D44F0267CA56200540708 /* UMPrometheusMetric.h in Headers */,
 				A60211211D488A2F00211137 /* UMHTTPURLHandler.h in Headers */,
 				A60B766F226E0166003F1F0E /* UniversalSerial.h in Headers */,
 				A60211231D488A2F00211137 /* UMDateTimeStuff.h in Headers */,
@@ -19847,6 +19878,7 @@
 				A60212DF1D488A3D00211137 /* UMSynchronizedSortedDictionary.h in Headers */,
 				A60212E01D488A3D00211137 /* UMHost.h in Headers */,
 				A60212E11D488A3D00211137 /* UMHTTPResponseCode.h in Headers */,
+				A64D44F1267CA56300540708 /* UMPrometheusMetric.h in Headers */,
 				A60212E31D488A3D00211137 /* UMHTTPPageCache.h in Headers */,
 				A60212E41D488A3D00211137 /* UMHTTPPageRef.h in Headers */,
 				A60212E51D488A3D00211137 /* UMAssert.h in Headers */,
@@ -19931,7 +19963,9 @@
 				A60C4D651EF7FE59007C203A /* UMThroughputCounter.h in Headers */,
 				A60C4D681EF7FE59007C203A /* UMSyntaxToken_Number.h in Headers */,
 				A60C4D691EF7FE59007C203A /* UniversalQueue.h in Headers */,
+				A64D44EA267CA4DC00540708 /* UMPrometheus.h in Headers */,
 				A60C4D6A1EF7FE59007C203A /* UMJsonStreamParserAccumulator.h in Headers */,
+				A64D4513267CC88F00540708 /* UMPrometheusThroughputMetric.h in Headers */,
 				A60C4D6E1EF7FE59007C203A /* UMSyntaxToken.h in Headers */,
 				A60C4D701EF7FE59007C203A /* UMJsonTokeniser.h in Headers */,
 				A60C4D711EF7FE59007C203A /* UMRegex.h in Headers */,
@@ -19948,6 +19982,7 @@
 				A60C4D7D1EF7FE59007C203A /* UMAverageDelay.h in Headers */,
 				A6467B7E24DD904C00191557 /* UMPacket.h in Headers */,
 				A60C4D801EF7FE59007C203A /* UMObject.h in Headers */,
+				A64D44EE267CA4E600540708 /* UMPrometheusMetric.h in Headers */,
 				A60C4D831EF7FE59007C203A /* NSString+UMSocket.h in Headers */,
 				A60C4D851EF7FE59007C203A /* UMSyntaxToken_Const.h in Headers */,
 				A60C4D871EF7FE59007C203A /* UMSocket.h in Headers */,
@@ -20299,6 +20334,7 @@
 				A6E1DD8324063158001FB7FF /* NSDictionary+HierarchicalDescription.h in Headers */,
 				A6E1DD8424063158001FB7FF /* UMTokenizerWord.h in Headers */,
 				A6E1DD8524063158001FB7FF /* UMHistoryLog.h in Headers */,
+				A64D44F2267CA56400540708 /* UMPrometheusMetric.h in Headers */,
 				A6E1DD8624063158001FB7FF /* UMHTTPURLHandler.h in Headers */,
 				A6E1DD8724063158001FB7FF /* UniversalSerial.h in Headers */,
 				A6E1DD8824063158001FB7FF /* UMDateTimeStuff.h in Headers */,
@@ -20718,6 +20754,7 @@
 				A602101D1D488A2F00211137 /* UMTaskQueue.m in Sources */,
 				A602101E1D488A2F00211137 /* UMQueueSingle.m in Sources */,
 				A6C9549B1DC95AFD0036AC39 /* NSData+UMHTTP.m in Sources */,
+				A64D44F5267CA57400540708 /* UMPrometheusMetric.m in Sources */,
 				A60210201D488A2F00211137 /* UMSleeper.m in Sources */,
 				A60210211D488A2F00211137 /* UMThroughputCounter.m in Sources */,
 				A60210221D488A2F00211137 /* UMUtil.m in Sources */,
@@ -20800,6 +20837,7 @@
 				A602105F1D488A2F00211137 /* NSDate+stringFunctions.m in Sources */,
 				A60C4E511EF80095007C203A /* UMPluginDirectory.m in Sources */,
 				A60210601D488A2F00211137 /* UMMicroSec.m in Sources */,
+				A64D44F6267CA57700540708 /* UMPrometheus.m in Sources */,
 				A60210611D488A2F00211137 /* UMRedisSession.m in Sources */,
 				A60210621D488A2F00211137 /* UMPKI.m in Sources */,
 				A60210631D488A2F00211137 /* UMJsonTokeniser.m in Sources */,
@@ -20855,6 +20893,7 @@
 				A60211A31D488A3D00211137 /* UMTaskQueue.m in Sources */,
 				A60211A41D488A3D00211137 /* UMQueueSingle.m in Sources */,
 				A6C9549D1DC95AFE0036AC39 /* NSData+UMHTTP.m in Sources */,
+				A64D44F4267CA57300540708 /* UMPrometheusMetric.m in Sources */,
 				A60211A61D488A3D00211137 /* UMSleeper.m in Sources */,
 				A60211A71D488A3D00211137 /* UMThroughputCounter.m in Sources */,
 				A60211A81D488A3D00211137 /* UMUtil.m in Sources */,
@@ -20937,6 +20976,7 @@
 				A60211E51D488A3D00211137 /* NSDate+stringFunctions.m in Sources */,
 				A60C4E571EF80096007C203A /* UMPluginDirectory.m in Sources */,
 				A60211E61D488A3D00211137 /* UMMicroSec.m in Sources */,
+				A64D44F7267CA57800540708 /* UMPrometheus.m in Sources */,
 				A60211E71D488A3D00211137 /* UMRedisSession.m in Sources */,
 				A60211E81D488A3D00211137 /* UMPKI.m in Sources */,
 				A60211E91D488A3D00211137 /* UMJsonTokeniser.m in Sources */,
@@ -20968,6 +21008,7 @@
 				A60C4C9C1EF7FE59007C203A /* UMScanner.m in Sources */,
 				A60C4C9D1EF7FE59007C203A /* UMBackgrounderWithQueue.m in Sources */,
 				A60C4C9E1EF7FE59007C203A /* UMStringWithHistory.m in Sources */,
+				A64D4514267CC88F00540708 /* UMPrometheusThroughputMetric.m in Sources */,
 				A60C4C9F1EF7FE59007C203A /* UMLogBuffered.m in Sources */,
 				A60C4CA01EF7FE59007C203A /* UMSyntaxToken_Number.m in Sources */,
 				A667A28D2284032B0009FE66 /* UMConstantStringsDict.m in Sources */,
@@ -20983,6 +21024,7 @@
 				A684A67A2052856F005D52A9 /* UMCommandLine.m in Sources */,
 				A60C4CA61EF7FE59007C203A /* UMLogFeed.m in Sources */,
 				A60C4CA71EF7FE59007C203A /* UMLogFile.m in Sources */,
+				A64D44EF267CA4E600540708 /* UMPrometheusMetric.m in Sources */,
 				A60C4CA81EF7FE59007C203A /* UMLogHandler.m in Sources */,
 				A6BEA6EC1EF95025007C203A /* NSDictionary+UniversalConfig.m in Sources */,
 				A60C4E491EF80094007C203A /* UMPluginHandler.m in Sources */,
@@ -21065,6 +21107,7 @@
 				A60C4CE41EF7FE59007C203A /* UMSSLCertificate.m in Sources */,
 				A60C4CE51EF7FE59007C203A /* NSData+UMSocket.m in Sources */,
 				A60C4CE61EF7FE59007C203A /* UMTimer.m in Sources */,
+				A64D44EB267CA4DC00540708 /* UMPrometheus.m in Sources */,
 				A60C4CE71EF7FE59007C203A /* UMRedisCommand.m in Sources */,
 				A60C4CE81EF7FE59007C203A /* UMJsonParser.m in Sources */,
 				A60C4CE91EF7FE59007C203A /* UMLogLevel.m in Sources */,
@@ -21176,6 +21219,7 @@
 				A67045E71FD14BEC00F27771 /* UMQueueMulti.m in Sources */,
 				A60C2DC81A3F21450090FC94 /* UMLayerTask.m in Sources */,
 				A60C2E1B1A3F216A0090FC94 /* UMSleeper.m in Sources */,
+				A64D44F9267CA57900540708 /* UMPrometheus.m in Sources */,
 				A6020FDC1D4876E500211137 /* UMFileTracker.m in Sources */,
 				A666EF221E89BB17004804CB /* UMSyntaxToken_Name.m in Sources */,
 				A6020FDD1D4876E500211137 /* UMFileTrackingInfo.m in Sources */,
@@ -21260,6 +21304,7 @@
 				A6AC4B771D460BB5002BAA97 /* NSString+UMSocket.m in Sources */,
 				A6AC4C211D460C1A002BAA97 /* UMJsonTokeniser.m in Sources */,
 				A6AC4B001D460B6D002BAA97 /* UMHistoryLogEntry.m in Sources */,
+				A64D44FB267CA57A00540708 /* UMPrometheus.m in Sources */,
 				A6BEA7121EF950CD007C203A /* UMHTTPClient.m in Sources */,
 				A6AC49F81D460AEE002BAA97 /* UMHTTPURLHandler.m in Sources */,
 				A6AC4A471D460B1C002BAA97 /* UMLogHandler.m in Sources */,
@@ -21393,6 +21438,7 @@
 				A6AC4B871D460BB6002BAA97 /* NSString+UMSocket.m in Sources */,
 				A6AC4C3F1D460C1C002BAA97 /* UMJsonTokeniser.m in Sources */,
 				A6AC4B3C1D460B6E002BAA97 /* UMHistoryLogEntry.m in Sources */,
+				A64D44FA267CA57A00540708 /* UMPrometheus.m in Sources */,
 				A6BEA7131EF950CE007C203A /* UMHTTPClient.m in Sources */,
 				A6AC4A121D460AEF002BAA97 /* UMHTTPURLHandler.m in Sources */,
 				A6AC4A591D460B1D002BAA97 /* UMLogHandler.m in Sources */,
@@ -21695,6 +21741,7 @@
 				A6E1DCB824063158001FB7FF /* UMTaskQueue.m in Sources */,
 				A6E1DCB924063158001FB7FF /* UMQueueSingle.m in Sources */,
 				A6E1DCBA24063158001FB7FF /* NSData+UMHTTP.m in Sources */,
+				A64D44F3267CA57300540708 /* UMPrometheusMetric.m in Sources */,
 				A6E1DCBB24063158001FB7FF /* UMSleeper.m in Sources */,
 				A6E1DCBC24063158001FB7FF /* UMThroughputCounter.m in Sources */,
 				A6E1DCBD24063158001FB7FF /* UMUtil.m in Sources */,
@@ -21777,6 +21824,7 @@
 				A6E1DD0A24063158001FB7FF /* NSDate+stringFunctions.m in Sources */,
 				A6E1DD0B24063158001FB7FF /* UMPluginDirectory.m in Sources */,
 				A6E1DD0C24063158001FB7FF /* UMMicroSec.m in Sources */,
+				A64D44F8267CA57800540708 /* UMPrometheus.m in Sources */,
 				A6E1DD0D24063158001FB7FF /* UMRedisSession.m in Sources */,
 				A6E1DD0E24063158001FB7FF /* UMPKI.m in Sources */,
 				A6E1DD0F24063158001FB7FF /* UMJsonTokeniser.m in Sources */,

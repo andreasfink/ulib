@@ -20,6 +20,22 @@
     return self;
 }
 
+- (UMPrometheusMetric *)initWithMetricName:(NSString *)name subname1:(NSString *)sub1 subvalue1:(NSString *)val1 type:(UMPrometheusMetricType)t
+{
+    self = [super init];
+    if(self)
+    {
+        _lock = [[UMMutex alloc]initWithName:@"UMPrometheusMetricLock"];
+        _value = @(0);
+        _metricName = name;
+        _subname1 = sub1;
+        _subvalue1 =val1;
+        _metricType = t;
+    }
+    return self;
+}
+
+
 - (void)update
 {
     [_lock lock];

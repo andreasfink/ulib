@@ -10,6 +10,7 @@
 
 @implementation UMPrometheusThroughputMetric
 
+
 - (UMPrometheusThroughputMetric *)init
 {
     self = [super init];
@@ -31,6 +32,21 @@
         _reportDuration = duration;
     }
     return self;
+}
+
+- (UMPrometheusThroughputMetric *)initWithResolutionInSeconds:(double)resolution
+                                               reportDuration:(double) duration
+                                                         name:(NSString *)name
+                                                     subname1:(NSString *)sub1
+                                                    subvalue1:(NSString *)val1;
+{
+    self = [super initWithMetricName:name subname1:sub1 subvalue1:val1 type:UMPrometheusMetricType_gauge];
+    {
+        _throughputCounter = [[UMThroughputCounter alloc]initWithResolutionInSeconds:resolution maxDuration:duration];
+        _reportDuration = duration;
+    }
+    return self;
+
 }
 
 - (void)increaseBy:(NSInteger)i

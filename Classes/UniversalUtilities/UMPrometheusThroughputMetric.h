@@ -18,4 +18,9 @@
 - (UMPrometheusThroughputMetric *)initWithResolutionInSeconds:(double)resolution
                                                reportDuration:(double) duration;
 
+- (UMPrometheusThroughputMetric *)initWithResolutionInSeconds:(double)resolution
+                                               reportDuration:(double) duration
+                                                         name:(NSString *)name
+                                                     subname1:(NSString *)sub1
+                                                    subvalue1:(NSString *)val1;
 @end

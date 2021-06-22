@@ -52,6 +52,8 @@ typedef enum UMPrometheusMetricType
 @property(readwrite,strong) NSNumber *value;
 @property(readwrite,strong) NSDate *timestamp;
 @property(readwrite,strong) id<UMPrometheusDataSourceProtocol> delegate;
+
+- (UMPrometheusMetric *)initWithMetricName:(NSString *)name subname1:(NSString *)sub1 subvalue1:(NSString *)val1 type:(UMPrometheusMetricType)t;
 - (NSString *)prometheusOutput;
 - (void)updatePrometheusData:(UMPrometheusMetric *)metric;
 - (void)update;

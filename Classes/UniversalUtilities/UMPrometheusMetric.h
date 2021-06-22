@@ -57,5 +57,6 @@ typedef enum UMPrometheusMetricType
 - (void)update;
 - (NSString *)key;
 - (void)increaseBy:(NSInteger)i;
+- (void)setSubname1:(NSString *)a value:(NSString *)b;
 @end
 

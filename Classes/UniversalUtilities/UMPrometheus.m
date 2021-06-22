@@ -43,4 +43,10 @@
     }
     return s;
 }
+
+- (void)removeObjectForKey:(id)key
+{
+    [_metrics removeObjectForKey:key];
+}
+
 @end

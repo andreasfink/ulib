@@ -117,5 +117,10 @@
     [_lock unlock];
 }
 
+- (void)setSubname1:(NSString *)a value:(NSString *)b
+{
+    _subname1 = a;
+    _subvalue1 = b;
+}
 @end
 

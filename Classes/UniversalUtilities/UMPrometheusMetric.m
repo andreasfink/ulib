@@ -91,37 +91,36 @@
 
 - (NSString *)prometheusOutput
 {
-    /* if we have a subname object, we expect a main object to provide help and type */
+    NSMutableString *s = [[NSMutableString alloc]init];
+    NSString *key = [self key];
+    [_lock lock];
     if(_subname1.length > 0)
     {
-        return @"";
-    }
-    NSMutableString *s = [[NSMutableString alloc]init];
-    [_lock lock];
-    NSString *key = [self key];
-    if(_help.length > 0)
-    {
-        [s appendString:@"# HELP "];
+        /* if we have a subname object, we expect a main object to provide help and type */
+        if(_help.length > 0)
+        {
+            [s appendString:@"# HELP "];
+            [s appendString:key];
+            [s appendString:@" "];
+            [s appendString:_help];
+            [s appendString:@"\n"];
+        }
+        [s appendString:@"# TYPE "];
         [s appendString:key];
-        [s appendString:@" "];
-        [s appendString:_help];
-        [s appendString:@"\n"];
-    }
-    [s appendString:@"# TYPE "];
-    [s appendString:key];
-    switch(_metricType)
-    {
+        switch(_metricType)
+        {
 
-        case UMPrometheusMetricType_gauge:
-            [s appendString:@" gauge\n"];
-            break;
-        case UMPrometheusMetricType_histogram:
-            [s appendString:@" histogram\n"];
-            break;
-        default:
-        case UMPrometheusMetricType_counter:
-            [s appendString:@" counter\n"];
-            break;
+            case UMPrometheusMetricType_gauge:
+                [s appendString:@" gauge\n"];
+                break;
+            case UMPrometheusMetricType_histogram:
+                [s appendString:@" histogram\n"];
+                break;
+            default:
+            case UMPrometheusMetricType_counter:
+                [s appendString:@" counter\n"];
+                break;
+        }
     }
     [self update];
     [s appendFormat:@"%@ %@\n",key,self.value];

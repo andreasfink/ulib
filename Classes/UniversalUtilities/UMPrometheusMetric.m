@@ -94,7 +94,7 @@
     NSMutableString *s = [[NSMutableString alloc]init];
     NSString *key = [self key];
     [_lock lock];
-    if(_subname1.length > 0)
+    if(_subname1.length == 0)
     {
         /* if we have a subname object, we expect a main object to provide help and type */
         if(_help.length > 0)

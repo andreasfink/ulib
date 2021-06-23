@@ -91,10 +91,23 @@
 
 - (NSString *)prometheusOutput
 {
+    /* if we have a subname object, we expect a main object to provide help and type */
+    if(_subname1.length > 0)
+    {
+        return @"";
+    }
     NSMutableString *s = [[NSMutableString alloc]init];
     [_lock lock];
-    [s appendString:@"# TYPE "];
     NSString *key = [self key];
+    if(_help.length > 0)
+    {
+        [s appendString:@"# HELP "];
+        [s appendString:key];
+        [s appendString:@" "];
+        [s appendString:_help];
+        [s appendString:@"\n"];
+    }
+    [s appendString:@"# TYPE "];
     [s appendString:key];
     switch(_metricType)
     {
@@ -109,14 +122,6 @@
         case UMPrometheusMetricType_counter:
             [s appendString:@" counter\n"];
             break;
-    }
-    if(_help.length > 0)
-    {
-        [s appendString:@"# HELP "];
-        [s appendString:key];
-        [s appendString:@" "];
-        [s appendString:_help];
-        [s appendString:@"\n"];
     }
     [self update];
     [s appendFormat:@"%@ %@\n",key,self.value];

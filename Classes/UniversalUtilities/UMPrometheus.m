@@ -36,10 +36,25 @@
     NSMutableString *s = [[NSMutableString alloc]init];
     NSArray *keys = [_metrics allKeys];
     keys = [keys sortedArrayUsingSelector:@selector(compare:)];
+    NSString *oldhelp = @"";
+    NSString *oldtype = @"";
     for(id key in keys)
     {
         UMPrometheusMetric *m = _metrics[key];
-        [s appendString:m.prometheusOutput];
+        NSString *help = m.prometheusOutputHelp;
+        NSString *type = m.prometheusOutputType;
+        NSString *data = m.prometheusOutputData;
+        if(![help isEqualToString:oldhelp])
+        {
+            [s appendString:help];
+        }
+        if(![type isEqualToString:oldtype])
+        {
+            [s appendString:type];
+        }
+        [s appendString:data];
+        oldhelp = help;
+        oldtype = type;
     }
     return s;
 }

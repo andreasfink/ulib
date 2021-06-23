@@ -89,41 +89,47 @@
     return s;
 }
 
-- (NSString *)prometheusOutput
+- (NSString *)prometheusOutputHelp
 {
     NSMutableString *s = [[NSMutableString alloc]init];
-    NSString *key = [self key];
-    [_lock lock];
-    if(_subname1.length == 0)
+    if(_help.length > 0)
     {
-        /* if we have a subname object, we expect a main object to provide help and type */
-        if(_help.length > 0)
-        {
-            [s appendString:@"# HELP "];
-            [s appendString:key];
-            [s appendString:@" "];
-            [s appendString:_help];
-            [s appendString:@"\n"];
-        }
-        [s appendString:@"# TYPE "];
-        [s appendString:key];
-        switch(_metricType)
-        {
-
-            case UMPrometheusMetricType_gauge:
-                [s appendString:@" gauge\n"];
-                break;
-            case UMPrometheusMetricType_histogram:
-                [s appendString:@" histogram\n"];
-                break;
-            default:
-            case UMPrometheusMetricType_counter:
-                [s appendString:@" counter\n"];
-                break;
-        }
+        [s appendString:@"# HELP "];
+        [s appendString:_metricName];
+        [s appendString:@" "];
+        [s appendString:_help];
+        [s appendString:@"\n"];
     }
+    return s;
+}
+
+- (NSString *)prometheusOutputType
+{
+    NSMutableString *s = [[NSMutableString alloc]init];
+    [s appendString:@"# TYPE "];
+    [s appendString:_metricName];
+    switch(_metricType)
+    {
+
+        case UMPrometheusMetricType_gauge:
+            [s appendString:@" gauge\n"];
+            break;
+        case UMPrometheusMetricType_histogram:
+            [s appendString:@" histogram\n"];
+            break;
+        default:
+        case UMPrometheusMetricType_counter:
+            [s appendString:@" counter\n"];
+            break;
+    }
+    return s;
+}
+
+- (NSString *)prometheusOutputData
+{
+    [_lock lock];
     [self update];
-    [s appendFormat:@"%@ %@\n",key,self.value];
+    NSString *s = [NSString stringWithFormat:@"%@ %@\n",self.key,self.value];
     [_lock unlock];
     return s;
 }

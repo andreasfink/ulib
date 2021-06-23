@@ -54,7 +54,10 @@ typedef enum UMPrometheusMetricType
 @property(readwrite,strong) id<UMPrometheusDataSourceProtocol> delegate;
 
 - (UMPrometheusMetric *)initWithMetricName:(NSString *)name subname1:(NSString *)sub1 subvalue1:(NSString *)val1 type:(UMPrometheusMetricType)t;
-- (NSString *)prometheusOutput;
+- (NSString *)prometheusOutputHelp;
+- (NSString *)prometheusOutputType;
+- (NSString *)prometheusOutputData;
+
 - (void)updatePrometheusData:(UMPrometheusMetric *)metric;
 - (void)update;
 - (NSString *)key;

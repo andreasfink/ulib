@@ -1142,7 +1142,7 @@
 		A6A7A23C1CF7506600211137 /* UMPKI.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A7A2361CF71D7D00211137 /* UMPKI.m */; };
 		A6A7A2401CF7511F00211137 /* UMSSLCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A7A23D1CF7511F00211137 /* UMSSLCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6A7A2421CF7511F00211137 /* UMSSLCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A7A23E1CF7511F00211137 /* UMSSLCertificate.m */; };
-		A6A8C6CA268C92D2006A01A4 /* UMPrometheusMetricUptime.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A8C6C8268C92D2006A01A4 /* UMPrometheusMetricUptime.h */; };
+		A6A8C6CA268C92D2006A01A4 /* UMPrometheusMetricUptime.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A8C6C8268C92D2006A01A4 /* UMPrometheusMetricUptime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6A8C6CB268C92D2006A01A4 /* UMPrometheusMetricUptime.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8C6C9268C92D2006A01A4 /* UMPrometheusMetricUptime.m */; };
 		A6AC49791D460A49002BAA97 /* UMRegexMatch.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D42E491D2F9C5F00211137 /* UMRegexMatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6AC497D1D460A5F002BAA97 /* UMRegexMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D42E4A1D2F9C5F00211137 /* UMRegexMatch.m */; };

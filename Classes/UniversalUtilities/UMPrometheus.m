@@ -30,6 +30,10 @@
     _metrics[key] = o;
 }
 
+- (void)addMetric:(UMPrometheusMetric *)o;
+{
+    _metrics[o.key] = o;
+}
 
 - (NSString *)prometheusOutput
 {

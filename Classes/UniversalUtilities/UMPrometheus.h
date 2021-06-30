@@ -17,6 +17,7 @@
 
 - (id)objectForKeyedSubscript:(id)key;
 - (void)addObject:(UMPrometheusMetric *)o forKey:(id)key;
+- (void)addMetric:(UMPrometheusMetric *)o;
 - (void)removeObjectForKey:(id)key;
 - (NSString *)prometheusOutput;
 @end

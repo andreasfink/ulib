@@ -71,6 +71,6 @@ void ummutex_stat_disable(void);
 
 #define UMMUTEX_UNLOCK(a) \
 {  \
-    [a unlock];  \
     a.lockedInFunction =  NULL; \
+    [a unlock];  \
 }

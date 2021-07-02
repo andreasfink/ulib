@@ -32,6 +32,15 @@
 
 - (UMTaskQueue *)initWithNumberOfThreads:(NSUInteger)workerThreadCount name:(NSString *)n enableLogging:(BOOL)enableLog
 {
+    if(workerThreadCount > 8)
+    {
+        NSLog(@"initWithNumberOfThreads=%lu (%@) really want that many?",workerThreadCount,n);
+        if(workerThreadCount > 64)
+        {
+            NSLog(@"initWithNumberOfThreads=%lu (%@) limiting to 8?",workerThreadCount,n);
+            workerThreadCount = 8;
+        }
+    }
     self = [super init];
     if(self)
     {

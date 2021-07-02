@@ -15,6 +15,7 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #include <string.h>
+#import "UMAssert.h"
 
 @implementation UMTaskQueue
 
@@ -30,14 +31,17 @@
     return [self initWithNumberOfThreads:threadCount name:@"UMBackgroundQueue" enableLogging:NO];
 }
 
-- (UMTaskQueue *)initWithNumberOfThreads:(NSUInteger)workerThreadCount name:(NSString *)n enableLogging:(BOOL)enableLog
+- (UMTaskQueue *)initWithNumberOfThreads:(NSUInteger)workerThreadCount
+                                    name:(NSString *)n
+                           enableLogging:(BOOL)enableLog
 {
+    UMAssert(n.length > 0,@"UMTaskQueue initWithNumberOfThreads:name:enableLogging: has no name being passed");
     if(workerThreadCount > 8)
     {
-        NSLog(@"initWithNumberOfThreads=%lu (%@) really want that many?",workerThreadCount,n);
+        NSLog(@"UMTaskQueue initWithNumberOfThreads=%lu (%@) really want that many?",workerThreadCount,n);
         if(workerThreadCount > 64)
         {
-            NSLog(@"initWithNumberOfThreads=%lu (%@) limiting to 8?",workerThreadCount,n);
+            NSLog(@"UMTaskQueue initWithNumberOfThreads=%lu (%@) limiting to 8?",workerThreadCount,n);
             workerThreadCount = 8;
         }
     }

@@ -22,7 +22,12 @@
 {
     /* default number of threads is twice the number of CPU cores */
     /* this allows long running jobs to run while smaller shorter jobs can run in parallel */
-    return [self initWithNumberOfThreads:ulib_cpu_count() * 2 name:@"UMBackgroundQueue" enableLogging:NO];
+    int threadCount = ulib_cpu_count() * 2;
+    if(threadCount > 8)
+    {
+        threadCount = 8;
+    }
+    return [self initWithNumberOfThreads:threadCount name:@"UMBackgroundQueue" enableLogging:NO];
 }
 
 - (UMTaskQueue *)initWithNumberOfThreads:(NSUInteger)workerThreadCount name:(NSString *)n enableLogging:(BOOL)enableLog

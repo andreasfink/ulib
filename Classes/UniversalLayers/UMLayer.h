@@ -41,6 +41,7 @@
 }
 
 
+- (UMLayer *)initWithoutExecutionQueue:(NSString *)name;
 - (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq;
 - (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq name:(NSString *)name;
 

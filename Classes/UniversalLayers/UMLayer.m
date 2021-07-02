@@ -132,6 +132,18 @@
     return NULL;
 }
 
+- (UMLayer *)initWithoutExecutionQueue:(NSString *)name
+{
+    self = [super init];
+    if(self)
+    {
+        _layerName = name;
+        _taskQueue = NULL;
+        _logLevel = UMLOG_MAJOR;
+    }
+    return self;
+}
+
 - (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq
 {
     return [self initWithTaskQueueMulti:tq name:@""];

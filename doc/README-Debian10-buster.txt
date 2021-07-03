@@ -148,7 +148,7 @@ Build  libiconv
     wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
     tar -xvzf libiconv-1.16.tar.gz
     cd libiconv-1.16
-    CC=gcc LDFLAGS="-fuse-ld=gold" CXX="gcc++" CFLAGS="" CPPFLAGS="" ./configure --enable-static --enable-dynamic
+    CC=gcc LDFLAGS="-fuse-ld=gold" CXX="gcc++" CFLAGS="-fPIC" CPPFLAGS="-fPIC" ./configure --enable-static --enable-dynamic
     make
     make install
     cd ..
@@ -157,8 +157,8 @@ Build  libiconv
 3. Setting some defaults
 ------------------------------------------------
 
-export CC="/usr/bin/clang-10"
-export CXX="/usr/bin/clang++-10"
+export CC="/usr/bin/clang-13"
+export CXX="/usr/bin/clang++-13"
 export PREFIX="/usr/local"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"

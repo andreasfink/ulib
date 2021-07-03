@@ -12,18 +12,18 @@ Here is how to get such a installation up and running under Debian 10 (codename 
 First we need some basic tools and repository's set up
 
 apt-get install --assume-yes \
-	apt-transport-https \
-	openssh-client \
-	vim \
-	dirmngr \
-	libsctp1 \
-	lksctp-tools \
-	acpid \
-	wget \
-	telnet \
-	sudo \
-	locales-all \
-	net-tools
+    apt-transport-https \
+    openssh-client \
+    vim \
+    dirmngr \
+    libsctp1 \
+    lksctp-tools \
+    acpid \
+    wget \
+    telnet \
+    sudo \
+    locales-all \
+    net-tools
 
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xCBCB082A1BB943DB
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C23AC7F49887F95A 
@@ -58,7 +58,7 @@ echo "deb-src http://apt.llvm.org/${DEBIAN_NICKNAME}/ llvm-toolchain-${DEBIAN_NI
 
 apt-get update
 
-apt-get install clang-10 lldb-10 lld-10
+apt-get install clang-13 lldb-13 lld-13
 
 
 2. Install depenencies

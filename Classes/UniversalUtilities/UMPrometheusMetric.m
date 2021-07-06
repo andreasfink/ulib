@@ -20,7 +20,33 @@
     return self;
 }
 
+- (UMPrometheusMetric *)initWithMetricName:(NSString *)name type:(UMPrometheusMetricType)t;
+{
+    return [self initWithMetricName:name
+                           subname1:NULL
+                          subvalue1:NULL
+                           subname2:NULL
+                          subvalue2:NULL
+                               type:t];
+}
+
 - (UMPrometheusMetric *)initWithMetricName:(NSString *)name subname1:(NSString *)sub1 subvalue1:(NSString *)val1 type:(UMPrometheusMetricType)t
+{
+    return [self initWithMetricName:name
+                           subname1:sub1
+                          subvalue1:val1
+                           subname2:NULL
+                          subvalue2:NULL
+                               type:t];
+
+}
+
+- (UMPrometheusMetric *)initWithMetricName:(NSString *)name
+                                  subname1:(NSString *)sub1
+                                 subvalue1:(NSString *)val1
+                                  subname2:(NSString *)sub2
+                                 subvalue2:(NSString *)val2
+                                      type:(UMPrometheusMetricType)t
 {
     self = [super init];
     if(self)
@@ -30,6 +56,8 @@
         _metricName = name;
         _subname1 = sub1;
         _subvalue1 =val1;
+        _subname2 = sub2;
+        _subvalue2 =val2;
         _metricType = t;
     }
     return self;

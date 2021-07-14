@@ -718,8 +718,6 @@ static NSArray *        _machineCPUIDs = NULL;
 #define RXPIPE    0
 #define TXPIPE    1
 
-#if!defined(TARGET_OS_TV)
-
 +(NSArray *)readChildProcess:(NSArray *)args
 {
     int pipefds[2];
@@ -785,7 +783,6 @@ static NSArray *        _machineCPUIDs = NULL;
     }
     return result;
 }
-#endif
 
 
 + (NSArray *)getCPUSerialNumbers

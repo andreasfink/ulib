@@ -215,6 +215,27 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
     }
 }
 
+
+- (NSString *)lockStatusDescription
+{
+    NSMutableString *s = [[NSMutableString alloc]init];
+    [s appendString:[super description]];
+    if(_lockedInFunction != NULL)
+    {
+        [s appendFormat: @" locked by %s (%s:%ld)", _lockedInFunction,_lockedInFile,_lockedAtLine];
+    }
+    else
+    {
+        [s appendFormat: @" unlocked"];
+    }
+    if(_tryingToLockInFunction != NULL)
+    {
+        [s appendFormat: @" awaited by %s (%s:%ld)",_tryingToLockInFunction,_tryingToLockInFile,_tryingToLockAtLine];
+
+    }
+    return s;
+}
+
 @end
 
 
@@ -292,3 +313,4 @@ BOOL ummutex_stat_is_enabled(void)
         return YES;
     }
 }
+

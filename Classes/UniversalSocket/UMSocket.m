@@ -1803,6 +1803,9 @@ static int SSL_smart_shutdown(SSL *ssl)
 		case EINPROGRESS:
 			fprintf(stderr,"Error: %d EINPROGRESS %s",err,errString.UTF8String);
 			break;
+         case EBUSY:
+               fprintf(stderr,"Error: %d EBUSY %s",err,errString.UTF8String);
+               break;
 		case EINTR:
 			fprintf(stderr,"Error: %d EINTR %s",err,errString.UTF8String);
 			break;
@@ -2425,6 +2428,10 @@ static int SSL_smart_shutdown(SSL *ssl)
             return UMSocketError_not_connected;
         case ECONNABORTED:
             return UMSocketError_connection_aborted;
+#if defined EBUSY
+        case EBUSY:
+            return UMSocketError_busy;
+#endif
         case EINPROGRESS:
 #if defined EALREADY
         case EALREADY:
@@ -2554,6 +2561,8 @@ static int SSL_smart_shutdown(SSL *ssl)
             return @"file descriptor is not open";
         case UMSocketError_protocol_violation:
             return @"protocol violation";
+        case UMSocketError_busy:
+            return @"busy";
         case UMSocketError_not_known:
             return @"not known";
         default:

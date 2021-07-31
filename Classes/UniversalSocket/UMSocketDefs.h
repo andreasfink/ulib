@@ -60,7 +60,8 @@ typedef enum UMSocketError
     UMSocketError_connection_aborted        = -53,  /* ECONNABORTED */
     UMSocketError_is_already_connected      = -106, /* EISCONN */
     UMSocketError_not_connected             = -107, /* ENOTCONN */
-    UMSocketError_in_progress               = -115, /* EINPROGRESS */    
+    UMSocketError_in_progress               = -115, /* EINPROGRESS */
+    UMSocketError_busy                      = -116, /* EBUSY */
     UMSocketError_invalid_port_or_address   = -900, /* EINVAL con connect */
     UMSocketError_file_descriptor_not_open  = -901,
     UMSocketError_protocol_violation        = -902,

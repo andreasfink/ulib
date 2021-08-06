@@ -223,14 +223,38 @@
 		}
 		if(_runCallbackInForeground)
 		{
+            if(_objectToCall == NULL)
+            {
+                NSLog(@"TIMER ERROR(%@): timer fires in foregroundbut object to call is NULL",_name);
+            }
+            else if(![_objectToCall respondsToSelector:_selectorToCall])
+            {
+                NSLog(@"TIMER ERROR(%@): trying to call selector %@ in foreground on object %@ which it doesn't understand",
+                      _name,NSStringFromSelector(_selectorToCall),_objectToCall);
+            }
+            else
+            {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-			[_objectToCall performSelector:_selectorToCall withObject:_parameter];
+                [_objectToCall performSelector:_selectorToCall withObject:_parameter];
 #pragma clang diagnostic pop
+            }
 		}
 		else
 		{
-			[_objectToCall runSelectorInBackground:_selectorToCall withObject:_parameter];
+            if(_objectToCall == NULL)
+            {
+                NSLog(@"TIMER ERROR(%@): timer fires in background but object to call is NULL",_name);
+            }
+            else if(![_objectToCall respondsToSelector:_selectorToCall])
+            {
+                NSLog(@"TIMER ERROR(%@): trying to call selector %@ in background on object %@ which it doesn't understand",
+                      _name, NSStringFromSelector(_selectorToCall),_objectToCall);
+            }
+            else
+            {
+                [_objectToCall runSelectorInBackground:_selectorToCall withObject:_parameter];
+            }
 		}
 	}
 }

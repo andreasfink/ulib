@@ -52,9 +52,7 @@
 + (NSString *)getMachineSerialNumber; /*!< returns the machines serial number if it can be read */
 + (NSString *)getMachineUUID; /*!< returns the machines UUID if it can be read */
 //+ (NSArray *)getCPUSerialNumbers; /* !< returns the CPU serial if it can be read */
-#if!defined(TARGET_OS_TV)
 + (NSArray *)readChildProcess:(NSArray *)args; /* !< creates a subprocess with the array elements as arguments. Executes it and returns an array of lines returned */
-#endif
 
 + (long long) milisecondClock;
 + (uint32_t) random:(uint32_t)upperBound;

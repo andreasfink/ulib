@@ -128,7 +128,20 @@
 
 - (UMLayer *)init
 {
-    return [self initWithTaskQueueMulti:NULL];
+    UMAssert(0,@"UMLayer: dont call init. call initWithTaskQueueMulti:name: instead");
+    return NULL;
+}
+
+- (UMLayer *)initWithoutExecutionQueue:(NSString *)name
+{
+    self = [super init];
+    if(self)
+    {
+        _layerName = name;
+        _taskQueue = NULL;
+        _logLevel = UMLOG_MAJOR;
+    }
+    return self;
 }
 
 - (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq
@@ -139,6 +152,8 @@
 - (UMLayer *)initWithTaskQueueMulti:(UMTaskQueueMulti *)tq
                                name:(NSString *)name
 {
+    UMAssert(name.length > 0,@"UMLayer initWithTaskQueueMulti:name: has no name being passed");
+
     self = [super init];
     if(self)
     {
@@ -146,9 +161,8 @@
 
         if(tq == NULL)
         {
-            NSString *s = (name.length > 0) ? [NSString stringWithFormat:@"private_task_queue(%@)",name] : @"private_task_queue";
             UMTaskQueueMulti *tq =[[UMTaskQueueMulti alloc]initWithNumberOfThreads:4
-                                                                              name:s
+                                                                              name:name
                                                                      enableLogging:NO
                                                                     numberOfQueues:UMLAYER_QUEUE_COUNT];
             _taskQueue =tq;

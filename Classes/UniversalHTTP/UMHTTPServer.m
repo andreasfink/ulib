@@ -91,7 +91,9 @@
             {
                 tqname = @"HTTP_TaskQueue";
             }
-            _taskQueue = [[UMTaskQueue alloc]initWithNumberOfThreads:_processingThreadCount name:tqname enableLogging:NO];
+            _taskQueue = [[UMTaskQueue alloc]initWithNumberOfThreads:_processingThreadCount
+                                                                name:tqname
+                                                       enableLogging:NO];
             [_taskQueue start];
         }
         if(doSSL)

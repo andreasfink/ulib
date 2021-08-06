@@ -29,4 +29,8 @@
 #import "UMRegex.h"
 #import "UMDigitTree.h"
 #import "UMDigitTreeEntry.h"
+#import "UMPrometheus.h"
+#import "UMPrometheusMetric.h"
+#import "UMPrometheusThroughputMetric.h"
+#import "UMPrometheusMetricUptime.h"
 

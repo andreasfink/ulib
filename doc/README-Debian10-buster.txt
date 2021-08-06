@@ -12,18 +12,18 @@ Here is how to get such a installation up and running under Debian 10 (codename 
 First we need some basic tools and repository's set up
 
 apt-get install --assume-yes \
-	apt-transport-https \
-	openssh-client \
-	vim \
-	dirmngr \
-	libsctp1 \
-	lksctp-tools \
-	acpid \
-	wget \
-	telnet \
-	sudo \
-	locales-all \
-	net-tools
+    apt-transport-https \
+    openssh-client \
+    vim \
+    dirmngr \
+    libsctp1 \
+    lksctp-tools \
+    acpid \
+    wget \
+    telnet \
+    sudo \
+    locales-all \
+    net-tools
 
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xCBCB082A1BB943DB
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C23AC7F49887F95A 
@@ -58,7 +58,7 @@ echo "deb-src http://apt.llvm.org/${DEBIAN_NICKNAME}/ llvm-toolchain-${DEBIAN_NI
 
 apt-get update
 
-apt-get install clang-10 lldb-10 lld-10
+apt-get install clang-13 lldb-13 lld-13
 
 
 2. Install depenencies
@@ -148,7 +148,7 @@ Build  libiconv
     wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
     tar -xvzf libiconv-1.16.tar.gz
     cd libiconv-1.16
-    CC=gcc LDFLAGS="-fuse-ld=gold" CXX="gcc++" CFLAGS="" CPPFLAGS="" ./configure --enable-static --enable-dynamic
+    CC=gcc LDFLAGS="-fuse-ld=gold" CXX="gcc++" CFLAGS="-fPIC" CPPFLAGS="-fPIC" ./configure --enable-static --enable-dynamic
     make
     make install
     cd ..
@@ -157,8 +157,8 @@ Build  libiconv
 3. Setting some defaults
 ------------------------------------------------
 
-export CC="/usr/bin/clang-10"
-export CXX="/usr/bin/clang++-10"
+export CC="/usr/bin/clang-13"
+export CXX="/usr/bin/clang++-13"
 export PREFIX="/usr/local"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"
@@ -220,7 +220,7 @@ mkdir -p ${PREFIX}/bin
 
 
     cd base
-    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf --disable-mixedabi --with-libiconv-library=/usr/local/lib/libiconv.a
+    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf --with-libiconv-library=/usr/local/lib/libiconv.a
     make -j8
     make install
     ldconfig

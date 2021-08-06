@@ -15,6 +15,7 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #include <string.h>
+#import "UMAssert.h"
 
 @implementation UMTaskQueue
 
@@ -22,11 +23,28 @@
 {
     /* default number of threads is twice the number of CPU cores */
     /* this allows long running jobs to run while smaller shorter jobs can run in parallel */
-    return [self initWithNumberOfThreads:ulib_cpu_count() * 2 name:@"UMBackgroundQueue" enableLogging:NO];
+    int threadCount = ulib_cpu_count() * 2;
+    if(threadCount > 8)
+    {
+        threadCount = 8;
+    }
+    return [self initWithNumberOfThreads:threadCount name:@"UMBackgroundQueue" enableLogging:NO];
 }
 
-- (UMTaskQueue *)initWithNumberOfThreads:(NSUInteger)workerThreadCount name:(NSString *)n enableLogging:(BOOL)enableLog
+- (UMTaskQueue *)initWithNumberOfThreads:(NSUInteger)workerThreadCount
+                                    name:(NSString *)n
+                           enableLogging:(BOOL)enableLog
 {
+    UMAssert(n.length > 0,@"UMTaskQueue initWithNumberOfThreads:name:enableLogging: has no name being passed");
+    if(workerThreadCount > 8)
+    {
+        NSLog(@"UMTaskQueue initWithNumberOfThreads=%lu (%@) really want that many?",workerThreadCount,n);
+        if(workerThreadCount > 64)
+        {
+            NSLog(@"UMTaskQueue initWithNumberOfThreads=%lu (%@) limiting to 8?",workerThreadCount,n);
+            workerThreadCount = 8;
+        }
+    }
     self = [super init];
     if(self)
     {

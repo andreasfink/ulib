@@ -21,19 +21,34 @@
     const char          *_lockedInFile;
     long                 _lockedAtLine;
     const char          *_lockedInFunction;
+    const char          *_lastLockedInFile;
+    long                 _lastLockedAtLine;
+    const char          *_lastLockedInFunction;
+    const char          *_tryingToLockInFile;
+    long                 _tryingToLockAtLine;
+    const char          *_tryingToLockInFunction;
+
 }
 
 @property(readwrite,strong) NSString        *name;
 @property(readwrite,assign) const char      *lockedInFile;
 @property(readwrite,assign) long            lockedAtLine;
 @property(readwrite,assign) const char      *lockedInFunction;
+@property(readwrite,assign) const char      *lastLockedInFile;
+@property(readwrite,assign) long            lastLockedAtLine;
+@property(readwrite,assign) const char      *lastLockedInFunction;
+@property(readwrite,assign) const char      *tryingToLockInFile;
+@property(readwrite,assign) long            tryingToLockAtLine;
+@property(readwrite,assign) const char      *tryingToLockInFunction;
 
-- (void)lock;
-- (void)unlock;
-- (int)tryLock;
-- (UMMutex *)init;
-- (UMMutex *)initWithName:(NSString *)name;
-- (UMMutex *)initWithName:(NSString *)name saveInObjectStat:(BOOL)safeInObjectStat;
+
+- (void) lock;
+- (void) unlock;
+- (int) tryLock;
+- (UMMutex *) init;
+- (UMMutex *) initWithName:(NSString *)name;
+- (UMMutex *) initWithName:(NSString *)name saveInObjectStat:(BOOL)safeInObjectStat;
+- (NSString *) lockStatusDescription;
 @end
 
 @interface UMMutexStat : NSObject
@@ -52,6 +67,7 @@
 @property(readwrite,assign,atomic)  int64_t unlock_count;
 @property(readwrite,assign,atomic)  int64_t waiting_count;
 @property(readwrite,assign,atomic)  BOOL currently_locked;
+
 @end
 
 
@@ -63,14 +79,23 @@ void ummutex_stat_disable(void);
 
 #define UMMUTEX_LOCK(a)  \
 { \
+    a.tryingToLockInFile = __FILE__; \
+    a.tryingToLockAtLine = __LINE__; \
+    a.tryingToLockInFunction = __func__; \
     [a lock]; \
     a.lockedInFile = __FILE__;  \
     a.lockedAtLine = __LINE__;   \
     a.lockedInFunction =  __func__;  \
+    a.tryingToLockInFile = NULL; \
+    a.tryingToLockAtLine = 0; \
+    a.tryingToLockInFunction = NULL; \
 }
 
 #define UMMUTEX_UNLOCK(a) \
 {  \
-    [a unlock];  \
+    a.lastLockedInFile = a.lockedInFile;  \
+    a.lastLockedAtLine = a.lockedAtLine;   \
+    a.lastLockedInFunction =  a.lockedInFunction;  \
     a.lockedInFunction =  NULL; \
+    [a unlock];  \
 }

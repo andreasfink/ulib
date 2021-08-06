@@ -12,9 +12,9 @@ dnl
 
 dnl initialization
 
-AC_PREREQ(2.13)
+AC_PREREQ([2.71])
 AC_INIT([ulib],[1.0],[andreas@fink.org])
-AC_CONFIG_HEADER(Classes/ulib_config.h)
+AC_CONFIG_HEADERS([Classes/ulib_config.h])
 AC_SUBST(SHELL)
 AC_CONFIG_AUX_DIR(.)
 AC_SET_TERMINAL_SEQUENCES()
@@ -206,7 +206,15 @@ AC_CHECK_LIB(iconv, libiconv, [LIBS="$LIBS -liconv"])
 
 dnl Checks for header files.
 
-AC_HEADER_STDC
+m4_warn([obsolete],
+[The preprocessor macro `STDC_HEADERS' is obsolete.
+  Except in unusual embedded environments, you can safely include all
+  ISO C90 headers unconditionally.])dnl
+# Autoupdate added the next two lines to ensure that your configure
+# script's behavior did not change.  They are probably safe to remove.
+AC_CHECK_INCLUDES_DEFAULT
+AC_PROG_EGREP
+
 
 dnl check for headers
 AC_CONFIG_SECTION([Configuring HEADERS])
@@ -406,16 +414,12 @@ AC_DEFUN(AC_FUNC_WHICH_PTHREAD_SETNAME_NP,
 	[
 		AC_CACHE_CHECK(for which type of pthread_setname_np, ac_cv_func_which_pthread_setname_np,
 			[
-				AC_TRY_COMPILE(
-					[ #include <pthread.h>],
-					[
+				AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[ #include <pthread.h>]], [[
 						pthread_t target_thread=0; 
 						char *name="foo";
 						(void) pthread_setname_np(target_thread,name);
-					],
-					ac_cv_func_which_pthread_setname_np=2, 
-					[
-						AC_TRY_COMPILE(
+					]])],[ac_cv_func_which_pthread_setname_np=2],[
+						_au_m4_changequote([,])AC_TRY_COMPILE(
 							[ #include <netdb.h> ],
 							[
 								char *name="foo";
@@ -424,8 +428,8 @@ AC_DEFUN(AC_FUNC_WHICH_PTHREAD_SETNAME_NP,
 							ac_cv_func_which_pthread_setname_np=1,
 							ac_cv_func_which_pthread_setname_np=0
 						)
-					] 
-				)
+					 
+				])
 			]
 		)
 		if test $ac_cv_func_which_pthread_setname_np -eq 1; 
@@ -540,7 +544,20 @@ AC_CONFIG_FILES([Makefile.osx])
 AC_CONFIG_FILES([Makefile.linux])
 AC_CONFIG_FILES([Makefile.freebsd])
 AC_CONFIG_FILES([ulib.pc])
+AC_CONFIG_FILES([make_buildnr.sh])
 AC_OUTPUT
+
+chmod 755 make_buildnr.sh
+
+if [[ -f BUILDNR ]]
+then
+	echo "Buildnumber: `cat BUILDNR`"
+else
+	echo "1" > BUILDNR
+	echo "Buildnumber: 1"
+	./make_buildnr.sh
+fi
+
 case "$host" in
   *apple-darwin*) 
     cp Makefile.osx Makefile

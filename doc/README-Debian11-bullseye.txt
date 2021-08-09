@@ -49,23 +49,12 @@ echo "deb http://ftp.debian.org/debian ${DEBIAN_NICKNAME}-backports main"      >
 echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" > /etc/apt/sources.list.d/universalss7.list
 
 
-1. You need to install the llvm compiler
--------------------------------------------
-
-
-echo "deb http://apt.llvm.org/${DEBIAN_NICKNAME}/ llvm-toolchain-${DEBIAN_NICKNAME} main"			> /etc/apt/sources.list.d/llvm.list
-echo "deb-src http://apt.llvm.org/${DEBIAN_NICKNAME}/ llvm-toolchain-${DEBIAN_NICKNAME} main"		>> /etc/apt/sources.list.d/llvm.list
-
-apt-get update
-
-apt-get install clang-13 lldb-13 lld-13
-
-
-2. Install depenencies
+1. Install depenencies
 --------------------------
 (run as root or use sudo in front)
 
  apt-get install build-essential git subversion  \
+		install clang lldb \
         libxml2 libxml2-dev \
         libffi6 libffi-dev\
         libicu-dev \

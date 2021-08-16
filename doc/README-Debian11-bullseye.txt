@@ -36,6 +36,10 @@ wget -4 -O - http://repo.universalss7.ch/debian/key.asc | apt-key add -
 
 DEBIAN_NICKNAME=sid
 DEBIAN_MAIN_VERSION=`cat /etc/debian_version | cut -f1 -d.`
+if [ "${DEBIAN_MAIN_VERSION}" = "11" ]
+then
+	DEBIAN_NICKNAME="bullseye"
+fi
 if [ "${DEBIAN_MAIN_VERSION}" = "10" ]
 then
 	DEBIAN_NICKNAME="buster"
@@ -54,9 +58,9 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
 (run as root or use sudo in front)
 
  apt-get install build-essential git subversion  \
-		install clang lldb \
+        clang lldb \
         libxml2 libxml2-dev \
-        libffi6 libffi-dev\
+        libffi7 libffi-dev\
         libicu-dev \
         libuuid1 uuid-dev uuid-runtime \
         libsctp1 libsctp-dev lksctp-tools \
@@ -77,7 +81,7 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         libgl1-mesa-dev \
         libpcap-dev \
         python-dev swig \
-        libedit-dev libeditline0  libeditline-dev  readline-common \
+        libedit-dev readline-common \
         binfmt-support libtinfo-dev \
         bison flex m4 wget \
         libicns1    libicns-dev \
@@ -87,7 +91,7 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         libxmu6 libxpm4 wmaker-common\
         libgnutls30 libgnutls28-dev\
         libpng-dev libpng16-16\
-        libreadline7 libreadline-dev \
+        libreadline8 libreadline-dev \
         libgif7 libgif-dev libwings3 libwings-dev  libwutil5 \
         libcups2-dev \
         xorg \
@@ -98,10 +102,10 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         libasound2-dev libjack-dev libjack0 libportaudio2 libportaudiocpp0 portaudio19-dev \
         wmaker cmake cmake-curses-gui \
         libwraster6 libwraster-dev \
-        libicu63 libicu-dev \
+        libicu67 libicu-dev \
         ninja-build \
-        gobjc gobjc-8 \
-        gobjc++ gobjc++-8 \
+        gobjc gobjc-10 \
+        gobjc++ gobjc++-10 \
         default-libmysqlclient-dev \
         libpq-dev libpq5
 
@@ -146,8 +150,8 @@ Build  libiconv
 3. Setting some defaults
 ------------------------------------------------
 
-export CC="/usr/bin/clang-13"
-export CXX="/usr/bin/clang++-13"
+export CC="/usr/bin/clang"
+export CXX="/usr/bin/clang++"
 export PREFIX="/usr/local"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"

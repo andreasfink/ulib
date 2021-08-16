@@ -14,7 +14,7 @@ typedef NSUInteger NSDataSearchOptions;
 
 @interface NSData(UMLog)
 
-- (NSRange)rangeOfData:(NSData *)dataToFind options:(NSDataSearchOptions)mask range:(NSRange)searchRange;
+//- (NSRange)rangeOfData:(NSData *)dataToFind options:(NSDataSearchOptions)mask range:(NSRange)searchRange;
 
 @end
 

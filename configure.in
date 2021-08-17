@@ -121,6 +121,7 @@ case "$host" in
     CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
     AC_DEFINE(HAVE_OPENSSL)
 	SHARED_LIBRARY_EXTENSION="so"
+    DMIDECODE="/usr/sbin/dmidecode"
 	;;
 
   *-freebsd*)
@@ -154,6 +155,7 @@ case "$host" in
 	CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
 	AC_DEFINE(HAVE_OPENSSL)
         LIBRARIES=""
+    DMIDECODE="/usr/local/sbin/dmidecode"
 	;;
 esac
 
@@ -540,6 +542,7 @@ AC_SUBST(REVISION)
 AC_SUBST(STATIC_LIBS)
 AC_SUBST(SHARED_LIBRARY_EXTENSION)
 AC_SUBST(LIBRARIES)
+AC_SUBST(DMIDECODE)
 AC_CONFIG_SECTION([Generating output files]) 
 AC_CONFIG_FILES([Makefile.osx])
 AC_CONFIG_FILES([Makefile.linux])

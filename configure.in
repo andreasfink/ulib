@@ -12,7 +12,7 @@ dnl
 
 dnl initialization
 
-AC_PREREQ([2.71])
+AC_PREREQ([2.68])
 AC_INIT([ulib],[1.0],[andreas@fink.org])
 AC_CONFIG_HEADERS([Classes/ulib_config.h])
 AC_SUBST(SHELL)
@@ -113,6 +113,7 @@ case "$host" in
 		GNUSTEP_CONFIG=/usr/bin/gnustep-config
 	fi
 	LIBS="$LIBS -ldl"
+	LIBRARIES="-lsctp -lbsd -luuid"
 	CFLAGS="$CFLAGS `$GNUSTEP_CONFIG --objc-flags`"
 	LDFLAGS="$LDFLAGS `/usr/local/bin/gnustep-config --base-libs --objc-libs`"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
@@ -152,6 +153,7 @@ case "$host" in
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
 	CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
 	AC_DEFINE(HAVE_OPENSSL)
+        LIBRARIES=""
 	;;
 esac
 
@@ -212,7 +214,6 @@ m4_warn([obsolete],
   ISO C90 headers unconditionally.])dnl
 # Autoupdate added the next two lines to ensure that your configure
 # script's behavior did not change.  They are probably safe to remove.
-AC_CHECK_INCLUDES_DEFAULT
 AC_PROG_EGREP
 
 
@@ -538,7 +539,7 @@ AC_SUBST(MINORVER)
 AC_SUBST(REVISION)
 AC_SUBST(STATIC_LIBS)
 AC_SUBST(SHARED_LIBRARY_EXTENSION)
-
+AC_SUBST(LIBRARIES)
 AC_CONFIG_SECTION([Generating output files]) 
 AC_CONFIG_FILES([Makefile.osx])
 AC_CONFIG_FILES([Makefile.linux])

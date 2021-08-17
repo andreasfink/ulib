@@ -637,7 +637,6 @@ static NSArray *        _machineCPUIDs = NULL;
 #define MAXLINE 256
     NSMutableString *serialNumber = NULL;
     NSArray *cmd = @[@(DMIDECODE),@"-t",@"system"];
-    NSLog(@"CMD=%@",cmd);
     NSArray *lines = [UMUtil readChildProcess:cmd];
     for (NSString *line in lines)
     {

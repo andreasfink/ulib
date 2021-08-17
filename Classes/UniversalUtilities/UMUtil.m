@@ -637,7 +637,7 @@ static NSArray *        _machineCPUIDs = NULL;
 #define MAXLINE 256
     NSMutableString *serialNumber = NULL;
     NSArray *cmd = @[@(DMIDECODE),@"-t",@"system"];
-	NSLog(@"CMD=%@",cmd);
+    NSLog(@"CMD=%@",cmd);
     NSArray *lines = [UMUtil readChildProcess:cmd];
     for (NSString *line in lines)
     {
@@ -693,7 +693,7 @@ static NSArray *        _machineCPUIDs = NULL;
     NSString *uuidNumber = NULL;
     BOOL found = NO;
 
-    NSArray *cmd = [NSArray arrayWithObjects:@"/usr/sbin/dmidecode",@"-t",@"system",NULL];
+    NSArray *cmd = [NSArray arrayWithObjects:@(DMIDECODE),@"-t",@"system",NULL];
     NSArray *lines = [UMUtil readChildProcess:cmd];
     for (NSString *line in lines)
     {

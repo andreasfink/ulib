@@ -3450,7 +3450,13 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 {
 #ifdef __APPLE__
     return;
-#else
+#endif
+
+#ifdef FREEBSD
+    return;
+#endif
+
+#ifdef LINUX
     setsockopt(_sock, SOL_SOCKET, SO_PRIORITY, &dscp, sizeof(dscp));
 #endif
 }
@@ -3459,7 +3465,11 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 {
 #ifdef __APPLE__
     return -1;
-#else
+#endif
+#ifdef FREEBSD
+    return -1;
+#endif
+#ifdef LINUX
     int dscp = 0;
     socklen_t len = sizeof(dscp);
     if(getsockopt(_sock, SOL_SOCKET, SO_PRIORITY, &dscp, &len) != 0)
@@ -3468,6 +3478,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     }
     return dscp;
 #endif
+    return -1;
 }
 
 @end

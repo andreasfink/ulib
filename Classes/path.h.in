@@ -1,0 +1,4 @@
+/* path.h */
+
+#define	DMIDECODE "@DMIDECODE@"
+

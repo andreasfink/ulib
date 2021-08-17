@@ -549,6 +549,7 @@ AC_CONFIG_FILES([Makefile.linux])
 AC_CONFIG_FILES([Makefile.freebsd])
 AC_CONFIG_FILES([ulib.pc])
 AC_CONFIG_FILES([make_buildnr.sh])
+AC_CONFIG_FILES([Classes/path.h])
 AC_OUTPUT
 
 chmod 755 make_buildnr.sh

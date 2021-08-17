@@ -8,6 +8,7 @@
 #import "UMUtil.h"
 #import <pthread.h>
 #include "ulib_config.h"
+#include "path.h"
 
 /* byte order stuff: we use macros under MacOS X */
 
@@ -635,7 +636,8 @@ static NSArray *        _machineCPUIDs = NULL;
 
 #define MAXLINE 256
     NSMutableString *serialNumber = NULL;
-    NSArray *cmd = @[@"" DMIDECODE "",@"-t",@"system"];
+    NSArray *cmd = @[@(DMIDECODE),@"-t",@"system"];
+	NSLog(@"CMD=%@",cmd);
     NSArray *lines = [UMUtil readChildProcess:cmd];
     for (NSString *line in lines)
     {

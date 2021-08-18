@@ -5166,6 +5166,7 @@ then :
 
 fi
 
+
 ac_fn_c_check_header_compile "$LINENO" "sys/socket.h" "ac_cv_header_sys_socket_h" "$ac_includes_default"
 if test "x$ac_cv_header_sys_socket_h" = xyes
 then :

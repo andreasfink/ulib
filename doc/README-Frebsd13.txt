@@ -3,7 +3,7 @@ Gnustep under FreeBSD 13
 
 To build Gnustep under Feebsd
 
-Here is how to get such a installation up and running under FreeBSD 12 (codename Stretch)
+Here is how to get such a installation up and running under FreeBSD 13
 
 
 First we need some basic tools and repository's set up
@@ -23,6 +23,7 @@ pkg install git \
 	sudo \
 	gmake \
 	windowmaker \
+	jpeg \
 	tiff \
 	png \
 	libxml2 \
@@ -37,8 +38,7 @@ pkg install git \
 	pngwriter \
 	mariadb103-client \
 	postgresql96-client \
-	bash jpeg-xl libjpeg-turbo mozjpeg openjpeg \
-        sctplib \
+	bash
 
 
 Download the sourcecode of gnustep and dependencies
@@ -57,41 +57,60 @@ Download the sourcecode of gnustep and dependencies
     git clone https://github.com/gnustep/back
     ./scripts/install-dependencies
 	
+	
+Lets purge the gcc stuff in case its installed
+----------------------------------------------
+
+apt-get purge libblocksruntime-dev libblocksruntime0
+
+
+4. Build dependencies
+
+#   Note libiconf does not build if the compiler is set to clang or the linker to lld.
+
+    tar -xvzf libiconv-1.15.tar.gz
+    cd libiconv-1.15
+    ./configure --enable-static --enable-dynamic
+    make
+    make install
+    cd ..
+
 
 3. Setting some defaults
 ------------------------------------------------
 
-#first switch to bash:
-
-bash
-
-# always use gmake
-
-alias make=gmake
-
-export CC="clang"
-export CXX="clang++"
+export CC="clang-devel"
+export CXX="clang++-devel"
 export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/root/bin"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
-export RUNTIME_VERSION="gnustep-2.0"
-export CPPFLAGS="-I ${PREFIX}/include"
-export LDFLAGS="-L/usr/local/lib"
-export OBJCFLAGS="-fblocks"
-export CFLAGS="-I ${PREFIX}/include"
-export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
+#export RUNTIME_VERSION="gnustep-2.0"
+#export CPPFLAGS="-L/usr/local/lib -L${PREFIX}/lib"
+#export LD="/usr/bin/lld-7"
+#export LDFLAGS="-fuse-ld=${LD}"
+#export OBJCFLAGS="-fblocks"
+#export CFLAGS="-I ${PREFIX}/include"
 
-mkdir -p ${PREFIX}/lib
-mkdir -p ${PREFIX}/etc
-mkdir -p ${PREFIX}/bin
+#mkdir -p ${PREFIX}/lib
+#mkdir -p ${PREFIX}/etc
+#mkdir -p ${PREFIX}/bin
+
+#    cd swift-corelibs-libdispatch
+#    mkdir build
+#    cd build
+#    cmake .. -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX}
+#    make
+#    make install
     
 
-.install libobjc2 runtime
+    
+
+5. install libobjc2 runtime
 
     cd libobjc2
     mkdir Build
     cd Build
     cmake ..  -DCMAKE_BUILD_TYPE=Release -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX}
-    make -j64
+    make -j8
     make install
     cd ..
     ldconfig
@@ -101,6 +120,11 @@ mkdir -p ${PREFIX}/bin
 6. install gnustep-make
 
     cd make
+
+	cat FilesystemLayouts/fhs | sed 's/^GNUSTEP_DEFAULT_PREFIX=.*$/GNUSTEP_DEFAULT_PREFIX=\/opt\/universalss7/g' > FilesystemLayouts/universalss7
+
+
+with standard /usr/local layout...
     ./configure \
             --with-layout=fhs \
             --disable-importing-config-file \
@@ -113,13 +137,16 @@ mkdir -p ${PREFIX}/bin
             --with-user-defaults-dir='GNUstep/Library/Defaults' \
 gmake
 gmake install
-source ${PREFIX}/etc/GNUstep/GNUstep.conf
+source /etc/GNUstep/GNUstep.conf
 cd ..
  
 7. install gnustep-base
 
 
 cd base
+./configure --with-config-file=/etc/GNUstep/GNUstep.conf
+
+
     ./configure  --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf  
 	make -j8
     make install

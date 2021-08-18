@@ -78,6 +78,7 @@ export CPPFLAGS="-I ${PREFIX}/include"
 export LDFLAGS="-L/usr/local/lib"
 export OBJCFLAGS="-fblocks"
 export CFLAGS="-I ${PREFIX}/include"
+export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 
 mkdir -p ${PREFIX}/lib
 mkdir -p ${PREFIX}/etc

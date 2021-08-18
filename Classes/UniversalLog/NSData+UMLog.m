@@ -13,7 +13,8 @@
 #import "NSData+UMLog.h"
 
 @implementation NSData(UMLog)
-
+#if 0
+		// this is now implemented in gnustep base 
 - (NSRange)rangeOfData:(NSData *)dataToFind options:(NSDataSearchOptions)mask range:(NSRange)searchRange
 {
     const void * bytes = [self bytes];
@@ -48,6 +49,8 @@
     }
     return foundRange;
 }
+#endif
+
 @end
 
 #endif

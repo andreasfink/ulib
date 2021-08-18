@@ -8,7 +8,7 @@
 #import "UMUtil.h"
 #import <pthread.h>
 #include "ulib_config.h"
-#include "path.h"
+#include "../path.h"
 
 /* byte order stuff: we use macros under MacOS X */
 

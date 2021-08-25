@@ -9,5 +9,7 @@
 #import "UMQueueNull.h"
 #import "UMQueueMulti.h"
 
+#define  UMQueue    #error
+
 #import "UMPool.h"
 

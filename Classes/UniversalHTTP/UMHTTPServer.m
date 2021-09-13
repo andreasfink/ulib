@@ -66,8 +66,6 @@
         _sleeper		= [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
         [_sleeper prepare];
         _connections = [[UMSynchronizedArray alloc] init];
-        _connectionsLock = [[UMMutex alloc]initWithName:@"http-connections-lock"];
-
         _terminatedConnections = [[UMSynchronizedArray alloc]init];
         _lock		= [[NSLock alloc] init];
         _sslLock     = [[NSLock alloc]init];
@@ -355,10 +353,8 @@
 {
     if(con)
     {
-        UMMUTEX_LOCK(_connectionsLock);
         [_connections removeObject:con];
         [_terminatedConnections addObject:con];
-        UMMUTEX_UNLOCK(_connectionsLock);
     }
 }
 

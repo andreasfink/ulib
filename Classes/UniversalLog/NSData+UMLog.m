@@ -14,6 +14,8 @@
 
 @implementation NSData(UMLog)
 
+#ifdef OLD_GNUSTEP
+
 - (NSRange)rangeOfData:(NSData *)dataToFind options:(NSDataSearchOptions)mask range:(NSRange)searchRange
 {
     const void * bytes = [self bytes];
@@ -48,6 +50,7 @@
     }
     return foundRange;
 }
+#endif
 @end
 
 #endif

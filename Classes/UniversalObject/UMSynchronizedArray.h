@@ -19,7 +19,7 @@
 @interface UMSynchronizedArray : UMObject<NSCopying,NSFastEnumeration>
 {
     NSMutableArray  *_array;
-    UMMutex         *_mutex;
+    UMMutex         *_lock;
 }
 
 @property (readonly,strong) NSMutableArray *array;
@@ -55,5 +55,9 @@
 - (NSString *)jsonString;
 - (NSString *)jsonCompactString;
 
+
+/* if you need to lock other thread's operation on this array temporarely */
+- (void)lock;
+- (void)unlock;
 @end
 

@@ -155,7 +155,6 @@ typedef enum UMHTTPServerStatus
     NSData *_certFileData;
 
     UMSynchronizedArray *_pendingRequests;
-    UMMutex *_connectionsLock;
     NSString    *_documentRoot;
 
     NSUInteger   _processingThreadCount;

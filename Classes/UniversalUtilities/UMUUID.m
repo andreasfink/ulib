@@ -25,11 +25,12 @@
 +(NSString *)UUID
 { 
     char uuid_string2[40];
-    memset(uuid_string,0x00,40);
+    char *uuid_string = & uuid_string2;
+    memset(uuid_string2,0x00,40);
     uuid_t uu;
     uint32_t status;
     uuid_create(&uu,&status);
-    uuid_to_string(uu,uuid_string2,&status);
+    uuid_to_string(&uu,&uuid_string,&status);
 
     NSString *uniqueId = NULL;
 
@@ -47,7 +48,7 @@
                  trec.tm_hour,
                  trec.tm_min,
                  trec.tm_sec,
-                 uuid_string2];
+                 uuid_string];
     return uniqueId;
 }
 

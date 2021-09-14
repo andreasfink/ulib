@@ -130,4 +130,23 @@
     [_lock unlock];
     return i;
 }
+
+- (void)lock
+{
+    UMMUTEX_LOCK(_lock);
+}
+
+- (void)unlock
+{
+    UMMUTEX_UNLOCK(_lock);
+}
+
+- (id)getObjectAtIndex:(NSInteger)i
+{
+    UMMUTEX_LOCK(_lock);
+    id obj = [_queue objectAtIndex:0];
+    UMMUTEX_UNLOCK(_lock);
+    return obj;
+}
+
 @end

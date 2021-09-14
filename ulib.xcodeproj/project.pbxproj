@@ -10199,7 +10199,7 @@
 		A666EEC91E89BB17004804CB /* UMSyntaxAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMSyntaxAction.m; path = UniversalTokenizer/UMSyntaxAction.m; sourceTree = "<group>"; };
 		A666EECA1E89BB17004804CB /* UMSyntaxContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMSyntaxContext.h; path = UniversalTokenizer/UMSyntaxContext.h; sourceTree = "<group>"; };
 		A666EECB1E89BB17004804CB /* UMSyntaxContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMSyntaxContext.m; path = UniversalTokenizer/UMSyntaxContext.m; sourceTree = "<group>"; };
-		A666EECC1E89BB17004804CB /* UMSyntaxToken_Const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMSyntaxToken_Const.h; path = UniversalTokenizer/UMSyntaxToken_Const.h; sourceTree = "<group>"; };
+		A666EECC1E89BB17004804CB /* UMSyntaxToken_Const.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 5; lastKnownFileType = sourcecode.c.h; name = UMSyntaxToken_Const.h; path = UniversalTokenizer/UMSyntaxToken_Const.h; sourceTree = "<group>"; };
 		A666EECD1E89BB17004804CB /* UMSyntaxToken_Const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMSyntaxToken_Const.m; path = UniversalTokenizer/UMSyntaxToken_Const.m; sourceTree = "<group>"; };
 		A666EECE1E89BB17004804CB /* UMSyntaxToken_Name.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMSyntaxToken_Name.h; path = UniversalTokenizer/UMSyntaxToken_Name.h; sourceTree = "<group>"; };
 		A666EECF1E89BB17004804CB /* UMSyntaxToken_Name.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMSyntaxToken_Name.m; path = UniversalTokenizer/UMSyntaxToken_Name.m; sourceTree = "<group>"; };
@@ -22479,7 +22479,7 @@
 		A6D8AB32149A769B0029E9CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -22519,7 +22519,7 @@
 		A6D8AB33149A769B0029E9CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -22598,7 +22598,7 @@
 				SUPPORTED_PLATFORMS = "watchsimulator watchos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
-				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -22645,7 +22645,7 @@
 				SUPPORTED_PLATFORMS = "watchsimulator watchos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
-				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;

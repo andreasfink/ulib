@@ -1803,6 +1803,9 @@ static int SSL_smart_shutdown(SSL *ssl)
 		case EINPROGRESS:
 			fprintf(stderr,"Error: %d EINPROGRESS %s",err,errString.UTF8String);
 			break;
+         case EBUSY:
+               fprintf(stderr,"Error: %d EBUSY %s",err,errString.UTF8String);
+               break;
 		case EINTR:
 			fprintf(stderr,"Error: %d EINTR %s",err,errString.UTF8String);
 			break;
@@ -2425,6 +2428,10 @@ static int SSL_smart_shutdown(SSL *ssl)
             return UMSocketError_not_connected;
         case ECONNABORTED:
             return UMSocketError_connection_aborted;
+#if defined EBUSY
+        case EBUSY:
+            return UMSocketError_busy;
+#endif
         case EINPROGRESS:
 #if defined EALREADY
         case EALREADY:
@@ -2554,6 +2561,8 @@ static int SSL_smart_shutdown(SSL *ssl)
             return @"file descriptor is not open";
         case UMSocketError_protocol_violation:
             return @"protocol violation";
+        case UMSocketError_busy:
+            return @"busy";
         case UMSocketError_not_known:
             return @"not known";
         default:
@@ -3441,7 +3450,13 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 {
 #ifdef __APPLE__
     return;
-#else
+#endif
+
+#ifdef FREEBSD
+    return;
+#endif
+
+#ifdef LINUX
     setsockopt(_sock, SOL_SOCKET, SO_PRIORITY, &dscp, sizeof(dscp));
 #endif
 }
@@ -3450,7 +3465,11 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 {
 #ifdef __APPLE__
     return -1;
-#else
+#endif
+#ifdef FREEBSD
+    return -1;
+#endif
+#ifdef LINUX
     int dscp = 0;
     socklen_t len = sizeof(dscp);
     if(getsockopt(_sock, SOL_SOCKET, SO_PRIORITY, &dscp, &len) != 0)
@@ -3459,6 +3478,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     }
     return dscp;
 #endif
+    return -1;
 }
 
 @end

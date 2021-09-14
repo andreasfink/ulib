@@ -33,5 +33,8 @@
 - (void)insertFirst:(id)obj;
 - (NSInteger)count;
 - (void)removeObject:(id)object;
+- (void)lock;
+- (id)getObjectAtIndex:(NSInteger)i;
+- (void)unlock;
 
 @end

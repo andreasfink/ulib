@@ -16,6 +16,7 @@
 
 #ifdef OLD_GNUSTEP
 
+		// this is now implemented in gnustep base 
 - (NSRange)rangeOfData:(NSData *)dataToFind options:(NSDataSearchOptions)mask range:(NSRange)searchRange
 {
     const void * bytes = [self bytes];
@@ -51,6 +52,8 @@
     return foundRange;
 }
 #endif
+
 @end
 
 #endif
+

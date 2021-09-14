@@ -26,6 +26,12 @@
     #define __func__ "unknown"
 #endif
 
+/* Define if you have sctp/sctp.h. */
+#undef HAVE_SCTP_SCTP_H
+
+/* Define if you have netinet/sctp.h. */
+#undef HAVE_NETINET_SCTP_H
+
 /* Define if you have getopt.h. */
 #undef HAVE_GETOPT_H
 

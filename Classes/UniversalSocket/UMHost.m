@@ -197,6 +197,7 @@
     self = [super init];
     if (self)
     {
+        n = [UMSocket unifyIP:n];
         self.addresses = [NSMutableArray arrayWithObjects:n,nil];
         _lock = [[UMMutex alloc] initWithName:@"umhost"];
         _isLocalHost = 0;

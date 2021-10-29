@@ -477,6 +477,8 @@ static int SSL_smart_shutdown(SSL *ssl)
                 case UMSOCKET_TYPE_UDP6ONLY:
                 case UMSOCKET_TYPE_UDP4ONLY:
                 case UMSOCKET_TYPE_UDP:
+                    reuse=0;
+                    linger_time = 0;
                     fprintf(stderr,"[UMSocket: init] socket(IPPROTO_UDP) returns %d errno = %d (%s)",_sock,errno,strerror(errno));
                     break;
                 case UMSOCKET_TYPE_SCTP4ONLY_SEQPACKET:

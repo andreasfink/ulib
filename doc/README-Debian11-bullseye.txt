@@ -188,7 +188,6 @@ mkdir -p ${PREFIX}/bin
     ldconfig
 
 
-
 6. install gnustep-make
 
     cd make

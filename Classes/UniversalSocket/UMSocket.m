@@ -472,12 +472,14 @@ static int SSL_smart_shutdown(SSL *ssl)
                 case UMSOCKET_TYPE_TCP6ONLY:
                 case UMSOCKET_TYPE_TCP4ONLY:
                 case UMSOCKET_TYPE_TCP:
+                    reuse=1;
+                    linger_time=3;
                     break;
                 case UMSOCKET_TYPE_UDP6ONLY:
                 case UMSOCKET_TYPE_UDP4ONLY:
                 case UMSOCKET_TYPE_UDP:
                     reuse=1;
-                    linger_time=0;
+                    linger_time=1;
                     break;
                 case UMSOCKET_TYPE_SCTP4ONLY_SEQPACKET:
                 case UMSOCKET_TYPE_SCTP6ONLY_SEQPACKET:
@@ -684,8 +686,6 @@ static int SSL_smart_shutdown(SSL *ssl)
                     ipAddr = [UMSocket deunifyIp:ipAddr];
                     [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
                     inet_pton(AF_INET6,addressString, &sa6.sin6_addr);
-
-                    
                 }
                 if(bind(_sock,(struct sockaddr *)&sa6,sizeof(sa6)) != 0)
                 {

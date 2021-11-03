@@ -454,19 +454,48 @@ static int SSL_smart_shutdown(SSL *ssl)
     if (self)
     {
         int reuse = 1;
-        int linger_time = 5;
+        int linger_time = 1;
         rx_crypto_enable = 0;
         tx_crypto_enable = 0;
         _socketName = name;
         cryptoStream = [[UMCrypto alloc] init];
         _controlLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"socket-control-lock (%@)",_socketName]];
         _dataLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"socket-data-lock (%@)",_socketName]];
-
         type = t;
         _sock = -1;
         [self initNetworkSocket];
-        if(_sock < 0 )
+        if(_sock >= 0)
         {
+            /* success case */
+            switch(type)
+            {
+                case UMSOCKET_TYPE_TCP6ONLY:
+                case UMSOCKET_TYPE_TCP4ONLY:
+                case UMSOCKET_TYPE_TCP:
+                    break;
+                case UMSOCKET_TYPE_UDP6ONLY:
+                case UMSOCKET_TYPE_UDP4ONLY:
+                case UMSOCKET_TYPE_UDP:
+                    reuse=1;
+                    linger_time=0;
+                    break;
+                case UMSOCKET_TYPE_SCTP4ONLY_SEQPACKET:
+                case UMSOCKET_TYPE_SCTP6ONLY_SEQPACKET:
+                case UMSOCKET_TYPE_SCTP_SEQPACKET:
+                case UMSOCKET_TYPE_SCTP4ONLY_STREAM:
+                case UMSOCKET_TYPE_SCTP6ONLY_STREAM:
+                case UMSOCKET_TYPE_SCTP_STREAM:
+                case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
+                case UMSOCKET_TYPE_SCTP6ONLY_DGRAM:
+                case UMSOCKET_TYPE_SCTP_DGRAM:
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            /* error case */
             switch(type)
             {
                 case UMSOCKET_TYPE_TCP6ONLY:
@@ -477,8 +506,6 @@ static int SSL_smart_shutdown(SSL *ssl)
                 case UMSOCKET_TYPE_UDP6ONLY:
                 case UMSOCKET_TYPE_UDP4ONLY:
                 case UMSOCKET_TYPE_UDP:
-                    reuse=0;
-                    linger_time = 0;
                     fprintf(stderr,"[UMSocket: init] socket(IPPROTO_UDP) returns %d errno = %d (%s)",_sock,errno,strerror(errno));
                     break;
                 case UMSOCKET_TYPE_SCTP4ONLY_SEQPACKET:
@@ -513,9 +540,9 @@ static int SSL_smart_shutdown(SSL *ssl)
                 fprintf(stderr,"setsockopt(SO_REUSEADDR) failed %d (%s)\n",errno,strerror(errno));
             }
         }
-        if(linger_time)
+        if(linger_time > 0)
         {
-            struct    linger xlinger;
+            struct linger xlinger;
             memset(&xlinger,0,sizeof(xlinger));
             xlinger.l_onoff = 1;
             xlinger.l_linger = linger_time;

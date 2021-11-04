@@ -20,5 +20,8 @@
 
 - (void)addEntry:(id)obj  forKeys:(NSArray<NSString *>*)keys;
 - (id)getEntryForKeys:(NSArray<NSString *>*)keys;
+- (id)getEntryForKeysReversed:(NSArray<NSString *>*)keys;
+- (NSArray *)getCumulativeEntryForKeys:(NSArray<NSString *>*)keys;
+- (NSArray *)getCumulativeEntryForKeysReversed:(NSArray<NSString *>*)keys;
 
 @end

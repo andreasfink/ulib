@@ -13,12 +13,12 @@
 
 {
     UMSynchronizedDictionary *_subEntries;
-    id _payload;
+    id                        _payload;
 }
 
 - (id)getEntry:(NSString *)key;
 - (id)getPayload;
-
+- (id)getOrCreateEntry:(NSString *)key;
 - (void)setEntry:(id)obj forKey:(NSString *)key;
 - (void)setPayload:(id)obj;
 

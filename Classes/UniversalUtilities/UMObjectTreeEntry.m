@@ -25,6 +25,19 @@
     return _subEntries[key];
 }
 
+- (id)getOrCreateEntry:(NSString *)key
+{
+    [_subEntries lock];
+    UMObjectTreeEntry *entry2 = _subEntries[key];
+    if(entry2 == NULL)
+    {
+        entry2 = [[UMObjectTreeEntry alloc]init];
+        _subEntries[key] = entry2;
+    }
+    [_subEntries unlock];
+    return entry2;
+}
+
 - (id)getPayload
 {
     return _payload;

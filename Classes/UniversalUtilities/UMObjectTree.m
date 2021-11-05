@@ -33,12 +33,10 @@
         entry = entry2;
     }
     [entry setPayload:obj];
-    [_lock unlock];
 }
 
 - (id)getEntryForKeys:(NSArray<NSString *>*)keys
 {
-    [_lock lock];
     UMObjectTreeEntry *entry = _root;
     id payload = [entry getPayload];
     
@@ -54,13 +52,11 @@
         entry = entry2;
         payload = [entry getPayload];
     }
-    [_lock unlock];
     return payload;
 }
 
 - (id)getEntryForKeysReversed:(NSArray<NSString *>*)keys
 {
-    [_lock lock];
     UMObjectTreeEntry *entry = _root;
     id payload = [entry getPayload];
     
@@ -76,14 +72,12 @@
         entry = entry2;
         payload = [entry getPayload];
     }
-    [_lock unlock];
     return payload;
 }
 
 - (NSArray *)getCumulativeEntryForKeys:(NSArray<NSString *>*)keys
 {
     NSMutableArray *results = [[NSMutableArray alloc]init];
-    [_lock lock];
     UMObjectTreeEntry *entry = _root;
     id payload = [entry getPayload];
     if(payload)
@@ -106,14 +100,12 @@
             [results addObject:payload];
         }
     }
-    [_lock unlock];
     return results;
 }
 
 - (NSArray *)getCumulativeEntryForKeysReversed:(NSArray<NSString *>*)keys
 {
     NSMutableArray *results = [[NSMutableArray alloc]init];
-    [_lock lock];
     UMObjectTreeEntry *entry = _root;
     id payload = [entry getPayload];
     if(payload)
@@ -136,7 +128,6 @@
             [results addObject:payload];
         }
     }
-    [_lock unlock];
     return results;
 }
 

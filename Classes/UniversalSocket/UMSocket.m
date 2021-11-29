@@ -2792,7 +2792,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
                   fromAddress:(NSString **)address
                      fromPort:(int *)port
 {
-    ssize_t rxsize;
+    ssize_t rxsize=0;
     char rxbuf[RXBUFSIZE];
     char hbuf[NI_MAXHOST];
     char sbuf[NI_MAXSERV];

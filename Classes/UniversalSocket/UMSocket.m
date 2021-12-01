@@ -157,6 +157,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             _socketType = SOCK_STREAM;
             _socketProto = 0;//IPPROTO_TCP;
             _sock = socket(_socketFamily, _socketType, _socketProto);
+            [self setIPv6Only];
             TRACK_FILE_SOCKET(_sock,@"tcp");
             break;
         case UMSOCKET_TYPE_TCP:
@@ -191,6 +192,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             _socketType = SOCK_DGRAM;
             _socketProto = 0;//IPPROTO_UDP;
             _sock = socket(_socketDomain, _socketType, _socketProto);
+            [self setIPv6Only];
             TRACK_FILE_SOCKET(_sock,@"udp");
             break;
         case UMSOCKET_TYPE_UDP:
@@ -220,7 +222,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
         case UMSOCKET_TYPE_SCTP6ONLY_DGRAM:
         case UMSOCKET_TYPE_SCTP_DGRAM:
-                /*we handle this in subclass UMSocketSCTP in ulibsctp */
+                /* we handle this in subclass UMSocketSCTP in ulibsctp */
             break;
         default:
             break;
@@ -3125,6 +3127,17 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 - (UMSocketError) setIPDualStack
 {
     int flag = 0;
+    int err = setsockopt(_sock, IPPROTO_IPV6, IPV6_V6ONLY, (char *)&flag, sizeof(flag));
+    if(err !=0)
+    {
+        return [UMSocket umerrFromErrno:errno];
+    }
+    return UMSocketError_no_error;
+}
+
+- (UMSocketError) setIPv6Only
+{
+    int flag = 1;
     int err = setsockopt(_sock, IPPROTO_IPV6, IPV6_V6ONLY, (char *)&flag, sizeof(flag));
     if(err !=0)
     {

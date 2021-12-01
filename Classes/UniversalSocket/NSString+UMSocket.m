@@ -16,6 +16,10 @@
 
 - (BOOL)isIPv4
 {
+    if([self hasPrefix:@"ipv4:"])
+    {
+        return YES;
+    }
     struct in_addr addr4;
     
     int result = inet_pton(AF_INET,self.UTF8String, &addr4);
@@ -28,6 +32,11 @@
 
 - (BOOL)isIPv6
 {
+    if([self hasPrefix:@"ipv6:"])
+    {
+        return YES;
+    }
+
     struct in6_addr addr6;
 
     int result = inet_pton(AF_INET6,self.UTF8String, &addr6);

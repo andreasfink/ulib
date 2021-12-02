@@ -2901,8 +2901,16 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         sa6.sin6_len        = sizeof(struct sockaddr_in6);
 #endif
         sa6.sin6_port       = htons(_requestedRemotePort);
-        inet_pton(_socketFamily, addr.UTF8String, &sa6.sin6_addr);
-
+        if(addrtype==6)
+        {
+            inet_pton(_socketFamily, addr.UTF8String, &sa6.sin6_addr);
+        }
+        else if (addrtype==4)
+        {
+            /* we have a IPV6 socket but the remote addres is in IPV4 format so we must use the IPv6 representation of it */
+            NSString *ipv4_in_ipv6 =[NSString stringWithFormat:@"::ffff:%@",addr];
+            inet_pton(_socketFamily, ipv4_in_ipv6.UTF8String, &sa6.sin6_addr);
+        }
         sentDataSize = sendto(_sock, [data bytes],
                               (size_t)[data length],
                               flags,

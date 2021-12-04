@@ -2779,16 +2779,25 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         {
             if([addr isIPv4])
             {
-                *t = 4;
+                if(t)
+                {
+                    *t = 4;
+                }
                 return addr;
             }
             return addr;
             if([addr isIPv6])
             {
-                *t = 6;
+                if(t)
+                {
+                    *t = 6;
+                }
                 return addr;
             }
-            *t = 0;
+            if(t)
+            {
+                *t = 0;
+            }
             return addr;
         }
     }

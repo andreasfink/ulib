@@ -2309,7 +2309,6 @@ static int SSL_smart_shutdown(SSL *ssl)
     *returningData = nil;
    // NSLog(@"[UMsocket receive:to:] %@", [self fullDescription]);
     
-    
     /* skip heading spaces */
     if(receivebufpos > 0)
     {
@@ -2778,10 +2777,18 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         }
         else
         {
-            if(t)
+            if([addr isIPv4])
             {
-                *t = 0;
+                *t = 4;
+                return addr;
             }
+            return addr;
+            if([addr isIPv6])
+            {
+                *t = 6;
+                return addr;
+            }
+            *t = 0;
             return addr;
         }
     }
@@ -2867,63 +2874,13 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     int addrtype = 0;
     ssize_t sentDataSize = 0;
     int flags = MSG_DONTWAIT;
-
-    NSString *addr = [UMSocket deunifyIp:unifiedAddr type:&addrtype];
-    if(addrtype==4)
-    {
-        _socketFamily = AF_INET;
-    }
-    else if (addrtype==6)
-    {
-        _socketFamily = AF_INET6;
-    }
-    if(_socketFamily==AF_INET)
-    {
-        struct sockaddr_in	sa;
-        
-        memset(&sa,0x00,sizeof(sa));
-        sa.sin_family		= _socketFamily;
-#ifdef	HAS_SOCKADDR_LEN
-        sa.sin_len			= sizeof(struct sockaddr_in);
-#endif
-        sa.sin_port             = htons(port);
-        inet_pton(_socketFamily, addr.UTF8String, &sa.sin_addr);
-        int flags=0;
-        sentDataSize = sendto(_sock,
-                              [data bytes],
-                              (size_t)[data length],
-                              flags,
-                              (struct sockaddr *)&sa,
-                              (socklen_t) sizeof(struct sockaddr_in));
-    }
-    else if(_socketFamily==AF_INET6)
-    {
-
-        struct sockaddr_in6	sa6;
-
-        memset(&sa6,0x00,sizeof(sa6));
-        sa6.sin6_family			= _socketFamily;
-#ifdef	HAS_SOCKADDR_LEN
-        sa6.sin6_len        = sizeof(struct sockaddr_in6);
-#endif
-        sa6.sin6_port       = htons(_requestedRemotePort);
-        if(addrtype==6)
-        {
-            inet_pton(_socketFamily, addr.UTF8String, &sa6.sin6_addr);
-        }
-        else if (addrtype==4)
-        {
-            /* we have a IPV6 socket but the remote addres is in IPV4 format so we must use the IPv6 representation of it */
-            NSString *ipv4_in_ipv6 =[NSString stringWithFormat:@"::ffff:%@",addr];
-            inet_pton(_socketFamily, ipv4_in_ipv6.UTF8String, &sa6.sin6_addr);
-        }
-        sentDataSize = sendto(_sock, [data bytes],
-                              (size_t)[data length],
-                              flags,
-                              (struct sockaddr *)&sa6,
-                              (socklen_t) sizeof(struct sockaddr_in6));
-    }
-    
+    NSData *d = [UMSocket sockaddrFromAddress:unifiedAddr port:port socketFamily:_socketFamily];
+    sentDataSize = sendto(_sock,
+                          [data bytes],
+                          (size_t)[data length],
+                          flags,
+                          (struct sockaddr *)d.bytes,
+                          (socklen_t) d.length);
     if(sentDataSize == [data length])
     {
         return UMSocketError_no_error;

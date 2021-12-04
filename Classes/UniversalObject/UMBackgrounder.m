@@ -11,8 +11,8 @@
 #import "UMThreadHelpers.h"
 #import "UMAssert.h"
 
-//#define UMSLEEPER_DEFAULT_SLEEP_TIME 500000 /* 500ms */
-#define UMSLEEPER_DEFAULT_SLEEP_TIME 50000000LL /* 50s */
+#define UMSLEEPER_DEFAULT_SLEEP_TIME 500000 /* 500ms */
+//#define UMSLEEPER_DEFAULT_SLEEP_TIME 50000000LL /* 50s */
 
 @implementation UMBackgrounder
 

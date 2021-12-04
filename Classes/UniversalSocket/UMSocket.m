@@ -123,7 +123,6 @@ static int SSL_smart_shutdown(SSL *ssl)
 @synthesize direction;
 @synthesize status;
 
-@synthesize isBound;
 @synthesize lastError;
 @synthesize reportDelegate;
 @synthesize name;
@@ -575,7 +574,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
         [self reportStatus:@"bind()"];
 
-        if (isBound == YES)
+        if (_isBound == YES)
         {
             [self reportStatus:@"- already bound"];
             return UMSocketError_already_bound;
@@ -699,7 +698,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             default:
                 return [UMSocket umerrFromErrno:EAFNOSUPPORT];
         }
-        isBound = YES;
+        _isBound = YES;
         [self reportStatus:@"isBound=YES"];
         return UMSocketError_no_error;
     err:
@@ -1001,7 +1000,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 /* we do not copy the socket on purpose as this is used from accept() */
     newsock->_sock=-1;
     newsock->_hasSocket=NO;
-    newsock.isBound=isBound;
+    newsock.isBound=_isBound;
     newsock.isListening=self.isListening;
     newsock.isConnecting=self.isConnecting;
     newsock.isConnected=self.isConnected;
@@ -2870,7 +2869,14 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
     int flags = MSG_DONTWAIT;
 
     NSString *addr = [UMSocket deunifyIp:unifiedAddr type:&addrtype];
-
+    if(addrtype==4)
+    {
+        _socketFamily = AF_INET;
+    }
+    else if (addrtype==6)
+    {
+        _socketFamily = AF_INET6;
+    }
     if(_socketFamily==AF_INET)
     {
         struct sockaddr_in	sa;

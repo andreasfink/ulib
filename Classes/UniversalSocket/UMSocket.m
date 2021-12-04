@@ -2879,8 +2879,6 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
                  toAddress:(NSString *)unifiedAddr
                     toPort:(int)port
 {
-    
-    int addrtype = 0;
     ssize_t sentDataSize = 0;
     int flags = MSG_DONTWAIT;
     NSData *d = [UMSocket sockaddrFromAddress:unifiedAddr port:port socketFamily:_socketFamily];

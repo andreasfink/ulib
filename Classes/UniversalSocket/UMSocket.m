@@ -123,7 +123,6 @@ static int SSL_smart_shutdown(SSL *ssl)
 @synthesize direction;
 @synthesize status;
 
-@synthesize isBound;
 @synthesize lastError;
 @synthesize reportDelegate;
 @synthesize name;
@@ -157,6 +156,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             _socketType = SOCK_STREAM;
             _socketProto = 0;//IPPROTO_TCP;
             _sock = socket(_socketFamily, _socketType, _socketProto);
+            [self setIPv6Only];
             TRACK_FILE_SOCKET(_sock,@"tcp");
             break;
         case UMSOCKET_TYPE_TCP:
@@ -191,6 +191,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             _socketType = SOCK_DGRAM;
             _socketProto = 0;//IPPROTO_UDP;
             _sock = socket(_socketDomain, _socketType, _socketProto);
+            [self setIPv6Only];
             TRACK_FILE_SOCKET(_sock,@"udp");
             break;
         case UMSOCKET_TYPE_UDP:
@@ -220,7 +221,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
         case UMSOCKET_TYPE_SCTP6ONLY_DGRAM:
         case UMSOCKET_TYPE_SCTP_DGRAM:
-                /*we handle this in subclass UMSocketSCTP in ulibsctp */
+                /* we handle this in subclass UMSocketSCTP in ulibsctp */
             break;
         default:
             break;
@@ -454,19 +455,50 @@ static int SSL_smart_shutdown(SSL *ssl)
     if (self)
     {
         int reuse = 1;
-        int linger_time = 5;
+        int linger_time = 1;
         rx_crypto_enable = 0;
         tx_crypto_enable = 0;
         _socketName = name;
         cryptoStream = [[UMCrypto alloc] init];
         _controlLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"socket-control-lock (%@)",_socketName]];
         _dataLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"socket-data-lock (%@)",_socketName]];
-
         type = t;
         _sock = -1;
         [self initNetworkSocket];
-        if(_sock < 0 )
+        if(_sock >= 0)
         {
+            /* success case */
+            switch(type)
+            {
+                case UMSOCKET_TYPE_TCP6ONLY:
+                case UMSOCKET_TYPE_TCP4ONLY:
+                case UMSOCKET_TYPE_TCP:
+                    reuse=1;
+                    linger_time=3;
+                    break;
+                case UMSOCKET_TYPE_UDP6ONLY:
+                case UMSOCKET_TYPE_UDP4ONLY:
+                case UMSOCKET_TYPE_UDP:
+                    reuse=1;
+                    linger_time=1;
+                    break;
+                case UMSOCKET_TYPE_SCTP4ONLY_SEQPACKET:
+                case UMSOCKET_TYPE_SCTP6ONLY_SEQPACKET:
+                case UMSOCKET_TYPE_SCTP_SEQPACKET:
+                case UMSOCKET_TYPE_SCTP4ONLY_STREAM:
+                case UMSOCKET_TYPE_SCTP6ONLY_STREAM:
+                case UMSOCKET_TYPE_SCTP_STREAM:
+                case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
+                case UMSOCKET_TYPE_SCTP6ONLY_DGRAM:
+                case UMSOCKET_TYPE_SCTP_DGRAM:
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            /* error case */
             switch(type)
             {
                 case UMSOCKET_TYPE_TCP6ONLY:
@@ -511,9 +543,9 @@ static int SSL_smart_shutdown(SSL *ssl)
                 fprintf(stderr,"setsockopt(SO_REUSEADDR) failed %d (%s)\n",errno,strerror(errno));
             }
         }
-        if(linger_time)
+        if(linger_time > 0)
         {
-            struct    linger xlinger;
+            struct linger xlinger;
             memset(&xlinger,0,sizeof(xlinger));
             xlinger.l_onoff = 1;
             xlinger.l_linger = linger_time;
@@ -542,7 +574,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
         [self reportStatus:@"bind()"];
 
-        if (isBound == YES)
+        if (_isBound == YES)
         {
             [self reportStatus:@"- already bound"];
             return UMSocketError_already_bound;
@@ -655,8 +687,6 @@ static int SSL_smart_shutdown(SSL *ssl)
                     ipAddr = [UMSocket deunifyIp:ipAddr];
                     [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
                     inet_pton(AF_INET6,addressString, &sa6.sin6_addr);
-
-                    
                 }
                 if(bind(_sock,(struct sockaddr *)&sa6,sizeof(sa6)) != 0)
                 {
@@ -668,7 +698,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             default:
                 return [UMSocket umerrFromErrno:EAFNOSUPPORT];
         }
-        isBound = YES;
+        _isBound = YES;
         [self reportStatus:@"isBound=YES"];
         return UMSocketError_no_error;
     err:
@@ -970,7 +1000,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 /* we do not copy the socket on purpose as this is used from accept() */
     newsock->_sock=-1;
     newsock->_hasSocket=NO;
-    newsock.isBound=isBound;
+    newsock.isBound=_isBound;
     newsock.isListening=self.isListening;
     newsock.isConnecting=self.isConnecting;
     newsock.isConnected=self.isConnected;
@@ -1448,7 +1478,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     memset(pollfds,0,sizeof(pollfds));
     pollfds[0].fd = _sock;
     pollfds[0].events = events;
-    UMAssert(timeoutInMs<200000,@"timeout should be smaller than 20seconds");
+    UMAssert(timeoutInMs<200000,@"timeout should be smaller than 200seconds");
     UMAssert(((timeoutInMs>100) || (timeoutInMs !=0) || (timeoutInMs !=-1)),@"timeout should be bigger than 100ms");
 
     errno = 99;
@@ -2279,7 +2309,6 @@ static int SSL_smart_shutdown(SSL *ssl)
     *returningData = nil;
    // NSLog(@"[UMsocket receive:to:] %@", [self fullDescription]);
     
-    
     /* skip heading spaces */
     if(receivebufpos > 0)
     {
@@ -2750,7 +2779,18 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
         {
             if(t)
             {
-                *t = 0;
+                if([addr isIPv4])
+                {
+                    *t = 4;
+                }
+                else if([addr isIPv6])
+                {
+                    *t = 6;
+                }
+                else
+                {
+                    *t = 0;
+                }
             }
             return addr;
         }
@@ -2763,7 +2803,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
                   fromAddress:(NSString **)address
                      fromPort:(int *)port
 {
-    ssize_t rxsize;
+    ssize_t rxsize=0;
     char rxbuf[RXBUFSIZE];
     char hbuf[NI_MAXHOST];
     char sbuf[NI_MAXSERV];
@@ -2833,52 +2873,15 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
                  toAddress:(NSString *)unifiedAddr
                     toPort:(int)port
 {
-    
-    int addrtype = 0;
     ssize_t sentDataSize = 0;
     int flags = MSG_DONTWAIT;
-
-    NSString *addr = [UMSocket deunifyIp:unifiedAddr type:&addrtype];
-
-    if(_socketFamily==AF_INET)
-    {
-        struct sockaddr_in	sa;
-        
-        memset(&sa,0x00,sizeof(sa));
-        sa.sin_family		= _socketFamily;
-#ifdef	HAS_SOCKADDR_LEN
-        sa.sin_len			= sizeof(struct sockaddr_in);
-#endif
-        sa.sin_port             = htons(port);
-        inet_pton(_socketFamily, addr.UTF8String, &sa.sin_addr);
-        int flags=0;
-        sentDataSize = sendto(_sock,
-                              [data bytes],
-                              (size_t)[data length],
-                              flags,
-                              (struct sockaddr *)&sa,
-                              (socklen_t) sizeof(struct sockaddr_in));
-    }
-    else if(_socketFamily==AF_INET6)
-    {
-
-        struct sockaddr_in6	sa6;
-
-        memset(&sa6,0x00,sizeof(sa6));
-        sa6.sin6_family			= _socketFamily;
-#ifdef	HAS_SOCKADDR_LEN
-        sa6.sin6_len        = sizeof(struct sockaddr_in6);
-#endif
-        sa6.sin6_port       = htons(_requestedRemotePort);
-        inet_pton(_socketFamily, addr.UTF8String, &sa6.sin6_addr);
-
-        sentDataSize = sendto(_sock, [data bytes],
-                              (size_t)[data length],
-                              flags,
-                              (struct sockaddr *)&sa6,
-                              (socklen_t) sizeof(struct sockaddr_in6));
-    }
-    
+    NSData *d = [UMSocket sockaddrFromAddress:unifiedAddr port:port socketFamily:_socketFamily];
+    sentDataSize = sendto(_sock,
+                          [data bytes],
+                          (size_t)[data length],
+                          flags,
+                          (struct sockaddr *)d.bytes,
+                          (socklen_t) d.length);
     if(sentDataSize == [data length])
     {
         return UMSocketError_no_error;
@@ -3096,6 +3099,17 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 - (UMSocketError) setIPDualStack
 {
     int flag = 0;
+    int err = setsockopt(_sock, IPPROTO_IPV6, IPV6_V6ONLY, (char *)&flag, sizeof(flag));
+    if(err !=0)
+    {
+        return [UMSocket umerrFromErrno:errno];
+    }
+    return UMSocketError_no_error;
+}
+
+- (UMSocketError) setIPv6Only
+{
+    int flag = 1;
     int err = setsockopt(_sock, IPPROTO_IPV6, IPV6_V6ONLY, (char *)&flag, sizeof(flag));
     if(err !=0)
     {

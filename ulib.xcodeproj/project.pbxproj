@@ -1895,6 +1895,10 @@
 		A6F1E322187D448700AD2F85 /* UMRedisSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E31C187D448700AD2F85 /* UMRedisSession.m */; };
 		A6F1E32E187D935600AD2F85 /* UMRedisStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E329187D935600AD2F85 /* UMRedisStatus.m */; };
 		A6F1E32F187D935600AD2F85 /* UMRedisStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E329187D935600AD2F85 /* UMRedisStatus.m */; };
+		A6F6DA3F2732030C0080A507 /* UMObjectTree.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F6DA3D2732030C0080A507 /* UMObjectTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6F6DA402732030C0080A507 /* UMObjectTree.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6DA3E2732030C0080A507 /* UMObjectTree.m */; };
+		A6F6DA432732031A0080A507 /* UMObjectTreeEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F6DA412732031A0080A507 /* UMObjectTreeEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6F6DA442732031A0080A507 /* UMObjectTreeEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6DA422732031A0080A507 /* UMObjectTreeEntry.m */; };
 		A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D8AB0C149A769B0029E9CF /* Foundation.framework */; };
 		A6FFFC811B9D73F900C331B0 /* NSString+UMSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A6FFFC7D1B9D716C00C331B0 /* NSString+UMSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -10477,6 +10481,10 @@
 		A6F48CF31AF71F4E00854472 /* UMFileTrackingMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFileTrackingMacros.h; sourceTree = "<group>"; };
 		A6F693EA1B4E82FA0090FC94 /* configure.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = configure.in; sourceTree = "<group>"; };
 		A6F694141B4E85020090FC94 /* ulib.pc.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = ulib.pc.in; sourceTree = "<group>"; };
+		A6F6DA3D2732030C0080A507 /* UMObjectTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMObjectTree.h; sourceTree = "<group>"; };
+		A6F6DA3E2732030C0080A507 /* UMObjectTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMObjectTree.m; sourceTree = "<group>"; };
+		A6F6DA412732031A0080A507 /* UMObjectTreeEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMObjectTreeEntry.h; sourceTree = "<group>"; };
+		A6F6DA422732031A0080A507 /* UMObjectTreeEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMObjectTreeEntry.m; sourceTree = "<group>"; };
 		A6FADFA7252A17CD008A06C6 /* openssl-1.1.1i.tar.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = "openssl-1.1.1i.tar.gz"; sourceTree = "<group>"; };
 		A6FFFC7D1B9D716C00C331B0 /* NSString+UMSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UMSocket.h"; sourceTree = "<group>"; };
 		A6FFFC7E1B9D716C00C331B0 /* NSString+UMSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UMSocket.m"; sourceTree = "<group>"; };
@@ -19432,13 +19440,13 @@
 				A6CC4B501A3F24C70090FC94 /* UMAverageDelay.h */,
 				A67B5189191B84A90090FC94 /* UMAverageDelay.m */,
 				A6CC4B571A3F24C70090FC94 /* UMTimer.h */,
+				A6419BA11A2DE3740090FC94 /* UMTimer.m */,
 				A6CC4B531A3F24C70090FC94 /* UMMicroSec.h */,
 				A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */,
 				A6CC4B551A3F24C70090FC94 /* UMSleeper.h */,
 				A6D8AB9F149A786E0029E9CF /* UMSleeper.m */,
 				A6CC4B561A3F24C70090FC94 /* UMThroughputCounter.h */,
 				A6D8ABA1149A786E0029E9CF /* UMThroughputCounter.m */,
-				A6419BA11A2DE3740090FC94 /* UMTimer.m */,
 				A6CC4B581A3F24C70090FC94 /* UMTimerBackgrounder.h */,
 				A6419BAA1A2DE8040090FC94 /* UMTimerBackgrounder.m */,
 				A6CC4B591A3F24C70090FC94 /* UMUtil.h */,
@@ -19461,6 +19469,10 @@
 				A6C4781A22D325C8007F395C /* UMStatisticEntry.m */,
 				A6C4781D22D325CE007F395C /* UMStatistic.h */,
 				A6C4781E22D325CE007F395C /* UMStatistic.m */,
+				A6F6DA3D2732030C0080A507 /* UMObjectTree.h */,
+				A6F6DA3E2732030C0080A507 /* UMObjectTree.m */,
+				A6F6DA412732031A0080A507 /* UMObjectTreeEntry.h */,
+				A6F6DA422732031A0080A507 /* UMObjectTreeEntry.m */,
 				A6F1C600247BC56200FE7402 /* UMDigitTree.h */,
 				A6F1C601247BC56200FE7402 /* UMDigitTree.m */,
 				A6F1C604247BC56C00FE7402 /* UMDigitTreeEntry.h */,
@@ -20025,6 +20037,7 @@
 				A60C4DAD1EF7FE59007C203A /* NSNumber+HierarchicalDescription.h in Headers */,
 				A60B7664226E0166003F1F0E /* UMSerialPort.h in Headers */,
 				A6D75F0B1FCF35B5005C198E /* UMSyslogClient.h in Headers */,
+				A6F6DA432732031A0080A507 /* UMObjectTreeEntry.h in Headers */,
 				A60C4DB21EF7FE59007C203A /* UMUUID.h in Headers */,
 				A607CE071F2A9A55006A832B /* UMPrivateKey.h in Headers */,
 				A60C4DB61EF7FE59007C203A /* NSArray+HierarchicalDescription.h in Headers */,
@@ -20032,6 +20045,7 @@
 				A60C4DB71EF7FE59007C203A /* UMDateWithHistory.h in Headers */,
 				A60C4DB81EF7FE59007C203A /* UMBackgrounderWithQueues.h in Headers */,
 				A60C4DBA1EF7FE59007C203A /* NSDictionary+HierarchicalDescription.h in Headers */,
+				A6F6DA3F2732030C0080A507 /* UMObjectTree.h in Headers */,
 				A60C4DBB1EF7FE59007C203A /* UMTokenizerWord.h in Headers */,
 				A60C4DBC1EF7FE59007C203A /* UMHistoryLog.h in Headers */,
 				A60C4DBD1EF7FE59007C203A /* UMHTTPURLHandler.h in Headers */,
@@ -20546,7 +20560,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = "Andreas Fink (andreas@fink.org)";
 				TargetAttributes = {
 					A60210041D488A2F00211137 = {
@@ -21019,6 +21033,8 @@
 				A60C4C9F1EF7FE59007C203A /* UMLogBuffered.m in Sources */,
 				A60C4CA01EF7FE59007C203A /* UMSyntaxToken_Number.m in Sources */,
 				A667A28D2284032B0009FE66 /* UMConstantStringsDict.m in Sources */,
+				A6F6DA402732030C0080A507 /* UMObjectTree.m in Sources */,
+				A6F6DA442732031A0080A507 /* UMObjectTreeEntry.m in Sources */,
 				A60C4CA11EF7FE59007C203A /* UMLogConsole.m in Sources */,
 				A63F22AC1FB72B450048B329 /* UMAtomicCounter.m in Sources */,
 				A6CEB96A22BA514200B2BD9D /* UMNamedList.m in Sources */,
@@ -22038,6 +22054,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
@@ -22081,6 +22098,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
@@ -22343,6 +22361,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -22423,6 +22442,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -22479,7 +22499,7 @@
 		A6D8AB32149A769B0029E9CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -22519,7 +22539,7 @@
 		A6D8AB33149A769B0029E9CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;

@@ -11,8 +11,7 @@
 #import "UMThreadHelpers.h"
 #import "UMAssert.h"
 
-//#define UMSLEEPER_DEFAULT_SLEEP_TIME 500000 /* 500ms */
-#define UMSLEEPER_DEFAULT_SLEEP_TIME 50000000LL /* 50s */
+#define UMSLEEPER_DEFAULT_SLEEP_TIME 500000LL /* 500ms */
 
 @implementation UMBackgrounder
 
@@ -146,7 +145,6 @@
    self.runningStatus = UMBackgrounder_running;
 
     [_control_sleeper wakeUp:UMSleeper_StartupCompletedSignal];
-
     if(_enableLogging)
     {
         NSLog(@"%@: started up successfully",self.name);

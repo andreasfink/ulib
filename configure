@@ -5393,7 +5393,8 @@ if test "${enable_debug+set}" = set; then :
 else
 
 	echo Using Release target
-	CFLAGS="$CFLAGS -O2 -D${CONFIG_DEFINE}=Release"
+	CFLAGS="$CFLAGS -g -O2 -D${CONFIG_DEFINE}=Release"
+	LDFLAGS="$LDFLAGS -g"
 	CONFIGURATION="-configuration Release"
 
 fi

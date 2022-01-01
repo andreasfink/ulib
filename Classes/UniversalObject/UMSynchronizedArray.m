@@ -55,7 +55,7 @@
 {
     UMMUTEX_LOCK(_lock);
     NSUInteger cnt = [_array count];
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_UNLOCK(_lock);
     return cnt;
 }
 

@@ -52,7 +52,6 @@
 - (id)getEntryForDigits:(NSString *)digits
 {
     [_lock lock];
-
     UMDigitTreeEntry *entry = _root;
     id payload = [entry getPayload];
     

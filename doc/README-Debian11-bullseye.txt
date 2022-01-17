@@ -89,7 +89,7 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         libxft2 libxft-dev \
         libflite1 flite1-dev \
         libxmu6 libxpm4 wmaker-common\
-        libgnutls30 libgnutls28-dev\
+        libgnutls30 libgnutls28-dev gnutls-bin\
         libpng-dev libpng16-16\
         libreadline8 libreadline-dev \
         libgif7 libgif-dev libwings3 libwings-dev  libwutil5 \

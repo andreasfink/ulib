@@ -45,6 +45,9 @@
 - (void) lock;
 - (void) unlock;
 - (int) tryLock;
+- (int)tryLock:(NSTimeInterval)timeout
+     retryTime:(NSTimeInterval)retryTime;
+
 - (UMMutex *) init;
 - (UMMutex *) initWithName:(NSString *)name;
 - (UMMutex *) initWithName:(NSString *)name saveInObjectStat:(BOOL)safeInObjectStat;
@@ -90,6 +93,34 @@ void ummutex_stat_disable(void);
     a.tryingToLockAtLine = 0; \
     a.tryingToLockInFunction = NULL; \
 }
+
+#define UMMUTEX_TRYLOCK(a,timeout,retry,result)  \
+{ \
+    a.tryingToLockInFile = __FILE__; \
+    a.tryingToLockAtLine = __LINE__; \
+    a.tryingToLockInFunction = __func__; \
+    if(timeout <= 0) \
+    { \
+        result = [a tryLock];\
+    } \
+    else \
+    { \
+        result = [a tryLock:timeout retryTime:retry];\
+    } \
+    if(result==0) \
+    { \
+        a.lockedInFile = __FILE__;  \
+        a.lockedAtLine = __LINE__;   \
+        a.lockedInFunction =  __func__;  \
+    } \
+    else \
+    { \
+        a.tryingToLockInFile = NULL; \
+        a.tryingToLockAtLine = 0; \
+        a.tryingToLockInFunction = NULL; \
+    } \
+}
+
 
 #define UMMUTEX_UNLOCK(a) \
 {  \

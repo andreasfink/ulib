@@ -85,7 +85,6 @@
     [_lock lock];
     _addresses = [addresses mutableCopy];
     [_lock unlock];
-
 }
 
 - (UMHost *) initWithLocalhostAddresses:(NSArray *)permittedAddresses

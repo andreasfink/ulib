@@ -11,6 +11,8 @@
 #import "UMConstantStringsDict.h"
 #import "UMAssert.h"
 
+#include <unistd.h> /* for usleep */
+
 static NSMutableDictionary *global_ummutex_stat = NULL;
 static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
@@ -215,6 +217,31 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
     }
 }
 
+- (int)tryLock:(NSTimeInterval)timeout
+     retryTime:(NSTimeInterval)retryTime
+{
+    @autoreleasepool
+    {
+        NSDate *start = [NSDate date];
+        int i = 0;
+        while((i=[self tryLock]) != 0)
+        {
+            NSDate *now = [NSDate date];
+            NSTimeInterval diff = [now timeIntervalSinceDate:start];
+            if(diff > timeout)
+            {
+                /* we have waited long enough */
+                break;
+            }
+            else
+            {
+                useconds_t delay = (useconds_t)(retryTime * 1000000.0);
+                usleep(delay);
+            }
+        }
+        return i;
+    }
+}
 
 - (NSString *)lockStatusDescription
 {

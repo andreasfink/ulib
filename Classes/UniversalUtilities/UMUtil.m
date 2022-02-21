@@ -721,6 +721,7 @@ static NSArray *        _machineCPUIDs = NULL;
 
 +(NSArray *)readChildProcess:(NSArray *)args
 {
+    int errnoOccured=0;
     int pipefds[2];
     pid_t pid;
     NSMutableArray *result = NULL;
@@ -755,6 +756,7 @@ static NSArray *        _machineCPUIDs = NULL;
         if (execvp(cmd[0], cmd) == -1)
         {
 			fprintf(stderr,"execvp(%s) fails with errno %d %s",cmd[0],errno,strerror(errno));
+            errnoOccured = errno;
         }
         /* we actually should never get here.*/
         exit(0);
@@ -776,11 +778,6 @@ static NSArray *        _machineCPUIDs = NULL;
                 break;
             }
         }
-        //       if(line)
-        //       {
-        //           free(line);
-        //           line = NULL;
-        //       }
     }
     return result;
 }

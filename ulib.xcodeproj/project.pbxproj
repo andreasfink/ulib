@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -10172,6 +10172,8 @@
 		A6419BA11A2DE3740090FC94 /* UMTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTimer.m; sourceTree = "<group>"; };
 		A6419BAA1A2DE8040090FC94 /* UMTimerBackgrounder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTimerBackgrounder.m; sourceTree = "<group>"; };
 		A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMMicroSec.m; sourceTree = "<group>"; };
+		A64585A927FD7D7C0064513A /* README.macosx.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.macosx.txt; sourceTree = "<group>"; };
+		A64585AA27FD7D7C0064513A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A6467B7C24DD904C00191557 /* UMPacket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMPacket.h; sourceTree = "<group>"; };
 		A6467B7D24DD904C00191557 /* UMPacket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMPacket.m; sourceTree = "<group>"; };
 		A64C9C4D172DD45D000C9F55 /* libulib-static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libulib-static.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -19135,6 +19137,8 @@
 			isa = PBXGroup;
 			children = (
 				A6019BAB1AC15C0D00854472 /* VERSION */,
+				A64585A927FD7D7C0064513A /* README.macosx.txt */,
+				A64585AA27FD7D7C0064513A /* README.md */,
 				A6F694141B4E85020090FC94 /* ulib.pc.in */,
 				A628C8B71CB9270C00211137 /* Makefile.osx.in */,
 				A677B75A19C804A10090FC94 /* Makefile.linux.in */,
@@ -20704,6 +20708,7 @@
 		};
 		A60C4C941EF7FE59007C203A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -20715,7 +20720,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\nmkdir -p \"/Library/Application Support/FinkTelecomServices\"\n\n";
+			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\nmkdir -p \"/Library/Application Support/FinkTelecomServices/frameworks\"\nmkdir -p \"/Library/Application Support/FinkTelecomServices/bin\"\nmkdir -p \"/Library/Application Support/FinkTelecomServices/lib\"\n\n";
 		};
 		A6E1DC9524063158001FB7FF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

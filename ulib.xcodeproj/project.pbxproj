@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -1139,6 +1139,9 @@
 		A684B4271AB8FF4500854472 /* UMQueueNull.h in Headers */ = {isa = PBXBuildFile; fileRef = A684B4241AB8FF4500854472 /* UMQueueNull.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A684B42B1AB8FF4500854472 /* UMQueueNull.m in Sources */ = {isa = PBXBuildFile; fileRef = A684B4251AB8FF4500854472 /* UMQueueNull.m */; };
 		A684B42C1AB8FF4500854472 /* UMQueueNull.m in Sources */ = {isa = PBXBuildFile; fileRef = A684B4251AB8FF4500854472 /* UMQueueNull.m */; };
+		A6A4D24A27FEEC2B002CC587 /* smpp_relay_billing_plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A4D24027FEEC2A002CC587 /* smpp_relay_billing_plugin.framework */; };
+		A6A4D28827FEED3D002CC587 /* smpprelay_characterisation_plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A4D27E27FEED3D002CC587 /* smpprelay_characterisation_plugin.framework */; };
+		A6A4D2A427FEED53002CC587 /* smpprelay_dlr_modification_plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A4D29A27FEED53002CC587 /* smpprelay_dlr_modification_plugin.framework */; };
 		A6A7A23C1CF7506600211137 /* UMPKI.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A7A2361CF71D7D00211137 /* UMPKI.m */; };
 		A6A7A2401CF7511F00211137 /* UMSSLCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A7A23D1CF7511F00211137 /* UMSSLCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6A7A2421CF7511F00211137 /* UMSSLCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A7A23E1CF7511F00211137 /* UMSSLCertificate.m */; };
@@ -1902,6 +1905,30 @@
 		A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D8AB0C149A769B0029E9CF /* Foundation.framework */; };
 		A6FFFC811B9D73F900C331B0 /* NSString+UMSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A6FFFC7D1B9D716C00C331B0 /* NSString+UMSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A6A4D24B27FEEC2B002CC587 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A6D8AAFA149A769A0029E9CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A6A4D23F27FEEC2A002CC587;
+			remoteInfo = "smpp-relay-billing-plugin";
+		};
+		A6A4D28927FEED3D002CC587 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A6D8AAFA149A769A0029E9CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A6A4D27D27FEED3D002CC587;
+			remoteInfo = "smpprelay-characterisation-plugin";
+		};
+		A6A4D2A527FEED53002CC587 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A6D8AAFA149A769A0029E9CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A6A4D29927FEED53002CC587;
+			remoteInfo = "smpprelay-dlr-modification-plugin";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		A6AC49521D460987002BAA97 /* CopyFiles */ = {
@@ -10172,6 +10199,8 @@
 		A6419BA11A2DE3740090FC94 /* UMTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTimer.m; sourceTree = "<group>"; };
 		A6419BAA1A2DE8040090FC94 /* UMTimerBackgrounder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTimerBackgrounder.m; sourceTree = "<group>"; };
 		A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMMicroSec.m; sourceTree = "<group>"; };
+		A64585A927FD7D7C0064513A /* README.macosx.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.macosx.txt; sourceTree = "<group>"; };
+		A64585AA27FD7D7C0064513A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A6467B7C24DD904C00191557 /* UMPacket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMPacket.h; sourceTree = "<group>"; };
 		A6467B7D24DD904C00191557 /* UMPacket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMPacket.m; sourceTree = "<group>"; };
 		A64C9C4D172DD45D000C9F55 /* libulib-static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libulib-static.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -10272,6 +10301,12 @@
 		A69F08FF149D3A4C0009F272 /* UMConfigParsedLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMConfigParsedLine.h; sourceTree = "<group>"; };
 		A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMConfigParsedLine.m; sourceTree = "<group>"; };
 		A6A143F5149B4F5000B007D0 /* ulib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ulib.h; sourceTree = "<group>"; };
+		A6A4D24027FEEC2A002CC587 /* smpp_relay_billing_plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = smpp_relay_billing_plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6A4D24927FEEC2B002CC587 /* smpp-relay-billing-pluginTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "smpp-relay-billing-pluginTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6A4D27E27FEED3D002CC587 /* smpprelay_characterisation_plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = smpprelay_characterisation_plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6A4D28727FEED3D002CC587 /* smpprelay-characterisation-pluginTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "smpprelay-characterisation-pluginTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6A4D29A27FEED53002CC587 /* smpprelay_dlr_modification_plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = smpprelay_dlr_modification_plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6A4D2A327FEED53002CC587 /* smpprelay-dlr-modification-pluginTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "smpprelay-dlr-modification-pluginTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6A7A2351CF71D7D00211137 /* UMPKI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMPKI.h; sourceTree = "<group>"; };
 		A6A7A2361CF71D7D00211137 /* UMPKI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMPKI.m; sourceTree = "<group>"; };
 		A6A7A23D1CF7511F00211137 /* UMSSLCertificate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSSLCertificate.h; sourceTree = "<group>"; };
@@ -10535,6 +10570,51 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6DBF0C720BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D23D27FEEC2A002CC587 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D24627FEEC2B002CC587 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6A4D24A27FEEC2B002CC587 /* smpp_relay_billing_plugin.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D27B27FEED3D002CC587 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D28427FEED3D002CC587 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6A4D28827FEED3D002CC587 /* smpprelay_characterisation_plugin.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D29727FEED53002CC587 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D2A027FEED53002CC587 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6A4D2A427FEED53002CC587 /* smpprelay_dlr_modification_plugin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -19135,6 +19215,8 @@
 			isa = PBXGroup;
 			children = (
 				A6019BAB1AC15C0D00854472 /* VERSION */,
+				A64585A927FD7D7C0064513A /* README.macosx.txt */,
+				A64585AA27FD7D7C0064513A /* README.md */,
 				A6F694141B4E85020090FC94 /* ulib.pc.in */,
 				A628C8B71CB9270C00211137 /* Makefile.osx.in */,
 				A677B75A19C804A10090FC94 /* Makefile.linux.in */,
@@ -19168,6 +19250,12 @@
 				A602130E1D488A3D00211137 /* ulibtvos.framework */,
 				A60C4E241EF7FE59007C203A /* ulib.framework */,
 				A6E1DDB924063158001FB7FF /* ulibwatchos.framework */,
+				A6A4D24027FEEC2A002CC587 /* smpp_relay_billing_plugin.framework */,
+				A6A4D24927FEEC2B002CC587 /* smpp-relay-billing-pluginTests.framework */,
+				A6A4D27E27FEED3D002CC587 /* smpprelay_characterisation_plugin.framework */,
+				A6A4D28727FEED3D002CC587 /* smpprelay-characterisation-pluginTests.framework */,
+				A6A4D29A27FEED53002CC587 /* smpprelay_dlr_modification_plugin.framework */,
+				A6A4D2A327FEED53002CC587 /* smpprelay-dlr-modification-pluginTests.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -20251,6 +20339,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A6A4D23B27FEEC2A002CC587 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D27927FEED3D002CC587 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D29527FEED53002CC587 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A6E1DD2124063158001FB7FF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -20483,6 +20592,114 @@
 			productReference = A64C9C4D172DD45D000C9F55 /* libulib-static.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A6A4D23F27FEEC2A002CC587 /* smpp-relay-billing-plugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6A4D25527FEEC2B002CC587 /* Build configuration list for PBXNativeTarget "smpp-relay-billing-plugin" */;
+			buildPhases = (
+				A6A4D23B27FEEC2A002CC587 /* Headers */,
+				A6A4D23C27FEEC2A002CC587 /* Sources */,
+				A6A4D23D27FEEC2A002CC587 /* Frameworks */,
+				A6A4D23E27FEEC2A002CC587 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "smpp-relay-billing-plugin";
+			productName = "smpp-relay-billing-plugin";
+			productReference = A6A4D24027FEEC2A002CC587 /* smpp_relay_billing_plugin.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A6A4D24827FEEC2B002CC587 /* smpp-relay-billing-pluginTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6A4D25627FEEC2B002CC587 /* Build configuration list for PBXNativeTarget "smpp-relay-billing-pluginTests" */;
+			buildPhases = (
+				A6A4D24527FEEC2B002CC587 /* Sources */,
+				A6A4D24627FEEC2B002CC587 /* Frameworks */,
+				A6A4D24727FEEC2B002CC587 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A6A4D24C27FEEC2B002CC587 /* PBXTargetDependency */,
+			);
+			name = "smpp-relay-billing-pluginTests";
+			productName = "smpp-relay-billing-pluginTests";
+			productReference = A6A4D24927FEEC2B002CC587 /* smpp-relay-billing-pluginTests.framework */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A6A4D27D27FEED3D002CC587 /* smpprelay-characterisation-plugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6A4D28F27FEED3D002CC587 /* Build configuration list for PBXNativeTarget "smpprelay-characterisation-plugin" */;
+			buildPhases = (
+				A6A4D27927FEED3D002CC587 /* Headers */,
+				A6A4D27A27FEED3D002CC587 /* Sources */,
+				A6A4D27B27FEED3D002CC587 /* Frameworks */,
+				A6A4D27C27FEED3D002CC587 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "smpprelay-characterisation-plugin";
+			productName = "smpprelay-characterisation-plugin";
+			productReference = A6A4D27E27FEED3D002CC587 /* smpprelay_characterisation_plugin.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A6A4D28627FEED3D002CC587 /* smpprelay-characterisation-pluginTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6A4D29227FEED3D002CC587 /* Build configuration list for PBXNativeTarget "smpprelay-characterisation-pluginTests" */;
+			buildPhases = (
+				A6A4D28327FEED3D002CC587 /* Sources */,
+				A6A4D28427FEED3D002CC587 /* Frameworks */,
+				A6A4D28527FEED3D002CC587 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A6A4D28A27FEED3D002CC587 /* PBXTargetDependency */,
+			);
+			name = "smpprelay-characterisation-pluginTests";
+			productName = "smpprelay-characterisation-pluginTests";
+			productReference = A6A4D28727FEED3D002CC587 /* smpprelay-characterisation-pluginTests.framework */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A6A4D29927FEED53002CC587 /* smpprelay-dlr-modification-plugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6A4D2AB27FEED54002CC587 /* Build configuration list for PBXNativeTarget "smpprelay-dlr-modification-plugin" */;
+			buildPhases = (
+				A6A4D29527FEED53002CC587 /* Headers */,
+				A6A4D29627FEED53002CC587 /* Sources */,
+				A6A4D29727FEED53002CC587 /* Frameworks */,
+				A6A4D29827FEED53002CC587 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "smpprelay-dlr-modification-plugin";
+			productName = "smpprelay-dlr-modification-plugin";
+			productReference = A6A4D29A27FEED53002CC587 /* smpprelay_dlr_modification_plugin.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A6A4D2A227FEED53002CC587 /* smpprelay-dlr-modification-pluginTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6A4D2AE27FEED54002CC587 /* Build configuration list for PBXNativeTarget "smpprelay-dlr-modification-pluginTests" */;
+			buildPhases = (
+				A6A4D29F27FEED53002CC587 /* Sources */,
+				A6A4D2A027FEED53002CC587 /* Frameworks */,
+				A6A4D2A127FEED53002CC587 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A6A4D2A627FEED53002CC587 /* PBXTargetDependency */,
+			);
+			name = "smpprelay-dlr-modification-pluginTests";
+			productName = "smpprelay-dlr-modification-pluginTests";
+			productReference = A6A4D2A327FEED53002CC587 /* smpprelay-dlr-modification-pluginTests.framework */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A6AC49531D460987002BAA97 /* ulib-tvos-static */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6AC495A1D460987002BAA97 /* Build configuration list for PBXNativeTarget "ulib-tvos-static" */;
@@ -20560,7 +20777,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1330;
 				ORGANIZATIONNAME = "Andreas Fink (andreas@fink.org)";
 				TargetAttributes = {
 					A60210041D488A2F00211137 = {
@@ -20573,6 +20790,24 @@
 					A60C4C931EF7FE59007C203A = {
 						DevelopmentTeam = 2GSNWPNR77;
 						ProvisioningStyle = Automatic;
+					};
+					A6A4D23F27FEEC2A002CC587 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					A6A4D24827FEEC2B002CC587 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					A6A4D27D27FEED3D002CC587 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					A6A4D28627FEED3D002CC587 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					A6A4D29927FEED53002CC587 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					A6A4D2A227FEED53002CC587 = {
+						CreatedOnToolsVersion = 13.3;
 					};
 					A6AC49531D460987002BAA97 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -20607,6 +20842,12 @@
 				A6AC49601D4609B8002BAA97 /* ulib-ios-static */,
 				A6AC49531D460987002BAA97 /* ulib-tvos-static */,
 				A6D8AB1B149A769B0029E9CF /* ulibTests */,
+				A6A4D23F27FEEC2A002CC587 /* smpp-relay-billing-plugin */,
+				A6A4D24827FEEC2B002CC587 /* smpp-relay-billing-pluginTests */,
+				A6A4D27D27FEED3D002CC587 /* smpprelay-characterisation-plugin */,
+				A6A4D28627FEED3D002CC587 /* smpprelay-characterisation-pluginTests */,
+				A6A4D29927FEED53002CC587 /* smpprelay-dlr-modification-plugin */,
+				A6A4D2A227FEED53002CC587 /* smpprelay-dlr-modification-pluginTests */,
 			);
 		};
 /* End PBXProject section */
@@ -20627,6 +20868,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A63120961FEABB2500396502 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D23E27FEEC2A002CC587 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D24727FEEC2B002CC587 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D27C27FEED3D002CC587 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D28527FEED3D002CC587 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D29827FEED53002CC587 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D2A127FEED53002CC587 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -20704,6 +20987,7 @@
 		};
 		A60C4C941EF7FE59007C203A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -20715,7 +20999,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\nmkdir -p \"/Library/Application Support/FinkTelecomServices\"\n\n";
+			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\nmkdir -p \"/Library/Application Support/FinkTelecomServices/frameworks\"\nmkdir -p \"/Library/Application Support/FinkTelecomServices/bin\"\nmkdir -p \"/Library/Application Support/FinkTelecomServices/lib\"\n\n";
 		};
 		A6E1DC9524063158001FB7FF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -21307,6 +21591,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A6A4D23C27FEEC2A002CC587 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D24527FEEC2B002CC587 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D27A27FEED3D002CC587 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D28327FEED3D002CC587 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D29627FEED53002CC587 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6A4D29F27FEED53002CC587 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A6AC49501D460987002BAA97 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -21866,6 +22192,24 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A6A4D24C27FEEC2B002CC587 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A6A4D23F27FEEC2A002CC587 /* smpp-relay-billing-plugin */;
+			targetProxy = A6A4D24B27FEEC2B002CC587 /* PBXContainerItemProxy */;
+		};
+		A6A4D28A27FEED3D002CC587 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A6A4D27D27FEED3D002CC587 /* smpprelay-characterisation-plugin */;
+			targetProxy = A6A4D28927FEED3D002CC587 /* PBXContainerItemProxy */;
+		};
+		A6A4D2A627FEED53002CC587 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A6A4D29927FEED53002CC587 /* smpprelay-dlr-modification-plugin */;
+			targetProxy = A6A4D2A527FEED53002CC587 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		A6D8AB26149A769B0029E9CF /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -22195,6 +22539,468 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A6A4D25127FEEC2B002CC587 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Andreas Fink (andreas@fink.org). All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.fink.smpp-relay-billing-plugin";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A6A4D25227FEEC2B002CC587 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Andreas Fink (andreas@fink.org). All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.fink.smpp-relay-billing-plugin";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A6A4D25327FEEC2B002CC587 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.fink.smpp-relay-billing-pluginTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+			};
+			name = Debug;
+		};
+		A6A4D25427FEEC2B002CC587 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.fink.smpp-relay-billing-pluginTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+			};
+			name = Release;
+		};
+		A6A4D29027FEED3D002CC587 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Andreas Fink (andreas@fink.org). All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.fink.smpprelay-characterisation-plugin";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A6A4D29127FEED3D002CC587 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Andreas Fink (andreas@fink.org). All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.fink.smpprelay-characterisation-plugin";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A6A4D29327FEED3D002CC587 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.fink.smpprelay-characterisation-pluginTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+			};
+			name = Debug;
+		};
+		A6A4D29427FEED3D002CC587 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.fink.smpprelay-characterisation-pluginTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+			};
+			name = Release;
+		};
+		A6A4D2AC27FEED54002CC587 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Andreas Fink (andreas@fink.org). All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.fink.smpprelay-dlr-modification-plugin";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A6A4D2AD27FEED54002CC587 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Andreas Fink (andreas@fink.org). All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.fink.smpprelay-dlr-modification-plugin";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A6A4D2AF27FEED54002CC587 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.fink.smpprelay-dlr-modification-pluginTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+			};
+			name = Debug;
+		};
+		A6A4D2B027FEED54002CC587 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.fink.smpprelay-dlr-modification-pluginTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
 			};
 			name = Release;
 		};
@@ -22705,6 +23511,60 @@
 			buildConfigurations = (
 				A64C9C5A172DD45D000C9F55 /* Debug */,
 				A64C9C5B172DD45D000C9F55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A6A4D25527FEEC2B002CC587 /* Build configuration list for PBXNativeTarget "smpp-relay-billing-plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6A4D25127FEEC2B002CC587 /* Debug */,
+				A6A4D25227FEEC2B002CC587 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A6A4D25627FEEC2B002CC587 /* Build configuration list for PBXNativeTarget "smpp-relay-billing-pluginTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6A4D25327FEEC2B002CC587 /* Debug */,
+				A6A4D25427FEEC2B002CC587 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A6A4D28F27FEED3D002CC587 /* Build configuration list for PBXNativeTarget "smpprelay-characterisation-plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6A4D29027FEED3D002CC587 /* Debug */,
+				A6A4D29127FEED3D002CC587 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A6A4D29227FEED3D002CC587 /* Build configuration list for PBXNativeTarget "smpprelay-characterisation-pluginTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6A4D29327FEED3D002CC587 /* Debug */,
+				A6A4D29427FEED3D002CC587 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A6A4D2AB27FEED54002CC587 /* Build configuration list for PBXNativeTarget "smpprelay-dlr-modification-plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6A4D2AC27FEED54002CC587 /* Debug */,
+				A6A4D2AD27FEED54002CC587 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A6A4D2AE27FEED54002CC587 /* Build configuration list for PBXNativeTarget "smpprelay-dlr-modification-pluginTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6A4D2AF27FEED54002CC587 /* Debug */,
+				A6A4D2B027FEED54002CC587 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

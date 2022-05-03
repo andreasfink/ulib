@@ -107,7 +107,7 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         gobjc gobjc-10 \
         gobjc++ gobjc++-10 \
         default-libmysqlclient-dev \
-        libpq-dev libpq5
+        libpq-dev libpq5 curl libcurl4-openssl-dev
 
 
 
@@ -144,6 +144,7 @@ Build  libiconv
     CC=gcc LDFLAGS="-fuse-ld=gold" CXX="gcc++" CFLAGS="-fPIC" CPPFLAGS="-fPIC" ./configure --enable-static --enable-dynamic
     make
     make install
+	libtool --finish /usr/local/lib
     cd ..
 
 
@@ -206,13 +207,21 @@ mkdir -p ${PREFIX}/bin
 
     make install
     source ${PREFIX}/etc/GNUstep/GNUstep.conf
+    #source /usr/local/etc/GNUstep/GNUstep.conf
     cd ..
  
 7. install gnustep-base
 
 
     cd base
-    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf --with-libiconv-library=/usr/local/lib/libiconv.a
+    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf \
+    	--with-libiconv-library=/usr/local/lib/libiconv.a \
+    	--enable-pass-arguments \
+    	--enable-zeroconf \
+    	--enable-icu \
+    	--enable-libdispatch \
+    	--enable-nsurlsession 
+    
     make -j8
     make install
     ldconfig
@@ -233,20 +242,21 @@ mkdir -p ${PREFIX}/bin
 
 9.  If you want X11 GUI support in GnuStep install gnustep-gui
 
-    cd gnustep/gui
+    cd gui
     ./configure
     make -j8
     make install
     ldconfig
-    cd ../..
+    cd ..
 
 10. install gnustep-back
 
-    cd gnustep/corebase
+    cd corebase
     ./configure
     make -j8
     make install
-    cd ../..
+    cd ..
+    
 
 11. ulib
     git clone http://github.com/andreasfink/ulib

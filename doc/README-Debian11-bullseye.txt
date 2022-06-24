@@ -144,9 +144,9 @@ Build  libiconv
     CC=gcc LDFLAGS="-fuse-ld=gold" CXX="gcc++" CFLAGS="-fPIC" CPPFLAGS="-fPIC" ./configure --enable-static --enable-dynamic
     make
     make install
-	libtool --finish /usr/local/lib
+    ./libtool --finish /usr/local/lib
     cd ..
-
+#make check
 
 3. Setting some defaults
 ------------------------------------------------
@@ -172,6 +172,8 @@ mkdir -p ${PREFIX}/bin
     cmake  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX} ..
     make
     make install
+#make test
+
 
 5. install libobjc2 runtime
 
@@ -185,6 +187,7 @@ mkdir -p ${PREFIX}/bin
     #if you get errors here
     # edif the file CMakeCache.txt  and remove the -stlib... thing in line CMAKE_C_FLAGS:STRING=-I /usr/local/include
     make install
+#make test
     cd ..
     ldconfig
 
@@ -225,6 +228,7 @@ mkdir -p ${PREFIX}/bin
     make -j8
     make install
     ldconfig
+#make check
     cd ..
 
 (for debug version use "make debug=yes" instead of "make")

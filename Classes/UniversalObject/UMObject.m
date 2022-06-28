@@ -22,20 +22,27 @@
 
 extern NSString *UMBacktrace(void **stack_frames, size_t size);
 
+
 @interface UMObjectThreadStarter : NSObject
 {
-	SEL         _selector;
-	id          _obj;
-	const char *_file;
-	long        _line;
-	const char *_func;
+    UMThreadStarterFunction   _threadFunc;
+	SEL                       _selector;
+	id                        _obj;
+	const char *              _callingFile;
+	long                      _callingLine;
+	const char *              _callingFunc;
+    void *                    _ptr;
 }
 
 @property(readwrite,assign,atomic) SEL         selector;
 @property(readwrite,strong,atomic) id          obj;
-@property(readwrite,assign,atomic) const char  *file;
-@property(readwrite,assign,atomic) long        line;
-@property(readwrite,assign,atomic) const char  *func;
+@property(readwrite,assign,atomic) const char  *callingFile;
+@property(readwrite,assign,atomic) long        callingLine;
+@property(readwrite,assign,atomic) const char  *callingFunc;
+@property(readwrite,assign,atomic) void        *ptr;
+
+@property(readwrite,assign,atomic) UMThreadStarterFunction   threadFunc;
+
 @end
 
 @implementation UMObjectThreadStarter
@@ -303,10 +310,24 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
         SEL sel = ts.selector;
         id obj = ts.obj;
 
+        if(sel)
+        {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [self performSelector:sel withObject:obj];
+            [self performSelector:sel withObject:obj];
 #pragma clang diagnostic pop
+        }
+        else if((ts.threadFunc) && (ts.obj))
+        {
+            if(ts.obj)
+            {
+                ts.threadFunc(ts.obj);
+            }
+            else
+            {
+                ts.threadFunc(ts.ptr);
+            }
+        }
     }
 }
 
@@ -321,6 +342,29 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 						   withObject:ts];
 }
 
+
++ (void)runFunctionInBackground:(UMThreadStarterFunction)func
+                     withObject:(id)param
+{
+    UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
+    ts.threadFunc = func;
+    ts.obj  = param;
+    [NSThread detachNewThreadSelector:@selector(threadStarter:)
+                             toTarget:self
+                           withObject:ts];
+}
+
++ (void)runFunctionInBackground:(UMThreadStarterFunction)func
+                    withPointer:(void *)ptr
+{
+    UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
+    ts.threadFunc = func;
+    ts.ptr  = ptr;
+    [NSThread detachNewThreadSelector:@selector(threadStarter:)
+                             toTarget:self
+                           withObject:ts];
+}
+
 - (void)runSelectorInBackground:(SEL)aSelector
 					 withObject:(id)anArgument
 						   file:(const char *)fil
@@ -330,9 +374,9 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 	UMObjectThreadStarter *ts = [[UMObjectThreadStarter alloc]init];
 	ts.selector = aSelector;
 	ts.obj      = anArgument;
-	ts.file     = fil;
-	ts.line     = lin;
-	ts.func     = fun;
+	ts.callingFile     = fil;
+	ts.callingLine     = lin;
+	ts.callingFunc     = fun;
 
 	[NSThread detachNewThreadSelector:@selector(threadStarter:)
 							 toTarget:self

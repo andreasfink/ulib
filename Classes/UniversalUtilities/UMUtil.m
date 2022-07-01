@@ -17,16 +17,13 @@
 #include <TargetConditionals.h>
 #include <libkern/OSByteOrder.h>
 
-#if TARGET_OS_IOS  || TARGET_OS_TV
+#if     TARGET_OS_IOS
 #include <UIKit/UIKit.h>
-#endif
-
-#if TARGET_OS_WATCH
+#elif   TARGET_OS_TV
+#include <UIKit/UIKit.h>
+#elif   TARGET_OS_WATCH
 #include <WatchKit/WatchKit.h>
-#endif
-
-
-#if TARGET_OS_OSX
+#eluf   TARGET_OS_OSX
 #include <IOKit/IOTypes.h>
 #endif
 
@@ -584,55 +581,56 @@ static NSArray *        _machineCPUIDs = NULL;
 
 + (NSString *)getMachineSerialNumber
 {
+    BOOL found = NO;
+
     if(_machineSerialNumberLoaded)
     {
         return _machineSerialNumber;
     }
-    BOOL found = NO;
 
 #if defined(__APPLE__)
     NSString *serialNumber = NULL;
 
-#if TARGET_OS_IOS || TARGET_OS_TV
-    _machineSerialNumber = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    _machineSerialNumberLoaded=YES;
-    return _machineSerialNumber;
-#endif
-    
-#if TARGET_OS_WATCH
-    _machineSerialNumber = @"watch";
-    _machineSerialNumberLoaded=YES;
-    return _machineSerialNumber;
-#endif
-
-#if TARGET_OS_OSX
-    CFStringRef cfSerialNumber = NULL;
-    io_service_t platformExpert = IOServiceGetMatchingService(   kIOMasterPortDefault,
-                                                              IOServiceMatching("IOPlatformExpertDevice")
-                                                              );
-
-    if (platformExpert)
-    {
-        CFTypeRef serialNumberAsCFString = IORegistryEntryCreateCFProperty(
-                                                                           platformExpert,
-                                                                           CFSTR(kIOPlatformSerialNumberKey),
-                                                                           kCFAllocatorDefault,
-                                                                           0
-                                                                           );
-        cfSerialNumber = (CFStringRef)serialNumberAsCFString;
-        IOObjectRelease(platformExpert);
-    }
-    if (cfSerialNumber)
-    {
-        serialNumber = @ ([(NSString *)CFBridgingRelease(cfSerialNumber) UTF8String]);
+    #if TARGET_OS_IOS
+        _machineSerialNumber = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        _machineSerialNumberLoaded=YES;
         found = YES;
-    }
-    else
-    {
-        serialNumber = @"unknown";
-    }
-#endif /* TARGET_OS_.. */
-#else /*__APPLE__ */
+    #elif TARGET_OS_TV
+        _machineSerialNumber = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        _machineSerialNumberLoaded=YES;
+        found = YES;
+     return _machineSerialNumber;
+    #elif   TARGET_OS_WATCH
+        _machineSerialNumber = @"watch";
+        _machineSerialNumberLoaded=YES;
+        found = YES;
+    #elif TARGET_OS_OSX
+        CFStringRef cfSerialNumber = NULL;
+        io_service_t platformExpert = IOServiceGetMatchingService(   kIOMasterPortDefault,
+                                                                  IOServiceMatching("IOPlatformExpertDevice")
+                                                                  );
+        if (platformExpert)
+        {
+            CFTypeRef serialNumberAsCFString = IORegistryEntryCreateCFProperty(
+                                                                               platformExpert,
+                                                                               CFSTR(kIOPlatformSerialNumberKey),
+                                                                               kCFAllocatorDefault,
+                                                                               0
+                                                                               );
+            cfSerialNumber = (CFStringRef)serialNumberAsCFString;
+            IOObjectRelease(platformExpert);
+        }
+        if (cfSerialNumber)
+        {
+            serialNumber = @ ([(NSString *)CFBridgingRelease(cfSerialNumber) UTF8String]);
+            found = YES;
+        }
+        else
+        {
+            serialNumber = @"unknown";
+        }
+    #endif /* TARGET_OS_.. */
+#else /*  not __APPLE__ */
 
 #define MAXLINE 256
     NSMutableString *serialNumber = NULL;

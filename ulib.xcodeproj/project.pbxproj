@@ -22404,7 +22404,7 @@
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1i-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
@@ -22413,14 +22413,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.1i-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1p-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1i-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 					"$(inherited)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
@@ -22432,7 +22432,7 @@
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = macosx;
-				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1i-binary/usr/local/include/";
+				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1p-binary/usr/local/include/";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -22448,7 +22448,7 @@
 				DEVELOPMENT_TEAM = 2GSNWPNR77;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1i-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
@@ -22457,14 +22457,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.1i-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1p-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1i-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 					"$(inherited)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
@@ -22476,7 +22476,7 @@
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = macosx;
-				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1i-binary/usr/local/include/";
+				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1p-binary/usr/local/include/";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -22496,13 +22496,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "SupportingFiles/ulib-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1p-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				ONLY_ACTIVE_ARCH = YES;
@@ -22527,13 +22527,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "SupportingFiles/ulib-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.1g-binary/usr/local/include/",
+					"$(SRCROOT)/libs/osx/openssl-1.1.1p-binary/usr/local/include/",
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
+					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.$(PRODUCT_NAME:rfc1034identifier)";

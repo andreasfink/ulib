@@ -57,158 +57,170 @@
 
 - (void)startBackgroundTask
 {
-    UMAssert(_startStopLock,@"_startStopLock is NULL");
-    UMAssert(_control_sleeper,@"_control_sleeper is NULL");
-
-
-    [_startStopLock lock];
-    @try
+    @autoreleasepool
     {
-        if(self.runningStatus == UMBackgrounder_notRunning)
-        {
-            self.runningStatus = UMBackgrounder_startingUp;
+        UMAssert(_startStopLock,@"_startStopLock is NULL");
+        UMAssert(_control_sleeper,@"_control_sleeper is NULL");
 
-            [self runSelectorInBackground:@selector(backgroundTask)
-                               withObject:NULL
-                                     file:__FILE__
-                                     line:__LINE__
-                                 function:__func__];
-            int i=0;
-            while(i<= 10)
+
+        [_startStopLock lock];
+        @try
+        {
+            if(self.runningStatus == UMBackgrounder_notRunning)
             {
-                int s = [_control_sleeper sleep:1000000LL wakeOn:UMSleeper_StartupCompletedSignal]; /* 1s */
-                if(s==UMSleeper_StartupCompletedSignal)
+                self.runningStatus = UMBackgrounder_startingUp;
+
+                [self runSelectorInBackground:@selector(backgroundTask)
+                                   withObject:NULL
+                                         file:__FILE__
+                                         line:__LINE__
+                                     function:__func__];
+                int i=0;
+                while(i<= 10)
                 {
-                    return;
+                    int s = [_control_sleeper sleep:1000000LL wakeOn:UMSleeper_StartupCompletedSignal]; /* 1s */
+                    if(s==UMSleeper_StartupCompletedSignal)
+                    {
+                        return;
+                    }
+                    i++;
                 }
-                i++;
             }
         }
-    }
-    @finally
-    {
-        [_startStopLock unlock];
+        @finally
+        {
+            [_startStopLock unlock];
+        }
     }
 }
 
 - (void)shutdownBackgroundTask
 {
-    UMAssert(_startStopLock,@"_startStopLock is NULL");
-    UMAssert(_control_sleeper,@"_control_sleeper is NULL");
-    [_startStopLock lock];
-    @try
+    @autoreleasepool
     {
-        if(self.runningStatus != UMBackgrounder_running)
+        UMAssert(_startStopLock,@"_startStopLock is NULL");
+        UMAssert(_control_sleeper,@"_control_sleeper is NULL");
+        [_startStopLock lock];
+        @try
         {
-            return;
+            if(self.runningStatus != UMBackgrounder_running)
+            {
+                return;
+            }
+            
+            self.runningStatus = UMBackgrounder_shuttingDown;
+            int i=0;
+          
+            [_workSleeper wakeUp:UMSleeper_ShutdownOrderSignal];
+            while((self.runningStatus == UMBackgrounder_shuttingDown) && (i<= 100))
+            {
+                i++;
+                [_control_sleeper sleep:UMSLEEPER_DEFAULT_SLEEP_TIME wakeOn:UMSleeper_ShutdownCompletedSignal]; /* 500ms */
+            }
+            if((self.runningStatus == UMBackgrounder_shuttingDown) && (i> 100))
+            {
+                /* it didnt start successfully in 10 seconds. Something is VERY ODD */
+                NSLog(@"shutdownBackgroundTask: failed. Background task did not shut down within 10 seconds");
+            }
+            self.runningStatus = UMBackgrounder_notRunning;
         }
-        
-        self.runningStatus = UMBackgrounder_shuttingDown;
-        int i=0;
-      
-        [_workSleeper wakeUp:UMSleeper_ShutdownOrderSignal];
-        while((self.runningStatus == UMBackgrounder_shuttingDown) && (i<= 100))
+        @finally
         {
-            i++;
-            [_control_sleeper sleep:UMSLEEPER_DEFAULT_SLEEP_TIME wakeOn:UMSleeper_ShutdownCompletedSignal]; /* 500ms */
+            [_startStopLock unlock];
         }
-        if((self.runningStatus == UMBackgrounder_shuttingDown) && (i> 100))
-        {
-            /* it didnt start successfully in 10 seconds. Something is VERY ODD */
-            NSLog(@"shutdownBackgroundTask: failed. Background task did not shut down within 10 seconds");
-        }
-        self.runningStatus = UMBackgrounder_notRunning;
-    }
-    @finally
-    {
-        [_startStopLock unlock];
     }
 }
 
 - (void)backgroundTask
 {
-    BOOL mustQuit = NO;
+    @autoreleasepool
+    {
+        BOOL mustQuit = NO;
 
-    if(self.name)
-    {
-        ulib_set_thread_name(self.name);
-    }
-    if(self.runningStatus != UMBackgrounder_startingUp)
-    {
-        return;
-    }
-    if(_workSleeper==NULL)
-    {
-        self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
-        [self.workSleeper prepare];
-    }
-   self.runningStatus = UMBackgrounder_running;
-
-    [_control_sleeper wakeUp:UMSleeper_StartupCompletedSignal];
-    if(_enableLogging)
-    {
-        NSLog(@"%@: started up successfully",self.name);
-    }
-    [self backgroundInit];
-
-    BOOL doSleep = NO;
-    while((self.runningStatus == UMBackgrounder_running) && (mustQuit==NO))
-    {
-        if(doSleep)
+        if(self.name)
         {
-            /* lets sleep for a small while or until woken up due to work */
-            long long sleepTime = UMSLEEPER_DEFAULT_SLEEP_TIME;
-            if(_enableLogging)
-            {
-                sleepTime= UMSLEEPER_DEFAULT_SLEEP_TIME*100;
-            }
-            UMSleeper_Signal signal = [_workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ]; /* 100ms */
-            if(_enableLogging)
-            {
-                NSLog(@"%@ woke up with signal %d",self.name,signal);
-            }
-            if(signal & UMSleeper_ShutdownOrderSignal)
-            {
-                if(_enableLogging)
-                {
-                    NSLog(@"%@: got shutdown order",self.name);
-                }
-                mustQuit = YES;
-            }
+            ulib_set_thread_name(self.name);
         }
-        if(!mustQuit)
+        if(self.runningStatus != UMBackgrounder_startingUp)
         {
-            int status;
+            return;
+        }
+        if(_workSleeper==NULL)
+        {
+            self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
+            [self.workSleeper prepare];
+        }
+       self.runningStatus = UMBackgrounder_running;
+
+        [_control_sleeper wakeUp:UMSleeper_StartupCompletedSignal];
+        if(_enableLogging)
+        {
+            NSLog(@"%@: started up successfully",self.name);
+        }
+        [self backgroundInit];
+
+        BOOL doSleep = NO;
+        while((self.runningStatus == UMBackgrounder_running) && (mustQuit==NO))
+        {
             @autoreleasepool
             {
-                status = [self work]; /* > 0 means we had work processed */
-            }
-            if(status < 0)
-            {
-                if(_enableLogging)
+                if(doSleep)
                 {
-                    NSLog(@"%@: shutdown because work returns %d",self.name,status);
+                    /* lets sleep for a small while or until woken up due to work */
+                    long long sleepTime = UMSLEEPER_DEFAULT_SLEEP_TIME;
+                    if(_enableLogging)
+                    {
+                        sleepTime= UMSLEEPER_DEFAULT_SLEEP_TIME*100;
+                    }
+                    UMSleeper_Signal signal = [_workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ]; /* 100ms */
+                    if(_enableLogging)
+                    {
+                        NSLog(@"%@ woke up with signal %d",self.name,signal);
+                    }
+                    if(signal & UMSleeper_ShutdownOrderSignal)
+                    {
+                        if(_enableLogging)
+                        {
+                            NSLog(@"%@: got shutdown order",self.name);
+                        }
+                        mustQuit = YES;
+                    }
                 }
-                mustQuit = YES;
-            }
-            if(status>0)
-            {
-                doSleep=NO;
-            }
-            else
-            {
-                doSleep=YES;
+                if(!mustQuit)
+                {
+                    int status;
+                    @autoreleasepool
+                    {
+                        status = [self work]; /* > 0 means we had work processed */
+                    }
+                    if(status < 0)
+                    {
+                        if(_enableLogging)
+                        {
+                            NSLog(@"%@: shutdown because work returns %d",self.name,status);
+                        }
+                        mustQuit = YES;
+                    }
+                    if(status>0)
+                    {
+                        doSleep=NO;
+                    }
+                    else
+                    {
+                        doSleep=YES;
+                    }
+                }
             }
         }
+        if(_enableLogging)
+        {
+            NSLog(@"%@: shutting down",self.name);
+        }
+        [self backgroundExit];
+        self.runningStatus = UMBackgrounder_notRunning;
+        self.workSleeper = NULL;
+        [_control_sleeper wakeUp:UMSleeper_ShutdownCompletedSignal];
     }
-    if(_enableLogging)
-    {
-        NSLog(@"%@: shutting down",self.name);
-    }
-    [self backgroundExit];
-    self.runningStatus = UMBackgrounder_notRunning;
-    self.workSleeper = NULL;
-    [_control_sleeper wakeUp:UMSleeper_ShutdownCompletedSignal];
 }
 
 

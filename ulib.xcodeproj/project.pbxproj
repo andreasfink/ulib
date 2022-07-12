@@ -933,11 +933,11 @@
 		A6419BB01A2DE8040090FC94 /* UMTimerBackgrounder.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BAA1A2DE8040090FC94 /* UMTimerBackgrounder.m */; };
 		A6419BB81A2DF2FD0090FC94 /* UMMicroSec.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */; };
 		A6419BB91A2DF2FD0090FC94 /* UMMicroSec.m in Sources */ = {isa = PBXBuildFile; fileRef = A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */; };
-		A64347C5287DFD6E00D2B107 /* UMZMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A64347C3287DFD6E00D2B107 /* UMZMQSocket.h */; };
-		A64347C6287DFD6E00D2B107 /* UMZMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A64347C3287DFD6E00D2B107 /* UMZMQSocket.h */; };
-		A64347C7287DFD6E00D2B107 /* UMZMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A64347C3287DFD6E00D2B107 /* UMZMQSocket.h */; };
-		A64347C8287DFD6E00D2B107 /* UMZMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A64347C3287DFD6E00D2B107 /* UMZMQSocket.h */; };
-		A64347C9287DFD6E00D2B107 /* UMZMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A64347C3287DFD6E00D2B107 /* UMZMQSocket.h */; };
+		A64347C5287DFD6E00D2B107 /* UMZMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A64347C3287DFD6E00D2B107 /* UMZMQSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64347C6287DFD6E00D2B107 /* UMZMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A64347C3287DFD6E00D2B107 /* UMZMQSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64347C7287DFD6E00D2B107 /* UMZMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A64347C3287DFD6E00D2B107 /* UMZMQSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64347C8287DFD6E00D2B107 /* UMZMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A64347C3287DFD6E00D2B107 /* UMZMQSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64347C9287DFD6E00D2B107 /* UMZMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A64347C3287DFD6E00D2B107 /* UMZMQSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A64347CA287DFD6E00D2B107 /* UMZMQSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A64347C4287DFD6E00D2B107 /* UMZMQSocket.m */; };
 		A64347CB287DFD6E00D2B107 /* UMZMQSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A64347C4287DFD6E00D2B107 /* UMZMQSocket.m */; };
 		A64347CC287DFD6E00D2B107 /* UMZMQSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A64347C4287DFD6E00D2B107 /* UMZMQSocket.m */; };

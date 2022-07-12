@@ -15,3 +15,4 @@
 #import "NSData+UMSocket.h"
 #import "UMSyslogClient.h"
 #import "UMPacket.h"
+#import "UMZMQSocket.h"

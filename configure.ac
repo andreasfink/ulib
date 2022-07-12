@@ -196,6 +196,10 @@ AC_CHECK_LIB(nsl, inet_ntoa)
 AC_CHECK_LIB(resolv, inet_ntop)
 AC_CHECK_LIB(bind, inet_ntop)
 
+if test -z "$zmq"; then
+    AC_CHECK_LIB(zmq, zmq_socket, [LIBS="$LIBS -lzmq"])
+fi
+
 if test -z "$pthread"; then
     AC_CHECK_LIB(pthread, pthread_exit, [LIBS="$LIBS -lpthread"])
 fi
@@ -203,12 +207,6 @@ AC_CHECK_LIB(iconv, libiconv, [LIBS="$LIBS -liconv"])
 
 dnl Checks for header files.
 
-m4_warn([obsolete],
-[The preprocessor macro `STDC_HEADERS' is obsolete.
-  Except in unusual embedded environments, you can safely include all
-  ISO C90 headers unconditionally.])dnl
-# Autoupdate added the next two lines to ensure that your configure
-# script's behavior did not change.  They are probably safe to remove.
 AC_PROG_EGREP
 
 
@@ -272,6 +270,7 @@ AC_CHECK_HEADERS(netinet/sctp.h)
 AC_CHECK_HEADERS(sctp/sctp.h)
 AC_CHECK_HEADERS(netinet/in.h)
 AC_CHECK_HEADERS(net/if_dl.h)
+AC_CHECK_HEADERS(zmq.h)
 
 AC_CHECK_HEADERS(sys/socket.h sys/sockio.h net/if.h netinet/in.h,,,
 [
@@ -479,6 +478,7 @@ GW_HAVE_FUNC_FROM(unistd.h, getopt, HAVE_GETOPT_IN_UNISTD_H,
     	    	  [Does <unistd.h> declare getopt()?])
 
 
+
 AC_CONFIG_SECTION([Configuring parameters])
 
 
@@ -539,6 +539,7 @@ AC_SUBST(STATIC_LIBS)
 AC_SUBST(SHARED_LIBRARY_EXTENSION)
 AC_SUBST(LIBRARIES)
 AC_SUBST(DMIDECODE)
+
 AC_CONFIG_SECTION([Generating output files]) 
 AC_CONFIG_FILES([Makefile.osx])
 AC_CONFIG_FILES([Makefile.linux])

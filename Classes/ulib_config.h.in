@@ -171,6 +171,12 @@
 #define	HAVE_SIN_LEN HAVE_SOCKADDR_SIN_LEN
 #endif
 
+/* Define if you have zeromq support */
+#undef HAVE_ZMQ_H
+#ifdef HAVE_ZMQ_H
+#define HAVE_ZEROMQ 1
+#endif
+
 /* If we're using GCC, we can get it to check format function arguments. */
 #ifdef __GNUC__
     #define PRINTFLIKE(a,b) __attribute__((format(printf, a, b)))

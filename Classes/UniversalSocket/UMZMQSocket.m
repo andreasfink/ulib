@@ -6,10 +6,13 @@
 //
 
 #import "UMZMQSocket.h"
+#import "ulib_config.h"
+
 #if defined(HAVE_ZEROMQ)
-#import <zmq.h>
+#include <zmq.h>
 #endif
 
+#define HAVE_ZEROMQ 1
 #import "NSData+UniversalObject.h"
 
 @implementation UMZMQSocket
@@ -166,11 +169,11 @@
                 memcpy(zmq_msg_data(&msg),d.bytes,d.length);
                 if(remaining>0)
                 {
-                    rc = zmq_msg_send(&msg,socket,ZMQ_SNDMORE);
+                    rc = zmq_msg_send(&msg,_socket,ZMQ_SNDMORE);
                 }
                 else
                 {
-                    rc = zmq_msg_send(&msg,socket,0);
+                    rc = zmq_msg_send(&msg,_socket,0);
                 }
                 if(rc!=0)
                 {
@@ -197,17 +200,17 @@
 {
 #if defined(HAVE_ZEROMQ)
     zmq_msg_t msg;
-    rc = zmq_msg_init_size(&msg,d.length);
+    int rc = zmq_msg_init_size(&msg,d.length);
     if(rc==0)
     {
         memcpy(zmq_msg_data(&msg),d.bytes,d.length);
         if(hasMore)
         {
-            rc = zmq_msg_send(&msg,socket,ZMQ_SNDMORE);
+            rc = zmq_msg_send(&msg,_socket,ZMQ_SNDMORE);
         }
         else
         {
-            rc = zmq_msg_send(&msg,socket,0);
+            rc = zmq_msg_send(&msg,_socket,0);
         }
         if(rc!=0)
         {

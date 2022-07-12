@@ -28,10 +28,6 @@
     self = [super init];
     if(self)
     {
-#if 0
-        fprintf(stdout,"backgrounder init: %s\r\n",n.UTF8String);
-        fflush(stdout);
-#endif
         if(ws==NULL)
         {
             _workSleeper = [[UMSleeper alloc]initFromFile:__FILE__

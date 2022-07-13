@@ -179,7 +179,7 @@ if(_logLevel <= UMLOG_DEBUG) \
             {
                 rc = zmq_msg_send(&msg,_socket,0);
             }
-            if(rc!=0)
+            if(rc<0)
             {
                 [self setError:errno];
             }

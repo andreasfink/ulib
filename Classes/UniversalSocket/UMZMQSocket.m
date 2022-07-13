@@ -8,11 +8,11 @@
 #import "UMZMQSocket.h"
 #import "ulib_config.h"
 
-#if defined(HAVE_ZEROMQ)
+#if defined(HAVE_ZMQ_H)
 #include <zmq.h>
+#define HAVE_ZEROMQ 1
 #endif
 
-#define HAVE_ZEROMQ 1
 #import "NSData+UniversalObject.h"
 
 @implementation UMZMQSocket

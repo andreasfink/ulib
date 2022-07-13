@@ -195,10 +195,12 @@ AC_CHECK_LIB(socket, accept)
 AC_CHECK_LIB(nsl, inet_ntoa)
 AC_CHECK_LIB(resolv, inet_ntop)
 AC_CHECK_LIB(bind, inet_ntop)
+AC_CHECK_LIB(zmq,zmq_new_ctx)
 
 if test -z "$zmq"; then
-    AC_CHECK_LIB(zmq, zmq_socket, [LIBS="$LIBS -lzmq"])
+   LIBS="$LIBS -lstdc++ -lzmq"
 fi
+
 
 if test -z "$pthread"; then
     AC_CHECK_LIB(pthread, pthread_exit, [LIBS="$LIBS -lpthread"])
@@ -536,6 +538,7 @@ AC_SUBST(MAJORVER)
 AC_SUBST(MINORVER)
 AC_SUBST(REVISION)
 AC_SUBST(STATIC_LIBS)
+AC_SUBST(LIBS)
 AC_SUBST(SHARED_LIBRARY_EXTENSION)
 AC_SUBST(LIBRARIES)
 AC_SUBST(DMIDECODE)

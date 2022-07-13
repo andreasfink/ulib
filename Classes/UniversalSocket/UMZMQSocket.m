@@ -151,10 +151,10 @@ if(_logLevel <= UMLOG_DEBUG) \
     int remaining = (int)arr.count;
     for(id obj in arr)
     {
-        NSData *d;
+        NSData *d = NULL;
         if([obj isKindOfClass:[NSData class]])
         {
-            d = (NSData *)d;
+            NSData *d = (NSData *)obj;
             DEBUG_MESSAGE(([NSString stringWithFormat:@"Sending Data: %@",[d hexString]]));
         }
         else if([obj isKindOfClass:[NSString class]])

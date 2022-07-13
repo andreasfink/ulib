@@ -116,32 +116,13 @@ if(_logLevel <= UMLOG_DEBUG) \
 - (NSArray *)receiveArray
 {
 #if defined(HAVE_ZEROMQ)
-    int more = 1;
     NSMutableArray *arr = [[NSMutableArray alloc]init];
-
-    while(more)
+    BOOL more = NO;
+    do
     {
-        zmq_msg_t msg;
-        zmq_msg_init(&msg);
-        int rc = zmq_msg_recv(&msg,_socket,0);
-        DEBUG_MESSAGE(([NSString stringWithFormat:@"zmq_msg_recv returns %d",rc]));
-        if(rc == -1)
-        {
-            [self setError:errno];
-            sleep(1);
-            more = 0;
-        }
-        else
-        {
-            [self clearError];
-            size_t len = zmq_msg_size(&msg);
-            void *ptr = zmq_msg_data(&msg);
-            NSData *data = [NSData dataWithBytes:ptr length:len];
-            [arr addObject:data];
-            more = zmq_msg_more(&msg);
-        }
-        zmq_msg_close(&msg);
-    }
+        NSData *d = [self receiveDataAndMore:&more];
+        [arr addObject:d];
+    } while(more);
     return arr;
 #else
     sleep(1);

@@ -6,6 +6,7 @@
 //
 
 #import "UMObject.h"
+#import "UMLogLevel.h"
 
 @interface UMZMQSocket : UMObject
 {
@@ -13,10 +14,12 @@
     void *_context;
     void *_socket;
     NSString *_lastError;
+    UMLogLevel _logLevel;
 }
 
 @property(readwrite,strong,atomic) NSString *socketName;
 @property(readwrite,strong,atomic) NSString *lastError;
+@property(readwrite,assign,atomic) UMLogLevel logLevel;
 
 - (UMZMQSocket *)initWithType:(int)type;
 - (int)bind:(NSString *)name;

@@ -14,6 +14,13 @@
 #endif
 
 #import "NSData+UniversalObject.h"
+#import "UMLogFeed.h"
+
+#define DEBUG_MESSAGE(text) \
+if(_logLevel <= UMLOG_DEBUG) \
+{ \
+    [_logFeed debugText:(text)];\
+}
 
 @implementation UMZMQSocket
 
@@ -23,8 +30,11 @@
     if(self)
     {
 #if defined(HAVE_ZEROMQ)
+        DEBUG_MESSAGE(@"setting up ZeroMQ context");
         _context = zmq_ctx_new();
         _socket = zmq_socket(_context,type);
+#else
+        NSLog(@"no support for ZeroMQ compiled in");
 #endif
     }
     return self;
@@ -44,6 +54,7 @@
     else
     {
         _lastError = @(strerror(err));
+        DEBUG_MESSAGE( ([NSString stringWithFormat:@"Error in ZeroMQ %d %@",err,_lastError]) );
     }
 }
 
@@ -51,6 +62,7 @@
 - (int)bind:(NSString *)name
 {
 #if defined(HAVE_ZEROMQ)
+    DEBUG_MESSAGE( ([NSString stringWithFormat:@"binding to ZeroMQ %@",name]) );
     int rc = zmq_bind(_socket,name.UTF8String);
     if(rc!=0)
     {
@@ -70,6 +82,7 @@
 - (int)connect:(NSString *)name
 {
 #if defined(HAVE_ZEROMQ)
+    DEBUG_MESSAGE( ([NSString stringWithFormat:@"connecting to ZeroMQ %@",name]) );
     int rc = zmq_connect(_socket,name.UTF8String);
     if(rc!=0)
     {
@@ -90,6 +103,7 @@
 - (void) close
 {
 #if defined(HAVE_ZEROMQ)
+    DEBUG_MESSAGE(@"closing ZeroMQ");
     zmq_ctx_destroy(_context);
 #else
     [self setError:EOPNOTSUPP];

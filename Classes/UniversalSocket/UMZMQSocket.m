@@ -55,6 +55,7 @@ if(_logLevel <= UMLOG_DEBUG) \
     {
         _lastError = @(strerror(err));
         DEBUG_MESSAGE( ([NSString stringWithFormat:@"Error in ZeroMQ %d %@",err,_lastError]) );
+        sleep(1);
     }
 }
 
@@ -123,9 +124,11 @@ if(_logLevel <= UMLOG_DEBUG) \
         zmq_msg_t msg;
         zmq_msg_init(&msg);
         int rc = zmq_msg_recv(&msg,_socket,0);
-        if(rc==-1)
+        DEBUG_MESSAGE(([NSString stringWithFormat:@"zmq_msg_recv returns %d",rc]));
+        if(rc == -1)
         {
             [self setError:errno];
+            sleep(1);
             more = 0;
         }
         else

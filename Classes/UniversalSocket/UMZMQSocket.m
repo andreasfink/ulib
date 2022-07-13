@@ -121,8 +121,16 @@ if(_logLevel <= UMLOG_DEBUG) \
     do
     {
         NSData *d = [self receiveDataAndMore:&more];
-        [arr addObject:d];
+        if(d)
+        {
+            [arr addObject:d];
+        }
+        else
+        {
+            break;
+        }
     } while(more);
+    
     return arr;
 #else
     sleep(1);
@@ -158,32 +166,29 @@ if(_logLevel <= UMLOG_DEBUG) \
             d = [NSData data];
         }
         remaining--;
-        if(remaining == 0)
+        zmq_msg_t msg;
+        rc = zmq_msg_init_size(&msg,d.length);
+        if(rc==0)
         {
-            zmq_msg_t msg;
-            rc = zmq_msg_init_size(&msg,d.length);
-            if(rc==0)
+            memcpy(zmq_msg_data(&msg),d.bytes,d.length);
+            if(remaining>0)
             {
-                memcpy(zmq_msg_data(&msg),d.bytes,d.length);
-                if(remaining>0)
-                {
-                    rc = zmq_msg_send(&msg,_socket,ZMQ_SNDMORE);
-                }
-                else
-                {
-                    rc = zmq_msg_send(&msg,_socket,0);
-                }
-                if(rc!=0)
-                {
-                    [self setError:errno];
-                }
-                else
-                {
-                    [self clearError];
-                }
+                rc = zmq_msg_send(&msg,_socket,ZMQ_SNDMORE);
             }
-            zmq_msg_close(&msg);
+            else
+            {
+                rc = zmq_msg_send(&msg,_socket,0);
+            }
+            if(rc!=0)
+            {
+                [self setError:errno];
+            }
+            else
+            {
+                [self clearError];
+            }
         }
+        zmq_msg_close(&msg);
     }
     return rc;
 #else

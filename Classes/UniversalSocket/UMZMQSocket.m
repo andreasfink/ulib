@@ -155,11 +155,13 @@ if(_logLevel <= UMLOG_DEBUG) \
         if([obj isKindOfClass:[NSData class]])
         {
             d = (NSData *)d;
+            DEBUG_MESSAGE(([NSString stringWithFormat:@"Sending Data: %@",[d hexString]]));
         }
         else if([obj isKindOfClass:[NSString class]])
         {
             NSString *s = (NSString *)obj;
             d = [s dataUsingEncoding:NSUTF8StringEncoding];
+            DEBUG_MESSAGE(([NSString stringWithFormat:@"Sending String: '%@'",s]));
         }
         else
         {

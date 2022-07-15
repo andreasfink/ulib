@@ -55,7 +55,6 @@ if(_logLevel <= UMLOG_DEBUG) \
     {
         _lastError = @(strerror(err));
         DEBUG_MESSAGE( ([NSString stringWithFormat:@"Error in ZeroMQ %d %@",err,_lastError]) );
-        sleep(1);
     }
 }
 
@@ -133,7 +132,7 @@ if(_logLevel <= UMLOG_DEBUG) \
     
     return arr;
 #else
-    sleep(1);
+    usleep(100000);
     // avoid busyloops if backgrounder is
     // started without support
     [self setError:EOPNOTSUPP];

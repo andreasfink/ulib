@@ -256,7 +256,7 @@ if(_logLevel <= UMLOG_DEBUG) \
         [self setError:errno];
         if(morePtr)
         {
-            *morePtr = 0;
+            *morePtr = NO;
         }
     }
     else
@@ -265,9 +265,13 @@ if(_logLevel <= UMLOG_DEBUG) \
         size_t len = zmq_msg_size(&msg);
         void *ptr = zmq_msg_data(&msg);
         returnData = [NSData dataWithBytes:ptr length:len];
+        
+        int m;
+        size_t m_size = sizeof(m);
+        rc = zmq_getsockopt (_socket, ZMQ_RCVMORE, &m, &m_size);
         if(morePtr)
         {
-            *morePtr = zmq_msg_more(&msg);
+            *morePtr = m ? YES : NO;
         }
     }
     zmq_msg_close(&msg);

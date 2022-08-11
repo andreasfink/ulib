@@ -83,7 +83,9 @@
 - (void)setSeconds:(NSTimeInterval)sec
 {
     [_timerMutex lock];
+    UMMicroSec oldDuration = _microsecDuration;
     _microsecDuration = (UMMicroSec)(sec * 1000000.0);
+    _expiryTime = _expiryTime + _microsecDuration - oldDuration;
     [_timerMutex unlock];
 
 }

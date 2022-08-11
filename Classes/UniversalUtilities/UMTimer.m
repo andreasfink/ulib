@@ -120,7 +120,6 @@
         _name = n;
         _repeats = r;
         _timerMutex = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"timer %@",n]];
-
     }
     return self;
 }

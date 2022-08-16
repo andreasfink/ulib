@@ -130,6 +130,7 @@
 - (void)setResponseTypeGif;
 - (void)setResponseTypeJson;
 - (void)setResponseTypeBinary;
+- (void)setResponseTypeJavascript;
 
 - (void)setCookie:(NSString *)cookieName withValue:(NSString *)value;
 - (void)setCookie:(NSString *)cookieName withValue:(NSString *)value forPath:(NSString *)path;

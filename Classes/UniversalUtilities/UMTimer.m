@@ -12,6 +12,8 @@
 #import "UMBackgrounder.h"
 #import "UMMutex.h"
 #import "UMUtil.h"
+#import "UMSynchronizedSortedDictionary.h"
+#import "NSDate+stringFunctions.h"
 
 #include <time.h>
 @implementation UMTimer
@@ -260,4 +262,19 @@
 	}
 }
 
+- (UMSynchronizedSortedDictionary *)timerDescription
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"name"] = _name;
+    dict[@"is-running"] = @(_isRunning);
+    NSTimeInterval st = _startTime/1000000.0;
+    NSDate *start = [NSDate dateWithTimeIntervalSince1970:st];
+    dict[@"start-time"] = [start stringValue];
+                    
+    dict[@"expiry-time"] = [[NSDate dateWithTimeIntervalSince1970:(_expiryTime/1000000.0)] stringValue];
+    dict[@"last-checked"] = [[NSDate dateWithTimeIntervalSince1970:(_lastChecked/1000000.0)] stringValue];
+    dict[@"duration"] = @([self seconds]);
+    dict[@"repeats"] = @(_repeats);
+    return dict;
+}
 @end

@@ -16,6 +16,7 @@
 #import "UMLayerUserProtocol.h"
 #import "NSString+UniversalObject.h"
 #import "UMAssert.h"
+#import "UMHistoryLog.h"
 
 #if defined(FREEBSD)
 /* we need to get non posix error codes included */
@@ -140,6 +141,7 @@
         _layerName = name;
         _taskQueue = NULL;
         _logLevel = UMLOG_MAJOR;
+        _layerHistory = [[UMHistoryLog alloc]initWithMaxLines:100];
     }
     return self;
 }
@@ -177,8 +179,14 @@
         _upperQueueThroughput = [[UMThroughputCounter alloc]initWithResolutionInSeconds: 1.0 maxDuration: 1260.0];
         _adminQueueThroughput = [[UMThroughputCounter alloc]initWithResolutionInSeconds: 1.0 maxDuration: 1260.0];
         _logLevel = UMLOG_MAJOR;
+        _layerHistory = [[UMHistoryLog alloc]initWithMaxLines:100];
     }
     return self;
+}
+
+- (void)addToLayerHistoryLog:(NSString *)s
+{
+    [_layerHistory addLogEntry:s];
 }
 
 - (void)logDebug:(NSString *)s

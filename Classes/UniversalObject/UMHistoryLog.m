@@ -175,6 +175,13 @@
     return [a componentsJoinedByString:@"\n"];
 }
 
+- (NSString *)getLogForwardOrderWithDates
+{
+    NSArray *a = [self getLogArrayWithDatesAndOrder:YES];
+    return [a componentsJoinedByString:@"\n"];
+}
+
+
 - (NSString *)description
 {
     return [self getLogForwardOrder];

@@ -9,6 +9,7 @@
 #import "NSString+UniversalObject.h"
 #import "UMHistoryLogEntry.h"
 #import "UMAssert.h"
+#import "NSDate+stringFunctions.h"
 
 @implementation UMHistoryLog
 
@@ -73,6 +74,42 @@
     [_lock unlock];
 }
 
+- (NSArray *)getLogArrayWithDatesAndOrder:(BOOL)forward
+{
+    [_lock lock];
+    NSMutableArray *output = [[NSMutableArray alloc]init];
+    NSInteger count = [_entries count];
+    NSInteger position;
+    NSInteger direction;
+
+    if(forward)
+    {
+        position = 0;
+        direction = 1;
+    }
+    else
+    {
+        position = count - 1;
+        direction = -1;
+
+    }
+
+    while(count--)
+    {
+        UMHistoryLogEntry *entry = _entries[position];
+        NSDate *d = entry.date;
+        NSString *ds = [d stringValue];
+        NSString *line = [NSString stringWithFormat:@"%@  %@",ds,entry.log];
+        if([line length]>0)
+        {
+            [output addObject:line];
+        }
+        position = position + direction;
+    }
+    [_lock unlock];
+    return output;
+}
+
 - (NSArray *)getLogArrayWithOrder:(BOOL)forward
 {
     [_lock lock];
@@ -123,6 +160,12 @@
 - (NSString *)getLogBackwardOrder
 {
     NSArray *a = [self getLogArrayWithOrder:NO];
+    return [a componentsJoinedByString:@"\n"];
+}
+
+- (NSString *)getLogBackwardOrderWithDates
+{
+    NSArray *a = [self getLogArrayWithDatesAndOrder:NO];
     return [a componentsJoinedByString:@"\n"];
 }
 

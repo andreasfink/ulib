@@ -18,7 +18,7 @@
     self = [super init];
     if(self)
     {
-        
+        _date = [NSDate date];
     }
     return self;
 }
@@ -28,7 +28,8 @@
     self = [super init];
     if(self)
     {
-        log = newlog;
+        _date = [NSDate date];
+        _log = newlog;
     }
     return self;
 }

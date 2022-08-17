@@ -30,8 +30,11 @@
 - (void)addLogEntry:(NSString *)entry;
 - (void)addPrintableString:(NSString *)s;
 - (NSArray *)getLogArrayWithOrder:(BOOL)forward;
+- (NSArray *)getLogArrayWithDatesAndOrder:(BOOL)forward;
 - (NSString *)getLogForwardOrder;
 - (NSString *)getLogBackwardOrder;
 - (NSString *)stringLines;
+- (NSString *)getLogForwardOrderWithDates;
+- (NSString *)getLogBackwardOrderWithDates;
 
 @end

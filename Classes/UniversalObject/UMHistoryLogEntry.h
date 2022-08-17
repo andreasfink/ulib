@@ -20,11 +20,13 @@
 
 @interface UMHistoryLogEntry : UMObject
 {
-    NSString            *log;
+    NSDate              *_date;
+    NSString            *_log;
 }
 
 - (UMHistoryLogEntry *)initWithLog:(NSString *)newlog;
 
-@property(readwrite,strong) NSString            *log;
+@property(readwrite,strong) NSDate          *date;
+@property(readwrite,strong) NSString        *log;
 
 @end

@@ -1137,6 +1137,8 @@
 		A67045EA1FD14BEE00F27771 /* UMQueueMulti.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DC22E1FD08593001ACCC7 /* UMQueueMulti.m */; };
 		A67045EB1FD14BF100F27771 /* UMQueueMulti.h in Headers */ = {isa = PBXBuildFile; fileRef = A62DC22D1FD08593001ACCC7 /* UMQueueMulti.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A67AA9F71CF8BD0C00211137 /* ulib_config.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A7A2431CF81EE600211137 /* ulib_config.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A67BDEDF28AC80D600490E1B /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347DB287E33D100D2B107 /* libzmq.a */; };
+		A67BDEE128AC82F000490E1B /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347DB287E33D100D2B107 /* libzmq.a */; };
 		A67C389516B2D53000C9DA95 /* UMDataWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C389216B2D53000C9DA95 /* UMDataWithHistory.m */; };
 		A67C389716B2D53000C9DA95 /* UMDateWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C389316B2D53000C9DA95 /* UMDateWithHistory.m */; };
 		A67D14182431DDB9003CB94D /* TestUMDate.m in Sources */ = {isa = PBXBuildFile; fileRef = A67D14172431DDB9003CB94D /* TestUMDate.m */; };
@@ -2152,8 +2154,8 @@
 		A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMMicroSec.m; sourceTree = "<group>"; };
 		A64347C3287DFD6E00D2B107 /* UMZMQSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMZMQSocket.h; sourceTree = "<group>"; };
 		A64347C4287DFD6E00D2B107 /* UMZMQSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMZMQSocket.m; sourceTree = "<group>"; };
-		A64347DB287E33D100D2B107 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzmq.a; sourceTree = "<group>"; };
-		A64347E3287E38E700D2B107 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = ../../../../../usr/local/lib/libzmq.a; sourceTree = "<group>"; };
+		A64347DB287E33D100D2B107 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = /usr/local/lib/libzmq.a; sourceTree = "<absolute>"; };
+		A64347E3287E38E700D2B107 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = /usr/local/lib/libzmq.a; sourceTree = "<absolute>"; };
 		A64347E4287E391900D2B107 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = /usr/local/lib/libzmq.a; sourceTree = "<absolute>"; };
 		A64347EC287E39A700D2B107 /* configure.ac */ = {isa = PBXFileReference; lastKnownFileType = text; path = configure.ac; sourceTree = "<group>"; };
 		A64347ED287E39EE00D2B107 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libc++.1.tbd"; sourceTree = DEVELOPER_DIR; };
@@ -2528,6 +2530,7 @@
 				A6E1DB6824062E1E001FB7FF /* libcrypto.a in Frameworks */,
 				A6E1DB6924062E22001FB7FF /* libssl.a in Frameworks */,
 				A60C4D071EF7FE59007C203A /* Security.framework in Frameworks */,
+				A67BDEDF28AC80D600490E1B /* libzmq.a in Frameworks */,
 				A6DBF0C320BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2571,6 +2574,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A67BDEE128AC82F000490E1B /* libzmq.a in Frameworks */,
 				A67D141B2431DF85003CB94D /* libssl.a in Frameworks */,
 				A67D141C2431DF9E003CB94D /* libcrypto.a in Frameworks */,
 				A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */,
@@ -4336,14 +4340,12 @@
 				ORGANIZATIONNAME = "Andreas Fink (andreas@fink.org)";
 				TargetAttributes = {
 					A60210041D488A2F00211137 = {
-						DevelopmentTeam = 2GSNWPNR77;
 						ProvisioningStyle = Automatic;
 					};
 					A602118A1D488A3D00211137 = {
 						ProvisioningStyle = Automatic;
 					};
 					A60C4C931EF7FE59007C203A = {
-						DevelopmentTeam = 2GSNWPNR77;
 						ProvisioningStyle = Automatic;
 					};
 					A6AC49531D460987002BAA97 = {
@@ -4353,7 +4355,6 @@
 						CreatedOnToolsVersion = 7.3.1;
 					};
 					A6D8AB1B149A769B0029E9CF = {
-						DevelopmentTeam = 2GSNWPNR77;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -5668,7 +5669,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DEVELOPMENT_TEAM = 38L827M334;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
@@ -5715,7 +5716,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DEVELOPMENT_TEAM = 38L827M334;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
@@ -5761,7 +5762,7 @@
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DEVELOPMENT_TEAM = 38L827M334;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5802,7 +5803,7 @@
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DEVELOPMENT_TEAM = 38L827M334;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5842,7 +5843,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DEVELOPMENT_TEAM = 38L827M334;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
@@ -5888,7 +5889,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DEVELOPMENT_TEAM = 38L827M334;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
@@ -6296,7 +6297,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_POSTPROCESSING = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 38L827M334;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
@@ -6336,7 +6337,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 38L827M334;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
@@ -6371,13 +6372,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DEVELOPMENT_TEAM = 38L827M334;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
@@ -6405,6 +6407,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "watchsimulator watchos";
@@ -6419,13 +6422,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 2GSNWPNR77;
+				DEVELOPMENT_TEAM = 38L827M334;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
@@ -6453,6 +6457,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "watchsimulator watchos";

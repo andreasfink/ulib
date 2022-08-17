@@ -387,12 +387,6 @@ AC_CHECK_FUNCS(gettimeofday select socket strdup getopt_long localtime_r gmtime_
 dnl AC_CHECK_FUNC(getopt, , AC_LIBOBJS="$AC_LIBOBJS utils/attgetopt.o")
 dnl AC_SUBST(LIBOBJS)
 
-dnl Check if we have reentrant gethostbyname and which one
-AC_CHECK_FUNC(gethostbyname_r, [ AC_FUNC_WHICH_GETHOSTBYNAME_R ], [
-  AC_CHECK_FUNC(gethostbyname,[], [
-    AC_MSG_ERROR([Couldnot find gethostbyname_r nor gethostbyname functions])])]
-)
-
 dnl Checking if we have new TLS_method() or the older TLSv12_method()
 AC_CHECK_FUNC(TLS_method, [AC_DEFINE(HAVE_TLS_METHOD)],[])
 

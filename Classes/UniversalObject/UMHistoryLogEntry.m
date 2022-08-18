@@ -24,13 +24,13 @@
     return self;
 }
 
-- (UMHistoryLogEntry *)initWithLog:(NSString *)newlog
+- (UMHistoryLogEntry *)initWithLog:(NSString *)log
 {
     self = [super init];
     if(self)
     {
         _date = [NSDate date];
-        _log = newlog;
+        _log = log;
     }
     return self;
 }

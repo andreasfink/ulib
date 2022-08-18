@@ -25,8 +25,9 @@
 }
 
 - (UMHistoryLogEntry *)initWithLog:(NSString *)newlog;
+- (NSString *)stringValue;
 
-@property(readwrite,strong) NSDate          *date;
-@property(readwrite,strong) NSString        *log;
+@property(readwrite,strong,atomic) NSDate          *date;
+@property(readwrite,strong,atomic) NSString        *log;
 
 @end

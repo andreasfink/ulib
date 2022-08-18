@@ -69,8 +69,6 @@
 {
     [_lock lock];
     UMHistoryLogEntry *e = [[UMHistoryLogEntry alloc] initWithLog:log];
-    e.log = log;
-    e.date = [NSDate date];
     [_entries addObject:e];
     [self trim];
     [_lock unlock];
@@ -99,9 +97,7 @@
     while(count--)
     {
         UMHistoryLogEntry *entry = _entries[position];
-        NSDate *d = entry.date;
-        NSString *ds = [d stringValue];
-        NSString *line = [NSString stringWithFormat:@"%@  %@",ds,entry.log];
+        NSString *line = [entry stringValue];
         if([line length]>0)
         {
             [output addObject:line];

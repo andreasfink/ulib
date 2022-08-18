@@ -7,6 +7,7 @@
 //
 
 #import "UMHistoryLogEntry.h"
+#import "NSDate+stringFunctions.h"
 
 
 @implementation UMHistoryLogEntry
@@ -34,5 +35,10 @@
     return self;
 }
 
+- (NSString *)stringValue
+{
+    NSString *ds = [_date stringValue];
+    return [NSString stringWithFormat:@"%@ %@",ds,_log];
+}
 
 @end

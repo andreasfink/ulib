@@ -69,6 +69,8 @@
 {
     [_lock lock];
     UMHistoryLogEntry *e = [[UMHistoryLogEntry alloc] initWithLog:log];
+    e.log = log;
+    e.date = [NSDate date];
     [_entries addObject:e];
     [self trim];
     [_lock unlock];

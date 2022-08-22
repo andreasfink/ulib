@@ -5,7 +5,6 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-
 #import "UMLogFile.h"
 #import "UMLogFeed.h"
 #import "UMConfig.h"

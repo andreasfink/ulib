@@ -11,7 +11,7 @@
 
 #import "UMJsonTokeniser.h"
 #import "UMJsonStreamParser.h"
-
+ 
 @interface UMJsonStreamParserState : UMObject
 
 + (id)sharedInstance;

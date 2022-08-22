@@ -1757,95 +1757,10 @@ static int SSL_smart_shutdown(SSL *ssl)
     return ret;
 }
 
-- (void) reportError:(int)err withString: (NSString *)errString
+- (void) reportError:(UMSocketError )err withString: (NSString *)errString
 {
-	switch(err)
-	{
-		case EACCES:
-			fprintf(stderr,"Error: %d EACCES %s",err,errString.UTF8String);
-			break;
-		case EADDRINUSE:
-			fprintf(stderr,"Error: %d EADDRINUSE %s",err,errString.UTF8String);
-			break;
-		case EADDRNOTAVAIL:
-			fprintf(stderr,"Error: %d EADDRNOTAVAIL %s",err,errString.UTF8String);
-			break;
-		case EAFNOSUPPORT:
-			fprintf(stderr,"Error: %d EAFNOSUPPORT %s",err,errString.UTF8String);
-			break;
-		case EALREADY:
-			fprintf(stderr,"Error: %d EALREADY %s",err,errString.UTF8String);
-			break;
-		case EBADF:
-			fprintf(stderr,"Error: %d EBADF %s",err,errString.UTF8String);
-			break;
-		case ECONNREFUSED:
-			fprintf(stderr,"Error: %d ECONNREFUSED %s",err,errString.UTF8String);
-			break;
-		case EHOSTUNREACH:
-			fprintf(stderr,"Error: %d EHOSTUNREACH %s",err,errString.UTF8String);
-			break;
-		case EINPROGRESS:
-			fprintf(stderr,"Error: %d EINPROGRESS %s",err,errString.UTF8String);
-			break;
-         case EBUSY:
-               fprintf(stderr,"Error: %d EBUSY %s",err,errString.UTF8String);
-               break;
-		case EINTR:
-			fprintf(stderr,"Error: %d EINTR %s",err,errString.UTF8String);
-			break;
-		case EINVAL:
-			fprintf(stderr,"Error: %d EINVAL %s",err,errString.UTF8String);
-			break;
-		case EISCONN:
-			fprintf(stderr,"Error: %d EISCONN %s",err,errString.UTF8String);
-			break;
-		case ENETDOWN:
-			fprintf(stderr,"Error: %d ENETDOWN %s",err,errString.UTF8String);
-			break;
-		case ENETUNREACH:
-			fprintf(stderr,"Error: %d ENETUNREACH %s",err,errString.UTF8String);
-			break;
-		case ENOBUFS:
-			fprintf(stderr,"Error: %d ENOBUFS %s",err,errString.UTF8String);
-			break;
-		case ENOTSOCK:
-			fprintf(stderr,"Error: %d ENOTSOCK %s",err,errString.UTF8String);
-			break;
-		case EOPNOTSUPP:
-			fprintf(stderr,"Error: %d EOPNOTSUPP %s",err,errString.UTF8String);
-			break;
-		case EPROTOTYPE:
-			fprintf(stderr,"Error: %d EPROTOTYPE %s",err,errString.UTF8String);
-			break;
-		case ETIMEDOUT:
-			fprintf(stderr,"Error: %d ETIMEDOUT %s",err,errString.UTF8String);
-			break;
-		case EIO:
-			fprintf(stderr,"Error: %d EIO %s",err,errString.UTF8String);
-			break;
-		case ELOOP:
-			fprintf(stderr,"Error: %d ELOOP %s",err,errString.UTF8String);
-			break;
-		case ENAMETOOLONG:
-			fprintf(stderr,"Error: %d ENAMETOOLONG %s",err,errString.UTF8String);
-			break;
-		case ENOENT:
-			fprintf(stderr,"Error: %d ENOENT %s",err,errString.UTF8String);
-			break;
-		case ENOTDIR:
-			fprintf(stderr,"Error: %d ENOTDIR %s",err,errString.UTF8String);
-			break;
-		case ENOTCONN:
-			fprintf(stderr,"Error: %d ENOTCONN %s",err,errString.UTF8String);
-			break;
-		case EAGAIN:
-			fprintf(stderr,"Error: %d EAGAIN %s",err,errString.UTF8String);
-			break;
-		default:
-			fprintf(stderr,"Error: %d %s",err,errString.UTF8String);
-			break;
-	}
+    NSString *errString1 = [UMSocket getSocketErrorString:err];
+    fprintf(stderr,"Error: %d %s %s",err,errString1.UTF8String,errString.UTF8String);
 }
 
 
@@ -2417,10 +2332,11 @@ static int SSL_smart_shutdown(SSL *ssl)
             return UMSocketError_busy;
 #endif
         case EINPROGRESS:
+            return UMSocketError_in_progress;
+
 #if defined EALREADY
         case EALREADY:
 #endif
-            return UMSocketError_in_progress;
         case EISCONN:
             return UMSocketError_is_already_connected;
         default:

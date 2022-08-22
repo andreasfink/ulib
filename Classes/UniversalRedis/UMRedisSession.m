@@ -17,10 +17,6 @@
 
 @implementation UMRedisSession
 
-@synthesize socket;
-@synthesize hostName;
-@synthesize status;
-
 - (UMRedisSession *)initWithHost:(NSString *)hn
 {
     return [self initWithHost:hn andPort:0];
@@ -31,25 +27,24 @@
     self = [super init];
     if(self)
     {
-        socket = [[UMSocket alloc] initWithType:UMSOCKET_TYPE_TCP4ONLY name:@"redis-session"];
-        if (!socket)
+        _socket = [[UMSocket alloc] initWithType:UMSOCKET_TYPE_TCP4ONLY name:@"redis-session"];
+        if (!_socket)
         {
             NSString *msg = [NSString stringWithFormat:@"[UMRedisSession initWithSocket]  Couldn't connect to server).\r\n"];
             [self.logFeed majorError:0 withText:msg];
             return nil;
         }
     
-        status = REDIS_STATUS_HAS_SOCKET;
-        autoReconnect = YES;
-    
-        hostName = hostString;
-        UMHost *host = [[UMHost alloc] initWithName:hostName];
-        [socket setRemoteHost:host];
+        _status = REDIS_STATUS_HAS_SOCKET;
+        _autoReconnect = YES;
+        _hostName = hostString;
+        UMHost *host = [[UMHost alloc] initWithName:_hostName];
+        [_socket setRemoteHost:host];
         if (port == 0)
         {
             port = REDIS_PORT;
         }
-        [socket setRequestedRemotePort:port];
+        [_socket setRequestedRemotePort:port];
     }
     
     return self;
@@ -57,19 +52,19 @@
 
 - (BOOL)reinitWithHost
 {
-    socket = [[UMSocket alloc] initWithType:UMSOCKET_TYPE_TCP4ONLY name:@"redis-session"];
-    if (!socket)
+    _socket = [[UMSocket alloc] initWithType:UMSOCKET_TYPE_TCP4ONLY name:@"redis-session"];
+    if (!_socket)
     {
         NSString *msg = [NSString stringWithFormat:@"[UMRedisSession initWithSocket]  Couldn't connect to server).\r\n"];
         [self.logFeed majorError:0 withText:msg];
         return NO;
     }
     
-    status = REDIS_STATUS_HAS_SOCKET;
+    _status = REDIS_STATUS_HAS_SOCKET;
     
-    UMHost *host = [[UMHost alloc] initWithName:hostName];
-    [socket setRemoteHost:host];
-    [socket setRequestedRemotePort:REDIS_PORT];
+    UMHost *host = [[UMHost alloc] initWithName:_hostName];
+    [_socket setRemoteHost:host];
+    [_socket setRequestedRemotePort:REDIS_PORT];
     
     return YES;
 }
@@ -78,13 +73,13 @@
 {
     UMSocketError sErr;
     
-    sErr = [socket connect];
+    sErr = [_socket connect];
     if (sErr != UMSocketError_no_error)
     {
-        NSString *msg = [NSString stringWithFormat:@"[UMRedisSession connect] Couldn't connect to server error %d, status %d.\n", sErr, status];
+        NSString *msg = [NSString stringWithFormat:@"[UMRedisSession connect] Couldn't connect to server error %d, _status %d.\n", sErr, _status];
         [self.logFeed majorError:0 withText:msg];
-        socket = nil;
-        if(autoReconnect==NO)
+        _socket = nil;
+        if(_autoReconnect==NO)
         {
             @throw([NSException exceptionWithName:@"CAN_NOT_CONNECT"
                                            reason:NULL
@@ -99,23 +94,23 @@
         return [self restart];
     }
 
-    status = REDIS_STATUS_CONNECTED;
+    _status = REDIS_STATUS_CONNECTED;
     return YES;
 }
 
 - (NSString *)description
 {
     NSMutableString *desc = [NSMutableString stringWithString:@"redis session dump starts\r\n"];
-    [desc appendFormat:@"socket %@\r\n", socket];
+    [desc appendFormat:@"socket %@\r\n", _socket];
     [desc appendFormat:@"status %@\r\n", [self redisStatusToString]];
-    [desc appendFormat:@"host name %@\r\n", hostName];
+    [desc appendFormat:@"host name %@\r\n", _hostName];
     [desc appendString:@"redis session dump ends\r\n"];
     return desc;
 }
 
 - (BOOL)restart:(NSException *)socketException
 {
-    status = REDIS_STATUS_OFF;
+    _status = REDIS_STATUS_OFF;
     
     NSDictionary *userInfo = [socketException userInfo];
     NSString *command = [userInfo objectForKey:@"command"];
@@ -129,30 +124,30 @@
 
 - (BOOL)restart
 {
-    status = REDIS_STATUS_OFF;
+    _status = REDIS_STATUS_OFF;
     BOOL success = NO;
     BOOL haveSocket = [self reinitWithHost];
     if (haveSocket == NO)
     {
         return NO;
     }
-    status = REDIS_STATUS_HAS_SOCKET;
+    _status = REDIS_STATUS_HAS_SOCKET;
     [self.logFeed majorError:0 inSubsection:@"redis" withText:@"[UMRedisSession restart]: restarting after 30 seconds"];
 
-    UMSocketError sErr = [socket connect];
+    UMSocketError sErr = [_socket connect];
     success = sErr == UMSocketError_no_error;
     if (success)
     {
-        status = REDIS_STATUS_CONNECTED;
+        _status = REDIS_STATUS_CONNECTED;
     }
     return success;
 }
 
 - (BOOL)stop
 {
-    [socket close];
-    socket = nil;
-    status = REDIS_STATUS_OFF;
+    [_socket close];
+    _socket = nil;
+    _status = REDIS_STATUS_OFF;
     return YES;
 }
 
@@ -181,10 +176,10 @@
 
     NSMutableData *rxdata = NULL;
     
-    userr = [socket receiveLineToCRLF:&rxdata];
+    userr = [_socket receiveLineToCRLF:&rxdata];
     while(userr == UMSocketError_try_again)
     {
-        userr = [socket receiveLineToCRLF:&rxdata];
+        userr = [_socket receiveLineToCRLF:&rxdata];
     }
     if(userr != UMSocketError_no_error && userr != UMSocketError_try_again)
     {
@@ -229,7 +224,7 @@
 }
 
 /*
-In a Status Reply the first byte of the reply is "+"
+In a _status Reply the first byte of the reply is "+"
 In an Error Reply the first byte of the reply is "-"
 In an Integer Reply the first byte of the reply is ":"
 In a Bulk Reply the first byte of the reply is "$"
@@ -301,7 +296,7 @@ In a Multi Bulk Reply the first byte of the reply s "*"
             UMSocketError userr = UMSocketError_try_again;
             while(userr == UMSocketError_try_again)
             {
-                userr = [socket receive:len+2 to:&rxdata1]; /* includes the CRLF */
+                userr = [_socket receive:len+2 to:&rxdata1]; /* includes the CRLF */
             }
             if(userr != UMSocketError_no_error)
             {
@@ -334,7 +329,7 @@ In a Multi Bulk Reply the first byte of the reply s "*"
                 UMSocketError userr = UMSocketError_try_again;
                 while(userr == UMSocketError_try_again)
                 {
-                    userr = [socket receive:len1+2 to:&rxdata1]; /* includes the CRLF */
+                    userr = [_socket receive:len1+2 to:&rxdata1]; /* includes the CRLF */
                 }
                 if(userr != UMSocketError_no_error)
                 {
@@ -643,17 +638,17 @@ In a Multi Bulk Reply the first byte of the reply s "*"
     
     NSUInteger len = [data length];
     
-    userr = [socket sendString:[NSString stringWithFormat:@"$%lu\r\n",(unsigned long)len]];
+    userr = [_socket sendString:[NSString stringWithFormat:@"$%lu\r\n",(unsigned long)len]];
     if(userr != UMSocketError_no_error)
     {
         @throw [UMRedisSession socketException:userr whenRedisCommand:@"sendNSData"];
     }
-    userr = [socket sendData:data];
+    userr = [_socket sendData:data];
     if(userr != UMSocketError_no_error)
     {
         @throw [UMRedisSession socketException:userr whenRedisCommand:@"sendNSData"];
     }
-    userr = [socket sendString:@"\r\n"];
+    userr = [_socket sendString:@"\r\n"];
     if(userr != UMSocketError_no_error)
     {
         @throw [UMRedisSession socketException:userr whenRedisCommand:@"sendNSData"];
@@ -664,7 +659,7 @@ In a Multi Bulk Reply the first byte of the reply s "*"
 - (void)sendNSStringRaw:(NSString *)string;
 {
     UMSocketError userr = UMSocketError_no_error;
-    userr = [socket sendString:string];
+    userr = [_socket sendString:string];
     if(userr != UMSocketError_no_error)
     {
         @throw [UMRedisSession socketException:userr whenRedisCommand:@"sendNSStringRaw"];
@@ -897,7 +892,7 @@ In a Multi Bulk Reply the first byte of the reply s "*"
 
 - (NSString *) redisStatusToString
 {
-    switch (status)
+    switch (_status)
     {
         case REDIS_STATUS_OFF:
             return @"off";

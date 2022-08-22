@@ -11,12 +11,6 @@
 
 @implementation UMHTTPClientRequest
 
-@synthesize theRequest;
-@synthesize urlString;
-@synthesize url;
-@synthesize client;
-@synthesize urlCon;
-
 - (UMHTTPClientRequest *)initWithURLString:(NSString *)urls
                                 withChache:(BOOL)cache
                                    timeout:(NSTimeInterval) timeout
@@ -24,8 +18,8 @@
     self = [super init];
     if(self)
     {
-        urlString = urls;
-        url = [NSURL URLWithString:urls];
+        _urlString = urls;
+        _url = [NSURL URLWithString:urls];
 
         NSURLRequestCachePolicy policy;
         if(cache)
@@ -36,7 +30,7 @@
         {
             policy = NSURLRequestReloadIgnoringCacheData;
         }
-        theRequest = [NSMutableURLRequest requestWithURL:url
+        _theRequest = [NSMutableURLRequest requestWithURL:_url
                                              cachePolicy:policy
                                          timeoutInterval:timeout];
     }
@@ -72,7 +66,7 @@ didReceiveResponse:(NSURLResponse *)response
 {
 
 #if defined(LINUX) || defined(FREEBSD)
-    urlCon = [[NSURLConnection alloc]initWithRequest:theRequest
+    _urlCon = [[NSURLConnection alloc]initWithRequest:_theRequest
                                             delegate:self];
 #else
     /* note: this triggers a depreciated waring under recent MacOS X versions.
@@ -80,7 +74,7 @@ didReceiveResponse:(NSURLResponse *)response
     
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    urlCon = [[NSURLConnection alloc]initWithRequest:theRequest
+    _urlCon = [[NSURLConnection alloc]initWithRequest:_theRequest
                                             delegate:self
                                     startImmediately:YES];
 #pragma clang diagnostic pop
@@ -93,15 +87,15 @@ didReceiveResponse:(NSURLResponse *)response
 {
     @autoreleasepool
     {
-        if(url==NULL)
+        if(_url==NULL)
         {
             return;
         }
         NSError *err = NULL;
-        [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&err];
+        [NSString stringWithContentsOfURL:_url encoding:NSUTF8StringEncoding error:&err];
         if(err)
         {
-            NSLog(@"Error %@ while loading URL %@",err,urlString);
+            NSLog(@"Error %@ while loading url %@",err,_urlString);
         }
     }
 }

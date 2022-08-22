@@ -1919,8 +1919,6 @@
 		A6F1C60F247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C60D247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.m */; };
 		A6F1E321187D448700AD2F85 /* UMRedisSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E31C187D448700AD2F85 /* UMRedisSession.m */; };
 		A6F1E322187D448700AD2F85 /* UMRedisSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E31C187D448700AD2F85 /* UMRedisSession.m */; };
-		A6F1E32E187D935600AD2F85 /* UMRedisStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E329187D935600AD2F85 /* UMRedisStatus.m */; };
-		A6F1E32F187D935600AD2F85 /* UMRedisStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1E329187D935600AD2F85 /* UMRedisStatus.m */; };
 		A6F6DA3F2732030C0080A507 /* UMObjectTree.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F6DA3D2732030C0080A507 /* UMObjectTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6F6DA402732030C0080A507 /* UMObjectTree.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6DA3E2732030C0080A507 /* UMObjectTree.m */; };
 		A6F6DA432732031A0080A507 /* UMObjectTreeEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F6DA412732031A0080A507 /* UMObjectTreeEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2466,7 +2464,6 @@
 		A6F1C60C247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMCountryCodePrefixDigitTree.h; sourceTree = "<group>"; };
 		A6F1C60D247BCDB400FE7402 /* UMCountryCodePrefixDigitTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMCountryCodePrefixDigitTree.m; sourceTree = "<group>"; };
 		A6F1E31C187D448700AD2F85 /* UMRedisSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMRedisSession.m; sourceTree = "<group>"; };
-		A6F1E329187D935600AD2F85 /* UMRedisStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMRedisStatus.m; path = ../Classes/UniversalRedis/UMRedisStatus.m; sourceTree = "<group>"; };
 		A6F48CF31AF71F4E00854472 /* UMFileTrackingMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMFileTrackingMacros.h; sourceTree = "<group>"; };
 		A6F694141B4E85020090FC94 /* ulib.pc.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = ulib.pc.in; sourceTree = "<group>"; };
 		A6F6DA3D2732030C0080A507 /* UMObjectTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMObjectTree.h; sourceTree = "<group>"; };
@@ -2588,7 +2585,6 @@
 		22FAD7181636CDD9007AE9BB /* ulibTestsLinux */ = {
 			isa = PBXGroup;
 			children = (
-				A6F1E329187D935600AD2F85 /* UMRedisStatus.m */,
 				22FAD7191636CDDA007AE9BB /* check_crypto.sh */,
 				22FAD71D1636D73C007AE9BB /* run-checks */,
 				22FAD71A1636CDDA007AE9BB /* test_crypto.m */,
@@ -4986,7 +4982,6 @@
 				A6B37B3A1FC830C300794057 /* UMAtomicDate.m in Sources */,
 				A60C2DC61A3F21450090FC94 /* UMLayer.m in Sources */,
 				A60C4E611EF80098007C203A /* UMPluginHandler.m in Sources */,
-				A6F1E32F187D935600AD2F85 /* UMRedisStatus.m in Sources */,
 				A60C2DA11A3F213F0090FC94 /* UMHTTPRequest.m in Sources */,
 				A6AC4B971D460BB8002BAA97 /* NSString+UMSocket.m in Sources */,
 				A6D75F141FCF4989005C198E /* UMSyslogClient.m in Sources */,
@@ -5481,7 +5476,6 @@
 				A6B37B701FC8315600794057 /* UMScanner.m in Sources */,
 				A657274C1B1869AA00854472 /* UMSynchronizedDictionary.m in Sources */,
 				A6AC4AB61D460B6B002BAA97 /* NSData+UniversalObject.m in Sources */,
-				A6F1E32E187D935600AD2F85 /* UMRedisStatus.m in Sources */,
 				A6B37B861FC831D000794057 /* UMAverageDelay.m in Sources */,
 				A6B37B2E1FC830AF00794057 /* UMUUID.m in Sources */,
 				A6419BAF1A2DE8040090FC94 /* UMTimerBackgrounder.m in Sources */,

@@ -24,10 +24,10 @@ typedef enum RedisStatus
 
 @interface UMRedisSession : UMObject
 {
-    UMSocket *socket;
-    RedisStatus status;
-    NSString *hostName;
-    BOOL    autoReconnect;
+    UMSocket    *_socket;
+    RedisStatus _status;
+    NSString    *_hostName;
+    BOOL        _autoReconnect;
 }
 
 @property (readwrite,strong) UMSocket *socket;

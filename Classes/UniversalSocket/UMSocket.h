@@ -184,7 +184,7 @@ typedef enum SocketBlockingMode
 - (int) sendSctpBytes:(void *)bytes length:(int)len;
 - (int) sendSctpNSData:(NSData *)data;
 - (UMSocketError) receive: (ssize_t)maxSize appendTo:(NSMutableData *)appendToMe;
-- (void) reportError:(int)err withString: (NSString *)errString;
+- (void) reportError:(int)err withString:(NSString *)errString;
 - (void) reportStatus: (NSString *)str;
 - (UMSocketError) switchToNonBlocking;
 - (UMSocketError) switchToBlocking;

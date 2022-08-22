@@ -1467,14 +1467,6 @@ static int SSL_smart_shutdown(SSL *ssl)
     
     int events = POLLIN | POLLPRI | POLLERR | POLLHUP | POLLNVAL;
     
-#ifdef POLLRDBAND
-    events |= POLLRDBAND;
-#endif
-    
-#ifdef POLLRDHUP
-    events |= POLLRDHUP;
-#endif
-
     memset(pollfds,0,sizeof(pollfds));
     pollfds[0].fd = _sock;
     pollfds[0].events = events;
@@ -1520,22 +1512,10 @@ static int SSL_smart_shutdown(SSL *ssl)
             return UMSocketError_has_data_and_hup;
         }
         
-#ifdef POLLRDHUP
-        else if(ret2 & POLLRDHUP)
-        {
-            return UMSocketError_has_data_and_hup;
-        }
-#endif
         else if(ret2 & POLLNVAL)
         {
             return [UMSocket umerrFromErrno:eno];
         }
-#ifdef POLLRDBAND
-        else if(ret2 & POLLRDBAND)
-        {
-            return UMSocketError_has_data;
-        }
-#endif
         else if(ret2 & POLLIN)
         {
             return UMSocketError_has_data;
@@ -1568,14 +1548,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     
     int events = POLLIN | POLLPRI | POLLERR | POLLHUP | POLLNVAL;
     
-#ifdef POLLRDBAND
-    events |= POLLRDBAND;
-#endif
-    
-#ifdef POLLRDHUP
-    events |= POLLRDHUP;
-#endif
-    
+
     for(NSInteger i=0;i<n;i++)
     {
         UMSocket *s = inputSockets[i];
@@ -1623,15 +1596,6 @@ static int SSL_smart_shutdown(SSL *ssl)
                                            @"error" : @(0)}];
 
             }
-#ifdef POLLRDHUP
-            else if(ret2 & POLLRDHUP)
-            {
-                [returnArray addObject: @{ @"socket":s,
-                                           @"data": @YES,
-                                           @"hup" : @YES,
-                                           @"error" : @(0)}];
-            }
-#endif
             else if(ret2 & POLLNVAL)
             {
                 [returnArray addObject: @{ @"socket":s,
@@ -1639,15 +1603,6 @@ static int SSL_smart_shutdown(SSL *ssl)
                                            @"hup" : @NO,
                                            @"error" : @([UMSocket umerrFromErrno:eno])}];
             }
-#ifdef POLLRDBAND
-            else if(ret2 & POLLRDBAND)
-            {
-                [returnArray addObject: @{ @"socket":s,
-                                           @"data" : @YES,
-                                           @"hup" : @NO,
-                                           @"error" : @(0)}];
-            }
-#endif
             else if(ret2 & POLLIN)
             {
                 [returnArray addObject: @{ @"socket":s,

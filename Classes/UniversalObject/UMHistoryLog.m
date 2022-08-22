@@ -25,8 +25,7 @@
     {
         _entries = [[NSMutableArray alloc] init];
         _max = maxlines;
-        _lock =[[UMMutex alloc]initWithName:@"history-lock"];
-        //count = 0;
+        _lock = [[UMMutex alloc]initWithName:@"history-lock"];
     }
     return self;
 }
@@ -127,7 +126,6 @@
         direction = -1;
 
     }
-
     while(count--)
     {
         UMHistoryLogEntry *entry = _entries[position];

@@ -390,8 +390,8 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (NSString *)description
 {
-	[self updateName];
-	return [NSString stringWithString:name];
+    [self updateName];
+    return [NSString stringWithFormat:@"%@ sock: %d",name,_sock];
 }
 
 - (NSString *)fullDescription

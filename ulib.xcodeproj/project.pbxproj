@@ -729,7 +729,7 @@
 		A60C4D011EF7FE59007C203A /* UMUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = A65334C316CEC81D00C10AA7 /* UMUUID.m */; };
 		A60C4D021EF7FE59007C203A /* UMRegexMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D42E4A1D2F9C5F00211137 /* UMRegexMatch.m */; };
 		A60C4D061EF7FE59007C203A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D8AB0C149A769B0029E9CF /* Foundation.framework */; };
-		A60C4D071EF7FE59007C203A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A610866B163530F700D0D9C6 /* Security.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		A60C4D071EF7FE59007C203A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A610866B163530F700D0D9C6 /* Security.framework */; };
 		A60C4D0C1EF7FE59007C203A /* UMSSLCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A7A23D1CF7511F00211137 /* UMSSLCertificate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4D0D1EF7FE59007C203A /* ulib.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A143F5149B4F5000B007D0 /* ulib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4D0E1EF7FE59007C203A /* UMHistoryLogEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A615D9161B4D6CF300854472 /* UMHistoryLogEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -946,13 +946,6 @@
 		A64347CF287DFD6E00D2B107 /* UMZMQSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A64347C4287DFD6E00D2B107 /* UMZMQSocket.m */; };
 		A64347D0287DFD6E00D2B107 /* UMZMQSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A64347C4287DFD6E00D2B107 /* UMZMQSocket.m */; };
 		A64347D1287DFD6E00D2B107 /* UMZMQSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A64347C4287DFD6E00D2B107 /* UMZMQSocket.m */; };
-		A64347DD287E33D100D2B107 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347DB287E33D100D2B107 /* libzmq.a */; };
-		A64347DE287E33D100D2B107 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347DB287E33D100D2B107 /* libzmq.a */; };
-		A64347DF287E33D100D2B107 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347DB287E33D100D2B107 /* libzmq.a */; };
-		A64347E0287E33D100D2B107 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347DB287E33D100D2B107 /* libzmq.a */; };
-		A64347E1287E33D100D2B107 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347DB287E33D100D2B107 /* libzmq.a */; };
-		A64347E2287E33D100D2B107 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347DB287E33D100D2B107 /* libzmq.a */; };
-		A64347E5287E391900D2B107 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347E4287E391900D2B107 /* libzmq.a */; };
 		A64347E6287E391900D2B107 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347E4287E391900D2B107 /* libzmq.a */; };
 		A64347E7287E391900D2B107 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347E4287E391900D2B107 /* libzmq.a */; };
 		A64347E8287E391900D2B107 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347E4287E391900D2B107 /* libzmq.a */; };
@@ -962,7 +955,7 @@
 		A64347EE287E39EE00D2B107 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347ED287E39EE00D2B107 /* libc++.1.tbd */; };
 		A64347EF287E39EE00D2B107 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347ED287E39EE00D2B107 /* libc++.1.tbd */; };
 		A64347F0287E39EE00D2B107 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347ED287E39EE00D2B107 /* libc++.1.tbd */; platformFilter = maccatalyst; };
-		A64347F1287E39EE00D2B107 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347ED287E39EE00D2B107 /* libc++.1.tbd */; platformFilter = maccatalyst; };
+		A64347F1287E39EE00D2B107 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347ED287E39EE00D2B107 /* libc++.1.tbd */; };
 		A64347F2287E39EE00D2B107 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347ED287E39EE00D2B107 /* libc++.1.tbd */; };
 		A64347F3287E39EE00D2B107 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347ED287E39EE00D2B107 /* libc++.1.tbd */; };
 		A64347F4287E39EE00D2B107 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347ED287E39EE00D2B107 /* libc++.1.tbd */; };
@@ -1137,8 +1130,6 @@
 		A67045EA1FD14BEE00F27771 /* UMQueueMulti.m in Sources */ = {isa = PBXBuildFile; fileRef = A62DC22E1FD08593001ACCC7 /* UMQueueMulti.m */; };
 		A67045EB1FD14BF100F27771 /* UMQueueMulti.h in Headers */ = {isa = PBXBuildFile; fileRef = A62DC22D1FD08593001ACCC7 /* UMQueueMulti.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A67AA9F71CF8BD0C00211137 /* ulib_config.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A7A2431CF81EE600211137 /* ulib_config.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A67BDEDF28AC80D600490E1B /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347DB287E33D100D2B107 /* libzmq.a */; };
-		A67BDEE128AC82F000490E1B /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347DB287E33D100D2B107 /* libzmq.a */; };
 		A67C389516B2D53000C9DA95 /* UMDataWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C389216B2D53000C9DA95 /* UMDataWithHistory.m */; };
 		A67C389716B2D53000C9DA95 /* UMDateWithHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C389316B2D53000C9DA95 /* UMDateWithHistory.m */; };
 		A67D14182431DDB9003CB94D /* TestUMDate.m in Sources */ = {isa = PBXBuildFile; fileRef = A67D14172431DDB9003CB94D /* TestUMDate.m */; };
@@ -1624,7 +1615,6 @@
 		A6DDD9C1163611F3002FA7CC /* NSData+UMLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9BE163611F3002FA7CC /* NSData+UMLog.m */; };
 		A6DDD9C61636154A002FA7CC /* NSData+UMSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DDD9C31636154A002FA7CC /* NSData+UMSocket.m */; };
 		A6E1DB572406285D001FB7FF /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB562406285D001FB7FF /* libcrypto.a */; platformFilter = ios; };
-		A6E1DB5D24062881001FB7FF /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5C24062881001FB7FF /* libssl.a */; platformFilter = maccatalyst; };
 		A6E1DB5F2406289F001FB7FF /* libcrypto-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5E2406289F001FB7FF /* libcrypto-tvOS.a */; };
 		A6E1DB61240628A6001FB7FF /* libssl-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB60240628A6001FB7FF /* libssl-tvOS.a */; };
 		A6E1DB6324062B1E001FB7FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB6224062B1E001FB7FF /* UIKit.framework */; };
@@ -1918,6 +1908,7 @@
 		A6E1DDB424063158001FB7FF /* UMLayerUserProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A61F7D551A2CB4F70090FC94 /* UMLayerUserProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E1DDBD24063260001FB7FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB6224062B1E001FB7FF /* UIKit.framework */; };
 		A6E1DDBE24063263001FB7FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB6224062B1E001FB7FF /* UIKit.framework */; };
+		A6EDD4EA28B40787008CE908 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6EDD4E928B40787008CE908 /* libzmq.a */; };
 		A6F1C602247BC56200FE7402 /* UMDigitTree.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C600247BC56200FE7402 /* UMDigitTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6F1C603247BC56200FE7402 /* UMDigitTree.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C601247BC56200FE7402 /* UMDigitTree.m */; };
 		A6F1C606247BC56C00FE7402 /* UMDigitTreeEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C604247BC56C00FE7402 /* UMDigitTreeEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2154,7 +2145,6 @@
 		A6419BB61A2DF2FD0090FC94 /* UMMicroSec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMMicroSec.m; sourceTree = "<group>"; };
 		A64347C3287DFD6E00D2B107 /* UMZMQSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMZMQSocket.h; sourceTree = "<group>"; };
 		A64347C4287DFD6E00D2B107 /* UMZMQSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMZMQSocket.m; sourceTree = "<group>"; };
-		A64347DB287E33D100D2B107 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = /usr/local/lib/libzmq.a; sourceTree = "<absolute>"; };
 		A64347E3287E38E700D2B107 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = /usr/local/lib/libzmq.a; sourceTree = "<absolute>"; };
 		A64347E4287E391900D2B107 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = /usr/local/lib/libzmq.a; sourceTree = "<absolute>"; };
 		A64347EC287E39A700D2B107 /* configure.ac */ = {isa = PBXFileReference; lastKnownFileType = text; path = configure.ac; sourceTree = "<group>"; };
@@ -2466,6 +2456,7 @@
 		A6E1DDBA24063158001FB7FF /* ulibios copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ulibios copy2-Info.plist"; path = "/Users/afink/development/gitlab/ulib/ulibios copy2-Info.plist"; sourceTree = "<absolute>"; };
 		A6EB479F1A35C73A0090FC94 /* UMBackgrounderWithQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBackgrounderWithQueues.m; sourceTree = "<group>"; };
 		A6EB47A71A35C9530090FC94 /* UMTaskQueueMulti.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTaskQueueMulti.m; sourceTree = "<group>"; };
+		A6EDD4E928B40787008CE908 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = /usr/local/lib/libzmq.a; sourceTree = "<absolute>"; };
 		A6F1C600247BC56200FE7402 /* UMDigitTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDigitTree.h; sourceTree = "<group>"; };
 		A6F1C601247BC56200FE7402 /* UMDigitTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDigitTree.m; sourceTree = "<group>"; };
 		A6F1C604247BC56C00FE7402 /* UMDigitTreeEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDigitTreeEntry.h; sourceTree = "<group>"; };
@@ -2491,16 +2482,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A64347E6287E391900D2B107 /* libzmq.a in Frameworks */,
 				A6E1DB6324062B1E001FB7FF /* UIKit.framework in Frameworks */,
 				A6E1DB572406285D001FB7FF /* libcrypto.a in Frameworks */,
 				A6E1DB6B24062E63001FB7FF /* libssl.a in Frameworks */,
-				A6E1DB5D24062881001FB7FF /* libssl.a in Frameworks */,
 				A60210701D488A2F00211137 /* Foundation.framework in Frameworks */,
 				A6DBF0C420BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
-				A64347DD287E33D100D2B107 /* libzmq.a in Frameworks */,
 				A60210711D488A2F00211137 /* Security.framework in Frameworks */,
 				A64347F1287E39EE00D2B107 /* libc++.1.tbd in Frameworks */,
+				A64347E6287E391900D2B107 /* libzmq.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2516,7 +2505,6 @@
 				A6E1DDBD24063260001FB7FF /* UIKit.framework in Frameworks */,
 				A60211F71D488A3D00211137 /* Security.framework in Frameworks */,
 				A64347E7287E391900D2B107 /* libzmq.a in Frameworks */,
-				A64347DE287E33D100D2B107 /* libzmq.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2524,14 +2512,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A64347E5287E391900D2B107 /* libzmq.a in Frameworks */,
-				A64347F3287E39EE00D2B107 /* libc++.1.tbd in Frameworks */,
 				A60C4D061EF7FE59007C203A /* Foundation.framework in Frameworks */,
+				A60C4D071EF7FE59007C203A /* Security.framework in Frameworks */,
+				A6DBF0C320BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 				A6E1DB6824062E1E001FB7FF /* libcrypto.a in Frameworks */,
 				A6E1DB6924062E22001FB7FF /* libssl.a in Frameworks */,
-				A60C4D071EF7FE59007C203A /* Security.framework in Frameworks */,
-				A67BDEDF28AC80D600490E1B /* libzmq.a in Frameworks */,
-				A6DBF0C320BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
+				A64347F3287E39EE00D2B107 /* libc++.1.tbd in Frameworks */,
+				A6EDD4EA28B40787008CE908 /* libzmq.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2540,7 +2527,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A64347E9287E391900D2B107 /* libzmq.a in Frameworks */,
-				A64347E0287E33D100D2B107 /* libzmq.a in Frameworks */,
 				A6DBF0C720BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 				A64347EF287E39EE00D2B107 /* libc++.1.tbd in Frameworks */,
 			);
@@ -2550,7 +2536,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A64347E2287E33D100D2B107 /* libzmq.a in Frameworks */,
 				A6DBF0C820BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 				A64347EB287E391900D2B107 /* libzmq.a in Frameworks */,
 				A6E1DDBE24063263001FB7FF /* UIKit.framework in Frameworks */,
@@ -2562,7 +2547,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A64347E1287E33D100D2B107 /* libzmq.a in Frameworks */,
 				A6DBF0C920BEFE4F00B38DAF /* IOKit.framework in Frameworks */,
 				A64347EA287E391900D2B107 /* libzmq.a in Frameworks */,
 				A6E1DB6424062B1E001FB7FF /* UIKit.framework in Frameworks */,
@@ -2574,7 +2558,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A67BDEE128AC82F000490E1B /* libzmq.a in Frameworks */,
 				A67D141B2431DF85003CB94D /* libssl.a in Frameworks */,
 				A67D141C2431DF9E003CB94D /* libcrypto.a in Frameworks */,
 				A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */,
@@ -2594,7 +2577,6 @@
 				A6E1DD1D24063158001FB7FF /* libssl.a in Frameworks */,
 				A6E1DD1E24063158001FB7FF /* Foundation.framework in Frameworks */,
 				A6E1DD1F24063158001FB7FF /* IOKit.framework in Frameworks */,
-				A64347DF287E33D100D2B107 /* libzmq.a in Frameworks */,
 				A6E1DD2024063158001FB7FF /* Security.framework in Frameworks */,
 				A64347F4287E39EE00D2B107 /* libc++.1.tbd in Frameworks */,
 			);
@@ -2858,7 +2840,7 @@
 		A682E4071AA7CB4100854472 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				A64347DB287E33D100D2B107 /* libzmq.a */,
+				A6EDD4E928B40787008CE908 /* libzmq.a */,
 				A6B9E61D286FBBAC00A6C299 /* openssl-1.1.1p.tar.gz */,
 				A602149A1D488CF400211137 /* watchos */,
 				A6AC480A1D4608FC002BAA97 /* tvos */,

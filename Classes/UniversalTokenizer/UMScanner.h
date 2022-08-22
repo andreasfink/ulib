@@ -13,5 +13,5 @@
 
 - (NSArray *)scanFile:(NSString *)filename;
 - (NSArray *)scanString:(NSString *)filecontent;
-
+ 
 @end

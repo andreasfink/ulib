@@ -1755,7 +1755,6 @@
 		A6E1DD1A24063158001FB7FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB6224062B1E001FB7FF /* UIKit.framework */; };
 		A6E1DD1B24063158001FB7FF /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB562406285D001FB7FF /* libcrypto.a */; platformFilter = ios; };
 		A6E1DD1C24063158001FB7FF /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5824062869001FB7FF /* libssl.a */; };
-		A6E1DD1D24063158001FB7FF /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB5C24062881001FB7FF /* libssl.a */; platformFilter = maccatalyst; };
 		A6E1DD1E24063158001FB7FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D8AB0C149A769B0029E9CF /* Foundation.framework */; };
 		A6E1DD1F24063158001FB7FF /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DBF0C220BEFE4F00B38DAF /* IOKit.framework */; };
 		A6E1DD2024063158001FB7FF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A610866B163530F700D0D9C6 /* Security.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -1908,7 +1907,6 @@
 		A6E1DDB424063158001FB7FF /* UMLayerUserProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A61F7D551A2CB4F70090FC94 /* UMLayerUserProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E1DDBD24063260001FB7FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB6224062B1E001FB7FF /* UIKit.framework */; };
 		A6E1DDBE24063263001FB7FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1DB6224062B1E001FB7FF /* UIKit.framework */; };
-		A6EDD4EA28B40787008CE908 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6EDD4E928B40787008CE908 /* libzmq.a */; };
 		A6F1C602247BC56200FE7402 /* UMDigitTree.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C600247BC56200FE7402 /* UMDigitTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6F1C603247BC56200FE7402 /* UMDigitTree.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1C601247BC56200FE7402 /* UMDigitTree.m */; };
 		A6F1C606247BC56C00FE7402 /* UMDigitTreeEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F1C604247BC56C00FE7402 /* UMDigitTreeEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1924,6 +1922,7 @@
 		A6F6DA432732031A0080A507 /* UMObjectTreeEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A6F6DA412732031A0080A507 /* UMObjectTreeEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6F6DA442732031A0080A507 /* UMObjectTreeEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6DA422732031A0080A507 /* UMObjectTreeEntry.m */; };
 		A6FA420720694BCF00849F7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D8AB0C149A769B0029E9CF /* Foundation.framework */; };
+		A6FA69E928B43839005A7AC1 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64347E3287E38E700D2B107 /* libzmq.a */; };
 		A6FFFC811B9D73F900C331B0 /* NSString+UMSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A6FFFC7D1B9D716C00C331B0 /* NSString+UMSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -2262,9 +2261,8 @@
 		A6B37B191FC82D6D00794057 /* TestUMPool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestUMPool.m; sourceTree = "<group>"; };
 		A6B5657822A280000047E975 /* UMTestCaseBinaryIP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMTestCaseBinaryIP.h; sourceTree = "<group>"; };
 		A6B5657922A280000047E975 /* UMTestCaseBinaryIP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMTestCaseBinaryIP.m; sourceTree = "<group>"; };
-		A6B9E61D286FBBAC00A6C299 /* openssl-1.1.1p.tar.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = "openssl-1.1.1p.tar.gz"; sourceTree = "<group>"; };
 		A6B9E61E286FBBCB00A6C299 /* openssl-1.1.1p-binary */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "openssl-1.1.1p-binary"; sourceTree = "<group>"; };
-		A6B9E61F286FBBCB00A6C299 /* openssl-1.1.1p.pkg */ = {isa = PBXFileReference; lastKnownFileType = file; path = "openssl-1.1.1p.pkg"; sourceTree = "<group>"; };
+		A6B9E61F286FBBCB00A6C299 /* openssl-1.1.1p.pkg */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.installer-pkg"; path = "openssl-1.1.1p.pkg"; sourceTree = "<group>"; };
 		A6B9E620286FBBCB00A6C299 /* BUILD-OPENSSL-1.1.1p.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "BUILD-OPENSSL-1.1.1p.txt"; sourceTree = "<group>"; };
 		A6B9E621286FBBEA00A6C299 /* README-Debian11-bullseye.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Debian11-bullseye.txt"; sourceTree = "<group>"; };
 		A6B9E622286FBBEA00A6C299 /* README-Debian10-buster.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Debian10-buster.txt"; sourceTree = "<group>"; };
@@ -2444,8 +2442,8 @@
 		A6E1DB4C24061C8B001FB7FF /* openssl-1.1.1g */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "openssl-1.1.1g"; sourceTree = "<group>"; };
 		A6E1DB562406285D001FB7FF /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "libs/ios/openssl-1.1.1g/lib/libcrypto.a"; sourceTree = "<group>"; };
 		A6E1DB5824062869001FB7FF /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "libs/ios/openssl-1.1.1g/lib/libssl.a"; sourceTree = "<group>"; };
-		A6E1DB5A2406287A001FB7FF /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "libs/osx/openssl-1.1.1g-binary/usr/local/lib/libcrypto.a"; sourceTree = "<group>"; };
-		A6E1DB5C24062881001FB7FF /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "libs/osx/openssl-1.1.1g-binary/usr/local/lib/libssl.a"; sourceTree = "<group>"; };
+		A6E1DB5A2406287A001FB7FF /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = /usr/local/lib/libcrypto.a; sourceTree = "<absolute>"; };
+		A6E1DB5C24062881001FB7FF /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = /usr/local/lib/libssl.a; sourceTree = "<absolute>"; };
 		A6E1DB5E2406289F001FB7FF /* libcrypto-tvOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcrypto-tvOS.a"; path = "libs/tvos/openssl-1.1.1/lib/libcrypto-tvOS.a"; sourceTree = "<group>"; };
 		A6E1DB60240628A6001FB7FF /* libssl-tvOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libssl-tvOS.a"; path = "libs/tvos/openssl-1.1.1g/lib/libssl-tvOS.a"; sourceTree = "<group>"; };
 		A6E1DB6224062B1E001FB7FF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = ../../../../../System/iOSSupport/System/Library/Frameworks/UIKit.framework; sourceTree = "<group>"; };
@@ -2454,7 +2452,6 @@
 		A6E1DDBA24063158001FB7FF /* ulibios copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ulibios copy2-Info.plist"; path = "/Users/afink/development/gitlab/ulib/ulibios copy2-Info.plist"; sourceTree = "<absolute>"; };
 		A6EB479F1A35C73A0090FC94 /* UMBackgrounderWithQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMBackgrounderWithQueues.m; sourceTree = "<group>"; };
 		A6EB47A71A35C9530090FC94 /* UMTaskQueueMulti.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTaskQueueMulti.m; sourceTree = "<group>"; };
-		A6EDD4E928B40787008CE908 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = /usr/local/lib/libzmq.a; sourceTree = "<absolute>"; };
 		A6F1C600247BC56200FE7402 /* UMDigitTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDigitTree.h; sourceTree = "<group>"; };
 		A6F1C601247BC56200FE7402 /* UMDigitTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDigitTree.m; sourceTree = "<group>"; };
 		A6F1C604247BC56C00FE7402 /* UMDigitTreeEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDigitTreeEntry.h; sourceTree = "<group>"; };
@@ -2470,6 +2467,7 @@
 		A6F6DA3E2732030C0080A507 /* UMObjectTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMObjectTree.m; sourceTree = "<group>"; };
 		A6F6DA412732031A0080A507 /* UMObjectTreeEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMObjectTreeEntry.h; sourceTree = "<group>"; };
 		A6F6DA422732031A0080A507 /* UMObjectTreeEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMObjectTreeEntry.m; sourceTree = "<group>"; };
+		A6FA69E828B4382E005A7AC1 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libc++.1.tbd"; sourceTree = DEVELOPER_DIR; };
 		A6FFFC7D1B9D716C00C331B0 /* NSString+UMSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UMSocket.h"; sourceTree = "<group>"; };
 		A6FFFC7E1B9D716C00C331B0 /* NSString+UMSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UMSocket.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2515,7 +2513,7 @@
 				A6E1DB6824062E1E001FB7FF /* libcrypto.a in Frameworks */,
 				A6E1DB6924062E22001FB7FF /* libssl.a in Frameworks */,
 				A64347F3287E39EE00D2B107 /* libc++.1.tbd in Frameworks */,
-				A6EDD4EA28B40787008CE908 /* libzmq.a in Frameworks */,
+				A6FA69E928B43839005A7AC1 /* libzmq.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2571,7 +2569,6 @@
 				A6E1DD1A24063158001FB7FF /* UIKit.framework in Frameworks */,
 				A6E1DD1B24063158001FB7FF /* libcrypto.a in Frameworks */,
 				A6E1DD1C24063158001FB7FF /* libssl.a in Frameworks */,
-				A6E1DD1D24063158001FB7FF /* libssl.a in Frameworks */,
 				A6E1DD1E24063158001FB7FF /* Foundation.framework in Frameworks */,
 				A6E1DD1F24063158001FB7FF /* IOKit.framework in Frameworks */,
 				A6E1DD2024063158001FB7FF /* Security.framework in Frameworks */,
@@ -2836,8 +2833,6 @@
 		A682E4071AA7CB4100854472 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				A6EDD4E928B40787008CE908 /* libzmq.a */,
-				A6B9E61D286FBBAC00A6C299 /* openssl-1.1.1p.tar.gz */,
 				A602149A1D488CF400211137 /* watchos */,
 				A6AC480A1D4608FC002BAA97 /* tvos */,
 				A6AC46D11D4608F0002BAA97 /* ios */,
@@ -2921,6 +2916,7 @@
 		A6D8AB06149A769B0029E9CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6FA69E828B4382E005A7AC1 /* libc++.1.tbd */,
 				A64347E3287E38E700D2B107 /* libzmq.a */,
 				A6E1DB6224062B1E001FB7FF /* UIKit.framework */,
 				A6E1DB60240628A6001FB7FF /* libssl-tvOS.a */,
@@ -5822,7 +5818,6 @@
 				DEVELOPMENT_TEAM = 38L827M334;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
@@ -5830,15 +5825,11 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.1p-binary/usr/local/include/",
-					"$(inherited)",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",
 					/usr/local/lib,
@@ -5852,7 +5843,7 @@
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = macosx;
-				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1p-binary/usr/local/include/";
+				SYSTEM_HEADER_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -5868,7 +5859,6 @@
 				DEVELOPMENT_TEAM = 38L827M334;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(LOCAL_LIBRARY_DIR)/Application\\ Support/FinkTelecomServices/frameworks",
@@ -5876,15 +5866,11 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/libs/osx/openssl-1.1.1p-binary/usr/local/include/",
-					"$(inherited)",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",
 					/usr/local/lib,
@@ -5898,7 +5884,7 @@
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = macosx;
-				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1p-binary/usr/local/include/";
+				SYSTEM_HEADER_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = framework;
 			};

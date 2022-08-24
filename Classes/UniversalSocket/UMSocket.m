@@ -140,6 +140,8 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (void)initNetworkSocket
 {
+    _sock = -1;
+    _hasSocket = NO;
     switch(type)
     {
         case UMSOCKET_TYPE_TCP4ONLY:
@@ -226,6 +228,14 @@ static int SSL_smart_shutdown(SSL *ssl)
         default:
             break;
     }
+    if(_sock <0)
+    {
+        _hasSocket = NO;
+    }
+    else
+    {
+        _hasSocket = YES;
+    }
 }
 
 - (NSString *)connectedRemoteAddress
@@ -266,7 +276,14 @@ static int SSL_smart_shutdown(SSL *ssl)
 #endif
     }
     _sock=s;
-    self.hasSocket=YES;
+    if(_sock >=0)
+    {
+        self.hasSocket=YES;
+    }
+    else
+    {
+        self.hasSocket=NO;
+    }
 }
 
 + (NSString *)statusDescription:(UMSocketStatus)s;

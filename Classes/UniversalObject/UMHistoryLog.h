@@ -18,14 +18,16 @@
 
 @interface UMHistoryLog : UMObject
 {
-    NSMutableArray  *_entries;
-    NSInteger       _max;
-    UMMutex         *_lock;
+    NSMutableArray      *_entries;
+    NSInteger            _max;
+    UMMutex             *_lock;
 }
 
 - (UMHistoryLog *)init;
 - (UMHistoryLog *)initWithMaxLines:(int)maxlines;
 - (UMHistoryLog *)initWithString:(NSString *)s;
+- (UMHistoryLog *)initWithMaxLines:(int)maxlines string:(NSString *)s;
+
 - (void)addObject:(id)entry;
 - (void)addLogEntry:(NSString *)entry;
 - (void)addPrintableString:(NSString *)s;

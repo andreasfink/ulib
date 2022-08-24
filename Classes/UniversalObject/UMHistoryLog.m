@@ -15,10 +15,16 @@
 
 - (UMHistoryLog *)init
 {
-    return [self initWithMaxLines:MAX_UMHISTORY_LOG];
+    return [self initWithMaxLines:MAX_UMHISTORY_LOG string:NULL];
 }
 
+
 - (UMHistoryLog *)initWithMaxLines:(int)maxlines
+{
+    return [self initWithMaxLines:maxlines string:NULL];
+}
+
+- (UMHistoryLog *)initWithMaxLines:(int)maxlines string:(NSString *)s
 {
     self = [super init];
     if(self)
@@ -26,22 +32,21 @@
         _entries = [[NSMutableArray alloc] init];
         _max = maxlines;
         _lock = [[UMMutex alloc]initWithName:@"history-lock"];
+        if(s)
+        {
+            NSArray *lines = [s componentsSeparatedByCharactersInSet:[UMObject newlineCharacterSet]];
+            for(NSString *line in lines)
+            {
+                [self addLogEntry:line];
+            }
+        }
     }
     return self;
 }
 
 - (UMHistoryLog *)initWithString:(NSString *)s
 {
-    self = [self initWithMaxLines:MAX_UMHISTORY_LOG];
-    if(self)
-    {
-        NSArray *lines = [s componentsSeparatedByCharactersInSet:[UMObject newlineCharacterSet]];
-        for(NSString *line in lines)
-        {
-            [self addLogEntry:line];
-        }
-    }
-    return self;
+    return  [self initWithMaxLines:MAX_UMHISTORY_LOG string:s];
 }
 
 - (void)addPrintableString:(NSString *)s

@@ -24,4 +24,9 @@
 	return output;
 }
 
+- (NSArray<NSString *>*)sortedStringsArray
+{
+    return [self  sortedArrayUsingComparator: ^(NSString *a, NSString *b)  {return [a compare:b];} ];
+}
+
 @end

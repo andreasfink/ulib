@@ -134,9 +134,9 @@ typedef enum UMSocketType
 typedef	enum UMSocketStatus
 {
 	UMSOCKET_STATUS_FOOS	    = -1,
-	UMSOCKET_STATUS_OFF		    = 100,
-	UMSOCKET_STATUS_OOS		    = 101,
-    UMSOCKET_STATUS_IS          = 102,
+	UMSOCKET_STATUS_OFF		    = 100, /* disconnected */
+	UMSOCKET_STATUS_OOS		    = 101, /* open requested */
+    UMSOCKET_STATUS_IS          = 102, /* connected */
     UMSOCKET_STATUS_LISTENING   = 103,
 } UMSocketStatus;
 

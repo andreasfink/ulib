@@ -7,9 +7,10 @@
 
 #import "ulib_config.h"
 
-#if HAVE_ZEROMQ
-
+#if HAVE_ZMQ_H
 #include <zmq.h>
+#endif
+
 #import "UMZMQSocket.h"
 
 #import "NSData+UniversalObject.h"
@@ -351,5 +352,4 @@ if(_logLevel <= UMLOG_DEBUG) \
 
 @end
 
-#endif
 

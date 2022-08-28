@@ -775,22 +775,22 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
         return UMSocketError_not_listening;
     }
-    if(advertizeDomain==NULL)
+    if(_advertizeDomain==NULL)
     {
         return UMSocketError_invalid_advertize_domain;
     }
-    if([advertizeType length]==0)
+    if([_advertizeType length]==0)
     {
         return UMSocketError_invalid_advertize_type;
     }
-    if([advertizeName length]==0)
+    if([_advertizeName length]==0)
     {
         return UMSocketError_invalid_advertize_name;
     }
 
-    _netService = [[NSNetService alloc] initWithDomain:advertizeDomain
-                                         type:advertizeType
-                                         name:advertizeName
+    _netService = [[NSNetService alloc] initWithDomain:_advertizeDomain
+                                         type:_advertizeType
+                                         name:_advertizeName
                                          port:self.requestedLocalPort];
     [_netService scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [_netService setDelegate:self];

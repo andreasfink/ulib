@@ -5,9 +5,6 @@
 //  Created by Andreas Fink on 12.07.22.
 //
 
-#import "ulib_config.h"
-
-#if HAVE_ZEROMQ
 
 #import "UMObject.h"
 #import "UMLogLevel.h"
@@ -52,5 +49,4 @@
 - (void)close;
 @end
 
-#endif
 

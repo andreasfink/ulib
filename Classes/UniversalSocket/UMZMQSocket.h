@@ -5,16 +5,20 @@
 //  Created by Andreas Fink on 12.07.22.
 //
 
+#import "ulib_config.h"
+
+#if defined(HAVE_ZEROMQ)
+
 #import "UMObject.h"
 #import "UMLogLevel.h"
 
 @interface UMZMQSocket : UMObject
 {
-    NSString *_socketName;
-    void *_context;
-    void *_socket;
-    NSString *_lastError;
-    UMLogLevel _logLevel;
+    NSString        *_socketName;
+    void            *_context;
+    void            *_socket;
+    NSString        *_lastError;
+    UMLogLevel      _logLevel;
 }
 
 @property(readwrite,strong,atomic) NSString *socketName;
@@ -47,4 +51,6 @@
 
 - (void)close;
 @end
+
+#endif
 

@@ -5,13 +5,12 @@
 //  Created by Andreas Fink on 12.07.22.
 //
 
-#import "UMZMQSocket.h"
 #import "ulib_config.h"
 
-#if defined(HAVE_ZMQ_H)
+#if defined(HAVE_ZEROMQ)
+
 #include <zmq.h>
-#define HAVE_ZEROMQ 1
-#endif
+#import "UMZMQSocket.h"
 
 #import "NSData+UniversalObject.h"
 #import "UMLogFeed.h"
@@ -351,3 +350,6 @@ if(_logLevel <= UMLOG_DEBUG) \
 }
 
 @end
+
+#endif
+

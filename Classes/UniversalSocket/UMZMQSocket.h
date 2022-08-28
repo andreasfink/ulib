@@ -7,7 +7,7 @@
 
 #import "ulib_config.h"
 
-#if defined(HAVE_ZEROMQ)
+#if HAVE_ZEROMQ
 
 #import "UMObject.h"
 #import "UMLogLevel.h"

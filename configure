@@ -4886,6 +4886,30 @@ printf "%s\n" "$ac_cv_path_EGREP" >&6; }
 '
   echo "${nl}${T_MD}Configuring HEADERS ...${T_ME}"
 
+ac_fn_c_check_header_compile "$LINENO" "sys/sysctl.h" "ac_cv_header_sys_sysctl_h" "
+#if HAVE_SYS_IOCTL_H
+#include <sys/ioctl.h>
+#endif
+
+#if HAVE_SYS_TIME_H
+#include <sys/time.h>
+#endif
+
+#if HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
+
+#if HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
+
+"
+if test "x$ac_cv_header_sys_sysctl_h" = xyes
+then :
+  printf "%s\n" "#define HAVE_SYS_SYSCTL_H 1" >>confdefs.h
+
+fi
 ac_fn_c_check_header_compile "$LINENO" "sys/ioctl.h" "ac_cv_header_sys_ioctl_h" "
 #if HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>

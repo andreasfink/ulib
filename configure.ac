@@ -214,7 +214,7 @@ AC_PROG_EGREP
 
 dnl check for headers
 AC_CONFIG_SECTION([Configuring HEADERS])
-AC_CHECK_HEADERS(sys/ioctl.h sys/time.h sys/types.h unistd.h sys/poll.h,,,
+AC_CHECK_HEADERS(sys/sysctl.h sys/ioctl.h sys/time.h sys/types.h unistd.h sys/poll.h,,,
 [
 #if HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>

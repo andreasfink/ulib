@@ -252,8 +252,8 @@ static int SSL_smart_shutdown(SSL *ssl)
         TRACK_FILE_CLOSE(_sock);
         close(_sock);
 #if !defined(TARGET_OS_WATCH)
-        [netService stop];
-        netService=NULL;
+        [_netService stop];
+        _netService=NULL;
 #endif
     }
     _sock=s;
@@ -788,13 +788,13 @@ static int SSL_smart_shutdown(SSL *ssl)
         return UMSocketError_invalid_advertize_name;
     }
 
-    netService = [[NSNetService alloc] initWithDomain:advertizeDomain
+    _netService = [[NSNetService alloc] initWithDomain:advertizeDomain
                                          type:advertizeType
                                          name:advertizeName
                                          port:self.requestedLocalPort];
-    [netService scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [netService setDelegate:self];
-    [netService publish];
+    [_netService scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [_netService setDelegate:self];
+    [_netService publish];
 #endif
     return UMSocketError_no_error;
 }
@@ -805,8 +805,8 @@ static int SSL_smart_shutdown(SSL *ssl)
     return UMSocketError_not_supported_operation;
 #else
 
-    [netService stop];
-    netService=NULL;
+    [_netService stop];
+    _netService=NULL;
     return UMSocketError_no_error;
 #endif
 }

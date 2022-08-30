@@ -2243,6 +2243,7 @@
 		A69F08FF149D3A4C0009F272 /* UMConfigParsedLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMConfigParsedLine.h; sourceTree = "<group>"; };
 		A69F0900149D3A4C0009F272 /* UMConfigParsedLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMConfigParsedLine.m; sourceTree = "<group>"; };
 		A6A143F5149B4F5000B007D0 /* ulib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ulib.h; sourceTree = "<group>"; };
+		A6A7634B28BC147400376742 /* README-Ubuntu-22.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Ubuntu-22.txt"; sourceTree = "<group>"; };
 		A6A7A2351CF71D7D00211137 /* UMPKI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMPKI.h; sourceTree = "<group>"; };
 		A6A7A2361CF71D7D00211137 /* UMPKI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMPKI.m; sourceTree = "<group>"; };
 		A6A7A23D1CF7511F00211137 /* UMSSLCertificate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSSLCertificate.h; sourceTree = "<group>"; };
@@ -2742,6 +2743,7 @@
 				A6B9E624286FBBEA00A6C299 /* README-FreeBSD12.txt */,
 				A6B9E626286FBBEA00A6C299 /* README-FreeBSD13.txt */,
 				A6B9E625286FBBEA00A6C299 /* README-Ubuntu-16.txt */,
+				A6A7634B28BC147400376742 /* README-Ubuntu-22.txt */,
 				A6590ED91FDFCA12004C8A74 /* README-LINUX.txt */,
 			);
 			path = doc;

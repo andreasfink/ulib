@@ -7,10 +7,12 @@
 
 #import "UMLogEntry.h"
 
+@class UMMutex;
+
 @interface UMLogDestination : UMObject
 {
 	UMLogLevel		level;
-	NSLock			*_lock;
+	UMMutex			*_lock;
 	NSMutableArray	*debugSections;
     NSMutableArray  *onlyLogSubsections;
 }

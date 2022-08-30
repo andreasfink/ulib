@@ -59,7 +59,7 @@
         UMAssert(_control_sleeper,@"_control_sleeper is NULL");
 
 
-        [_startStopLock lock];
+        UMMUTEX_LOCK(_startStopLock);
         @try
         {
             if(self.runningStatus == UMBackgrounder_notRunning)
@@ -85,7 +85,7 @@
         }
         @finally
         {
-            [_startStopLock unlock];
+            UMMUTEX_UNLOCK(_startStopLock);
         }
     }
 }
@@ -96,7 +96,7 @@
     {
         UMAssert(_startStopLock,@"_startStopLock is NULL");
         UMAssert(_control_sleeper,@"_control_sleeper is NULL");
-        [_startStopLock lock];
+        UMMUTEX_LOCK(_startStopLock);
         @try
         {
             if(self.runningStatus != UMBackgrounder_running)
@@ -122,7 +122,7 @@
         }
         @finally
         {
-            [_startStopLock unlock];
+            UMMUTEX_UNLOCK(_startStopLock);
         }
     }
 }

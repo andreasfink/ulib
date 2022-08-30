@@ -1040,15 +1040,15 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (void) doInitReceiveBuffer
 {
-    [_dataLock lock];
+    UMMUTEX_LOCK(_dataLock);
     _receiveBuffer = [[NSMutableData alloc] init];
     _receivebufpos = 0;
-    [_dataLock unlock];
+    UMMUTEX_UNLOCK(_dataLock);
 }
 
 - (void) deleteFromReceiveBuffer:(NSUInteger)bytes
 {
-    [_dataLock lock];
+    UMMUTEX_LOCK(_dataLock);
     long len;
 
     if (bytes > (len = [_receiveBuffer length]))
@@ -1061,7 +1061,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
         _receivebufpos = 0;
     }
-    [_dataLock unlock];
+    UMMUTEX_UNLOCK(_dataLock);
 }
 
 - (UMSocket *) accept:(UMSocketError *)ret
@@ -1292,9 +1292,9 @@ static int SSL_smart_shutdown(SSL *ssl)
             {
                 NSLog(@"can not switch to blocking mode ");
             }
-            [_dataLock lock];
+            UMMUTEX_LOCK(_dataLock);
             i = [_cryptoStream writeBytes:bytes length:length errorCode:&eno];
-            [_dataLock unlock];
+            UMMUTEX_UNLOCK(_dataLock);
             err = [self switchToNonBlocking];
             if(err!= UMSocketError_no_error)
             {
@@ -1326,9 +1326,9 @@ static int SSL_smart_shutdown(SSL *ssl)
                 self.isConnected = NO;
                 return [UMSocket umerrFromErrno:ECONNREFUSED];
             }
-            [_dataLock lock];
+            UMMUTEX_LOCK(_dataLock);
             i = [_cryptoStream writeBytes:bytes length:length errorCode:&eno];
-            [_dataLock unlock];
+            UMMUTEX_UNLOCK(_dataLock);
 
             if (i != length)
             {
@@ -1419,9 +1419,9 @@ static int SSL_smart_shutdown(SSL *ssl)
                 self.isConnected = NO;
                 return [UMSocket umerrFromErrno:EINVAL];
             }
-            [_dataLock lock];
+            UMMUTEX_LOCK(_dataLock);
             i =    [_cryptoStream writeBytes: [data bytes] length:[data length]  errorCode:&eno];
-            [_dataLock unlock];
+            UMMUTEX_UNLOCK(_dataLock);
 
             if (i != [data length])
             {

@@ -71,16 +71,16 @@
 
 - (void)addLogEntry:(NSString *)log
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     UMHistoryLogEntry *e = [[UMHistoryLogEntry alloc] initWithLog:log];
     [_entries addObject:e];
     [self trim];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
 }
 
 - (NSArray *)getLogArrayWithDatesAndOrder:(BOOL)forward
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     NSMutableArray *output = [[NSMutableArray alloc]init];
     NSInteger count = [_entries count];
     NSInteger position;
@@ -108,13 +108,13 @@
         }
         position = position + direction;
     }
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
     return output;
 }
 
 - (NSArray *)getLogArrayWithOrder:(BOOL)forward
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     NSMutableArray *output = [[NSMutableArray alloc]init];
     NSInteger count = [_entries count];
     NSInteger position;
@@ -141,7 +141,7 @@
         }
         position = position + direction;
     }
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
     return output;
 }
 

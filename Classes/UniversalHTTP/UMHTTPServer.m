@@ -24,6 +24,9 @@
 #import "UMSynchronizedArray.h"
 #import "UMThreadHelpers.h"
 
+#define NSLOCK_LOCK(l)     [l lock];
+#define NSLOCK_UNLOCK(l)   [l unlock];
+
 @implementation UMHTTPServer
 
 - (id) init
@@ -140,7 +143,7 @@
 
 		[self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is starting up\r\n",_name, [_listenerSocket requestedLocalPort]]];
 
-        [_lock lock];
+        NSLOCK_LOCK(_lock);
 
 		self.status = UMHTTPServerStatus_startingUp;
         [self runSelectorInBackground:@selector(mainListener)
@@ -167,7 +170,7 @@
 		    sErr = _lastErr;
 		    self.status = UMHTTPServerStatus_notRunning;
 	    }
-        [_lock unlock];
+        NSLOCK_UNLOCK(_lock);
     
 	    if( self.status == UMHTTPServerStatus_running)
 	    {

@@ -39,9 +39,9 @@
     UMAssert(_queue!=NULL,@"Queue is not set");
     if(obj)
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_lock);
         [_queue addObject:obj];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_lock);
     }
 }
 
@@ -57,9 +57,9 @@
 {
     if(obj)
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_lock);
         [_queue insertObject:obj atIndex:0];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_lock);
     }
 }
 
@@ -68,10 +68,10 @@
 {
     if(obj)
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_lock);
         [_queue removeObject:obj]; /* should not be there twice */
         [_queue addObject:obj];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_lock);
     }
 }
 
@@ -80,34 +80,34 @@
 {
     if(obj)
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_lock);
         [_queue removeObject:obj];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_lock);
     }
 }
 
 - (id)getFirst
 {
     id obj = NULL;
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     if ([_queue count]>0)
     {
         obj = [_queue objectAtIndex:0];
         [_queue removeObjectAtIndex:0];
     }
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
     return obj;
 }
 
 - (id)peekFirst
 {
     id obj = NULL;
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     if ([_queue count]>0)
     {
         obj = [_queue objectAtIndex:0];
     }
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
     return obj;
 }
 
@@ -125,9 +125,9 @@
 
 - (NSInteger)count
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     NSInteger i = [_queue count];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
     return i;
 }
 

@@ -95,7 +95,7 @@
 
 - (NSString *)descriptionWithIndex:(int)index
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     NSMutableString *s = [[NSMutableString alloc]init];
     switch(type)
     {
@@ -121,7 +121,7 @@
             [s appendFormat:@"    %@\r\n",entry];
         }
     }
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
     return s;
 }
 
@@ -129,9 +129,9 @@
                                     line:(long)line
                                     func:(const char *)func
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     [self addObjectHistory:message.UTF8String file:file line:line function:func];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
 }
 
 - (void)addObjectHistory:(const char *)message
@@ -139,10 +139,10 @@
                     line:(long)line
                 function:(const char *)func
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     NSString *s = [NSString stringWithFormat:@"%08lX file:%s, line:%ld, func.%s: %s",(unsigned long)self,file,line,func,message];
     [_history addLogEntry:s];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
 }
 
 @end

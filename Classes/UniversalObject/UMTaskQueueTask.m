@@ -42,12 +42,12 @@
             }
             if(_synchronizeMutex)
             {
-                [_synchronizeMutex lock];
+                UMMUTEX_LOCK(_synchronizeMutex);
                 @autoreleasepool
                 {
                     [self main];
                 }
-                [_synchronizeMutex unlock];
+                UMMUTEX_UNLOCK(_synchronizeMutex);
             }
             else
             {

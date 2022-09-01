@@ -1464,6 +1464,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 {
     if(_sock<0)
     {
+        NSLog(@"dataIsAvailable: Invalid File Socket");
         return UMSocketError_invalid_file_descriptor;
     }
     struct pollfd pollfds[1];
@@ -2271,6 +2272,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         case EAFNOSUPPORT:
             return UMSocketError_address_not_valid_for_socket_family;
         case EBADF:
+            NSLog(@"UMErrFromErrno: Invalid File Socket");
             return UMSocketError_invalid_file_descriptor;
         case EFAULT:
             return UMSocketError_pointer_not_in_userspace;

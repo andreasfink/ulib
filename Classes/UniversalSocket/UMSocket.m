@@ -247,6 +247,10 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (void)setSock:(int)s
 {
+    if(s==_sock)
+    {
+        return;
+    }
     if((self.hasSocket) && (_sock >=0))
     {
         TRACK_FILE_CLOSE(_sock);

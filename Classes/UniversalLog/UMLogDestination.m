@@ -30,7 +30,7 @@
     if(self)
     {
         level = UMLOG_DEBUG;
-        _lock =[[UMMutex alloc]init];
+        _lock =[[UMMutex alloc]initWithName:@"UMLogDestination-lock"];
         debugSections =  [[NSMutableArray alloc] init];
 	}
     return self;

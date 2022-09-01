@@ -21,7 +21,7 @@
 
 - (void)unlock
 {
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_UNLOCK(_lock);
 }
 
 - (UMLogDestination *) init

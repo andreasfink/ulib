@@ -34,9 +34,9 @@
 
 - (void)flush
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     _underlyingDictionary = [[NSMutableDictionary alloc] init];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
 }
 
 - (UMSynchronizedDictionary *)initWithDictionary:(NSDictionary *)sd
@@ -55,12 +55,12 @@
 
 - (void)lock
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
 }
 
 - (void)unlock
 {
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
 }
 
 
@@ -82,9 +82,9 @@
 
 - (NSUInteger)count
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     NSUInteger cnt  = [_underlyingDictionary count];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
     return cnt;
 }
 
@@ -93,9 +93,9 @@
 {
     if((key) &&(anObject))
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_lock);
         [_underlyingDictionary setObject:anObject forKey:key];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_lock);
     }
 }
 
@@ -104,9 +104,9 @@
     id returnValue = NULL;
     if(key)
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_lock);
         returnValue = [_underlyingDictionary objectForKey:key];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_lock);
     }
     return returnValue;
 }
@@ -114,9 +114,9 @@
 - (NSArray *)allKeys
 {
     NSArray *a;
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     a = [_underlyingDictionary allKeys];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
     return a;
 }
 
@@ -124,27 +124,27 @@
 {
     if(aKey)
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_lock);
         [_underlyingDictionary removeObjectForKey:aKey];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_lock);
     }
 }
 
 - (NSMutableDictionary *)mutableCopy
 {
     NSMutableDictionary *d;
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     d = [_underlyingDictionary mutableCopy];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
     return d;
 }
 
 - (id)copyWithZone:(nullable NSZone *)zone
 {
     UMSynchronizedDictionary *cpy;
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
     cpy = [[UMSynchronizedDictionary allocWithZone:zone] initWithDictionary:_underlyingDictionary];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
     return cpy;
 }
 

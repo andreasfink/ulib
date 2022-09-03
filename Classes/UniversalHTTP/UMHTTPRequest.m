@@ -313,6 +313,11 @@
     
 }
 
+- (void)setResponseTypeJavascript
+{
+    [self setResponseHeader:@"Content-Type" withValue:@"text/javascript"];
+}
+
 - (void)setResponseTypeJpeg
 {
     [self setResponseHeader:@"Content-Type" withValue:@"image/jpeg"];

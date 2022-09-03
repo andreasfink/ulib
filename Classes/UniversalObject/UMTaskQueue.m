@@ -5,6 +5,7 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 //
+#import "ulib_config.h"
 
 #import "UMTaskQueue.h"
 #import "UMBackgrounderWithQueue.h"
@@ -13,7 +14,11 @@
 #import "UMTaskQueueTask.h"
 #import "UMFileTrackingMacros.h"
 #include <sys/types.h>
+#if defined(HAVE_SYS_SYSCTL_H)
 #include <sys/sysctl.h>
+#endif
+#include <sys/sysctl.h>
+
 #include <string.h>
 #import "UMAssert.h"
 

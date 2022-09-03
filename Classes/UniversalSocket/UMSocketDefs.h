@@ -58,7 +58,7 @@ typedef enum UMSocketError
     UMSocketError_no_such_process           = -46, /* ESRCH */
     UMSocketError_host_down                 = -47,  /* EHOSTDOWN*/
     UMSocketError_connection_aborted        = -53,  /* ECONNABORTED */
-    UMSocketError_is_already_connected      = -106, /* EISCONN */
+    UMSocketError_is_already_connected      = -106, /* EISCONN & EALREADY */
     UMSocketError_not_connected             = -107, /* ENOTCONN */
     UMSocketError_in_progress               = -115, /* EINPROGRESS */
     UMSocketError_busy                      = -116, /* EBUSY */
@@ -134,9 +134,9 @@ typedef enum UMSocketType
 typedef	enum UMSocketStatus
 {
 	UMSOCKET_STATUS_FOOS	    = -1,
-	UMSOCKET_STATUS_OFF		    = 100,
-	UMSOCKET_STATUS_OOS		    = 101,
-    UMSOCKET_STATUS_IS          = 102,
+	UMSOCKET_STATUS_OFF		    = 100, /* disconnected */
+	UMSOCKET_STATUS_OOS		    = 101, /* open requested */
+    UMSOCKET_STATUS_IS          = 102, /* connected */
     UMSOCKET_STATUS_LISTENING   = 103,
 } UMSocketStatus;
 

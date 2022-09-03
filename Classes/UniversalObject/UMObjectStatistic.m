@@ -16,7 +16,7 @@ static UMObjectStatistic *global_object_stat = NULL;
 static int umobject_stat_index_from_ascii(const char *asciiName);
 
 @implementation UMObjectStatistic
-
+ 
 + (void)enable
 {
     if(global_object_stat==NULL)

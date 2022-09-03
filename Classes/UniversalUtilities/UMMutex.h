@@ -130,3 +130,4 @@ void ummutex_stat_disable(void);
     a.lockedInFunction =  NULL; \
     [a unlock];  \
 }
+

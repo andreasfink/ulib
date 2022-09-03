@@ -9,9 +9,9 @@
 
 @interface UMRedisStatus : UMObject
 {
-    BOOL    ok;
-    BOOL    exceptionRaised;
-    NSString *statusString;
+    BOOL    _ok;
+    BOOL    _exceptionRaised;
+    NSString *_statusString;
 }
 
 @property (readwrite,assign)    BOOL    ok;

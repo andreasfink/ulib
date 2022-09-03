@@ -178,14 +178,6 @@ static void flushpipe(int fd)
 
     int events = POLLIN | POLLPRI | POLLERR | POLLHUP | POLLNVAL;
 
-#ifdef POLLRDBAND
-    events |= POLLRDBAND;
-#endif 
-    
-#ifdef POLLRDHUP
-    events |= POLLRDHUP;
-#endif
-    
     [self prepare];
     if(_rxpipe < 0)
     {

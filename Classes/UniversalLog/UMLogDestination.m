@@ -7,7 +7,7 @@
 
 #import "UMLogDestination.h"
 #import "UMLogFile.h"
-
+#import "UMMutex.h"
 
 @implementation UMLogDestination
 
@@ -16,12 +16,12 @@
 
 - (void)lock
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_lock);
 }
 
 - (void)unlock
 {
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_lock);
 }
 
 - (UMLogDestination *) init
@@ -30,7 +30,7 @@
     if(self)
     {
         level = UMLOG_DEBUG;
-        _lock =[[NSLock alloc]init];
+        _lock =[[UMMutex alloc]initWithName:@"UMLogDestination-lock"];
         debugSections =  [[NSMutableArray alloc] init];
 	}
     return self;

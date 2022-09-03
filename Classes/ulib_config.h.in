@@ -71,6 +71,9 @@
 /* Define if you have the <pthread.h> header file.  */
 #undef HAVE_PTHREAD_H
 
+/* Define if you have the <sys/sysctl.h> header file.  */
+#undef HAVE_SYS_SYSCTL_H
+
 /* Define if you have the <sys/ioctl.h> header file.  */
 #undef HAVE_SYS_IOCTL_H
 
@@ -134,11 +137,6 @@
 /* Define if you have the backtrace function. */
 #undef HAVE_BACKTRACE
 
-/* Define for various gethostbyname_r functions */
-#undef HAVE_FUNC_GETHOSTBYNAME_R_6
-#undef HAVE_FUNC_GETHOSTBYNAME_R_5
-#undef HAVE_FUNC_GETHOSTBYNAME_R_3
-
 /* Define for various pthread_setname_np variants */
 #undef	HAVE_PTHREAD_SETNAME_NP0
 #undef	HAVE_PTHREAD_SETNAME_NP1
@@ -169,6 +167,12 @@
 #undef HAVE_SOCKADDR_SIN_LEN
 #ifdef	HAVE_SOCKADDR_SIN_LEN
 #define	HAVE_SIN_LEN HAVE_SOCKADDR_SIN_LEN
+#endif
+
+/* Define if you have zeromq support */
+#undef HAVE_ZMQ_H
+#ifdef HAVE_ZMQ_H
+#define HAVE_ZEROMQ 1
 #endif
 
 /* If we're using GCC, we can get it to check format function arguments. */

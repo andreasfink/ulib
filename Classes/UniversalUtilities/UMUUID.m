@@ -79,7 +79,6 @@
     time_t              now;
     struct tm           trec;
 
-
     time(&now);
     gmtime_r(&now, &trec);
     trec.tm_mon++;
@@ -91,7 +90,6 @@
                  trec.tm_min,
                  trec.tm_sec,
                  uuid_string2];
-
     uuid_clear(uu);
     return uniqueId;
 }

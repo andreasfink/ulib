@@ -10,23 +10,17 @@
 
 @implementation UMHTTPURLHandler
 
-@synthesize uri;
-@synthesize requestDelegate;
-@synthesize authenticationDelegate;
-@synthesize requestMethodToCall;
-@synthesize authenticateMethodToCall;
-@synthesize requiresAuthentication;
 
 -(int) isEqualUri:(NSURL *)u
 {
-	return [u isEqual:uri];
+	return [u isEqual:_uri];
 }
 
 -(void)callIt:(UMHTTPRequest *)req
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-	[requestDelegate performSelector:requestMethodToCall withObject:req];
+	[_requestDelegate performSelector:_requestMethodToCall withObject:req];
 #pragma clang diagnostic pop
 }
 
@@ -34,21 +28,8 @@
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-	[authenticationDelegate performSelector:authenticateMethodToCall withObject:req];
+	[_authenticationDelegate performSelector:_authenticateMethodToCall withObject:req];
 #pragma clang diagnostic pop
 }
-
-
-#if 0
--(NSString *)description
-{
-	return [NSString stringWithFormat:
-	@"uri:%@\n"
-	"request [%@]\n"
-	"methodToCall:%@"
-	method = NSStringFromSelector(setWidthHeight);
-
-}
-#endif
 	
 @end

@@ -16,7 +16,7 @@
 #define PROTOBUF_WIRE_TYPE_START_GROUP       3
 #define PROTOBUF_WIRE_TYPE_END_GROUP         4
 #define PROTOBUF_WIRE_TYPE_32BIT_FIXED       5
-
+ 
 @protocol UMProtocolBufferProtocol<NSObject>
 @property(readwrite,strong)    NSData *buffer;
 @end

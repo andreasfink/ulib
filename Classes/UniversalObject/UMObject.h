@@ -25,6 +25,9 @@ BOOL umobject_object_stat_is_enabled(void);
 #define UMOBJECT_FLAG_COUNTED_IN_STAT		0x08
 #define UMOBJECT_FLAG_IS_INITIALIZED        0xCC00
 #define UMOBJECT_FLAG_IS_RELEASED           0x3300
+
+typedef  void (*UMThreadStarterFunction)(NSObject *param);
+
 /*!
  @class UMObject
  @brief The root object for ulib
@@ -94,6 +97,9 @@ BOOL umobject_object_stat_is_enabled(void);
                            line:(long)lin
                        function:(const char *)fun;
 - (void)runSelectorInBackground:(SEL)aSelector;
+
++ (void)runFunctionInBackground:(UMThreadStarterFunction)func withObject:(id)param;
++ (void)runFunctionInBackground:(UMThreadStarterFunction)func withPointer:(void *)ptr;
 
 @end
 

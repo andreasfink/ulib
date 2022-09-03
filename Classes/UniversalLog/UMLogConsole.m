@@ -10,8 +10,6 @@
 
 @implementation UMLogConsole
 
-
-
 - (void) logAnEntry:(UMLogEntry *)logEntry
 {
 	UMLogLevel	entryLevel;

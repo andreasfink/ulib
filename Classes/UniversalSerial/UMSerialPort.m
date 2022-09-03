@@ -431,14 +431,6 @@
 
     int events = POLLIN | POLLPRI | POLLERR | POLLHUP | POLLNVAL;
 
-#ifdef POLLRDBAND
-    events |= POLLRDBAND;
-#endif
-
-#ifdef POLLRDHUP
-    events |= POLLRDHUP;
-#endif
-
     memset(pollfds,0,sizeof(pollfds));
     pollfds[0].fd = _fd;
     pollfds[0].events = events;
@@ -484,22 +476,10 @@
         {
             returnError = UMSerialPortError_has_data_and_hup;
         }
-#ifdef POLLRDHUP
-        else if(ret2 & POLLRDHUP)
-        {
-            returnError = UMSerialPortError_has_data_and_hup;
-        }
-#endif
         else if(ret2 & POLLNVAL)
         {
             returnError = [UMSerialPort errorFromErrno:eno];
         }
-#ifdef POLLRDBAND
-        else if(ret2 & POLLRDBAND)
-        {
-            returnError =  UMSerialPortError_has_data;
-        }
-#endif
         else if(ret2 & POLLIN)
         {
             returnError =  UMSerialPortError_has_data;

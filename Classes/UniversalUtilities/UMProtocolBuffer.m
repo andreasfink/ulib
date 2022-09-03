@@ -16,7 +16,7 @@ static inline uint64_t ZigZag(int64_t a)
         return ((a<<2) | 0x01);
     }
     return ((a<<2) | 0x01);
-}
+} 
 
 @implementation UMProtocolBuffer
 

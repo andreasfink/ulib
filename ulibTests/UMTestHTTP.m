@@ -715,7 +715,7 @@ error:
             SSL_load_error_strings();
             global_ssl_context = SSL_CTX_new(SSLv23_client_method());
             SSL_CTX_set_mode(global_ssl_context, SSL_MODE_ENABLE_PARTIAL_WRITE | SSL_MODE_ACCEPT_MOVING_WRITE_BUFFER);
-            ssl = SSL_new(global_ssl_context);
+            _ssl = SSL_new(global_ssl_context);
 
         }
 #endif
@@ -745,7 +745,7 @@ error:
      */
     rc = 0;
     for (i = 0; i < 4 /* max 2x pending + 2x data = 4 */; i++) {
-        if ((rc = SSL_shutdown(ssl)))
+        if ((rc = SSL_shutdown(_ssl)))
             break;
     }
     return rc;        
@@ -766,9 +766,9 @@ error:
     
     if (certkey) 
     {
-        SSL_use_certificate_file(ssl, [certkey UTF8String], SSL_FILETYPE_PEM);
-        SSL_use_PrivateKey_file(ssl, [certkey UTF8String], SSL_FILETYPE_PEM);
-        if (SSL_check_private_key(ssl) != 1)
+        SSL_use_certificate_file(_ssl, [certkey UTF8String], SSL_FILETYPE_PEM);
+        SSL_use_PrivateKey_file(_ssl, [certkey UTF8String], SSL_FILETYPE_PEM);
+        if (SSL_check_private_key(_ssl) != 1)
             return -1;
     }
     

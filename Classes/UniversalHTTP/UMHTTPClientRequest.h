@@ -18,15 +18,15 @@
     
 @interface UMHTTPClientRequest : UMTaskQueueTask
 {
-    NSURLRequest *theRequest;
-    NSString *urlString;
-    NSURL *url;
-    UMHTTPClient *client;
-    id<UMHTTPClientDelegateProtocol>  _delegate;
-    id  _reference;
-    NSURLConnection *urlCon;
-    NSInteger _responseStatusCode;
-    NSMutableData *_responseData;
+    NSURLRequest                        *_theRequest;
+    NSString                            *_urlString;
+    NSURL                               *_url;
+    UMHTTPClient                        *_client;
+    id<UMHTTPClientDelegateProtocol>    _delegate;
+    id                                  _reference;
+    NSURLConnection                     *_urlCon;
+    NSInteger                           _responseStatusCode;
+    NSMutableData                       *_responseData;
 }
 @property(readwrite,strong) NSURLRequest *theRequest;
 @property(readwrite,strong) NSString *urlString;

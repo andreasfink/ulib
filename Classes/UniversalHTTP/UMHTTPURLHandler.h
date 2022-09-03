@@ -20,19 +20,15 @@
 
 @interface UMHTTPURLHandler : NSObject
 {
-	BOOL						requiresAuthentication;
-
-	id<UMHTTPURLHandlerMethod>	__unsafe_unretained authenticationDelegate;
-	SEL							authenticateMethodToCall;
-
-	id<UMHTTPURLHandlerMethod>	__unsafe_unretained requestDelegate;
-	SEL							requestMethodToCall;
-
-	NSURL						*uri;
+	BOOL						_requiresAuthentication;
+	id<UMHTTPURLHandlerMethod>	__unsafe_unretained _authenticationDelegate;
+	SEL							_authenticateMethodToCall;
+	id<UMHTTPURLHandlerMethod>	__unsafe_unretained _requestDelegate;
+	SEL							_requestMethodToCall;
+	NSURL						*_uri;
 }
 
 @property (readwrite,assign)		BOOL	requiresAuthentication;
-
 @property (readwrite,strong)		NSURL	*uri;
 @property (readwrite,unsafe_unretained)		id<UMHTTPURLHandlerMethod>	requestDelegate;
 @property (readwrite,assign)		SEL		requestMethodToCall;

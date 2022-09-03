@@ -12,6 +12,8 @@
 #import "UMBackgrounder.h"
 #import "UMMutex.h"
 #import "UMUtil.h"
+#import "UMSynchronizedSortedDictionary.h"
+#import "NSDate+stringFunctions.h"
 
 #include <time.h>
 @implementation UMTimer
@@ -83,7 +85,9 @@
 - (void)setSeconds:(NSTimeInterval)sec
 {
     [_timerMutex lock];
+    UMMicroSec oldDuration = _microsecDuration;
     _microsecDuration = (UMMicroSec)(sec * 1000000.0);
+    _expiryTime = _expiryTime + _microsecDuration - oldDuration;
     [_timerMutex unlock];
 
 }
@@ -118,7 +122,6 @@
         _name = n;
         _repeats = r;
         _timerMutex = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"timer %@",n]];
-
     }
     return self;
 }
@@ -259,4 +262,19 @@
 	}
 }
 
+- (UMSynchronizedSortedDictionary *)timerDescription
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"name"] = _name;
+    dict[@"is-running"] = @(_isRunning);
+    NSTimeInterval st = _startTime/1000000.0;
+    NSDate *start = [NSDate dateWithTimeIntervalSince1970:st];
+    dict[@"start-time"] = [start stringValue];
+                    
+    dict[@"expiry-time"] = [[NSDate dateWithTimeIntervalSince1970:(_expiryTime/1000000.0)] stringValue];
+    dict[@"last-checked"] = [[NSDate dateWithTimeIntervalSince1970:(_lastChecked/1000000.0)] stringValue];
+    dict[@"duration"] = @([self seconds]);
+    dict[@"repeats"] = @(_repeats);
+    return dict;
+}
 @end

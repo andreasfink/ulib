@@ -58,6 +58,8 @@
 @property(readwrite,assign) BOOL                enable;
 @property(readwrite,assign) BOOL                isSharedQueue;
 
+- (void)addToLayerHistoryLog:(NSString *)s;
+
 - (void)queueFromLower:(UMLayerTask *)task;
 - (void)queueMultiFromLower:(NSArray<UMLayerTask *>*)job;
 

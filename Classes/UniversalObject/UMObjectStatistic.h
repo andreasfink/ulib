@@ -19,7 +19,7 @@
 	long long					_allocCount;
 	long long					_dealloc;
 }
-
+ 
 + (void)enable;
 + (void)disable;
 + (UMObjectStatistic *)sharedInstance;

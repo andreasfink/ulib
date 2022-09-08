@@ -183,7 +183,7 @@ static void flushpipe(int fd)
     [self prepare];
     if(_rxpipe < 0)
     {
-        return sig;
+        return UMSleeper_Error;
     }
 
     pollresult = 0;

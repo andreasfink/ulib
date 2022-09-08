@@ -158,7 +158,11 @@
 
 		while(self.status == UMHTTPServerStatus_startingUp)
         {
-			[_sleeper sleep:100000];/* wait 100ms */
+            UMSleeper_Signal sig =  [_sleeper sleep:100000];/* wait 100ms */
+            if (sig == UMSleeper_Error)
+            {
+                break;
+            }
         }
 
 	    if( self.status == UMHTTPServerStatus_running )
@@ -344,7 +348,11 @@
 	self.status = UMHTTPServerStatus_shuttingDown;
 	while(self.status == UMHTTPServerStatus_shuttingDown)
 	{
-		[_sleeper sleep:100000]; /* wait 100ms */
+        UMSleeper_Signal sig =  [_sleeper sleep:100000];/* wait 100ms */
+        if (sig == UMSleeper_Error)
+        {
+            break;
+        }
 	}
 	self.status = UMHTTPServerStatus_notRunning;
     

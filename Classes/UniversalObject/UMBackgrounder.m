@@ -79,6 +79,10 @@
                     {
                         return;
                     }
+                    if (s == UMSleeper_Error)
+                    {
+                        break;
+                    }
                     i++;
                 }
             }
@@ -111,7 +115,11 @@
             while((self.runningStatus == UMBackgrounder_shuttingDown) && (i<= 100))
             {
                 i++;
-                [_control_sleeper sleep:UMSLEEPER_DEFAULT_SLEEP_TIME wakeOn:UMSleeper_ShutdownCompletedSignal]; /* 500ms */
+                UMSleeper_Signal sig =  [_control_sleeper sleep:UMSLEEPER_DEFAULT_SLEEP_TIME wakeOn:UMSleeper_ShutdownCompletedSignal]; /* 500ms */
+                if (sig == UMSleeper_Error)
+                {
+                    break;
+                }
             }
             if((self.runningStatus == UMBackgrounder_shuttingDown) && (i> 100))
             {
@@ -169,6 +177,11 @@
                         sleepTime= UMSLEEPER_DEFAULT_SLEEP_TIME*100;
                     }
                     UMSleeper_Signal signal = [_workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ]; /* 100ms */
+                    if (signal == UMSleeper_Error)
+                    {
+                        mustQuit=YES;
+                        break;
+                    }
                     if(_enableLogging)
                     {
                         NSLog(@"%@ woke up with signal %d",self.name,signal);

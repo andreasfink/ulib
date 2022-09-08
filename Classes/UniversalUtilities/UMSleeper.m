@@ -47,7 +47,7 @@ static void socket_set_blocking(int fd, int blocking)
         _ifile = file;
         _iline = line;
         _ifunction = function;
-        _prepareLock = [[UMMutex alloc]initWithName:@"sleeper-mutex"];
+        _lock = [[UMMutex alloc]initWithName:@"sleeper-mutex"];
     }
 //#define SLEEEPER_INIT_DEBUG 1
 #ifdef SLEEEPER_INIT_DEBUG
@@ -68,10 +68,10 @@ static void socket_set_blocking(int fd, int blocking)
     {
         return;
     }
-    [_prepareLock lock];
+    UMMUTEX_LOCK(_lock);
     if(self.isPrepared==YES)
     {
-        [_prepareLock unlock];
+        UMMUTEX_UNLOCK(_lock);
         return;
     }
     int pipefds[2];
@@ -110,7 +110,7 @@ static void socket_set_blocking(int fd, int blocking)
     socket_set_blocking(_rxpipe, 0);
     socket_set_blocking(_txpipe, 0);
     _isPrepared = YES;
-    [_prepareLock unlock];
+    UMMUTEX_UNLOCK(_lock);
 }
 
 - (void) dealloc
@@ -119,6 +119,7 @@ static void socket_set_blocking(int fd, int blocking)
     {
         return;
     }
+    UMMUTEX_LOCK(_lock);
     if(_rxpipe >=0)
     {
         TRACK_FILE_CLOSE(_rxpipe);
@@ -132,6 +133,7 @@ static void socket_set_blocking(int fd, int blocking)
     _rxpipe = -1;
     _txpipe = -1;
     _isPrepared = NO;
+    UMMUTEX_UNLOCK(_lock);
 }
 
 
@@ -214,6 +216,7 @@ static void flushpipe(int fd)
             UMSleeper_Signal signalToRead=0xFE;
             ssize_t bytes;
             uint8_t buffer[1];
+            
             bytes = read(self.rxpipe, &buffer, 1);
             if(bytes == 1)
             {

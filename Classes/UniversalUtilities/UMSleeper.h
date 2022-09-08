@@ -28,7 +28,7 @@ typedef uint8_t UMSleeper_Signal; /* note Sleeper signal is a bitmask */
     const char  *_ifile;
     long        _iline;
     const char  *_ifunction;
-    UMMutex     *_prepareLock;
+    UMMutex     *_lock;
     BOOL        _debug;
 }
 @property(readwrite,assign,atomic) BOOL isPrepared;

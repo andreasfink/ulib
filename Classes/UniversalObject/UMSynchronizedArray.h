@@ -19,7 +19,7 @@
 @interface UMSynchronizedArray : UMObject<NSCopying,NSFastEnumeration>
 {
     NSMutableArray  *_array;
-    UMMutex         *_lock;
+    UMMutex         *_arrayLock;
 }
 
 @property (readonly,strong) NSMutableArray *array;

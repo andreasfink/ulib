@@ -18,7 +18,7 @@
     NSString *_name;
     UMSynchronizedSortedDictionary *_entries;
     UMStatisticEntry *_main_entry;
-    UMMutex *_lock;
+    UMMutex *_statisticLock;
     BOOL _dirty;
 }
 

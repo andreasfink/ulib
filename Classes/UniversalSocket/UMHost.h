@@ -15,7 +15,7 @@
 	int				_isLocalHost;
 	int				_isResolving;
 	int				_isResolved;
-	UMMutex			*_lock;
+	UMMutex			*_hostLock;
     NSString        *_name;
 }
 

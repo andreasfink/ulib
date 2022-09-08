@@ -24,7 +24,7 @@
     if(self)
     {
         _name = name;
-        _lock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"stat-entry<%@>",name]];
+        _statisticEntryLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"stat-entry<%@>",name]];
 
         [self updateCurrentTimeIndexes];
         memset(&_secondsData[0],0,sizeof(_secondsData));
@@ -131,7 +131,7 @@
 
 - (void)increaseBy:(double)count
 {
-    [_lock lock];
+    [_statisticEntryLock lock];
     [self timeShift];
     _secondsData[_currentSecondsIndex % UMSTATISTIC_SECONDS_MAX] += count;
     _secondsDataCount[_currentSecondsIndex % UMSTATISTIC_SECONDS_MAX] += 1;
@@ -209,7 +209,7 @@
         _yearsDataMin[_currentSecondsIndex % UMSTATISTIC_YEARS_MAX] = count;
     }
 
-    [_lock unlock];
+    [_statisticEntryLock unlock];
 }
 
 

@@ -12,7 +12,7 @@
 
 @interface UMDigitTree : NSObject
 {
-    UMMutex          *_lock;
+    UMMutex          *_digitTreeLock;
     UMDigitTreeEntry *_root;
 }
 

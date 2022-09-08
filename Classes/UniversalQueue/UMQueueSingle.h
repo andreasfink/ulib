@@ -17,7 +17,7 @@
 
 @interface UMQueueSingle : UMObject
 {
-    UMMutex          *_lock;
+    UMMutex          *_queueLock;
     NSMutableArray   *_queue;
 }
 

@@ -14,7 +14,7 @@
 
 @interface UMObjectTree : UMObject
 {
-    UMMutex          *_lock;
+    UMMutex          *_objectTreeLock;
     UMObjectTreeEntry *_root;
 }
 

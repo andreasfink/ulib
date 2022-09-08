@@ -159,7 +159,7 @@ static void flushpipe(int fd)
 #define SLICE_TIME (1000LL*1000LL*10LL*60LL)   /* max 10 minutes for testing */
 
 - (UMSleeper_Signal) sleep:(UMMicroSec) microseconds
-       wakeOn:(UMSleeper_Signal)sig;	/* returns signal value if signal was received, 0 on timer epxiry, -1 on error  */
+                    wakeOn:(UMSleeper_Signal)sig	/* returns signal value if signal was received, 0 on timer epxiry, -1 on error  */
 {
     struct pollfd pollfd[2];
     int pollresult;
@@ -183,7 +183,7 @@ static void flushpipe(int fd)
     [self prepare];
     if(_rxpipe < 0)
     {
-        return -1;
+        return sig;
     }
 
     pollresult = 0;

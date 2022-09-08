@@ -112,7 +112,7 @@
             int i=0;
           
             [_workSleeper wakeUp:UMSleeper_ShutdownOrderSignal];
-            while((self.runningStatus == UMBackgrounder_shuttingDown) && (i<= 100))
+            while((self.runningStatus == UMBackgrounder_shuttingDown) && (i<= 200))
             {
                 i++;
                 UMSleeper_Signal sig =  [_control_sleeper sleep:UMSLEEPER_DEFAULT_SLEEP_TIME wakeOn:UMSleeper_ShutdownCompletedSignal]; /* 500ms */
@@ -121,7 +121,7 @@
                     break;
                 }
             }
-            if((self.runningStatus == UMBackgrounder_shuttingDown) && (i> 100))
+            if((self.runningStatus == UMBackgrounder_shuttingDown) && (i> 200))
             {
                 /* it didnt start successfully in 10 seconds. Something is VERY ODD */
                 NSLog(@"shutdownBackgroundTask: failed. Background task did not shut down within 10 seconds");

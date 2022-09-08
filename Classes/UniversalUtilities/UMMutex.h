@@ -82,16 +82,26 @@ void ummutex_stat_disable(void);
 
 #define UMMUTEX_LOCK(a)  \
 { \
-    a.tryingToLockInFile = __FILE__; \
-    a.tryingToLockAtLine = __LINE__; \
-    a.tryingToLockInFunction = __func__; \
+    if([a isKindOfClass:[UMMutex class]]) \
+    { \
+        a.tryingToLockInFile = __FILE__; \
+        a.tryingToLockAtLine = __LINE__; \
+        a.tryingToLockInFunction = __func__; \
+    } \
+    else \
+    { \
+        NSLog(@"FILE:%s line%d: locking a non UMMutex #a ##a!",__FILE__,__line__); \
+    } \
     [a lock]; \
-    a.lockedInFile = __FILE__;  \
-    a.lockedAtLine = __LINE__;   \
-    a.lockedInFunction =  __func__;  \
-    a.tryingToLockInFile = NULL; \
-    a.tryingToLockAtLine = 0; \
-    a.tryingToLockInFunction = NULL; \
+    if([a isKindOfClass:[UMMutex class]]) \
+    { \
+        a.lockedInFile = __FILE__;  \
+        a.lockedAtLine = __LINE__;   \
+        a.lockedInFunction =  __func__;  \
+        a.tryingToLockInFile = NULL; \
+        a.tryingToLockAtLine = 0; \
+        a.tryingToLockInFunction = NULL; \
+    } \
 }
 
 #define UMMUTEX_TRYLOCK(a,timeout,retry,result)  \

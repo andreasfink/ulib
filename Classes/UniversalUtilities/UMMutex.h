@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <pthread.h>
-
+#include "ulib_config.h" // we need __func__ 
 
 @interface UMMutex : NSObject
 {

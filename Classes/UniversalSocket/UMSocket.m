@@ -1231,7 +1231,6 @@ static int SSL_smart_shutdown(SSL *ssl)
             _blockingMode = SocketBlockingMode_isBlocking;
         }
     }
-    UMMUTEX_UNLOCK(_controlLock);
     return returnValue;
 }
 

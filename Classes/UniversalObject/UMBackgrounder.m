@@ -57,8 +57,6 @@
     {
         UMAssert(_startStopLock,@"_startStopLock is NULL");
         UMAssert(_control_sleeper,@"_control_sleeper is NULL");
-
-
         UMMUTEX_LOCK(_startStopLock);
         @try
         {
@@ -92,6 +90,11 @@
             UMMUTEX_UNLOCK(_startStopLock);
         }
     }
+}
+
+- (void)shutdownBackgroundTaskFromWithin
+{
+    self.runningStatus == UMBackgrounder_shuttingDown;
 }
 
 - (void)shutdownBackgroundTask
@@ -139,7 +142,6 @@
 {
     @autoreleasepool
     {
-        BOOL mustQuit = NO;
 
         if(self.name)
         {
@@ -162,7 +164,7 @@
             NSLog(@"%@: started up successfully",self.name);
         }
         [self backgroundInit];
-
+        BOOL mustQuit=NO;
         BOOL doSleep = NO;
         while((self.runningStatus == UMBackgrounder_running) && (mustQuit==NO))
         {
@@ -195,7 +197,7 @@
                         mustQuit = YES;
                     }
                 }
-                if(!mustQuit)
+                if((!mustQuit) && (self.runningStatus == UMBackgrounder_running))
                 {
                     int status;
                     @autoreleasepool

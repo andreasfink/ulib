@@ -94,7 +94,7 @@
 
 - (void)shutdownBackgroundTaskFromWithin
 {
-    self.runningStatus == UMBackgrounder_shuttingDown;
+    self.runningStatus = UMBackgrounder_shuttingDown;
 }
 
 - (void)shutdownBackgroundTask

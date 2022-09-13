@@ -231,6 +231,7 @@ typedef enum SocketBlockingMode
 
 - (void) initNetworkSocket;
 - (UMSocketError) setLinger;
+- (UMSocketError)setPathMtuDiscovery:(BOOL)enable;
 - (UMSocketError) setReuseAddr;
 - (UMSocketError) setIPDualStack;
 - (UMSocketError) setIPv6Only;

@@ -27,6 +27,7 @@
     const char          *_tryingToLockInFile;
     long                 _tryingToLockAtLine;
     const char          *_tryingToLockInFunction;
+    BOOL                _isLocked;
 
 }
 
@@ -40,6 +41,7 @@
 @property(readwrite,assign) const char      *tryingToLockInFile;
 @property(readwrite,assign) long            tryingToLockAtLine;
 @property(readwrite,assign) const char      *tryingToLockInFunction;
+@property(readonly,assign) BOOL             isLocked;
 
 
 - (void) lock;
@@ -140,4 +142,3 @@ void ummutex_stat_disable(void);
     a.lockedInFunction =  NULL; \
     [a unlock];  \
 }
-

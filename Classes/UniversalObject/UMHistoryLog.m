@@ -140,7 +140,7 @@
             [output addObject:line];
         }
         position = position + direction;
-    }
+    }src/mm_mtp3.m
     UMMUTEX_UNLOCK(_historyLogLock);
     return output;
 }

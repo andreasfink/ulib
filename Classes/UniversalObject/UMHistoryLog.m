@@ -134,7 +134,7 @@
     while(count--)
     {
         UMHistoryLogEntry *entry = _entries[position];
-        NSString *line = entry.log;
+        NSString *line = [entry stringValueWithoutDate];
         if([line length]>0)
         {
             [output addObject:line];
@@ -191,7 +191,7 @@
 
 - (NSString *)stringLines
 {
-    return [self getLogForwardOrder];
+    return [self getLogForwardOrderWithDates];
 }
 
 @end

@@ -41,4 +41,9 @@
     return [NSString stringWithFormat:@"%@ %@",ds,_log];
 }
 
+- (NSString *)stringValueWithoutDate
+{
+    return [NSString stringWithFormat:@"%@",_log];
+}
+
 @end

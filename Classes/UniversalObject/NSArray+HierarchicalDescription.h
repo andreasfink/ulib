@@ -11,5 +11,6 @@
 
 - (NSString *)hierarchicalDescriptionWithPrefix:(NSString *)prefix; /*!< convert a NSArray to a string in a human readable fashion with identation (prefix) being properly increased */
 - (NSArray<NSString *>*)sortedStringsArray;
+- (NSArray<NSNumber *>*)sortedNumbersArray;
 
 @end

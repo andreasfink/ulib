@@ -5659,7 +5659,7 @@
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-ios-info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
@@ -5706,7 +5706,7 @@
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-ios-info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
@@ -5764,7 +5764,7 @@
 				SDKROOT = appletvos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 16.1;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -5805,7 +5805,7 @@
 				SDKROOT = appletvos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 16.1;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -5836,7 +5836,7 @@
 					"$(PROJECT_DIR)/libs",
 					/usr/local/lib,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5877,7 +5877,7 @@
 					"$(PROJECT_DIR)/libs",
 					/usr/local/lib,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5915,7 +5915,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 					"$(PROJECT_DIR)/libs",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5947,7 +5947,7 @@
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 					"$(PROJECT_DIR)/libs",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -5983,7 +5983,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				TVOS_DEPLOYMENT_TARGET = 16.1;
 			};
 			name = Debug;
 		};
@@ -6018,7 +6018,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				TVOS_DEPLOYMENT_TARGET = 16.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -6043,7 +6043,7 @@
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
@@ -6081,7 +6081,7 @@
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
@@ -6156,9 +6156,9 @@
 				GENERATE_PROFILING_CODE = YES;
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				INFOPLIST_FILE = SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DULIB_CONFIG=Debug",
@@ -6168,11 +6168,11 @@
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1i-binary/usr/local/include/";
-				TVOS_DEPLOYMENT_TARGET = 15.0;
+				TVOS_DEPLOYMENT_TARGET = 16.1;
 				USER_HEADER_SEARCH_PATHS = "";
 				USE_HEADERMAP = YES;
 				WARNING_CFLAGS = "-Wimplicit-fallthrough";
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -6231,9 +6231,9 @@
 				GENERATE_PROFILING_CODE = YES;
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				INFOPLIST_FILE = SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DULIB_CONFIG=Release",
@@ -6243,11 +6243,11 @@
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1i-binary/usr/local/include/";
-				TVOS_DEPLOYMENT_TARGET = 15.0;
+				TVOS_DEPLOYMENT_TARGET = 16.1;
 				USER_HEADER_SEARCH_PATHS = "";
 				USE_HEADERMAP = YES;
 				WARNING_CFLAGS = "-Wimplicit-fallthrough";
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -6377,7 +6377,7 @@
 				SUPPORTED_PLATFORMS = "watchsimulator watchos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
-				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -6427,7 +6427,7 @@
 				SUPPORTED_PLATFORMS = "watchsimulator watchos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
-				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+				WATCHOS_DEPLOYMENT_TARGET = 9.1;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;

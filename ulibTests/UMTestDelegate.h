@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "UMObject.h"
-#import "UMHTTPServerAuthorizeResult.h"
+#import "UMHTTPServerAuthoriseResult.h"
 #import "UMHTTPServer.h"
 
 @class UMSocket, UMHTTPRequest;
 
-@interface UMAuthorizeConnectionDelegate : UMObject <UMHTTPServerAuthorizeConnectionDelegate>
+@interface UMAuthoriseConnectionDelegate : UMObject <UMHTTPServerAuthoriseConnectionDelegate>
 {
     NSString *serverAllowIP;
     NSString *serverDenyIP;
@@ -24,9 +24,9 @@
 @property(readwrite,strong)	NSString *serverDenyIP;
 @property(readwrite,strong)	NSString *subsection;
 
-- (UMAuthorizeConnectionDelegate *)initWithConfigFile:(NSString *)file;
-- (UMHTTPServerAuthorizeResult) httpAuthorizeConnection:(UMSocket *)us;
-- (void) httpAuthorizeUrl:(UMHTTPRequest *)req;
+- (UMAuthoriseConnectionDelegate *)initWithConfigFile:(NSString *)file;
+- (UMHTTPServerAuthoriseResult) httpAuthoriseConnection:(UMSocket *)us;
+- (void) httpAuthoriseUrl:(UMHTTPRequest *)req;
 
 @end
 

@@ -118,7 +118,8 @@
 - (void) setResponseCssString:(NSString *)content;
 - (void) setResponseJsonString:(NSString *)content;
 - (void) setResponseJsonObject:(id)content;
-- (void)setNotAuthorizedForRealm:(NSString *)realm;
+- (void)setNotAuthorizedForRealm:(NSString *)realm; /* depreciated */
+- (void)setNotAuthorisedForRealm:(NSString *)realm;
 - (void)setContentType:(NSString *)ct;
 - (NSString *)authenticationStatusAsString;
 - (NSMutableDictionary *)paramsMutableCopy;

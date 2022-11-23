@@ -15,7 +15,7 @@ var searchData=
   ['authenticaterequestdelegate_4701',['authenticateRequestDelegate',['../interface_u_m_h_t_t_p_server.html#a733dac28149e647a1dea54af3d7b4f14',1,'UMHTTPServer']]],
   ['authenticationdelegate_4702',['authenticationDelegate',['../interface_u_m_h_t_t_p_u_r_l_handler.html#a564096fe64a95fb18498a5729ecd54cd',1,'UMHTTPURLHandler']]],
   ['authenticationstatus_4703',['authenticationStatus',['../interface_u_m_h_t_t_p_request.html#a7b87dd8df7788230ac09787093107e8f',1,'UMHTTPRequest']]],
-  ['authorizeconnectiondelegate_4704',['authorizeConnectionDelegate',['../interface_u_m_h_t_t_p_server.html#ac07397827ef5d105bfe411a2e1e1d4bc',1,'UMHTTPServer']]],
+  ['authoriseconnectiondelegate_4704',['authoriseConnectionDelegate',['../interface_u_m_h_t_t_p_server.html#ac07397827ef5d105bfe411a2e1e1d4bc',1,'UMHTTPServer']]],
   ['authpassword_4705',['authPassword',['../interface_u_m_h_t_t_p_request.html#ae1782279349393e56efbda681f74db82',1,'UMHTTPRequest']]],
   ['authusername_4706',['authUsername',['../interface_u_m_h_t_t_p_request.html#a8d6cf506811dfb422196fc9f405c065e',1,'UMHTTPRequest']]],
   ['awaitingcompletion_4707',['awaitingCompletion',['../interface_u_m_h_t_t_p_request.html#a4ac173753c591cd1f347ce630877b9cb',1,'UMHTTPRequest']]]

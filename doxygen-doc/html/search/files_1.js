@@ -67,7 +67,7 @@ var searchData=
   ['umhttpresponsecode_2eh_2771',['UMHTTPResponseCode.h',['../_u_m_h_t_t_p_response_code_8h.html',1,'']]],
   ['umhttpserver_2eh_2772',['UMHTTPServer.h',['../_u_m_h_t_t_p_server_8h.html',1,'']]],
   ['umhttpserver_2em_2773',['UMHTTPServer.m',['../_u_m_h_t_t_p_server_8m.html',1,'']]],
-  ['umhttpserverauthorizeresult_2eh_2774',['UMHTTPServerAuthorizeResult.h',['../_u_m_h_t_t_p_server_authorize_result_8h.html',1,'']]],
+  ['umhttpserverauthoriseresult_2eh_2774',['UMHTTPServerAuthoriseResult.h',['../_u_m_h_t_t_p_server_authorise_result_8h.html',1,'']]],
   ['umhttpsserver_2eh_2775',['UMHTTPSServer.h',['../_u_m_h_t_t_p_s_server_8h.html',1,'']]],
   ['umhttpsserver_2em_2776',['UMHTTPSServer.m',['../_u_m_h_t_t_p_s_server_8m.html',1,'']]],
   ['umhttptask_5freadrequest_2eh_2777',['UMHTTPTask_ReadRequest.h',['../_u_m_h_t_t_p_task___read_request_8h.html',1,'']]],

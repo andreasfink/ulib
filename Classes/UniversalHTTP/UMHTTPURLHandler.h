@@ -8,14 +8,14 @@
 
 #import "UMObject.h"
 
-#import "UMHTTPServerAuthorizeResult.h"
+#import "UMHTTPServerAuthoriseResult.h"
 
 @class UMHTTPRequest;
 @class UMSocket;
 
 
 @protocol UMHTTPURLHandlerMethod <NSObject>
-- (UMHTTPServerAuthorizeResult)  httpAuthorizeRequest:(UMSocket *)sock;
+- (UMHTTPServerAuthoriseResult)  httpAuthoriseRequest:(UMSocket *)sock;
 @end
 
 @interface UMHTTPURLHandler : NSObject

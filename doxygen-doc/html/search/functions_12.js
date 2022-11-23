@@ -38,7 +38,7 @@ var searchData=
   ['setloghandler_3awithname_3awithsection_3awithsubsection_3aandwithlogfile_3a_3599',['setLogHandler:withName:withSection:withSubsection:andWithLogFile:',['../interface_u_m_log_file.html#a8dfaa12954665bf9a229d5f76db862b9',1,'UMLogFile']]],
   ['setloglevel_3a_3600',['setLogLevel:',['../protocol_u_m_layer_user_protocol-p.html#afe7928da012e435fec78a580fc55d30c',1,'UMLayerUserProtocol-p']]],
   ['setmimetypefromextension_3a_3601',['setMimeTypeFromExtension:',['../interface_u_m_h_t_t_p_request.html#a364602ce1e1cbb06362c24f2ef4003ed',1,'UMHTTPRequest']]],
-  ['setnotauthorizedforrealm_3a_3602',['setNotAuthorizedForRealm:',['../interface_u_m_h_t_t_p_request.html#a1ec29912878d1f756b7d868a7dc75bb4',1,'UMHTTPRequest']]],
+  ['setnotauthorisedforrealm_3a_3602',['setNotAuthorisedForRealm:',['../interface_u_m_h_t_t_p_request.html#a1ec29912878d1f756b7d868a7dc75bb4',1,'UMHTTPRequest']]],
   ['setnotfound_3603',['setNotFound',['../interface_u_m_h_t_t_p_request.html#a9c3320ecaf661eef6989353a597eb954',1,'UMHTTPRequest']]],
   ['setobject_3aatindexedsubscript_3a_3604',['setObject:atIndexedSubscript:',['../interface_u_m_synchronized_array.html#a39afe96648f34653d95e30b02d0d58e9',1,'UMSynchronizedArray']]],
   ['setobject_3aforkey_3a_3605',['setObject:forKey:',['../interface_u_m_redis_session.html#a62e4ec08c028edb4fa07316ca1d8118a',1,'UMRedisSession']]],

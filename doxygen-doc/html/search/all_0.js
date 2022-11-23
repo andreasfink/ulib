@@ -16,7 +16,7 @@ var searchData=
   ['_5fauthenticaterequestdelegate_13',['_authenticateRequestDelegate',['../interface_u_m_h_t_t_p_server.html#a1e62d87a1b22defcad4f51793f238d7e',1,'UMHTTPServer']]],
   ['_5fauthenticationdelegate_14',['_authenticationDelegate',['../interface_u_m_h_t_t_p_page_handler.html#a33ccf6b2fa73a9ace7e45a2752e59a48',1,'UMHTTPPageHandler']]],
   ['_5fauthenticationselector_15',['_authenticationSelector',['../interface_u_m_h_t_t_p_page_handler.html#a54a5811d7b96519d892b67ed0cb27cad',1,'UMHTTPPageHandler']]],
-  ['_5fauthorizeconnectiondelegate_16',['_authorizeConnectionDelegate',['../interface_u_m_h_t_t_p_server.html#aa78ec917a3f4ffa3b96150bd860d6de0',1,'UMHTTPServer']]],
+  ['_5fauthoriseconnectiondelegate_16',['_authoriseConnectionDelegate',['../interface_u_m_h_t_t_p_server.html#aa78ec917a3f4ffa3b96150bd860d6de0',1,'UMHTTPServer']]],
   ['_5fawaitingcompletion_17',['_awaitingCompletion',['../interface_u_m_h_t_t_p_request.html#af5f41b0ecf986a6fafbcfa4872c01abb',1,'UMHTTPRequest']]],
   ['_5fblockingmode_18',['_blockingMode',['../interface_u_m_socket.html#ab81a0bac8f37c3507c6a1b70eb6ac5e2',1,'UMSocket']]],
   ['_5fbuffer_19',['_buffer',['../interface_u_m_protocol_buffer.html#a3723471b61a2e43edce6f44f78fa36ca',1,'UMProtocolBuffer']]],

@@ -268,7 +268,7 @@
                         clientSocket.serverSideKeyData      = _privateKeyFileData;
                         clientSocket.serverSideCertFilename = _certFile;
                         clientSocket.serverSideCertData     = _certFileData;
-                        if ([self authorizeConnection:clientSocket] == UMHTTPServerAuthorize_successful)
+                        if ([self authoriseConnection:clientSocket] == UMHTTPServerAuthorise_successful)
                         {
                             UMHTTPConnection *con = [[UMHTTPConnection alloc] initWithSocket:clientSocket server:self];
                             con.name = [NSString stringWithFormat:@"HTTPConnection %@:%d",clientSocket.connectedRemoteAddress,clientSocket.connectedRemotePort];
@@ -325,16 +325,16 @@
     }
 }
 
--(UMHTTPServerAuthorizeResult) authorizeConnection:(UMSocket *)us
+-(UMHTTPServerAuthoriseResult) authoriseConnection:(UMSocket *)us
 {
-	if(_authorizeConnectionDelegate)
+	if(_authoriseConnectionDelegate)
     {
-		if([_authorizeConnectionDelegate respondsToSelector:@selector(httpAuthorizeConnection:)])
+		if([_authoriseConnectionDelegate respondsToSelector:@selector(httpAuthoriseConnection:)])
         {
-			return [_authorizeConnectionDelegate httpAuthorizeConnection:us];
+			return [_authoriseConnectionDelegate httpAuthoriseConnection:us];
         }
     }
-	return UMHTTPServerAuthorize_successful;
+	return UMHTTPServerAuthorise_successful;
 }
 
 - (void) stop

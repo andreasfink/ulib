@@ -231,7 +231,7 @@
 		A60210B11D488A2F00211137 /* UMHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC5E149AA4AC0029E9CF /* UMHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60210B21D488A2F00211137 /* UMSleeper.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B551A3F24C70090FC94 /* UMSleeper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60210B41D488A2F00211137 /* UMHTTPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC60149AA4AC0029E9CF /* UMHTTPServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A60210B51D488A2F00211137 /* UMHTTPServerAuthorizeResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthorizeResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A60210B51D488A2F00211137 /* UMHTTPServerAuthoriseResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthoriseResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60210B71D488A2F00211137 /* UMTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B571A3F24C70090FC94 /* UMTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60210BB1D488A2F00211137 /* UMRedisCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B0C1A3F24680090FC94 /* UMRedisCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60210BE1D488A2F00211137 /* NSString+HierarchicalDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4BA61A3F25450090FC94 /* NSString+HierarchicalDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -436,7 +436,7 @@
 		A60212371D488A3D00211137 /* UMHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC5E149AA4AC0029E9CF /* UMHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60212381D488A3D00211137 /* UMSleeper.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B551A3F24C70090FC94 /* UMSleeper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A602123A1D488A3D00211137 /* UMHTTPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC60149AA4AC0029E9CF /* UMHTTPServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A602123B1D488A3D00211137 /* UMHTTPServerAuthorizeResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthorizeResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A602123B1D488A3D00211137 /* UMHTTPServerAuthoriseResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthoriseResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A602123D1D488A3D00211137 /* UMTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B571A3F24C70090FC94 /* UMTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60212411D488A3D00211137 /* UMRedisCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B0C1A3F24680090FC94 /* UMRedisCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60212441D488A3D00211137 /* NSString+HierarchicalDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4BA61A3F25450090FC94 /* NSString+HierarchicalDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -570,7 +570,7 @@
 		A60C2DA11A3F213F0090FC94 /* UMHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AC5F149AA4AC0029E9CF /* UMHTTPRequest.m */; };
 		A60C2DA21A3F213F0090FC94 /* UMHTTPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC60149AA4AC0029E9CF /* UMHTTPServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C2DA31A3F213F0090FC94 /* UMHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AC61149AA4AC0029E9CF /* UMHTTPServer.m */; };
-		A60C2DA41A3F213F0090FC94 /* UMHTTPServerAuthorizeResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthorizeResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A60C2DA41A3F213F0090FC94 /* UMHTTPServerAuthoriseResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthoriseResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C2DA51A3F213F0090FC94 /* UMHTTPResponseCode.h in Headers */ = {isa = PBXBuildFile; fileRef = A67C388A16B2C2C300C9DA95 /* UMHTTPResponseCode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C2DA61A3F213F0090FC94 /* UMHTTPURLHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC63149AA4AC0029E9CF /* UMHTTPURLHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C2DA71A3F213F0090FC94 /* UMHTTPURLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D8AC64149AA4AC0029E9CF /* UMHTTPURLHandler.m */; };
@@ -758,7 +758,7 @@
 		A60C4D441EF7FE59007C203A /* UMHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC5E149AA4AC0029E9CF /* UMHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4D451EF7FE59007C203A /* UMSleeper.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B551A3F24C70090FC94 /* UMSleeper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4D471EF7FE59007C203A /* UMHTTPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC60149AA4AC0029E9CF /* UMHTTPServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A60C4D481EF7FE59007C203A /* UMHTTPServerAuthorizeResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthorizeResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A60C4D481EF7FE59007C203A /* UMHTTPServerAuthoriseResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthoriseResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4D4A1EF7FE59007C203A /* UMTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B571A3F24C70090FC94 /* UMTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4D4E1EF7FE59007C203A /* UMRedisCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B0C1A3F24680090FC94 /* UMRedisCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60C4D511EF7FE59007C203A /* NSString+HierarchicalDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4BA61A3F25450090FC94 /* NSString+HierarchicalDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1792,7 +1792,7 @@
 		A6E1DD4124063158001FB7FF /* UMHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC5E149AA4AC0029E9CF /* UMHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E1DD4224063158001FB7FF /* UMSleeper.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B551A3F24C70090FC94 /* UMSleeper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E1DD4324063158001FB7FF /* UMHTTPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC60149AA4AC0029E9CF /* UMHTTPServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6E1DD4424063158001FB7FF /* UMHTTPServerAuthorizeResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthorizeResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6E1DD4424063158001FB7FF /* UMHTTPServerAuthoriseResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthoriseResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E1DD4524063158001FB7FF /* UMTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B571A3F24C70090FC94 /* UMTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E1DD4624063158001FB7FF /* UMRedisCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4B0C1A3F24680090FC94 /* UMRedisCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6E1DD4724063158001FB7FF /* NSString+HierarchicalDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CC4BA61A3F25450090FC94 /* NSString+HierarchicalDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2410,7 +2410,7 @@
 		A6D8AC5F149AA4AC0029E9CF /* UMHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPRequest.m; sourceTree = "<group>"; };
 		A6D8AC60149AA4AC0029E9CF /* UMHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPServer.h; sourceTree = "<group>"; };
 		A6D8AC61149AA4AC0029E9CF /* UMHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPServer.m; sourceTree = "<group>"; };
-		A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthorizeResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPServerAuthorizeResult.h; sourceTree = "<group>"; };
+		A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthoriseResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPServerAuthoriseResult.h; sourceTree = "<group>"; };
 		A6D8AC63149AA4AC0029E9CF /* UMHTTPURLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPURLHandler.h; sourceTree = "<group>"; };
 		A6D8AC64149AA4AC0029E9CF /* UMHTTPURLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPURLHandler.m; sourceTree = "<group>"; };
 		A6D8AC65149AA4AC0029E9CF /* UniversalHTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = UniversalHTTP.h; sourceTree = "<group>"; };
@@ -3276,7 +3276,7 @@
 				A6D8AC61149AA4AC0029E9CF /* UMHTTPServer.m */,
 				A63BF7281EB931F300340D18 /* UMHTTPSServer.h */,
 				A63BF7291EB931F300340D18 /* UMHTTPSServer.m */,
-				A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthorizeResult.h */,
+				A6D8AC62149AA4AC0029E9CF /* UMHTTPServerAuthoriseResult.h */,
 				A6D8AC63149AA4AC0029E9CF /* UMHTTPURLHandler.h */,
 				A6D8AC64149AA4AC0029E9CF /* UMHTTPURLHandler.m */,
 				A6D8AC65149AA4AC0029E9CF /* UniversalHTTP.h */,
@@ -3392,7 +3392,7 @@
 				A60210B11D488A2F00211137 /* UMHTTPRequest.h in Headers */,
 				A60210B21D488A2F00211137 /* UMSleeper.h in Headers */,
 				A60210B41D488A2F00211137 /* UMHTTPServer.h in Headers */,
-				A60210B51D488A2F00211137 /* UMHTTPServerAuthorizeResult.h in Headers */,
+				A60210B51D488A2F00211137 /* UMHTTPServerAuthoriseResult.h in Headers */,
 				A60210B71D488A2F00211137 /* UMTimer.h in Headers */,
 				A60210BB1D488A2F00211137 /* UMRedisCommand.h in Headers */,
 				A60210BE1D488A2F00211137 /* NSString+HierarchicalDescription.h in Headers */,
@@ -3549,7 +3549,7 @@
 				A60212371D488A3D00211137 /* UMHTTPRequest.h in Headers */,
 				A60212381D488A3D00211137 /* UMSleeper.h in Headers */,
 				A602123A1D488A3D00211137 /* UMHTTPServer.h in Headers */,
-				A602123B1D488A3D00211137 /* UMHTTPServerAuthorizeResult.h in Headers */,
+				A602123B1D488A3D00211137 /* UMHTTPServerAuthoriseResult.h in Headers */,
 				A602123D1D488A3D00211137 /* UMTimer.h in Headers */,
 				A60212411D488A3D00211137 /* UMRedisCommand.h in Headers */,
 				A60212441D488A3D00211137 /* NSString+HierarchicalDescription.h in Headers */,
@@ -3714,7 +3714,7 @@
 				A6CEB96922BA514200B2BD9D /* UMNamedList.h in Headers */,
 				A60C4D451EF7FE59007C203A /* UMSleeper.h in Headers */,
 				A60C4D471EF7FE59007C203A /* UMHTTPServer.h in Headers */,
-				A60C4D481EF7FE59007C203A /* UMHTTPServerAuthorizeResult.h in Headers */,
+				A60C4D481EF7FE59007C203A /* UMHTTPServerAuthoriseResult.h in Headers */,
 				A60C4D4A1EF7FE59007C203A /* UMTimer.h in Headers */,
 				A60C4D4E1EF7FE59007C203A /* UMRedisCommand.h in Headers */,
 				A60C4D511EF7FE59007C203A /* NSString+HierarchicalDescription.h in Headers */,
@@ -3947,7 +3947,7 @@
 				A6020FBE1D4876E500211137 /* UMFileTrackingMacros.h in Headers */,
 				A6BEA70C1EF950BD007C203A /* UMHTTPClient.h in Headers */,
 				A6020FBD1D4876E500211137 /* UMFileTrackingInfo.h in Headers */,
-				A60C2DA41A3F213F0090FC94 /* UMHTTPServerAuthorizeResult.h in Headers */,
+				A60C2DA41A3F213F0090FC94 /* UMHTTPServerAuthoriseResult.h in Headers */,
 				A6020FB11D4876E500211137 /* NSNumber+HierarchicalDescription.h in Headers */,
 				A60C2D9E1A3F213F0090FC94 /* UMHTTPPageHandler.h in Headers */,
 				A60C2DC31A3F21450090FC94 /* UniversalLayers.h in Headers */,
@@ -4040,7 +4040,7 @@
 				A6E1DD4124063158001FB7FF /* UMHTTPRequest.h in Headers */,
 				A6E1DD4224063158001FB7FF /* UMSleeper.h in Headers */,
 				A6E1DD4324063158001FB7FF /* UMHTTPServer.h in Headers */,
-				A6E1DD4424063158001FB7FF /* UMHTTPServerAuthorizeResult.h in Headers */,
+				A6E1DD4424063158001FB7FF /* UMHTTPServerAuthoriseResult.h in Headers */,
 				A6E1DD4524063158001FB7FF /* UMTimer.h in Headers */,
 				A6E1DD4624063158001FB7FF /* UMRedisCommand.h in Headers */,
 				A6E1DD4724063158001FB7FF /* NSString+HierarchicalDescription.h in Headers */,
@@ -5659,14 +5659,12 @@
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-ios-info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 					"$(PROJECT_DIR)/libs",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5706,14 +5704,12 @@
 				);
 				INFOPLIST_FILE = "SupportingFiles/ulib-ios-info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 					"$(PROJECT_DIR)/libs",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5756,7 +5752,6 @@
 					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1g/lib",
 					"$(PROJECT_DIR)/libs",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5764,7 +5759,6 @@
 				SDKROOT = appletvos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
-				TVOS_DEPLOYMENT_TARGET = 16.1;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -5797,7 +5791,6 @@
 					"$(PROJECT_DIR)/libs/tvos/openssl-1.1.1g/lib",
 					"$(PROJECT_DIR)/libs",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5805,7 +5798,6 @@
 				SDKROOT = appletvos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
-				TVOS_DEPLOYMENT_TARGET = 16.1;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -5830,13 +5822,11 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",
 					/usr/local/lib,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5871,13 +5861,11 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",
 					/usr/local/lib,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -5915,7 +5903,6 @@
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 					"$(PROJECT_DIR)/libs",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5947,7 +5934,6 @@
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1p-binary/usr/local/lib",
 					"$(PROJECT_DIR)/libs",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -5983,7 +5969,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				TVOS_DEPLOYMENT_TARGET = 16.1;
 			};
 			name = Debug;
 		};
@@ -6018,7 +6003,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				TVOS_DEPLOYMENT_TARGET = 16.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -6043,7 +6027,6 @@
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
@@ -6081,7 +6064,6 @@
 					"$(inherited)",
 				);
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
@@ -6359,14 +6341,12 @@
 				);
 				INFOPLIST_FILE = "ulibios copy2-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 					"$(PROJECT_DIR)/libs",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -6375,9 +6355,8 @@
 				SDKROOT = watchos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "watchsimulator watchos";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 4;
 				USER_HEADER_SEARCH_PATHS = "";
-				WATCHOS_DEPLOYMENT_TARGET = 9.1;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -6409,14 +6388,12 @@
 				);
 				INFOPLIST_FILE = "ulibios copy2-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/libs/ios/openssl-1.1.1g/lib",
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs/osx/openssl-1.1.1g-binary/usr/local/lib",
 					"$(PROJECT_DIR)/libs",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 1.14.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = me.fink.ulib;
@@ -6425,9 +6402,8 @@
 				SDKROOT = watchos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "watchsimulator watchos";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 4;
 				USER_HEADER_SEARCH_PATHS = "";
-				WATCHOS_DEPLOYMENT_TARGET = 9.1;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;

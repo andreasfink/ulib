@@ -421,8 +421,8 @@
 
         if(req.authenticationStatus == UMHTTP_AUTHENTICATION_STATUS_FAILED)
         {
-            [req setNotAuthorizedForRealm:realm];
-            req.responseCode = HTTP_RESPONSE_CODE_UNAUTHORIZED;
+            [req setNotAuthorisedForRealm:realm];
+            req.responseCode = HTTP_RESPONSE_CODE_UNAUTHORISED;
             [req setResponseHtmlString:@"Authentication failed"];
             req.awaitingCompletion = NO;
         }

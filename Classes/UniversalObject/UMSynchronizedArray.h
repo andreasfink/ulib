@@ -44,8 +44,6 @@
 - (void)addPrintableString:(NSString *)s;
 - (void)removeObject:(id)obj;
 - (id)removeFirst;
-
-
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx;
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
 - (NSMutableArray *)mutableCopy;

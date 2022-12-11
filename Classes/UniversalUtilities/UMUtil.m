@@ -606,7 +606,11 @@ static NSArray *        _machineCPUIDs = NULL;
         found = YES;
     #elif TARGET_OS_OSX
         CFStringRef cfSerialNumber = NULL;
-        io_service_t platformExpert = IOServiceGetMatchingService(   kIOMasterPortDefault,
+
+    
+    
+        io_service_t platformExpert = IOServiceGetMatchingService(  kIOMainPortDefault,
+                                                                  /* kIOMasterPortDefault*/
                                                                   IOServiceMatching("IOPlatformExpertDevice")
                                                                   );
         if (platformExpert)

@@ -1231,7 +1231,6 @@ static int SSL_smart_shutdown(SSL *ssl)
             _blockingMode = SocketBlockingMode_isBlocking;
         }
     }
-    UMMUTEX_UNLOCK(_controlLock);
     return returnValue;
 }
 
@@ -2966,6 +2965,29 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 #endif
 }
 
+- (UMSocketError)setPathMtuDiscovery:(BOOL)enable
+{
+#ifdef IP_MTU_DISCOVER
+    int i;
+    if(enable)
+    {
+    	i = IP_PMTUDISC_DO;
+    }
+    else
+    {
+    	i = IP_PMTUDISC_DONT;
+    }
+    int err = setsockopt(_sock, IPPROTO_IP, IP_MTU_DISCOVER, &i, sizeof (i));
+
+    if(err !=0)
+    {
+        return [UMSocket umerrFromErrno:errno];
+    }
+    return UMSocketError_no_error;
+#else
+    return UMSocketError_not_supported_operation;
+#endif
+}
 
 
 -(UMSocketError) setReuseAddr

@@ -18,50 +18,50 @@
 	self = [super init];
 	if(self)
 	{
-		_lock = [[NSLock alloc]init];
+		_entryLock = [[NSLock alloc]init];
 	}
 	return self;
 }
 
 - (void)increaseAllocCounter
 {
-	NSLOCK_LOCK(_lock);
+	NSLOCK_LOCK(_entryLock);
 	_allocCounter++;
 	_inUseCounter++;
-	NSLOCK_UNLOCK(_lock);
+	NSLOCK_UNLOCK(_entryLock);
 }
 
 - (void)decreaseAllocCounter
 {
-	NSLOCK_LOCK(_lock);
+	NSLOCK_LOCK(_entryLock);
 	_allocCounter--;
 	_inUseCounter--;
-	NSLOCK_UNLOCK(_lock);
+	NSLOCK_UNLOCK(_entryLock);
 }
 
 - (void)increaseDeallocCounter
 {
-	NSLOCK_LOCK(_lock);
+	NSLOCK_LOCK(_entryLock);
 	_deallocCounter++;
 	_inUseCounter--;
-	NSLOCK_UNLOCK(_lock);
+	NSLOCK_UNLOCK(_entryLock);
 }
 
 - (void)decreaseDeallocCounter
 {
-	NSLOCK_LOCK(_lock);
+	NSLOCK_LOCK(_entryLock);
 	_deallocCounter--;
 	_inUseCounter++;
-	NSLOCK_UNLOCK(_lock);
+	NSLOCK_UNLOCK(_entryLock);
 }
 
 - (long long)allocCounter
 {
 	long long l;
 
-	NSLOCK_LOCK(_lock);
+	NSLOCK_LOCK(_entryLock);
 	l = _allocCounter;
-	NSLOCK_UNLOCK(_lock);
+	NSLOCK_UNLOCK(_entryLock);
 	return l;
 }
 
@@ -69,9 +69,9 @@
 {
 	long long l;
 
-	NSLOCK_LOCK(_lock);
+	NSLOCK_LOCK(_entryLock);
 	l = _deallocCounter;
-	NSLOCK_UNLOCK(_lock);
+	NSLOCK_UNLOCK(_entryLock);
 	return l;
 }
 
@@ -79,9 +79,9 @@
 {
 	long long l;
 
-	NSLOCK_LOCK(_lock);
+	NSLOCK_LOCK(_entryLock);
 	l = _inUseCounter;
-	NSLOCK_UNLOCK(_lock);
+	NSLOCK_UNLOCK(_entryLock);
 	return l;
 }
 
@@ -92,7 +92,7 @@
 
 - (UMObjectStatisticEntry *)copyWithZone:(NSZone *)zone
 {
-	NSLOCK_LOCK(_lock);
+	NSLOCK_LOCK(_entryLock);
 
 	UMObjectStatisticEntry *clone = [[UMObjectStatisticEntry allocWithZone:zone]init];
 	clone->_allocCounter = _allocCounter;
@@ -100,7 +100,7 @@
 	clone->_inUseCounter = _inUseCounter;
 	clone->_name = _name;
 
-	NSLOCK_UNLOCK(_lock);
+	NSLOCK_UNLOCK(_entryLock);
 	return clone;
 }
 @end

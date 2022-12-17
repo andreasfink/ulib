@@ -17,14 +17,14 @@
     NSString                        *_path;
     BOOL                            _dirty;
     UMSynchronizedSortedDictionary  *_namedlistEntries;
-    UMMutex                         *_lock;
+    UMMutex                         *_namedListLock;
 }
 
 
 @property(readwrite,strong,atomic)  NSString            *name;
 @property(readwrite,strong,atomic)  NSString            *path;
 @property(readwrite,assign,atomic)  BOOL                dirty;
-@property(readwrite,strong,atomic)  UMMutex             *lock;
+@property(readwrite,strong,atomic)  UMMutex             *namedListLock;
 
 
 - (UMNamedList *)initWithDirectory:(NSString *)dir name:(NSString *)name;

@@ -57,7 +57,6 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
             pthread_mutexattr_init(&_mutexAttr);
             pthread_mutexattr_settype(&_mutexAttr, PTHREAD_MUTEX_RECURSIVE);
             pthread_mutex_init(&_mutexLock, &_mutexAttr);
-
             if(_savedInObjectStat)
             {
                 UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
@@ -141,7 +140,10 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
         pthread_mutex_lock(&_mutexLock);
         _lockDepth++;
-
+        if(_lockDepth>0)
+        {
+            _isLocked=YES;
+        }
         if(global_ummutex_stat)
         {
             pthread_mutex_lock(global_ummutex_stat_mutex);
@@ -173,6 +175,10 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
         }
         _lockDepth--;
         pthread_mutex_unlock(&_mutexLock);
+        if(_lockDepth <=0)
+        {
+            _isLocked=NO;
+        }
     }
 }
 
@@ -247,7 +253,7 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 {
     NSMutableString *s = [[NSMutableString alloc]init];
     [s appendString:[super description]];
-    if(_lockedInFunction != NULL)
+    if(_isLocked)
     {
         [s appendFormat: @" locked by %s (%s:%ld)", _lockedInFunction,_lockedInFile,_lockedAtLine];
     }
@@ -258,7 +264,6 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
     if(_tryingToLockInFunction != NULL)
     {
         [s appendFormat: @" awaited by %s (%s:%ld)",_tryingToLockInFunction,_tryingToLockInFile,_tryingToLockAtLine];
-
     }
     return s;
 }

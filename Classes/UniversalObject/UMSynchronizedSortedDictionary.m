@@ -53,7 +53,7 @@
     {
         return;
     }
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_dictionaryLock);
     if (_underlyingDictionary[key] == NULL)
     {
         if(anObject)
@@ -69,7 +69,7 @@
             [super setObject:anObject forKeyedSubscript:key];
         }
     }
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_dictionaryLock);
 }
 
 - (id)objectForKeyedSubscript:(id)key
@@ -78,40 +78,40 @@
     {
         return NULL;
     }
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_dictionaryLock);
     id r = [_underlyingDictionary objectForKey:key];
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_dictionaryLock);
     return r;
 }
 
 - (id)objectAtIndex:(NSUInteger)index
 {
     id r = NULL;
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_dictionaryLock);
     id key = _sortIndex[index];
     if(key)
     {
         r = [_underlyingDictionary objectForKey:key];
     }
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_dictionaryLock);
     return r;
 }
 
 - (id)keyAtIndex:(NSUInteger)index
 {
     id key = NULL;
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_dictionaryLock);
     key = _sortIndex[index];
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_dictionaryLock);
     return key;
 }
 
 
 - (NSArray *)allKeys
 {
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_dictionaryLock);
     NSArray *r = [_sortIndex copy];
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_dictionaryLock);
     return r;
 }
 
@@ -121,10 +121,10 @@
     {
         return;
     }
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_dictionaryLock);
     [_underlyingDictionary removeObjectForKey:aKey];
     [_sortIndex removeObject:aKey];
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_dictionaryLock);
 }
 
 
@@ -157,7 +157,7 @@
 {
     UMJsonWriter *writer = [[UMJsonWriter alloc] init];
     writer.humanReadable = YES;
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_dictionaryLock);
     NSString *json=NULL;
     @try
     {
@@ -171,7 +171,7 @@
     }
     @finally
     {
-        UMMUTEX_UNLOCK(_lock);
+        UMMUTEX_UNLOCK(_dictionaryLock);
     }
     return json;
 }
@@ -180,7 +180,7 @@
 {
     UMJsonWriter *writer = [[UMJsonWriter alloc] init];
     writer.humanReadable = NO;
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_dictionaryLock);
     NSString *json=NULL;
     @try
     {
@@ -192,7 +192,7 @@
     }
     @finally
     {
-        UMMUTEX_UNLOCK(_lock);
+        UMMUTEX_UNLOCK(_dictionaryLock);
     }
     return json;
 }
@@ -210,9 +210,9 @@
 								  objects:(id __unsafe_unretained _Nullable [_Nonnull])stackbuf
 									count:(NSUInteger)len
 {
-	UMMUTEX_LOCK(_lock);
+	UMMUTEX_LOCK(_dictionaryLock);
 	NSUInteger iu = [_sortIndex countByEnumeratingWithState:state objects:stackbuf count:len];
-	UMMUTEX_UNLOCK(_lock);
+	UMMUTEX_UNLOCK(_dictionaryLock);
 	return iu;
 }
 

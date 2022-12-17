@@ -26,7 +26,7 @@
         _dirty = YES;
         _entries = [[UMSynchronizedSortedDictionary alloc]init];
         _main_entry = [[UMStatisticEntry alloc]init];
-        _lock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"stat<%@>",name]];
+        _statisticLock = [[UMMutex alloc]initWithName:[NSString stringWithFormat:@"stat<%@>",name]];
 
     }
     return self;
@@ -34,19 +34,19 @@
 
 - (void)flushIfDirty
 {
-    [_lock lock];
+    [_statisticLock lock];
 
     if(_dirty)
     {
         [self flush];
     }
-    [_lock unlock];
+    [_statisticLock unlock];
 }
 
 
 - (void)flush
 {
-    [_lock lock];
+    [_statisticLock lock];
 
     UMSynchronizedSortedDictionary *dict = [self objectValue:YES];
     NSString *jsonString = [dict jsonString];
@@ -59,7 +59,7 @@
         NSLog(@"Error while writing statistics %@ to %@: %@",_name,_path,err);
     }
     _dirty = NO;
-    [_lock unlock];
+    [_statisticLock unlock];
 }
 
 - (UMSynchronizedSortedDictionary *)objectValue:(BOOL)includeSubs

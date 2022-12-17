@@ -14,7 +14,7 @@
     self = [super init];
     if(self)
     {
-        _lock = [[UMMutex alloc]initWithName:@"UMPrometheusMetricLock"];
+        _prometheusLock = [[UMMutex alloc]initWithName:@"UMPrometheusMetricLock"];
         _value = @(0);
     }
     return self;
@@ -51,7 +51,7 @@
     self = [super init];
     if(self)
     {
-        _lock = [[UMMutex alloc]initWithName:@"UMPrometheusMetricLock"];
+        _prometheusLock = [[UMMutex alloc]initWithName:@"UMPrometheusMetricLock"];
         _value = @(0);
         _metricName = name;
         _subname1 = sub1;
@@ -66,7 +66,7 @@
 
 - (void)update
 {
-    [_lock lock];
+    [_prometheusLock lock];
     if(_delegate)
     {
         [_delegate updatePrometheusData:self];
@@ -75,7 +75,7 @@
     {
         [self updatePrometheusData:self];
     }
-    [_lock unlock];
+    [_prometheusLock unlock];
 }
 
 
@@ -155,20 +155,20 @@
 
 - (NSString *)prometheusOutputData
 {
-    [_lock lock];
+    [_prometheusLock lock];
     [self update];
     NSString *s = [NSString stringWithFormat:@"%@ %@\n",self.key,self.value];
-    [_lock unlock];
+    [_prometheusLock unlock];
     return s;
 }
 
 - (void)increaseBy:(NSInteger)inc
 {
-    [_lock lock];
+    [_prometheusLock lock];
     NSInteger i = [_value integerValue];
     i = i + inc;
     _value = @(i);
-    [_lock unlock];
+    [_prometheusLock unlock];
 }
 
 - (void)setSubname1:(NSString *)a value:(NSString *)b

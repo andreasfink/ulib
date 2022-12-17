@@ -145,10 +145,10 @@ static UMTimerBackgrounder *_sharedTimerBackgrounder = NULL;
             }
             else if(sleepTime > 1000LL) /* sleeping less than 1ms is an overkill. So this would turn into a busy loop for 1ms */
             {
-                int signal = [_workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ];
-                if(signal & UMSleeper_ShutdownOrderSignal)
+                UMSleeper_Signal signal = [_workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ];
+                if((signal & UMSleeper_ShutdownOrderSignal) || (signal == UMSleeper_Error))
                 {
-                    mustQuit = YES;
+                    mustQuit=YES;
                 }
             }
         }

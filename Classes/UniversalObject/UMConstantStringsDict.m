@@ -29,7 +29,7 @@ static UMConstantStringsDict *global_constant_strings = NULL;
 	{
         for(int i=0;i<MAX_CSTRING_DICTS;i++)
         {
-            _lock[i] = [[UMMutex alloc]initWithName:@"UMConstantStringsDict" saveInObjectStat:NO];
+            _olock[i] = [[UMMutex alloc]initWithName:@"UMConstantStringsDict" saveInObjectStat:NO];
             _dict[i] = [[NSMutableDictionary alloc]init];
         }
 	}
@@ -50,16 +50,16 @@ static UMConstantStringsDict *global_constant_strings = NULL;
         sum += cptr[i++];
     }
     int index = sum % MAX_CSTRING_DICTS;
-    [_lock[index] lock];
+    [_olock[index] lock];
     NSData *d = _dict[index][str];
     if(d)
     {
-        [_lock[index] unlock];
+        [_olock[index] unlock];
         return     d.bytes;
     }
     d = [NSData dataWithBytes:cptr length:len+1]; /* We  include the null byte */
     _dict[index][str] = d;
-	[_lock[index] unlock];
+	[_olock[index] unlock];
 	return 	d.bytes;
 }
 

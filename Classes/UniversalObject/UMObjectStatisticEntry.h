@@ -11,7 +11,7 @@
 
 @interface UMObjectStatisticEntry : NSObject
 {
-	NSLock      *_lock;
+	NSLock      *_entryLock;
 	long long   _allocCounter;
 	long long   _deallocCounter;
 	long long   _inUseCounter;

@@ -57,8 +57,6 @@
     {
         UMAssert(_startStopLock,@"_startStopLock is NULL");
         UMAssert(_control_sleeper,@"_control_sleeper is NULL");
-
-
         UMMUTEX_LOCK(_startStopLock);
         @try
         {
@@ -79,6 +77,10 @@
                     {
                         return;
                     }
+                    if (s == UMSleeper_Error)
+                    {
+                        break;
+                    }
                     i++;
                 }
             }
@@ -88,6 +90,11 @@
             UMMUTEX_UNLOCK(_startStopLock);
         }
     }
+}
+
+- (void)shutdownBackgroundTaskFromWithin
+{
+    self.runningStatus = UMBackgrounder_shuttingDown;
 }
 
 - (void)shutdownBackgroundTask
@@ -108,12 +115,16 @@
             int i=0;
           
             [_workSleeper wakeUp:UMSleeper_ShutdownOrderSignal];
-            while((self.runningStatus == UMBackgrounder_shuttingDown) && (i<= 100))
+            while((self.runningStatus == UMBackgrounder_shuttingDown) && (i<= 200))
             {
                 i++;
-                [_control_sleeper sleep:UMSLEEPER_DEFAULT_SLEEP_TIME wakeOn:UMSleeper_ShutdownCompletedSignal]; /* 500ms */
+                UMSleeper_Signal sig =  [_control_sleeper sleep:UMSLEEPER_DEFAULT_SLEEP_TIME wakeOn:UMSleeper_ShutdownCompletedSignal]; /* 500ms */
+                if (sig == UMSleeper_Error)
+                {
+                    break;
+                }
             }
-            if((self.runningStatus == UMBackgrounder_shuttingDown) && (i> 100))
+            if((self.runningStatus == UMBackgrounder_shuttingDown) && (i> 200))
             {
                 /* it didnt start successfully in 10 seconds. Something is VERY ODD */
                 NSLog(@"shutdownBackgroundTask: failed. Background task did not shut down within 10 seconds");
@@ -131,7 +142,6 @@
 {
     @autoreleasepool
     {
-        BOOL mustQuit = NO;
 
         if(self.name)
         {
@@ -154,7 +164,7 @@
             NSLog(@"%@: started up successfully",self.name);
         }
         [self backgroundInit];
-
+        BOOL mustQuit=NO;
         BOOL doSleep = NO;
         while((self.runningStatus == UMBackgrounder_running) && (mustQuit==NO))
         {
@@ -169,6 +179,11 @@
                         sleepTime= UMSLEEPER_DEFAULT_SLEEP_TIME*100;
                     }
                     UMSleeper_Signal signal = [_workSleeper sleep:sleepTime wakeOn:(UMSleeper_HasWorkSignal | UMSleeper_ShutdownOrderSignal) ]; /* 100ms */
+                    if (signal == UMSleeper_Error)
+                    {
+                        mustQuit=YES;
+                        break;
+                    }
                     if(_enableLogging)
                     {
                         NSLog(@"%@ woke up with signal %d",self.name,signal);
@@ -182,7 +197,7 @@
                         mustQuit = YES;
                     }
                 }
-                if(!mustQuit)
+                if((!mustQuit) && (self.runningStatus == UMBackgrounder_running))
                 {
                     int status;
                     @autoreleasepool

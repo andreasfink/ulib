@@ -15,7 +15,7 @@
 {
 	NSMutableArray	*_logDestinations;
 	UMLogConsole	*_console;
-    UMMutex         *_lock;
+    UMMutex         *_logHandlerLock;
     UMMutex         *_logDestinationsLock;
 }
 

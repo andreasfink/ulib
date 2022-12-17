@@ -15,7 +15,7 @@
 @interface UMObjectStatistic : NSObject
 {
 	NSMutableDictionary 		*_dict[UMOBJECT_STATISTIC_SPREAD];
-	UMMutex						*_lock[UMOBJECT_STATISTIC_SPREAD];
+	UMMutex						*_olock[UMOBJECT_STATISTIC_SPREAD];
 	long long					_allocCount;
 	long long					_dealloc;
 }

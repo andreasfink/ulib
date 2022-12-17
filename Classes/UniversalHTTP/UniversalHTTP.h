@@ -31,7 +31,7 @@ typedef enum
 #import "NSDictionary+UMHTTP.h"
 #import "NSData+UMHTTP.h"
 
-#import "UMHTTPServerAuthorizeResult.h"
+#import "UMHTTPServerAuthoriseResult.h"
 #import "NSMutableString+UMHTTP.h"
 #import "NSMutableData+UMHTTP.h"
 

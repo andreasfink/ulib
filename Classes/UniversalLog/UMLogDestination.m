@@ -16,12 +16,12 @@
 
 - (void)lock
 {
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_logDestinationLock);
 }
 
 - (void)unlock
 {
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_logDestinationLock);
 }
 
 - (UMLogDestination *) init
@@ -30,7 +30,7 @@
     if(self)
     {
         level = UMLOG_DEBUG;
-        _lock =[[UMMutex alloc]initWithName:@"UMLogDestination-lock"];
+        _logDestinationLock =[[UMMutex alloc]initWithName:@"UMLogDestination-lock"];
         debugSections =  [[NSMutableArray alloc] init];
 	}
     return self;

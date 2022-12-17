@@ -34,7 +34,7 @@ var searchData=
   ['umhttprequest_5ftimeoutprotocol_2dp_2543',['UMHTTPRequest_TimeoutProtocol-p',['../protocol_u_m_h_t_t_p_request___timeout_protocol-p.html',1,'']]],
   ['umhttpserver_2544',['UMHTTPServer',['../interface_u_m_h_t_t_p_server.html',1,'']]],
   ['umhttpserverauthenticaterequestdelegate_2dp_2545',['UMHTTPServerAuthenticateRequestDelegate-p',['../protocol_u_m_h_t_t_p_server_authenticate_request_delegate-p.html',1,'']]],
-  ['umhttpserverauthorizeconnectiondelegate_2dp_2546',['UMHTTPServerAuthorizeConnectionDelegate-p',['../protocol_u_m_h_t_t_p_server_authorize_connection_delegate-p.html',1,'']]],
+  ['umhttpserverauthoriseconnectiondelegate_2dp_2546',['UMHTTPServerAuthoriseConnectionDelegate-p',['../protocol_u_m_h_t_t_p_server_authorise_connection_delegate-p.html',1,'']]],
   ['umhttpserverhttpconnectdelegate_2dp_2547',['UMHTTPServerHttpConnectDelegate-p',['../protocol_u_m_h_t_t_p_server_http_connect_delegate-p.html',1,'']]],
   ['umhttpserverhttpdeletedelegate_2dp_2548',['UMHTTPServerHttpDeleteDelegate-p',['../protocol_u_m_h_t_t_p_server_http_delete_delegate-p.html',1,'']]],
   ['umhttpserverhttpgetdelegate_2dp_2549',['UMHTTPServerHttpGetDelegate-p',['../protocol_u_m_h_t_t_p_server_http_get_delegate-p.html',1,'']]],

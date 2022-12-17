@@ -27,7 +27,7 @@ typedef double um_statistic_counter_type;
 @interface UMStatisticEntry : UMObject
 {
     NSString *_name;
-    UMMutex *_lock;
+    UMMutex *_statisticEntryLock;
 
     long long   _currentSecondsIndex;
     long long   _secondsIndex;

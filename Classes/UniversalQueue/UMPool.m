@@ -17,7 +17,7 @@
     {
         for(int i=0;i<UMPOOL_QUEUES_COUNT;i++)
         {
-            _lock[i] = [[UMMutex alloc] initWithName:@"umpool"];
+            _poolLock[i] = [[UMMutex alloc] initWithName:@"umpool"];
             _queues[i] = [[NSMutableArray alloc]init];
             _rotary = 0;
         }
@@ -38,19 +38,19 @@
         {
             int i = index % UMPOOL_QUEUES_COUNT;
 
-           if(0==[_lock[i] tryLock])
+           if(0==[_poolLock[i] tryLock])
            {
                [_queues[i] addObject:obj];
-               [_lock[i] unlock];
+               [_poolLock[i] unlock];
                return;
            }
         }
         /* we only get here if all locks are established */
         /* now we have no other choice than to do a waitlock */
         int i = ++index % UMPOOL_QUEUES_COUNT;
-        [_lock[i] lock];
+        [_poolLock[i] lock];
         [_queues[i] addObject:obj];
-        [_lock[i] unlock];
+        [_poolLock[i] unlock];
     }
 }
 
@@ -63,9 +63,9 @@
         for(int index=start;index<end;index++)
         {
             int i = index % UMPOOL_QUEUES_COUNT;
-            [_lock[i] lock];
+            [_poolLock[i] lock];
             [_queues[i] removeObject:obj];
-            [_lock[i] unlock];
+            [_poolLock[i] unlock];
         }
         _rotary = ++_rotary % UMPOOL_QUEUES_COUNT;
     }
@@ -96,13 +96,13 @@
     for(int index=start;index<end;index++)
     {
         int i = index % UMPOOL_QUEUES_COUNT;
-        [_lock[i] lock];
+        [_poolLock[i] lock];
         if ([_queues[i] count]>0)
         {
             obj = [_queues[i] objectAtIndex:0];
             [_queues[i] removeObjectAtIndex:0];
         }
-        [_lock[i] unlock];
+        [_poolLock[i] unlock];
         if(obj)
         {
             break;
@@ -121,9 +121,9 @@
     for(int index=start;index<end;index++)
     {
         int i = index % UMPOOL_QUEUES_COUNT;
-        [_lock[i] lock];
+        [_poolLock[i] lock];
         cnt= cnt + [_queues[i] count];
-        [_lock[i] unlock];
+        [_poolLock[i] unlock];
     }
     _rotary = ++_rotary % UMPOOL_QUEUES_COUNT;
     return cnt;

@@ -118,7 +118,7 @@ Download the sourcecode of gnustep and dependencies
 
     mkdir gnustep
     cd gnustep
-    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
+    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.17.tar.gz
     git clone https://github.com/apple/swift-corelibs-libdispatch
     git clone https://github.com/gnustep/scripts
     git clone https://github.com/gnustep/make
@@ -138,9 +138,9 @@ Build  libiconv
 
 #   Note libiconv does not build if the compiler is set to clang or the linker to lld.
 
-    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
-    tar -xvzf libiconv-1.16.tar.gz
-    cd libiconv-1.16
+    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.17.tar.gz
+    tar -xvzf libiconv-1.17.tar.gz
+    cd libiconv-1.17
     CC=gcc LDFLAGS="-fuse-ld=gold" CXX="gcc++" CFLAGS="-fPIC" CPPFLAGS="-fPIC" ./configure --enable-static --enable-dynamic
     make
     make install
@@ -151,8 +151,8 @@ Build  libiconv
 3. Setting some defaults
 ------------------------------------------------
 
-export CC="/usr/bin/clang-9"
-export CXX="/usr/bin/clang++-9"
+export CC="/usr/bin/clang"
+export CXX="/usr/bin/clang++"
 export PREFIX="/usr/local"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"

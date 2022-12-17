@@ -26,7 +26,7 @@ typedef enum UMFileTrackingInfo_type
     NSString *locationFile;
     long    locationLine;
     NSString *locationFunction;
-    UMMutex *_lock;
+    UMMutex *_fileTrackingInfoLock;
 }
 
 - (NSString *)key;

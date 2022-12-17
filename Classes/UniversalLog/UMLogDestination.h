@@ -12,7 +12,7 @@
 @interface UMLogDestination : UMObject
 {
 	UMLogLevel		level;
-	UMMutex			*_lock;
+	UMMutex			*_logDestinationLock;
 	NSMutableArray	*debugSections;
     NSMutableArray  *onlyLogSubsections;
 }

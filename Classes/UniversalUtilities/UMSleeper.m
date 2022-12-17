@@ -47,7 +47,7 @@ static void socket_set_blocking(int fd, int blocking)
         _ifile = file;
         _iline = line;
         _ifunction = function;
-        _prepareLock = [[UMMutex alloc]initWithName:@"sleeper-mutex"];
+        _lock = [[UMMutex alloc]initWithName:@"sleeper-mutex"];
     }
 //#define SLEEEPER_INIT_DEBUG 1
 #ifdef SLEEEPER_INIT_DEBUG
@@ -68,10 +68,10 @@ static void socket_set_blocking(int fd, int blocking)
     {
         return;
     }
-    [_prepareLock lock];
+    UMMUTEX_LOCK(_lock);
     if(self.isPrepared==YES)
     {
-        [_prepareLock unlock];
+        UMMUTEX_UNLOCK(_lock);
         return;
     }
     int pipefds[2];
@@ -110,7 +110,7 @@ static void socket_set_blocking(int fd, int blocking)
     socket_set_blocking(_rxpipe, 0);
     socket_set_blocking(_txpipe, 0);
     _isPrepared = YES;
-    [_prepareLock unlock];
+    UMMUTEX_UNLOCK(_lock);
 }
 
 - (void) dealloc
@@ -119,6 +119,7 @@ static void socket_set_blocking(int fd, int blocking)
     {
         return;
     }
+    UMMUTEX_LOCK(_lock);
     if(_rxpipe >=0)
     {
         TRACK_FILE_CLOSE(_rxpipe);
@@ -132,6 +133,7 @@ static void socket_set_blocking(int fd, int blocking)
     _rxpipe = -1;
     _txpipe = -1;
     _isPrepared = NO;
+    UMMUTEX_UNLOCK(_lock);
 }
 
 
@@ -157,7 +159,7 @@ static void flushpipe(int fd)
 #define SLICE_TIME (1000LL*1000LL*10LL*60LL)   /* max 10 minutes for testing */
 
 - (UMSleeper_Signal) sleep:(UMMicroSec) microseconds
-       wakeOn:(UMSleeper_Signal)sig;	/* returns signal value if signal was received, 0 on timer epxiry, -1 on error  */
+                    wakeOn:(UMSleeper_Signal)sig	/* returns signal value if signal was received, 0 on timer epxiry, -1 on error  */
 {
     struct pollfd pollfd[2];
     int pollresult;
@@ -181,7 +183,7 @@ static void flushpipe(int fd)
     [self prepare];
     if(_rxpipe < 0)
     {
-        return -1;
+        return UMSleeper_Error;
     }
 
     pollresult = 0;
@@ -214,6 +216,7 @@ static void flushpipe(int fd)
             UMSleeper_Signal signalToRead=0xFE;
             ssize_t bytes;
             uint8_t buffer[1];
+            
             bytes = read(self.rxpipe, &buffer, 1);
             if(bytes == 1)
             {

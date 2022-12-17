@@ -13,14 +13,14 @@
 #import "UMTestHTTP.h"
 #import "NSMutableString+UMHTTP.h"
 
-@interface UMAuthorizeConnectionDelegate (PRIVATE)
+@interface UMAuthoriseConnectionDelegate (PRIVATE)
 
 - (BOOL)patternList:(NSString *)l matchesIP:(NSString *)ip;
 - (BOOL)pattern:(NSString *)p matchesIP:(NSString *)ip;
 
 @end
 
-@implementation UMAuthorizeConnectionDelegate (PRIVATE)
+@implementation UMAuthoriseConnectionDelegate (PRIVATE)
 
 - (BOOL)pattern:(NSString *)p matchesIP:(NSString *)ip
 {
@@ -84,13 +84,13 @@
 
 @end
 
-@implementation UMAuthorizeConnectionDelegate
+@implementation UMAuthoriseConnectionDelegate
 
 @synthesize serverAllowIP;
 @synthesize serverDenyIP;
 @synthesize subsection;
 
-- (UMAuthorizeConnectionDelegate *)initWithConfigFile:(NSString *)file
+- (UMAuthoriseConnectionDelegate *)initWithConfigFile:(NSString *)file
 {
     self = [super init];
     if(self)
@@ -103,7 +103,7 @@
         
         NSDictionary *grp = [cfg getSingleGroup:@"core"];
         if (!grp)
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"UMAuthorizeConne ctionDelegate. init: configuration file must have group core" userInfo:nil];
+            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"UMAuthoriseConne ctionDelegate. init: configuration file must have group core" userInfo:nil];
         
         self.serverAllowIP = grp[@"server-allow-ip"];
         if (!serverAllowIP)
@@ -118,7 +118,7 @@
 }
 
 
-- (UMHTTPServerAuthorizeResult) httpAuthorizeConnection:(UMSocket *)us
+- (UMHTTPServerAuthoriseResult) httpAuthoriseConnection:(UMSocket *)us
 {
     NSString *ip;
     int type;
@@ -126,21 +126,21 @@
     ip = [us getRemoteAddress];
     ip = [UMSocket deunifyIp:ip type:&type];
     if (!ip)
-        return UMHTTPServerAuthorize_blacklisted;
+        return UMHTTPServerAuthorise_blacklisted;
     
     if ([serverDenyIP length] == 0)
-        return UMHTTPServerAuthorize_successful;
+        return UMHTTPServerAuthorise_successful;
     
     if (serverAllowIP && [self patternList:serverAllowIP matchesIP:ip])
-        return UMHTTPServerAuthorize_successful;
+        return UMHTTPServerAuthorise_successful;
     
     if ([self patternList:serverDenyIP matchesIP:ip])
-        return UMHTTPServerAuthorize_blacklisted;
+        return UMHTTPServerAuthorise_blacklisted;
     
-    return UMHTTPServerAuthorize_blacklisted;
+    return UMHTTPServerAuthorise_blacklisted;
 }
 
-- (void) httpAuthorizeUrl:(UMHTTPRequest *)req
+- (void) httpAuthoriseUrl:(UMHTTPRequest *)req
 {
 
 }

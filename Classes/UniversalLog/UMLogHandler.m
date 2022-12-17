@@ -17,7 +17,7 @@
 - (void)genericInitialisation
 {
     _logDestinationsLock = [[UMMutex alloc]initWithName:@"loghandler-destinations"];
-    _lock = [[UMMutex alloc]initWithName:@"loghandler-lock"];
+    _logHandlerLock = [[UMMutex alloc]initWithName:@"loghandler-lock"];
     _logDestinations = [[NSMutableArray alloc] init];
 }
 

@@ -6,7 +6,7 @@ var searchData=
   ['umhttpauthenticationstatus_4225',['UMHTTPAuthenticationStatus',['../_u_m_h_t_t_p_authentication_status_8h.html#a475dd80fbc3fa2eb9a6a085fab57406c',1,'UMHTTPAuthenticationStatus.h']]],
   ['umhttpconnectionrequestsection_4226',['UMHTTPConnectionRequestSection',['../_u_m_h_t_t_p_connection_8h.html#a44cd85204e98cdc0dbe5ec9cd563456a',1,'UMHTTPConnection.h']]],
   ['umhttpresponsecode_4227',['UMHTTPResponseCode',['../_u_m_h_t_t_p_response_code_8h.html#adb4cc971c110c4d7b8423e7c3656761d',1,'UMHTTPResponseCode.h']]],
-  ['umhttpserverauthorizeresult_4228',['UMHTTPServerAuthorizeResult',['../_u_m_h_t_t_p_server_authorize_result_8h.html#add2b3cab7c2e67c9d76c768e951861df',1,'UMHTTPServerAuthorizeResult.h']]],
+  ['umhttpserverauthoriseresult_4228',['UMHTTPServerAuthoriseResult',['../_u_m_h_t_t_p_server_authorise_result_8h.html#add2b3cab7c2e67c9d76c768e951861df',1,'UMHTTPServerAuthoriseResult.h']]],
   ['umhttpserverstatus_4229',['UMHTTPServerStatus',['../_u_m_h_t_t_p_server_8h.html#ab929394ba418c93743cfc9d47772d478',1,'UMHTTPServer.h']]],
   ['umloglevel_4230',['UMLogLevel',['../_u_m_log_level_8h.html#a705111f16b9eef7a1743ef4604332250',1,'UMLogLevel.h']]],
   ['ummemory_5fheader_4231',['ummemory_header',['../_u_m_memory_header_8h.html#a8a32d0c94943c3c9c965d0e5d3227a62',1,'UMMemoryHeader.h']]],

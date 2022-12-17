@@ -22,7 +22,7 @@
         _comment     = [NSCharacterSet characterSetWithCharactersInString:@"!#"];
         _endOfLine   = [NSCharacterSet characterSetWithCharactersInString:@"\r\n"];
         _digits      = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-        _lock = [[UMMutex alloc]initWithName:@"tokenizer-lock"];
+        _tokenizerLock = [[UMMutex alloc]initWithName:@"tokenizer-lock"];
         [self reset];
     }
     return self;
@@ -96,7 +96,7 @@
 
 - (NSArray *)tokensFromChars:(NSArray *)chars
 {
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_tokenizerLock);
     [self reset];
     NSInteger len = chars.count;
     
@@ -137,7 +137,7 @@
     [self pushLine];
     NSArray *result = _lines;
     _lines = [[NSMutableArray alloc]init];
-   UMMUTEX_UNLOCK(_lock);
+   UMMUTEX_UNLOCK(_tokenizerLock);
     return result;
 }
 

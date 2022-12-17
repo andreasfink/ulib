@@ -80,7 +80,7 @@ var searchData=
   ['asciistringfromnsstring_3a_3029',['asciiStringFromNSString:',['../interface_u_m_constant_strings_dict.html#a19604e45a0089e469b04337e8230f296',1,'UMConstantStringsDict']]],
   ['authenticateit_3a_3030',['authenticateIt:',['../interface_u_m_h_t_t_p_u_r_l_handler.html#afe3eb942c531cacd6f41e42fc55a09c3',1,'UMHTTPURLHandler']]],
   ['authenticationstatusasstring_3031',['authenticationStatusAsString',['../interface_u_m_h_t_t_p_request.html#a7ddf8c000d4249a6cbf0167b31090f2d',1,'UMHTTPRequest']]],
-  ['authorizeconnection_3a_3032',['authorizeConnection:',['../interface_u_m_h_t_t_p_server.html#ae2d8cdf4c9f5922d411aff640f240f89',1,'UMHTTPServer']]],
+  ['authoriseconnection_3a_3032',['authoriseConnection:',['../interface_u_m_h_t_t_p_server.html#ae2d8cdf4c9f5922d411aff640f240f89',1,'UMHTTPServer']]],
   ['autocompletewords_3ausingcontext_3acurrentword_3a_3033',['autocompleteWords:usingContext:currentWord:',['../interface_u_m_syntax_token.html#a067d22f446b51affb54b9de72a5e3e60',1,'UMSyntaxToken']]],
   ['averagevalue_3034',['averageValue',['../interface_u_m_average_delay.html#a998c4d6e0d4c6f391b95a10ab720329c',1,'UMAverageDelay']]]
 ];

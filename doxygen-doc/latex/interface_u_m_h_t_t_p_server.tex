@@ -32,7 +32,7 @@ Inheritance diagram for U\+M\+H\+T\+T\+P\+Server\+:\begin{figure}[H]
 \item 
 (void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aa731bf401981cafaf705ab39c5a61ef7}{main\+Listener}}
 \item 
-(\mbox{\hyperlink{_u_m_h_t_t_p_server_authorize_result_8h_ac158190b8ea33463762e8fca208ec896}{U\+M\+H\+T\+T\+P\+Server\+Authorize\+Result}}) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ae2d8cdf4c9f5922d411aff640f240f89}{authorize\+Connection\+:}}
+(\mbox{\hyperlink{_u_m_h_t_t_p_server_authorise_result_8h_ac158190b8ea33463762e8fca208ec896}{U\+M\+H\+T\+T\+P\+Server\+Authorise\+Result}}) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ae2d8cdf4c9f5922d411aff640f240f89}{authorise\+Connection\+:}}
 \item 
 (void) -\/ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a64d439e957b9f879bd61f1534da1ec05}{stop}}
 \item 
@@ -105,7 +105,7 @@ B\+O\+OL \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a6dc305bdea738fde14e71768
 \item 
 \mbox{\hyperlink{interface_u_m_task_queue}{U\+M\+Task\+Queue}} $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ad5e6f17d7126cf0d7ad5d43b304acae1}{\+\_\+task\+Queue}}
 \item 
-id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorize_connection_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authorize\+Connection\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aa78ec917a3f4ffa3b96150bd860d6de0}{\+\_\+authorize\+Connection\+Delegate}}
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorise_connection_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authorise\+Connection\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aa78ec917a3f4ffa3b96150bd860d6de0}{\+\_\+authorise\+Connection\+Delegate}}
 \item 
 id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authenticate_request_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authenticate\+Request\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a1e62d87a1b22defcad4f51793f238d7e}{\+\_\+authenticate\+Request\+Delegate}}
 \item 
@@ -150,7 +150,7 @@ N\+S\+String $\ast$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aeca2d8f612f9c
 \item 
 B\+O\+OL \mbox{\hyperlink{interface_u_m_h_t_t_p_server_aa7b28de6b2ee7b826668f92334167b39}{enable\+Keepalive}}
 \item 
-id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorize_connection_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authorize\+Connection\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ac07397827ef5d105bfe411a2e1e1d4bc}{authorize\+Connection\+Delegate}}
+id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorise_connection_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authorise\+Connection\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_ac07397827ef5d105bfe411a2e1e1d4bc}{authorise\+Connection\+Delegate}}
 \item 
 id$<$ \mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authenticate_request_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authenticate\+Request\+Delegate}} $>$ \mbox{\hyperlink{interface_u_m_h_t_t_p_server_a733dac28149e647a1dea54af3d7b4f14}{authenticate\+Request\+Delegate}}
 \item 
@@ -202,10 +202,10 @@ to start a webserver, instantiate \mbox{\hyperlink{interface_u_m_h_t_t_p_server}
 {\footnotesize\ttfamily -\/ (void) add\+Page\+Handler\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_h_t_t_p_page_handler}{U\+M\+H\+T\+T\+P\+Page\+Handler}} $\ast$)}]{h }\end{DoxyParamCaption}}
 
 \mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ae2d8cdf4c9f5922d411aff640f240f89}\label{interface_u_m_h_t_t_p_server_ae2d8cdf4c9f5922d411aff640f240f89}} 
-\index{UMHTTPServer@{UMHTTPServer}!authorizeConnection:@{authorizeConnection:}}
-\index{authorizeConnection:@{authorizeConnection:}!UMHTTPServer@{UMHTTPServer}}
-\doxysubsubsection{\texorpdfstring{authorizeConnection:()}{authorizeConnection:()}}
-{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_h_t_t_p_server_authorize_result_8h_ac158190b8ea33463762e8fca208ec896}{U\+M\+H\+T\+T\+P\+Server\+Authorize\+Result}}) authorize\+Connection\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_socket}{U\+M\+Socket}} $\ast$)}]{socket }\end{DoxyParamCaption}}
+\index{UMHTTPServer@{UMHTTPServer}!authoriseConnection:@{authoriseConnection:}}
+\index{authoriseConnection:@{authoriseConnection:}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{authoriseConnection:()}{authoriseConnection:()}}
+{\footnotesize\ttfamily -\/ (\mbox{\hyperlink{_u_m_h_t_t_p_server_authorise_result_8h_ac158190b8ea33463762e8fca208ec896}{U\+M\+H\+T\+T\+P\+Server\+Authorise\+Result}}) authorise\+Connection\+: \begin{DoxyParamCaption}\item[{(\mbox{\hyperlink{interface_u_m_socket}{U\+M\+Socket}} $\ast$)}]{socket }\end{DoxyParamCaption}}
 
 \mbox{\Hypertarget{interface_u_m_h_t_t_p_server_acd454e5aac62b3d3a61142b4ed701ac6}\label{interface_u_m_h_t_t_p_server_acd454e5aac62b3d3a61142b4ed701ac6}} 
 \index{UMHTTPServer@{UMHTTPServer}!connectionDone:@{connectionDone:}}
@@ -363,10 +363,10 @@ Reimplemented in \mbox{\hyperlink{interface_u_m_h_t_t_p_s_server_a4ed2ac2ea30345
 {\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authenticate_request_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authenticate\+Request\+Delegate}}$>$) \+\_\+authenticate\+Request\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
 
 \mbox{\Hypertarget{interface_u_m_h_t_t_p_server_aa78ec917a3f4ffa3b96150bd860d6de0}\label{interface_u_m_h_t_t_p_server_aa78ec917a3f4ffa3b96150bd860d6de0}} 
-\index{UMHTTPServer@{UMHTTPServer}!\_authorizeConnectionDelegate@{\_authorizeConnectionDelegate}}
-\index{\_authorizeConnectionDelegate@{\_authorizeConnectionDelegate}!UMHTTPServer@{UMHTTPServer}}
-\doxysubsubsection{\texorpdfstring{\_authorizeConnectionDelegate}{\_authorizeConnectionDelegate}}
-{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorize_connection_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authorize\+Connection\+Delegate}}$>$) \+\_\+authorize\+Connection\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
+\index{UMHTTPServer@{UMHTTPServer}!\_authoriseConnectionDelegate@{\_authoriseConnectionDelegate}}
+\index{\_authoriseConnectionDelegate@{\_authoriseConnectionDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{\_authoriseConnectionDelegate}{\_authoriseConnectionDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorise_connection_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authorise\+Connection\+Delegate}}$>$) \+\_\+authorise\+Connection\+Delegate\hspace{0.3cm}{\ttfamily [protected]}}
 
 this delegate gets called upon a new incoming connection to verify if the calling IP is allowed to connect. \mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a22d4893ebe8c855ca50e885878f5f31b}\label{interface_u_m_h_t_t_p_server_a22d4893ebe8c855ca50e885878f5f31b}} 
 \index{UMHTTPServer@{UMHTTPServer}!\_certFile@{\_certFile}}
@@ -582,10 +582,10 @@ list of \mbox{\hyperlink{interface_u_m_h_t_t_p_connection}{U\+M\+H\+T\+T\+P\+Con
 {\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authenticate_request_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authenticate\+Request\+Delegate}}$>$) authenticate\+Request\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
 
 \mbox{\Hypertarget{interface_u_m_h_t_t_p_server_ac07397827ef5d105bfe411a2e1e1d4bc}\label{interface_u_m_h_t_t_p_server_ac07397827ef5d105bfe411a2e1e1d4bc}} 
-\index{UMHTTPServer@{UMHTTPServer}!authorizeConnectionDelegate@{authorizeConnectionDelegate}}
-\index{authorizeConnectionDelegate@{authorizeConnectionDelegate}!UMHTTPServer@{UMHTTPServer}}
-\doxysubsubsection{\texorpdfstring{authorizeConnectionDelegate}{authorizeConnectionDelegate}}
-{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorize_connection_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authorize\+Connection\+Delegate}}$>$) authorize\+Connection\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
+\index{UMHTTPServer@{UMHTTPServer}!authoriseConnectionDelegate@{authoriseConnectionDelegate}}
+\index{authoriseConnectionDelegate@{authoriseConnectionDelegate}!UMHTTPServer@{UMHTTPServer}}
+\doxysubsubsection{\texorpdfstring{authoriseConnectionDelegate}{authoriseConnectionDelegate}}
+{\footnotesize\ttfamily -\/ (id$<$\mbox{\hyperlink{protocol_u_m_h_t_t_p_server_authorise_connection_delegate-p}{U\+M\+H\+T\+T\+P\+Server\+Authorise\+Connection\+Delegate}}$>$) authorise\+Connection\+Delegate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [atomic]}, {\ttfamily [strong]}}
 
 \mbox{\Hypertarget{interface_u_m_h_t_t_p_server_a89f8eed825889c37715e163551bc7638}\label{interface_u_m_h_t_t_p_server_a89f8eed825889c37715e163551bc7638}} 
 \index{UMHTTPServer@{UMHTTPServer}!documentRoot@{documentRoot}}

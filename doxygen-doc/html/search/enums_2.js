@@ -6,7 +6,7 @@ var searchData=
   ['umhttpconnectionrequestsection_4250',['UMHTTPConnectionRequestSection',['../_u_m_h_t_t_p_connection_8h.html#a9b067f554f3acaee6a2a75c7221434f2',1,'UMHTTPConnection.h']]],
   ['umhttpmethod_4251',['UMHTTPMethod',['../_universal_h_t_t_p_8h.html#a02a9e45b6d3d2dab6024aa9d8a5a4902',1,'UniversalHTTP.h']]],
   ['umhttpresponsecode_4252',['UMHTTPResponseCode',['../_u_m_h_t_t_p_response_code_8h.html#a4122f3b35942845e2b7032320cb24e43',1,'UMHTTPResponseCode.h']]],
-  ['umhttpserverauthorizeresult_4253',['UMHTTPServerAuthorizeResult',['../_u_m_h_t_t_p_server_authorize_result_8h.html#ac158190b8ea33463762e8fca208ec896',1,'UMHTTPServerAuthorizeResult.h']]],
+  ['umhttpserverauthoriseresult_4253',['UMHTTPServerAuthoriseResult',['../_u_m_h_t_t_p_server_authorise_result_8h.html#ac158190b8ea33463762e8fca208ec896',1,'UMHTTPServerAuthoriseResult.h']]],
   ['umhttpserverstatus_4254',['UMHTTPServerStatus',['../_u_m_h_t_t_p_server_8h.html#af29796f7750d4fe4f9d78febb44adfdb',1,'UMHTTPServer.h']]],
   ['umjson_5ftoken_5ft_4255',['UMjson_token_t',['../_u_m_json_tokeniser_8h.html#a88223e806369cd2975332472b8ae9ecd',1,'UMJsonTokeniser.h']]],
   ['umjsonstreamparseradaptertype_4256',['UMJsonStreamParserAdapterType',['../_u_m_json_stream_parser_adapter_8h.html#af1b5b536db3b790d9e1128d08e13c4b8',1,'UMJsonStreamParserAdapter.h']]],

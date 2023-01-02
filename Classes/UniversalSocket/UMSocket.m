@@ -2660,25 +2660,22 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
                 return [addr substringWithRange:NSMakeRange(start,len)];
             }
         }
-        else
+        if(t)
         {
-            if(t)
+            if([addr isIPv4])
             {
-                if([addr isIPv4])
-                {
-                    *t = 4;
-                }
-                else if([addr isIPv6])
-                {
-                    *t = 6;
-                }
-                else
-                {
-                    *t = 0;
-                }
+                *t = 4;
             }
-            return addr;
+            else if([addr isIPv6])
+            {
+                *t = 6;
+            }
+            else
+            {
+                *t = 0;
+            }
         }
+        return addr;
     }
 }
 

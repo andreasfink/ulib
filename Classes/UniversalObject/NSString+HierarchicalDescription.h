@@ -13,5 +13,6 @@
 - (NSString *)hierarchicalDescriptionWithPrefix:(NSString *)prefix;  /*!< convert a NSString to a string in a human readable fashion with identation (prefix) being properly handled */
 - (NSString *)increasePrefix;
 - (NSString *)removeFirstAndLastChar;
+- (NSString *)htmlEscaped;
 
 @end

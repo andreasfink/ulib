@@ -92,7 +92,7 @@ void ummutex_stat_disable(void);
     } \
     else \
     { \
-        NSLog(@"FILE:%s line%d: locking a non UMMutex %s:%d!",__FILE__,__LINE__); \
+        NSLog(@"FILE:%s line:%d locking a non UMMutex!",__FILE__,__LINE__); \
     } \
     [a lock]; \
     if([a isKindOfClass:[UMMutex class]]) \

@@ -17,7 +17,6 @@
 #if defined(HAVE_SYS_SYSCTL_H)
 #include <sys/sysctl.h>
 #endif
-#include <sys/sysctl.h>
 
 #include <string.h>
 #import "UMAssert.h"

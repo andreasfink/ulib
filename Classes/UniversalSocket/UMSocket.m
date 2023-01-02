@@ -2593,31 +2593,34 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 
 +(NSString *)deunifyIp:(NSString *)addr type:(int *)t
 {
+    int dummy_t;
+    if(t==NULL)
+    {
+        t = &dummy_t;
+    }
     @autoreleasepool
     {
-        if([addr isEqualToString:@"ipv6:[::]"])
+        if(([addr isEqualToString:@"ipv6:[::]"]) || ([addr isEqualToString:@"[::]"]) || ([addr isEqualToString:@"::"]))
         {
-            if(t)
-            {
-                *t = 6;
-            }
+            *t = 6;
             return @"::";
         }
-        if(([addr isEqualToString:@"ipv6:localhost"]) || ([addr isEqualToString:@"::1"]))
+        if(([addr isEqualToString:@"ipv4:0.0.0.0"]) || ([addr isEqualToString:@"0.0.0.0"]))
+
         {
-            if(t)
-            {
-                *t = 6;
-            }
-            return @"localhost";
+            *t = 6;
+            return @"0.0.0.0";
         }
-        if(([addr isEqualToString:@"ipv4:localhost"]) || ([addr isEqualToString:@"127.0.0.1"]) || ([addr isEqualToString:@"localhost"]))
+        if(([addr isEqualToString:@"ipv6:localhost"]) || ([addr isEqualToString:@"ipv6:[::1]"]) || ([addr isEqualToString:@"ipv6:::1"]) || ([addr isEqualToString:@"::1"]))
         {
-            if(t)
-            {
-                *t = 4;
-            }
-            return @"localhost";
+            *t = 6;
+            return @"::1";
+        }
+
+        if(([addr isEqualToString:@"ipv4:localhost"]) || ([addr isEqualToString:@"ipv4:127.0.0.1"]) || ([addr isEqualToString:@"127.0.0.1"])|| ([addr isEqualToString:@"localhost"]))
+        {
+            *t = 4;
+            return @"127.0.0.1";
         }
         if(addr.length >=4)
         {
@@ -2660,20 +2663,17 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
                 return [addr substringWithRange:NSMakeRange(start,len)];
             }
         }
-        if(t)
+        if([addr isIPv4])
         {
-            if([addr isIPv4])
-            {
-                *t = 4;
-            }
-            else if([addr isIPv6])
-            {
-                *t = 6;
-            }
-            else
-            {
-                *t = 0;
-            }
+            *t = 4;
+        }
+        else if([addr isIPv6])
+        {
+            *t = 6;
+        }
+        else
+        {
+            *t = 0;
         }
         return addr;
     }

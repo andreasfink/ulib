@@ -2603,7 +2603,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
             }
             return @"::";
         }
-        if([addr isEqualToString:@"ipv6:localhost"])
+        if(([addr isEqualToString:@"ipv6:localhost"]) || ([addr isEqualToString:@"::1"]))
         {
             if(t)
             {
@@ -2611,7 +2611,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
             }
             return @"localhost";
         }
-        if([addr isEqualToString:@"ipv4:localhost"])
+        if(([addr isEqualToString:@"ipv4:localhost"]) || ([addr isEqualToString:@"127.0.0.1"]) || ([addr isEqualToString:@"localhost"]))
         {
             if(t)
             {
@@ -2619,43 +2619,46 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
             }
             return @"localhost";
         }
-        NSString *addrtype =   [addr substringToIndex:4];
-        if([addrtype isEqualToString:@"ipv4"])
+        if(addr.length >=4)
         {
-            if(t)
-            {
-                *t = 4;
-            }
-            NSInteger start = 5;
-            NSInteger len = [addr length] - start;
-            if(len < 1)
+            NSString *addrtype =   [addr substringToIndex:4];
+            if([addrtype isEqualToString:@"ipv4"])
             {
                 if(t)
                 {
-                    *t = 0;
+                    *t = 4;
                 }
-                return @"";
+                NSInteger start = 5;
+                NSInteger len = [addr length] - start;
+                if(len < 1)
+                {
+                    if(t)
+                    {
+                        *t = 0;
+                    }
+                    return @"";
+                }
+                return [addr substringWithRange:NSMakeRange(start,len)];
             }
-            return [addr substringWithRange:NSMakeRange(start,len)];
-        }
-        
-        else if([addrtype isEqualToString:@"ipv6"])  /* format: ipv6:[xxx:xxx:xxx...:xxxx] */
-        {
-            if(t)
-            {
-                *t = 6;
-            }
-            NSInteger start = 5;
-            NSInteger len = [addr length] -1 - start;
-            if(len < 1)
+            
+            else if([addrtype isEqualToString:@"ipv6"])  /* format: ipv6:[xxx:xxx:xxx...:xxxx] */
             {
                 if(t)
                 {
-                    *t = 0;
+                    *t = 6;
                 }
-                return NULL;
+                NSInteger start = 5;
+                NSInteger len = [addr length] -1 - start;
+                if(len < 1)
+                {
+                    if(t)
+                    {
+                        *t = 0;
+                    }
+                    return NULL;
+                }
+                return [addr substringWithRange:NSMakeRange(start,len)];
             }
-            return [addr substringWithRange:NSMakeRange(start,len)];
         }
         else
         {

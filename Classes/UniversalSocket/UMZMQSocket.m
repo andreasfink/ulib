@@ -63,6 +63,11 @@ if(_logLevel <= UMLOG_DEBUG) \
 {
 #if defined(HAVE_ZEROMQ)
     DEBUG_MESSAGE( ([NSString stringWithFormat:@"binding to ZeroMQ %@",name]) );
+    if(name.length == 0)
+    {
+        _lastError = @"bind failed due to name.length == 0";
+        return -1;
+    }
     int rc = zmq_bind(_socket,name.UTF8String);
     if(rc!=0)
     {

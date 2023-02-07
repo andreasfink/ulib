@@ -95,7 +95,9 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         gobjc gobjc-10 \
         gobjc++ gobjc++-10 \
         libpq-dev libpq5 curl libcurl4-openssl-dev \
-		libpq-dev libmariadb-dev-compat
+	libpq-dev libmariadb-dev-compat \
+	libzmq5 libzmq3-dev
+
 
 
 
@@ -158,7 +160,6 @@ mkdir -p ${PREFIX}/bin
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    #cmake .. -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX}
     cmake  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX} ..
     make
     make install

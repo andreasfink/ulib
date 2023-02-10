@@ -2421,7 +2421,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         case UMSocketError_generic_bind_error:
             return @"generic_bind_error";
         case  UMSocketError_try_again:
-            return @"timeout";
+            return @"try-again";
         case  UMSocketError_timed_out:
             return @"connection attempt timed out";
         case  UMSocketError_connection_refused:

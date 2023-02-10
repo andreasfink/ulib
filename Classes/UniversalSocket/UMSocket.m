@@ -1654,7 +1654,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     ssize_t actualReadBytes = [_cryptoStream readBytes:cptr length:1 errorCode:&eno];
     if (actualReadBytes < 0)
     {
-        if (eno != EAGAIN)
+        if((eno != EWOULDBLOCK) && (eno != EAGAIN) && (eno != EINTR))
         {
             return [UMSocket umerrFromErrno:eno];
         }
@@ -1691,7 +1691,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
         if (actualReadBytes < 0)
         {
-            if (eno != EAGAIN)
+            if((eno != EWOULDBLOCK) && (eno != EAGAIN) && (eno != EINTR))
             {
                 return [UMSocket umerrFromErrno:eno];
             }
@@ -1749,7 +1749,7 @@ static int SSL_smart_shutdown(SSL *ssl)
          
          if(actualReadBytes < 0)
          {
-             if (eno != EAGAIN)
+             if((eno != EWOULDBLOCK) && (eno != EAGAIN) && (eno != EINTR))
              {
                  ret = [UMSocket umerrFromErrno:EBADF];
                  return ret;
@@ -2138,7 +2138,7 @@ static int SSL_smart_shutdown(SSL *ssl)
                                     errorCode:&eno];
         if (actualReadBytes <= 0)
         {
-            if (eno == EINTR || eno == EAGAIN || eno == EWOULDBLOCK )
+            if ((eno == EINTR) || (eno == EAGAIN) || (eno == EWOULDBLOCK))
             {
                 usleep(10000);
                 return UMSocketError_try_again;
@@ -2231,7 +2231,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         eno = errno;
         if (actualReadBytes <= 0)
         {
-            if (eno == EINTR || eno == EAGAIN || eno == EWOULDBLOCK)
+            if ((eno == EINTR) || (eno == EAGAIN) || (eno == EWOULDBLOCK))
             {
                 usleep(10000);
                 return UMSocketError_try_again;

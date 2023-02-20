@@ -1178,13 +1178,13 @@
         NSString *text2 = [NSString stringWithFormat:@"Client socket %@ connected to <%@:%ld>\r\n",name, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort]];
         [TestUMSocket logAtomic:text2 toLog:_logFeed atFile:dst];
         
-        UMSocketStatus ourStatus = [clientSocket _status];
+        UMSocketStatus ourStatus = [clientSocket status];
         NSString *ss = [UMSocket statusDescription:ourStatus];
         XCTAssertTrue([ss compare:@"is"] == NSOrderedSame, @"sTestUmSocket: ocket status should be in service");
-        UMSocketConnectionDirection d = [clientSocket _direction];
+        UMSocketConnectionDirection d = [clientSocket direction];
         NSString *sd = [UMSocket directionDescription:d];
         XCTAssertTrue([sd compare:@"outbound"] == NSOrderedSame, @"TestUmSocket: socket direction should be outbound");
-        UMSocketType t = [clientSocket _type];
+        UMSocketType t = [clientSocket type];
         NSString *st = [UMSocket socketTypeDescription:t];
         XCTAssertTrue([st compare:@"tcp4only"] == NSOrderedSame, @"TestUmSocket: socket type shpould be tcp");
         rport = [clientSocket requestedRemotePort];
@@ -1378,7 +1378,7 @@ again:
         NSString *text8 = [NSString stringWithFormat:@"%@ closed socket to <%@:%ld>\r\n", name, [clientSocket remoteHost], (long)[clientSocket requestedRemotePort]];
         [TestUMSocket logAtomic:text8 toLog:_logFeed atFile:dst];
         
-        ourStatus = [clientSocket _status];
+        ourStatus = [clientSocket status];
         NSString *ss1 = [UMSocket statusDescription:ourStatus];
         XCTAssertTrue([ss1 compare:@"oos"] == NSOrderedSame, @"socket status should be out of service");
         XCTAssertTrue([clientSocket isConnecting] == 0, @"TestUmSocket: client socket should not be connecting");
@@ -1444,7 +1444,7 @@ again:
         sErr = [clientSocket connect];
         XCTAssertTrue(sErr != UMSocketError_no_error, @"testSocketTCPError: client socket should not be able to connect the server junky.junky.junky\r\n");
         XCTAssertTrue(sErr == UMSocketError_address_not_available, @"testSocketTCPError: error message should be unknown host \r\n");
-         UMSocketStatus ourStatus = [clientSocket _status];
+         UMSocketStatus ourStatus = [clientSocket status];
         NSString *ss1 = [UMSocket statusDescription:ourStatus];
         XCTAssertTrue([ss1 compare:@"unknown"] == NSOrderedSame, @"testSocketTCPError: socket status should be unknown");
         XCTAssertTrue([clientSocket isConnecting] == 0, @"testSocketTCPError: client socket should not be connecting");

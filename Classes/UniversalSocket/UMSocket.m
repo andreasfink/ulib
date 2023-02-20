@@ -672,12 +672,16 @@ static int SSL_smart_shutdown(SSL *ssl)
             case UMSOCKET_TYPE_TCP4ONLY:
             case UMSOCKET_TYPE_UDP4ONLY:
             {
-                if(localAddresses.count > 0)
+                if(localAddresses.count == 1)
                 {
                     ipAddr = [localAddresses objectAtIndex:0];
                     ipAddr = [UMSocket deunifyIp:ipAddr];
                     [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
                     inet_aton(addressString, &sa.sin_addr);
+                }
+                else
+                {
+                    sa.sin_addr.s_addr = htonl(INADDR_ANY);
                 }
                 if(bind(_sock,(struct sockaddr *)&sa,sizeof(sa)) != 0)
                 {
@@ -691,13 +695,18 @@ static int SSL_smart_shutdown(SSL *ssl)
             case UMSOCKET_TYPE_TCP:
             case UMSOCKET_TYPE_UDP:
             {
-                if(localAddresses.count > 0)
+                if(localAddresses.count == 1)
                 {
                     ipAddr = [localAddresses objectAtIndex:0];
                     ipAddr = [UMSocket deunifyIp:ipAddr];
                     [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
                     inet_pton(AF_INET6,addressString, &sa6.sin6_addr);
                 }
+                else
+                {
+                    sa6.sin6_addr            = in6addr_any;
+                }
+
                 if(bind(_sock,(struct sockaddr *)&sa6,sizeof(sa6)) != 0)
                 {
                     eno = errno;

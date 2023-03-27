@@ -435,6 +435,21 @@ NSString *sqlEscapeNSString(NSString *input)
     NSString *result = @(out);
     return result;
 }
-
+- (NSString *)randomizeX
+{
+    NSMutableString *out = [[NSMutableString alloc]init];
+    NSInteger count = self.length;
+    for(NSInteger i=0;i<count;i++)
+    {
+        unichar uc = [self characterAtIndex:i];
+        if((uc=='X') || (uc=='x'))
+        {
+            uc = '0' + (rand() % 10);
+        }
+        NSString *s = [[NSString alloc]initWithCharacters:&uc length:1];
+        [out appendString:s];
+    }
+    return out;
+}
 @end
 

@@ -35,5 +35,6 @@ NSString *sqlEscapeNSString(NSString *input);
   Allowed punctioations are - _ + , = %
 */
 - (NSString *)filterNameWithMaxLength:(int)maxlen;
+- (NSString *)randomizeX;
 
 @end

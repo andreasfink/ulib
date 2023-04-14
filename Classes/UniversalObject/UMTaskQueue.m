@@ -119,7 +119,7 @@
 static int g_cpu_count = 0;
 
 #ifdef __APPLE__
-int ulib_cpu_count()
+int ulib_cpu_count(void)
 {
     if(g_cpu_count)
     {
@@ -138,7 +138,7 @@ int ulib_cpu_count()
 #endif
 
 #ifdef LINUX
-int ulib_cpu_count()
+int ulib_cpu_count(void)
 {
     if(g_cpu_count)
     {

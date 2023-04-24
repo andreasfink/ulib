@@ -5820,7 +5820,10 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/include/,
+				);
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -5859,7 +5862,10 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/include/,
+				);
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (

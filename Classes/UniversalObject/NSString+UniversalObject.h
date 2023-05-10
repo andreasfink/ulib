@@ -28,6 +28,7 @@ NSString *sqlEscapeNSString(NSString *input);
 - (BOOL)webBoolValue;
 - (NSString *)trim;
 - (NSInteger)intergerValueSupportingHex;
+- (BOOL)isEqualToStringSupportingX:(NSString *)str;
 
 /* this is used to clean names. They are all returned in lowercase
   only lowercase is allowed. Uppercase is converted

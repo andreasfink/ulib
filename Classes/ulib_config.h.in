@@ -72,7 +72,7 @@
 #undef HAVE_PTHREAD_H
 
 /* Define if you have the <sys/sysctl.h> header file.  */
-#undef HAVE_SYS_SYSCTL_H
+//#undef HAVE_SYS_SYSCTL_H
 
 /* Define if you have the <sys/ioctl.h> header file.  */
 #undef HAVE_SYS_IOCTL_H
@@ -172,6 +172,11 @@
 /* Define if you have zeromq support */
 #undef HAVE_ZMQ_H
 #ifdef HAVE_ZMQ_H
+#define HAVE_ZEROMQ 1
+#endif
+
+#undef HAVE_ZMQ_H_USR_LOCAL
+#ifdef HAVE_ZMQ_H_USR_LOCAL
 #define HAVE_ZEROMQ 1
 #endif
 

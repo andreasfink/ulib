@@ -72,7 +72,7 @@
 #undef HAVE_PTHREAD_H
 
 /* Define if you have the <sys/sysctl.h> header file.  */
-//#undef HAVE_SYS_SYSCTL_H
+#undef HAVE_SYS_SYSCTL_H
 
 /* Define if you have the <sys/ioctl.h> header file.  */
 #undef HAVE_SYS_IOCTL_H

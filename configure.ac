@@ -201,9 +201,8 @@ if test -z "$zmq"; then
    LIBS="$LIBS -lstdc++ -lzmq"
 fi
 
-if test -f "/usr/local/lib/zmq.h"; then
-	HAVE_ZMQ_H_USR_LOCAL=1
-	AC_SUBST(HAVE_ZMQ_H_USR_LOCAL)
+if test -f "/usr/local/include/zmq.h"; then
+    AC_DEFINE(HAVE_ZMQ_H_USR_LOCAL)
 fi
 
 if test -z "$pthread"; then

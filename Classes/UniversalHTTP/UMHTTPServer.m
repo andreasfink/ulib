@@ -24,6 +24,9 @@
 #import "UMSynchronizedArray.h"
 #import "UMThreadHelpers.h"
 
+#define NSLOCK_LOCK(l)     [l lock];
+#define NSLOCK_UNLOCK(l)   [l unlock];
+
 @implementation UMHTTPServer
 
 - (id) init
@@ -66,8 +69,6 @@
         _sleeper		= [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
         [_sleeper prepare];
         _connections = [[UMSynchronizedArray alloc] init];
-        _connectionsLock = [[UMMutex alloc]initWithName:@"http-connections-lock"];
-
         _terminatedConnections = [[UMSynchronizedArray alloc]init];
         _lock		= [[NSLock alloc] init];
         _sslLock     = [[NSLock alloc]init];
@@ -142,7 +143,7 @@
 
 		[self.logFeed info:0 withText:[NSString stringWithFormat:@"HTTPServer '%@' on port %d is starting up\r\n",_name, [_listenerSocket requestedLocalPort]]];
 
-        [_lock lock];
+        NSLOCK_LOCK(_lock);
 
 		self.status = UMHTTPServerStatus_startingUp;
         [self runSelectorInBackground:@selector(mainListener)
@@ -157,7 +158,11 @@
 
 		while(self.status == UMHTTPServerStatus_startingUp)
         {
-			[_sleeper sleep:100000];/* wait 100ms */
+            UMSleeper_Signal sig =  [_sleeper sleep:100000];/* wait 100ms */
+            if (sig == UMSleeper_Error)
+            {
+                break;
+            }
         }
 
 	    if( self.status == UMHTTPServerStatus_running )
@@ -169,7 +174,7 @@
 		    sErr = _lastErr;
 		    self.status = UMHTTPServerStatus_notRunning;
 	    }
-        [_lock unlock];
+        NSLOCK_UNLOCK(_lock);
     
 	    if( self.status == UMHTTPServerStatus_running)
 	    {
@@ -263,7 +268,7 @@
                         clientSocket.serverSideKeyData      = _privateKeyFileData;
                         clientSocket.serverSideCertFilename = _certFile;
                         clientSocket.serverSideCertData     = _certFileData;
-                        if ([self authorizeConnection:clientSocket] == UMHTTPServerAuthorize_successful)
+                        if ([self authoriseConnection:clientSocket] == UMHTTPServerAuthorise_successful)
                         {
                             UMHTTPConnection *con = [[UMHTTPConnection alloc] initWithSocket:clientSocket server:self];
                             con.name = [NSString stringWithFormat:@"HTTPConnection %@:%d",clientSocket.connectedRemoteAddress,clientSocket.connectedRemotePort];
@@ -320,16 +325,16 @@
     }
 }
 
--(UMHTTPServerAuthorizeResult) authorizeConnection:(UMSocket *)us
+-(UMHTTPServerAuthoriseResult) authoriseConnection:(UMSocket *)us
 {
-	if(_authorizeConnectionDelegate)
+	if(_authoriseConnectionDelegate)
     {
-		if([_authorizeConnectionDelegate respondsToSelector:@selector(httpAuthorizeConnection:)])
+		if([_authoriseConnectionDelegate respondsToSelector:@selector(httpAuthoriseConnection:)])
         {
-			return [_authorizeConnectionDelegate httpAuthorizeConnection:us];
+			return [_authoriseConnectionDelegate httpAuthoriseConnection:us];
         }
     }
-	return UMHTTPServerAuthorize_successful;
+	return UMHTTPServerAuthorise_successful;
 }
 
 - (void) stop
@@ -343,7 +348,11 @@
 	self.status = UMHTTPServerStatus_shuttingDown;
 	while(self.status == UMHTTPServerStatus_shuttingDown)
 	{
-		[_sleeper sleep:100000]; /* wait 100ms */
+        UMSleeper_Signal sig =  [_sleeper sleep:100000];/* wait 100ms */
+        if (sig == UMSleeper_Error)
+        {
+            break;
+        }
 	}
 	self.status = UMHTTPServerStatus_notRunning;
     
@@ -355,10 +364,8 @@
 {
     if(con)
     {
-        UMMUTEX_LOCK(_connectionsLock);
         [_connections removeObject:con];
         [_terminatedConnections addObject:con];
-        UMMUTEX_UNLOCK(_connectionsLock);
     }
 }
 

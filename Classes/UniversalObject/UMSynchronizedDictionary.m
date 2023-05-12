@@ -26,7 +26,7 @@
         if(self)
         {
             _underlyingDictionary = [[NSMutableDictionary alloc] init];
-            _lock = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
+            _dictionaryLock = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
         }
         return self;
     }
@@ -34,9 +34,9 @@
 
 - (void)flush
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_dictionaryLock);
     _underlyingDictionary = [[NSMutableDictionary alloc] init];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_dictionaryLock);
 }
 
 - (UMSynchronizedDictionary *)initWithDictionary:(NSDictionary *)sd
@@ -47,7 +47,7 @@
         if(self)
         {
             _underlyingDictionary = [sd mutableCopy];
-            _lock = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
+            _dictionaryLock = [[UMMutex alloc]initWithName:@"synchronized-dictionary"];
         }
         return self;
     }
@@ -55,12 +55,12 @@
 
 - (void)lock
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_dictionaryLock);
 }
 
 - (void)unlock
 {
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_dictionaryLock);
 }
 
 
@@ -80,11 +80,12 @@
     return [_underlyingDictionary copy];
 }
 
+
 - (NSUInteger)count
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_dictionaryLock);
     NSUInteger cnt  = [_underlyingDictionary count];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_dictionaryLock);
     return cnt;
 }
 
@@ -93,9 +94,9 @@
 {
     if((key) &&(anObject))
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_dictionaryLock);
         [_underlyingDictionary setObject:anObject forKey:key];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_dictionaryLock);
     }
 }
 
@@ -104,9 +105,9 @@
     id returnValue = NULL;
     if(key)
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_dictionaryLock);
         returnValue = [_underlyingDictionary objectForKey:key];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_dictionaryLock);
     }
     return returnValue;
 }
@@ -114,9 +115,9 @@
 - (NSArray *)allKeys
 {
     NSArray *a;
-    [_lock lock];
+    UMMUTEX_LOCK(_dictionaryLock);
     a = [_underlyingDictionary allKeys];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_dictionaryLock);
     return a;
 }
 
@@ -124,27 +125,27 @@
 {
     if(aKey)
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_dictionaryLock);
         [_underlyingDictionary removeObjectForKey:aKey];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_dictionaryLock);
     }
 }
 
 - (NSMutableDictionary *)mutableCopy
 {
     NSMutableDictionary *d;
-    [_lock lock];
+    UMMUTEX_LOCK(_dictionaryLock);
     d = [_underlyingDictionary mutableCopy];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_dictionaryLock);
     return d;
 }
 
 - (id)copyWithZone:(nullable NSZone *)zone
 {
     UMSynchronizedDictionary *cpy;
-    [_lock lock];
+    UMMUTEX_LOCK(_dictionaryLock);
     cpy = [[UMSynchronizedDictionary allocWithZone:zone] initWithDictionary:_underlyingDictionary];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_dictionaryLock);
     return cpy;
 }
 

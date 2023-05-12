@@ -47,43 +47,43 @@ static UMFileTracker *_global_file_tracker = nil;
 {
     NSString *key = info.key;
     UMAssert(key != NULL,@"key can not be null");
-    [_lock lock];
+    UMMUTEX_LOCK(_fileTrackerLock);
     fileTrackingInfos[key] = info;
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_fileTrackerLock);
 }
 
 - (UMFileTrackingInfo *)infoForFdes:(int)fdes
 {
     NSString *key = [UMFileTracker keyFromFdes:fdes];
     UMAssert(key != NULL,@"key can not be null");
-    [_lock lock];
+    UMMUTEX_LOCK(_fileTrackerLock);
     UMFileTrackingInfo *ti = fileTrackingInfos[key];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_fileTrackerLock);
     return ti;
 }
 
 - (UMFileTrackingInfo *)infoForFile:(FILE *)f
 {
     NSString *key = [UMFileTracker keyFromFILE:f];
-    [_lock lock];
+    UMMUTEX_LOCK(_fileTrackerLock);
     UMFileTrackingInfo *ti = fileTrackingInfos[key];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_fileTrackerLock);
     return ti;
 }
 
 
 - (void) closeFdes:(int)fdes
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_fileTrackerLock);
     [fileTrackingInfos removeObjectForKey:[UMFileTracker keyFromFdes:fdes]];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_fileTrackerLock);
 }
 
 - (void) closeFILE:(FILE *)f
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_fileTrackerLock);
     [fileTrackingInfos removeObjectForKey:[UMFileTracker keyFromFILE:f]];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_fileTrackerLock);
 }
 
 + (NSString *)keyFromFdes:(int)fdes
@@ -98,7 +98,7 @@ static UMFileTracker *_global_file_tracker = nil;
 
 - (NSString *)description
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_fileTrackerLock);
 
     struct rlimit r;
 
@@ -114,7 +114,7 @@ static UMFileTracker *_global_file_tracker = nil;
         UMFileTrackingInfo *ti = fileTrackingInfos[key];
         [s appendString: [ti descriptionWithIndex:++i]];
     }
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_fileTrackerLock);
     return s;
 }
 @end

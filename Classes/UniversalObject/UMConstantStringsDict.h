@@ -24,7 +24,7 @@
 @interface UMConstantStringsDict : NSObject
 {
 	NSMutableDictionary 		*_dict[MAX_CSTRING_DICTS];
-	UMMutex						*_lock[MAX_CSTRING_DICTS];
+	UMMutex						*_olock[MAX_CSTRING_DICTS];
 }
 
 + (UMConstantStringsDict *)sharedInstance;

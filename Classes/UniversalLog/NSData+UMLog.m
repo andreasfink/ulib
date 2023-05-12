@@ -13,7 +13,9 @@
 #import "NSData+UMLog.h"
 
 @implementation NSData(UMLog)
-#if 0
+
+#ifdef OLD_GNUSTEP
+
 		// this is now implemented in gnustep base 
 - (NSRange)rangeOfData:(NSData *)dataToFind options:(NSDataSearchOptions)mask range:(NSRange)searchRange
 {
@@ -54,3 +56,4 @@
 @end
 
 #endif
+

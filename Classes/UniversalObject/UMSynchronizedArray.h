@@ -19,7 +19,7 @@
 @interface UMSynchronizedArray : UMObject<NSCopying,NSFastEnumeration>
 {
     NSMutableArray  *_array;
-    UMMutex         *_mutex;
+    UMMutex         *_arrayLock;
 }
 
 @property (readonly,strong) NSMutableArray *array;
@@ -44,8 +44,6 @@
 - (void)addPrintableString:(NSString *)s;
 - (void)removeObject:(id)obj;
 - (id)removeFirst;
-
-
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx;
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
 - (NSMutableArray *)mutableCopy;
@@ -55,5 +53,9 @@
 - (NSString *)jsonString;
 - (NSString *)jsonCompactString;
 
+
+/* if you need to lock other thread's operation on this array temporarely */
+- (void)lock;
+- (void)unlock;
 @end
 

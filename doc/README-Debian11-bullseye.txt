@@ -49,7 +49,12 @@ then
 	DEBIAN_NICKNAME="stretch"
 fi
 
-echo "deb http://ftp.debian.org/debian ${DEBIAN_NICKNAME}-backports main"      > /etc/apt/sources.list.d/backports.list
+if [ "${DEBIAN_MAIN_VERSION}" = "12" ]
+then
+	DEBIAN_NICKNAME="bookworm"
+fi
+
+#echo "deb http://ftp.debian.org/debian ${DEBIAN_NICKNAME}-backports main"      > /etc/apt/sources.list.d/backports.list
 echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" > /etc/apt/sources.list.d/universalss7.list
 
 
@@ -89,7 +94,7 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         libxft2 libxft-dev \
         libflite1 flite1-dev \
         libxmu6 libxpm4 wmaker-common\
-        libgnutls30 libgnutls28-dev\
+        libgnutls30 libgnutls28-dev gnutls-bin\
         libpng-dev libpng16-16\
         libreadline8 libreadline-dev \
         libgif7 libgif-dev libwings3 libwings-dev  libwutil5 \
@@ -107,10 +112,14 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         gobjc gobjc-10 \
         gobjc++ gobjc++-10 \
         default-libmysqlclient-dev \
-        libpq-dev libpq5
+        libpq-dev libpq5 curl libcurl4-openssl-dev
 
 
-
+Changes for bookworm/sid on risc-v  VisionFive2:       
+	libffi7 	-> libffi8
+	python-dev 	-> python3
+	libicu67 	-> libicu71
+	lldb 		missing
 
 
 Download the sourcecode of gnustep and dependencies
@@ -118,7 +127,7 @@ Download the sourcecode of gnustep and dependencies
 
     mkdir gnustep
     cd gnustep
-    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
+    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.17.tar.gz
     git clone https://github.com/apple/swift-corelibs-libdispatch
     git clone https://github.com/gnustep/scripts
     git clone https://github.com/gnustep/make
@@ -138,14 +147,15 @@ Build  libiconv
 
 #   Note libiconv does not build if the compiler is set to clang or the linker to lld.
 
-    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz
-    tar -xvzf libiconv-1.16.tar.gz
-    cd libiconv-1.16
+    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.17.tar.gz
+    tar -xvzf libiconv-1.17.tar.gz
+    cd libiconv-1.17
     CC=gcc LDFLAGS="-fuse-ld=gold" CXX="gcc++" CFLAGS="-fPIC" CPPFLAGS="-fPIC" ./configure --enable-static --enable-dynamic
     make
     make install
+    ./libtool --finish /usr/local/lib
     cd ..
-
+#make check
 
 3. Setting some defaults
 ------------------------------------------------
@@ -171,6 +181,8 @@ mkdir -p ${PREFIX}/bin
     cmake  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX} ..
     make
     make install
+#make test
+
 
 5. install libobjc2 runtime
 
@@ -184,9 +196,9 @@ mkdir -p ${PREFIX}/bin
     #if you get errors here
     # edif the file CMakeCache.txt  and remove the -stlib... thing in line CMAKE_C_FLAGS:STRING=-I /usr/local/include
     make install
+#make test
     cd ..
     ldconfig
-
 
 
 6. install gnustep-make
@@ -207,16 +219,25 @@ mkdir -p ${PREFIX}/bin
 
     make install
     source ${PREFIX}/etc/GNUstep/GNUstep.conf
+    #source /usr/local/etc/GNUstep/GNUstep.conf
     cd ..
  
 7. install gnustep-base
 
 
     cd base
-    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf --with-libiconv-library=/usr/local/lib/libiconv.a
+    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf \
+    	--with-libiconv-library=/usr/local/lib/libiconv.a \
+    	--enable-pass-arguments \
+    	--enable-zeroconf \
+    	--enable-icu \
+    	--enable-libdispatch \
+    	--enable-nsurlsession 
+    
     make -j8
     make install
     ldconfig
+#make check
     cd ..
 
 (for debug version use "make debug=yes" instead of "make")
@@ -234,20 +255,21 @@ mkdir -p ${PREFIX}/bin
 
 9.  If you want X11 GUI support in GnuStep install gnustep-gui
 
-    cd gnustep/gui
+    cd gui
     ./configure
     make -j8
     make install
     ldconfig
-    cd ../..
+    cd ..
 
 10. install gnustep-back
 
-    cd gnustep/corebase
+    cd corebase
     ./configure
     make -j8
     make install
-    cd ../..
+    cd ..
+    
 
 11. ulib
     git clone http://github.com/andreasfink/ulib

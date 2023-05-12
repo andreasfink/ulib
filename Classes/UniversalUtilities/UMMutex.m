@@ -11,6 +11,8 @@
 #import "UMConstantStringsDict.h"
 #import "UMAssert.h"
 
+#include <unistd.h> /* for usleep */
+
 static NSMutableDictionary *global_ummutex_stat = NULL;
 static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
@@ -55,7 +57,6 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
             pthread_mutexattr_init(&_mutexAttr);
             pthread_mutexattr_settype(&_mutexAttr, PTHREAD_MUTEX_RECURSIVE);
             pthread_mutex_init(&_mutexLock, &_mutexAttr);
-
             if(_savedInObjectStat)
             {
                 UMObjectStatistic *stat = [UMObjectStatistic sharedInstance];
@@ -139,7 +140,10 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
         pthread_mutex_lock(&_mutexLock);
         _lockDepth++;
-
+        if(_lockDepth>0)
+        {
+            _isLocked=YES;
+        }
         if(global_ummutex_stat)
         {
             pthread_mutex_lock(global_ummutex_stat_mutex);
@@ -171,6 +175,10 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
         }
         _lockDepth--;
         pthread_mutex_unlock(&_mutexLock);
+        if(_lockDepth <=0)
+        {
+            _isLocked=NO;
+        }
     }
 }
 
@@ -215,12 +223,37 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
     }
 }
 
+- (int)tryLock:(NSTimeInterval)timeout
+     retryTime:(NSTimeInterval)retryTime
+{
+    @autoreleasepool
+    {
+        NSDate *start = [NSDate date];
+        int i = 0;
+        while((i=[self tryLock]) != 0)
+        {
+            NSDate *now = [NSDate date];
+            NSTimeInterval diff = [now timeIntervalSinceDate:start];
+            if(diff > timeout)
+            {
+                /* we have waited long enough */
+                break;
+            }
+            else
+            {
+                useconds_t delay = (useconds_t)(retryTime * 1000000.0);
+                usleep(delay);
+            }
+        }
+        return i;
+    }
+}
 
 - (NSString *)lockStatusDescription
 {
     NSMutableString *s = [[NSMutableString alloc]init];
     [s appendString:[super description]];
-    if(_lockedInFunction != NULL)
+    if(_isLocked)
     {
         [s appendFormat: @" locked by %s (%s:%ld)", _lockedInFunction,_lockedInFile,_lockedAtLine];
     }
@@ -231,7 +264,6 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
     if(_tryingToLockInFunction != NULL)
     {
         [s appendFormat: @" awaited by %s (%s:%ld)",_tryingToLockInFunction,_tryingToLockInFile,_tryingToLockAtLine];
-
     }
     return s;
 }

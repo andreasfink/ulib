@@ -9,39 +9,44 @@
 #import "NSString+UniversalObject.h"
 #import "UMHistoryLogEntry.h"
 #import "UMAssert.h"
+#import "NSDate+stringFunctions.h"
 
 @implementation UMHistoryLog
 
 - (UMHistoryLog *)init
 {
-    return [self initWithMaxLines:MAX_UMHISTORY_LOG];
+    return [self initWithMaxLines:MAX_UMHISTORY_LOG string:NULL];
 }
 
+
 - (UMHistoryLog *)initWithMaxLines:(int)maxlines
+{
+    return [self initWithMaxLines:maxlines string:NULL];
+}
+
+- (UMHistoryLog *)initWithMaxLines:(int)maxlines string:(NSString *)s
 {
     self = [super init];
     if(self)
     {
         _entries = [[NSMutableArray alloc] init];
         _max = maxlines;
-        _lock =[[UMMutex alloc]initWithName:@"history-lock"];
-        //count = 0;
+        _historyLogLock = [[UMMutex alloc]initWithName:@"history-lock"];
+        if(s)
+        {
+            NSArray *lines = [s componentsSeparatedByCharactersInSet:[UMObject newlineCharacterSet]];
+            for(NSString *line in lines)
+            {
+                [self addLogEntry:line];
+            }
+        }
     }
     return self;
 }
 
 - (UMHistoryLog *)initWithString:(NSString *)s
 {
-    self = [self initWithMaxLines:MAX_UMHISTORY_LOG];
-    if(self)
-    {
-        NSArray *lines = [s componentsSeparatedByCharactersInSet:[UMObject newlineCharacterSet]];
-        for(NSString *line in lines)
-        {
-            [self addLogEntry:line];
-        }
-    }
-    return self;
+    return  [self initWithMaxLines:MAX_UMHISTORY_LOG string:s];
 }
 
 - (void)addPrintableString:(NSString *)s
@@ -66,16 +71,16 @@
 
 - (void)addLogEntry:(NSString *)log
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_historyLogLock);
     UMHistoryLogEntry *e = [[UMHistoryLogEntry alloc] initWithLog:log];
     [_entries addObject:e];
     [self trim];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_historyLogLock);
 }
 
-- (NSArray *)getLogArrayWithOrder:(BOOL)forward
+- (NSArray *)getLogArrayWithDatesAndOrder:(BOOL)forward
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_historyLogLock);
     NSMutableArray *output = [[NSMutableArray alloc]init];
     NSInteger count = [_entries count];
     NSInteger position;
@@ -96,14 +101,47 @@
     while(count--)
     {
         UMHistoryLogEntry *entry = _entries[position];
-        NSString *line = entry.log;
+        NSString *line = [entry stringValue];
         if([line length]>0)
         {
             [output addObject:line];
         }
         position = position + direction;
     }
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_historyLogLock);
+    return output;
+}
+
+- (NSArray *)getLogArrayWithOrder:(BOOL)forward
+{
+    UMMUTEX_LOCK(_historyLogLock);
+    NSMutableArray *output = [[NSMutableArray alloc]init];
+    NSInteger count = [_entries count];
+    NSInteger position;
+    NSInteger direction;
+
+    if(forward)
+    {
+        position = 0;
+        direction = 1;
+    }
+    else
+    {
+        position = count - 1;
+        direction = -1;
+
+    }
+    while(count--)
+    {
+        UMHistoryLogEntry *entry = _entries[position];
+        NSString *line = [entry stringValueWithoutDate];
+        if([line length]>0)
+        {
+            [output addObject:line];
+        }
+        position = position + direction;
+    }
+    UMMUTEX_UNLOCK(_historyLogLock);
     return output;
 }
 
@@ -126,11 +164,24 @@
     return [a componentsJoinedByString:@"\n"];
 }
 
+- (NSString *)getLogBackwardOrderWithDates
+{
+    NSArray *a = [self getLogArrayWithDatesAndOrder:NO];
+    return [a componentsJoinedByString:@"\n"];
+}
+
 - (NSString *)getLogForwardOrder
 {
     NSArray *a = [self getLogArrayWithOrder:YES];
     return [a componentsJoinedByString:@"\n"];
 }
+
+- (NSString *)getLogForwardOrderWithDates
+{
+    NSArray *a = [self getLogArrayWithDatesAndOrder:YES];
+    return [a componentsJoinedByString:@"\n"];
+}
+
 
 - (NSString *)description
 {
@@ -140,7 +191,7 @@
 
 - (NSString *)stringLines
 {
-    return [self getLogForwardOrder];
+    return [self getLogForwardOrderWithDates];
 }
 
 @end

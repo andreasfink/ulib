@@ -15,7 +15,7 @@
     self=[super init];
     if(self)
     {
-        _lock = [[UMMutex alloc] initWithName:@"umqueue"];
+        _queueLock = [[UMMutex alloc] initWithName:@"umqueue"];
         NSMutableArray *q = [[NSMutableArray alloc]init];
         _queue = q;
     }
@@ -27,7 +27,7 @@
     self=[super init];
     if(self)
     {
-        _lock = NULL;
+        _queueLock = NULL;
         _queue = [[NSMutableArray alloc]init];
     }
     return self;
@@ -39,9 +39,9 @@
     UMAssert(_queue!=NULL,@"Queue is not set");
     if(obj)
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_queueLock);
         [_queue addObject:obj];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_queueLock);
     }
 }
 
@@ -57,9 +57,9 @@
 {
     if(obj)
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_queueLock);
         [_queue insertObject:obj atIndex:0];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_queueLock);
     }
 }
 
@@ -68,10 +68,10 @@
 {
     if(obj)
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_queueLock);
         [_queue removeObject:obj]; /* should not be there twice */
         [_queue addObject:obj];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_queueLock);
     }
 }
 
@@ -80,34 +80,34 @@
 {
     if(obj)
     {
-        [_lock lock];
+        UMMUTEX_LOCK(_queueLock);
         [_queue removeObject:obj];
-        [_lock unlock];
+        UMMUTEX_UNLOCK(_queueLock);
     }
 }
 
 - (id)getFirst
 {
     id obj = NULL;
-    [_lock lock];
+    UMMUTEX_LOCK(_queueLock);
     if ([_queue count]>0)
     {
         obj = [_queue objectAtIndex:0];
         [_queue removeObjectAtIndex:0];
     }
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_queueLock);
     return obj;
 }
 
 - (id)peekFirst
 {
     id obj = NULL;
-    [_lock lock];
+    UMMUTEX_LOCK(_queueLock);
     if ([_queue count]>0)
     {
         obj = [_queue objectAtIndex:0];
     }
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_queueLock);
     return obj;
 }
 
@@ -125,9 +125,28 @@
 
 - (NSInteger)count
 {
-    [_lock lock];
+    UMMUTEX_LOCK(_queueLock);
     NSInteger i = [_queue count];
-    [_lock unlock];
+    UMMUTEX_UNLOCK(_queueLock);
     return i;
 }
+
+- (void)lock
+{
+    UMMUTEX_LOCK(_queueLock);
+}
+
+- (void)unlock
+{
+    UMMUTEX_UNLOCK(_queueLock);
+}
+
+- (id)getObjectAtIndex:(NSInteger)i
+{
+    UMMUTEX_LOCK(_queueLock);
+    id obj = [_queue objectAtIndex:0];
+    UMMUTEX_UNLOCK(_queueLock);
+    return obj;
+}
+
 @end

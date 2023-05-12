@@ -29,7 +29,7 @@
     if(self)
     {
         _namedlistEntries = [[UMSynchronizedSortedDictionary alloc]init];
-        _lock  = [[UMMutex alloc]initWithName:@"UMNamedList-lock"];
+        _namedListLock  = [[UMMutex alloc]initWithName:@"UMNamedList-lock"];
         _path = path;
         _name = name;
     }
@@ -44,7 +44,7 @@
 - (void)addEntry:(NSString *)str
 {
     UMAssert(_namedlistEntries!=NULL,@"_entries can not be NULL");
-    UMAssert(_lock!=NULL,@"_lock should not be NULL");
+    UMAssert(_namedListLock!=NULL,@"_lock should not be NULL");
     if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
     {
         NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", [_namedlistEntries className]);
@@ -60,11 +60,11 @@
         NSLog(@"you can not add empty string");
         return;
     }
-    UMAssert(_lock!=NULL,@"_lock is NULL");
-    [_lock lock];
+    UMAssert(_namedListLock!=NULL,@"_lock is NULL");
+    [_namedListLock lock];
     _namedlistEntries[str] = str;
     _dirty=YES;
-    [_lock unlock];
+    [_namedListLock unlock];
 #ifdef DEBUG
     NSLog(@"UMNamedList addEntry:%@",str);
     [self dump];
@@ -74,7 +74,7 @@
 - (void)removeEntry:(NSString *)str
 {
     UMAssert(_namedlistEntries!=NULL,@"_entries can not be NULL");
-    UMAssert(_lock!=NULL,@"_lock should not be NULL");
+    UMAssert(_namedListLock!=NULL,@"_lock should not be NULL");
     if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
     {
         NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", [_namedlistEntries className]);
@@ -91,10 +91,10 @@
         NSLog(@"you can not remove empty string");
         return;
     }
-    [_lock lock];
+    [_namedListLock lock];
     [_namedlistEntries removeObjectForKey:str];
     _dirty=YES;
-    [_lock unlock];
+    [_namedListLock unlock];
 #ifdef DEBUG
     NSLog(@"UMNamedList removeEntry:%@",str);
     [self dump];
@@ -104,13 +104,13 @@
 - (BOOL)containsEntry:(NSString *)str
 {
     BOOL found = NO;
-    [_lock lock];
+    [_namedListLock lock];
     NSString *s =  _namedlistEntries[str];
     if(s!=NULL)
     {
         found = YES;
     }
-    [_lock unlock];
+    [_namedListLock unlock];
     return found;
 }
 
@@ -118,15 +118,15 @@
 - (NSArray *)allEntries
 {
     NSArray *a;
-    [_lock lock];
+    [_namedListLock lock];
     a = [_namedlistEntries allKeys];
-    [_lock unlock];
+    [_namedListLock unlock];
     return a;
 }
 
 - (void)flush
 {
-    [_lock lock];
+    [_namedListLock lock];
     if(_dirty)
     {
         NSArray *keys = [_namedlistEntries allKeys];
@@ -145,7 +145,7 @@
 #endif
         _dirty = NO;
     }
-    [_lock unlock];
+    [_namedListLock unlock];
 #ifdef DEBUG
 //    NSLog(@"UMNamedList flush");
 //    [self dump];
@@ -176,10 +176,10 @@
             list[value]=value;
         }
     }
-    [_lock lock];
+    [_namedListLock lock];
     _namedlistEntries = list;
     _dirty = NO;
-    [_lock unlock];
+    [_namedListLock unlock];
 #ifdef DEBUG
     [self dump];
 #endif

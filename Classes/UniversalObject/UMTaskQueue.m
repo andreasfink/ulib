@@ -5,6 +5,7 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 //
+#import "ulib_config.h"
 
 #import "UMTaskQueue.h"
 #import "UMBackgrounderWithQueue.h"
@@ -13,7 +14,11 @@
 #import "UMTaskQueueTask.h"
 #import "UMFileTrackingMacros.h"
 #include <sys/types.h>
+#if defined(HAVE_SYS_SYSCTL_H) && !defined(__LINUX__)
+/* under linux sys/sysctl.h is depreciated */
 #include <sys/sysctl.h>
+#endif
+
 #include <string.h>
 #import "UMAssert.h"
 
@@ -115,7 +120,7 @@
 static int g_cpu_count = 0;
 
 #ifdef __APPLE__
-int ulib_cpu_count()
+int ulib_cpu_count(void)
 {
     if(g_cpu_count)
     {
@@ -134,7 +139,7 @@ int ulib_cpu_count()
 #endif
 
 #ifdef LINUX
-int ulib_cpu_count()
+int ulib_cpu_count(void)
 {
     if(g_cpu_count)
     {

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <pthread.h>
-
+#include "ulib_config.h" // we need __func__ 
 
 @interface UMMutex : NSObject
 {
@@ -27,6 +27,7 @@
     const char          *_tryingToLockInFile;
     long                 _tryingToLockAtLine;
     const char          *_tryingToLockInFunction;
+    BOOL                _isLocked;
 
 }
 
@@ -40,11 +41,15 @@
 @property(readwrite,assign) const char      *tryingToLockInFile;
 @property(readwrite,assign) long            tryingToLockAtLine;
 @property(readwrite,assign) const char      *tryingToLockInFunction;
+@property(readonly,assign) BOOL             isLocked;
 
 
 - (void) lock;
 - (void) unlock;
 - (int) tryLock;
+- (int)tryLock:(NSTimeInterval)timeout
+     retryTime:(NSTimeInterval)retryTime;
+
 - (UMMutex *) init;
 - (UMMutex *) initWithName:(NSString *)name;
 - (UMMutex *) initWithName:(NSString *)name saveInObjectStat:(BOOL)safeInObjectStat;
@@ -79,17 +84,55 @@ void ummutex_stat_disable(void);
 
 #define UMMUTEX_LOCK(a)  \
 { \
+    if([a isKindOfClass:[UMMutex class]]) \
+    { \
+        a.tryingToLockInFile = __FILE__; \
+        a.tryingToLockAtLine = __LINE__; \
+        a.tryingToLockInFunction = __func__; \
+    } \
+    else \
+    { \
+        NSLog(@"FILE:%s line:%d locking a non UMMutex!",__FILE__,__LINE__); \
+    } \
+    [a lock]; \
+    if([a isKindOfClass:[UMMutex class]]) \
+    { \
+        a.lockedInFile = __FILE__;  \
+        a.lockedAtLine = __LINE__;   \
+        a.lockedInFunction =  __func__;  \
+        a.tryingToLockInFile = NULL; \
+        a.tryingToLockAtLine = 0; \
+        a.tryingToLockInFunction = NULL; \
+    } \
+}
+
+#define UMMUTEX_TRYLOCK(a,timeout,retry,result)  \
+{ \
     a.tryingToLockInFile = __FILE__; \
     a.tryingToLockAtLine = __LINE__; \
     a.tryingToLockInFunction = __func__; \
-    [a lock]; \
-    a.lockedInFile = __FILE__;  \
-    a.lockedAtLine = __LINE__;   \
-    a.lockedInFunction =  __func__;  \
-    a.tryingToLockInFile = NULL; \
-    a.tryingToLockAtLine = 0; \
-    a.tryingToLockInFunction = NULL; \
+    if(timeout <= 0) \
+    { \
+        result = [a tryLock];\
+    } \
+    else \
+    { \
+        result = [a tryLock:timeout retryTime:retry];\
+    } \
+    if(result==0) \
+    { \
+        a.lockedInFile = __FILE__;  \
+        a.lockedAtLine = __LINE__;   \
+        a.lockedInFunction =  __func__;  \
+    } \
+    else \
+    { \
+        a.tryingToLockInFile = NULL; \
+        a.tryingToLockAtLine = 0; \
+        a.tryingToLockInFunction = NULL; \
+    } \
 }
+
 
 #define UMMUTEX_UNLOCK(a) \
 {  \

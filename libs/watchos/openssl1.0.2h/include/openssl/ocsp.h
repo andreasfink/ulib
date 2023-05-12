@@ -160,7 +160,7 @@ typedef struct ocsp_request_st {
  *       tryLater              (3),      --Try again later
  *                                       --(4) is not used
  *       sigRequired           (5),      --Must sign the request
- *       unauthorized          (6)       --Request unauthorized
+ *       unauthorised          (6)       --Request unauthorised
  *   }
  */
 # define OCSP_RESPONSE_STATUS_SUCCESSFUL          0
@@ -168,7 +168,7 @@ typedef struct ocsp_request_st {
 # define OCSP_RESPONSE_STATUS_INTERNALERROR        2
 # define OCSP_RESPONSE_STATUS_TRYLATER             3
 # define OCSP_RESPONSE_STATUS_SIGREQUIRED          5
-# define OCSP_RESPONSE_STATUS_UNAUTHORIZED         6
+# define OCSP_RESPONSE_STATUS_UNAUTHORISED         6
 
 /*-  ResponseBytes ::=       SEQUENCE {
  *       responseType   OBJECT IDENTIFIER,

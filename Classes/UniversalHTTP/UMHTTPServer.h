@@ -8,7 +8,7 @@
 
 #import "UMObject.h"
 
-#import "UMHTTPServerAuthorizeResult.h"
+#import "UMHTTPServerAuthoriseResult.h"
 #import "UMHTTPAuthenticationStatus.h"
 #import "UMSocketDefs.h"
 #import "UMSynchronizedArray.h"
@@ -35,8 +35,8 @@ typedef enum UMHTTPServerStatus
 } UMHTTPServerStatus;
 
 
-@protocol UMHTTPServerAuthorizeConnectionDelegate <NSObject>
-- (UMHTTPServerAuthorizeResult)	httpAuthorizeConnection:(UMSocket *)sock;
+@protocol UMHTTPServerAuthoriseConnectionDelegate <NSObject>
+- (UMHTTPServerAuthoriseResult)	httpAuthoriseConnection:(UMSocket *)sock;
 @end
 
 @protocol UMHTTPServerAuthenticateRequestDelegate <NSObject>
@@ -131,7 +131,7 @@ typedef enum UMHTTPServerStatus
 	// the delegates for authorisation
 	//
 	
-	id	<UMHTTPServerAuthorizeConnectionDelegate>	_authorizeConnectionDelegate; /*!< this delegate gets called upon a new incoming connection to verify if the calling IP is allowed to connect. */
+	id	<UMHTTPServerAuthoriseConnectionDelegate>	_authoriseConnectionDelegate; /*!< this delegate gets called upon a new incoming connection to verify if the calling IP is allowed to connect. */
 	id	<UMHTTPServerAuthenticateRequestDelegate>	_authenticateRequestDelegate;
 
 	//
@@ -148,17 +148,13 @@ typedef enum UMHTTPServerStatus
     id <UMHTTPServerHttpGetPostDelegate>    _httpGetPostDelegate;
     id <UMHTTPWebSocketDelegateProtocol>    _httpWebSocketDelegate;
 
-    NSString *_privateKeyFile;
-    NSData *_privateKeyFileData;
-
-    NSString *_certFile;
-    NSData *_certFileData;
-
+    NSString            *_privateKeyFile;
+    NSData              *_privateKeyFileData;
+    NSString            *_certFile;
+    NSData              *_certFileData;
     UMSynchronizedArray *_pendingRequests;
-    UMMutex *_connectionsLock;
-    NSString    *_documentRoot;
-
-    NSUInteger   _processingThreadCount;
+    NSString            *_documentRoot;
+    NSUInteger          _processingThreadCount;
 }
 
 @property(readwrite,strong)		        NSString *serverName;
@@ -169,7 +165,7 @@ typedef enum UMHTTPServerStatus
 //
 // the delegates for authorisation
 //
-@property(readwrite, strong)	id	<UMHTTPServerAuthorizeConnectionDelegate>	authorizeConnectionDelegate;
+@property(readwrite, strong)	id	<UMHTTPServerAuthoriseConnectionDelegate>	authoriseConnectionDelegate;
 @property(readwrite, strong)	id	<UMHTTPServerAuthenticateRequestDelegate>	authenticateRequestDelegate;
 
 //
@@ -211,7 +207,7 @@ typedef enum UMHTTPServerStatus
 
 - (UMSocketError) start;
 - (void) mainListener;
-- (UMHTTPServerAuthorizeResult) authorizeConnection:(UMSocket *) socket;
+- (UMHTTPServerAuthoriseResult) authoriseConnection:(UMSocket *) socket;
 - (void) stop;
 
 - (void) connectionDone:(UMHTTPConnection *) con;

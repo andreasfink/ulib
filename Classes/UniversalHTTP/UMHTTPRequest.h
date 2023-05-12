@@ -62,6 +62,10 @@
     UMMutex             *_pendingRequestLock;
     NSString            *_documentRoot;
     BOOL                _isWebSocketRequest;
+    
+    NSString            *_remoteAddress;
+    int                 _remotePort;
+
 }
 
 @property (readwrite,assign,atomic)uint64_t            requestId;
@@ -91,6 +95,8 @@
 @property (readwrite,assign,atomic)     BOOL            mustClose;
 @property (readwrite,strong) NSString                   *documentRoot;
 @property (readwrite,assign) BOOL                       isWebSocketRequest;
+@property (readwrite,strong) NSString                   *remoteAddress;
+@property (readwrite,assign) int                        remotePort;
 
 
 - (NSString *)name;
@@ -118,7 +124,8 @@
 - (void) setResponseCssString:(NSString *)content;
 - (void) setResponseJsonString:(NSString *)content;
 - (void) setResponseJsonObject:(id)content;
-- (void)setNotAuthorizedForRealm:(NSString *)realm;
+- (void)setNotAuthorizedForRealm:(NSString *)realm; /* depreciated */
+- (void)setNotAuthorisedForRealm:(NSString *)realm;
 - (void)setContentType:(NSString *)ct;
 - (NSString *)authenticationStatusAsString;
 - (NSMutableDictionary *)paramsMutableCopy;
@@ -130,6 +137,7 @@
 - (void)setResponseTypeGif;
 - (void)setResponseTypeJson;
 - (void)setResponseTypeBinary;
+- (void)setResponseTypeJavascript;
 
 - (void)setCookie:(NSString *)cookieName withValue:(NSString *)value;
 - (void)setCookie:(NSString *)cookieName withValue:(NSString *)value forPath:(NSString *)path;

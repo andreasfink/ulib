@@ -10,8 +10,4 @@
 
 @implementation UMRedisStatus
 
-@synthesize ok;
-@synthesize statusString;
-@synthesize exceptionRaised;
-
 @end

@@ -10,6 +10,7 @@
 #import "UMMicroSec.h"
 @class UMMutex;
 /* all timers are in microseconds since Jan. 1, 1970 */
+@class UMSynchronizedSortedDictionary;
 
 @interface UMTimer : UMObject
 {
@@ -69,5 +70,6 @@
 - (void)fire;
 - (void)setSeconds:(NSTimeInterval)sec;
 - (NSTimeInterval)seconds;
+- (UMSynchronizedSortedDictionary *)timerDescription;
 
 @end

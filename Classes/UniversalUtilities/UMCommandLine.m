@@ -221,6 +221,13 @@
         NSDictionary *def = _commandLineDefinition[j];
         NSString *arg = @"";
         NSString *arg_multi = NULL;
+        if(def[@"hidden"])
+        {
+            if( [def[@"hidden"] boolValue] == YES)
+            {
+                continue;
+            }
+        }
         if(def[@"argument"])
         {
             if([def[@"multi"] boolValue])

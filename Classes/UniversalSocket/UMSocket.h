@@ -36,9 +36,9 @@ typedef enum SocketBlockingMode
 @interface UMSocket : UMObject<NSNetServiceDelegate>
 #endif
 {
-	UMSocketType		type;
-	UMSocketConnectionDirection	direction;
-	UMSocketStatus		status;
+	UMSocketType		_type;
+	UMSocketConnectionDirection	_direction;
+	UMSocketStatus		_status;
 	UMHost				*_localHost;
 	UMHost				*_remoteHost;
 	in_port_t			_requestedLocalPort;
@@ -48,7 +48,6 @@ typedef enum SocketBlockingMode
 	NSString			*_connectedLocalAddress;
 	NSString			*_connectedRemoteAddress;
 	int					_sock;
-    
     int                 _socketDomain;
     int                 _socketFamily;
     int                 _socketProto;
@@ -63,33 +62,33 @@ typedef enum SocketBlockingMode
 	NSString			*device;
 	int					lastPollEvent;
 	NSMutableData		*_receiveBuffer;
-	int					rx_crypto_enable;
-	int					tx_crypto_enable;
-	NSString			*lastError;
-    UMCrypto			*cryptoStream;
-	id					reportDelegate;	/* must have reportStatus:(NSString *) str */
-    long                receivebufpos;
-    BOOL                useSSL;
-    BOOL                sslActive;
+	int					_rx_crypto_enable;
+	int					_tx_crypto_enable;
+	NSString			*_lastError;
+    UMCrypto			*_cryptoStream;
+	id					_reportDelegate;	/* must have reportStatus:(NSString *) str */
+    long                _receivebufpos;
+    BOOL                _useSSL;
+    BOOL                _sslActive;
     
-    NSString            *serverSideCertFilename;
-    NSString            *serverSideKeyFilename;
-    NSData              *serverSideCertData;
-    NSData              *serverSideKeyData;
+    NSString            *_serverSideCertFilename;
+    NSString            *_serverSideKeyFilename;
+    NSData              *_serverSideCertData;
+    NSData              *_serverSideKeyData;
     BOOL                _isInPollCall;
-    void                *ssl;
+    void                *_ssl;
     NSString            *_socketName;
     UMMutex             *_controlLock;
     UMMutex             *_dataLock;
 
 @protected
-    int                 ip_version;
-    NSString            *name;
+    int                 _ip_version;
+    NSString            *_name;
 #if !TARGET_OS_WATCH
-    NSNetService        *netService;
+    NSNetService        *_netService;
 #endif
-    NSString            *advertizeName;
-    NSString            *advertizeDomain;
+    NSString            *_advertizeName;
+    NSString            *_advertizeDomain;
     int                 _configuredMaxSegmentSize;
     int                 _activeMaxSegmentSize;
     id __weak           _customUser; /* a user can use this field as a reference to its user */
@@ -151,6 +150,7 @@ typedef enum SocketBlockingMode
 
 - (UMSocket *) initWithType:(UMSocketType)t;
 - (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name;
+- (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name existingSocket:(int)sock;
 
 //+ (void) initSSL;
 + (NSString *) statusDescription:(UMSocketStatus)s;
@@ -184,7 +184,7 @@ typedef enum SocketBlockingMode
 - (int) sendSctpBytes:(void *)bytes length:(int)len;
 - (int) sendSctpNSData:(NSData *)data;
 - (UMSocketError) receive: (ssize_t)maxSize appendTo:(NSMutableData *)appendToMe;
-- (void) reportError:(int)err withString: (NSString *)errString;
+- (void) reportError:(UMSocketError)uerr withString:(NSString *)errString;
 - (void) reportStatus: (NSString *)str;
 - (UMSocketError) switchToNonBlocking;
 - (UMSocketError) switchToBlocking;
@@ -231,8 +231,10 @@ typedef enum SocketBlockingMode
 
 - (void) initNetworkSocket;
 - (UMSocketError) setLinger;
+- (UMSocketError) setPathMtuDiscovery:(BOOL)enable;
 - (UMSocketError) setReuseAddr;
 - (UMSocketError) setIPDualStack;
+- (UMSocketError) setIPv6Only;
 - (UMSocketError) setKeepalive:(BOOL)keepalive;
 + (NSString *)addressOfSockAddr:(struct sockaddr *)sockAddr;
 + (int)portOfSockAddr:(struct sockaddr *)sockAddr;

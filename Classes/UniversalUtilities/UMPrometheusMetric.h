@@ -23,7 +23,7 @@ typedef enum UMPrometheusMetricType
 
 @interface UMPrometheusMetric : UMObject
 {
-    UMMutex *_lock;
+    UMMutex *_prometheusLock;
     UMPrometheus *_parent;
     NSString *_metricName;
     NSString *_subname1;

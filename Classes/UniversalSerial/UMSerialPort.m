@@ -30,7 +30,7 @@
         _hardwareHandshake = NO;
         _fd = -1;
         _isOpen = NO;
-        _lock = [[UMMutex alloc]initWithName:@"UMSerialPort"];
+        _serialPortLock = [[UMMutex alloc]initWithName:@"UMSerialPort"];
     }
     return self;
 }
@@ -56,7 +56,7 @@
         _fd = -1;
         _isOpen = NO;
         NSString *s = [NSString stringWithFormat:@"UMSerialPort %@",name];
-        _lock = [[UMMutex alloc]initWithName:s];
+        _serialPortLock = [[UMMutex alloc]initWithName:s];
     }
     return self;
 }
@@ -112,7 +112,7 @@
 
 - (UMSerialPortError)open
 {
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_serialPortLock);
 
     if(_isOpen)
     {
@@ -122,7 +122,7 @@
     if(_fd < 0)
     {
         UMSerialPortError err =  [UMSerialPort errorFromErrno:errno];
-        UMMUTEX_UNLOCK(_lock);
+        UMMUTEX_UNLOCK(_serialPortLock);
         return err;
     }
     _isOpen = YES;
@@ -233,7 +233,7 @@
     tcflush(_fd, TCIOFLUSH);
     [self changeSpeed:_speed];
 
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_serialPortLock);
     return UMSerialPortError_no_error;
 }
 
@@ -246,7 +246,7 @@
         return;
     }
 
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_serialPortLock);
     struct termios tios;
     memset(&tios,0x00,sizeof(tios));
     tcgetattr(_fd, &tios);
@@ -325,16 +325,16 @@
         NSLog(@"failed to set termios attribute(speed) on device %@",_deviceName);
     }
     tcflush(_fd, TCIOFLUSH);
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_serialPortLock);
 }
 
 - (void)close
 {
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_serialPortLock);
     close(_fd);
     _fd = -1;
     _isOpen = NO;
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_serialPortLock);
 }
 
 - (UMSerialPortError)writeData:(NSData *)data
@@ -351,9 +351,9 @@
     }
 
     const uint8_t *bytes = data.bytes;
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_serialPortLock);
     ssize_t len2 = write(_fd,bytes,len);
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_serialPortLock);
 
     if(len2 < 0)
     {
@@ -384,7 +384,7 @@
     NSMutableData *data = [[NSMutableData alloc]init];
     uint8_t buffer[256];
     ssize_t r=1;
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_serialPortLock);
     while(r>0)
     {
         /* we need to be in non blocking mode here */
@@ -394,7 +394,7 @@
             [data appendBytes:buffer length:r];
         }
     }
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_serialPortLock);
     if((r < 0) && (errPtr != NULL))
     {
         *errPtr = [UMSerialPort errorFromErrno:errno];
@@ -431,14 +431,6 @@
 
     int events = POLLIN | POLLPRI | POLLERR | POLLHUP | POLLNVAL;
 
-#ifdef POLLRDBAND
-    events |= POLLRDBAND;
-#endif
-
-#ifdef POLLRDHUP
-    events |= POLLRDHUP;
-#endif
-
     memset(pollfds,0,sizeof(pollfds));
     pollfds[0].fd = _fd;
     pollfds[0].events = events;
@@ -448,9 +440,9 @@
     errno = 99;
 
     
-    UMMUTEX_LOCK(_lock);
+    UMMUTEX_LOCK(_serialPortLock);
     ret1 = poll(pollfds, 1, timeoutInMs);
-    UMMUTEX_UNLOCK(_lock);
+    UMMUTEX_UNLOCK(_serialPortLock);
 
     UMSerialPortError returnError = UMSerialPortError_no_error;
 
@@ -484,22 +476,10 @@
         {
             returnError = UMSerialPortError_has_data_and_hup;
         }
-#ifdef POLLRDHUP
-        else if(ret2 & POLLRDHUP)
-        {
-            returnError = UMSerialPortError_has_data_and_hup;
-        }
-#endif
         else if(ret2 & POLLNVAL)
         {
             returnError = [UMSerialPort errorFromErrno:eno];
         }
-#ifdef POLLRDBAND
-        else if(ret2 & POLLRDBAND)
-        {
-            returnError =  UMSerialPortError_has_data;
-        }
-#endif
         else if(ret2 & POLLIN)
         {
             returnError =  UMSerialPortError_has_data;

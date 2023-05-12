@@ -26,32 +26,44 @@
 
 - (void)runOnBackgrounder:(UMBackgrounder *)bg
 {
-    [_runMutex lock];
-    @try
+    @autoreleasepool
     {
-        ulib_set_thread_name([NSString stringWithFormat:@"%@ (executing: %@)",bg.name,_name]);
-        if(_enableLogging)
+        [_runMutex lock];
+        @try
         {
-            if(_name==NULL)
+            ulib_set_thread_name([NSString stringWithFormat:@"%@ (executing: %@)",bg.name,_name]);
+            if(_enableLogging)
             {
-                NSLog (@"_name is NULL!");
+                if(_name==NULL)
+                {
+                    NSLog (@"_name is NULL!");
+                }
+                NSLog(@"Task %@ execution on backgrounder %@",self.name,bg.name);
             }
-            NSLog(@"Task %@ execution on backgrounder %@",self.name,bg.name);
-        }
-        if(_synchronizeMutex)
-        {
-            [_synchronizeMutex lock];
-            @autoreleasepool
+            if(_synchronizeMutex)
             {
-                [self main];
+                UMMUTEX_LOCK(_synchronizeMutex);
+                @autoreleasepool
+                {
+                    [self main];
+                }
+                UMMUTEX_UNLOCK(_synchronizeMutex);
             }
-            [_synchronizeMutex unlock];
-        }
-        else
-        {
-            if((_synchronizeObject) && (_synchronizeObject!=self)) /* self is already synchronized */
+            else
             {
-                @synchronized(_synchronizeObject)
+                if((_synchronizeObject) && (_synchronizeObject!=self)) /* self is already synchronized */
+                {
+                    @synchronized(_synchronizeObject)
+                    {
+                        @autoreleasepool
+                        {
+                            [self startup];
+                            [self main];
+                            [self shutdown];
+                        }
+                    }
+                }
+                else
                 {
                     @autoreleasepool
                     {
@@ -61,24 +73,15 @@
                     }
                 }
             }
-            else
-            {
-                @autoreleasepool
-                {
-                    [self startup];
-                    [self main];
-                    [self shutdown];
-                }
-            }
         }
+        @finally
+        {
+            [_runMutex unlock];
+        }
+        _synchronizeObject=NULL; /* we need to break the link to the synchronized object as it might hold us
+                                 otherwise we might never get released from memory */
+        _retainObject = NULL;
     }
-    @finally
-    {
-        [_runMutex unlock];
-    }
-    _synchronizeObject=NULL; /* we need to break the link to the synchronized object as it might hold us
-                             otherwise we might never get released from memory */
-    _retainObject = NULL;
 }
 
 - (void)main

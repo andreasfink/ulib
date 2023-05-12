@@ -8,6 +8,9 @@
 
 #import "UMObjectStatisticEntry.h"
 
+#define NSLOCK_LOCK(l)     [l lock];
+#define NSLOCK_UNLOCK(l)   [l unlock];
+
 @implementation UMObjectStatisticEntry
 
 - (UMObjectStatisticEntry *)init
@@ -15,50 +18,50 @@
 	self = [super init];
 	if(self)
 	{
-		_lock = [[NSLock alloc]init];
+		_entryLock = [[NSLock alloc]init];
 	}
 	return self;
 }
 
 - (void)increaseAllocCounter
 {
-	[_lock lock];
+	NSLOCK_LOCK(_entryLock);
 	_allocCounter++;
 	_inUseCounter++;
-	[_lock unlock];
+	NSLOCK_UNLOCK(_entryLock);
 }
 
 - (void)decreaseAllocCounter
 {
-	[_lock lock];
+	NSLOCK_LOCK(_entryLock);
 	_allocCounter--;
 	_inUseCounter--;
-	[_lock unlock];
+	NSLOCK_UNLOCK(_entryLock);
 }
 
 - (void)increaseDeallocCounter
 {
-	[_lock lock];
+	NSLOCK_LOCK(_entryLock);
 	_deallocCounter++;
 	_inUseCounter--;
-	[_lock unlock];
+	NSLOCK_UNLOCK(_entryLock);
 }
 
 - (void)decreaseDeallocCounter
 {
-	[_lock lock];
+	NSLOCK_LOCK(_entryLock);
 	_deallocCounter--;
 	_inUseCounter++;
-	[_lock unlock];
+	NSLOCK_UNLOCK(_entryLock);
 }
 
 - (long long)allocCounter
 {
 	long long l;
 
-	[_lock lock];
+	NSLOCK_LOCK(_entryLock);
 	l = _allocCounter;
-	[_lock unlock];
+	NSLOCK_UNLOCK(_entryLock);
 	return l;
 }
 
@@ -66,9 +69,9 @@
 {
 	long long l;
 
-	[_lock lock];
+	NSLOCK_LOCK(_entryLock);
 	l = _deallocCounter;
-	[_lock unlock];
+	NSLOCK_UNLOCK(_entryLock);
 	return l;
 }
 
@@ -76,9 +79,9 @@
 {
 	long long l;
 
-	[_lock lock];
+	NSLOCK_LOCK(_entryLock);
 	l = _inUseCounter;
-	[_lock unlock];
+	NSLOCK_UNLOCK(_entryLock);
 	return l;
 }
 
@@ -89,7 +92,7 @@
 
 - (UMObjectStatisticEntry *)copyWithZone:(NSZone *)zone
 {
-	[_lock lock];
+	NSLOCK_LOCK(_entryLock);
 
 	UMObjectStatisticEntry *clone = [[UMObjectStatisticEntry allocWithZone:zone]init];
 	clone->_allocCounter = _allocCounter;
@@ -97,7 +100,7 @@
 	clone->_inUseCounter = _inUseCounter;
 	clone->_name = _name;
 
-	[_lock unlock];
+	NSLOCK_UNLOCK(_entryLock);
 	return clone;
 }
 @end

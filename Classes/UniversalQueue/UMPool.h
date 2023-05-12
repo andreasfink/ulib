@@ -14,7 +14,7 @@
 @interface UMPool : UMObject
 {
     NSMutableArray  *_queues[UMPOOL_QUEUES_COUNT];
-    UMMutex         *_lock[UMPOOL_QUEUES_COUNT];
+    UMMutex         *_poolLock[UMPOOL_QUEUES_COUNT];
     int _rotary;
 }
 

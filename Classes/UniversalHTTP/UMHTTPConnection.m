@@ -256,6 +256,8 @@
 				_currentRequest.protocolVersion = protocol;
                 _currentRequest.connection = self;
                 _currentRequest.documentRoot = _server.documentRoot;
+                _currentRequest.remoteAddress = _socket.connectedRemoteAddress;
+                _currentRequest.remotePort = _socket.connectedRemotePort;
 				cSection=UMHTTPConnectionRequestSectionHeaderLine;
 				continue;
 			}
@@ -421,8 +423,8 @@
 
         if(req.authenticationStatus == UMHTTP_AUTHENTICATION_STATUS_FAILED)
         {
-            [req setNotAuthorizedForRealm:realm];
-            req.responseCode = HTTP_RESPONSE_CODE_UNAUTHORIZED;
+            [req setNotAuthorisedForRealm:realm];
+            req.responseCode = HTTP_RESPONSE_CODE_UNAUTHORISED;
             [req setResponseHtmlString:@"Authentication failed"];
             req.awaitingCompletion = NO;
         }

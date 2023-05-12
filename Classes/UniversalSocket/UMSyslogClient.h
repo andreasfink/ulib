@@ -12,7 +12,7 @@
 #import "UMObject.h"
 #import "UMHost.h"
 #include <unistd.h>
-
+ 
 typedef enum UMSyslogFacility
 {
     UMSyslogFacility_Default                = -1,

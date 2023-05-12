@@ -57,6 +57,7 @@ typedef enum UMBackgrounder_runningStatus
 - (UMBackgrounder *)initWithName:(NSString *)n workSleeper:(UMSleeper *)ws;
 - (void)startBackgroundTask;
 - (void)shutdownBackgroundTask;
+- (void)shutdownBackgroundTaskFromWithin;
 - (void)backgroundTask;
 - (void)backgroundInit;
 - (void)backgroundExit;

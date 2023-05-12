@@ -19,7 +19,7 @@ typedef uint8_t UMSleeper_Signal; /* note Sleeper signal is a bitmask */
 #define UMSleeper_StartupCompletedSignal    (UMSleeper_Signal)0x04
 #define UMSleeper_ShutdownOrderSignal       (UMSleeper_Signal)0x08
 #define UMSleeper_ShutdownCompletedSignal   (UMSleeper_Signal)0x10
-
+ 
 @interface UMSleeper : UMObject
 {
     int         _rxpipe;
@@ -28,7 +28,7 @@ typedef uint8_t UMSleeper_Signal; /* note Sleeper signal is a bitmask */
     const char  *_ifile;
     long        _iline;
     const char  *_ifunction;
-    UMMutex     *_prepareLock;
+    UMMutex     *_lock;
     BOOL        _debug;
 }
 @property(readwrite,assign,atomic) BOOL isPrepared;

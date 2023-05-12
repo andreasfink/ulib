@@ -28,6 +28,7 @@ NSString *sqlEscapeNSString(NSString *input);
 - (BOOL)webBoolValue;
 - (NSString *)trim;
 - (NSInteger)intergerValueSupportingHex;
+- (BOOL)isEqualToStringSupportingX:(NSString *)str;
 
 /* this is used to clean names. They are all returned in lowercase
   only lowercase is allowed. Uppercase is converted
@@ -35,5 +36,6 @@ NSString *sqlEscapeNSString(NSString *input);
   Allowed punctioations are - _ + , = %
 */
 - (NSString *)filterNameWithMaxLength:(int)maxlen;
+- (NSString *)randomizeX;
 
 @end

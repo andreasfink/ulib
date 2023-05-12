@@ -30,4 +30,16 @@
 	return [self substringWithRange:NSMakeRange(1,n)];
 }
 
+
+- (NSString *)htmlEscaped
+{
+    NSString *s = [self stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"];
+    s = [s stringByReplacingOccurrencesOfString:@"\t" withString:@"&Tab;"];
+    s = [s stringByReplacingOccurrencesOfString:@"\n" withString:@"&NewLine;"];
+    s = [s stringByReplacingOccurrencesOfString:@" " withString:@"&nbsp;"];
+    s = [s stringByReplacingOccurrencesOfString:@"\"" withString:@"&quot;"];
+    s = [s stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
+    s = [s stringByReplacingOccurrencesOfString:@">" withString:@"&gt;"];
+    return s;
+}
 @end

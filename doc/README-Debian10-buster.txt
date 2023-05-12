@@ -58,7 +58,7 @@ echo "deb-src http://apt.llvm.org/${DEBIAN_NICKNAME}/ llvm-toolchain-${DEBIAN_NI
 
 apt-get update
 
-apt-get install clang-13 lldb-13 lld-13
+apt-get install clang-14 lldb-14 lld-14
 
 
 2. Install depenencies
@@ -96,7 +96,7 @@ apt-get install clang-13 lldb-13 lld-13
         libxft2 libxft-dev \
         libflite1 flite1-dev \
         libxmu6 libxpm4 wmaker-common\
-        libgnutls30 libgnutls28-dev\
+        libgnutls30 libgnutls28-dev gnutls-bin\
         libpng-dev libpng16-16\
         libreadline7 libreadline-dev \
         libgif7 libgif-dev libwings3 libwings-dev  libwutil5 \
@@ -157,8 +157,8 @@ Build  libiconv
 3. Setting some defaults
 ------------------------------------------------
 
-export CC="/usr/bin/clang-13"
-export CXX="/usr/bin/clang++-13"
+export CC="/usr/bin/clang-11"
+export CXX="/usr/bin/clang++-11"
 export PREFIX="/usr/local"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"

@@ -94,11 +94,18 @@
 - (void) setNotFound
 {
     _responseCode = HTTP_RESPONSE_CODE_NOT_FOUND;
+    NSString *text =
+        @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\r\n"
+        @"<HTML><HEAD>\r\n"
+        @"<TITLE>404 Page Not Foundd</TITLE>\r\n"
+        @"</HEAD><BODY>\r\n"
+    @"<H1>404 Page Not Found</H1>\r\n";
+    [self setResponseHtmlString:text];
 }
 
 - (void) setRequireAuthentication
 {
-    _responseCode = HTTP_RESPONSE_CODE_UNAUTHORIZED;
+    _responseCode = HTTP_RESPONSE_CODE_UNAUTHORISED;
 }
 
 - (void) extractGetParams
@@ -313,6 +320,11 @@
     
 }
 
+- (void)setResponseTypeJavascript
+{
+    [self setResponseHeader:@"Content-Type" withValue:@"text/javascript"];
+}
+
 - (void)setResponseTypeJpeg
 {
     [self setResponseHeader:@"Content-Type" withValue:@"image/jpeg"];
@@ -407,8 +419,8 @@
             return @"Temporary Redirect";
         case HTTP_RESPONSE_CODE_BAD_REQUEST:
             return @"Bad Request";
-        case HTTP_RESPONSE_CODE_UNAUTHORIZED:
-            return @"Unauthorized";
+        case HTTP_RESPONSE_CODE_UNAUTHORISED:
+            return @"Unauthorised";
         case HTTP_RESPONSE_CODE_PAYMENT_REQUIRED:
             return @"Payment Required";
         case HTTP_RESPONSE_CODE_FORBIDDEN:
@@ -581,9 +593,16 @@
     [self setResponseHeader: @"Content-Type" withValue: ct];
 }
 
+
+/* backwards compatibility */
 - (void)setNotAuthorizedForRealm:(NSString *)realm
 {
-    _responseCode = HTTP_RESPONSE_CODE_UNAUTHORIZED;
+    [self setNotAuthorisedForRealm:realm];
+}
+
+- (void)setNotAuthorisedForRealm:(NSString *)realm
+{
+    _responseCode = HTTP_RESPONSE_CODE_UNAUTHORISED;
     [self setResponseHeader:@"WWW-Authenticate" withValue:[NSString stringWithFormat:@"Basic real=\"%@\"",realm]];
     NSString *text =
         @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\r\n"
@@ -592,7 +611,7 @@
         @"</HEAD><BODY>\r\n"
         @"<H1>Authorization Required</H1>\r\n"
         @"This server could not verify that you\r\n"
-        @"are authorized to access the document\r\n"
+        @"are authorised to access the document\r\n"
         @"requested.  Either you supplied the wrong\r\n"
         @"credentials (e.g., bad password), or your\r\n"
         @"browser doesn\'t understand how to supply\r\n";

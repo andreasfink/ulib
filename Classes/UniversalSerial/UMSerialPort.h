@@ -62,7 +62,7 @@ typedef enum UMSerialPortError
     BOOL                _hardwareHandshake;
     int                 _fd;
     BOOL                _isOpen;
-    UMMutex             *_lock;
+    UMMutex             *_serialPortLock;
 }
 
 

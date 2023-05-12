@@ -6,7 +6,7 @@ The ones shipped with the distributions is not supporting automatic
 reference counting because its using the old objc runtime which does not support
 ARC.
 
-Here is how to get such a installation up and running under Debian 10 (codename Buster)
+Here is how to get such a installation up and running under Debian 12 (codename Bookworm)
 
 
 First we need some basic tools and repository's set up

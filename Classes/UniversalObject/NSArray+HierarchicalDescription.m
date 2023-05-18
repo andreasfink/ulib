@@ -29,6 +29,18 @@
     return [self  sortedArrayUsingComparator: ^(NSString *a, NSString *b)  {return [a compare:b];} ];
 }
 
+- (BOOL)containsString:(NSString *)str
+{
+    for(NSString *s in self)
+    {
+        if([str isEqualToString:s])
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 
 - (NSArray<NSNumber *>*)sortedNumbersArray
 {

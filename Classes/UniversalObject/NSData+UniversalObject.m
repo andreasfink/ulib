@@ -227,6 +227,8 @@ static inline int nibbleToInt(const char a)
 	return [[NSString alloc]initWithData:self encoding:NSUTF8StringEncoding];
 }
 
+
+
 @end
 
 @implementation NSMutableData (UniversalObject)
@@ -235,6 +237,5 @@ static inline int nibbleToInt(const char a)
 {
     [self appendBytes:&byte length:1];
 }
-
 @end
 

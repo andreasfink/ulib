@@ -201,6 +201,9 @@ if test -z "$zmq"; then
    LIBS="$LIBS -lstdc++ -lzmq"
 fi
 
+if test -f "/usr/local/include/zmq.h"; then
+    AC_DEFINE(HAVE_ZMQ_H_USR_LOCAL)
+fi
 
 if test -z "$pthread"; then
     AC_CHECK_LIB(pthread, pthread_exit, [LIBS="$LIBS -lpthread"])

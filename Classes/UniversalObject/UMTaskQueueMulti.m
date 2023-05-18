@@ -15,7 +15,8 @@
 #import "UMQueueMulti.h"
 
 #include <sys/types.h>
-#if defined(HAVE_SYS_SYSCTL_H)
+#if defined(HAVE_SYS_SYSCTL_H) && !defined(__LINUX__)
+/* under linux sys/sysctl.h is depreciated */
 #include <sys/sysctl.h>
 #endif
 #include <string.h>

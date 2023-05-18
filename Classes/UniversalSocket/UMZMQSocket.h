@@ -11,7 +11,11 @@
 
 
 #if HAVE_ZMQ_H
+#ifdef	HAVE_ZMQ_H_USR_LOCAL
 #include "/usr/local/include/zmq.h"
+#else
+#include "zmq.h"
+#endif
 #endif
 
 @interface UMZMQSocket : UMObject

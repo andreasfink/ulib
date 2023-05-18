@@ -4652,6 +4652,10 @@ if test -z "$zmq"; then
    LIBS="$LIBS -lstdc++ -lzmq"
 fi
 
+if test -f "/usr/local/include/zmq.h"; then
+    printf "%s\n" "#define HAVE_ZMQ_H_USR_LOCAL 1" >>confdefs.h
+
+fi
 
 if test -z "$pthread"; then
     { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for pthread_exit in -lpthread" >&5

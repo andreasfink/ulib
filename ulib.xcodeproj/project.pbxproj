@@ -6156,7 +6156,7 @@
 				PRODUCT_NAME = ulib;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
-				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1i-binary/usr/local/include/";
+				SYSTEM_HEADER_SEARCH_PATHS = /usr/local/include;
 				TVOS_DEPLOYMENT_TARGET = 16.1;
 				USER_HEADER_SEARCH_PATHS = "";
 				USE_HEADERMAP = YES;
@@ -6231,7 +6231,7 @@
 				PRODUCT_NAME = ulib;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
-				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/osx/openssl-1.1.1i-binary/usr/local/include/";
+				SYSTEM_HEADER_SEARCH_PATHS = /usr/local/include;
 				TVOS_DEPLOYMENT_TARGET = 16.1;
 				USER_HEADER_SEARCH_PATHS = "";
 				USE_HEADERMAP = YES;

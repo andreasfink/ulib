@@ -31,7 +31,7 @@
     self = [super init];
     if(self)
     {
-        _history =[[UMHistoryLog alloc]init];
+        _history =[[UMHistoryLog alloc]initWithMaxLines:1000];
         type = UMFileTrackingInfo_typeFDES;
         fdes = desc;
         locationFile = file;
@@ -50,7 +50,7 @@
     self = [super init];
     if(self)
     {
-        _history =[[UMHistoryLog alloc]init];
+        _history =[[UMHistoryLog alloc]initWithMaxLines:1000];
         type = UMFileTrackingInfo_typePIPE;
         fdes = desc;
         locationFile = file;
@@ -68,7 +68,7 @@
     self = [super init];
     if(self)
     {
-        _history =[[UMHistoryLog alloc]init];
+        _history =[[UMHistoryLog alloc]initWithMaxLines:1000];
         type = UMFileTrackingInfo_typeSOCKET;
         fdes = desc;
         locationFile = file;
@@ -83,7 +83,7 @@
     self = [super init];
     if(self)
     {
-        _history =[[UMHistoryLog alloc]init];
+        _history =[[UMHistoryLog alloc]initWithMaxLines:1000];
         type = UMFileTrackingInfo_typeFILE;
         f = f1;
         locationFile = file;

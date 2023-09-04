@@ -47,7 +47,7 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
 (run as root or use sudo in front)
 
  apt-get install build-essential git subversion  \
-        clang lldb \
+        clang  \
         libxml2 libxml2-dev \
         libffi7 libffi-dev\
         libuuid1 uuid-dev uuid-runtime \
@@ -96,7 +96,8 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         gobjc++ gobjc++-10 \
         libpq-dev libpq5 curl libcurl4-openssl-dev \
 	libpq-dev libmariadb-dev-compat \
-	libzmq5 libzmq3-dev
+	libzmq5 libzmq3-dev \
+	mold
 
 
 

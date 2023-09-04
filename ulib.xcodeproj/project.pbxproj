@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -2159,7 +2159,6 @@
 		A64D4512267CC88F00540708 /* UMPrometheusThroughputMetric.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMPrometheusThroughputMetric.m; sourceTree = "<group>"; };
 		A65112D61A33BD650090FC94 /* UMLogLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMLogLevel.h; sourceTree = "<group>"; };
 		A65112D81A33BD860090FC94 /* UMLogLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMLogLevel.m; sourceTree = "<group>"; };
-		A65326DF25135A5C009B4425 /* testcase1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testcase1.m; sourceTree = "<group>"; };
 		A65334C316CEC81D00C10AA7 /* UMUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMUUID.m; sourceTree = "<group>"; };
 		A6538C74189B9A8C00B25A07 /* UMAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMAssert.h; sourceTree = "<group>"; };
 		A65727451B1869AA00854472 /* UMSynchronizedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSynchronizedDictionary.h; sourceTree = "<group>"; };
@@ -2880,7 +2879,6 @@
 				A628C8B71CB9270C00211137 /* Makefile.osx.in */,
 				A677B75A19C804A10090FC94 /* Makefile.linux.in */,
 				A6DF60B7238B298D007647F6 /* make_documentation.sh */,
-				A65326DF25135A5C009B4425 /* testcase1.m */,
 				A64347EC287E39A700D2B107 /* configure.ac */,
 				A64347ED287E39EE00D2B107 /* libc++.1.tbd */,
 				A64347E4287E391900D2B107 /* libzmq.a */,
@@ -4454,19 +4452,20 @@
 		};
 		A60C4C941EF7FE59007C203A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"$(SRCROOT)/VERSION",
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/version.h",
+				"$(SRCROOT)/version.h",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f version.h ]\nthen\n    if [ VERSION -nt version.h ]\n    then\n        ./configure\n    fi\nelse\n    ./configure\nfi\nmkdir -p \"/Library/Application Support/FinkTelecomServices/frameworks\"\nmkdir -p \"/Library/Application Support/FinkTelecomServices/bin\"\nmkdir -p \"/Library/Application Support/FinkTelecomServices/lib\"\n\n";
+			shellScript = "./configure\n";
 		};
 		A6E1DC9524063158001FB7FF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

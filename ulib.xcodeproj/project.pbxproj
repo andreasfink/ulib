@@ -2110,6 +2110,8 @@
 		A61F7D551A2CB4F70090FC94 /* UMLayerUserProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMLayerUserProtocol.h; sourceTree = "<group>"; };
 		A627D6C0238B382B00257324 /* doxygen-doc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "doxygen-doc"; sourceTree = "<group>"; };
 		A628C8B71CB9270C00211137 /* Makefile.osx.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx.in; sourceTree = "<group>"; };
+		A628EE322AA5B55200C34D40 /* openssl-3.2.0.pkg */ = {isa = PBXFileReference; lastKnownFileType = file; path = "openssl-3.2.0.pkg"; sourceTree = "<group>"; };
+		A628EE332AA5B55C00C34D40 /* BUILD-OPENSSL-3.1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "BUILD-OPENSSL-3.1.txt"; sourceTree = "<group>"; };
 		A62A7E2618AAD20D00EA8A2A /* UMHTTPPageRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPPageRef.h; sourceTree = "<group>"; };
 		A62A7E2718AAD20D00EA8A2A /* UMHTTPPageRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMHTTPPageRef.m; sourceTree = "<group>"; };
 		A62A7E2E18AAD6AD00EA8A2A /* UMHTTPPageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMHTTPPageCache.h; sourceTree = "<group>"; };
@@ -2262,9 +2264,6 @@
 		A6B37B191FC82D6D00794057 /* TestUMPool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestUMPool.m; sourceTree = "<group>"; };
 		A6B5657822A280000047E975 /* UMTestCaseBinaryIP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMTestCaseBinaryIP.h; sourceTree = "<group>"; };
 		A6B5657922A280000047E975 /* UMTestCaseBinaryIP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMTestCaseBinaryIP.m; sourceTree = "<group>"; };
-		A6B9E61E286FBBCB00A6C299 /* openssl-1.1.1p-binary */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "openssl-1.1.1p-binary"; sourceTree = "<group>"; };
-		A6B9E61F286FBBCB00A6C299 /* openssl-1.1.1p.pkg */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.installer-pkg"; path = "openssl-1.1.1p.pkg"; sourceTree = "<group>"; };
-		A6B9E620286FBBCB00A6C299 /* BUILD-OPENSSL-1.1.1p.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "BUILD-OPENSSL-1.1.1p.txt"; sourceTree = "<group>"; };
 		A6B9E621286FBBEA00A6C299 /* README-Debian11-bullseye.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Debian11-bullseye.txt"; sourceTree = "<group>"; };
 		A6B9E622286FBBEA00A6C299 /* README-Debian10-buster.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Debian10-buster.txt"; sourceTree = "<group>"; };
 		A6B9E623286FBBEA00A6C299 /* README-Debian9-stretch.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "README-Debian9-stretch.txt"; sourceTree = "<group>"; };
@@ -2846,9 +2845,8 @@
 		A682E4AA1AA7CB4100854472 /* osx */ = {
 			isa = PBXGroup;
 			children = (
-				A6B9E620286FBBCB00A6C299 /* BUILD-OPENSSL-1.1.1p.txt */,
-				A6B9E61E286FBBCB00A6C299 /* openssl-1.1.1p-binary */,
-				A6B9E61F286FBBCB00A6C299 /* openssl-1.1.1p.pkg */,
+				A628EE332AA5B55C00C34D40 /* BUILD-OPENSSL-3.1.txt */,
+				A628EE322AA5B55200C34D40 /* openssl-3.2.0.pkg */,
 			);
 			name = osx;
 			path = ../libs/osx;

@@ -9,16 +9,16 @@
 #import <ulib/UMHTTPConnection.h>
 #import <ulib/UMHTTPServer.h>
 #import <ulib/UMSocket.h>
-#import <ulib/NSMutableArray+UMHTTP.h>
-#import <ulib/NSMutableString+UMHTTP.h>
-#import <ulib/NSString+UMHTTP.h>
+#import <ulib/NSMutableArray+ulib.h>
+#import <ulib/NSMutableString+ulib.h>
+#import <ulib/NSString+ulib.h>
 #import <ulib/UMSleeper.h>
 #import <ulib/UMHTTPCookie.h>
 #import <ulib/UMJsonWriter.h>
 #import <ulib/UMHTTPTask_ReadRequest.h>
 #import <ulib/UMTaskQueue.h>
 #import <ulib/UMSynchronizedArray.h>
-#import <ulib/NSString+UniversalObject.h>
+#import <ulib/NSString+ulib.h>
 
 @implementation UMHTTPRequest
 

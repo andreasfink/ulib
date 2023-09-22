@@ -23,9 +23,9 @@ clean:
 	xcodebuild $(CONFIGURATION) clean
 
 install:
-	./codesign_environment.sh	
-	xcodebuild ${XCODESIGN} $(CONFIGURATION)  ${XCODESIGN} install
-
+	./codesign_environment.sh
+	xcodebuild ${XCODESIGN} $(CONFIGURATION) ${XCODESIGN} install
+	
 install_for_pkg: 
 	./codesign_environment.sh
 	xcodebuild ${XCODESIGN} $(CONFIGURATION)  DSTROOT="install_root" ${XCODESIGN} install

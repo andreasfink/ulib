@@ -550,7 +550,7 @@ AC_CONFIG_FILES([Makefile.linux])
 AC_CONFIG_FILES([Makefile.freebsd])
 AC_CONFIG_FILES([ulib.pc])
 AC_CONFIG_FILES([make_buildnr.sh])
-AC_CONFIG_FILES([ulib/path.h])
+AC_CONFIG_FILES([ulib/dmi_decode_path.h])
 AC_CONFIG_FILES([debian/ulib.control])
 AC_OUTPUT
 

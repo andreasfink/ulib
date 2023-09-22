@@ -7,7 +7,7 @@
 //
 
 #import <ulib/UMNamedList.h>
-#import <ulib/NSString+UMHTTP.h>
+#import <ulib/NSString+ulib.h>
 #import <ulib/UMSynchronizedSortedDictionary.h>
 #import <ulib/UMAssert.h>
 

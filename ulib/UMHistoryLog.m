@@ -6,10 +6,10 @@
 //
 
 #import <ulib/UMHistoryLog.h>
-#import <ulib/NSString+UniversalObject.h>
+#import <ulib/NSString+ulib.h>
 #import <ulib/UMHistoryLogEntry.h>
 #import <ulib/UMAssert.h>
-#import <ulib/NSDate+stringFunctions.h>
+#import <ulib/NSDate+ulib.h>
 
 @implementation UMHistoryLog
 

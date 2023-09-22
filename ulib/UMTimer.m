@@ -13,7 +13,7 @@
 #import <ulib/UMMutex.h>
 #import <ulib/UMUtil.h>
 #import <ulib/UMSynchronizedSortedDictionary.h>
-#import <ulib/NSDate+stringFunctions.h>
+#import <ulib/NSDate+ulib.h>
 
 #include <time.h>
 @implementation UMTimer

@@ -2741,7 +2741,7 @@ ac_config_headers="$ac_config_headers ulib/ulib_config.h"
   esac
 
 
-COPYRIGHT="Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved."
+COPYRIGHT="Copyright © 2023 Andreas Fink (andreas@fink.org). All rights reserved."
 PROJECT_NAME="ulib"
 CONFIG_DEFINE="ULIB_CONFIG"
 

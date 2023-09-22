@@ -19,10 +19,10 @@
 #include <netdb.h>
 
 #import <ulib/UMMutex.h>
-#import <ulib/NSData+UMSocket.h>
+#import <ulib/NSData+ulib.h>
 #import <ulib/UMAssert.h>
 #import <ulib/UMFileTrackingMacros.h>
-#import <ulib/NSString+UMSocket.h>
+#import <ulib/NSString+ulib.h>
 #import <ulib/UMSocketDefs.h>
 #import <ulib/UMPacket.h>
 #import <ulib/UMHistoryLog.h>

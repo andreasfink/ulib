@@ -5903,7 +5903,7 @@ ac_config_files="$ac_config_files ulib.pc"
 
 ac_config_files="$ac_config_files make_buildnr.sh"
 
-ac_config_files="$ac_config_files ulib/path.h"
+ac_config_files="$ac_config_files ulib/dmi_decode_path.h"
 
 ac_config_files="$ac_config_files debian/ulib.control"
 
@@ -6598,7 +6598,7 @@ do
     "Makefile.freebsd") CONFIG_FILES="$CONFIG_FILES Makefile.freebsd" ;;
     "ulib.pc") CONFIG_FILES="$CONFIG_FILES ulib.pc" ;;
     "make_buildnr.sh") CONFIG_FILES="$CONFIG_FILES make_buildnr.sh" ;;
-    "ulib/path.h") CONFIG_FILES="$CONFIG_FILES ulib/path.h" ;;
+    "ulib/dmi_decode_path.h") CONFIG_FILES="$CONFIG_FILES ulib/dmi_decode_path.h" ;;
     "debian/ulib.control") CONFIG_FILES="$CONFIG_FILES debian/ulib.control" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;

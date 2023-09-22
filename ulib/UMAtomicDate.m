@@ -7,7 +7,7 @@
 //
 
 #import <ulib/UMAtomicDate.h>
-#import <ulib/NSDate+stringFunctions.h>
+#import <ulib/NSDate+ulib.h>
 
 @implementation UMAtomicDate
 

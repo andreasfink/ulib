@@ -10,17 +10,16 @@
 #import <ulib/UMHTTPServer.h>
 #import <ulib/UMHTTPRequest.h>
 #import <ulib/UMSocket.h>
-#import <ulib/NSString+UMHTTP.h>
-#import <ulib/NSMutableString+UMHTTP.h>
-#import <ulib/NSMutableArray+UMHTTP.h>
-#import <ulib/NSDictionary+UMHTTP.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSMutableString+ulib.h>
+#import <ulib/NSMutableArray+ulib.h>
+#import <ulib/NSDictionary+ulib.h>
 #import <ulib/UMLogFeed.h>
 #import <ulib/UMHTTPTask_ReadRequest.h>
 #import <ulib/UMSynchronizedArray.h>
 #import <ulib/UMThreadHelpers.h>
 #import <ulib/UMTaskQueue.h>
-#import <ulib/NSData+UniversalObject.h>
-#import <ulib/NSData+UMHTTP.h>
+#import <ulib/NSData+ulib.h>
 #import <ulib/UMHTTPWebSocketDelegateProtocol.h>
 
 #include <poll.h>

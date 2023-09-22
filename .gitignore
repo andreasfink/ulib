@@ -19,6 +19,7 @@ buildnumber.c
 buildnumber.h
 version.h
 ulib.pc
+install_root
 
 
 #########################

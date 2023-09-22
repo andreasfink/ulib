@@ -7,7 +7,7 @@
 //
 
 #import <ulib/UMSyntaxToken_Const.h>
-#import <ulib/NSString+UniversalObject.h>
+#import <ulib/NSString+ulib.h>
 
 @implementation UMSyntaxToken_Const
 

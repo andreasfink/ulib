@@ -10,16 +10,15 @@
 
 #import <ulib/UMAssert.h>
 #import <ulib/UMObject.h>
-#import <ulib/NSData+UniversalObject.h>
-#import <ulib/NSString+UniversalObject.h>
-#import <ulib/NSArray+HierarchicalDescription.h>
-#import <ulib/NSData+HierarchicalDescription.h>
-#import <ulib/NSData+HierarchicalDescription.h>
-#import <ulib/NSDictionary+HierarchicalDescription.h>
-#import <ulib/NSNumber+HierarchicalDescription.h>
-#import <ulib/NSObject+HierarchicalDescription.h>
-#import <ulib/NSString+HierarchicalDescription.h>
-#import <ulib/NSDate+stringFunctions.h>
+#import <ulib/NSData+ulib.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSArray+ulib.h>
+#import <ulib/NSData+ulib.h>
+#import <ulib/NSDictionary+ulib.h>
+#import <ulib/NSNumber+ulib.h>
+#import <ulib/NSObject+ulib.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSDate+ulib.h>
 #import <ulib/UMIntegerWithHistory.h>
 #import <ulib/UMStringWithHistory.h>
 #import <ulib/UMDoubleWithHistory.h>
@@ -46,7 +45,7 @@
 #import <ulib/UMConfig.h>
 #import <ulib/UMConfigParsedLine.h>
 #import <ulib/UMConfigGroup.h>
-#import <ulib/NSDictionary+UniversalConfig.h>
+#import <ulib/NSDictionary+ulib.h>
 
 
 
@@ -54,8 +53,8 @@
 
 #import <ulib/UMHost.h>
 #import <ulib/UMSocket.h>
-#import <ulib/NSString+UMSocket.h>
-#import <ulib/NSData+UMSocket.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSData+ulib.h>
 #import <ulib/UMSyslogClient.h>
 #import <ulib/UMPacket.h>
 #import <ulib/UMZMQSocket.h>
@@ -82,15 +81,15 @@ typedef enum
 #import <ulib/UMHTTPServer.h>
 #import <ulib/UMHTTPSServer.h>
 #import <ulib/UMHTTPPageHandler.h>
-#import <ulib/NSString+UMHTTP.h>
-#import <ulib/NSMutableString+UMHTTP.h>
-#import <ulib/NSMutableArray+UMHTTP.h>
-#import <ulib/NSDictionary+UMHTTP.h>
-#import <ulib/NSData+UMHTTP.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSMutableString+ulib.h>
+#import <ulib/NSMutableArray+ulib.h>
+#import <ulib/NSDictionary+ulib.h>
+#import <ulib/NSData+ulib.h>
 
 #import <ulib/UMHTTPServerAuthoriseResult.h>
-#import <ulib/NSMutableString+UMHTTP.h>
-#import <ulib/NSMutableData+UMHTTP.h>
+#import <ulib/NSMutableString+ulib.h>
+#import <ulib/NSMutableData+ulib.h>
 
 #import <ulib/UMHTTPRequest.h>
 
@@ -110,9 +109,9 @@ typedef enum
 #import <ulib/UMJsonStreamParser.h>
 #import <ulib/UMJsonStreamParserAdapter.h>
 #import <ulib/UMJsonStreamWriter.h>
-#import <ulib/NSString+UMJson.h>
-#import <ulib/NSArray+UMJson.h>
-#import <ulib/NSDictionary+UMJson.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSArray+ulib.h>
+#import <ulib/NSDictionary+ulib.h>
 
 
 #import <ulib/UMLogLevel.h>
@@ -183,7 +182,7 @@ typedef enum
 #import <ulib/UMPlugin.h>
 #import <ulib/UMPluginHandler.h>
 #import <ulib/UMPluginDirectory.h>
-#import <ulib/NSData+UMLog.h>
+#import <ulib/NSData+ulib.h>
 #import <ulib/UMBackgrounderWithQueues.h>
 #import <ulib/UMConstantStringsDict.h>
 #import <ulib/UMCountryCodePrefixDigitTree.h>
@@ -207,7 +206,7 @@ typedef enum
 #import <ulib/UMPool.h>
 #import <ulib/UMSSLCertificate.h>
 #import <ulib/UMSerialPort.h>
-#import <ulib/path.h>
+#import <ulib/dmi_decode_path.h>
 
 @interface ulib : NSObject
 {

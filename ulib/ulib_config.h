@@ -31,7 +31,7 @@
 /* #undef HAVE_SCTP_SCTP_H */
 
 /* Define if you have netinet/sctp.h. */
-#define HAVE_NETINET_SCTP_H 1
+/* #undef HAVE_NETINET_SCTP_H */
 
 /* Define if you have getopt.h. */
 #define HAVE_GETOPT_H 1
@@ -73,7 +73,7 @@
 #define HAVE_PTHREAD_H 1
 
 /* Define if you have the <sys/sysctl.h> header file.  */
-/* #undef HAVE_SYS_SYSCTL_H */
+#define HAVE_SYS_SYSCTL_H 1
 
 /* Define if you have the <sys/ioctl.h> header file.  */
 #define HAVE_SYS_IOCTL_H 1
@@ -94,13 +94,13 @@
 #define HAVE_SYS_SOCKET_H 1
 
 /* Define if you have the <sys/sockio.h> header file. */
-/* #undef HAVE_SYS_SOCKIO_H */
+#define HAVE_SYS_SOCKIO_H 1
 
 /* Define if you have the <net/if.h> header file. */
 #define HAVE_NET_IF_H 1
 
 /* Define if you have the <net/if_dl.h> header file. */
-/* #undef HAVE_NET_IF_DL_H */
+#define HAVE_NET_IF_DL_H 1
 
 /* Define if you have the <netinet/in.h> header file. */
 #define HAVE_NETINET_IN_H 1
@@ -109,7 +109,7 @@
 #define HAVE_LIBM 1
 
 /* Define if you have the nsl library (-lnsl).  */
-#define HAVE_LIBNSL 1
+/* #undef HAVE_LIBNSL */
 
 /* Define if you have the pthread library (-lpthread).  */
 /* #undef HAVE_LIBPTHREAD */
@@ -153,19 +153,19 @@
 #define HAVE_OPENSSL 1
 
 /* define if we have TLS_method() */
-#define HAVE_TLS_METHOD 1
+/* #undef HAVE_TLS_METHOD */
 
 /* define if we have BN_secure_new() */
-#define HAVE_BN_SECURE_NEW 1
+/* #undef HAVE_BN_SECURE_NEW */
 
 /* define if we have BIO_s_mem()() */
-#define HAVE_BIO_S_SECMEM 1
+/* #undef HAVE_BIO_S_SECMEM */
 
 /* define if we have common crypto installed */
-/* #undef HAVE_COMMONCRYPTO */
+#define HAVE_COMMONCRYPTO 1
 
 /* if sockadd.sin_len is existing */
-/* #undef HAVE_SOCKADDR_SIN_LEN */
+#define HAVE_SOCKADDR_SIN_LEN 1
 #ifdef	HAVE_SOCKADDR_SIN_LEN
 #define	HAVE_SIN_LEN HAVE_SOCKADDR_SIN_LEN
 #endif

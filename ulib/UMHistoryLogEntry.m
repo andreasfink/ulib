@@ -7,7 +7,7 @@
 //
 
 #import <ulib/UMHistoryLogEntry.h>
-#import <ulib/NSDate+stringFunctions.h>
+#import <ulib/NSDate+ulib.h>
 
 
 @implementation UMHistoryLogEntry

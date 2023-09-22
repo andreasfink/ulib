@@ -1,8 +1,6 @@
 /* path.h */
 
-#ifdef __LINUX__
 
-#define	DMIDECODE ""
+#define	DMIDECODE "/usr/sbin/dmidecode"
 
-#endif
 

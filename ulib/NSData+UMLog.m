@@ -10,7 +10,7 @@
 #if defined(LINUX) || defined(FREEBSD)
 /* this stuff is not in Gnustep but in OSX so we emulate it here */
 
-#import <ulib/NSData+UMLog.h"
+#import <ulib/NSData+UMLog.h>
 
 @implementation NSData(UMLog)
 

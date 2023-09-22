@@ -23,7 +23,7 @@
 #include <UIKit/UIKit.h>
 #elif   TARGET_OS_WATCH
 #include <WatchKit/WatchKit.h>
-#eluf   TARGET_OS_OSX
+#elif   TARGET_OS_OSX
 #include <IOKit/IOTypes.h>
 #endif
 

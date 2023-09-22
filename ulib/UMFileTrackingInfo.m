@@ -10,12 +10,9 @@
 #import <ulib/UMFileTracker.h>
 #import <ulib/UMHistoryLog.h>
 
-/*!
- @class UMFileTrackingInfo
- @brief A object holding the data used by UMFileTracker.
- */
 
 @implementation UMFileTrackingInfo
+
 
 - (NSString *)key
 {

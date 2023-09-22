@@ -46,6 +46,7 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 @end
 
 @implementation UMObjectThreadStarter
+
 - (UMObjectThreadStarter *)copyWithZone:(NSZone *)zone
 {
     UMObjectThreadStarter *nts = [[UMObjectThreadStarter alloc]init];
@@ -60,15 +61,6 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
 }
 @end
 
-/*!
- @class UMObject
- @brief The root object for ulib
-
- UMObject is a replacement for NSObject. It allows a log handler to be attached,
- getting instantiated from a config file and it has some debug variant UMObjectDebug
- which allow to trace where objects get allocated and deallocated and it
- has methods to run methods in background in another thread.
- */
 
 
 @implementation UMObject

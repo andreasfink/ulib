@@ -1,0 +1,17 @@
+# You should build openssl 3.2 under MacOS X as following
+
+1. checkout the repository
+
+git clone git://git.openssl.org/openssl.git
+
+
+2. Configure and build openssl
+
+cd openssl
+./Configure
+make
+sudo make install
+
+the PKG has been built this way on ARM64 and Intel X86_&4 architectures
+and then the binary "openssl" and the static libraries have been combined with lipo.
+the dynamic libraries have been removed on purpose so linking will occur statically only.

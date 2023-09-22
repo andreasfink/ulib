@@ -1,6 +1,6 @@
 dnl /* ==================================================================== 
 dnl  * Project "ulib"
-dnl  * Copyright: © 2017 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
+dnl  * Copyright: © 2023 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
 dnl  * ====================================================================
 dnl  */ 
 
@@ -13,13 +13,13 @@ dnl
 dnl initialization
 
 AC_PREREQ([2.68])
-AC_INIT([ulib],[1.0],[andreas@fink.org])
-AC_CONFIG_HEADERS([Classes/ulib_config.h])
+AC_INIT([ulib],[2.0],[andreas@fink.org])
+AC_CONFIG_HEADERS([ulib/ulib_config.h])
 AC_SUBST(SHELL)
 AC_CONFIG_AUX_DIR(.)
 AC_SET_TERMINAL_SEQUENCES()
 
-COPYRIGHT="Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved."
+COPYRIGHT="Copyright © 2023 Andreas Fink (andreas@fink.org). All rights reserved."
 PROJECT_NAME="ulib"
 CONFIG_DEFINE="ULIB_CONFIG"
 
@@ -525,6 +525,8 @@ AC_ARG_ENABLE(debug,
 
 ./make_version
 
+TIMESTAMP=`date -u +%Y%m%d%H%M%S`
+
 dnl Final Output
 AC_SUBST(CONFIGURATION)
 AC_SUBST(PROJECT_NAME)
@@ -539,14 +541,17 @@ AC_SUBST(LIBS)
 AC_SUBST(SHARED_LIBRARY_EXTENSION)
 AC_SUBST(LIBRARIES)
 AC_SUBST(DMIDECODE)
+AC_SUBST(ARCH)
+AC_SUBST(TIMESTAMP)
 
-AC_CONFIG_SECTION([Generating output files]) 
+AC_CONFIG_SECTION([Generating output files])
 AC_CONFIG_FILES([Makefile.osx])
 AC_CONFIG_FILES([Makefile.linux])
 AC_CONFIG_FILES([Makefile.freebsd])
 AC_CONFIG_FILES([ulib.pc])
 AC_CONFIG_FILES([make_buildnr.sh])
-AC_CONFIG_FILES([Classes/path.h])
+AC_CONFIG_FILES([ulib/path.h])
+AC_CONFIG_FILES([debian/ulib.control])
 AC_OUTPUT
 
 chmod 755 make_buildnr.sh

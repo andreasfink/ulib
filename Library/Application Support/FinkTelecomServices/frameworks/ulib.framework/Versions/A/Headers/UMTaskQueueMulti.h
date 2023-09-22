@@ -1,0 +1,80 @@
+//
+//  UMTaskQueueMulti.h
+//  ulib
+//
+//  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
+//
+//
+
+#import <ulib/UMObject.h>
+#import <ulib/UMQueueMulti.h>
+#import <ulib/UMThroughputCounter.h>
+
+/*!
+ @class UMTaskQueueMulti
+ @brief UMTaskQueueMulti is an object to deal with background queues
+ It holds a bunch of UMBackgrounderWithQueue objecs which share a
+ common queue where you can stuff UMTaskQueueTask objects into. In comparison to UMTaskQueue
+ a UMTaskQueueMulti has multiple priority queues instead of only one queue.
+
+ */
+
+@class UMBackgrounderWithQueue;
+@class UMTaskQueueTask;
+@class UMSleeper;
+@class UMThroughputCounter;
+@interface UMTaskQueueMulti : UMObject
+{
+    BOOL            _enableLogging;
+    NSString        *_name;
+    UMQueueMulti    *_multiQueue;
+    UMSleeper       *_workSleeper;
+    NSMutableArray  *_workerThreads; /* UMBackgrounderWithQueues objects */
+    BOOL            _debug;
+    UMThroughputCounter *_throughput;
+}
+
+@property (assign) BOOL         	enableLogging;
+@property (strong) NSString     	*name;
+@property (strong) UMQueueMulti     *multiQueue;
+@property (strong) UMSleeper    	*workSleeper;
+@property (assign) BOOL        		debug;
+
+
+
+- (UMTaskQueueMulti *)init;
+- (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
+                                         name:(NSString *)n
+                                enableLogging:(BOOL)enableLog
+                               numberOfQueues:(int)queueCount;
+
+- (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
+                                         name:(NSString *)n
+                                enableLogging:(BOOL)enableLog
+                               numberOfQueues:(int)queueCount
+                                        debug:(BOOL)debug
+                                    hardLimit:(NSUInteger)hardLimit;
+
+
+- (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
+                                         name:(NSString *)n
+                                enableLogging:(BOOL)enableLog
+                                       queues:(UMQueueMulti *)xqueues;
+
+- (UMTaskQueueMulti *)initWithNumberOfThreads:(int)workerThreadCount
+                                         name:(NSString *)n
+                                enableLogging:(BOOL)enableLog
+                                       queues:(UMQueueMulti *)xqueues
+                                        debug:(BOOL)xdebug
+                                    hardLimit:(NSUInteger)hardLimit;
+
+- (void)queueTask:(UMTaskQueueTask *)task toQueueNumber:(int)nr;
+- (void)queueArrayOfTasks:(NSArray<UMTaskQueueTask *>*)tasks toQueueNumber:(int)nr;
+
+- (void)start;
+- (void)shutdown;
+- (NSUInteger)count;
+- (NSDictionary *)status;
+- (NSDictionary *)statusByObjectType;
+
+@end

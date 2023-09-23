@@ -1,4 +1,4 @@
-/* dmi_decode_path.h */
+/* path.h */
 
 
 #define	DMIDECODE ""

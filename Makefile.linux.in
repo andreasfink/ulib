@@ -18,9 +18,9 @@ SLIB=lib@PROJECT_NAME@.a
 
 PKGCONFIGFILE=ulib.pc
 
-MFILES = $(wildcard Classes/*.m) $(wildcard Classes/*/*.m)
-CFILES = $(wildcard Classes/*.c) $(wildcard Classes/*/*.c)
-HFILES = version.h $(wildcard Classes/*.h) $(wildcard Classes/*/*.h)
+MFILES = $(wildcard ulib/*.m) $(wildcard ulib/*/*.m)
+CFILES = $(wildcard ulib/*.c) $(wildcard ulib/*/*.c)
+HFILES = version.h $(wildcard ulib/*.h) $(wildcard ulib/*/*.h)
 MOFILES  = $(MFILES:.m=.m.o)
 COFILES  = $(CFILES:.m=.c.o)
 OFILES = $(MOFILES) $(COFILES)

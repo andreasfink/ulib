@@ -1,0 +1,14 @@
+Package: ulib
+Version: 2.0.0-20230923134037
+Section: ulib
+Priority: optional
+Architecture: -arch x86_64
+Depends: gnustep-base, gnustep-corebase, libuuid1, uuid-runtime, libsctp1, libobjc2, libdispatch
+Maintainer: Andreas Fink <andreas@fink.org>
+Description: The Universal Library
+ ulib is a library delivering generic functions for
+ objective-c programms such as dealing with sockets
+ reading config files etc.
+ .
+ This package contains the ulib library and header files
+

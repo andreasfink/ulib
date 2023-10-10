@@ -8,8 +8,8 @@
 #include <time.h>
 
 #import <ulib/UMDateWithHistory.h>
-#import <ulib/NSDate+stringFunctions.h>
-#import <ulib/NSString+UniversalObject.h>
+#import <ulib/NSDate+ulib.h>
+#import <ulib/NSString+ulib.h>
 
 #define UMDATE_FORMAT   @"%Y-%m-%d %H:%M:%S.%F UTC"
 #define UMDATE_FORMAT_C   "%Y-%m-%d %H:%M:%S.%F UTC"

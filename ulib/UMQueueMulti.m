@@ -293,7 +293,7 @@
             name = [[obj class]description];
         }
         NSNumber *entry = dict[name];
-        if(entry)
+        if(entry!=NULL)
         {
             entry = @(entry.integerValue +1);
         }

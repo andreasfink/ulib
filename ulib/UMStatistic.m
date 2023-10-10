@@ -11,7 +11,7 @@
 #import <ulib/UMSynchronizedSortedDictionary.h>
 #import <ulib/UMStatisticEntry.h>
 #import <ulib/UMMutex.h>
-#import <ulib/NSString+UMHTTP.h>
+#import <ulib/NSString+ulib.h>
 #import <ulib/UMJsonParser.h>
 
 @implementation UMStatistic

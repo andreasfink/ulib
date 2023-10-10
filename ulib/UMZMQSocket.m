@@ -19,7 +19,7 @@
 
 #import <ulib/UMZMQSocket.h>
 
-#import <ulib/NSData+UniversalObject.h>
+#import <ulib/NSData+ulib.h>
 #import <ulib/UMLogFeed.h>
 
 #define DEBUG_MESSAGE(text) \

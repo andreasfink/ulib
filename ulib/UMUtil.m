@@ -8,7 +8,7 @@
 #import <ulib/UMUtil.h>
 #import <pthread.h>
 #include "ulib_config.h"
-#include "path.h"
+#include "dmi_decode_path.h"
 
 /* byte order stuff: we use macros under MacOS X */
 

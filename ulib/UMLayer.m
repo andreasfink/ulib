@@ -14,7 +14,7 @@
 #import <ulib/UMLogFeed.h>
 #import <ulib/UMLayerTask.h>
 #import <ulib/UMLayerUserProtocol.h>
-#import <ulib/NSString+UniversalObject.h>
+#import <ulib/NSString+ulib.h>
 #import <ulib/UMAssert.h>
 #import <ulib/UMHistoryLog.h>
 

@@ -182,7 +182,7 @@
                     if (signal == UMSleeper_Error)
                     {
                         mustQuit=YES;
-                        break;
+                        continue;
                     }
                     if(_enableLogging)
                     {

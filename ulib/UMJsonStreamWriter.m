@@ -9,8 +9,8 @@
 
 #import <ulib/UMJsonStreamWriter.h>
 #import <ulib/UMJsonStreamWriterState.h>
-#import <ulib/NSDate+stringFunctions.h>
-#import <ulib/NSData+UniversalObject.h>
+#import <ulib/NSDate+ulib.h>
+#import <ulib/NSData+ulib.h>
 #import <ulib/UMSynchronizedSortedDictionary.h>
 #import <ulib/UMSynchronizedDictionary.h>
 #import <ulib/UMSynchronizedArray.h>

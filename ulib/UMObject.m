@@ -15,7 +15,7 @@
 #import <ulib/UMLogHandler.h>
 #import <ulib/UMLogFeed.h>
 #import <ulib/UMLogFile.h>
-#import <ulib/NSString+UniversalObject.h>
+#import <ulib/NSString+ulib.h>
 #import <ulib/UMConstantStringsDict.h>
 #import <ulib/UMObjectStatistic.h>
 #import <ulib/UMMemoryHeader.h>

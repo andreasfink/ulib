@@ -16,7 +16,7 @@
 #include <uuid/uuid.h>
 #endif
 
-#import <ulib/NSData+UniversalObject.h>
+#import <ulib/NSData+ulib.h>
 
 @implementation UMUUID
 

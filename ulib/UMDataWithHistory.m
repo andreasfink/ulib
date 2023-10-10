@@ -6,8 +6,8 @@
 //
 
 #import <ulib/UMDataWithHistory.h>
-#import <ulib/NSData+UniversalObject.h>
-#import <ulib/NSString+UniversalObject.h>
+#import <ulib/NSData+ulib.h>
+#import <ulib/NSString+ulib.h>
 
 @implementation UMDataWithHistory
 

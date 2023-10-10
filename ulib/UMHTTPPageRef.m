@@ -18,7 +18,7 @@
 
 
 #import <ulib/UMHTTPPageRef.h>
-#import <ulib/NSString+UniversalObject.h>
+#import <ulib/NSString+ulib.h>
 
 @implementation UMHTTPPageRef
 

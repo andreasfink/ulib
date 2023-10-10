@@ -7,7 +7,7 @@ libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 
 Cflags: -I${includedir}  -DHAVE_OPENSSL=1
-Libs: -L${libdir} -l:libulib.so.2.0 -lobjc -lavahi-client -lavahi-core -lavahi-common -lgnustep-base -ldl -lsctp -lbsd -luuid
+Libs: -L${libdir} -l:libulib.dylib.2.0 -lobjc -lavahi-client -lavahi-core -lavahi-common -lgnustep-base -ldl 
 
 Name: ulib
 Description: universal library

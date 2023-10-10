@@ -358,13 +358,13 @@
 		A66EB0B42ABDDC0600C34D40 /* buildnumber.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buildnumber.c; sourceTree = SOURCE_ROOT; };
 		A66EB0B62ABDDC1800C34D40 /* BUILDNR */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILDNR; sourceTree = "<group>"; };
 		A66EB0B72ABDDC2100C34D40 /* aclocal.m4 */ = {isa = PBXFileReference; lastKnownFileType = text; path = aclocal.m4; sourceTree = "<group>"; };
-		A66EB0B82ABDDC2E00C34D40 /* config.log */ = {isa = PBXFileReference; lastKnownFileType = file; path = config.log; sourceTree = SOURCE_ROOT; };
-		A66EB0B92ABDDC2E00C34D40 /* configure.ac */ = {isa = PBXFileReference; lastKnownFileType = file; path = configure.ac; sourceTree = SOURCE_ROOT; };
+		A66EB0B82ABDDC2E00C34D40 /* config.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.log; sourceTree = SOURCE_ROOT; };
+		A66EB0B92ABDDC2E00C34D40 /* configure.ac */ = {isa = PBXFileReference; lastKnownFileType = text; path = configure.ac; sourceTree = SOURCE_ROOT; };
 		A66EB0BA2ABDDC2E00C34D40 /* distro.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = distro.sh; sourceTree = SOURCE_ROOT; };
 		A66EB0BB2ABDDC2E00C34D40 /* configure */ = {isa = PBXFileReference; lastKnownFileType = text; path = configure; sourceTree = SOURCE_ROOT; };
-		A66EB0BC2ABDDC2E00C34D40 /* config.guess */ = {isa = PBXFileReference; lastKnownFileType = file; path = config.guess; sourceTree = SOURCE_ROOT; };
-		A66EB0BD2ABDDC2E00C34D40 /* config.sub */ = {isa = PBXFileReference; lastKnownFileType = file; path = config.sub; sourceTree = SOURCE_ROOT; };
-		A66EB0BE2ABDDC2E00C34D40 /* config.status */ = {isa = PBXFileReference; lastKnownFileType = file; path = config.status; sourceTree = SOURCE_ROOT; };
+		A66EB0BC2ABDDC2E00C34D40 /* config.guess */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = config.guess; sourceTree = SOURCE_ROOT; };
+		A66EB0BD2ABDDC2E00C34D40 /* config.sub */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = config.sub; sourceTree = SOURCE_ROOT; };
+		A66EB0BE2ABDDC2E00C34D40 /* config.status */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = config.status; sourceTree = SOURCE_ROOT; };
 		A66EB0BF2ABDDC2E00C34D40 /* codesign_environment.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = codesign_environment.sh; sourceTree = SOURCE_ROOT; };
 		A66EB0C62ABDDC4900C34D40 /* doc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = doc; sourceTree = "<group>"; };
 		A66EB0C72ABDDC5300C34D40 /* Doxyfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Doxyfile; sourceTree = "<group>"; };
@@ -1642,7 +1642,7 @@
 				DYLIB_CURRENT_VERSION = 2.0.0;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1670,8 +1670,10 @@
 				PRODUCT_DEFINITION_PLIST = "SupportingFiles/ulib-macos-info.plist";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TVOS_DEPLOYMENT_TARGET = 16.6;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 9.6;
 			};
 			name = Debug;
 		};
@@ -1716,7 +1718,7 @@
 				DYLIB_CURRENT_VERSION = 2.0.0;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1736,26 +1738,31 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.ulib";
 				PRODUCT_DEFINITION_PLIST = "SupportingFiles/ulib-macos-info.plist";
 				SWIFT_COMPILATION_MODE = wholemodule;
+				TVOS_DEPLOYMENT_TARGET = 16.6;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 9.6;
 			};
 			name = Release;
 		};
 		A69BA46A2ABD850000C34D40 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 38L827M334;
-				DSTROOT = /;
+				DSTROOT = "/Library/Application Support";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_PROFILING_CODE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				INSTALL_PATH = /FinkTelecomServices/frameworks;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -1764,14 +1771,15 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.ulib";
+				PRODUCT_MODULE_NAME = ulib;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1781,18 +1789,20 @@
 		A69BA46B2ABD850000C34D40 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 38L827M334;
-				DSTROOT = /;
+				DSTROOT = "/Library/Application Support";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				INSTALL_PATH = /FinkTelecomServices/frameworks;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -1801,14 +1811,15 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.ulib";
+				PRODUCT_MODULE_NAME = ulib;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

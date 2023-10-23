@@ -1,5 +1,9 @@
 Package: ulib
+<<<<<<< HEAD
 Version: 2.0.0-20231023232011
+=======
+Version: 2.0.0-20231023214902
+>>>>>>> 12b604a1c50d0ddc80382079dbb84429b5c51154
 Section: ulib
 Priority: optional
 Architecture: 

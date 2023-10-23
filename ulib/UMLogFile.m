@@ -9,7 +9,7 @@
 #import <ulib/UMLogFeed.h>
 #import <ulib/UMConfig.h>
 #if defined(LINUX) || defined(FREEBSD)
-#import <ulib/NSData+UMLog.h>
+#import <ulib/NSData+ulib.h>
 #endif
 #include <unistd.h>
 #import <ulib/UMUtil.h> /* for UMBacktrace */

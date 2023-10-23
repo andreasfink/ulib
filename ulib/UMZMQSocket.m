@@ -4,12 +4,11 @@
 //
 //  Created by Andreas Fink on 12.07.22.
 //
-#include "/usr/local/include/zmq.h"
 
 
-#import <ulib/ulib_config.h>
-#if HAVE_ZMQ_H
-#ifdef    HAVE_ZMQ_H_USR_LOCAL
+#include <ulib/ulib_config.h>
+#if defined(HAVE_ZMQ_H)
+#if defined(HAVE_ZMQ_H_USR_LOCAL)
 #include "/usr/local/include/zmq.h"
 #else
 #include "zmq.h"

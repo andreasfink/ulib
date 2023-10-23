@@ -1,8 +1,8 @@
 Package: ulib
-Version: 2.0.0-20230923134037
+Version: 2.0.0-20230924102654
 Section: ulib
 Priority: optional
-Architecture: -arch x86_64
+Architecture: 
 Depends: gnustep-base, gnustep-corebase, libuuid1, uuid-runtime, libsctp1, libobjc2, libdispatch
 Maintainer: Andreas Fink <andreas@fink.org>
 Description: The Universal Library

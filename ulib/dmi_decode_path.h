@@ -1,6 +1,6 @@
 /* path.h */
 
 
-#define	DMIDECODE ""
+#define	DMIDECODE "/usr/sbin/dmidecode"
 
 

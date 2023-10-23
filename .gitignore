@@ -17,6 +17,7 @@ BUILDNR
 make_buildnr.sh
 buildnumber.c
 buildnumber.h
+ulib.pc
 version.h
 ulib.pc
 install_root

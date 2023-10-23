@@ -12,7 +12,7 @@ config.log
 config.status
 stamp-h1
 autom4te.cache
-Classes/ulib_config.h
+ulib/ulib_config.h
 BUILDNR
 make_buildnr.sh
 buildnumber.c
@@ -21,6 +21,7 @@ ulib.pc
 version.h
 ulib.pc
 install_root
+*.m.d
 
 
 #########################

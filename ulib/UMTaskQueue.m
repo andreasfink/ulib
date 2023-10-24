@@ -19,7 +19,12 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
+
 #endif
+#ifdef __APPLE__
+#include <sys/sysctl.h>
+#endif
+
 
 #include <string.h>
 #import <ulib/UMAssert.h>

@@ -176,7 +176,7 @@
 #define HAVE_ZEROMQ 1
 #endif
 
-#define HAVE_ZMQ_H_USR_LOCAL 1
+/* #undef HAVE_ZMQ_H_USR_LOCAL */
 #ifdef HAVE_ZMQ_H_USR_LOCAL
 #define HAVE_ZEROMQ 1
 #endif

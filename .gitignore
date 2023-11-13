@@ -13,6 +13,7 @@ config.status
 stamp-h1
 autom4te.cache
 ulib/ulib_config.h
+ulib/dmi_decode_path.h
 BUILDNR
 make_buildnr.sh
 buildnumber.c

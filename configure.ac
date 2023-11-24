@@ -106,16 +106,22 @@ case "$host" in
 	CFLAGS="$CFLAGS -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector"
 	CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
 	CFLAGS="${CFLAGS} -fobjc-arc"
-	if [[ -x /usr/local/bin/gnustep-config ]] 
+	if [[ -x /usr/GNUstep/System/Tools/gnustep-config ]]
 	then
-		GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
+		GNUSTEP_CONFIG=/usr/GNUstep/System/Tools/gnustep-config
+		CFLAGS="${CFLAGS} -I/usr/GNUstep/System/Library/Headers/"
 	else
-		GNUSTEP_CONFIG=/usr/bin/gnustep-config
+		if [[ -x /usr/local/bin/gnustep-config ]]
+		then
+			GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
+		else
+			GNUSTEP_CONFIG=/usr/bin/gnustep-config
+		fi
 	fi
+	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG}  --objc-flags`"
+    LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG}  --base-libs --objc-libs`"
 	LIBS="$LIBS -ldl"
 	LIBRARIES="-lsctp -lbsd -luuid"
-	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG} --objc-flags`"
-	LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG} --base-libs --objc-libs`"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
     CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
@@ -147,8 +153,8 @@ case "$host" in
 			GNUSTEP_CONFIG=/usr/bin/gnustep-config
 		fi
 	fi
-	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG} --objc-flags`"
-    LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG} --base-libs --objc-libs`"
+	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG}  --objc-flags`"
+    LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG}  --base-libs --objc-libs`"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
 	CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"

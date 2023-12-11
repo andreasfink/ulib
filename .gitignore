@@ -23,6 +23,7 @@ version.h
 ulib.pc
 install_root
 *.m.d
+debian/ulib.control
 
 
 #########################

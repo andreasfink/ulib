@@ -168,22 +168,19 @@ Build  libiconv
 
 export CC="/usr/bin/clang"
 export CXX="/usr/bin/clang++"
-export PREFIX="/usr"
-export PATH="/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/sbin:/usr/local/bin"
+export PREFIX="/"
+export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig/:/usr/local/lib/pkgconfig/"
 export RUNTIME_VERSION="gnustep-2.0"
 export OBJCFLAGS="-fblocks"
 export CFLAGS="-I ${PREFIX}/include"
 export LDFLAGS="-fuse-ld=gold"
-
-mkdir -p ${PREFIX}/lib
-mkdir -p ${PREFIX}/etc
-mkdir -p ${PREFIX}/bin
+export GNUSTEP_INSTALLATION_DOMAIN="SYSTEM"
 
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    cmake  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX} ..
+    cmake  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr ..
     make
     make install
 #make test
@@ -196,7 +193,7 @@ mkdir -p ${PREFIX}/bin
     git submodule update
     mkdir Build
     cd Build
-    /usr/bin/cmake  .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=${PREFIX}
+    /usr/bin/cmake  .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=/usr
     make
     #if you get errors here
     # edif the file CMakeCache.txt  and remove the -stlib... thing in line CMAKE_C_FLAGS:STRING=-I /usr/local/include
@@ -206,12 +203,12 @@ mkdir -p ${PREFIX}/bin
     ldconfig
 
 
-6. install gnustep-make
+6. install gnustep2-make
 
     cd make
 
     ./configure \
-            --with-layout=debian \
+            --with-layout=gnustep \
             --disable-importing-config-file \
             --enable-native-objc-exceptions \
             --enable-objc-arc \
@@ -224,9 +221,10 @@ mkdir -p ${PREFIX}/bin
 
     make install
     source /etc/GNUstep/GNUstep.conf
+    ln -s /usr/GNUstep/System/Tools/gnustep-config /usr/bin/gnustep-config
     cd ..
 
-7. install gnustep-base
+7. install gnustep-arc-base
 
 
     cd base

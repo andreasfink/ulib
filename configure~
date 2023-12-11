@@ -2937,14 +2937,20 @@ case "$host" in
 	CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
 	CFLAGS="$CFLAGS -fobjc-arc"
 	SHARED_LIBRARY_EXTENSION="so"
-	if [ -x /usr/local/bin/gnustep-config ]
-        then
-                GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
-        else
-                GNUSTEP_CONFIG=/usr/bin/gnustep-config
-        fi
-        CFLAGS="$CFLAGS `${GNUSTEP_CONFIG} --objc-flags`"
-        LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG} --base-libs --objc-libs`"
+	if [ -x /usr/GNUstep/System/Tools/gnustep-config ]
+	then
+		GNUSTEP_CONFIG=/usr/GNUstep/System/Tools/gnustep-config
+		CFLAGS="${CFLAGS} -I/usr/include/GNUstep"
+	else
+		if [ -x /usr/local/bin/gnustep-config ]
+		then
+			GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
+		else
+			GNUSTEP_CONFIG=/usr/bin/gnustep-config
+		fi
+	fi
+	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG} --objc-flags`"
+    LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG} --base-libs --objc-libs`"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
 	CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
@@ -5903,7 +5909,7 @@ ac_config_files="$ac_config_files ulib.pc"
 
 ac_config_files="$ac_config_files make_buildnr.sh"
 
-ac_config_files="$ac_config_files ulib/path.h"
+ac_config_files="$ac_config_files ulib/dmi_decode_path.h"
 
 ac_config_files="$ac_config_files debian/ulib.control"
 
@@ -6598,7 +6604,7 @@ do
     "Makefile.freebsd") CONFIG_FILES="$CONFIG_FILES Makefile.freebsd" ;;
     "ulib.pc") CONFIG_FILES="$CONFIG_FILES ulib.pc" ;;
     "make_buildnr.sh") CONFIG_FILES="$CONFIG_FILES make_buildnr.sh" ;;
-    "ulib/path.h") CONFIG_FILES="$CONFIG_FILES ulib/path.h" ;;
+    "ulib/dmi_decode_path.h") CONFIG_FILES="$CONFIG_FILES ulib/dmi_decode_path.h" ;;
     "debian/ulib.control") CONFIG_FILES="$CONFIG_FILES debian/ulib.control" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;

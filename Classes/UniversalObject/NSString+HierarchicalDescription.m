@@ -33,7 +33,6 @@
 
 - (NSString *)htmlEscaped
 {
-    NSMutableString *out = [[NSMutableString alloc]init];
     NSString *s = [self stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"];
     s = [s stringByReplacingOccurrencesOfString:@"\t" withString:@"&Tab;"];
     s = [s stringByReplacingOccurrencesOfString:@"\n" withString:@"&NewLine;"];

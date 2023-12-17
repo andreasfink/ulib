@@ -49,6 +49,11 @@ then
 	DEBIAN_NICKNAME="stretch"
 fi
 
+if [ "${DEBIAN_MAIN_VERSION}" = "12" ]
+then
+	DEBIAN_NICKNAME="bookworm"
+fi
+
 #echo "deb http://ftp.debian.org/debian ${DEBIAN_NICKNAME}-backports main"      > /etc/apt/sources.list.d/backports.list
 echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" > /etc/apt/sources.list.d/universalss7.list
 
@@ -110,7 +115,11 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         libpq-dev libpq5 curl libcurl4-openssl-dev
 
 
-
+Changes for bookworm/sid on risc-v  VisionFive2:       
+	libffi7 	-> libffi8
+	python-dev 	-> python3
+	libicu67 	-> libicu71
+	lldb 		missing
 
 
 Download the sourcecode of gnustep and dependencies

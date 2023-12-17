@@ -5,20 +5,10 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-
+#import "UMDateTimeStuff.h"
 #import "UMLogEntry.h"
 
-
 @implementation UMLogEntry
-
-@synthesize		timeStamp;
-@synthesize		level;
-@synthesize		section;
-@synthesize		subsection;
-@synthesize		name;
-@synthesize		message;
-@synthesize		errorCode;
-
 
 
 - (UMLogEntry *)init
@@ -26,59 +16,60 @@
     self = [super init];
     if(self)
     {
-	    timeStamp = [[NSDate alloc] init];
+        _timeStamp = [NSDate date];
     }
 	return self;
 }
 
 + (NSString *)levelName:(UMLogLevel)l
 {
-	switch(l)
-	{
+    switch(l)
+    {
         case    UMLOG_UNDEFINED:
             return @"UNDEFINED";
-		case	UMLOG_DEBUG:
-			return @"DEBUG";
-		case	UMLOG_INFO:
-			return @"INFO";
-		case	UMLOG_WARNING:
-			return @"WARNING";
-		case	UMLOG_MINOR:
-			return @"MINOR";
-		case	UMLOG_MAJOR:
-			return @"MAJOR";
-		case	UMLOG_PANIC:
-			return @"PANIC";
-	}
-	return @"UNKNOWN_LEVEL";
+        case    UMLOG_DEBUG:
+            return @"DEBUG";
+        case    UMLOG_INFO:
+            return @"INFO";
+        case    UMLOG_WARNING:
+            return @"WARNING";
+        case    UMLOG_MINOR:
+            return @"MINOR";
+        case    UMLOG_MAJOR:
+            return @"MAJOR";
+        case    UMLOG_PANIC:
+            return @"PANIC";
+    }
+    return @"UNKNOWN_LEVEL";
 }
+
 
 - (NSString *)description
 {
 	const char *s;
 	
-	if(errorCode)
+	if(_errorCode)
 	{
-		s = strerror(errorCode);
+		s = strerror(_errorCode);
 
 		/* dateime level section subsection objectname errorcode errorstring message */
 		return [NSString stringWithFormat:@"%@\t%@\t%@\t%@\t%@\t%s (%d) %@",
-				timeStamp,
-				[UMLogEntry levelName:level],
-				section,
-				subsection,
-				name,
-				s ? s : "",errorCode,
-				message];
+				_timeStamp,
+				[UMLogEntry levelName:_level],
+				_section,
+				_subsection,
+				_name,
+				s ? s : "",_errorCode,
+				_message];
 	}
 	/* dateime level section subsection objectname errorcode errorstring message */
 	return [NSString stringWithFormat:@"%@\t%@\t%@\t%@\t%@\t%@",
-			timeStamp,
-			[UMLogEntry levelName:level],
-			section,
-			subsection,
-			name,
-			message];
+			_timeStamp,
+			[UMLogEntry levelName:_level],
+			_section,
+			_subsection,
+			_name,
+			_message];
 }
 
 @end

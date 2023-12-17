@@ -672,12 +672,16 @@ static int SSL_smart_shutdown(SSL *ssl)
             case UMSOCKET_TYPE_TCP4ONLY:
             case UMSOCKET_TYPE_UDP4ONLY:
             {
-                if(localAddresses.count > 0)
+                if(localAddresses.count == 1)
                 {
                     ipAddr = [localAddresses objectAtIndex:0];
                     ipAddr = [UMSocket deunifyIp:ipAddr];
                     [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
                     inet_aton(addressString, &sa.sin_addr);
+                }
+                else
+                {
+                    sa.sin_addr.s_addr = htonl(INADDR_ANY);
                 }
                 if(bind(_sock,(struct sockaddr *)&sa,sizeof(sa)) != 0)
                 {
@@ -691,13 +695,18 @@ static int SSL_smart_shutdown(SSL *ssl)
             case UMSOCKET_TYPE_TCP:
             case UMSOCKET_TYPE_UDP:
             {
-                if(localAddresses.count > 0)
+                if(localAddresses.count == 1)
                 {
                     ipAddr = [localAddresses objectAtIndex:0];
                     ipAddr = [UMSocket deunifyIp:ipAddr];
                     [ipAddr getCString:addressString maxLength:255 encoding:NSUTF8StringEncoding];
                     inet_pton(AF_INET6,addressString, &sa6.sin6_addr);
                 }
+                else
+                {
+                    sa6.sin6_addr            = in6addr_any;
+                }
+
                 if(bind(_sock,(struct sockaddr *)&sa6,sizeof(sa6)) != 0)
                 {
                     eno = errno;
@@ -1654,7 +1663,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     ssize_t actualReadBytes = [_cryptoStream readBytes:cptr length:1 errorCode:&eno];
     if (actualReadBytes < 0)
     {
-        if (eno != EAGAIN)
+        if((eno != EWOULDBLOCK) && (eno != EAGAIN) && (eno != EINTR))
         {
             return [UMSocket umerrFromErrno:eno];
         }
@@ -1691,7 +1700,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
         if (actualReadBytes < 0)
         {
-            if (eno != EAGAIN)
+            if((eno != EWOULDBLOCK) && (eno != EAGAIN) && (eno != EINTR))
             {
                 return [UMSocket umerrFromErrno:eno];
             }
@@ -1749,7 +1758,7 @@ static int SSL_smart_shutdown(SSL *ssl)
          
          if(actualReadBytes < 0)
          {
-             if (eno != EAGAIN)
+             if((eno != EWOULDBLOCK) && (eno != EAGAIN) && (eno != EINTR))
              {
                  ret = [UMSocket umerrFromErrno:EBADF];
                  return ret;
@@ -2138,7 +2147,7 @@ static int SSL_smart_shutdown(SSL *ssl)
                                     errorCode:&eno];
         if (actualReadBytes <= 0)
         {
-            if (eno == EINTR || eno == EAGAIN || eno == EWOULDBLOCK )
+            if ((eno == EINTR) || (eno == EAGAIN) || (eno == EWOULDBLOCK))
             {
                 usleep(10000);
                 return UMSocketError_try_again;
@@ -2231,7 +2240,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         eno = errno;
         if (actualReadBytes <= 0)
         {
-            if (eno == EINTR || eno == EAGAIN || eno == EWOULDBLOCK)
+            if ((eno == EINTR) || (eno == EAGAIN) || (eno == EWOULDBLOCK))
             {
                 usleep(10000);
                 return UMSocketError_try_again;
@@ -2421,7 +2430,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         case UMSocketError_generic_bind_error:
             return @"generic_bind_error";
         case  UMSocketError_try_again:
-            return @"timeout";
+            return @"try-again";
         case  UMSocketError_timed_out:
             return @"connection attempt timed out";
         case  UMSocketError_connection_refused:
@@ -2593,89 +2602,89 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 
 +(NSString *)deunifyIp:(NSString *)addr type:(int *)t
 {
+    int dummy_t;
+    if(t==NULL)
+    {
+        t = &dummy_t;
+    }
     @autoreleasepool
     {
-        if([addr isEqualToString:@"ipv6:[::]"])
+        if(([addr isEqualToString:@"ipv6:[::]"]) || ([addr isEqualToString:@"[::]"]) || ([addr isEqualToString:@"::"]))
         {
-            if(t)
-            {
-                *t = 6;
-            }
+            *t = 6;
             return @"::";
         }
-        if([addr isEqualToString:@"ipv6:localhost"])
+        if(([addr isEqualToString:@"ipv4:0.0.0.0"]) || ([addr isEqualToString:@"0.0.0.0"]))
+
         {
-            if(t)
-            {
-                *t = 6;
-            }
-            return @"localhost";
+            *t = 6;
+            return @"0.0.0.0";
         }
-        if([addr isEqualToString:@"ipv4:localhost"])
+        if(([addr isEqualToString:@"ipv6:localhost"]) || ([addr isEqualToString:@"ipv6:[::1]"]) || ([addr isEqualToString:@"ipv6:::1"]) || ([addr isEqualToString:@"::1"]))
         {
-            if(t)
-            {
-                *t = 4;
-            }
-            return @"localhost";
+            *t = 6;
+            return @"::1";
         }
-        NSString *addrtype =   [addr substringToIndex:4];
-        if([addrtype isEqualToString:@"ipv4"])
+
+        if(([addr isEqualToString:@"ipv4:localhost"]) || ([addr isEqualToString:@"ipv4:127.0.0.1"]) || ([addr isEqualToString:@"127.0.0.1"])|| ([addr isEqualToString:@"localhost"]))
         {
-            if(t)
-            {
-                *t = 4;
-            }
-            NSInteger start = 5;
-            NSInteger len = [addr length] - start;
-            if(len < 1)
+            *t = 4;
+            return @"127.0.0.1";
+        }
+        if(addr.length >=4)
+        {
+            NSString *addrtype =   [addr substringToIndex:4];
+            if([addrtype isEqualToString:@"ipv4"])
             {
                 if(t)
-                {
-                    *t = 0;
-                }
-                return @"";
-            }
-            return [addr substringWithRange:NSMakeRange(start,len)];
-        }
-        
-        else if([addrtype isEqualToString:@"ipv6"])  /* format: ipv6:[xxx:xxx:xxx...:xxxx] */
-        {
-            if(t)
-            {
-                *t = 6;
-            }
-            NSInteger start = 5;
-            NSInteger len = [addr length] -1 - start;
-            if(len < 1)
-            {
-                if(t)
-                {
-                    *t = 0;
-                }
-                return NULL;
-            }
-            return [addr substringWithRange:NSMakeRange(start,len)];
-        }
-        else
-        {
-            if(t)
-            {
-                if([addr isIPv4])
                 {
                     *t = 4;
                 }
-                else if([addr isIPv6])
+                NSInteger start = 5;
+                NSInteger len = [addr length] - start;
+                if(len < 1)
+                {
+                    if(t)
+                    {
+                        *t = 0;
+                    }
+                    return @"";
+                }
+                return [addr substringWithRange:NSMakeRange(start,len)];
+            }
+            
+            else if([addrtype isEqualToString:@"ipv6"])  /* format: ipv6:[xxx:xxx:xxx...:xxxx] */
+            {
+                if(t)
                 {
                     *t = 6;
                 }
-                else
+                NSInteger start = 5;
+                NSInteger len = [addr length] -1 - start;
+                if(len < 1)
                 {
-                    *t = 0;
+                    if(t)
+                    {
+                        *t = 0;
+                    }
+                    return NULL;
                 }
+                return [addr substringWithRange:NSMakeRange(start,len)];
             }
-            return addr;
         }
+        if([addr isIPv4])
+        {
+            *t = 4;
+        }
+        else if([addr isIPv6])
+        {
+            *t = 6;
+        }
+        else
+        {
+            *t = 0;
+        }
+        return addr;
     }
 }
 

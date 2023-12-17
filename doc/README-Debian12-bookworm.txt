@@ -1,4 +1,4 @@
-ulib under Ubuntu-22
+ulib under Debian12-bookworm
 -----------------------------
 
 To user ulib with Linux you need to build your own gnustep installation
@@ -24,7 +24,8 @@ apt-get install --assume-yes \
     sudo \
     locales-all \
     net-tools \
-
+    libcurl4-openssl-dev \
+    gnutls-bin 
 
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xCBCB082A1BB943DB
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C23AC7F49887F95A 
@@ -35,10 +36,26 @@ apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EF0F382A1A7B6500
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421
 wget -4 -O - http://repo.universalss7.ch/debian/key.asc | apt-key add -
 
+DEBIAN_NICKNAME=sid
+DEBIAN_MAIN_VERSION=`cat /etc/debian_version | cut -f1 -d.`
+if [ "${DEBIAN_MAIN_VERSION}" = "12" ]
+then
+	DEBIAN_NICKNAME="bookworm"
+fi
+if [ "${DEBIAN_MAIN_VERSION}" = "11" ]
+then
+	DEBIAN_NICKNAME="bullseye"
+fi
+if [ "${DEBIAN_MAIN_VERSION}" = "10" ]
+then
+	DEBIAN_NICKNAME="buster"
+fi
+if [ "${DEBIAN_MAIN_VERSION}" = "9" ]
+then
+	DEBIAN_NICKNAME="stretch"
+fi
 
-DEBIAN_NICKNAME="jammy"
-	
-
+#echo "deb http://ftp.debian.org/debian ${DEBIAN_NICKNAME}-backports main"      > /etc/apt/sources.list.d/backports.list
 echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" > /etc/apt/sources.list.d/universalss7.list
 
 
@@ -49,26 +66,26 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
  apt-get install build-essential git subversion  \
         clang lldb \
         libxml2 libxml2-dev \
-        libffi7 libffi-dev\
+        libffi8 libffi-dev\
+        libicu-dev \
         libuuid1 uuid-dev uuid-runtime \
         libsctp1 libsctp-dev lksctp-tools \
         libavahi-core7  libavahi-core-dev\
         libavahi-client3 libavahi-client-dev\
         libavahi-common3 libavahi-common-dev libavahi-common-data \
         libgcrypt20 libgcrypt20-dev \
-        libtiff5 libtiff5-dev \
+        libtiff6 libtiff-dev \
         libbsd0 libbsd-dev \
         util-linux-locales \
         locales-all \
         libjpeg-dev \
-        libtiff-dev  \
         libcups2-dev  \
         libfreetype6-dev \
         libcairo2-dev \
         libxt-dev \
         libgl1-mesa-dev \
         libpcap-dev \
-         swig \
+        python3-dev swig \
         libedit-dev readline-common \
         binfmt-support libtinfo-dev \
         bison flex m4 wget \
@@ -90,17 +107,21 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         libasound2-dev libjack-dev libjack0 libportaudio2 libportaudiocpp0 portaudio19-dev \
         wmaker cmake cmake-curses-gui \
         libwraster6 libwraster-dev \
-        libicu70 libicu-dev \
+        libicu72 libicu-dev \
         ninja-build \
-        gobjc gobjc-10 \
-        gobjc++ gobjc++-10 \
+        gobjc gobjc-12 \
+        gobjc++ gobjc++-12 \
+        default-libmysqlclient-dev \
         libpq-dev libpq5 curl libcurl4-openssl-dev \
-	libpq-dev libmariadb-dev-compat \
-	libzmq5 libzmq3-dev
+		libzmq3-dev libzmq5 libpq libmariadb-dev \
+		libavahi-core-dev libavahi-core7 libsctp-dev libsctp1 libpcap-dev \
+		bison flex
 
-
-
-
+Changes for bookworm/sid on risc-v  VisionFive2:       
+	libffi7 	-> libffi8
+	python-dev 	-> python3
+	libicu67 	-> libicu71
+	lldb 		missing
 
 
 Download the sourcecode of gnustep and dependencies
@@ -136,9 +157,7 @@ Build  libiconv
     make install
     ./libtool --finish /usr/local/lib
     cd ..
-
-# optional:
-	make check
+#make check
 
 3. Setting some defaults
 ------------------------------------------------
@@ -160,6 +179,7 @@ mkdir -p ${PREFIX}/bin
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
+    #cmake .. -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX}
     cmake  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX} ..
     make
     make install
@@ -175,14 +195,10 @@ mkdir -p ${PREFIX}/bin
     cd Build
     /usr/bin/cmake  .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=${PREFIX}
     make 
+    #if you get errors here
+    # edif the file CMakeCache.txt  and remove the -stlib... thing in line CMAKE_C_FLAGS:STRING=-I /usr/local/include
     make install
-
 #make test
-#usually fails on these:
-#	 19 - AssociatedObject_legacy (Subprocess aborted)
-#	 20 - AssociatedObject_legacy_optimised (Subprocess aborted)
-# we dont care about backwards compatibility to libobjc1 anymore so its ok
-	 
     cd ..
     ldconfig
 
@@ -220,7 +236,7 @@ mkdir -p ${PREFIX}/bin
     	--enable-libdispatch \
     	--enable-nsurlsession 
     
-    make -j20
+    make -j8
     make install
     ldconfig
 #make check
@@ -256,15 +272,6 @@ mkdir -p ${PREFIX}/bin
     make install
     cd ..
     
-
-11. install zeromq
-
-	git clone https://github.com/zeromq/libzmq.git
-	cd libzmq
-	./autogen.sh
-	./configure CFLAGS=-fPIC CXXFLAGS=-fPIC --enable-static --disable-shared
-	make -j20
-	make install
 
 11. ulib
     git clone http://github.com/andreasfink/ulib

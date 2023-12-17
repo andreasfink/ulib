@@ -62,6 +62,10 @@
     UMMutex             *_pendingRequestLock;
     NSString            *_documentRoot;
     BOOL                _isWebSocketRequest;
+    
+    NSString            *_remoteAddress;
+    int                 _remotePort;
+
 }
 
 @property (readwrite,assign,atomic)uint64_t            requestId;
@@ -91,6 +95,8 @@
 @property (readwrite,assign,atomic)     BOOL            mustClose;
 @property (readwrite,strong) NSString                   *documentRoot;
 @property (readwrite,assign) BOOL                       isWebSocketRequest;
+@property (readwrite,strong) NSString                   *remoteAddress;
+@property (readwrite,assign) int                        remotePort;
 
 
 - (NSString *)name;

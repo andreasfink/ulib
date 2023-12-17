@@ -94,6 +94,13 @@
 - (void) setNotFound
 {
     _responseCode = HTTP_RESPONSE_CODE_NOT_FOUND;
+    NSString *text =
+        @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\r\n"
+        @"<HTML><HEAD>\r\n"
+        @"<TITLE>404 Page Not Foundd</TITLE>\r\n"
+        @"</HEAD><BODY>\r\n"
+    @"<H1>404 Page Not Found</H1>\r\n";
+    [self setResponseHtmlString:text];
 }
 
 - (void) setRequireAuthentication

@@ -12,13 +12,13 @@
 
 @interface UMLogEntry : UMObject
 {
-	NSDate		*timeStamp;
-	UMLogLevel	level;
-	NSString	*section;
-	NSString	*subsection;
-	NSString	*name;
-	NSString	*message;
-	int			errorCode;
+	NSDate		*_timeStamp;
+	UMLogLevel	_level;
+	NSString	*_section;
+	NSString	*_subsection;
+	NSString	*_name;
+	NSString	*_message;
+	int			_errorCode;
 }
 
 @property	(readwrite,strong)	NSDate		*timeStamp;

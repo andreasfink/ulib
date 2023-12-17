@@ -256,6 +256,8 @@
 				_currentRequest.protocolVersion = protocol;
                 _currentRequest.connection = self;
                 _currentRequest.documentRoot = _server.documentRoot;
+                _currentRequest.remoteAddress = _socket.connectedRemoteAddress;
+                _currentRequest.remotePort = _socket.connectedRemotePort;
 				cSection=UMHTTPConnectionRequestSectionHeaderLine;
 				continue;
 			}

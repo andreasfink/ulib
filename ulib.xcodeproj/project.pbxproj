@@ -4311,8 +4311,9 @@
 		A6D8AAFA149A769A0029E9CF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Andreas Fink (andreas@fink.org)";
 				TargetAttributes = {
 					A60210041D488A2F00211137 = {
@@ -5819,7 +5820,10 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/include/,
+				);
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -5858,7 +5862,10 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/include/,
+				);
 				INFOPLIST_FILE = "ulibios copy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/FinkTelecomServices/frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -6140,7 +6147,7 @@
 				INFOPLIST_FILE = SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DULIB_CONFIG=Debug",
@@ -6215,7 +6222,7 @@
 				INFOPLIST_FILE = SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DULIB_CONFIG=Release",

@@ -1,6 +1,6 @@
 //
 //  UMZMQSocket.h
-//  smpprelay
+//  ulib
 //
 //  Created by Andreas Fink on 12.07.22.
 //
@@ -8,6 +8,15 @@
 
 #import "UMObject.h"
 #import "UMLogLevel.h"
+
+
+#if HAVE_ZMQ_H
+#ifdef	HAVE_ZMQ_H_USR_LOCAL
+#include "/usr/local/include/zmq.h"
+#else
+#include "zmq.h"
+#endif
+#endif
 
 @interface UMZMQSocket : UMObject
 {

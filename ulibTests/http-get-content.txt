@@ -1,8 +1,0 @@
-POST http://localhost:8080 HTTP/1.1
-Accept: text/plain, text/html
-Accept-Encoding: x-compress; x-zip
-Accept-Language: en
-User-Agent:  UMTestHTTPClient
-Host: localhost:8080
-Connection: keep-alive
-testing HTTP request with get content; this is not OK but should work

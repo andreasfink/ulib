@@ -2,11 +2,11 @@ ulib under Debian12-bookworm
 -----------------------------
 
 To user ulib with Linux you need to build your own gnustep installation
-The ones shipped with the distributions is not supporting automatic 
+The ones shipped with the distributions is not supporting automatic
 reference counting because its using the old objc runtime which does not support
 ARC.
 
-Here is how to get such a installation up and running under Debian 10 (codename Buster)
+Here is how to get such a installation up and running under Debian 12 (codename Bookworm)
 
 
 First we need some basic tools and repository's set up
@@ -25,16 +25,20 @@ apt-get install --assume-yes \
     locales-all \
     net-tools \
     libcurl4-openssl-dev \
-    gnutls-bin 
+    gnutls-bin
 
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xCBCB082A1BB943DB
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C23AC7F49887F95A 
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C208ADDE26C2B797 
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421 
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0D9A1950E2EF0603 
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C23AC7F49887F95A
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C208ADDE26C2B797
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0D9A1950E2EF0603
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EF0F382A1A7B6500
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421
-wget -4 -O - http://repo.universalss7.ch/debian/key.asc | apt-key add -
+
+wget -4 -O - http://repo.universalss7.ch/debian/key.asc > /etc/apt/trusted.gpg.d/repo.universalss7.ch.asc
+wget -4 -O - http://repo.messagemover.com/debian/key.asc > /etc/apt/trusted.gpg.d/repo.messagemover.com.asc
+wget -4 -O - http://repo.gnustep.ch/key.asc > /etc/apt/trusted.gpg.d/repo.gnustep.ch.asc
+
 
 DEBIAN_NICKNAME=sid
 DEBIAN_MAIN_VERSION=`cat /etc/debian_version | cut -f1 -d.`
@@ -113,11 +117,11 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         gobjc++ gobjc++-12 \
         default-libmysqlclient-dev \
         libpq-dev libpq5 curl libcurl4-openssl-dev \
-		libzmq3-dev libzmq5 libpq libmariadb-dev \
-		libavahi-core-dev libavahi-core7 libsctp-dev libsctp1 libpcap-dev \
-		bison flex
+        libzmq3-dev libzmq5 libmariadb-dev \
+        libavahi-core-dev libavahi-core7 libsctp-dev libsctp1 libpcap-dev \
+        bison flex
 
-Changes for bookworm/sid on risc-v  VisionFive2:       
+Changes for bookworm/sid on risc-v  VisionFive2:
 	libffi7 	-> libffi8
 	python-dev 	-> python3
 	libicu67 	-> libicu71
@@ -133,14 +137,14 @@ Download the sourcecode of gnustep and dependencies
     git clone https://github.com/apple/swift-corelibs-libdispatch
     git clone https://github.com/gnustep/scripts
     git clone https://github.com/gnustep/make
-    git clone https://github.com/gnustep/libobjc2 
+    git clone https://github.com/gnustep/libobjc2
     git clone https://github.com/gnustep/base
     git clone https://github.com/gnustep/corebase
     git clone https://github.com/gnustep/gui
     git clone https://github.com/gnustep/back
     ./scripts/install-dependencies-linux
-	
-	
+
+
 
 
 
@@ -164,23 +168,19 @@ Build  libiconv
 
 export CC="/usr/bin/clang"
 export CXX="/usr/bin/clang++"
-export PREFIX="/usr/local"
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
-export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"
+export PREFIX="/"
+export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig/:/usr/local/lib/pkgconfig/"
 export RUNTIME_VERSION="gnustep-2.0"
 export OBJCFLAGS="-fblocks"
 export CFLAGS="-I ${PREFIX}/include"
 export LDFLAGS="-fuse-ld=gold"
-
-mkdir -p ${PREFIX}/lib
-mkdir -p ${PREFIX}/etc
-mkdir -p ${PREFIX}/bin
+export GNUSTEP_INSTALLATION_DOMAIN="SYSTEM"
 
     cd swift-corelibs-libdispatch
     mkdir build
     cd build
-    #cmake .. -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX}
-    cmake  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=${PREFIX} ..
+    cmake  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr ..
     make
     make install
 #make test
@@ -193,8 +193,8 @@ mkdir -p ${PREFIX}/bin
     git submodule update
     mkdir Build
     cd Build
-    /usr/bin/cmake  .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=${PREFIX}
-    make 
+    /usr/bin/cmake  .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=/usr
+    make
     #if you get errors here
     # edif the file CMakeCache.txt  and remove the -stlib... thing in line CMAKE_C_FLAGS:STRING=-I /usr/local/include
     make install
@@ -203,39 +203,40 @@ mkdir -p ${PREFIX}/bin
     ldconfig
 
 
-6. install gnustep-make
+6. install gnustep2-make
 
     cd make
 
     ./configure \
-            --with-layout=fhs \
+            --with-layout=gnustep \
             --disable-importing-config-file \
             --enable-native-objc-exceptions \
             --enable-objc-arc \
             --enable-install-ld-so-conf \
             --with-library-combo=ng-gnu-gnu \
-            --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf \
+            --with-config-file=/etc/GNUstep/GNUstep.conf \
             --with-user-config-file='.GNUstep.conf' \
             --with-user-defaults-dir='GNUstep/Library/Defaults' \
             --with-objc-lib-flag="-l:libobjc.so.4.6"
 
     make install
-    source ${PREFIX}/etc/GNUstep/GNUstep.conf
-    #source /usr/local/etc/GNUstep/GNUstep.conf
+    source /etc/GNUstep/GNUstep.conf
+    ln -s /usr/GNUstep/System/Tools/gnustep-config /usr/bin/gnustep-config
     cd ..
- 
-7. install gnustep-base
+
+7. install gnustep-arc-base
 
 
     cd base
-    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf \
+    ./configure --with-config-file=/etc/GNUstep/GNUstep.conf \
     	--with-libiconv-library=/usr/local/lib/libiconv.a \
     	--enable-pass-arguments \
     	--enable-zeroconf \
     	--enable-icu \
     	--enable-libdispatch \
-    	--enable-nsurlsession 
-    
+    	--enable-nsurlsession\
+    	--with-installation-domain=SYSTEM
+
     make -j8
     make install
     ldconfig
@@ -271,7 +272,7 @@ mkdir -p ${PREFIX}/bin
     make -j8
     make install
     cd ..
-    
+
 
 11. ulib
     git clone http://github.com/andreasfink/ulib
@@ -288,6 +289,6 @@ mkdir -p ${PREFIX}/bin
     ./configure
     make
     make install
-    
+
 
 

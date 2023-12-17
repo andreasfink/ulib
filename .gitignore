@@ -12,10 +12,18 @@ config.log
 config.status
 stamp-h1
 autom4te.cache
-Classes/ulib_config.h
-/libs/osx/openssl-1.1.0f/
+ulib/ulib_config.h
+ulib/dmi_decode_path.h
 BUILDNR
 make_buildnr.sh
+buildnumber.c
+buildnumber.h
+ulib.pc
+version.h
+ulib.pc
+install_root
+*.m.d
+debian/ulib.control
 
 
 #########################

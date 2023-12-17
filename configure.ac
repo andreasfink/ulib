@@ -1,6 +1,6 @@
 dnl /* ==================================================================== 
 dnl  * Project "ulib"
-dnl  * Copyright: © 2017 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
+dnl  * Copyright: © 2023 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
 dnl  * ====================================================================
 dnl  */ 
 
@@ -13,13 +13,13 @@ dnl
 dnl initialization
 
 AC_PREREQ([2.68])
-AC_INIT([ulib],[1.0],[andreas@fink.org])
-AC_CONFIG_HEADERS([Classes/ulib_config.h])
+AC_INIT([ulib],[2.0],[andreas@fink.org])
+AC_CONFIG_HEADERS([ulib/ulib_config.h])
 AC_SUBST(SHELL)
 AC_CONFIG_AUX_DIR(.)
 AC_SET_TERMINAL_SEQUENCES()
 
-COPYRIGHT="Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved."
+COPYRIGHT="Copyright © 2023 Andreas Fink (andreas@fink.org). All rights reserved."
 PROJECT_NAME="ulib"
 CONFIG_DEFINE="ULIB_CONFIG"
 
@@ -106,16 +106,22 @@ case "$host" in
 	CFLAGS="$CFLAGS -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector"
 	CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
 	CFLAGS="${CFLAGS} -fobjc-arc"
-	if [[ -x /usr/local/bin/gnustep-config ]] 
+	if [[ -x /usr/GNUstep/System/Tools/gnustep-config ]]
 	then
-		GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
+		GNUSTEP_CONFIG=/usr/GNUstep/System/Tools/gnustep-config
+		CFLAGS="${CFLAGS} -I/usr/GNUstep/System/Library/Headers/"
 	else
-		GNUSTEP_CONFIG=/usr/bin/gnustep-config
+		if [[ -x /usr/local/bin/gnustep-config ]]
+		then
+			GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
+		else
+			GNUSTEP_CONFIG=/usr/bin/gnustep-config
+		fi
 	fi
+	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG}  --objc-flags`"
+    LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG}  --base-libs --objc-libs`"
 	LIBS="$LIBS -ldl"
 	LIBRARIES="-lsctp -lbsd -luuid"
-	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG} --objc-flags`"
-	LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG} --base-libs --objc-libs`"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
     CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
@@ -135,14 +141,20 @@ case "$host" in
 	CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
 	CFLAGS="$CFLAGS -fobjc-arc"
 	SHARED_LIBRARY_EXTENSION="so"
-	if [[ -x /usr/local/bin/gnustep-config ]]
-        then
-                GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
-        else
-                GNUSTEP_CONFIG=/usr/bin/gnustep-config
-        fi
-        CFLAGS="$CFLAGS `${GNUSTEP_CONFIG} --objc-flags`"
-        LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG} --base-libs --objc-libs`"
+	if [[ -x /usr/GNUstep/System/Tools/gnustep-config ]]
+	then
+		GNUSTEP_CONFIG=/usr/GNUstep/System/Tools/gnustep-config
+		CFLAGS="${CFLAGS} -I/usr/GNUstep/System/Library/Headers/"
+	else
+		if [[ -x /usr/local/bin/gnustep-config ]]
+		then
+			GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
+		else
+			GNUSTEP_CONFIG=/usr/bin/gnustep-config
+		fi
+	fi
+	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG}  --objc-flags`"
+    LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG}  --base-libs --objc-libs`"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
 	CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
@@ -525,6 +537,8 @@ AC_ARG_ENABLE(debug,
 
 ./make_version
 
+TIMESTAMP=`date -u +%Y%m%d%H%M%S`
+
 dnl Final Output
 AC_SUBST(CONFIGURATION)
 AC_SUBST(PROJECT_NAME)
@@ -539,14 +553,17 @@ AC_SUBST(LIBS)
 AC_SUBST(SHARED_LIBRARY_EXTENSION)
 AC_SUBST(LIBRARIES)
 AC_SUBST(DMIDECODE)
+AC_SUBST(ARCH)
+AC_SUBST(TIMESTAMP)
 
-AC_CONFIG_SECTION([Generating output files]) 
+AC_CONFIG_SECTION([Generating output files])
 AC_CONFIG_FILES([Makefile.osx])
 AC_CONFIG_FILES([Makefile.linux])
 AC_CONFIG_FILES([Makefile.freebsd])
 AC_CONFIG_FILES([ulib.pc])
 AC_CONFIG_FILES([make_buildnr.sh])
-AC_CONFIG_FILES([Classes/path.h])
+AC_CONFIG_FILES([ulib/dmi_decode_path.h])
+AC_CONFIG_FILES([debian/ulib.control])
 AC_OUTPUT
 
 chmod 755 make_buildnr.sh

@@ -2,7 +2,7 @@ ulib under Ubuntu-22
 -----------------------------
 
 To user ulib with Linux you need to build your own gnustep installation
-The ones shipped with the distributions is not supporting automatic 
+The ones shipped with the distributions is not supporting automatic
 reference counting because its using the old objc runtime which does not support
 ARC.
 
@@ -27,17 +27,17 @@ apt-get install --assume-yes \
 
 
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xCBCB082A1BB943DB
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C23AC7F49887F95A 
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C208ADDE26C2B797 
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421 
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0D9A1950E2EF0603 
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C23AC7F49887F95A
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C208ADDE26C2B797
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0D9A1950E2EF0603
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EF0F382A1A7B6500
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421
 wget -4 -O - http://repo.universalss7.ch/debian/key.asc | apt-key add -
 
 
 DEBIAN_NICKNAME="jammy"
-	
+
 
 echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" > /etc/apt/sources.list.d/universalss7.list
 
@@ -47,7 +47,7 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
 (run as root or use sudo in front)
 
  apt-get install build-essential git subversion  \
-        clang lldb \
+        clang  \
         libxml2 libxml2-dev \
         libffi7 libffi-dev\
         libuuid1 uuid-dev uuid-runtime \
@@ -96,7 +96,8 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         gobjc++ gobjc++-10 \
         libpq-dev libpq5 curl libcurl4-openssl-dev \
 	libpq-dev libmariadb-dev-compat \
-	libzmq5 libzmq3-dev
+	libzmq5 libzmq3-dev \
+	mold
 
 
 
@@ -112,14 +113,14 @@ Download the sourcecode of gnustep and dependencies
     git clone https://github.com/apple/swift-corelibs-libdispatch
     git clone https://github.com/gnustep/scripts
     git clone https://github.com/gnustep/make
-    git clone https://github.com/gnustep/libobjc2 
+    git clone https://github.com/gnustep/libobjc2
     git clone https://github.com/gnustep/base
     git clone https://github.com/gnustep/corebase
     git clone https://github.com/gnustep/gui
     git clone https://github.com/gnustep/back
     ./scripts/install-dependencies-linux
-	
-	
+
+
 
 
 
@@ -145,7 +146,7 @@ Build  libiconv
 
 export CC="/usr/bin/clang"
 export CXX="/usr/bin/clang++"
-export PREFIX="/usr/local"
+export PREFIX="/usr"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"
 export RUNTIME_VERSION="gnustep-2.0"
@@ -174,7 +175,7 @@ mkdir -p ${PREFIX}/bin
     mkdir Build
     cd Build
     /usr/bin/cmake  .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=${PREFIX}
-    make 
+    make
     make install
 
 #make test
@@ -182,7 +183,7 @@ mkdir -p ${PREFIX}/bin
 #	 19 - AssociatedObject_legacy (Subprocess aborted)
 #	 20 - AssociatedObject_legacy_optimised (Subprocess aborted)
 # we dont care about backwards compatibility to libobjc1 anymore so its ok
-	 
+
     cd ..
     ldconfig
 
@@ -207,7 +208,7 @@ mkdir -p ${PREFIX}/bin
     source ${PREFIX}/etc/GNUstep/GNUstep.conf
     #source /usr/local/etc/GNUstep/GNUstep.conf
     cd ..
- 
+
 7. install gnustep-base
 
 
@@ -218,8 +219,8 @@ mkdir -p ${PREFIX}/bin
     	--enable-zeroconf \
     	--enable-icu \
     	--enable-libdispatch \
-    	--enable-nsurlsession 
-    
+    	--enable-nsurlsession
+
     make -j20
     make install
     ldconfig
@@ -255,7 +256,7 @@ mkdir -p ${PREFIX}/bin
     make -j8
     make install
     cd ..
-    
+
 
 11. install zeromq
 
@@ -281,6 +282,6 @@ mkdir -p ${PREFIX}/bin
     ./configure
     make
     make install
-    
+
 
 

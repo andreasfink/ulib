@@ -193,20 +193,19 @@ mkdir -p ${PREFIX}/bin
     cd make
 
     ./configure \
-            --with-layout=fhs \
+            --with-layout=gnustep \
             --disable-importing-config-file \
             --enable-native-objc-exceptions \
             --enable-objc-arc \
             --enable-install-ld-so-conf \
             --with-library-combo=ng-gnu-gnu \
-            --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf \
+            --with-config-file=/etc/GNUstep/GNUstep.conf \
             --with-user-config-file='.GNUstep.conf' \
             --with-user-defaults-dir='GNUstep/Library/Defaults' \
             --with-objc-lib-flag="-l:libobjc.so.4.6"
 
     make install
-    source ${PREFIX}/etc/GNUstep/GNUstep.conf
-    #source /usr/local/etc/GNUstep/GNUstep.conf
+    source /etc/GNUstep/GNUstep.conf
     cd ..
 
 7. install gnustep-base

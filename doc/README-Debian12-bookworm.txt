@@ -224,7 +224,7 @@ export GNUSTEP_INSTALLATION_DOMAIN="SYSTEM"
     ln -s /usr/GNUstep/System/Tools/gnustep-config /usr/bin/gnustep-config
     cd ..
 
-7. install gnustep-arc-base
+7. install gnustep-base
 
 
     cd base

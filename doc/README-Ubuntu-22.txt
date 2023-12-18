@@ -189,7 +189,7 @@ OLDABI_COMPAT=OFF
     cd make
 
     ./configure \
-            --with-layout=fhs \
+            --with-layout=gnustep \
             --disable-importing-config-file \
             --enable-native-objc-exceptions \
             --enable-objc-arc \

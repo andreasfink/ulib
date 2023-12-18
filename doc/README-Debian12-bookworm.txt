@@ -229,13 +229,14 @@ export GNUSTEP_INSTALLATION_DOMAIN="SYSTEM"
 
     cd base
     ./configure --with-config-file=/etc/GNUstep/GNUstep.conf \
-    	--with-libiconv-library=/usr/local/lib/libiconv.a \
-    	--enable-pass-arguments \
-    	--enable-zeroconf \
-    	--enable-icu \
-    	--enable-libdispatch \
-    	--enable-nsurlsession\
-    	--with-installation-domain=SYSTEM
+        --with-libiconv-include=/usr/local/include \
+        --with-libiconv-library=/usr/local/lib \
+        --enable-pass-arguments \
+        --enable-zeroconf \
+        --enable-icu \
+        --enable-libdispatch \
+        --enable-nsurlsession\
+        --with-installation-domain=SYSTEM
 
     make -j8
     make install
@@ -267,7 +268,8 @@ export GNUSTEP_INSTALLATION_DOMAIN="SYSTEM"
 
 10. install gnustep-back
 
-    cd corebase
+    cd back
+    source /usr/GNUstep/System/Library/Makefiles/GNUstep.sh
     ./configure
     make -j8
     make install

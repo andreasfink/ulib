@@ -23,7 +23,7 @@ apt-get install --assume-yes \
     telnet \
     sudo \
     locales-all \
-    net-tools \
+    net-tools
 
 
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xCBCB082A1BB943DB
@@ -37,9 +37,6 @@ wget -4 -O - http://repo.universalss7.ch/debian/key.asc | apt-key add -
 
 
 DEBIAN_NICKNAME="jammy"
-
-
-echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" > /etc/apt/sources.list.d/universalss7.list
 
 
 1. Install depenencies
@@ -94,10 +91,8 @@ echo "deb http://repo.universalss7.ch/debian/ ${DEBIAN_NICKNAME} universalss7" >
         ninja-build \
         gobjc gobjc-10 \
         gobjc++ gobjc++-10 \
-        libpq-dev libpq5 curl libcurl4-openssl-dev \
-	libpq-dev libmariadb-dev-compat \
-	libzmq5 libzmq3-dev \
-	mold
+        libpq-dev libpq5 curl libcurl4-openssl-dev libc++-15-dev gcc-12 g++-12  libstdc++6 \
+        libmariadb-dev-compat libzmq5 libzmq3-dev mold
 
 
 
@@ -109,7 +104,7 @@ Download the sourcecode of gnustep and dependencies
 
     mkdir gnustep
     cd gnustep
-    wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.17.tar.gz
+    wget  http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.17.tar.gz
     git clone https://github.com/apple/swift-corelibs-libdispatch
     git clone https://github.com/gnustep/scripts
     git clone https://github.com/gnustep/make
@@ -148,7 +143,7 @@ export CC="/usr/bin/clang"
 export CXX="/usr/bin/clang++"
 export PREFIX="/usr"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
-export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig/:${PREFIX}/lib/pkgconfig/"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig/:/usr/local/lib/pkgconfig/"
 export RUNTIME_VERSION="gnustep-2.0"
 export OBJCFLAGS="-fblocks"
 export CFLAGS="-I ${PREFIX}/include"
@@ -174,7 +169,8 @@ mkdir -p ${PREFIX}/bin
     git submodule update
     mkdir Build
     cd Build
-    /usr/bin/cmake  .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=${PREFIX}
+/usr/bin/cmake  .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DOLDABI_COMPAT=OFF -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=/usr  -DGNUSTEP_CONFIG:FILEPATH=GNUSTEP_CONFIG-NOTFOUND
+OLDABI_COMPAT=OFF
     make
     make install
 
@@ -199,13 +195,13 @@ mkdir -p ${PREFIX}/bin
             --enable-objc-arc \
             --enable-install-ld-so-conf \
             --with-library-combo=ng-gnu-gnu \
-            --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf \
+            --with-config-file=/etc/GNUstep/GNUstep.conf \
             --with-user-config-file='.GNUstep.conf' \
             --with-user-defaults-dir='GNUstep/Library/Defaults' \
             --with-objc-lib-flag="-l:libobjc.so.4.6"
 
     make install
-    source ${PREFIX}/etc/GNUstep/GNUstep.conf
+    source /etc/GNUstep/GNUstep.conf
     #source /usr/local/etc/GNUstep/GNUstep.conf
     cd ..
 
@@ -213,7 +209,7 @@ mkdir -p ${PREFIX}/bin
 
 
     cd base
-    ./configure --with-config-file=${PREFIX}/etc/GNUstep/GNUstep.conf \
+    ./configure --with-config-file=/etc/GNUstep/GNUstep.conf \
     	--with-libiconv-library=/usr/local/lib/libiconv.a \
     	--enable-pass-arguments \
     	--enable-zeroconf \

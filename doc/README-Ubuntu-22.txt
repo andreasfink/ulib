@@ -148,6 +148,7 @@ export RUNTIME_VERSION="gnustep-2.0"
 export OBJCFLAGS="-fblocks"
 export CFLAGS="-I ${PREFIX}/include"
 export LDFLAGS="-fuse-ld=gold"
+export GNUSTEP_INSTALLATION_DOMAIN="SYSTEM"
 
 mkdir -p ${PREFIX}/lib
 mkdir -p ${PREFIX}/etc
@@ -210,7 +211,8 @@ OLDABI_COMPAT=OFF
 
     cd base
     ./configure --with-config-file=/etc/GNUstep/GNUstep.conf \
-    	--with-libiconv-library=/usr/local/lib/libiconv.a \
+    	--with-libiconv-include=/usr/local/include \
+    	--with-libiconv-library=/usr/local/lib \
     	--enable-pass-arguments \
     	--enable-zeroconf \
     	--enable-icu \
@@ -247,7 +249,9 @@ OLDABI_COMPAT=OFF
 
 10. install gnustep-back
 
-    cd corebase
+
+    cd back
+    source /usr/GNUstep/System/Library/Makefiles/GNUstep.sh
     ./configure
     make -j8
     make install

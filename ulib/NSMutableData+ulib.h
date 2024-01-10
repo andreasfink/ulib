@@ -16,4 +16,9 @@
 - (BOOL)blankAtBeginning:(int)start;
 - (BOOL)blankAtEnd:(int)end;
 - (void) appendByte:(uint8_t)byte; /*!< add  a single byte to a NSData object */
+
+- (void)appendNetworkOrderUINT8:(NSInteger)i;
+- (void)appendNetworkOrderUINT16:(NSInteger)i;
+- (void)appendNetworkOrderUINT32:(NSInteger)i;
+
 @end

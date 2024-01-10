@@ -185,4 +185,28 @@
     [self appendBytes:&byte length:1];
 }
 
+- (void)appendNetworkOrderUINT8:(NSInteger)i
+{
+    uint8_t byte = i & 0xFF;
+    [self appendBytes:&byte length:1];
+}
+
+- (void)appendNetworkOrderUINT16:(NSInteger)i
+{
+    uint8_t bytes[2];
+    bytes[0] = (i >> 8) & 0xFF;
+    bytes[1] = (i >> 0) & 0xFF;
+    [self appendBytes:&bytes length:2];
+}
+
+- (void)appendNetworkOrderUINT32:(NSInteger)i
+{
+    uint8_t bytes[4];
+    bytes[0] = (i >> 24) & 0xFF;
+    bytes[1] = (i >> 16) & 0xFF;
+    bytes[2] = (i >> 8) & 0xFF;
+    bytes[3] = (i >> 0) & 0xFF;
+    [self appendBytes:&bytes length:2];
+}
+
 @end

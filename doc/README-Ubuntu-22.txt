@@ -203,10 +203,6 @@ OLDABI_COMPAT=OFF
 
     make install
     source /etc/GNUstep/GNUstep.conf
-<<<<<<< HEAD
-=======
-    #source /usr/local/etc/GNUstep/GNUstep.conf
->>>>>>> 754136dc481975e41bac340c12651020ec0ad858
     cd ..
 
 7. install gnustep-base

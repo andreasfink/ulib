@@ -47,6 +47,7 @@ typedef enum SocketBlockingMode
 	in_port_t			_connectedRemotePort;
 	NSString			*_connectedLocalAddress;
 	NSString			*_connectedRemoteAddress;
+    NSString            *_requestedLocalAddress;
 	int					_sock;
     int                 _socketDomain;
     int                 _socketFamily;
@@ -146,6 +147,7 @@ typedef enum SocketBlockingMode
 @property (weak) id customUser;
 @property(readwrite,strong,atomic) UMHistoryLog        *historyLog;
 @property(readwrite,assign,atomic) int                 dscp;
+@property(readwrite,strong,atomic) NSString            *requestedLocalAddress;
 
 - (UMSocket *) initWithType:(UMSocketType)t;
 - (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name;

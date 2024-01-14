@@ -1,5 +1,5 @@
 //
-//  UMAsset.h
+//  UMAssert.h
 //  ulib
 //
 //  Created by Andreas Fink on 31.01.14.

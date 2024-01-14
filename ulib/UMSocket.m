@@ -594,8 +594,11 @@ static int SSL_smart_shutdown(SSL *ssl)
             _localHost               = [[UMHost alloc] initWithLocalhost];
         }
         localAddresses              = [_localHost addresses];
+        if(_requestedLocalAddress)
+        {
+            localAddresses = @[_requestedLocalAddress];
+        }
         useableLocalAddresses       = [[NSMutableArray alloc] init];
-
         memset(&sa,0x00,sizeof(sa));
         sa.sin_family			= AF_INET;
 #ifdef	HAS_SOCKADDR_LEN
@@ -611,6 +614,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         sa6.sin6_port			= htons(_requestedLocalPort);
         sa6.sin6_addr			= in6addr_any;
 
+        
         switch(_type)
         {
 #ifdef	SCTP_SUPPORTED
@@ -623,19 +627,25 @@ static int SSL_smart_shutdown(SSL *ssl)
             case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
             {
                 int i;
-                for(i=0;i< [localAddresses count];i++)
+                if(_requestedLocalAddress)
                 {
-                    ipAddr = [localAddresses objectAtIndex:i];
-                    NSData *d = [UMSocket sockaddrFromAddress:ipAddr
-                                                     port:_requestedLocalPort
-                                             socketFamily:AF_INET];
-                    int err = [self bindx:(struct sockaddr *)d.bytes];
-                    if(!err)
+                    [useableLocalAddresses addObject:_requestedLocalAddress];
+                }
+                else
+                {
+                    for(i=0;i< [localAddresses count];i++)
                     {
-                        [useableLocalAddresses addObject:ipAddr];
+                        ipAddr = [localAddresses objectAtIndex:i];
+                        NSData *d = [UMSocket sockaddrFromAddress:ipAddr
+                                                             port:_requestedLocalPort
+                                                     socketFamily:AF_INET];
+                        int err = [self bindx:(struct sockaddr *)d.bytes];
+                        if(!err)
+                        {
+                            [useableLocalAddresses addObject:ipAddr];
+                        }
                     }
                 }
-
                 if( [useableLocalAddresses count] == 0)
                 {
                     return UMSocketError_sctp_bindx_failed_for_all;

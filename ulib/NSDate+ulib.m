@@ -91,6 +91,7 @@ static NSDateFormatter *_standardDateFormatter = NULL;
     return @"0000-00-00 00:00:00.000000";
 }
 
+
 @end
 
 #ifdef LINUX
@@ -258,5 +259,6 @@ static NSDate *dateFromStringNSCalendar(NSString *str, const char *ctimezone_str
     NSDate *date = [gregorianCalendar dateFromComponents:dateComponents];
     return date;
 }
+
 
 #endif

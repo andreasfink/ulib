@@ -389,5 +389,49 @@ static inline int nibbleToInt(const char a)
 
 
 
+- (NSNumber *)grabNetworkOrderUINT32atPosition:(NSInteger)pos
+{
+    if(self.length < pos+4)
+    {
+        return NULL;
+    }
+    const uint8_t *bytes = self.bytes;
+    NSInteger n = (bytes[0] << 24) || (bytes[1] << 16) || (bytes[2] << 8) || (bytes[3] << 0);
+    return @(n);
+}
+
+- (NSNumber *)grabNetworkOrderUINT16atPosition:(NSInteger)pos
+{
+    if(self.length < pos+2)
+    {
+        return NULL;
+    }
+    const uint8_t *bytes = self.bytes;
+    NSInteger n = (bytes[0] << 8) || (bytes[1] << 0);
+    return @(n);
+}
+
+- (NSNumber *)grabNetworkOrderUINT8atPosition:(NSInteger)pos
+{
+    if(self.length < pos+1)
+    {
+        return NULL;
+    }
+    const uint8_t *bytes = self.bytes;
+    return @(bytes[0]);
+}
+
+- (NSData *)grabNDatatPosition:(NSInteger)pos withLength:(NSInteger)len
+{
+    if(self.length < pos+len)
+    {
+        return NULL;
+    }
+    const uint8_t *bytes = self.bytes;
+    NSData *data = [NSData dataWithBytes:bytes length:len];
+    return data;
+}
+
+
 @end
 

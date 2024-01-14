@@ -37,6 +37,11 @@ typedef NSUInteger NSDataSearchOptions;
 - (NSRange) rangeOfData_dd:(NSData *)dataToFind;
 - (NSRange) rangeOfData_dd:(NSData *)dataToFind startingFrom:(long)i;
 
+- (NSNumber *)grabNetworkOrderUINT32atPosition:(NSInteger)pos;
+- (NSNumber *)grabNetworkOrderUINT16atPosition:(NSInteger)pos;
+- (NSNumber *)grabNetworkOrderUINT8atPosition:(NSInteger)pos;
+- (NSData *)grabNDatatPosition:(NSInteger)pos withLength:(NSInteger)len;
+
 @end
 
 

@@ -206,7 +206,7 @@
     bytes[1] = (i >> 16) & 0xFF;
     bytes[2] = (i >> 8) & 0xFF;
     bytes[3] = (i >> 0) & 0xFF;
-    [self appendBytes:&bytes length:2];
+    [self appendBytes:&bytes length:4];
 }
 
 

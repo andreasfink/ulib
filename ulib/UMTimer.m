@@ -182,6 +182,14 @@
     [_timerMutex unlock];
 }
 
+- (void) restart
+{
+    [_timerMutex lock];
+    [self unlockedStop];
+    [self unlockedStart];
+    [_timerMutex unlock];
+}
+
 - (void) unlockedStop
 {
     self.isRunning = NO;

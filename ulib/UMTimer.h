@@ -71,5 +71,6 @@
 - (void)setSeconds:(NSTimeInterval)sec;
 - (NSTimeInterval)seconds;
 - (UMSynchronizedSortedDictionary *)timerDescription;
+- (void)restart;
 
 @end

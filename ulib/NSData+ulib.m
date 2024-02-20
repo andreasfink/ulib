@@ -396,7 +396,7 @@ static inline int nibbleToInt(const char a)
         return NULL;
     }
     const uint8_t *bytes = self.bytes;
-    NSInteger n = (bytes[0] << 24) || (bytes[1] << 16) || (bytes[2] << 8) || (bytes[3] << 0);
+    NSInteger n = (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | (bytes[3] << 0);
     return @(n);
 }
 
@@ -407,7 +407,7 @@ static inline int nibbleToInt(const char a)
         return NULL;
     }
     const uint8_t *bytes = self.bytes;
-    NSInteger n = (bytes[0] << 8) || (bytes[1] << 0);
+    NSInteger n = (bytes[0] << 8) | (bytes[1] << 0);
     return @(n);
 }
 

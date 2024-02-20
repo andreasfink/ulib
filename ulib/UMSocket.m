@@ -965,7 +965,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             UMAssert(0,@"[UMSocket connect]: IPversion is not 6 neither 4");
             err = 0;
         }
-        if(err)
+        if(err!=0)
         {
 
             _isConnecting = YES;

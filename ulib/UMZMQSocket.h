@@ -47,7 +47,6 @@
 - (uint32_t)receiveUInt32;
 - (uint32_t)receiveUInt32AndMore:(BOOL *)more;
 
-
 - (void)close;
 @end
 

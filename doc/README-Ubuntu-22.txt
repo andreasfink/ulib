@@ -26,15 +26,8 @@ apt-get install --assume-yes \
     net-tools
 
 
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xCBCB082A1BB943DB
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C23AC7F49887F95A
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C208ADDE26C2B797
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0D9A1950E2EF0603
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com EF0F382A1A7B6500
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 15CF4D18AF4F7421
-wget -4 -O - http://repo.universalss7.ch/debian/key.asc | apt-key add -
-
+wget -4 -O - http://repo.gnustep.ch/key.asc  > /etc/apt/trusted.gpg.d/repo.gnustep.ch.asc
+wget -4 -O - http://repo.universalss7.ch/debian/key.asc  > /etc/apt/trusted.gpg.d/repo.universalss7.ch.asc
 
 DEBIAN_NICKNAME="jammy"
 
@@ -144,7 +137,7 @@ export CXX="/usr/bin/clang++"
 export PREFIX="/usr"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PREFIX}/bin"
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig/:/usr/local/lib/pkgconfig/"
-export RUNTIME_VERSION="gnustep-2.0"
+export RUNTIME_VERSION="gnustep-2.1"
 export OBJCFLAGS="-fblocks"
 export CFLAGS="-I ${PREFIX}/include"
 export LDFLAGS="-fuse-ld=gold"

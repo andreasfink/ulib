@@ -7,7 +7,7 @@ libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 
 Cflags: -I${includedir}  -I/usr/GNUstep/System/Library/Headers/ -DHAVE_OPENSSL=1
-Libs: -L${libdir} -l:libulib.@SHARED_LIBRARY_EXTENSION@.@MAJORVER@.@MINORVER@ -lobjc -lavahi-client -lavahi-core -lavahi-common -lgnustep-base -ldl @LIBRARIES@
+Libs: -L${libdir} -l:libulib.@SHARED_LIBRARY_EXTENSION@.@MAJORVER@.@MINORVER@ -l:libobjc.so.4.6 -lavahi-client -lavahi-core -lavahi-common -lgnustep-base -ldl @LIBRARIES@
 
 Name: ulib
 Description: universal library

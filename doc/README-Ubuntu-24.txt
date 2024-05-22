@@ -1,4 +1,4 @@
-ulib under Ubuntu-22
+ulib under Ubuntu-24
 -----------------------------
 
 To user ulib with Linux you need to build your own gnustep installation
@@ -164,7 +164,6 @@ mkdir -p ${PREFIX}/bin
     mkdir Build
     cd Build
 /usr/bin/cmake  .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DOLDABI_COMPAT=OFF -DBUILD_STATIC_LIBOBJC=1  -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_INSTALL_PREFIX=/usr  -DGNUSTEP_CONFIG:FILEPATH=GNUSTEP_CONFIG-NOTFOUND
-OLDABI_COMPAT=OFF
     make
     make install
 
@@ -197,6 +196,8 @@ OLDABI_COMPAT=OFF
     make install
     source /etc/GNUstep/GNUstep.conf
     cd ..
+
+	export PATH=/usr/GNUstep/System/Tools:$PATH
 
 7. install gnustep-base
 

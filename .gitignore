@@ -3,6 +3,10 @@
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 *.o
+*.d
+install
+libulib.a
+libulib.so
 Makefile
 Makefile.linux
 Makefile.osx
@@ -22,7 +26,6 @@ ulib.pc
 version.h
 ulib.pc
 install_root
-*.m.d
 debian/ulib.control
 
 

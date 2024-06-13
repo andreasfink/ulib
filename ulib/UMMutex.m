@@ -14,8 +14,9 @@
 #include <unistd.h> /* for usleep */
 
 static NSMutableDictionary  *global_ummutex_stat = NULL;
-static NSMutableArray       *global_locked_mutexes = NULL;
 static pthread_mutex_t      *global_ummutex_stat_mutex = NULL;
+static NSMutableArray       *global_locked_mutexes = NULL;
+static pthread_mutex_t      *global_locked_mutexes_lock = NULL;
 
 NSArray *ummutex_get_locked_mutexes(void)
 {
@@ -42,18 +43,18 @@ void ummutex_add_locked_mutex(UMMutex *m)
 {
     if(global_locked_mutexes)
     {
-        pthread_mutex_lock(global_ummutex_stat_mutex);
+        pthread_mutex_lock(global_locked_mutexes_lock);
         [global_locked_mutexes addObject:m];
-        pthread_mutex_unlock(global_ummutex_stat_mutex);
+        pthread_mutex_unlock(global_locked_mutexes_lock);
     }
 }
 void ummutex_remove_locked_mutex(UMMutex *m)
 {
     if(global_locked_mutexes)
     {
-        pthread_mutex_lock(global_ummutex_stat_mutex);
+        pthread_mutex_lock(global_locked_mutexes_lock);
         [global_locked_mutexes removeObject:m];
-        pthread_mutex_unlock(global_ummutex_stat_mutex);
+        pthread_mutex_unlock(global_locked_mutexes_lock);
     }
 }
 
@@ -313,7 +314,12 @@ void ummutex_remove_locked_mutex(UMMutex *m)
 
 void ummutex_record_locks(void)
 {
-    global_locked_mutexes   = [[NSMutableArray alloc]init];
+    global_locked_mutexes_lock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+    if(global_locked_mutexes_lock)
+    {
+        pthread_mutex_init(global_locked_mutexes_lock, NULL);
+        global_locked_mutexes   = [[NSMutableArray alloc]init];
+    }
 }
 
 int ummutex_stat_enable(void)

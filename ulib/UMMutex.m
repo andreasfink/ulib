@@ -17,6 +17,26 @@ static NSMutableDictionary  *global_ummutex_stat = NULL;
 static NSMutableArray       *global_locked_mutexes = NULL;
 static pthread_mutex_t      *global_ummutex_stat_mutex = NULL;
 
+NSArray *ummutex_get_locked_mutexes(void)
+{
+    NSMutableArray * a = [[NSMutableArray alloc]init];
+    if(global_locked_mutexes)
+    {
+        pthread_mutex_lock(global_ummutex_stat_mutex);
+        for(UMMutex *m in global_locked_mutexes)
+        {
+            [a addObject:@{
+                @"name" : m.name,
+                @"file" : @(m.lockedInFile)     ,
+                @"line" : @(m.lockedAtLine)     ,
+                @"func" : @(m.lockedInFunction) ,
+            }];
+        }
+        pthread_mutex_unlock(global_ummutex_stat_mutex);
+    }
+    return a;
+}
+
 void ummutex_add_locked_mutex(UMMutex *m)
 {
     if(global_locked_mutexes)
@@ -299,7 +319,7 @@ int ummutex_stat_enable(void)
         {
             pthread_mutex_init(global_ummutex_stat_mutex, NULL);
             global_ummutex_stat     = [[NSMutableDictionary alloc]init];
-            global_locked_mutexes   = [[NSMutableDictionary alloc]init];
+            global_locked_mutexes   = [[NSMutableArray alloc]init];
             return 0;
         }
     }

@@ -21,7 +21,7 @@ static pthread_mutex_t      *global_locked_mutexes_lock = NULL;
 NSArray *ummutex_get_locked_mutexes(void)
 {
     NSMutableArray * a = [[NSMutableArray alloc]init];
-    if(global_locked_mutexes)
+    if((global_locked_mutexes) && (global_locked_mutexes_lock))
     {
         pthread_mutex_lock(global_locked_mutexes_lock);
         for(UMMutex *m in global_locked_mutexes)
@@ -41,7 +41,7 @@ NSArray *ummutex_get_locked_mutexes(void)
 
 void ummutex_add_locked_mutex(UMMutex *m)
 {
-    if(global_locked_mutexes)
+    if((global_locked_mutexes) && (global_locked_mutexes_lock))
     {
         pthread_mutex_lock(global_locked_mutexes_lock);
         [global_locked_mutexes addObject:m];
@@ -50,7 +50,7 @@ void ummutex_add_locked_mutex(UMMutex *m)
 }
 void ummutex_remove_locked_mutex(UMMutex *m)
 {
-    if(global_locked_mutexes)
+    if((global_locked_mutexes) && (global_locked_mutexes_lock))
     {
         pthread_mutex_lock(global_locked_mutexes_lock);
         [global_locked_mutexes removeObject:m];

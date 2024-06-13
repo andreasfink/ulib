@@ -25,12 +25,13 @@ NSArray *ummutex_get_locked_mutexes(void)
         pthread_mutex_lock(global_ummutex_stat_mutex);
         for(UMMutex *m in global_locked_mutexes)
         {
-            [a addObject:@{
-                @"name" : m.name,
-                @"file" : @(m.lockedInFile)     ,
-                @"line" : @(m.lockedAtLine)     ,
-                @"func" : @(m.lockedInFunction) ,
-            }];
+           [a addObject:@{
+                    @"name" : (m.name                ? m.name                : @"" ),
+                    @"file" : (m.lockedInFile        ? @(m.lockedInFile)     : @""  ),
+                    @"line" : (m.lockedAtLine        ? @(m.lockedAtLine)     : @"" ),
+                    @"func" : (m.lockedInFunction    ? @(m.lockedInFunction) : @"" ),
+                }
+           ];
         }
         pthread_mutex_unlock(global_ummutex_stat_mutex);
     }

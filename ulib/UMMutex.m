@@ -13,10 +13,31 @@
 
 #include <unistd.h> /* for usleep */
 
-static NSMutableDictionary *global_ummutex_stat = NULL;
-static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
+static NSMutableDictionary  *global_ummutex_stat = NULL;
+static NSMutableArray       *global_locked_mutexes = NULL;
+static pthread_mutex_t      *global_ummutex_stat_mutex = NULL;
+
+void ummutex_add_locked_mutex(UMMutex *m)
+{
+    if(global_locked_mutexes)
+    {
+        pthread_mutex_lock(global_ummutex_stat_mutex);
+        [global_locked_mutexes addObject:m];
+        pthread_mutex_unlock(global_ummutex_stat_mutex);
+    }
+}
+void ummutex_remove_locked_mutex(UMMutex *m)
+{
+    if(global_locked_mutexes)
+    {
+        pthread_mutex_lock(global_ummutex_stat_mutex);
+        [global_locked_mutexes removeObject:m];
+        pthread_mutex_unlock(global_ummutex_stat_mutex);
+    }
+}
 
 @implementation UMMutexStat
+
 - (UMMutexStat *)copyWithZone:(NSZone *)zone;
 {
     UMMutexStat *r = [[UMMutexStat allocWithZone:zone]init];
@@ -27,7 +48,6 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
     r.currently_locked = _currently_locked;
     return r;
 }
-
 @end
 
 @implementation UMMutex
@@ -270,8 +290,6 @@ static pthread_mutex_t *global_ummutex_stat_mutex = NULL;
 
 @end
 
-
-
 int ummutex_stat_enable(void)
 {
     if(global_ummutex_stat == NULL)
@@ -280,7 +298,8 @@ int ummutex_stat_enable(void)
         if(global_ummutex_stat_mutex)
         {
             pthread_mutex_init(global_ummutex_stat_mutex, NULL);
-            global_ummutex_stat = [[NSMutableDictionary alloc]init];
+            global_ummutex_stat     = [[NSMutableDictionary alloc]init];
+            global_locked_mutexes   = [[NSMutableDictionary alloc]init];
             return 0;
         }
     }
@@ -292,7 +311,8 @@ void ummutex_stat_disable(void)
     global_ummutex_stat = NULL;
     pthread_mutex_destroy(global_ummutex_stat_mutex);
     free(global_ummutex_stat_mutex);
-    global_ummutex_stat_mutex = NULL;
+    global_ummutex_stat_mutex   = NULL;
+    global_locked_mutexes       = NULL;
 }
 
 NSArray *ummutex_stat(BOOL sortByName)

@@ -71,6 +71,8 @@
 @property(readwrite,assign,atomic)  int64_t unlock_count;
 @property(readwrite,assign,atomic)  int64_t waiting_count;
 @property(readwrite,assign,atomic)  BOOL currently_locked;
+@property(readwrite,strong,atomic)  NSMutableArray <UMMutex *>*mutexes;
+
 
 @end
 
@@ -80,6 +82,8 @@ BOOL ummutex_stat_is_enabled(void);
 NSArray *ummutex_stat(BOOL sortByName);
 int ummutex_stat_enable(void);
 void ummutex_stat_disable(void);
+void ummutex_add_locked_mutex(UMMutex *m);
+void ummutex_remove_locked_mutex(UMMutex *m);
 
 #ifndef __FUNCTION__
 #define __FUNCTION__ "unknown"
@@ -107,6 +111,7 @@ void ummutex_stat_disable(void);
         a.tryingToLockAtLine = 0; \
         a.tryingToLockInFunction = NULL; \
     } \
+    ummutex_add_locked_mutex(a); \
 }
 
 #define UMMUTEX_TRYLOCK(a,timeout,retry,result)  \
@@ -127,6 +132,7 @@ void ummutex_stat_disable(void);
         a.lockedInFile = __FILE__;  \
         a.lockedAtLine = __LINE__;   \
         a.lockedInFunction =  __FUNCTION__;  \
+        ummutex_add_locked_mutex(a); \
     } \
     else \
     { \
@@ -136,7 +142,6 @@ void ummutex_stat_disable(void);
     } \
 }
 
-
 #define UMMUTEX_UNLOCK(a) \
 {  \
     a.lastLockedInFile = a.lockedInFile;  \
@@ -144,4 +149,5 @@ void ummutex_stat_disable(void);
     a.lastLockedInFunction =  a.lockedInFunction;  \
     a.lockedInFunction =  NULL; \
     [a unlock];  \
+    ummutex_remove_locked_mutex(a); \
 }

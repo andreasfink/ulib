@@ -311,6 +311,11 @@ void ummutex_remove_locked_mutex(UMMutex *m)
 
 @end
 
+void ummutex_record_locks(void)
+{
+    global_locked_mutexes   = [[NSMutableArray alloc]init];
+}
+
 int ummutex_stat_enable(void)
 {
     if(global_ummutex_stat == NULL)
@@ -320,7 +325,6 @@ int ummutex_stat_enable(void)
         {
             pthread_mutex_init(global_ummutex_stat_mutex, NULL);
             global_ummutex_stat     = [[NSMutableDictionary alloc]init];
-            global_locked_mutexes   = [[NSMutableArray alloc]init];
             return 0;
         }
     }

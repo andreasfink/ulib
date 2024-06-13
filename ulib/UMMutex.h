@@ -85,6 +85,7 @@ void ummutex_stat_disable(void);
 void ummutex_add_locked_mutex(UMMutex *m);
 void ummutex_remove_locked_mutex(UMMutex *m);
 NSArray *ummutex_get_locked_mutexes(void);
+void ummutex_record_locks(void);
 
 #ifndef __FUNCTION__
 #define __FUNCTION__ "unknown"

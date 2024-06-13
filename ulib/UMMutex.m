@@ -23,7 +23,7 @@ NSArray *ummutex_get_locked_mutexes(void)
     NSMutableArray * a = [[NSMutableArray alloc]init];
     if(global_locked_mutexes)
     {
-        pthread_mutex_lock(global_ummutex_stat_mutex);
+        pthread_mutex_lock(global_locked_mutexes_lock);
         for(UMMutex *m in global_locked_mutexes)
         {
            [a addObject:@{
@@ -34,7 +34,7 @@ NSArray *ummutex_get_locked_mutexes(void)
                 }
            ];
         }
-        pthread_mutex_unlock(global_ummutex_stat_mutex);
+        pthread_mutex_unlock(global_locked_mutexes_lock);
     }
     return a;
 }

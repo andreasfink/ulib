@@ -163,6 +163,28 @@ void ummutex_remove_locked_mutex(UMMutex *m)
 
 - (void)lock
 {
+    UMAssert(0,@"direct call to [<mutex> lock]. call UMMUTEX_LOCK() macro instead");
+}
+
+- (void)unlock
+{
+    UMAssert(0,@"direct call to [<mutex> unlock]. call UMMUTEX_UNLOCK() macro instead");
+}
+
+- (int)tryLock
+{
+    UMAssert(0,@"direct call to [<mutex> tryLock]. call UMMUTEX_TRYLOCK(lock,timeout,retry,result) macro instead");
+    return 0;
+}
+
+- (int) tryLock:(NSTimeInterval)timeout retryTime:(NSTimeInterval)retryTime
+{
+    UMAssert(0,@"direct call to [<mutex> tryLock:retryTime:]. call UMMUTEX_TRYLOCK(lock,timeout,retry,result) macro instead");
+    return 0;
+}
+
+- (void)_internalLock
+{
     @autoreleasepool
     {
         UMMutexStat *stat = NULL;
@@ -197,7 +219,7 @@ void ummutex_remove_locked_mutex(UMMutex *m)
     }
 }
 
-- (void)unlock
+- (void)_internalUnlock
 {
     @autoreleasepool
     {
@@ -224,7 +246,7 @@ void ummutex_remove_locked_mutex(UMMutex *m)
     }
 }
 
-- (int)tryLock /* returns 0 if successful */
+- (int)_internalTryLock /* returns 0 if successful */
 {
     @autoreleasepool
     {
@@ -265,8 +287,8 @@ void ummutex_remove_locked_mutex(UMMutex *m)
     }
 }
 
-- (int)tryLock:(NSTimeInterval)timeout
-     retryTime:(NSTimeInterval)retryTime
+- (int)_internalTryLock:(NSTimeInterval)timeout
+              retryTime:(NSTimeInterval)retryTime
 {
     @autoreleasepool
     {

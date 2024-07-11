@@ -30,46 +30,46 @@
 - (int64_t)counter
 {
     int64_t r;
-    [_mutex lock];
+    UMMUTEX_LOCK(_mutex);
     r = _counter;
-    [_mutex unlock];
+    UMMUTEX_UNLOCK(_mutex);
     return r;
 }
 
 - (void)setCounter:(int64_t)c
 {
-    [_mutex lock];
+    UMMUTEX_LOCK(_mutex);
     _counter = c;
-    [_mutex unlock];
+    UMMUTEX_UNLOCK(_mutex);
 }
 
 - (void)increase:(int64_t)c
 {
-    [_mutex lock];
+    UMMUTEX_LOCK(_mutex);
     _counter += c;
-    [_mutex unlock];
+    UMMUTEX_UNLOCK(_mutex);
 }
 
 - (void)decrease:(int64_t)c
 {
-    [_mutex lock];
+    UMMUTEX_LOCK(_mutex);
     _counter -= c;
-    [_mutex unlock];
+    UMMUTEX_UNLOCK(_mutex);
 }
 
 
 - (void)increase
 {
-    [_mutex lock];
+    UMMUTEX_LOCK(_mutex);
     _counter++;
-    [_mutex unlock];
+    UMMUTEX_UNLOCK(_mutex);
 }
 
 - (void)decrease
 {
-    [_mutex lock];
+    UMMUTEX_LOCK(_mutex);
     _counter--;
-    [_mutex unlock];
+    UMMUTEX_UNLOCK(_mutex);
 }
 
 - (UMAtomicCounter *)copyWithZone:(NSZone *)zone

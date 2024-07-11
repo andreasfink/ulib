@@ -22,7 +22,7 @@
 
 - (void)addEntry:(id)obj  forDigits:(NSString *)digits
 {
-    [_digitTreeLock lock];
+    UMMUTEX_LOCK(_digitTreeLock);
     if(_root==NULL)
     {
         _root = [[UMDigitTreeEntry alloc]init];
@@ -46,12 +46,12 @@
         entry = entry2;
     }
     [entry setPayload:obj];
-    [_digitTreeLock unlock];
+    UMMUTEX_UNLOCK(_digitTreeLock);
 }
 
 - (id)getEntryForDigits:(NSString *)digits
 {
-    [_digitTreeLock lock];
+    UMMUTEX_LOCK(_digitTreeLock);
     UMDigitTreeEntry *entry = _root;
     id payload = [entry getPayload];
     
@@ -72,7 +72,7 @@
         entry = entry2;
         payload = [entry getPayload];
     }
-    [_digitTreeLock unlock];
+    UMMUTEX_UNLOCK(_digitTreeLock);
     return payload;
 }
 

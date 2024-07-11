@@ -14,12 +14,12 @@
 @synthesize level;
 @synthesize debugSections;
 
-- (void)lock
+- (void)lockDestination
 {
     UMMUTEX_LOCK(_logDestinationLock);
 }
 
-- (void)unlock
+- (void)unlockDestination
 {
     UMMUTEX_UNLOCK(_logDestinationLock);
 }
@@ -103,16 +103,16 @@
 	{
 		if ([debugSections indexOfObject: [logEntry subsection]] != NSNotFound)
 		{
-			[self lock];
+			[self lockDestination];
 			[self logNow: logEntry];
-			[self unlock];
+			[self unlockDestination];
 		}
 	}
 	else if( entryLevel >= level )
 	{
-		[self lock];
+		[self lockDestination];
 		[self logNow: logEntry];
-		[self unlock];
+		[self unlockDestination];
 	}
 }
 

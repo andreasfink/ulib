@@ -39,6 +39,9 @@
 - (UMSynchronizedDictionary *)copyWithZone:(NSZone *)zone;
 - (void) lock;
 - (void) unlock;
+
+- (void) lockDictionary;
+- (void) unlockDictionary;
 - (void) flush;
 
 - (NSString *)jsonCompactString;

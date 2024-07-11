@@ -61,31 +61,31 @@ error:
 
 - (void)closeLog
 {
-    [self lock];
+    [self lockDestination];
     [fileHandler closeFile];
-    [self unlock];
+    [self unlockDestination];
 }
 
 - (void)emptyLog
 {
-    [self lock];
+    [self lockDestination];
     [fileHandler truncateFileAtOffset:0];
-    [self unlock];
+    [self unlockDestination];
 }
 
 - (BOOL) removeLog
 {
 #ifdef GNUSTEP  /* gnustep doesnt have removeItemAtPath (yet) */
-    [self lock];
+    [self lockDestination];
     unlink([fileName UTF8String]);
-    [self unlock];
+    [self unlockDestination];
     return YES;
 #else
     BOOL ret;
-   [self lock];
+   [self lockDestination];
     NSError *err;
     ret = [filemgr removeItemAtPath:fileName error:&err];
-    [self unlock];
+    [self unlockDestination];
     return ret;
 #endif
 
@@ -101,17 +101,17 @@ error:
 	{
 		if ([debugSections indexOfObject: [logEntry subsection]] != NSNotFound )
 		{
-			[self lock];
+			[self lockDestination];
 			[self logNow: logEntry];
-			[self unlock];
+			[self unlockDestination];
 		}
 	}
     
 	else if( entryLevel >= level )
 	{
-		[self lock];
+		[self lockDestination];
 		[self logNow: logEntry];
-		[self unlock];
+		[self unlockDestination];
 	}
 }
 
@@ -148,9 +148,9 @@ error:
 
 - (void) flush
 {
-    [self lock];
+    [self lockDestination];
     [fileHandler synchronizeFile];
-    [self unlock];
+    [self unlockDestination];
 }
 
 - (void) flushUnlocked
@@ -162,9 +162,9 @@ error:
 {
     ssize_t pos;
     
-    [self lock];
+    [self lockDestination];
     pos = (ssize_t)[fileHandler offsetInFile];
-    [self unlock];
+    [self unlockDestination];
     return pos;
 }
 
@@ -180,9 +180,9 @@ error:
 {
     ssize_t size;
     
-    [self lock];
+    [self lockDestination];
     size = (ssize_t)[fileHandler seekToEndOfFile];
-    [self unlock];
+    [self unlockDestination];
     return size;
 }
 
@@ -202,9 +202,9 @@ error:
     NSError *error;
     
     size = -1;
-    [self lock];
+    [self lockDestination];
     fileAttributes = [filemgr attributesOfItemAtPath:fileName error:&error];
-    [self unlock];
+    [self unlockDestination];
     if(fileAttributes)
 	{
 		fileSize = [fileAttributes objectForKey:@"NSFileSize"];
@@ -292,7 +292,7 @@ error:
     }
     
     NSData * newLineData = [lineDelimiter dataUsingEncoding:NSUTF8StringEncoding];
-    [self lock];
+    [self lockDestination];
     @try
     {
         [fileHandler seekToFileOffset:currentOffset];
@@ -330,7 +330,7 @@ error:
 #endif
                     if (!newChunk)
                     {
-                        [self unlock];
+                        [self unlockDestination];
                         *ret = 0;
                         return nil;
                     }
@@ -356,7 +356,7 @@ error:
     }
     @finally
     {
-        [self unlock];
+        [self unlockDestination];
     }
     NSString * line = [[NSString alloc] initWithData:currentData encoding:NSUTF8StringEncoding];
     *ret = 1;

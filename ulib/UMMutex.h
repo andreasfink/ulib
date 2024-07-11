@@ -46,9 +46,16 @@
 - (void) lock;
 - (void) unlock;
 - (int) tryLock;
-- (int)tryLock:(NSTimeInterval)timeout
-     retryTime:(NSTimeInterval)retryTime;
 
+- (void) _internalLock;
+- (void) _internalUnlock;
+- (int)  _internalTryLock;
+- (int)  _internalTryLock:(NSTimeInterval)timeout
+                retryTime:(NSTimeInterval)retryTime;
+
+/*- (int)tryLock:(NSTimeInterval)timeout
+     retryTime:(NSTimeInterval)retryTime;
+*/
 - (UMMutex *) init;
 - (UMMutex *) initWithName:(NSString *)name;
 - (UMMutex *) initWithName:(NSString *)name saveInObjectStat:(BOOL)safeInObjectStat;
@@ -103,7 +110,7 @@ void ummutex_record_locks(void);
     { \
         NSLog(@"FILE:%s line:%d locking a non UMMutex!",__FILE__,__LINE__); \
     } \
-    [a lock]; \
+    [a _internalLock]; \
     if([a isKindOfClass:[UMMutex class]]) \
     { \
         a.lockedInFile = __FILE__;  \
@@ -123,11 +130,11 @@ void ummutex_record_locks(void);
     a.tryingToLockInFunction = __FUNCTION__; \
     if(timeout <= 0) \
     { \
-        result = [a tryLock];\
+        result = [a _internalTryLock];\
     } \
     else \
     { \
-        result = [a tryLock:timeout retryTime:retry];\
+        result = [a _internalTryLock:timeout retryTime:retry];\
     } \
     if(result==0) \
     { \
@@ -150,6 +157,6 @@ void ummutex_record_locks(void);
     a.lastLockedAtLine = a.lockedAtLine;   \
     a.lastLockedInFunction =  a.lockedInFunction;  \
     a.lockedInFunction =  NULL; \
-    [a unlock];  \
+    [a _internalUnlock];  \
     ummutex_remove_locked_mutex(a); \
 }

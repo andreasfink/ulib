@@ -63,6 +63,16 @@
     UMMUTEX_UNLOCK(_dictionaryLock);
 }
 
+- (void)lockDictionary
+{
+    UMMUTEX_LOCK(_dictionaryLock);
+}
+
+- (void)unlockDictionary
+{
+    UMMUTEX_UNLOCK(_dictionaryLock);
+}
+
 
 + (instancetype)synchronizedDictionary
 {

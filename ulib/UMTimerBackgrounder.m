@@ -50,10 +50,10 @@ static UMTimerBackgrounder *_sharedTimerBackgrounder = NULL;
                                            reason:@"trying to add timer with no target"
                                          userInfo:@{    @"backtrace":   UMBacktrace(NULL,0) }]);
         }
-        [_timersLock lock];
+        UMMUTEX_LOCK(_timersLock);
         [_timers removeObject:t]; /* in case its already there */
         [_timers addObject:t];
-        [_timersLock unlock];
+        UMMUTEX_UNLOCK(_timersLock);
     }
 }
 
@@ -63,9 +63,9 @@ static UMTimerBackgrounder *_sharedTimerBackgrounder = NULL;
 	{
 		if(t)
 		{
-			[_timersLock lock];
+            UMMUTEX_LOCK(_timersLock);
 			[_timers removeObject:t];
-			[_timersLock unlock];
+            UMMUTEX_UNLOCK(_timersLock);
 		}
 	}
 }
@@ -81,7 +81,7 @@ static UMTimerBackgrounder *_sharedTimerBackgrounder = NULL;
 		int workDone = 0;
 
 		UMMicroSec now = ulib_microsecondTime();
-		[_timersLock lock];
+        UMMUTEX_LOCK(_timersLock);
 		for(UMTimer *t in _timers)
 		{
 			UMMicroSec timeLeft = [t timeLeft:now];
@@ -99,7 +99,7 @@ static UMTimerBackgrounder *_sharedTimerBackgrounder = NULL;
 		{
 			[_timers removeObject:t];
 		}
-		[_timersLock unlock];
+        UMMUTEX_UNLOCK(_timersLock);
 		for(UMTimer *t in dueTimers)
 		{
 			if([t isRunning])

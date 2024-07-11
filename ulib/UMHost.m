@@ -43,13 +43,13 @@
     {
         _hostLock = [[UMMutex alloc] initWithName:@"umhost"];
     }
-    [_hostLock lock];
+    UMMUTEX_LOCK(_hostLock);
     if(_addresses == NULL)
     {
         _addresses = [[NSMutableArray alloc]init];
     }
 	[_addresses addObject:a];
-    [_hostLock unlock];
+    UMMUTEX_UNLOCK(_hostLock);
 }
 
 - (UMHost *)  initWithLocalhost
@@ -74,17 +74,17 @@
 - (NSArray *)addresses
 {
     NSArray *a;
-    [_hostLock lock];
+    UMMUTEX_LOCK(_hostLock);
     a = [_addresses copy];
-    [_hostLock unlock];
+    UMMUTEX_UNLOCK(_hostLock);
     return a;
 }
 
 - (void) setAddresses:(NSArray *)addresses
 {
-    [_hostLock lock];
+    UMMUTEX_LOCK(_hostLock);
     _addresses = [addresses mutableCopy];
-    [_hostLock unlock];
+    UMMUTEX_UNLOCK(_hostLock);
 }
 
 - (UMHost *) initWithLocalhostAddresses:(NSArray *)permittedAddresses
@@ -217,7 +217,7 @@
 - (NSString *)address:(UMSocketType)type
 {
     NSString *addr = nil;
-    [_hostLock lock];
+    UMMUTEX_LOCK(_hostLock);
 	if([_addresses count] > 0)
     {
         if (_isLocalHost)
@@ -240,7 +240,7 @@
             addr = [_addresses objectAtIndex:0];
         }
     }
-    [_hostLock unlock];
+    UMMUTEX_UNLOCK(_hostLock);
     return addr;
 }
 
@@ -263,7 +263,7 @@
         }
 		return;
 	}
-    [_hostLock lock];
+    UMMUTEX_LOCK(_hostLock);
 	_isResolving = 1;
 	_addresses = [[NSMutableArray alloc]init];
     
@@ -290,17 +290,17 @@
     
 	_isResolving = 0;
 	_isResolved = 1;
-	[_hostLock unlock];
+    UMMUTEX_UNLOCK(_hostLock);
 }
 
 - (int) resolved
 {
     int ret;
     
-    [_hostLock lock];
+    UMMUTEX_LOCK(_hostLock);
     ret = _isResolved;
-    [_hostLock unlock];
-    
+    UMMUTEX_UNLOCK(_hostLock);
+
     return ret;
 }
 
@@ -308,9 +308,9 @@
 {
     int ret;
     
-    [_hostLock lock];
+    UMMUTEX_LOCK(_hostLock);
     ret = _isResolving;
-    [_hostLock unlock];
+    UMMUTEX_UNLOCK(_hostLock);
     return ret;
 }
 

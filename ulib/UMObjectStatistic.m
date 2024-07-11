@@ -72,7 +72,7 @@ static int umobject_stat_index_from_ascii(const char *asciiName)
 	NSAssert(_olock,@"_olock is NULL");
     int index = umobject_stat_index_from_ascii(asciiName);
 	UMObjectStatisticEntry *entry = NULL;
-	[_olock[index] lock];
+    UMMUTEX_LOCK(_olock[index]);
 	entry = _dict[index][nsName];
 	if(entry == NULL)
 	{
@@ -81,7 +81,7 @@ static int umobject_stat_index_from_ascii(const char *asciiName)
 		entry.name = asciiName;
 		_dict[index][nsName] = entry;
 	}
-	[_olock[index] unlock];
+    UMMUTEX_UNLOCK(_olock[index]);
 	return entry;
 }
 
@@ -90,14 +90,14 @@ static int umobject_stat_index_from_ascii(const char *asciiName)
 	NSMutableArray *arr = [[NSMutableArray alloc]init];
     for(int index=0;index<UMOBJECT_STATISTIC_SPREAD;index++)
     {
-        [_olock[index] lock];
+        UMMUTEX_LOCK(_olock[index]);
         NSArray *keys = [_dict[index] allKeys];
         for(NSString *key in keys)
         {
             UMObjectStatisticEntry *e = _dict[index][key];
             [arr addObject: [e copy] ];
         }
-        [_olock[index] unlock];
+        UMMUTEX_UNLOCK(_olock[index]);
     }
 	NSArray *arr2 = [arr sortedArrayUsingComparator: ^(UMObjectStatisticEntry *a, UMObjectStatisticEntry *b)
 					 {

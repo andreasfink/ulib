@@ -50,7 +50,7 @@ static UMConstantStringsDict *global_constant_strings = NULL;
         sum += cptr[i++];
     }
     int index = sum % MAX_CSTRING_DICTS;
-    [_olock[index] lock];
+    UMMUTEX_LOCK(_olock[index]);
     NSData *d = _dict[index][str];
     if(d)
     {
@@ -59,7 +59,8 @@ static UMConstantStringsDict *global_constant_strings = NULL;
     }
     d = [NSData dataWithBytes:cptr length:len+1]; /* We  include the null byte */
     _dict[index][str] = d;
-	[_olock[index] unlock];
+    UMMUTEX_UNLOCK(_olock[index]);
+
 	return 	d.bytes;
 }
 

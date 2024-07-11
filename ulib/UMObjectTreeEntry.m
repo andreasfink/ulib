@@ -27,14 +27,14 @@
 
 - (id)getOrCreateEntry:(NSString *)key
 {
-    [_subEntries lock];
+    [_subEntries lockDictionary];
     UMObjectTreeEntry *entry2 = _subEntries[key];
     if(entry2 == NULL)
     {
         entry2 = [[UMObjectTreeEntry alloc]init];
         _subEntries[key] = entry2;
     }
-    [_subEntries unlock];
+    [_subEntries unlockDictionary];
     return entry2;
 }
 

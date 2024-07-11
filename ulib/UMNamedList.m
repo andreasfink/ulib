@@ -61,10 +61,11 @@
         return;
     }
     UMAssert(_namedListLock!=NULL,@"_lock is NULL");
-    [_namedListLock lock];
+    
+        UMMUTEX_LOCK(_namedListLock);
     _namedlistEntries[str] = str;
     _dirty=YES;
-    [_namedListLock unlock];
+        UMMUTEX_UNLOCK(_namedListLock);
 #ifdef DEBUG
     NSLog(@"UMNamedList addEntry:%@",str);
     [self dump];
@@ -91,10 +92,10 @@
         NSLog(@"you can not remove empty string");
         return;
     }
-    [_namedListLock lock];
+        UMMUTEX_LOCK(_namedListLock);
     [_namedlistEntries removeObjectForKey:str];
     _dirty=YES;
-    [_namedListLock unlock];
+        UMMUTEX_UNLOCK(_namedListLock);
 #ifdef DEBUG
     NSLog(@"UMNamedList removeEntry:%@",str);
     [self dump];
@@ -104,13 +105,13 @@
 - (BOOL)containsEntry:(NSString *)str
 {
     BOOL found = NO;
-    [_namedListLock lock];
+        UMMUTEX_LOCK(_namedListLock);
     NSString *s =  _namedlistEntries[str];
     if(s!=NULL)
     {
         found = YES;
     }
-    [_namedListLock unlock];
+        UMMUTEX_UNLOCK(_namedListLock);
     return found;
 }
 
@@ -118,15 +119,15 @@
 - (NSArray *)allEntries
 {
     NSArray *a;
-    [_namedListLock lock];
+        UMMUTEX_LOCK(_namedListLock);
     a = [_namedlistEntries allKeys];
-    [_namedListLock unlock];
+        UMMUTEX_UNLOCK(_namedListLock);
     return a;
 }
 
 - (void)flush
 {
-    [_namedListLock lock];
+        UMMUTEX_LOCK(_namedListLock);
     if(_dirty)
     {
         NSArray *keys = [_namedlistEntries allKeys];
@@ -145,7 +146,7 @@
 #endif
         _dirty = NO;
     }
-    [_namedListLock unlock];
+        UMMUTEX_UNLOCK(_namedListLock);
 #ifdef DEBUG
 //    NSLog(@"UMNamedList flush");
 //    [self dump];
@@ -176,10 +177,10 @@
             list[value]=value;
         }
     }
-    [_namedListLock lock];
+    UMMUTEX_LOCK(_namedListLock);
     _namedlistEntries = list;
     _dirty = NO;
-    [_namedListLock unlock];
+    UMMUTEX_UNLOCK(_namedListLock);
 #ifdef DEBUG
     [self dump];
 #endif

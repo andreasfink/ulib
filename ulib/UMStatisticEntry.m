@@ -131,7 +131,8 @@
 
 - (void)increaseBy:(double)count
 {
-    [_statisticEntryLock lock];
+    UMMUTEX_LOCK(_statisticEntryLock);
+
     [self timeShift];
     _secondsData[_currentSecondsIndex % UMSTATISTIC_SECONDS_MAX] += count;
     _secondsDataCount[_currentSecondsIndex % UMSTATISTIC_SECONDS_MAX] += 1;
@@ -208,8 +209,7 @@
     {
         _yearsDataMin[_currentSecondsIndex % UMSTATISTIC_YEARS_MAX] = count;
     }
-
-    [_statisticEntryLock unlock];
+    UMMUTEX_UNLOCK(_statisticEntryLock);
 }
 
 

@@ -66,7 +66,7 @@
 
 - (void)update
 {
-    [_prometheusLock lock];
+    UMMUTEX_LOCK(_prometheusLock);
     if(_delegate)
     {
         [_delegate updatePrometheusData:self];
@@ -75,7 +75,7 @@
     {
         [self updatePrometheusData:self];
     }
-    [_prometheusLock unlock];
+    UMMUTEX_UNLOCK(_prometheusLock);
 }
 
 
@@ -155,20 +155,20 @@
 
 - (NSString *)prometheusOutputData
 {
-    [_prometheusLock lock];
+    UMMUTEX_LOCK(_prometheusLock);
     [self update];
     NSString *s = [NSString stringWithFormat:@"%@ %@\n",self.key,self.value];
-    [_prometheusLock unlock];
+    UMMUTEX_UNLOCK(_prometheusLock);
     return s;
 }
 
 - (void)increaseBy:(NSInteger)inc
 {
-    [_prometheusLock lock];
+    UMMUTEX_LOCK(_prometheusLock);
     NSInteger i = [_value integerValue];
     i = i + inc;
     _value = @(i);
-    [_prometheusLock unlock];
+    UMMUTEX_UNLOCK(_prometheusLock);
 }
 
 - (void)setSubname1:(NSString *)a value:(NSString *)b

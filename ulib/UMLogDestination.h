@@ -26,8 +26,8 @@
 - (void)logNow:(UMLogEntry *)message;
 - (UMLogDestination *) init;
 - (NSString *)description;
-- (void)lock;
-- (void)unlock;
+- (void)lockDestination;
+- (void)unlockDestination;
 - (NSString *)oneLineDescription;
 
 @end

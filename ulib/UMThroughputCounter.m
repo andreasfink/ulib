@@ -53,6 +53,7 @@
         memset(_cells,0x00,_cellSize+4);
         _endTime   = [UMThroughputCounter microsecondTime];
         _endIndex  = _endTime/_resolution;
+        _mutex = [[UMMutex alloc]initWithName:@"UMThroughputCounter-lock"];
     }
 	return self;
 }

@@ -100,6 +100,13 @@ void ummutex_record_locks(void);
 
 #define UMMUTEX_LOCK(a)  \
 { \
+    if(a==NULL)\
+    { \
+        @throw([NSException exceptionWithName:@"UMMUTEX_LOCK(NULL)" \
+                                       reason: \
+                [NSString stringWithFormat:@"trying to lock a mutex which is NULL file %s line %ld",__FILE__,(long)__LINE__] \
+                                     userInfo:NULL]); \
+    } \
     if([a isKindOfClass:[UMMutex class]]) \
     { \
         a.tryingToLockInFile = __FILE__; \
@@ -108,7 +115,7 @@ void ummutex_record_locks(void);
     } \
     else \
     { \
-        NSLog(@"FILE:%s line:%d locking a non UMMutex!",__FILE__,__LINE__); \
+        NSLog(@"FILE:%s line:%ld locking a non UMMutex!",__FILE__,(long)__LINE__); \
     } \
     [a _internalLock]; \
     if([a isKindOfClass:[UMMutex class]]) \
@@ -125,6 +132,13 @@ void ummutex_record_locks(void);
 
 #define UMMUTEX_TRYLOCK(a,timeout,retry,result)  \
 { \
+    if(a==NULL)\
+    { \
+        @throw([NSException exceptionWithName:@"UMMUTEX_TRYLOCK(NULL)" \
+                                   reason: \
+            [NSString stringWithFormat:@"trying to trylock a mutex which is NULL file %s line %ld",__FILE__,(long)__LINE__] \
+                                 userInfo:NULL]); \
+    } \
     a.tryingToLockInFile = __FILE__; \
     a.tryingToLockAtLine = __LINE__; \
     a.tryingToLockInFunction = __FUNCTION__; \
@@ -153,6 +167,13 @@ void ummutex_record_locks(void);
 
 #define UMMUTEX_UNLOCK(a) \
 {  \
+    if(a==NULL)\
+    { \
+        @throw([NSException exceptionWithName:@"UMMUTEX_UNLOCK(NULL)" \
+                                   reason: \
+            [NSString stringWithFormat:@"trying to lock a mutex which is NULL file %s line %ld",__FILE__,(long)__LINE__] \
+                                 userInfo:NULL]); \
+    } \
     a.lastLockedInFile = a.lockedInFile;  \
     a.lastLockedAtLine = a.lockedAtLine;   \
     a.lastLockedInFunction =  a.lockedInFunction;  \

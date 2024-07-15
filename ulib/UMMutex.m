@@ -294,7 +294,7 @@ void ummutex_remove_locked_mutex(UMMutex *m)
     {
         NSDate *start = [NSDate date];
         int i = 0;
-        while((i=[self tryLock]) != 0)
+        while((i=[self _internalTryLock]) != 0)
         {
             NSDate *now = [NSDate date];
             NSTimeInterval diff = [now timeIntervalSinceDate:start];

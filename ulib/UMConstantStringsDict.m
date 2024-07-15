@@ -54,13 +54,12 @@ static UMConstantStringsDict *global_constant_strings = NULL;
     NSData *d = _dict[index][str];
     if(d)
     {
-        [_olock[index] unlock];
+        UMMUTEX_UNLOCK(_olock[index]);
         return     d.bytes;
     }
     d = [NSData dataWithBytes:cptr length:len+1]; /* We  include the null byte */
     _dict[index][str] = d;
     UMMUTEX_UNLOCK(_olock[index]);
-
 	return 	d.bytes;
 }
 

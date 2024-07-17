@@ -37,7 +37,7 @@
         {
             int i = index % UMPOOL_QUEUES_COUNT;
             int result;
-            UMMUTEX_TRYLOCK(_poolLock[i], 1, 1, result);
+            UMMUTEX_TRYLOCK1(_poolLock[i], result);
             if(result)
             {
                [_queues[i] addObject:obj];

@@ -42,11 +42,12 @@
 @property(readwrite,assign) const char      *tryingToLockInFunction;
 @property(readonly,assign) BOOL             isLocked;
 
-
+/*
+ USE MACROS UMMUTEX_LOCK(mutex), UMMUTEX_TRYLOCK(mutex,timeout,retry,result) and UMMUTEX_UNLOCK(mutex) instead now
 - (void) lock;
 - (void) unlock;
 - (int) tryLock;
-
+*/
 - (void) _internalLock;
 - (void) _internalUnlock;
 - (int)  _internalTryLock;
@@ -164,6 +165,8 @@ void ummutex_record_locks(void);
         a.tryingToLockInFunction = NULL; \
     } \
 }
+
+#define UMMUTEX_TRYLOCK1(a,result) UMMUTEX_TRYLOCK(a,0,0,result)
 
 #define UMMUTEX_UNLOCK(a) \
 {  \

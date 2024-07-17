@@ -94,11 +94,11 @@
 {
     UMMicroSec nowTime = [UMThroughputCounter microsecondTime];
 
-    UMMUTEX_LOCK(_mutex);
+    ummutex_lock(_mutex);
     long long nowIndex = nowTime/_resolution;
     [self timeShiftByIndex: nowIndex];
     _cells[nowIndex % _cellCount] += count;
-    UMMUTEX_UNLOCK(_mutex);
+    ummutex_unlock(_mutex);
 }
 
 
@@ -145,7 +145,7 @@ end:
     long long i;
 
     nowTime  = [UMThroughputCounter microsecondTime];
-    UMMUTEX_LOCK(_mutex);
+    ummutex_lock(_mutex);
     nowIndex = nowTime/_resolution;
     [self timeShiftByIndex: nowIndex];
     indexCount = microsecondDuration/_resolution;
@@ -160,7 +160,7 @@ end:
     {
         result += _cells[i % _cellCount];
     }
-    UMMUTEX_UNLOCK(_mutex);
+    ummutex_unlock(_mutex);
 
     return result;
 }

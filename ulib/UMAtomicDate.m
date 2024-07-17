@@ -29,17 +29,17 @@
 
 - (NSDate *)date
 {
-    UMMUTEX_LOCK(_mutex);
+    ummutex_lock(_mutex);
     NSDate *d = [_date copy];
-    UMMUTEX_UNLOCK(_mutex);
+    ummutex_lock(_mutex);
     return d;
 }
 
 - (void)setDate:(NSDate *)d
 {
-    UMMUTEX_LOCK(_mutex);
+    ummutex_lock(_mutex);
     _date = d;
-    UMMUTEX_UNLOCK(_mutex);
+    ummutex_lock(_mutex);
 }
 
 - (NSTimeInterval)timeIntervalSinceDate:(NSDate *)since
@@ -51,9 +51,9 @@
     }
     else
     {
-        UMMUTEX_LOCK(_mutex);
+        ummutex_lock(_mutex);
         r = [_date timeIntervalSinceDate:since];
-        UMMUTEX_UNLOCK(_mutex);
+        ummutex_lock(_mutex);
     }
     return r;
 }
@@ -62,9 +62,9 @@
 {
     NSTimeInterval r;
 
-    UMMUTEX_LOCK(_mutex);
+    ummutex_lock(_mutex);
     r = [_date timeIntervalSinceNow];
-    UMMUTEX_UNLOCK(_mutex);
+    ummutex_lock(_mutex);
     return -r;
 }
 
@@ -72,17 +72,17 @@
 {
     NSTimeInterval r;
 
-    UMMUTEX_LOCK(_mutex);
+    ummutex_lock(_mutex);
     r = [_date timeIntervalSinceNow];
-    UMMUTEX_UNLOCK(_mutex);
+    ummutex_lock(_mutex);
     return fabs(r);
 }
 
 - (void)touch
 {
-    UMMUTEX_LOCK(_mutex);
+    ummutex_lock(_mutex);
     _date = [NSDate new];
-    UMMUTEX_UNLOCK(_mutex);
+    ummutex_lock(_mutex);
 }
 
 - (UMAtomicDate *)copyWithZone:(NSZone *)zone
@@ -93,9 +93,9 @@
 
 - (NSString *)description
 {
-    UMMUTEX_LOCK(_mutex);
+    ummutex_lock(_mutex);
     NSString *s = _date.description;
-    UMMUTEX_UNLOCK(_mutex);
+    ummutex_lock(_mutex);
     return s;
 }
 

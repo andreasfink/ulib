@@ -68,10 +68,10 @@ static void socket_set_blocking(int fd, int blocking)
     {
         return;
     }
-    UMMUTEX_LOCK(_lock);
+    ummutex_lock(_lock);
     if(self.isPrepared==YES)
     {
-        UMMUTEX_UNLOCK(_lock);
+        ummutex_unlock(_lock);
         return;
     }
     int pipefds[2];
@@ -110,7 +110,7 @@ static void socket_set_blocking(int fd, int blocking)
     socket_set_blocking(_rxpipe, 0);
     socket_set_blocking(_txpipe, 0);
     _isPrepared = YES;
-    UMMUTEX_UNLOCK(_lock);
+    ummutex_unlock(_lock);
 }
 
 - (void) dealloc
@@ -119,7 +119,7 @@ static void socket_set_blocking(int fd, int blocking)
     {
         return;
     }
-    UMMUTEX_LOCK(_lock);
+    ummutex_lock(_lock);
     if(_rxpipe >=0)
     {
         TRACK_FILE_CLOSE(_rxpipe);
@@ -133,7 +133,7 @@ static void socket_set_blocking(int fd, int blocking)
     _rxpipe = -1;
     _txpipe = -1;
     _isPrepared = NO;
-    UMMUTEX_UNLOCK(_lock);
+    ummutex_unlock(_lock);
 }
 
 

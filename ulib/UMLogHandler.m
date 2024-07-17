@@ -59,29 +59,29 @@
 
 - (void) addLogDestination:(UMLogDestination *)dst
 {
-    UMMUTEX_LOCK(_logDestinationsLock);
+    ummutex_lock(_logDestinationsLock);
     [_logDestinations addObject: dst];
-    UMMUTEX_UNLOCK(_logDestinationsLock);
+    ummutex_unlock(_logDestinationsLock);
 }
 
 - (void) removeLogDestination:(UMLogDestination *)dst
 {
     NSUInteger i;
 
-    UMMUTEX_LOCK(_logDestinationsLock);
+    ummutex_lock(_logDestinationsLock);
     i = [_logDestinations indexOfObject: dst];
     if (i != NSNotFound)
     {
         [_logDestinations removeObjectAtIndex:i];
     }
-    UMMUTEX_UNLOCK(_logDestinationsLock);
+    ummutex_unlock(_logDestinationsLock);
 }
 
 - (void) logAnEntry:(UMLogEntry *)logEntry
 {
-    UMMUTEX_LOCK(_logDestinationsLock);
+    ummutex_lock(_logDestinationsLock);
     NSArray *dsts  = [_logDestinations copy];
-    UMMUTEX_UNLOCK(_logDestinationsLock);
+    ummutex_unlock(_logDestinationsLock);
 
     UMLogDestination *dst = nil;
     for ( dst in dsts )
@@ -120,9 +120,9 @@
 
 - (NSString *)description
 {
-    UMMUTEX_LOCK(_logDestinationsLock);
+    ummutex_lock(_logDestinationsLock);
     NSArray *dsts  = [_logDestinations copy];
-    UMMUTEX_UNLOCK(_logDestinationsLock);
+    ummutex_unlock(_logDestinationsLock);
 
     NSMutableString *s = [[NSMutableString alloc]init];
     [s appendFormat:@"%@\n", [super description]];
@@ -145,9 +145,9 @@
 
 - (UMLogLevel)level
 {
-    UMMUTEX_LOCK(_logDestinationsLock);
+    ummutex_lock(_logDestinationsLock);
     NSArray *dsts  = [_logDestinations copy];
-    UMMUTEX_UNLOCK(_logDestinationsLock);
+    ummutex_unlock(_logDestinationsLock);
 
     UMLogLevel minLevel = UMLOG_PANIC;
     UMLogDestination *dst;

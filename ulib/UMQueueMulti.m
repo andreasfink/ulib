@@ -39,17 +39,17 @@
 
 - (void)startWork
 {
-    UMMUTEX_LOCK(_queueLock);
+    ummutex_lock(_queueLock);
     _workInProgress++;
-    UMMUTEX_UNLOCK(_queueLock);
+    ummutex_unlock(_queueLock);
     [_processingThroughput increase];
 }
 
 - (void)endWork
 {
-    UMMUTEX_LOCK(_queueLock);
+    ummutex_lock(_queueLock);
     _workInProgress--;
-    UMMUTEX_UNLOCK(_queueLock);
+    ummutex_unlock(_queueLock);
 }
 
 - (void)append:(id)obj
@@ -62,7 +62,7 @@
     if(obj)
     {
         BOOL limitReached = NO;
-        UMMUTEX_LOCK(_queueLock);
+        ummutex_lock(_queueLock);
         _currentlyInQueue++;
         if((_hardLimit > 0) && (_currentlyInQueue > _hardLimit))
         {
@@ -71,7 +71,7 @@
         }
         NSMutableArray *subqueue = _queues[index];
         [subqueue addObject:obj];
-        UMMUTEX_UNLOCK(_queueLock);
+        ummutex_unlock(_queueLock);
         if(limitReached)
         {
             @throw([NSException exceptionWithName:@"QUEUE-LIMIT-REACHED" reason:NULL userInfo:NULL]);
@@ -84,7 +84,7 @@
     if(objects.count > 0)
     {
         BOOL limitReached = NO;
-        UMMUTEX_LOCK(_queueLock);
+        ummutex_lock(_queueLock);
         _currentlyInQueue += objects.count;
         if((_hardLimit > 0) && (_currentlyInQueue > _hardLimit))
         {
@@ -96,7 +96,7 @@
             NSMutableArray *subqueue = _queues[index];
             [subqueue addObjectsFromArray:objects];
         }
-        UMMUTEX_UNLOCK(_queueLock);
+        ummutex_unlock(_queueLock);
         if(limitReached)
         {
             @throw([NSException exceptionWithName:@"QUEUE-LIMIT-REACHED" reason:NULL userInfo:NULL]);
@@ -134,17 +134,17 @@
 {
     if(obj)
     {
-        UMMUTEX_LOCK(_queueLock);
+        ummutex_lock(_queueLock);
         _currentlyInQueue++;
         if((_hardLimit > 0) && (_currentlyInQueue > _hardLimit))
         {
             _currentlyInQueue--;
-            UMMUTEX_UNLOCK(_queueLock);
+            ummutex_unlock(_queueLock);
             @throw([NSException exceptionWithName:@"QUEUE-LIMIT-REACHED" reason:NULL userInfo:NULL]);
         }
         NSMutableArray *subqueue = _queues[index];
         [subqueue insertObject:obj atIndex:0];
-        UMMUTEX_UNLOCK(_queueLock);
+        ummutex_unlock(_queueLock);
     }
 }
 
@@ -157,7 +157,7 @@
 {
     if(obj)
     {
-        UMMUTEX_LOCK(_queueLock);
+        ummutex_lock(_queueLock);
         NSMutableArray *subqueue = _queues[index];
         NSInteger idx = [subqueue indexOfObject:obj];
         if(idx != NSNotFound)
@@ -170,11 +170,11 @@
         if((_hardLimit > 0) && (_currentlyInQueue > _hardLimit))
         {
             _currentlyInQueue--;
-            UMMUTEX_UNLOCK(_queueLock);
+            ummutex_unlock(_queueLock);
             @throw([NSException exceptionWithName:@"QUEUE-LIMIT-REACHED" reason:NULL userInfo:NULL]);
         }
         [subqueue addObject:obj];
-        UMMUTEX_UNLOCK(_queueLock);
+        ummutex_unlock(_queueLock);
     }
 }
 
@@ -192,7 +192,7 @@
 {
     if(obj)
     {
-        UMMUTEX_LOCK(_queueLock);
+        ummutex_lock(_queueLock);
         NSMutableArray *subqueue = _queues[index];
         NSInteger idx = [subqueue indexOfObject:obj];
         if(idx != NSNotFound)
@@ -200,14 +200,14 @@
             _currentlyInQueue--;
             [subqueue removeObjectAtIndex:idx];
         }
-        UMMUTEX_UNLOCK(_queueLock);
+        ummutex_unlock(_queueLock);
     }
 }
 
 - (id)getFirst
 {
     id obj = NULL;
-    UMMUTEX_LOCK(_queueLock);
+    ummutex_lock(_queueLock);
     NSUInteger cnt = _queues.count;
     for(NSUInteger index=0;index<cnt;index++)
     {
@@ -220,7 +220,7 @@
             break;
         }
     }
-    UMMUTEX_UNLOCK(_queueLock);
+    ummutex_unlock(_queueLock);
     return obj;
 }
 
@@ -245,7 +245,7 @@
 
 - (NSInteger)count
 {
-    UMMUTEX_LOCK(_queueLock);
+    ummutex_lock(_queueLock);
     NSUInteger cnt = _queues.count;
     NSUInteger total = 0;
     for(NSUInteger index=0;index<cnt;index++)
@@ -253,14 +253,14 @@
         NSMutableArray *subqueue = _queues[index];
         total += subqueue.count;
     }
-    UMMUTEX_UNLOCK(_queueLock);
+    ummutex_unlock(_queueLock);
     return total;
 }
 
 - (NSDictionary *)status
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    UMMUTEX_LOCK(_queueLock);
+    ummutex_lock(_queueLock);
     NSUInteger cnt = _queues.count;
     NSUInteger total = 0;
     for(NSUInteger index=0;index<cnt;index++)
@@ -269,7 +269,7 @@
         dict[@(index)] = @(subqueue.count);
         total += subqueue.count;
     }
-    UMMUTEX_UNLOCK(_queueLock);
+    ummutex_unlock(_queueLock);
     dict[@"total"] = @(total);
     return dict;
 }
@@ -309,23 +309,23 @@
 - (NSDictionary *)statusByObjectType
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    UMMUTEX_LOCK(_queueLock);
+    ummutex_lock(_queueLock);
     NSUInteger cnt = _queues.count;
     for(NSUInteger index=0;index<cnt;index++)
     {
         dict[@(index)] = [self subQueueStatus:index];
     }
-    UMMUTEX_UNLOCK(_queueLock);
+    ummutex_unlock(_queueLock);
     return dict;
 }
 
 
 - (NSInteger)countForQueueNumber:(NSUInteger)index
 {
-    UMMUTEX_LOCK(_queueLock);
+    ummutex_lock(_queueLock);
     NSMutableArray *subqueue = _queues[index];
     NSInteger i = [subqueue count];
-    UMMUTEX_UNLOCK(_queueLock);
+    ummutex_unlock(_queueLock);
     return i;
 }
 

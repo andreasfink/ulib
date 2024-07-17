@@ -28,7 +28,7 @@
 {
     @autoreleasepool
     {
-        UMMUTEX_LOCK(_runMutex);
+        ummutex_lock(_runMutex);
         @try
         {
             ulib_set_thread_name([NSString stringWithFormat:@"%@ (executing: %@)",bg.name,_name]);
@@ -42,12 +42,12 @@
             }
             if(_synchronizeMutex)
             {
-                UMMUTEX_LOCK(_synchronizeMutex);
+                ummutex_lock(_synchronizeMutex);
                 @autoreleasepool
                 {
                     [self main];
                 }
-                UMMUTEX_UNLOCK(_synchronizeMutex);
+                ummutex_unlock(_synchronizeMutex);
             }
             else
             {
@@ -76,7 +76,7 @@
         }
         @finally
         {
-            UMMUTEX_UNLOCK(_runMutex);
+            ummutex_unlock(_runMutex);
         }
         _synchronizeObject=NULL; /* we need to break the link to the synchronized object as it might hold us
                                  otherwise we might never get released from memory */

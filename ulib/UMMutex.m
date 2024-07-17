@@ -163,12 +163,12 @@ void ummutex_remove_locked_mutex(UMMutex *m)
 
 - (void)lock
 {
-    UMAssert(0,@"direct call to [<mutex> lock]. call UMMUTEX_LOCK() macro instead");
+    UMAssert(0,@"direct call to [<mutex> lock]. call ummutex_lock() macro instead");
 }
 
 - (void)unlock
 {
-    UMAssert(0,@"direct call to [<mutex> unlock]. call UMMUTEX_UNLOCK() macro instead");
+    UMAssert(0,@"direct call to [<mutex> unlock]. call ummutex_unlock() macro instead");
 }
 
 - (int)tryLock
@@ -419,3 +419,133 @@ BOOL ummutex_stat_is_enabled(void)
     }
 }
 
+
+void ummutex_lock_flf(UMMutex *mutex,const char *file,long line, const char *func)
+{
+    if(mutex==NULL)
+    {
+        @throw([NSException exceptionWithName:@"ummutex_lock(NULL)"
+                                       reason:[NSString stringWithFormat:@"trying to lock a mutex which is NULL file %s line %ld function:%s",file,line,func]
+                                     userInfo:NULL]);
+    }
+    if(![mutex isKindOfClass:[UMMutex class]])
+    {
+        @throw([NSException exceptionWithName:@"ummutex_lock(non-mutex)"
+                                       reason:[NSString stringWithFormat:@"trying to lock a mutex which is not a UMMutex file %s line %ld function:%s",file,line,func]
+                                     userInfo:NULL]);
+    }
+    mutex.tryingToLockInFile = file;
+    mutex.tryingToLockAtLine = line;
+    mutex.tryingToLockInFunction = func;
+    [mutex _internalLock];
+    mutex.lockedInFile = file;
+    mutex.lockedAtLine = line;
+    mutex.lockedInFunction =  func;
+    mutex.tryingToLockInFile = NULL;
+    mutex.tryingToLockAtLine = 0;
+    mutex.tryingToLockInFunction = NULL;
+    ummutex_add_locked_mutex(mutex);
+}
+
+void ummutex_unlock_flf(UMMutex *mutex,const char *file,long line, const char *func)
+{
+    if(mutex==NULL)
+    {
+        @throw([NSException exceptionWithName:@"ummutex_unlock(NULL)"
+                                       reason:[NSString stringWithFormat:@"trying to unlock a mutex which is NULL. File %s line %ld function:%s",file,line,func]
+                                     userInfo:NULL]);
+    }
+    if(![mutex isKindOfClass:[UMMutex class]])
+    {
+        @throw([NSException exceptionWithName:@"ummutex_unlock(non-mutex)"
+                                       reason:[NSString stringWithFormat:@"trying to unlock a mutex which is not a UMMutex. File %s line %ld function:%s",file,line,func]
+                                     userInfo:NULL]);
+    }
+    if(mutex.lockDepth<=0)
+    {
+        @throw([NSException exceptionWithName:@"ummutex_unlock(not-locked)"
+                                       reason:[NSString stringWithFormat:@"trying to unlock not locked UMMutex. File %s line %ld function:%s",file,line,func]
+                                     userInfo:NULL]);
+
+    }
+    mutex.lastLockedInFile = mutex.lockedInFile;
+    mutex.lastLockedAtLine = mutex.lockedAtLine;
+    mutex.lastLockedInFunction =  mutex.lockedInFunction;
+    mutex.lockedInFunction =  NULL;
+    [mutex _internalUnlock];
+    mutex.lastUnlockedInFile = file;
+    mutex.lastUnlockedAtLine = line;
+    mutex.lastUnlockedInFunction =  func;
+    ummutex_remove_locked_mutex(mutex);
+}
+
+int ummutex_trylock_flf(UMMutex *mutex,const char *file,long line, const char *func)
+{
+    int result = 0;
+    if(mutex==NULL)
+    {
+        @throw([NSException exceptionWithName:@"ummutex_trylock(NULL)"
+                                       reason:[NSString stringWithFormat:@"trying to unlock a mutex which is NULL. File %s line %ld function:%s",file,line,func]
+                                     userInfo:NULL]);
+    }
+    if(![mutex isKindOfClass:[UMMutex class]])
+    {
+        @throw([NSException exceptionWithName:@"ummutex_trylock(non-mutex)"
+                                       reason:[NSString stringWithFormat:@"trying to unlock a mutex which is not a UMMutex. File %s line %ld function:%s",file,line,func]
+                                     userInfo:NULL]);
+    }
+    mutex.tryingToLockInFile = file;
+    mutex.tryingToLockAtLine = line;
+    mutex.tryingToLockInFunction = func;
+    result = [mutex _internalTryLock];
+    if(result==0)
+    {
+        mutex.lockedInFile =file;
+        mutex.lockedAtLine = line;
+        mutex.lockedInFunction =  func;
+        ummutex_add_locked_mutex(mutex);
+    }
+    else
+    {
+        mutex.tryingToLockInFile = NULL; \
+        mutex.tryingToLockAtLine = 0; \
+        mutex.tryingToLockInFunction = NULL; \
+    }
+    return result;
+}
+
+
+int ummutex_trylock_retry_timeout_retrytime_flf(UMMutex *mutex,NSTimeInterval timeout,NSTimeInterval retry,const char *file,long line, const char *func)
+{
+    int result = 0;
+    if(mutex==NULL)
+    {
+        @throw([NSException exceptionWithName:@"ummutex_trylock_retry_timeout_retrytime(NULL)"
+                                       reason:[NSString stringWithFormat:@"trying to unlock a mutex which is NULL. File %s line %ld function:%s",file,line,func]
+                                     userInfo:NULL]);
+    }
+    if(![mutex isKindOfClass:[UMMutex class]])
+    {
+        @throw([NSException exceptionWithName:@"ummutex_trylock_retry_timeout_retrytime(non-mutex)"
+                                       reason:[NSString stringWithFormat:@"trying to unlock a mutex which is not a UMMutex. File %s line %ld function:%s",file,line,func]
+                                     userInfo:NULL]);
+    }
+    mutex.tryingToLockInFile = file;
+    mutex.tryingToLockAtLine = line;
+    mutex.tryingToLockInFunction = func;
+    result = [mutex _internalTryLock:timeout retryTime:retry];
+    if(result==0)
+    {
+        mutex.lockedInFile =file;
+        mutex.lockedAtLine = line;
+        mutex.lockedInFunction =  func;
+        ummutex_add_locked_mutex(mutex);
+    }
+    else
+    {
+        mutex.tryingToLockInFile = NULL; \
+        mutex.tryingToLockAtLine = 0; \
+        mutex.tryingToLockInFunction = NULL; \
+    }
+    return result;
+}

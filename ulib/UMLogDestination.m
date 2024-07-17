@@ -16,12 +16,12 @@
 
 - (void)lockDestination
 {
-    UMMUTEX_LOCK(_logDestinationLock);
+    ummutex_lock(_logDestinationLock);
 }
 
 - (void)unlockDestination
 {
-    UMMUTEX_UNLOCK(_logDestinationLock);
+    ummutex_unlock(_logDestinationLock);
 }
 
 - (UMLogDestination *) init

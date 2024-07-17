@@ -35,10 +35,10 @@
     self = [super init];
     if(self)
 	{
-        UMMUTEX_LOCK(lastRequestId_lock);
+        ummutex_lock(lastRequestId_lock);
         _requestId = ++lastRequestId;
         _completionTimeout = [NSDate dateWithTimeIntervalSinceNow:120];
-        UMMUTEX_UNLOCK(lastRequestId_lock);
+        ummutex_unlock(lastRequestId_lock);
         _responseCode=HTTP_RESPONSE_CODE_OK;
         self.awaitingCompletion = NO;
         _responseHeaders = [[NSMutableDictionary alloc]init];
@@ -640,7 +640,7 @@
 
 - (void)resumePendingRequest
 {
-    UMMUTEX_LOCK(_pendingRequestLock);
+    ummutex_lock(_pendingRequestLock);
 
     if(self.connection) /* we cant do the work twice */
     {
@@ -648,7 +648,7 @@
         [self finishRequest];
         self.connection = NULL;
     }
-    UMMUTEX_UNLOCK(_pendingRequestLock);
+    ummutex_unlock(_pendingRequestLock);
 }
 
 - (void)sleepUntilCompleted

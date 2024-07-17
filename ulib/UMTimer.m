@@ -84,19 +84,19 @@
 
 - (void)setSeconds:(NSTimeInterval)sec
 {
-    UMMUTEX_LOCK(_timerMutex)
+    ummutex_lock(_timerMutex);
     UMMicroSec oldDuration = _microsecDuration;
     _microsecDuration = (UMMicroSec)(sec * 1000000.0);
     _expiryTime = _expiryTime + _microsecDuration - oldDuration;
-    UMMUTEX_UNLOCK(_timerMutex)
+    ummutex_unlock(_timerMutex);
 
 }
 - (NSTimeInterval)seconds
 {
     NSTimeInterval sec;
-    UMMUTEX_LOCK(_timerMutex)
+    ummutex_lock(_timerMutex);
     sec = ((double)_microsecDuration)/1000000.0;
-    UMMUTEX_UNLOCK(_timerMutex)
+    ummutex_unlock(_timerMutex);
     return sec;
 }
 
@@ -129,19 +129,19 @@
 
 - (void)startIfNotRunning
 {
-    UMMUTEX_LOCK(_timerMutex)
+    ummutex_lock(_timerMutex);
     if(self.isRunning==NO)
     {
         [self unlockedStart];
     }
-    UMMUTEX_UNLOCK(_timerMutex)
+    ummutex_unlock(_timerMutex);
 }
 
 - (void)start
 {
-    UMMUTEX_LOCK(_timerMutex);
+    ummutex_lock(_timerMutex);
     [self unlockedStart];
-    UMMUTEX_UNLOCK(_timerMutex);
+    ummutex_unlock(_timerMutex);
 }
 
 - (void)unlockedStart
@@ -177,17 +177,17 @@
 
 - (void) stop
 {
-    UMMUTEX_LOCK(_timerMutex);
+    ummutex_lock(_timerMutex);
     [self unlockedStop];
-    UMMUTEX_UNLOCK(_timerMutex);
+    ummutex_unlock(_timerMutex);
 }
 
 - (void) restart
 {
-        UMMUTEX_LOCK(_timerMutex);
+        ummutex_lock(_timerMutex);
     [self unlockedStop];
     [self unlockedStart];
-        UMMUTEX_UNLOCK(_timerMutex);
+        ummutex_unlock(_timerMutex);
 }
 
 - (void) unlockedStop

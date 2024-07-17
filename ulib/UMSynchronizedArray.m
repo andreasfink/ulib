@@ -53,9 +53,9 @@
 
 - (NSUInteger)count
 {
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     NSUInteger cnt = [_array count];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
     return cnt;
 }
 
@@ -66,9 +66,9 @@
     {
         return;
     }
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     [_array addObject:anObject];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
 }
 
 
@@ -78,10 +78,10 @@
     {
         return;
     }
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     [_array removeObject:anObject];
     [_array addObject:anObject];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
 }
 
 - (void)addPrintableString:(NSString *)s
@@ -103,41 +103,41 @@
                                                 }
                 ]);
     }
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     [_array insertObject:anObject atIndex:index];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
 }
 
 - (void)removeLastObject
 {
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     [_array removeLastObject];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index
 {
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     [_array removeObjectAtIndex:index];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
 }
 
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject
 {
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     [_array setObject:anObject atIndexedSubscript:index];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
 }
 
 - (id)objectAtIndex:(NSUInteger)index
 {
     id obj = NULL;
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     if(index < [_array count])
     {
         obj = [_array objectAtIndex:index];
     }
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
     return obj;
 }
 
@@ -145,54 +145,54 @@
 - (id)removeFirst
 {
     id obj = NULL;
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     if(_array.count>0)
     {
         obj = [_array objectAtIndex:0];
         [_array removeObjectAtIndex:0];
     }
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
     return obj;
 }
 
 - (NSString *)stringLines
 {
     NSString *s;
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     s = [_array componentsJoinedByString:@"\n"];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
     return s;
 }
 
 - (void)removeObject:(id)obj
 {
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     [_array removeObject:obj];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
 }
 
 
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx
 {
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     [_array setObject:obj atIndexedSubscript:idx];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)idx
 {
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     id r = [self objectAtIndex:idx];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
     return r;
 }
 
 - (NSMutableArray *)mutableCopy
 {
     NSMutableArray *a;
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     a = [_array mutableCopy];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
     return a;
 }
 
@@ -201,29 +201,29 @@
 {
     if(arr)
     {
-        UMMUTEX_LOCK(_arrayLock);
+        ummutex_lock(_arrayLock);
         for (id o in arr)
         {
             [_array addObject:o];
         }
-        UMMUTEX_UNLOCK(_arrayLock);
+        ummutex_unlock(_arrayLock);
     }
 }
 
 
 - (id)copyWithZone:(nullable NSZone *)zone
 {
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     UMSynchronizedArray *sa = [[UMSynchronizedArray allocWithZone:zone]initWithArray:_array];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
     return sa;
 }
 
 - (NSArray *)arrayCopy
 {
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     NSArray *a = [_array copy];
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
     return a;
 }
 
@@ -232,7 +232,7 @@
 {
     UMJsonWriter *writer = [[UMJsonWriter alloc] init];
     writer.humanReadable = YES;
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     NSString *json=NULL;
     @try
     {
@@ -244,7 +244,7 @@
     }
     @finally
     {
-        UMMUTEX_UNLOCK(_arrayLock);
+        ummutex_unlock(_arrayLock);
     }
     return json;
 }
@@ -254,7 +254,7 @@
 {
     UMJsonWriter *writer = [[UMJsonWriter alloc] init];
     writer.humanReadable = YES;
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
     NSString *json=NULL;
     @try
     {
@@ -266,7 +266,7 @@
     }
     @finally
     {
-        UMMUTEX_UNLOCK(_arrayLock);
+        ummutex_unlock(_arrayLock);
     }
     return json;
 }
@@ -275,21 +275,21 @@
 								  objects:(id __unsafe_unretained _Nullable [_Nonnull])stackbuf
 									count:(NSUInteger)len;
 {
-	UMMUTEX_LOCK(_arrayLock);
+	ummutex_lock(_arrayLock);
 	NSUInteger iu = [_array countByEnumeratingWithState:state objects:stackbuf count:len];
-	UMMUTEX_UNLOCK(_arrayLock);
+	ummutex_unlock(_arrayLock);
 	return iu;
 }
 
 
 - (void)lock
 {
-    UMMUTEX_LOCK(_arrayLock);
+    ummutex_lock(_arrayLock);
 }
 
 - (void)unlock
 {
-    UMMUTEX_UNLOCK(_arrayLock);
+    ummutex_unlock(_arrayLock);
 }
 
 @end

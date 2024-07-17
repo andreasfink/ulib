@@ -36,21 +36,19 @@
         for(index=start;index<end;index++)
         {
             int i = index % UMPOOL_QUEUES_COUNT;
-            int result;
-            UMMUTEX_TRYLOCK1(_poolLock[i], result);
-            if(result)
+            if(ummutex_trylock(_poolLock[i]))
             {
                [_queues[i] addObject:obj];
-               UMMUTEX_UNLOCK(_poolLock[i]);
+               ummutex_unlock(_poolLock[i]);
                return;
             }
         }
         /* we only get here if all locks are established */
         /* now we have no other choice than to do a waitlock */
         int i = ++index % UMPOOL_QUEUES_COUNT;
-        UMMUTEX_LOCK(_poolLock[i]);
+        ummutex_lock(_poolLock[i]);
         [_queues[i] addObject:obj];
-        UMMUTEX_UNLOCK(_poolLock[i]);
+        ummutex_unlock(_poolLock[i]);
     }
 }
 
@@ -63,9 +61,9 @@
         for(int index=start;index<end;index++)
         {
             int i = index % UMPOOL_QUEUES_COUNT;
-            UMMUTEX_LOCK(_poolLock[i]);
+            ummutex_lock(_poolLock[i]);
             [_queues[i] removeObject:obj];
-            UMMUTEX_UNLOCK(_poolLock[i]);
+            ummutex_unlock(_poolLock[i]);
         }
         _rotary = ++_rotary % UMPOOL_QUEUES_COUNT;
     }
@@ -80,9 +78,9 @@
         for(int index=start;index<end;index++)
         {
             int i = index % UMPOOL_QUEUES_COUNT;
-            UMMUTEX_LOCK(_poolLock[i]);
+            ummutex_lock(_poolLock[i]);
             [_queues[i] removeObjectIdenticalTo:obj];
-            UMMUTEX_UNLOCK(_poolLock[i]);
+            ummutex_unlock(_poolLock[i]);
         }
         _rotary = ++_rotary % UMPOOL_QUEUES_COUNT;
     }
@@ -96,13 +94,13 @@
     for(int index=start;index<end;index++)
     {
         int i = index % UMPOOL_QUEUES_COUNT;
-        UMMUTEX_LOCK(_poolLock[i]);
+        ummutex_lock(_poolLock[i]);
         if ([_queues[i] count]>0)
         {
             obj = [_queues[i] objectAtIndex:0];
             [_queues[i] removeObjectAtIndex:0];
         }
-        UMMUTEX_UNLOCK(_poolLock[i]);
+        ummutex_unlock(_poolLock[i]);
         if(obj)
         {
             break;
@@ -121,9 +119,9 @@
     for(int index=start;index<end;index++)
     {
         int i = index % UMPOOL_QUEUES_COUNT;
-        UMMUTEX_LOCK(_poolLock[i]);
+        ummutex_lock(_poolLock[i]);
         cnt= cnt + [_queues[i] count];
-        UMMUTEX_UNLOCK(_poolLock[i]);
+        ummutex_unlock(_poolLock[i]);
     }
     _rotary = ++_rotary % UMPOOL_QUEUES_COUNT;
     return cnt;

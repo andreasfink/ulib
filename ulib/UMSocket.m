@@ -415,9 +415,9 @@ static int SSL_smart_shutdown(SSL *ssl)
     NSString* l6 = [NSString localizedStringWithFormat:@"Local Port:           %d", _connectedLocalPort];
     NSString* l7 = [NSString localizedStringWithFormat:@"Remote Port:          %d", _connectedRemotePort];
     NSString* l8;
-    UMMUTEX_LOCK(_controlLock);
+    ummutex_lock(_controlLock);
     l8 = [NSString localizedStringWithFormat:@"Socket:               %d", _sock];
-    UMMUTEX_UNLOCK(_controlLock);
+    ummutex_unlock(_controlLock);
     return [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n",l0,l1,l2,l3,l4,l5,l6,l7,l8];
 }
 
@@ -571,7 +571,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) bind
 {
-    UMMUTEX_LOCK(_controlLock);
+    ummutex_lock(_controlLock);
     @try
     {
         int eno = 0;
@@ -735,7 +735,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
     @finally
     {
-        UMMUTEX_UNLOCK(_controlLock);
+        ummutex_unlock(_controlLock);
     }
 }
 
@@ -769,9 +769,9 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
     self.isListening = NO;
     
-    UMMUTEX_LOCK(_controlLock);
+    ummutex_lock(_controlLock);
     err = listen(_sock,backlog);
-    UMMUTEX_UNLOCK(_controlLock);
+    ummutex_unlock(_controlLock);
 
     _direction = _direction | UMSOCKET_DIRECTION_INBOUND;
     if(err)
@@ -864,7 +864,7 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) connect
 {
-    UMMUTEX_LOCK(_controlLock);
+    ummutex_lock(_controlLock);
     @try
     {
         struct sockaddr_in	sa;
@@ -991,7 +991,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
     @finally
     {
-        UMMUTEX_UNLOCK(_controlLock);
+        ummutex_unlock(_controlLock);
     }
 }
 
@@ -1063,15 +1063,15 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (void) doInitReceiveBuffer
 {
-    UMMUTEX_LOCK(_dataLock);
+    ummutex_lock(_dataLock);
     _receiveBuffer = [[NSMutableData alloc] init];
     _receivebufpos = 0;
-    UMMUTEX_UNLOCK(_dataLock);
+    ummutex_unlock(_dataLock);
 }
 
 - (void) deleteFromReceiveBuffer:(NSUInteger)bytes
 {
-    UMMUTEX_LOCK(_dataLock);
+    ummutex_lock(_dataLock);
     long len;
 
     if (bytes > (len = [_receiveBuffer length]))
@@ -1084,12 +1084,12 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
         _receivebufpos = 0;
     }
-    UMMUTEX_UNLOCK(_dataLock);
+    ummutex_unlock(_dataLock);
 }
 
 - (UMSocket *) accept:(UMSocketError *)ret
 {
-    UMMUTEX_LOCK(_controlLock);
+    ummutex_lock(_controlLock);
     @try
     {
         int		newsock = -1;
@@ -1201,7 +1201,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
     @finally
     {
-        UMMUTEX_UNLOCK(_controlLock);
+        ummutex_unlock(_controlLock);
     }
 }
 
@@ -1213,10 +1213,10 @@ static int SSL_smart_shutdown(SSL *ssl)
 
     if(_blockingMode != SocketBlockingMode_isNotBlocking)
     {
-        UMMUTEX_LOCK(_controlLock);
+        ummutex_lock(_controlLock);
         flags = fcntl(_sock, F_GETFL, 0);
         err = fcntl(_sock, F_SETFL, flags  | O_NONBLOCK);
-        UMMUTEX_UNLOCK(_controlLock);
+        ummutex_unlock(_controlLock);
         if(err<0)
         {
             returnValue = [UMSocket umerrFromErrno:errno];
@@ -1237,10 +1237,10 @@ static int SSL_smart_shutdown(SSL *ssl)
 
     if(_blockingMode != SocketBlockingMode_isBlocking)
     {
-        UMMUTEX_LOCK(_controlLock);
+        ummutex_lock(_controlLock);
         flags = fcntl(_sock, F_GETFL, 0);
         err = fcntl(_sock, F_SETFL, flags  & ~O_NONBLOCK);
-        UMMUTEX_UNLOCK(_controlLock);
+        ummutex_unlock(_controlLock);
         if(err<0)
         {
             returnValue = [UMSocket umerrFromErrno:errno];
@@ -1258,7 +1258,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     UMSocketError err = UMSocketError_no_error;
     if((self.hasSocket) && (_sock >=0))
     {
-        UMMUTEX_LOCK(_controlLock);
+        ummutex_lock(_controlLock);
         TRACK_FILE_CLOSE(_sock);
         int res = close(_sock);
         if (res)
@@ -1270,7 +1270,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         self.hasSocket=NO;
         _status = UMSOCKET_STATUS_OFF;
         self.isConnected = NO;
-        UMMUTEX_UNLOCK(_controlLock);
+        ummutex_unlock(_controlLock);
     }
     return err;
 }
@@ -1314,9 +1314,9 @@ static int SSL_smart_shutdown(SSL *ssl)
             {
                 NSLog(@"can not switch to blocking mode ");
             }
-            UMMUTEX_LOCK(_dataLock);
+            ummutex_lock(_dataLock);
             i = [_cryptoStream writeBytes:bytes length:length errorCode:&eno];
-            UMMUTEX_UNLOCK(_dataLock);
+            ummutex_unlock(_dataLock);
             err = [self switchToNonBlocking];
             if(err!= UMSocketError_no_error)
             {
@@ -1348,9 +1348,9 @@ static int SSL_smart_shutdown(SSL *ssl)
                 self.isConnected = NO;
                 return [UMSocket umerrFromErrno:ECONNREFUSED];
             }
-            UMMUTEX_LOCK(_dataLock);
+            ummutex_lock(_dataLock);
             i = [_cryptoStream writeBytes:bytes length:length errorCode:&eno];
-            UMMUTEX_UNLOCK(_dataLock);
+            ummutex_unlock(_dataLock);
 
             if (i != length)
             {
@@ -1441,9 +1441,9 @@ static int SSL_smart_shutdown(SSL *ssl)
                 self.isConnected = NO;
                 return [UMSocket umerrFromErrno:EINVAL];
             }
-            UMMUTEX_LOCK(_dataLock);
+            ummutex_lock(_dataLock);
             i =    [_cryptoStream writeBytes: [data bytes] length:[data length]  errorCode:&eno];
-            UMMUTEX_UNLOCK(_dataLock);
+            ummutex_unlock(_dataLock);
 
             if (i != [data length])
             {
@@ -1504,9 +1504,9 @@ static int SSL_smart_shutdown(SSL *ssl)
 
     errno = 99;
 
-    UMMUTEX_LOCK(_controlLock);
+    ummutex_lock(_controlLock);
     ret1 = poll(pollfds, 1, timeoutInMs);
-    UMMUTEX_UNLOCK(_controlLock);
+    ummutex_unlock(_controlLock);
 
     if (ret1 < 0)
     {
@@ -1847,9 +1847,9 @@ static int SSL_smart_shutdown(SSL *ssl)
     memset(&sa_remote_in6,0x00,sizeof(sa_remote_in6));
     
     len = sizeof(sa_local);
-    UMMUTEX_LOCK(_controlLock);
+    ummutex_lock(_controlLock);
     getsockname(_sock, &sa_local, &len);
-    UMMUTEX_UNLOCK(_controlLock);
+    ummutex_unlock(_controlLock);
 
     switch(sa_local.sa_family)
     {

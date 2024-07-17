@@ -62,10 +62,10 @@
     }
     UMAssert(_namedListLock!=NULL,@"_lock is NULL");
     
-        UMMUTEX_LOCK(_namedListLock);
+        ummutex_lock(_namedListLock);
     _namedlistEntries[str] = str;
     _dirty=YES;
-        UMMUTEX_UNLOCK(_namedListLock);
+        ummutex_unlock(_namedListLock);
 #ifdef DEBUG
     NSLog(@"UMNamedList addEntry:%@",str);
     [self dump];
@@ -92,10 +92,10 @@
         NSLog(@"you can not remove empty string");
         return;
     }
-        UMMUTEX_LOCK(_namedListLock);
+        ummutex_lock(_namedListLock);
     [_namedlistEntries removeObjectForKey:str];
     _dirty=YES;
-        UMMUTEX_UNLOCK(_namedListLock);
+        ummutex_unlock(_namedListLock);
 #ifdef DEBUG
     NSLog(@"UMNamedList removeEntry:%@",str);
     [self dump];
@@ -105,13 +105,13 @@
 - (BOOL)containsEntry:(NSString *)str
 {
     BOOL found = NO;
-        UMMUTEX_LOCK(_namedListLock);
+        ummutex_lock(_namedListLock);
     NSString *s =  _namedlistEntries[str];
     if(s!=NULL)
     {
         found = YES;
     }
-        UMMUTEX_UNLOCK(_namedListLock);
+        ummutex_unlock(_namedListLock);
     return found;
 }
 
@@ -119,15 +119,15 @@
 - (NSArray *)allEntries
 {
     NSArray *a;
-        UMMUTEX_LOCK(_namedListLock);
+        ummutex_lock(_namedListLock);
     a = [_namedlistEntries allKeys];
-        UMMUTEX_UNLOCK(_namedListLock);
+        ummutex_unlock(_namedListLock);
     return a;
 }
 
 - (void)flush
 {
-        UMMUTEX_LOCK(_namedListLock);
+        ummutex_lock(_namedListLock);
     if(_dirty)
     {
         NSArray *keys = [_namedlistEntries allKeys];
@@ -146,7 +146,7 @@
 #endif
         _dirty = NO;
     }
-        UMMUTEX_UNLOCK(_namedListLock);
+        ummutex_unlock(_namedListLock);
 #ifdef DEBUG
 //    NSLog(@"UMNamedList flush");
 //    [self dump];
@@ -177,10 +177,10 @@
             list[value]=value;
         }
     }
-    UMMUTEX_LOCK(_namedListLock);
+    ummutex_lock(_namedListLock);
     _namedlistEntries = list;
     _dirty = NO;
-    UMMUTEX_UNLOCK(_namedListLock);
+    ummutex_unlock(_namedListLock);
 #ifdef DEBUG
     [self dump];
 #endif

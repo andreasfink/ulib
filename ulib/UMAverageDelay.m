@@ -33,7 +33,7 @@
 
 - (void) appendNumber:(NSNumber *)nr
 {
-    UMMUTEX_LOCK(_mutex);
+    ummutex_lock(_mutex);
     [_counters addObject:nr];
     NSInteger i = [_counters count];
     while(i > _size)
@@ -41,7 +41,7 @@
         [_counters removeObjectAtIndex:0];
         i--;
     }
-    UMMUTEX_UNLOCK(_mutex);
+    ummutex_unlock(_mutex);
 }
 
 - (double) averageValue
@@ -49,13 +49,13 @@
     double value = 0.0;
     int count = 0;
 
-    UMMUTEX_LOCK(_mutex);
+    ummutex_lock(_mutex);
     for(NSNumber *nr in _counters)
     {
         value += [nr doubleValue];
         count++;
     }
-    UMMUTEX_UNLOCK(_mutex);
+    ummutex_unlock(_mutex);
 
     if(count==0)
     {
@@ -71,13 +71,13 @@
     double avg = 0.0;
     int count = 0;
     double sum = 0.0;
-    UMMUTEX_LOCK(_mutex);
+    ummutex_lock(_mutex);
     for(NSNumber *nr in _counters)
     {
         sum += [nr doubleValue];
         count++;
     }
-    UMMUTEX_UNLOCK(_mutex);
+    ummutex_unlock(_mutex);
 
     if(count==0)
     {

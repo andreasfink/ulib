@@ -23,6 +23,9 @@
     const char          *_lastLockedInFile;
     long                 _lastLockedAtLine;
     const char          *_lastLockedInFunction;
+    const char          *_lastUnockedInFile;
+    long                 _lastUnockedAtLine;
+    const char          *_lastUnlockedInFunction;
     const char          *_tryingToLockInFile;
     long                 _tryingToLockAtLine;
     const char          *_tryingToLockInFunction;
@@ -37,13 +40,18 @@
 @property(readwrite,assign) const char      *lastLockedInFile;
 @property(readwrite,assign) long            lastLockedAtLine;
 @property(readwrite,assign) const char      *lastLockedInFunction;
+@property(readwrite,assign) const char      *lastUnlockedInFile;
+@property(readwrite,assign) long            lastUnlockedAtLine;
+@property(readwrite,assign) const char      *lastUnlockedInFunction;
 @property(readwrite,assign) const char      *tryingToLockInFile;
 @property(readwrite,assign) long            tryingToLockAtLine;
 @property(readwrite,assign) const char      *tryingToLockInFunction;
 @property(readonly,assign) BOOL             isLocked;
+@property(readonly,assign) int              lockDepth;
+
 
 /*
- USE MACROS UMMUTEX_LOCK(mutex), UMMUTEX_TRYLOCK(mutex,timeout,retry,result) and UMMUTEX_UNLOCK(mutex) instead now
+ USE MACROS ummutex_lock(mutex), ummutex_trylock(mutex) and ummutex_unlock(mutex) instead now
 - (void) lock;
 - (void) unlock;
 - (int) tryLock;
@@ -95,92 +103,21 @@ void ummutex_remove_locked_mutex(UMMutex *m);
 NSArray *ummutex_get_locked_mutexes(void);
 void ummutex_record_locks(void);
 
+
+void ummutex_lock_flf(UMMutex *mutex,const char *file,long line, const char *func);
+void ummutex_unlock_flf(UMMutex *mutex,const char *file,long line, const char *func);
+int ummutex_trylock_flf(UMMutex *mutex,const char *file,long line, const char *func);
+int ummutex_trylock_retry_timeout_retrytime_flf(UMMutex *mutex,NSTimeInterval timeout,NSTimeInterval retry,const char *file,long line, const char *func);
+
 #ifndef __FUNCTION__
-#define __FUNCTION__ "unknown"
+#define __FUNCTION__ __func__
 #endif
 
-#define UMMUTEX_LOCK(a)  \
-{ \
-    if(a==NULL)\
-    { \
-        @throw([NSException exceptionWithName:@"UMMUTEX_LOCK(NULL)" \
-                                       reason: \
-                [NSString stringWithFormat:@"trying to lock a mutex which is NULL file %s line %ld",__FILE__,(long)__LINE__] \
-                                     userInfo:NULL]); \
-    } \
-    if([a isKindOfClass:[UMMutex class]]) \
-    { \
-        a.tryingToLockInFile = __FILE__; \
-        a.tryingToLockAtLine = __LINE__; \
-        a.tryingToLockInFunction = __FUNCTION__; \
-    } \
-    else \
-    { \
-        NSLog(@"FILE:%s line:%ld locking a non UMMutex!",__FILE__,(long)__LINE__); \
-    } \
-    [a _internalLock]; \
-    if([a isKindOfClass:[UMMutex class]]) \
-    { \
-        a.lockedInFile = __FILE__;  \
-        a.lockedAtLine = __LINE__;   \
-        a.lockedInFunction =  __FUNCTION__;  \
-        a.tryingToLockInFile = NULL; \
-        a.tryingToLockAtLine = 0; \
-        a.tryingToLockInFunction = NULL; \
-    } \
-    ummutex_add_locked_mutex(a); \
-}
+#ifndef __func__
+#define __func__ "unknown"
+#endif
 
-#define UMMUTEX_TRYLOCK(a,timeout,retry,result)  \
-{ \
-    if(a==NULL)\
-    { \
-        @throw([NSException exceptionWithName:@"UMMUTEX_TRYLOCK(NULL)" \
-                                   reason: \
-            [NSString stringWithFormat:@"trying to trylock a mutex which is NULL file %s line %ld",__FILE__,(long)__LINE__] \
-                                 userInfo:NULL]); \
-    } \
-    a.tryingToLockInFile = __FILE__; \
-    a.tryingToLockAtLine = __LINE__; \
-    a.tryingToLockInFunction = __FUNCTION__; \
-    if(timeout <= 0) \
-    { \
-        result = [a _internalTryLock];\
-    } \
-    else \
-    { \
-        result = [a _internalTryLock:timeout retryTime:retry];\
-    } \
-    if(result==0) \
-    { \
-        a.lockedInFile = __FILE__;  \
-        a.lockedAtLine = __LINE__;   \
-        a.lockedInFunction =  __FUNCTION__;  \
-        ummutex_add_locked_mutex(a); \
-    } \
-    else \
-    { \
-        a.tryingToLockInFile = NULL; \
-        a.tryingToLockAtLine = 0; \
-        a.tryingToLockInFunction = NULL; \
-    } \
-}
-
-#define UMMUTEX_TRYLOCK1(a,result) UMMUTEX_TRYLOCK(a,0,0,result)
-
-#define UMMUTEX_UNLOCK(a) \
-{  \
-    if(a==NULL)\
-    { \
-        @throw([NSException exceptionWithName:@"UMMUTEX_UNLOCK(NULL)" \
-                                   reason: \
-            [NSString stringWithFormat:@"trying to lock a mutex which is NULL file %s line %ld",__FILE__,(long)__LINE__] \
-                                 userInfo:NULL]); \
-    } \
-    a.lastLockedInFile = a.lockedInFile;  \
-    a.lastLockedAtLine = a.lockedAtLine;   \
-    a.lastLockedInFunction =  a.lockedInFunction;  \
-    a.lockedInFunction =  NULL; \
-    [a _internalUnlock];  \
-    ummutex_remove_locked_mutex(a); \
-}
+#define  ummutex_lock(mutex)                                                ummutex_lock_flf(mutex,__FILE__,__LINE__,__func__)
+#define  ummutex_unlock(mutex)                                              ummutex_unlock_flf(mutex,__FILE__,__LINE__,__func__)
+#define  ummutex_trylock(mutex)                                             ummutex_trylock_flf(mutex,__FILE__,__LINE__,__func__)
+#define  ummutex_trylock_retry_timeout_retrytime(mutex,timeout,retrytime)   ummutex_trylock_retry_timeout_retrytime_flf(mutex,timeout,retry,__FILE__,__LINE__,__func__)

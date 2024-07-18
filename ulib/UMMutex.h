@@ -120,4 +120,4 @@ int ummutex_trylock_retry_timeout_retrytime_flf(UMMutex *mutex,NSTimeInterval ti
 #define  ummutex_lock(mutex)                                                ummutex_lock_flf(mutex,__FILE__,__LINE__,__func__)
 #define  ummutex_unlock(mutex)                                              ummutex_unlock_flf(mutex,__FILE__,__LINE__,__func__)
 #define  ummutex_trylock(mutex)                                             ummutex_trylock_flf(mutex,__FILE__,__LINE__,__func__)
-#define  ummutex_trylock_retry_timeout_retrytime(mutex,timeout,retrytime)   ummutex_trylock_retry_timeout_retrytime_flf(mutex,timeout,retry,__FILE__,__LINE__,__func__)
+#define  ummutex_trylock_retry_timeout_retrytime(mutex,timeout,retrytime) ummutex_trylock_retry_timeout_retrytime_flf(mutex,timeout,retry,__FILE__,__LINE__,__func__)

@@ -485,13 +485,13 @@ int ummutex_trylock_flf(UMMutex *mutex,const char *file,long line, const char *f
     if(mutex==NULL)
     {
         @throw([NSException exceptionWithName:@"ummutex_trylock(NULL)"
-                                       reason:[NSString stringWithFormat:@"trying to unlock a mutex which is NULL. File %s line %ld function:%s",file,line,func]
+                                       reason:[NSString stringWithFormat:@"trying to trylock a mutex which is NULL. File %s line %ld function:%s",file,line,func]
                                      userInfo:NULL]);
     }
     if(![mutex isKindOfClass:[UMMutex class]])
     {
         @throw([NSException exceptionWithName:@"ummutex_trylock(non-mutex)"
-                                       reason:[NSString stringWithFormat:@"trying to unlock a mutex which is not a UMMutex. File %s line %ld function:%s",file,line,func]
+                                       reason:[NSString stringWithFormat:@"trying to trylock a mutex which is not a UMMutex. File %s line %ld function:%s",file,line,func]
                                      userInfo:NULL]);
     }
     mutex.tryingToLockInFile = file;

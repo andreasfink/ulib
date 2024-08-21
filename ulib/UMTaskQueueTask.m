@@ -13,6 +13,18 @@
 
 @implementation UMTaskQueueTask
 
+- (UMTaskQueueTask *)init
+{
+    self = [super init];
+    if(self)
+    {
+        _name = @"unnamed";
+        _runMutex = [[UMMutex alloc]initWithName:@"umtask-lock"];
+    }
+    return self;
+
+}
+
 - (UMTaskQueueTask *)initWithName:(NSString *)n
 {
     self = [super init];

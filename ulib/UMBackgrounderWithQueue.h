@@ -27,8 +27,8 @@
 
 @interface UMBackgrounderWithQueue : UMBackgrounder
 {
-    UMQueueSingle *_queue;
-    BOOL    _sharedQueue;
+    UMQueueSingle   *_queue;
+    BOOL            _sharedQueue;
 }
 
 @property(strong)     UMQueueSingle   *queue;

@@ -50,7 +50,7 @@
 - (void)appendArray:(NSArray *)app;
 - (NSArray *)arrayCopy;
 - (id)lastObject;
-- (id)fistObject;
+- (id)firstObject;
 
 - (NSString *)jsonString;
 - (NSString *)jsonCompactString;

@@ -97,29 +97,63 @@
         @throw([NSException exceptionWithName:@"INSERT_NULL_IN_SYNCRONIZED_ARRAY"
                                        reason:NULL
                                      userInfo:@{
-                                                @"sysmsg" : @"UMSynchronizedArray: trying to insert NULL object",
-                                                @"func": @(__func__),
-                                                @"backtrace": UMBacktrace(NULL,0)
-                                                }
-                ]);
+            @"sysmsg" : @"UMSynchronizedArray: trying to insert NULL object",
+            @"func": @(__func__),
+            @"backtrace": UMBacktrace(NULL,0)
+        }
+               ]);
     }
     ummutex_lock(_arrayLock);
     [_array insertObject:anObject atIndex:index];
     ummutex_unlock(_arrayLock);
 }
 
-- (void)removeLastObject
+- (id)lastObject
 {
+    id lastObject = NULL;
     ummutex_lock(_arrayLock);
-    [_array removeLastObject];
+    NSInteger i = _array.count;
+    if(i>0)
+    {
+        lastObject = [_array objectAtIndex:i];
+    }
     ummutex_unlock(_arrayLock);
+    return lastObject;
 }
 
-- (void)removeObjectAtIndex:(NSUInteger)index
+- (id)firstObject
+{
+    id firstObject = NULL;
+    ummutex_lock(_arrayLock);
+    NSInteger i = _array.count;
+    if(i>0)
+    {
+        firstObject = [_array objectAtIndex:0];
+    }
+    ummutex_unlock(_arrayLock);
+    return firstObject;
+}
+- (id)removeLastObject
+{
+    id lastObject = NULL;
+    ummutex_lock(_arrayLock);
+    NSInteger i = _array.count;
+    if(i>0)
+    {
+        lastObject = [_array objectAtIndex:i];
+        [_array removeLastObject];
+    }
+    ummutex_unlock(_arrayLock);
+    return lastObject;
+}
+
+- (id)removeObjectAtIndex:(NSUInteger)index
 {
     ummutex_lock(_arrayLock);
+    id removedObject = [_array objectAtIndex:index];
     [_array removeObjectAtIndex:index];
     ummutex_unlock(_arrayLock);
+    return removedObject;
 }
 
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject
@@ -272,13 +306,13 @@
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
-								  objects:(id __unsafe_unretained _Nullable [_Nonnull])stackbuf
-									count:(NSUInteger)len;
+                                  objects:(id __unsafe_unretained _Nullable [_Nonnull])stackbuf
+                                    count:(NSUInteger)len;
 {
-	ummutex_lock(_arrayLock);
-	NSUInteger iu = [_array countByEnumeratingWithState:state objects:stackbuf count:len];
-	ummutex_unlock(_arrayLock);
-	return iu;
+    ummutex_lock(_arrayLock);
+    NSUInteger iu = [_array countByEnumeratingWithState:state objects:stackbuf count:len];
+    ummutex_unlock(_arrayLock);
+    return iu;
 }
 
 
@@ -292,4 +326,13 @@
     ummutex_unlock(_arrayLock);
 }
 
+
+- (UMSynchronizedArray *)sortedArrayUsingComparator:(NSComparator)cmptr
+{
+    ummutex_lock(_arrayLock);
+    NSArray *arr2 = [_array sortedArrayUsingComparator:cmptr];
+    UMSynchronizedArray *ua = [[UMSynchronizedArray alloc]initWithArray:arr2];
+    ummutex_unlock(_arrayLock);
+    return ua;
+}
 @end

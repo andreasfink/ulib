@@ -36,8 +36,8 @@
 - (void)addObject:(id)anObject;
 - (void)addObjectUnique:(id)anObject;
 - (void)insertObject:(id)anObject atIndex:(NSUInteger)index;
-- (void)removeLastObject;
-- (void)removeObjectAtIndex:(NSUInteger)index;
+- (id)removeLastObject;
+- (id)removeObjectAtIndex:(NSUInteger)index;
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject;
 - (id)objectAtIndex:(NSUInteger)index;
 - (NSString *)stringLines;
@@ -49,11 +49,12 @@
 - (NSMutableArray *)mutableCopy;
 - (void)appendArray:(NSArray *)app;
 - (NSArray *)arrayCopy;
+- (id)lastObject;
+- (id)fistObject;
 
 - (NSString *)jsonString;
 - (NSString *)jsonCompactString;
-
-
+- (UMSynchronizedArray *)sortedArrayUsingComparator:(NSComparator)cmptr;
 /* if you need to lock other thread's operation on this array temporarely */
 - (void)lock;
 - (void)unlock;

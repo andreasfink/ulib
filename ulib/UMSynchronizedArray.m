@@ -29,6 +29,7 @@
     if(self)
     {
         _array = [arr mutableCopy];
+        _arrayLock = [[UMMutex alloc]initWithName:@"synchronized-array"];
     }
     return self;
 }
@@ -115,7 +116,7 @@
     NSInteger i = _array.count;
     if(i>0)
     {
-        lastObject = [_array objectAtIndex:i];
+        lastObject = [_array objectAtIndex:i-1];
     }
     ummutex_unlock(_arrayLock);
     return lastObject;

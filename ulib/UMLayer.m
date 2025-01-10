@@ -216,7 +216,7 @@
 
 - (void)logMinorError:(NSString *)s
 {
-    [self.logFeed majorErrorText:s];
+    [self.logFeed minorErrorText:s];
 }
 
 - (void)logMajorError:(int)err location:(NSString *)location

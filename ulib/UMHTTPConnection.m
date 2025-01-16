@@ -213,6 +213,10 @@
 /* returns error if it should exit */
 - (int) checkForIncomingData:(NSMutableData *)appendToMe requestCompleted:(BOOL *)complete
 {
+    if(appendToMe==NULL)
+    {
+        return 0;
+    }
 	const char *ptr = [appendToMe bytes];
 	size_t n	= [appendToMe length];
 	char *eol;

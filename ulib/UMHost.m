@@ -171,8 +171,8 @@
     self = [super init];
     if (self)
     {
-        _addresses = [[NSMutableArray alloc] init];
         _hostLock = [[UMMutex alloc] initWithName:@"umhost"];
+        _addresses = [[NSMutableArray alloc] init];
         _isLocalHost = 0;
         _isResolving = 0;
         _isResolved = 0;
@@ -196,12 +196,12 @@
     self = [super init];
     if (self)
     {
-        n = [UMSocket unifyIP:n];
-        self.addresses = [NSMutableArray arrayWithObjects:n,nil];
         _hostLock = [[UMMutex alloc] initWithName:@"umhost"];
         _isLocalHost = 0;
         _isResolving = 0;
         _isResolved = 1;
+        n = [UMSocket unifyIP:n];
+        self.addresses = [NSMutableArray arrayWithObjects:n,nil];
         _name = n;
     }
     return self;

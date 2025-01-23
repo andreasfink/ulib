@@ -571,24 +571,25 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError) bind
 {
+    UMSocketError errcode = UMSocketError_no_error;
+    
     ummutex_lock(_controlLock);
-    @try
+    NSArray                 *localAddresses = NULL;
+    NSMutableArray          *useableLocalAddresses;
+    struct sockaddr_in	sa;
+    struct sockaddr_in6	sa6;
+    NSString    *ipAddr;
+    char    addressString[256];
+
+    [self reportStatus:@"bind()"];
+
+    if (_isBound == YES)
     {
-        int eno = 0;
-        NSArray                 *localAddresses = NULL;
-        NSMutableArray          *useableLocalAddresses;
-        struct sockaddr_in	sa;
-        struct sockaddr_in6	sa6;
-        NSString    *ipAddr;
-        char    addressString[256];
-
-        [self reportStatus:@"bind()"];
-
-        if (_isBound == YES)
-        {
-            [self reportStatus:@"- already bound"];
-            return UMSocketError_already_bound;
-        }
+        [self reportStatus:@"- already bound"];
+        errcode = UMSocketError_already_bound;
+    }
+    else
+    {
         if(_localHost == NULL)
         {
             _localHost               = [[UMHost alloc] initWithLocalhost];
@@ -613,12 +614,12 @@ static int SSL_smart_shutdown(SSL *ssl)
 #endif
         sa6.sin6_port			= htons(_requestedLocalPort);
         sa6.sin6_addr			= in6addr_any;
-
+        
         
         switch(_type)
         {
 #ifdef	SCTP_SUPPORTED
-/* FIXME:  what about IPv4/IPv6 specifics? */
+                /* FIXME:  what about IPv4/IPv6 specifics? */
             case UMSOCKET_TYPE_SCTP_SEQPACKET:
             case UMSOCKET_TYPE_SCTP_STREAM:
             case UMSOCKET_TYPE_SCTP_DGRAM:
@@ -648,37 +649,37 @@ static int SSL_smart_shutdown(SSL *ssl)
                 }
                 if( [useableLocalAddresses count] == 0)
                 {
-                    return UMSocketError_sctp_bindx_failed_for_all;
+                    errcode = UMSocketError_sctp_bindx_failed_for_all;
                 }
                 break;
             }
-                case UMSOCKET_TYPE_SCTP6ONLY_SEQPACKET:
-                case UMSOCKET_TYPE_SCTP6ONLY_STREAM:
-                case UMSOCKET_TYPE_SCTP6ONLY_DGRAM:
+            case UMSOCKET_TYPE_SCTP6ONLY_SEQPACKET:
+            case UMSOCKET_TYPE_SCTP6ONLY_STREAM:
+            case UMSOCKET_TYPE_SCTP6ONLY_DGRAM:
             {
                 int i;
                 for(i=0;i< [localAddresses count];i++)
                 {
                     ipAddr = [localAddresses objectAtIndex:i];
                     NSData *d = [UMSocket sockaddrFromAddress:ipAddr
-                                                     port:_requestedLocalPort
-                                             socketFamily:AF_INET6];
+                                                         port:_requestedLocalPort
+                                                 socketFamily:AF_INET6];
                     int err = [self bindx:(struct sockaddr *)d.bytes];
                     if(!err)
                     {
                         [useableLocalAddresses addObject:ipAddr];
                     }
                 }
-
+                
                 if( [useableLocalAddresses count] == 0)
                 {
-                    return UMSocketError_sctp_bindx_failed_for_all;
+                    errcode = UMSocketError_sctp_bindx_failed_for_all;
                 }
                 break;
             }
-
+                
 #endif
-
+                
             case UMSOCKET_TYPE_TCP4ONLY:
             case UMSOCKET_TYPE_UDP4ONLY:
             {
@@ -695,8 +696,7 @@ static int SSL_smart_shutdown(SSL *ssl)
                 }
                 if(bind(_sock,(struct sockaddr *)&sa,sizeof(sa)) != 0)
                 {
-                    eno = errno;
-                    goto err;
+                    errcode = [UMSocket umerrFromErrno:errno];
                 }
             }
                 break;
@@ -716,27 +716,23 @@ static int SSL_smart_shutdown(SSL *ssl)
                 {
                     sa6.sin6_addr            = in6addr_any;
                 }
-
                 if(bind(_sock,(struct sockaddr *)&sa6,sizeof(sa6)) != 0)
                 {
-                    eno = errno;
-                    goto err;
+                    errcode = [UMSocket umerrFromErrno:errno];
                 }
                 break;
             }
             default:
-                return [UMSocket umerrFromErrno:EAFNOSUPPORT];
+                errcode =  [UMSocket umerrFromErrno:EAFNOSUPPORT];
         }
-        _isBound = YES;
-        [self reportStatus:@"isBound=YES"];
-        return UMSocketError_no_error;
-    err:
-        return [UMSocket umerrFromErrno:eno];
+        if(errcode == UMSocketError_no_error)
+        {
+            _isBound = YES;
+            [self reportStatus:@"isBound=YES"];
+        }
     }
-    @finally
-    {
-        ummutex_unlock(_controlLock);
-    }
+    ummutex_unlock(_controlLock);
+    return errcode;
 }
 
 -(int)bindx:(struct sockaddr *)sockaddr
@@ -2037,7 +2033,7 @@ static int SSL_smart_shutdown(SSL *ssl)
                                            length:wantReadBytes
                                         errorCode:&eno];
         totalReadBytes += actualReadBytes;
-        if(actualReadBytes == 0) /* SIGHUP */
+        if(actualReadBytes == 0)
         {
             if(totalReadBytes==0)
             {
@@ -2049,7 +2045,7 @@ static int SSL_smart_shutdown(SSL *ssl)
             }
             else
             {
-                e = UMSocketError_has_data_and_hup;
+                e = UMSocketError_has_data;
             }
             break;
         }

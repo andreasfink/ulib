@@ -188,8 +188,8 @@
 }
 
 - (ssize_t)readBytes:(unsigned char *)bytes
-             length:(size_t)length
-          errorCode:(int *)eno
+              length:(size_t)length
+           errorCode:(int *)eno
 {
 	if(_enable)
 	{

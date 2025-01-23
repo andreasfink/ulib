@@ -58,5 +58,7 @@
 /* if you need to lock other thread's operation on this array temporarely */
 - (void)lock;
 - (void)unlock;
+- (NSString *)componentsJoinedByString:(NSString *)separator;
+
 @end
 

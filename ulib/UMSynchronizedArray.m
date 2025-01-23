@@ -336,4 +336,12 @@
     ummutex_unlock(_arrayLock);
     return ua;
 }
+
+- (NSString *)componentsJoinedByString:(NSString *)separator
+{
+    ummutex_lock(_arrayLock);
+    NSString *s = [_array componentsJoinedByString:separator];
+    ummutex_unlock(_arrayLock);
+    return s;
+}
 @end

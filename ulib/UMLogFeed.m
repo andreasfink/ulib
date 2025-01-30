@@ -227,7 +227,8 @@ extern NSString *UMBacktrace(void **stack_frames, size_t size);
     }
 }
 
-- (void) info:(int)err inSubsection:(NSString *)s
+- (void) info:(int)err
+ inSubsection:(NSString *)s
 	 withText:(NSString *)txt
 {
     @autoreleasepool

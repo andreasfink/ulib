@@ -47,7 +47,8 @@
     UMAssert(_namedListLock!=NULL,@"_lock should not be NULL");
     if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
     {
-        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", [_namedlistEntries className]);
+
+        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", _namedlistEntries.className);
         return;
     }
     if(![str isKindOfClass:[NSString class]])
@@ -78,7 +79,7 @@
     UMAssert(_namedListLock!=NULL,@"_lock should not be NULL");
     if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
     {
-        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", [_namedlistEntries className]);
+        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", _namedlistEntries.className);
         return;
     }
 
@@ -206,7 +207,9 @@
     dict[@"_dirty"] = (_dirty ? @"YES" : @"NO");
     if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
     {
-        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", [_namedlistEntries className]);
+        NSObject *o = _namedlistEntries;
+        NSString *s = o.className;
+        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class",s);
     }
     else
     {

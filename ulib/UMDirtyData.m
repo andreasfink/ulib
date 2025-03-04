@@ -51,14 +51,26 @@
 - (NSString *)stringValue
 {
     NSData *d = (NSData *)_currentValue;
-    NSString *hex = d.hexString;
-    return hex;
+    NSString *s = d.stringValue;
+    return s;
 }
 
 - (void)setStringValue:(NSString *)s
 {
     NSData *d = [s unhexedData];
     [self setData:d];
+}
+
+- (NSData *)previousData
+{
+    return (NSData *)_previousValue;
+}
+
+- (NSString *)previousStringValue
+{
+    NSData *d = (NSData *)_previousValue;
+    NSString *s = d.stringValue;
+    return s;
 }
 
 @end

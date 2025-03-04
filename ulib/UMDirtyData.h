@@ -14,9 +14,11 @@
 - (UMDirtyData *)initWithString:(NSString *)s;
 
 - (NSData *)data;
+- (NSData *)previousData;
 - (void)setData:(NSData *)d;
 
 - (NSString *)stringValue;
+- (NSString *)previousStringValue;
 - (void)setStringValue:(NSString *)s;
 
 @end

@@ -85,4 +85,16 @@
 
 }
 
+
+- (UMStringWithHistory *)initWithString:(NSString *)s
+{
+    self = [super init];
+    if(self)
+    {
+        _currentValue = s;
+        _isModified = YES;
+    }
+    return self;
+}
+
 @end

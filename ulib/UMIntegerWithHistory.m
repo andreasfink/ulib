@@ -11,7 +11,6 @@
 
 -(void)setInteger:(NSInteger)newValue
 {
-
     _oldValue = _currentValue;
     _currentValue = [NSNumber numberWithInteger:newValue];
     NSNumber *currentNumber = (NSNumber *)_currentValue;
@@ -29,6 +28,16 @@
 - (NSInteger)integer
 {
     return [self currentInteger];
+}
+
+- (NSNumber *)number
+{
+    return @([self integer]);
+}
+
+- (void)setNumber:(NSNumber *)n
+{
+    [self setInteger:n.integerValue];
 }
 
 
@@ -82,6 +91,26 @@
     return iwh;
 }
 
+- (UMIntegerWithHistory *)initWithNumber:(NSNumber *)n
+{
+    self = [super init];
+    if(self)
+    {
+        _currentValue = @(n.integerValue);
+        _isModified = YES;
+    }
+    return self;
+}
 
+- (UMIntegerWithHistory *)initWithInteger:(NSInteger)i
+{
+    self = [super init];
+    if(self)
+    {
+        _currentValue = @(i);
+        _isModified = YES;
+    }
+    return self;
+}
 
 @end

@@ -76,4 +76,16 @@
     return n.doubleValue;
 }
 
+
+- (double)previousDoubleValue
+{
+    NSNumber *n = (NSNumber *)_previousValue;
+    return n.doubleValue;
+
+}
+
+- (NSString *)previousStringValue
+{
+    return [NSString stringWithFormat:@"%@",_previousValue];
+}
 @end

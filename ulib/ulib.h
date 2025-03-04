@@ -12,6 +12,7 @@
 #import <ulib/UMDirtyString.h>
 #import <ulib/UMDirtyData.h>
 #import <ulib/UMDirtyDate.h>
+#import <ulib/UMDirtyBoolean.h>
 
 #import <ulib/NSData+ulib.h>
 #import <ulib/NSString+ulib.h>

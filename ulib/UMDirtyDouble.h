@@ -18,8 +18,10 @@
 
 - (double)doubleValue;
 - (void)setDoubleValue:(double)newValue;
+- (double)previousDoubleValue;
 
 - (NSString *)stringValue;
+- (NSString *)previousStringValue;
 - (void)setStringValue:(NSString *)s;
 
 

@@ -19,6 +19,7 @@
 
 - (NSString *)stringValue;
 - (NSString *)previousStringValue;
+- (NSDate *)previousDateValue;
 - (void)setStringValue:(NSString *)s;
 
 @end

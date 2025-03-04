@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A6059F042D77706200911CEF /* UMDirtyBoolean.h in Headers */ = {isa = PBXBuildFile; fileRef = A6059F022D77706200911CEF /* UMDirtyBoolean.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6059F052D77706200911CEF /* UMDirtyBoolean.m in Sources */ = {isa = PBXBuildFile; fileRef = A6059F032D77706200911CEF /* UMDirtyBoolean.m */; };
 		A66EB0B52ABDDC0600C34D40 /* buildnumber.c in Sources */ = {isa = PBXBuildFile; fileRef = A66EB0B42ABDDC0600C34D40 /* buildnumber.c */; };
 		A66EB0C02ABDDC3D00C34D40 /* distro.sh in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0BA2ABDDC2E00C34D40 /* distro.sh */; };
 		A66EB0C12ABDDC3D00C34D40 /* configure in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0BB2ABDDC2E00C34D40 /* configure */; };
@@ -342,6 +344,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A6059F022D77706200911CEF /* UMDirtyBoolean.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyBoolean.h; sourceTree = "<group>"; };
+		A6059F032D77706200911CEF /* UMDirtyBoolean.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDirtyBoolean.m; sourceTree = "<group>"; };
 		A66EB0B32ABDDC0600C34D40 /* buildnumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buildnumber.h; sourceTree = SOURCE_ROOT; };
 		A66EB0B42ABDDC0600C34D40 /* buildnumber.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buildnumber.c; sourceTree = SOURCE_ROOT; };
 		A66EB0B62ABDDC1800C34D40 /* BUILDNR */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILDNR; sourceTree = "<group>"; };
@@ -1098,6 +1102,8 @@
 				A6D02DA92D76C59A00F2C1C4 /* UMDirtyDouble.m */,
 				A6D02DB02D76C7B600F2C1C4 /* UMDirtyDate.h */,
 				A6D02DB12D76C7B600F2C1C4 /* UMDirtyDate.m */,
+				A6059F022D77706200911CEF /* UMDirtyBoolean.h */,
+				A6059F032D77706200911CEF /* UMDirtyBoolean.m */,
 			);
 			path = ulib;
 			sourceTree = "<group>";
@@ -1167,6 +1173,7 @@
 				A683DADD2ABD980F00C34D40 /* UMHTTP2Frame.h in Headers */,
 				A683DA8D2ABD980F00C34D40 /* UMSyntaxToken_Digits.h in Headers */,
 				A6D02DA22D76C58B00F2C1C4 /* UMDirtyString.h in Headers */,
+				A6059F042D77706200911CEF /* UMDirtyBoolean.h in Headers */,
 				A6D02DA72D76C59200F2C1C4 /* UMDirtyData.h in Headers */,
 				A683D9E52ABD980E00C34D40 /* UMHTTP2Session.h in Headers */,
 				A683DA252ABD980E00C34D40 /* UMScanner.h in Headers */,
@@ -1388,6 +1395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A683DADF2ABD980F00C34D40 /* UMSerialPort.m in Sources */,
+				A6059F052D77706200911CEF /* UMDirtyBoolean.m in Sources */,
 				A6D02DA32D76C58B00F2C1C4 /* UMDirtyString.m in Sources */,
 				A683DA642ABD980E00C34D40 /* UMPublicKey.m in Sources */,
 				A683DA582ABD980E00C34D40 /* UMSyntaxToken.m in Sources */,

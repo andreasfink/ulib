@@ -103,4 +103,9 @@
     }
 }
 
+- (UMDirtyInteger *)copyWithZone:(NSZone *)zone
+{
+    return [[UMDirtyInteger allocWithZone:zone]initWithInteger:self.integerValue];
+}
+
 @end

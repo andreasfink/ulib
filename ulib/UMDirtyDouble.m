@@ -88,4 +88,9 @@
 {
     return [NSString stringWithFormat:@"%@",_previousValue];
 }
+
+- (UMDirtyDouble *)copyWithZone:(NSZone *)zone
+{
+    return [[UMDirtyDouble allocWithZone:zone]initWithDouble:self.doubleValue];
+}
 @end

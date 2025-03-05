@@ -24,6 +24,7 @@
 - (NSString *)previousStringValue;
 - (void)setStringValue:(NSString *)s;
 
+- (UMDirtyDouble *)copyWithZone:(NSZone *)zone;
 
 @end
 

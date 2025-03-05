@@ -8,12 +8,12 @@
 #import <ulib/UMAssert.h>
 #import <ulib/UMObject.h>
 #import <ulib/UMDirtyObject.h>
+#import <ulib/UMDirtyBoolean.h>
+#import <ulib/UMDirtyDouble.h>
 #import <ulib/UMDirtyInteger.h>
 #import <ulib/UMDirtyString.h>
 #import <ulib/UMDirtyData.h>
 #import <ulib/UMDirtyDate.h>
-#import <ulib/UMDirtyBoolean.h>
-
 #import <ulib/NSData+ulib.h>
 #import <ulib/NSString+ulib.h>
 #import <ulib/NSArray+ulib.h>

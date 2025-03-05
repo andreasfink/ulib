@@ -132,4 +132,9 @@
     }
 }
 
+- (UMDirtyBoolean *)copyWithZone:(NSZone *)zone
+{
+    return [[UMDirtyBoolean allocWithZone:zone]initWithBoolean:self.booleanValue];
+}
+
 @end

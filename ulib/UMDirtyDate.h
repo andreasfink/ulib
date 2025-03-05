@@ -22,5 +22,7 @@
 - (NSDate *)previousDateValue;
 - (void)setStringValue:(NSString *)s;
 
+- (UMDirtyDate *)copyWithZone:(NSZone *)zone;
+
 @end
 

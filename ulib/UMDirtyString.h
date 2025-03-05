@@ -13,6 +13,8 @@
 - (NSString *)stringValue;
 - (void)setStringValue:(NSString *)s;
 
+- (UMDirtyString *)copyWithZone:(NSZone *)zone;
+
 @end
 
 

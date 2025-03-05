@@ -38,4 +38,9 @@
     }
 }
 
+- (UMDirtyString *)copyWithZone:(NSZone *)zone
+{
+    return [[UMDirtyString allocWithZone:zone]initWithString:self.stringValue];
+}
+
 @end

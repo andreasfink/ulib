@@ -72,4 +72,9 @@
     return (NSDate *)_previousValue;
 }
 
+- (UMDirtyDate *)copyWithZone:(NSZone *)zone
+{
+    return [[UMDirtyDate allocWithZone:zone]initWithDate:self.date];
+}
+
 @end

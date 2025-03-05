@@ -73,4 +73,9 @@
     return s;
 }
 
+- (UMDirtyData *)copyWithZone:(NSZone *)zone
+{
+    return [[UMDirtyData allocWithZone:zone]initWithData:self.data];
+}
+
 @end

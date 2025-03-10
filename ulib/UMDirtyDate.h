@@ -13,13 +13,12 @@
 - (UMDirtyDate *)initWithDate:(NSDate *)d;
 - (UMDirtyDate *)initWithString:(NSString *)s;
 
-- (NSDate *)date;
-- (NSDate *)previousDate;
-- (void)setDate:(NSDate *)d;
+- (NSDate *)dateValue;
+- (NSDate *)previousDateValue;
+- (void)setDateValue:(NSDate *)d;
 
 - (NSString *)stringValue;
 - (NSString *)previousStringValue;
-- (NSDate *)previousDateValue;
 - (void)setStringValue:(NSString *)s;
 
 - (UMDirtyDate *)copyWithZone:(NSZone *)zone;

@@ -28,12 +28,12 @@
     return [self initWithDate:s.dateValue];
 }
 
-- (NSDate *)date
+- (NSDate *)dateValue
 {
     return (NSDate *)_currentValue;
 }
 
-- (void)setDate:(NSDate *)d
+- (void)setDateValue:(NSDate *)d
 {
 
     _previousValue = _currentValue;
@@ -47,6 +47,11 @@
     }
 }
 
+- (NSDate *)previousDateValue
+{
+    return (NSDate *)_previousValue;
+}
+
 - (NSString *)stringValue
 {
     NSDate *d = (NSDate *)_currentValue;
@@ -57,7 +62,7 @@
 - (void)setStringValue:(NSString *)s
 {
     NSDate *d = s.dateValue;
-    [self setDate:d];
+    [self setDateValue:d];
 }
 
 
@@ -67,14 +72,10 @@
     return d.stringValue;
 }
 
-- (NSDate *)previousDateValue
-{
-    return (NSDate *)_previousValue;
-}
 
 - (UMDirtyDate *)copyWithZone:(NSZone *)zone
 {
-    return [[UMDirtyDate allocWithZone:zone]initWithDate:self.date];
+    return [[UMDirtyDate allocWithZone:zone]initWithDate:self.dateValue];
 }
 
 @end

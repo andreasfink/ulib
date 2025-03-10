@@ -224,15 +224,15 @@
         {
             if (UMSOCKET_IS_IPV4_ONLY_TYPE(type))
             {
-                addr = [_addresses objectAtIndex:1];
+                return @"127.0.0.1";
             }
             else if (UMSOCKET_IS_IPV6_ONLY_TYPE(type))
             {
-                addr = [_addresses objectAtIndex:2];
+                return @"::1";
             }
             else
             {
-                addr = [_addresses objectAtIndex:2];
+                return @"::1";
             }
         }
         else

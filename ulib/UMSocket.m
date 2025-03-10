@@ -2665,7 +2665,7 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
                 {
                     *t = 6;
                 }
-                NSInteger start = 5;
+                NSInteger start = 6;
                 NSInteger len = [addr length] -1 - start;
                 if(len < 1)
                 {

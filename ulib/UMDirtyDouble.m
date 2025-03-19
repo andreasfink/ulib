@@ -6,7 +6,8 @@
 //
 
 #import "UMDirtyDouble.h"
-#include <xlocale.h> /* for atof()*/
+//#include <xlocale.h> /* for atof()*/
+#include <stdlib.h>
 
 @implementation UMDirtyDouble
 

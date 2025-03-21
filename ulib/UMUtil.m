@@ -32,7 +32,8 @@
 #endif
 
 #ifdef LINUX
-#include <bsd/stdlib.h>
+#include <stdlib.h>
+//#include <bsd/stdlib.h>
 #endif
 
 #include <stdio.h>

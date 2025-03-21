@@ -11,6 +11,7 @@
 #ifdef	__APPLE__
 #include <xlocale.h> /* for atof()*/
 #endif
+#include <stdlib.h>
 
 @implementation UMDirtyDouble
 

@@ -14,9 +14,10 @@
     id      _previousValue;
 }
 
-@property(readwrite,assign) BOOL    isDirty;
-@property(readwrite,strong) id      currentValue;
-@property(readwrite,strong) id      previousValue;
-- (void)clearDirty;
+@property(readwrite,assign,atomic) BOOL    isDirty;
+@property(readwrite,strong,atomic) id      currentValue;
+@property(readwrite,strong,atomic) id      previousValue;
+- (void)clearDirty;  /*!< same as isDirty=NO flag but the new value is now the old value */
+
 @end
 

@@ -6,7 +6,11 @@
 //
 
 #import "UMDirtyDouble.h"
+
+#include <stdlib.h>
+#ifdef	__APPLE__
 #include <xlocale.h> /* for atof()*/
+#endif
 
 @implementation UMDirtyDouble
 

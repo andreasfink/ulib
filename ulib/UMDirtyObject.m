@@ -12,5 +12,7 @@
 - (void)clearDirty
 {
     _isDirty = NO;
+    _previousValue = _currentValue;
 }
+
 @end

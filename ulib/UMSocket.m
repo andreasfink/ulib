@@ -869,7 +869,7 @@ static int SSL_smart_shutdown(SSL *ssl)
         int err;
         _ip_version = 0;
         NSString *address;
-        int resolved;
+        BOOL resolved;
 
         if(self.isConnected)
         {
@@ -898,9 +898,11 @@ static int SSL_smart_shutdown(SSL *ssl)
 #endif
         sa6.sin6_port       = htons(_requestedRemotePort);
 
-        while((resolved = [_remoteHost resolved]) == 0)
+        resolved = [_remoteHost resolved];
+        while(resolved == NO)
         {
             usleep(50000);
+            resolved = [_remoteHost resolved];
         }
         address = [_remoteHost address:(UMSocketType)_type];
         if (!address)

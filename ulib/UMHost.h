@@ -12,9 +12,9 @@
 @interface UMHost : UMObject
 {
 	NSMutableArray	*_addresses;
-	int				_isLocalHost;
-	int				_isResolving;
-	int				_isResolved;
+    BOOL			_isLocalHost;
+    BOOL			_isResolving;
+    BOOL            _isResolved;
 	UMMutex			*_hostLock;
     NSString        *_name;
 }
@@ -22,9 +22,9 @@
 - (NSArray *)addresses;
 - (void) setAddresses:(NSArray *)addresses;
 @property(readwrite,strong)	NSString *name;
-@property(readwrite,assign)	int isLocalHost;
-@property(readwrite,assign)	int isResolved;
-@property(readwrite,assign)	int isResolving;
+@property(readwrite,assign,atomic)	BOOL isLocalHost;
+@property(readwrite,assign,atomic)	BOOL isResolved;
+@property(readwrite,assign,atomic)	BOOL isResolving;
 
 - (UMHost *)initWithLocalhost;
 - (UMHost *)initWithLocalhostAddresses:(NSArray *)permittedAddresses;

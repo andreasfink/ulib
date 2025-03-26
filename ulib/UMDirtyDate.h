@@ -7,6 +7,7 @@
 
 #import <ulib/UMDirtyObject.h>
 
+#define UMDIRTY_DATE(a)     [[UMDirtyDate alloc]initWithDate:a]
 
 @interface UMDirtyDate : UMDirtyObject
 

@@ -7,6 +7,8 @@
 
 #import <ulib/UMDirtyObject.h>
 
+#define UMDIRTY_INTEGER(a)    [[UMDirtyInteger alloc]initWithInteger:a]
+
 @interface UMDirtyInteger : UMDirtyObject
 {
     

@@ -7,6 +7,8 @@
 
 #import <ulib/ulib.h>
 
+#define UMDIRTY_DOUBLE(a)     [[UMDirtyDouble alloc]initWithDouble:a]
+
 @interface UMDirtyDouble : UMDirtyObject
 
 - (UMDirtyDouble *)initWithNumber:(NSNumber *)n;

@@ -7,6 +7,8 @@
 
 #import <ulib/UMDirtyObject.h>
 
+#define UMDIRTY_STRING(a)     [[UMDirtyString alloc]initWithString:a]
+
 @interface UMDirtyString : UMDirtyObject
 
 - (UMDirtyString *)initWithString:(NSString *)s;

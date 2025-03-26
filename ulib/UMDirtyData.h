@@ -7,6 +7,9 @@
 
 #import <ulib/UMDirtyObject.h>
 
+
+#define UMDIRTY_DATA(a)     [[UMDirtyData alloc]initWithData:a]
+
 @interface UMDirtyData : UMDirtyObject
 
 

@@ -7,6 +7,10 @@
 
 #import <ulib/UMDirtyObject.h>
 
+#define UMDIRTY_BOOLEAN(a)     [[UMDirtyBoolean alloc]initWithBoolean:a]
+#define UMDIRTY_YES            [[UMDirtyBoolean alloc]initWithBoolean:YES]
+#define UMDIRTY_NO             [[UMDirtyBoolean alloc]initWithBoolean:NO]
+
 @interface UMDirtyBoolean : UMDirtyObject
 {
     

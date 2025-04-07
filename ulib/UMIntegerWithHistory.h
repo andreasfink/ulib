@@ -25,6 +25,12 @@
 }
 
 
+- (UMIntegerWithHistory *)initWithNumber:(NSNumber *)n;
+- (UMIntegerWithHistory *)initWithInteger:(NSInteger)i;
+
+- (NSNumber *)number;
+- (void)setNumber:(NSNumber *)n;
+
 - (void)setInteger:(NSInteger)newValue;
 - (NSInteger)integer;
 - (NSInteger)currentInteger;

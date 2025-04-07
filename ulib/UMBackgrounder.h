@@ -54,6 +54,7 @@ typedef enum UMBackgrounder_runningStatus
 @property(readwrite,assign,atomic) BOOL enableLogging;
 @property(readwrite,assign,atomic) UMBackgrounder_runningStatus runningStatus;
 
+- (UMBackgrounder *)initWithName:(NSString *)n;
 - (UMBackgrounder *)initWithName:(NSString *)n workSleeper:(UMSleeper *)ws;
 - (void)startBackgroundTask;
 - (void)shutdownBackgroundTask;

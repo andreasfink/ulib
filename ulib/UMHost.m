@@ -100,8 +100,7 @@
         _addresses = [[NSMutableArray alloc] init];
         _hostLock = [[UMMutex alloc] initWithName:@"umhost"];
 
-        _isResolved = 0;
-        
+        self.isResolved = 0;
         if (getifaddrs (&ifptr) < 0)
         {
             int eno = errno;
@@ -109,8 +108,8 @@
             return nil;
         }
         
-        _isLocalHost=1;
-        _isResolved=1;
+        self.isLocalHost=YES;
+        self.isResolved=YES;
         _name = [UMHost localHostName];
         
         for (ifadders = ifptr; ifadders; ifadders = ifadders->ifa_next)
@@ -173,9 +172,9 @@
     {
         _hostLock = [[UMMutex alloc] initWithName:@"umhost"];
         _addresses = [[NSMutableArray alloc] init];
-        _isLocalHost = 0;
-        _isResolving = 0;
-        _isResolved = 0;
+        self.isLocalHost = 0;
+        self.isResolving = 0;
+        self.isResolved = 0;
         _name = n;
         [self runSelectorInBackground:@selector(resolve)
                            withObject:nil
@@ -197,9 +196,9 @@
     if (self)
     {
         _hostLock = [[UMMutex alloc] initWithName:@"umhost"];
-        _isLocalHost = 0;
-        _isResolving = 0;
-        _isResolved = 1;
+        self.isLocalHost = 0;
+        self.isResolving = 0;
+        self.isResolved = 1;
         n = [UMSocket unifyIP:n];
         self.addresses = [NSMutableArray arrayWithObjects:n,nil];
         _name = n;
@@ -216,23 +215,27 @@
 
 - (NSString *)address:(UMSocketType)type
 {
+    while(self.isResolving)
+    {
+        usleep(30000); /* wait 30ms */
+    }
     NSString *addr = nil;
     ummutex_lock(_hostLock);
 	if([_addresses count] > 0)
     {
-        if (_isLocalHost)
+        if (self.isLocalHost)
         {
             if (UMSOCKET_IS_IPV4_ONLY_TYPE(type))
             {
-                addr = [_addresses objectAtIndex:1];
+                return @"127.0.0.1";
             }
             else if (UMSOCKET_IS_IPV6_ONLY_TYPE(type))
             {
-                addr = [_addresses objectAtIndex:2];
+                return @"::1";
             }
             else
             {
-                addr = [_addresses objectAtIndex:2];
+                return @"::1";
             }
         }
         else
@@ -247,71 +250,71 @@
 - (void)resolve
 {
     ulib_set_thread_name([NSString stringWithFormat:@"UMHost: resolve(%@)",_name]);
-
     char	namecstr[INET6_ADDRSTRLEN + 18];
     memset(namecstr,0x00,INET6_ADDRSTRLEN + 18);
-    //memset(in_namecstr,0x00,256);
-	if(self.isLocalHost == 1)
+	if(self.isLocalHost)
     {
 		return;
     }
 	if(self.isResolving)
 	{
-		while(self.isResolving == 1)
+		while(self.isResolving)
         {
 			usleep(30000); /* wait 30ms */
         }
 		return;
 	}
     ummutex_lock(_hostLock);
-	_isResolving = 1;
+	self.isResolving = YES;
 	_addresses = [[NSMutableArray alloc]init];
     
     struct addrinfo *addrInfos = NULL;
-
     int res =getaddrinfo([_name UTF8String] ,NULL, NULL, &addrInfos);
     if(res==0)
     {
         struct addrinfo *thisAddr = addrInfos;
-        
         while(thisAddr)
-        {            
+        {
             if((thisAddr->ai_family == AF_INET) || (thisAddr->ai_family == AF_INET6))
             {
                 struct sockaddr_in *sa = (struct sockaddr_in *)thisAddr->ai_addr;
                 inet_ntop(thisAddr->ai_family, &(sa->sin_addr), namecstr, sizeof(namecstr));
-                [_addresses addObject:@(namecstr)];
+                BOOL dup=NO;
+                for(NSString *s in _addresses)
+                {
+                    if([s isEqualToString:@(namecstr)])
+                    {
+                        dup=YES;
+                    }
+                }
+                if(dup==NO)
+                {
+                    [_addresses addObject:@(namecstr)];
+                }
             }
             thisAddr = thisAddr->ai_next;
         }
-
         freeaddrinfo(addrInfos);
     }
-    
-	_isResolving = 0;
-	_isResolved = 1;
+    self.isResolving = 0;
+	self.isResolved = 1;
     ummutex_unlock(_hostLock);
 }
 
 - (int) resolved
 {
-    int ret;
-    
     ummutex_lock(_hostLock);
-    ret = _isResolved;
+    BOOL r = self.isResolved;
     ummutex_unlock(_hostLock);
-
-    return ret;
+    return r;
 }
 
 - (int) resolving
 {
-    int ret;
-    
     ummutex_lock(_hostLock);
-    ret = _isResolving;
+    BOOL r = self.isResolving;
     ummutex_unlock(_hostLock);
-    return ret;
+    return r;
 }
 
 @end

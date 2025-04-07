@@ -22,6 +22,12 @@
     return [self initWithName:@"(unnamed)" workSleeper:NULL];
 }
 
+
+- (UMBackgrounder *)initWithName:(NSString *)n
+{
+    return [self initWithName:n workSleeper:NULL];
+}
+
 - (UMBackgrounder *)initWithName:(NSString *)n
                      workSleeper:(UMSleeper *)ws
 {
@@ -156,14 +162,14 @@
             self.workSleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
             [self.workSleeper prepare];
         }
-       self.runningStatus = UMBackgrounder_running;
+        [self backgroundInit];
 
+        self.runningStatus = UMBackgrounder_running;
         [_control_sleeper wakeUp:UMSleeper_StartupCompletedSignal];
         if(_enableLogging)
         {
             NSLog(@"%@: started up successfully",self.name);
         }
-        [self backgroundInit];
         BOOL mustQuit=NO;
         BOOL doSleep = NO;
         while((self.runningStatus == UMBackgrounder_running) && (mustQuit==NO))

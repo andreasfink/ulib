@@ -24,6 +24,8 @@
 {
 }
 
+- (UMStringWithHistory *)initWithString:(NSString *)s;
+
 - (void)setString:(NSString *)newString;
 - (NSString *)string;
 - (NSString *)currentString;

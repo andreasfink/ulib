@@ -11,6 +11,16 @@
 #define UMDIRTY_YES            [[UMDirtyBoolean alloc]initWithBoolean:YES]
 #define UMDIRTY_NO             [[UMDirtyBoolean alloc]initWithBoolean:NO]
 
+#define SET_DIRTY_BOOLEAN(a,b)   \
+if(a==NULL) \
+{ \
+    a = [[UMDirtyBoolean alloc]initWithBoolean:b]; \
+}\
+else\
+{ \
+    a.currentValue = b; \
+}
+
 @interface UMDirtyBoolean : UMDirtyObject
 {
     

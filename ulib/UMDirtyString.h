@@ -9,6 +9,16 @@
 
 #define UMDIRTY_STRING(a)     [[UMDirtyString alloc]initWithString:a]
 
+#define SET_DIRTY_STRING(a,b)   \
+if(a==NULL) \
+{ \
+    a = [[UMDirtyString alloc]initWithString:b]; \
+}\
+else\
+{ \
+    a.currentValue = b; \
+}
+
 @interface UMDirtyString : UMDirtyObject
 
 - (UMDirtyString *)initWithString:(NSString *)s;

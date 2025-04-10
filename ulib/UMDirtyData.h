@@ -9,6 +9,15 @@
 
 
 #define UMDIRTY_DATA(a)     [[UMDirtyData alloc]initWithData:a]
+#define SET_DIRTY_DATA(a,b)   \
+if(a==NULL) \
+{ \
+    a = [[UMDirtyData alloc]initWithData:b]; \
+}\
+else\
+{ \
+    a.currentValue = b; \
+}
 
 @interface UMDirtyData : UMDirtyObject
 

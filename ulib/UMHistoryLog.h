@@ -28,6 +28,7 @@
 - (UMHistoryLog *)initWithString:(NSString *)s;
 - (UMHistoryLog *)initWithMaxLines:(int)maxlines string:(NSString *)s;
 
+
 - (void)addObject:(id)entry;
 - (void)addLogEntry:(NSString *)entry;
 - (void)addPrintableString:(NSString *)s;

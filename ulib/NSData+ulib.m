@@ -4,7 +4,10 @@
 //
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
-
+#import <Foundation/Foundation.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #import <ulib/NSData+ulib.h>
 #import <ulib/NSMutableData+ulib.h>
 #import <ulib/NSString+ulib.h>

@@ -9,6 +9,16 @@
 
 #define UMDIRTY_INTEGER(a)    [[UMDirtyInteger alloc]initWithInteger:a]
 
+#define SET_DIRTY_INTEGER(field,newValue)   \
+if((field)==NULL) \
+{ \
+    field = [[UMDirtyInteger alloc]initWithInteger:(newValue)]; \
+}\
+else\
+{ \
+    field.integerValue = (newValue); \
+}
+
 @interface UMDirtyInteger : UMDirtyObject
 {
     

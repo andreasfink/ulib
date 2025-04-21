@@ -8,6 +8,15 @@
 #import <ulib/ulib.h>
 
 #define UMDIRTY_DOUBLE(a)     [[UMDirtyDouble alloc]initWithDouble:a]
+#define SET_DIRTY_DOUBLE(a,b)   \
+if(a==NULL) \
+{ \
+    a = [[UMDirtyDouble alloc]initWithDouble:b]; \
+}\
+else\
+{ \
+    a.currentValue = b; \
+}
 
 @interface UMDirtyDouble : UMDirtyObject
 

@@ -42,7 +42,7 @@
 
     NSData *d1 = (NSData *)_previousValue;
     NSData *d2 = (NSData *)_currentValue;
-    if(![d1 isEqualTo:d2])
+    if(![d1 isEqualToData:d2])
     {
         _isDirty = YES;
     }

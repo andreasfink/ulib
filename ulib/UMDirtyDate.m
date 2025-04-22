@@ -4,7 +4,7 @@
 //
 //  Created by Andreas Fink on 04.03.2025.
 //
-
+#import <Foundation/Foundation.h>
 #import "UMDirtyDate.h"
 #import "NSDate+ulib.h"
 #import "NSString+ulib.h"
@@ -41,7 +41,7 @@
 
     NSDate *d1 = (NSDate *)_previousValue;
     NSDate *d2 = (NSDate *)_currentValue;
-    if(![d1 isEqualTo:d2])
+    if(![d1 isEqualToDate:d2])
     {
         _isDirty = YES;
     }

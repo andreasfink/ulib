@@ -25,7 +25,8 @@ apt-get install --assume-yes \
     locales-all \
     net-tools \
     libcurl4-openssl-dev \
-    gnutls-bin
+    gnutls-bin \
+    robin-map-dev
 
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xCBCB082A1BB943DB
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C23AC7F49887F95A

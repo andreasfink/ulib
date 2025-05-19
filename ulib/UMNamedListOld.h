@@ -1,6 +1,6 @@
 
 //
-//  UMNamedList.h
+//  UMNamedListOld.h
 //  ulib
 //
 //  Created by Andreas Fink on 19.06.19.
@@ -11,7 +11,7 @@
 
 @class UMSynchronizedSortedDictionary;
 
-@interface UMNamedList : UMObject
+@interface UMNamedListOld : UMObject
 {
     NSString                        *_name;
     NSString                        *_path;
@@ -27,8 +27,8 @@
 @property(readwrite,strong,atomic)  UMMutex             *namedListLock;
 
 
-- (UMNamedList *)initWithDirectory:(NSString *)dir name:(NSString *)name;
-- (UMNamedList *)initWithPath:(NSString *)path name:(NSString *)name;
+- (UMNamedListOld *)initWithDirectory:(NSString *)dir name:(NSString *)name;
+- (UMNamedListOld *)initWithPath:(NSString *)path name:(NSString *)name;
 - (void)addEntry:(NSString *)str;
 - (void)removeEntry:(NSString *)str;
 - (BOOL)containsEntry:(NSString *)str;

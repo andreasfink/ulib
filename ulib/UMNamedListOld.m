@@ -1,42 +1,42 @@
 //
-//  UMNamedList.m
+//  UMNamedListOld.m
 //  ulib
 //
 //  Created by Andreas Fink on 19.06.19.
 //  Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/UMNamedList.h>
+#import <ulib/UMNamedListOld.h>
 #import <ulib/NSString+ulib.h>
 #import <ulib/UMSynchronizedSortedDictionary.h>
 #import <ulib/UMAssert.h>
 
 //#define DEBUG   1
 
-@implementation UMNamedList
+@implementation UMNamedListOld
 
 
-- (UMNamedList *)initWithDirectory:(NSString *)dir name:(NSString *)name
+- (UMNamedListOld *)initWithDirectory:(NSString *)dir name:(NSString *)name
 {
     NSString *path = [NSString stringWithFormat:@"%@/%@",dir,name.urlencode];
     return [self initWithPath:path name:name];
 
 }
 
-- (UMNamedList *)initWithPath:(NSString *)path name:(NSString *)name
+- (UMNamedListOld *)initWithPath:(NSString *)path name:(NSString *)name
 {
     self = [super init];
     if(self)
     {
         _namedlistEntries = [[UMSynchronizedSortedDictionary alloc]init];
-        _namedListLock  = [[UMMutex alloc]initWithName:@"UMNamedList-lock"];
+        _namedListLock  = [[UMMutex alloc]initWithName:@"UMNamedListOld-lock"];
         _path = path;
         _name = name;
     }
     return self;
 }
 
-- (UMNamedList *)init
+- (UMNamedListOld *)init
 {
     return [self initWithPath:NULL name:NULL];
 }
@@ -68,7 +68,7 @@
     _dirty=YES;
         ummutex_unlock(_namedListLock);
 #ifdef DEBUG
-    NSLog(@"UMNamedList addEntry:%@",str);
+    NSLog(@"UMNamedListOld addEntry:%@",str);
     [self dump];
 #endif
 }
@@ -98,7 +98,7 @@
     _dirty=YES;
         ummutex_unlock(_namedListLock);
 #ifdef DEBUG
-    NSLog(@"UMNamedList removeEntry:%@",str);
+    NSLog(@"UMNamedListOld removeEntry:%@",str);
     [self dump];
 #endif
 }
@@ -149,7 +149,7 @@
     }
         ummutex_unlock(_namedListLock);
 #ifdef DEBUG
-//    NSLog(@"UMNamedList flush");
+//    NSLog(@"UMNamedListOld flush");
 //    [self dump];
 #endif
 }
@@ -189,14 +189,14 @@
 
 - (void)dump
 {
-    NSLog(@"UMNamedList dump:");
+    NSLog(@"UMNamedListOld dump:");
     NSLog(@"_name: %@",_name);
     NSLog(@"_path: %@",_path);
     NSLog(@"_dirty: %@",@(_dirty));
     NSLog(@"_name: %@",_name);
     NSLog(@"_namedlistEntries: %@",_namedlistEntries);
 
-//    NSLog(@"[UMNamedList %p dump] %@",self,[self description]);
+//    NSLog(@"[UMNamedListOld %p dump] %@",self,[self description]);
 }
 
 - (NSString *)description
@@ -218,9 +218,9 @@
     return [dict jsonString];
 }
 
-- (UMNamedList *)copyWithZone:(NSZone *)zone
+- (UMNamedListOld *)copyWithZone:(NSZone *)zone
 {
-    UMNamedList *n = [[UMNamedList allocWithZone:zone]init];
+    UMNamedListOld *n = [[UMNamedListOld allocWithZone:zone]init];
     n->_name = _name;
     n->_path = _path;
     n->_dirty = _dirty;

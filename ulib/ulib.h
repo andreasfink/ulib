@@ -131,7 +131,7 @@ typedef enum
 #import <ulib/UMThreadHelpers.h>
 #import <ulib/UMCommandLine.h>
 #import <ulib/UMProtocolBuffer.h>
-#import <ulib/UMNamedList.h>
+#import <ulib/UMNamedListOld.h>
 #import <ulib/UMStatistic.h>
 #import <ulib/UMStatisticEntry.h>
 #import <ulib/UMRegexMatch.h>

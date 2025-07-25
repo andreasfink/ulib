@@ -4,7 +4,7 @@
 //
 //  Created by Andreas Fink on 04.03.2025.
 //
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 #import "UMDirtyDate.h"
 #import "NSDate+ulib.h"
 #import "NSString+ulib.h"

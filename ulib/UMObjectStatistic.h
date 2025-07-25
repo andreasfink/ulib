@@ -6,7 +6,7 @@
 //  Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 #import <ulib/UMObjectStatisticEntry.h>
 
 #define     UMOBJECT_STATISTIC_SPREAD   64

@@ -6,24 +6,24 @@
 //  Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/UMNamedListOld.h>
+#import <ulib/UMNamedList.h>
 #import <ulib/NSString+ulib.h>
 #import <ulib/UMSynchronizedSortedDictionary.h>
 #import <ulib/UMAssert.h>
 
 //#define DEBUG   1
 
-@implementation UMNamedListOld
+@implementation UMNamedList
 
 
-- (UMNamedListOld *)initWithDirectory:(NSString *)dir name:(NSString *)name
+- (UMNamedList *)initWithDirectory:(NSString *)dir name:(NSString *)name
 {
     NSString *path = [NSString stringWithFormat:@"%@/%@",dir,name.urlencode];
     return [self initWithPath:path name:name];
 
 }
 
-- (UMNamedListOld *)initWithPath:(NSString *)path name:(NSString *)name
+- (UMNamedList *)initWithPath:(NSString *)path name:(NSString *)name
 {
     self = [super init];
     if(self)
@@ -36,7 +36,7 @@
     return self;
 }
 
-- (UMNamedListOld *)init
+- (UMNamedList *)init
 {
     return [self initWithPath:NULL name:NULL];
 }
@@ -218,9 +218,9 @@
     return [dict jsonString];
 }
 
-- (UMNamedListOld *)copyWithZone:(NSZone *)zone
+- (UMNamedList *)copyWithZone:(NSZone *)zone
 {
-    UMNamedListOld *n = [[UMNamedListOld allocWithZone:zone]init];
+    UMNamedList *n = [[UMNamedList allocWithZone:zone]init];
     n->_name = _name;
     n->_path = _path;
     n->_dirty = _dirty;

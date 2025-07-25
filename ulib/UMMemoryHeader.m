@@ -5,7 +5,7 @@
 //  Created by Andreas Fink on 10.05.19.
 //  Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved.
 //
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 #import <ulib/UMMemoryHeader.h>
 #import <ulib/UMConstantStringsDict.h>
 #include <assert.h>

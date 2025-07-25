@@ -95,7 +95,7 @@ It can be used independently of ulib if needed.
  */
 
 
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 
 @interface UMCommandLine : NSObject
 {

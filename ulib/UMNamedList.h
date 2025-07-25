@@ -11,7 +11,7 @@
 
 @class UMSynchronizedSortedDictionary;
 
-@interface UMNamedListOld : UMObject
+@interface UMNamedList : UMObject
 {
     NSString                        *_name;
     NSString                        *_path;
@@ -27,8 +27,8 @@
 @property(readwrite,strong,atomic)  UMMutex             *namedListLock;
 
 
-- (UMNamedListOld *)initWithDirectory:(NSString *)dir name:(NSString *)name;
-- (UMNamedListOld *)initWithPath:(NSString *)path name:(NSString *)name;
+- (UMNamedList *)initWithDirectory:(NSString *)dir name:(NSString *)name;
+- (UMNamedList *)initWithPath:(NSString *)path name:(NSString *)name;
 - (void)addEntry:(NSString *)str;
 - (void)removeEntry:(NSString *)str;
 - (BOOL)containsEntry:(NSString *)str;

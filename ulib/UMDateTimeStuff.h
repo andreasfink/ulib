@@ -6,7 +6,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 
 NSString *UMTimeStampDTfromTime(time_t current);
 time_t UMTimeFromTimestampDT(NSString *timestamp);

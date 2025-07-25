@@ -6,7 +6,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 @interface NSDate(ulib)
 
 + (NSDate *)dateWithStandardDateString:(NSString *)str; /*!< convert the date from the standard format (yyyy-MM-dd HH:mm:ss.SSSS) to a NSDate object */

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 #import <ulib/UMObject.h>
 
 /*

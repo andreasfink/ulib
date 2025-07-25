@@ -5,11 +5,11 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 
 #if defined(LINUX) || defined(FREEBSD)
 /* this stuff is not in Gnustep but in OSX so we emulate it here */
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 typedef NSUInteger NSDataSearchOptions;
 #define  NSDataSearchBackwards (1UL << 0)
 #define  NSDataSearchAnchored (1UL << 1)

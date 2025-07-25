@@ -5,7 +5,7 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 #ifndef NSObject_HierarchicalDescription_h
 #define NSObject_HierarchicalDescription_h 1
 

@@ -6,7 +6,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 #import <ulib/UMObject.h>
 
 typedef enum UMFileTrackingInfo_type

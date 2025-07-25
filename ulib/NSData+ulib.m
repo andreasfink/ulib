@@ -4,7 +4,7 @@
 //
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -4,7 +4,7 @@
 //
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 #import <ulib/UMRedisSession.h>
 #import <ulib/UMHost.h>
 #import <ulib/UMSocket.h>

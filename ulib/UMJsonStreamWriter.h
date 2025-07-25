@@ -10,7 +10,7 @@
 #define UMJsonStreamWriter_H 1
 
 
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 #import <ulib/UMObject.h>
 #import <ulib/UMSynchronizedSortedDictionary.h>
 

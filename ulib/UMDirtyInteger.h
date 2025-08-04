@@ -8,7 +8,6 @@
 #import <ulib/UMDirtyObject.h>
 
 #define UMDIRTY_INTEGER(a)    [[UMDirtyInteger alloc]initWithInteger:a]
-
 #define SET_DIRTY_INTEGER(field,newValue)   \
 if((field)==NULL) \
 { \

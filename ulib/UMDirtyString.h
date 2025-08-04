@@ -8,7 +8,6 @@
 #import <ulib/UMDirtyObject.h>
 
 #define UMDIRTY_STRING(a)     [[UMDirtyString alloc]initWithString:(a)]
-
 #define SET_DIRTY_STRING(a,b)   \
 if(a==NULL) \
 { \

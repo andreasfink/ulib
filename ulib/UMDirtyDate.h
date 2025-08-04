@@ -8,6 +8,7 @@
 #import <ulib/UMDirtyObject.h>
 
 #define UMDIRTY_DATE(a)     [[UMDirtyDate alloc]initWithDate:a]
+<<<<<<< HEAD
 #define SET_DIRTY_DATE(a,b)   \
 if(a==NULL) \
 { \
@@ -17,6 +18,8 @@ else\
 { \
     a.currentValue = b; \
 }
+=======
+>>>>>>> origin/release-2.1
 
 @interface UMDirtyDate : UMDirtyObject
 

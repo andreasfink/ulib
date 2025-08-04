@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		A6059F042D77706200911CEF /* UMDirtyBoolean.h in Headers */ = {isa = PBXBuildFile; fileRef = A6059F022D77706200911CEF /* UMDirtyBoolean.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6059F052D77706200911CEF /* UMDirtyBoolean.m in Sources */ = {isa = PBXBuildFile; fileRef = A6059F032D77706200911CEF /* UMDirtyBoolean.m */; };
+<<<<<<< HEAD
 		A64994C22E0BCD99006873AC /* framework.h in Headers */ = {isa = PBXBuildFile; fileRef = A64994C12E0BCD91006873AC /* framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+=======
+>>>>>>> origin/release-2.1
 		A66EB0B52ABDDC0600C34D40 /* buildnumber.c in Sources */ = {isa = PBXBuildFile; fileRef = A66EB0B42ABDDC0600C34D40 /* buildnumber.c */; };
 		A66EB0C02ABDDC3D00C34D40 /* distro.sh in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0BA2ABDDC2E00C34D40 /* distro.sh */; };
 		A66EB0C12ABDDC3D00C34D40 /* configure in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0BB2ABDDC2E00C34D40 /* configure */; };
@@ -347,7 +350,10 @@
 /* Begin PBXFileReference section */
 		A6059F022D77706200911CEF /* UMDirtyBoolean.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyBoolean.h; sourceTree = "<group>"; };
 		A6059F032D77706200911CEF /* UMDirtyBoolean.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDirtyBoolean.m; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		A64994C12E0BCD91006873AC /* framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = framework.h; sourceTree = "<group>"; };
+=======
+>>>>>>> origin/release-2.1
 		A66EB0B32ABDDC0600C34D40 /* buildnumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buildnumber.h; sourceTree = SOURCE_ROOT; };
 		A66EB0B42ABDDC0600C34D40 /* buildnumber.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buildnumber.c; sourceTree = SOURCE_ROOT; };
 		A66EB0B62ABDDC1800C34D40 /* BUILDNR */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILDNR; sourceTree = "<group>"; };
@@ -687,6 +693,10 @@
 		A69BA47D2ABD854B00C34D40 /* dmi_decode_path.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dmi_decode_path.h.in; sourceTree = "<group>"; };
 		A69BA4812ABD854B00C34D40 /* dmi_decode_path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dmi_decode_path.h; sourceTree = "<group>"; };
 		A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dmi_decode_path.h; sourceTree = "<group>"; };
+<<<<<<< HEAD
+=======
+		A6D02D9B2D76BFF900F2C1C4 /* UMUUID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UMUUID.h; path = ulib/UMUUID.h; sourceTree = "<group>"; };
+>>>>>>> origin/release-2.1
 		A6D02D9C2D76C57F00F2C1C4 /* UMDirtyObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyObject.h; sourceTree = "<group>"; };
 		A6D02D9D2D76C57F00F2C1C4 /* UMDirtyObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDirtyObject.m; sourceTree = "<group>"; };
 		A6D02DA02D76C58B00F2C1C4 /* UMDirtyString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyString.h; sourceTree = "<group>"; };
@@ -738,6 +748,7 @@
 		A69BA44B2ABD850000C34D40 = {
 			isa = PBXGroup;
 			children = (
+				A6D02D9B2D76BFF900F2C1C4 /* UMUUID.h */,
 				A66EB0E62ABDDCD000C34D40 /* VERSION */,
 				A66EB0E72ABDDCD000C34D40 /* version.h */,
 				A66EB0E22ABDDCC200C34D40 /* ulib.pc */,
@@ -1146,7 +1157,10 @@
 				A683DAD62ABD980F00C34D40 /* UMTokenizer.h in Headers */,
 				A683D9D92ABD980E00C34D40 /* UMAverageDelay.h in Headers */,
 				A6D02D9F2D76C57F00F2C1C4 /* UMDirtyObject.h in Headers */,
+<<<<<<< HEAD
 				A64994C22E0BCD99006873AC /* framework.h in Headers */,
+=======
+>>>>>>> origin/release-2.1
 				A683D9B52ABD980E00C34D40 /* UMHTTPServer.h in Headers */,
 				A683DA712ABD980E00C34D40 /* UMScannerChar.h in Headers */,
 				A683DA392ABD980E00C34D40 /* UMLogBuffered.h in Headers */,

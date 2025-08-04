@@ -5,7 +5,7 @@
 //  Created by Andreas Fink on 04.03.2025.
 //
 
-#import <ulib/ulib.h>
+#import <ulib/UMDirtyObject.h>
 
 #define UMDIRTY_DOUBLE(a)     [[UMDirtyDouble alloc]initWithDouble:a]
 #define SET_DIRTY_DOUBLE(a,b)   \

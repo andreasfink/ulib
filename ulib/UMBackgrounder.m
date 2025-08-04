@@ -148,7 +148,6 @@
 {
     @autoreleasepool
     {
-
         if(self.name)
         {
             ulib_set_thread_name(self.name);

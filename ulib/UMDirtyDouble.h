@@ -8,6 +8,7 @@
 #import <ulib/ulib.h>
 
 #define UMDIRTY_DOUBLE(a)     [[UMDirtyDouble alloc]initWithDouble:a]
+<<<<<<< HEAD
 #define SET_DIRTY_DOUBLE(a,b)   \
 if(a==NULL) \
 { \
@@ -17,6 +18,8 @@ else\
 { \
     a.currentValue = b; \
 }
+=======
+>>>>>>> bd8ae622abb748fc043563e7e90d719fe523addd
 
 @interface UMDirtyDouble : UMDirtyObject
 

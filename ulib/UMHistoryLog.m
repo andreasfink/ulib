@@ -68,7 +68,6 @@
     }
 }
 
-
 - (void)addLogEntry:(NSString *)log
 {
     ummutex_lock(_historyLogLock);

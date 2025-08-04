@@ -9,6 +9,7 @@
 
 #define UMDIRTY_INTEGER(a)    [[UMDirtyInteger alloc]initWithInteger:a]
 
+<<<<<<< HEAD
 #define SET_DIRTY_INTEGER(field,newValue)   \
 if((field)==NULL) \
 { \
@@ -19,6 +20,8 @@ else\
     field.integerValue = (newValue); \
 }
 
+=======
+>>>>>>> bd8ae622abb748fc043563e7e90d719fe523addd
 @interface UMDirtyInteger : UMDirtyObject
 {
     

@@ -9,10 +9,7 @@
 /* Begin PBXBuildFile section */
 		A6059F042D77706200911CEF /* UMDirtyBoolean.h in Headers */ = {isa = PBXBuildFile; fileRef = A6059F022D77706200911CEF /* UMDirtyBoolean.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6059F052D77706200911CEF /* UMDirtyBoolean.m in Sources */ = {isa = PBXBuildFile; fileRef = A6059F032D77706200911CEF /* UMDirtyBoolean.m */; };
-<<<<<<< HEAD
 		A64994C22E0BCD99006873AC /* framework.h in Headers */ = {isa = PBXBuildFile; fileRef = A64994C12E0BCD91006873AC /* framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
-=======
->>>>>>> origin/release-2.1
 		A66EB0B52ABDDC0600C34D40 /* buildnumber.c in Sources */ = {isa = PBXBuildFile; fileRef = A66EB0B42ABDDC0600C34D40 /* buildnumber.c */; };
 		A66EB0C02ABDDC3D00C34D40 /* distro.sh in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0BA2ABDDC2E00C34D40 /* distro.sh */; };
 		A66EB0C12ABDDC3D00C34D40 /* configure in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0BB2ABDDC2E00C34D40 /* configure */; };
@@ -353,7 +350,11 @@
 <<<<<<< HEAD
 		A64994C12E0BCD91006873AC /* framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = framework.h; sourceTree = "<group>"; };
 =======
+<<<<<<< HEAD
 >>>>>>> origin/release-2.1
+=======
+>>>>>>> bd8ae622abb748fc043563e7e90d719fe523addd
+>>>>>>> release-2.1
 		A66EB0B32ABDDC0600C34D40 /* buildnumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buildnumber.h; sourceTree = SOURCE_ROOT; };
 		A66EB0B42ABDDC0600C34D40 /* buildnumber.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buildnumber.c; sourceTree = SOURCE_ROOT; };
 		A66EB0B62ABDDC1800C34D40 /* BUILDNR */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILDNR; sourceTree = "<group>"; };
@@ -696,7 +697,11 @@
 <<<<<<< HEAD
 =======
 		A6D02D9B2D76BFF900F2C1C4 /* UMUUID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UMUUID.h; path = ulib/UMUUID.h; sourceTree = "<group>"; };
+<<<<<<< HEAD
 >>>>>>> origin/release-2.1
+=======
+>>>>>>> bd8ae622abb748fc043563e7e90d719fe523addd
+>>>>>>> release-2.1
 		A6D02D9C2D76C57F00F2C1C4 /* UMDirtyObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyObject.h; sourceTree = "<group>"; };
 		A6D02D9D2D76C57F00F2C1C4 /* UMDirtyObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDirtyObject.m; sourceTree = "<group>"; };
 		A6D02DA02D76C58B00F2C1C4 /* UMDirtyString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyString.h; sourceTree = "<group>"; };
@@ -1160,7 +1165,11 @@
 <<<<<<< HEAD
 				A64994C22E0BCD99006873AC /* framework.h in Headers */,
 =======
+<<<<<<< HEAD
 >>>>>>> origin/release-2.1
+=======
+>>>>>>> bd8ae622abb748fc043563e7e90d719fe523addd
+>>>>>>> release-2.1
 				A683D9B52ABD980E00C34D40 /* UMHTTPServer.h in Headers */,
 				A683DA712ABD980E00C34D40 /* UMScannerChar.h in Headers */,
 				A683DA392ABD980E00C34D40 /* UMLogBuffered.h in Headers */,

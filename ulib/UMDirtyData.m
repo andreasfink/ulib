@@ -42,7 +42,15 @@
 
     NSData *d1 = (NSData *)_previousValue;
     NSData *d2 = (NSData *)_currentValue;
+<<<<<<< HEAD
     if(![d1 isEqualToData:d2])
+=======
+<<<<<<< HEAD
+    if(![d1 isEqualToData:d2])
+=======
+    if(![d1 isEqualTo:d2])
+>>>>>>> bd8ae622abb748fc043563e7e90d719fe523addd
+>>>>>>> release-2.1
     {
         _isDirty = YES;
     }

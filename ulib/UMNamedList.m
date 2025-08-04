@@ -29,7 +29,7 @@
     if(self)
     {
         _namedlistEntries = [[UMSynchronizedSortedDictionary alloc]init];
-        _namedListLock  = [[UMMutex alloc]initWithName:@"UMNamedListOld-lock"];
+        _namedListLock  = [[UMMutex alloc]initWithName:@"UMNamedList-lock"];
         _path = path;
         _name = name;
     }
@@ -68,7 +68,7 @@
     _dirty=YES;
         ummutex_unlock(_namedListLock);
 #ifdef DEBUG
-    NSLog(@"UMNamedListOld addEntry:%@",str);
+    NSLog(@"UMNamedList addEntry:%@",str);
     [self dump];
 #endif
 }
@@ -98,7 +98,7 @@
     _dirty=YES;
         ummutex_unlock(_namedListLock);
 #ifdef DEBUG
-    NSLog(@"UMNamedListOld removeEntry:%@",str);
+    NSLog(@"UMNamedList removeEntry:%@",str);
     [self dump];
 #endif
 }
@@ -149,7 +149,7 @@
     }
         ummutex_unlock(_namedListLock);
 #ifdef DEBUG
-//    NSLog(@"UMNamedListOld flush");
+//    NSLog(@"UMNamedList flush");
 //    [self dump];
 #endif
 }
@@ -189,14 +189,14 @@
 
 - (void)dump
 {
-    NSLog(@"UMNamedListOld dump:");
+    NSLog(@"UMNamedList dump:");
     NSLog(@"_name: %@",_name);
     NSLog(@"_path: %@",_path);
     NSLog(@"_dirty: %@",@(_dirty));
     NSLog(@"_name: %@",_name);
     NSLog(@"_namedlistEntries: %@",_namedlistEntries);
 
-//    NSLog(@"[UMNamedListOld %p dump] %@",self,[self description]);
+//    NSLog(@"[UMNamedList %p dump] %@",self,[self description]);
 }
 
 - (NSString *)description

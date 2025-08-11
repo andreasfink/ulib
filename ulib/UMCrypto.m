@@ -271,17 +271,20 @@
     return self;
 }
 
+/*     int RAND_bytes(unsigned char *buf, int num); */
+
 - (UMCrypto *)initDESInitWithKeyWithEntropySource:(NSString *)file withGrade:(int)grade;
 {
     char *entropy;
     //int n;
-    DES_cblock block;
+    unsigned char block[8];
     unsigned char DESKey[DES_KEY_LEN];
     int i, nrounds = 1000/grade;
     unsigned char DESIV[DES_BLOCK_SIZE];
 
-#define RANDOM_SIZE 8
+#define RANDOM_SIZE sizeof(block)
     
+
     self = [super init];
     if (self)
     {
@@ -297,8 +300,8 @@
         UMAssert((result != 0), @"Unable to generate random bytes: %d",
                  errno);
  
-        DES_random_key(&block);
-        i = EVP_BytesToKey(EVP_des_cbc(), EVP_sha1(), salt, block, RANDOM_SIZE, nrounds, DESKey, DESIV);
+        RAND_bytes(&block[0], sizeof(block));
+        i = EVP_BytesToKey(EVP_des_cbc(), EVP_sha1(), salt, block, sizeof(block), nrounds, DESKey, DESIV);
         if (i != 8)
         { //bytes !!!
             NSLog(@"Key size is %d bits - should be 56 bits\n", i);

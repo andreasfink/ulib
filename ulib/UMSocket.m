@@ -949,6 +949,10 @@ static int SSL_smart_shutdown(SSL *ssl)
         }
         _direction = _direction | UMSOCKET_DIRECTION_OUTBOUND;
         _isConnecting = YES;
+        if((_requestedLocalPort!=0) || (_requestedLocalAddress.length > 0))
+        {
+            [self bind];
+        }
         [self reportStatus:@"calling connect()"];
         if(_ip_version==6)
         {

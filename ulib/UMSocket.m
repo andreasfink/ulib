@@ -575,7 +575,6 @@ static int SSL_smart_shutdown(SSL *ssl)
     
     ummutex_lock(_controlLock);
     NSArray                 *localAddresses = NULL;
-    NSMutableArray          *useableLocalAddresses;
     struct sockaddr_in	sa;
     struct sockaddr_in6	sa6;
     NSString    *ipAddr;
@@ -599,7 +598,6 @@ static int SSL_smart_shutdown(SSL *ssl)
         {
             localAddresses = @[_requestedLocalAddress];
         }
-        useableLocalAddresses       = [[NSMutableArray alloc] init];
         memset(&sa,0x00,sizeof(sa));
         sa.sin_family			= AF_INET;
 #ifdef	HAS_SOCKADDR_LEN
@@ -618,68 +616,6 @@ static int SSL_smart_shutdown(SSL *ssl)
         
         switch(_type)
         {
-#ifdef	SCTP_SUPPORTED
-                /* FIXME:  what about IPv4/IPv6 specifics? */
-            case UMSOCKET_TYPE_SCTP_SEQPACKET:
-            case UMSOCKET_TYPE_SCTP_STREAM:
-            case UMSOCKET_TYPE_SCTP_DGRAM:
-            case UMSOCKET_TYPE_SCTP4ONLY_SEQPACKET:
-            case UMSOCKET_TYPE_SCTP4ONLY_STREAM:
-            case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
-            {
-                int i;
-                if(_requestedLocalAddress)
-                {
-                    [useableLocalAddresses addObject:_requestedLocalAddress];
-                }
-                else
-                {
-                    for(i=0;i< [localAddresses count];i++)
-                    {
-                        ipAddr = [localAddresses objectAtIndex:i];
-                        NSData *d = [UMSocket sockaddrFromAddress:ipAddr
-                                                             port:_requestedLocalPort
-                                                     socketFamily:AF_INET];
-                        int err = [self bindx:(struct sockaddr *)d.bytes];
-                        if(!err)
-                        {
-                            [useableLocalAddresses addObject:ipAddr];
-                        }
-                    }
-                }
-                if( [useableLocalAddresses count] == 0)
-                {
-                    errcode = UMSocketError_sctp_bindx_failed_for_all;
-                }
-                break;
-            }
-            case UMSOCKET_TYPE_SCTP6ONLY_SEQPACKET:
-            case UMSOCKET_TYPE_SCTP6ONLY_STREAM:
-            case UMSOCKET_TYPE_SCTP6ONLY_DGRAM:
-            {
-                int i;
-                for(i=0;i< [localAddresses count];i++)
-                {
-                    ipAddr = [localAddresses objectAtIndex:i];
-                    NSData *d = [UMSocket sockaddrFromAddress:ipAddr
-                                                         port:_requestedLocalPort
-                                                 socketFamily:AF_INET6];
-                    int err = [self bindx:(struct sockaddr *)d.bytes];
-                    if(!err)
-                    {
-                        [useableLocalAddresses addObject:ipAddr];
-                    }
-                }
-                
-                if( [useableLocalAddresses count] == 0)
-                {
-                    errcode = UMSocketError_sctp_bindx_failed_for_all;
-                }
-                break;
-            }
-                
-#endif
-                
             case UMSOCKET_TYPE_TCP4ONLY:
             case UMSOCKET_TYPE_UDP4ONLY:
             {
@@ -1414,16 +1350,6 @@ static int SSL_smart_shutdown(SSL *ssl)
     int eno = 0;
     switch(_type)
     {
-#if defined(UM_TRANSPORT_SCTP_SUPPORTED)
-        case UMSOCKET_TYPE_SCTP:
-        case UMSOCKET_TYPE_SCTP_DGRAM:
-        case UMSOCKET_TYPE_SCTP_STREAM:
-        case UMSOCKET_TYPE_SCTP4ONLY:
-        case UMSOCKET_TYPE_SCTP4ONLY_DGRAM:
-        case UMSOCKET_TYPE_SCTP4ONLY_STREAM:
-            [self sendSctp:data withStreamID: 0 withProtocolID: 0]
-            break;
-#endif
         case UMSOCKET_TYPE_TCP4ONLY:
         case UMSOCKET_TYPE_TCP6ONLY:
         case UMSOCKET_TYPE_TCP:

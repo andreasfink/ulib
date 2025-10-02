@@ -78,7 +78,6 @@ static UMTimerBackgrounder *_sharedTimerBackgrounder = NULL;
 	@autoreleasepool
 	{
 		NSMutableArray *dueTimers = [[NSMutableArray alloc] init];
-		int workDone = 0;
 
 		UMMicroSec now = ulib_microsecondTime();
         ummutex_lock(_timersLock);
@@ -88,7 +87,6 @@ static UMTimerBackgrounder *_sharedTimerBackgrounder = NULL;
 			if(timeLeft < 0)
 			{
 				[dueTimers addObject:t];
-				workDone++;
 			}
 			else if(timeLeft < nextWakeupIn)
 			{

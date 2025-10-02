@@ -1,6 +1,6 @@
 dnl /* ==================================================================== 
 dnl  * Project "ulib"
-dnl  * Copyright: © 2023 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
+dnl  * Copyright: © 2025 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
 dnl  * ====================================================================
 dnl  */ 
 
@@ -19,7 +19,7 @@ AC_SUBST(SHELL)
 AC_CONFIG_AUX_DIR(.)
 AC_SET_TERMINAL_SEQUENCES()
 
-COPYRIGHT="Copyright © 2023 Andreas Fink (andreas@fink.org). All rights reserved."
+COPYRIGHT="Copyright © 2025 Andreas Fink (andreas@fink.org). All rights reserved."
 PROJECT_NAME="ulib"
 CONFIG_DEFINE="ULIB_CONFIG"
 
@@ -29,6 +29,7 @@ MAJORVER=`echo $VERSION | cut -f1 -d.`
 MINORVER=`echo $VERSION | cut -f2 -d.`
 REVISION=`echo $VERSION | cut -f3 -d.`
 
+dnl  Load GNUStep config stuff
 dnl Set user who runs ./configure
 CUSER=`id -un`
 AC_SUBST(VERSION)
@@ -99,17 +100,18 @@ case "$host" in
     else
         CFLAGS="$CFLAGS -D_DEFAULT_SOURCE"
 	fi
-	CFLAGS="$CFLAGS  -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties"
-	CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
-	CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"
-	CFLAGS="$CFLAGS -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion"
-	CFLAGS="$CFLAGS -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector"
-	CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
+	#CFLAGS="$CFLAGS -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties"
+	#CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
+	#CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"
+	#CFLAGS="$CFLAGS -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion"
+	#CFLAGS="$CFLAGS -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector"
+	#CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
 	CFLAGS="${CFLAGS} -fobjc-arc"
-	if [[ -x /usr/GNUstep/System/Tools/gnustep-config ]]
+	#source /etc/GNUstep2/GNUstep2.conf
+	if [[ -x /usr/GNUstep2/System/Tools/gnustep-config ]]
 	then
-		GNUSTEP_CONFIG=/usr/GNUstep/System/Tools/gnustep-config
-		CFLAGS="${CFLAGS} -I/usr/GNUstep/System/Library/Headers/"
+		GNUSTEP_CONFIG=/usr/GNUstep2/System/Tools/gnustep-config
+		CFLAGS="${CFLAGS} -I/usr/GNUstep2/System/Library/Headers/"
 	else
 		if [[ -x /usr/local/bin/gnustep-config ]]
 		then
@@ -133,13 +135,13 @@ case "$host" in
   *-freebsd*)
 	CFLAGS="$CFLAGS -std=c99 -fPIC -DFREEBSD"
 	FREEBSD_VERSION=`uname -r`
-	CFLAGS="$CFLAGS  -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties"
-	CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
-	CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"
-	CFLAGS="$CFLAGS -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion"
-	CFLAGS="$CFLAGS -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector"
-	CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
-	CFLAGS="$CFLAGS -fobjc-arc"
+	#CFLAGS="$CFLAGS -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties"
+	#CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
+	#CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"
+	#CFLAGS="$CFLAGS -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion"
+	#CFLAGS="$CFLAGS -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector"
+	#CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
+	#CFLAGS="$CFLAGS -fobjc-arc"
 	SHARED_LIBRARY_EXTENSION="so"
 	if [[ -x /usr/GNUstep/System/Tools/gnustep-config ]]
 	then

@@ -12,8 +12,6 @@
 
 @implementation UMHistoryLogEntry
 
-@synthesize log;
-
 - (UMHistoryLogEntry *)init
 {
     self = [super init];

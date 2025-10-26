@@ -149,6 +149,7 @@ typedef enum SocketBlockingMode
 @property(readwrite,strong,atomic) UMHistoryLog        *historyLog;
 @property(readwrite,assign,atomic) int                 dscp;
 @property(readwrite,strong,atomic) NSString            *requestedLocalAddress;
+@property(readwrite,assign,atomic) int                 mtu;
 
 - (UMSocket *) initWithType:(UMSocketType)t;
 - (UMSocket *) initWithType:(UMSocketType)t name:(NSString *)name;

@@ -4,7 +4,7 @@
 prefix=/usr/local
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
-includedir=${prefix}/include
+includedir=${prefix}/include/fts6
 
 Cflags: -I${includedir}  -I/usr/GNUstep/System/Library/Headers/ -DHAVE_OPENSSL=1
 Libs: -L${libdir} -l:libulib.@SHARED_LIBRARY_EXTENSION@.@MAJORVER@.@MINORVER@ -l:libobjc.so.4.6 -lavahi-client -lavahi-core -lavahi-common -lgnustep-base -ldl @LIBRARIES@

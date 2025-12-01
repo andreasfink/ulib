@@ -37,5 +37,5 @@
 - (int)resolved;
 - (int)resolving;
 + (NSString *)localHostName;
-
+- (NSString *)address;
 @end

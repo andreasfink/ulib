@@ -317,4 +317,13 @@
     return r;
 }
 
+- (NSString *)address
+{
+    if(_addresses.count>0)
+    {
+        return _addresses[0];
+    }
+    return @"";
+}
+
 @end

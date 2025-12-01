@@ -26,6 +26,7 @@
 		A66EB0E42ABDDCC200C34D40 /* ulib.pc in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0E22ABDDCC200C34D40 /* ulib.pc */; };
 		A66EB0E52ABDDCC200C34D40 /* ulib.pc.in in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0E32ABDDCC200C34D40 /* ulib.pc.in */; };
 		A66EB0E82ABDDCD000C34D40 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0E62ABDDCD000C34D40 /* VERSION */; };
+		A67502B22EC62A340027A592 /* UMDeprecatedMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A67502B12EC62A340027A592 /* UMDeprecatedMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A683D83B2ABD905E00C34D40 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A683D83A2ABD905E00C34D40 /* libcrypto.a */; };
 		A683D83F2ABD906900C34D40 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A683D83E2ABD906900C34D40 /* libssl.a */; };
 		A683D8412ABD906E00C34D40 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A683D8402ABD906E00C34D40 /* libzmq.a */; };
@@ -389,6 +390,7 @@
 		A66EB0E72ABDDCD000C34D40 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		A66EB0E92ABDDCF500C34D40 /* debian */ = {isa = PBXFileReference; lastKnownFileType = folder; path = debian; sourceTree = "<group>"; };
 		A66EB0EA2ABDDEB300C34D40 /* SupportingFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SupportingFiles; sourceTree = "<group>"; };
+		A67502B12EC62A340027A592 /* UMDeprecatedMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDeprecatedMacros.h; sourceTree = "<group>"; };
 		A683D83A2ABD905E00C34D40 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = /usr/local/lib/libcrypto.a; sourceTree = "<absolute>"; };
 		A683D83E2ABD906900C34D40 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = /usr/local/lib/libssl.a; sourceTree = "<absolute>"; };
 		A683D8402ABD906E00C34D40 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = /usr/local/lib/libzmq.a; sourceTree = "<absolute>"; };
@@ -800,6 +802,7 @@
 		A69BA4572ABD850000C34D40 /* ulib */ = {
 			isa = PBXGroup;
 			children = (
+				A67502B12EC62A340027A592 /* UMDeprecatedMacros.h */,
 				A64994C12E0BCD91006873AC /* framework.h */,
 				A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */,
 				A683D8922ABD980A00C34D40 /* dmi_decode_path.h.in */,
@@ -1227,6 +1230,7 @@
 				A683DA482ABD980E00C34D40 /* UMConfig.h in Headers */,
 				A683D9D02ABD980E00C34D40 /* UMSyntaxAction.h in Headers */,
 				A683DA752ABD980F00C34D40 /* UMSleeper.h in Headers */,
+				A67502B22EC62A340027A592 /* UMDeprecatedMacros.h in Headers */,
 				A6A1EB932ABD9D5A00C34D40 /* ulib.h in Headers */,
 				A683DA922ABD980F00C34D40 /* UMSyntaxToken_Const.h in Headers */,
 				A683D9F72ABD980E00C34D40 /* UMObjectTreeEntry.h in Headers */,
@@ -1727,6 +1731,7 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
@@ -1768,6 +1773,7 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;

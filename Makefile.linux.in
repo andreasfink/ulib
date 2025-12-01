@@ -41,7 +41,7 @@ install_dev:
 	mkdir -p "${DESTDIR}/usr/local/lib/pkgconfig"
 	mkdir -p "${DESTDIR}/usr/local/include/ulib"
 	install -b -g bin -o root -m 644 ${PKGCONFIGFILE} ${DESTDIR}/usr/local/lib/pkgconfig/
-	cp $(HFILES) "${DESTDIR}/usr/local/include/"
+	cp $(HFILES) "${DESTDIR}/usr/local/include/ulib/"
 
 install_bin: ${LIB} ${SLIB}
 	rm -f "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}"

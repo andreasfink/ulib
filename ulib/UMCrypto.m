@@ -375,6 +375,39 @@
     RSA_free(rsa);
     return ciphertext;
 }
+#if 0
+/* potential replacement routine coe snipped from https://docs.openssl.org/3.0/man3/OSSL_ENCODER_to_bio/#examples */
+ To encode a pkey as PKCS#8 with DER format encrypted with AES-256-CBC into a buffer:
+
+ OSSL_ENCODER_CTX *ectx;
+ const char *format = "DER";
+ const char *structure = "PrivateKeyInfo"; /* PKCS#8 structure */
+ const unsigned char *pass = "my password";
+ unsigned char *data = NULL;
+ size_t datalen;
+
+ ectx = OSSL_ENCODER_CTX_new_for_pkey(pkey,
+                                      OSSL_KEYMGMT_SELECT_KEYPAIR
+                                      | OSSL_KEYMGMT_SELECT_DOMAIN_PARAMETERS,
+                                      format, structure,
+                                      NULL);
+ if (ectx == NULL) {
+     /* error: no suitable potential encoders found */
+ }
+ if (pass != NULL) {
+     OSSL_ENCODER_CTX_set_passphrase(ectx, pass, strlen(pass));
+     OSSL_ENCODER_CTX_set_cipher(ctx, "AES-256-CBC", NULL);
+ }
+ if (OSSL_ENCODER_to_data(ectx, &data, &datalen)) {
+     /*
+      * pkey was successfully encoded into a newly allocated
+      * data buffer
+      */
+ } else {
+     /* encoding failure */
+ }
+ OSSL_ENCODER_CTX_free(ectx);
+#endif
 
 - (NSData *)RSADecryptWithCiphertextSSLPrivate:(NSData *)ciphertext
 {

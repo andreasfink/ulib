@@ -275,22 +275,31 @@
         struct addrinfo *thisAddr = addrInfos;
         while(thisAddr)
         {
-            if((thisAddr->ai_family == AF_INET) || (thisAddr->ai_family == AF_INET6))
+            if(thisAddr->ai_family == AF_INET)
             {
-                struct sockaddr_in *sa = (struct sockaddr_in *)thisAddr->ai_addr;
-                inet_ntop(thisAddr->ai_family, &(sa->sin_addr), namecstr, sizeof(namecstr));
-                BOOL dup=NO;
-                for(NSString *s in _addresses)
+                struct sockaddr_in *sa4 = (struct sockaddr_in *)thisAddr->ai_addr;
+                inet_ntop(thisAddr->ai_family, &(sa4->sin_addr), namecstr, sizeof(namecstr));
+            }
+            else if (thisAddr->ai_family == AF_INET6)
+            {
+                struct sockaddr_in6 *sa6 = (struct sockaddr_in6 *)thisAddr->ai_addr;
+                inet_ntop(thisAddr->ai_family, &(sa6->sin6_addr), namecstr, sizeof(namecstr));
+            }
+            else
+            {
+                continue;
+            }
+            BOOL dup=NO;
+            for(NSString *s in _addresses)
+            {
+                if([s isEqualToString:@(namecstr)])
                 {
-                    if([s isEqualToString:@(namecstr)])
-                    {
-                        dup=YES;
-                    }
+                    dup=YES;
                 }
-                if(dup==NO)
-                {
-                    [_addresses addObject:@(namecstr)];
-                }
+            }
+            if(dup==NO)
+            {
+                [_addresses addObject:@(namecstr)];
             }
             thisAddr = thisAddr->ai_next;
         }

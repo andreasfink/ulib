@@ -18,6 +18,7 @@
 @property(readwrite,strong,atomic) id      currentValue;
 @property(readwrite,strong,atomic) id      previousValue;
 - (void)clearDirty;  /*!< same as isDirty=NO flag but the new value is now the old value */
+- (id)proxyForJson;
 
 @end
 

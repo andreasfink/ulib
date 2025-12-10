@@ -15,4 +15,9 @@
     _previousValue = _currentValue;
 }
 
+- (id)proxyForJson
+{
+    return _currentValue;
+}
+
 @end

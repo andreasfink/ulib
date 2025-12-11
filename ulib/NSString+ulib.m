@@ -23,22 +23,22 @@
 
 - (NSString *)hierarchicalDescriptionWithPrefix:(NSString *)prefix
 {
-	return [NSString stringWithFormat:@"%@String: %@",prefix,self];
+    return [NSString stringWithFormat:@"%@String: %@",prefix,self];
 }
 
 - (NSString *)increasePrefix
 {
-	return [NSString stringWithFormat:@"\t%@",self];
+    return [NSString stringWithFormat:@"\t%@",self];
 }
 
 - (NSString *)removeFirstAndLastChar
 {
-	ssize_t n;
-	n = [self length];
-	n = n - 2;
-	if(n<0)
-		n = 0;
-	return [self substringWithRange:NSMakeRange(1,n)];
+    ssize_t n;
+    n = [self length];
+    n = n - 2;
+    if(n<0)
+        n = 0;
+    return [self substringWithRange:NSMakeRange(1,n)];
 }
 
 
@@ -90,7 +90,7 @@ static inline int nibbleToInt(const char a)
 - (NSString *)urldecode
 {
     NSString *result = [(NSString *)self stringByReplacingOccurrencesOfString:@"+" withString:@" "];
-
+    
 #if defined(__APPLE__)
     result = [result stringByRemovingPercentEncoding];
 #else
@@ -143,7 +143,7 @@ static inline int nibbleToInt(const char a)
                 nibble = nibbleToInt(c[i]);
                 status = 2;
             }
-
+            
         }
         else if(status==2)
         {
@@ -164,7 +164,7 @@ static inline int nibbleToInt(const char a)
     {
         allowedInUrl = [NSCharacterSet characterSetWithCharactersInString:@"!$&'()*,-.0123456789;=ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"];
     }
-
+    
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
     return [data urlencode];
 }
@@ -177,17 +177,17 @@ static inline int nibbleToInt(const char a)
 #else
     NSString *decode = [self stringByAppendingString:@"\n"];
     NSData *data = [decode dataUsingEncoding:NSASCIIStringEncoding];
-
+    
     // Construct an OpenSSL context
     BIO *command = BIO_new(BIO_f_base64());
     BIO *context = BIO_new_mem_buf((void *)[data bytes],(int)[data length]);
-
+    
     // Tell the context to encode base64
     context = BIO_push(command, context);
-
+    
     // Encode all the data
     NSMutableData *outputData = [NSMutableData data];
-
+    
 #define BUFFSIZE 256
     int len;
     char inbuf[BUFFSIZE];
@@ -195,10 +195,10 @@ static inline int nibbleToInt(const char a)
     {
         [outputData appendBytes:inbuf length:len];
     }
-
+    
     BIO_free_all(context);
     [data self]; // extend GC lifetime of data to here
-
+    
     return outputData;
 #endif
 }
@@ -251,9 +251,9 @@ static inline int nibbleToInt(const char a)
     {
         return YES;
     }
-
+    
     struct in6_addr addr6;
-
+    
     int result = inet_pton(AF_INET6,self.UTF8String, &addr6);
     if(result==1)
     {
@@ -275,7 +275,7 @@ static inline int nibbleToInt(const char a)
 - (NSData *)binaryIPAddress4
 {
     uint32_t addr4;
-
+    
     int result = inet_pton(AF_INET,self.UTF8String, (struct in_addr *)&addr4);
     if(result==1)
     {
@@ -287,7 +287,7 @@ static inline int nibbleToInt(const char a)
 - (NSData *)binaryIPAddress6
 {
     struct in6_addr addr6;
-
+    
     int result = inet_pton(AF_INET6,self.UTF8String, &addr6);
     if(result==1)
     {
@@ -308,7 +308,7 @@ static inline int nibbleToInt(const char a)
     NSString *s = self;
     /* we always escape the lower 32 chars */
     s = [s stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
-
+    
     s = [s stringByReplacingOccurrencesOfString:@"\x00" withString:@"\\x00"];
     s = [s stringByReplacingOccurrencesOfString:@"\x01" withString:@"\\x01"];
     s = [s stringByReplacingOccurrencesOfString:@"\x02" withString:@"\\x02"];
@@ -342,7 +342,7 @@ static inline int nibbleToInt(const char a)
     s = [s stringByReplacingOccurrencesOfString:@"\x1d" withString:@"\\x1d"];
     s = [s stringByReplacingOccurrencesOfString:@"\x1e" withString:@"\\x1e"];
     s = [s stringByReplacingOccurrencesOfString:@"\x1f" withString:@"\\x1f"];
-
+    
     s = [s stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
     s = [s stringByReplacingOccurrencesOfString:@"`" withString:@"\\`"];
     s = [s stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
@@ -422,7 +422,7 @@ static inline int nibbleToInt(const char a)
 - (NSString *)printable
 {
 #define MAXLINELEN  1024
-
+    
     char s2[MAXLINELEN];
     memset(&s2,0x00,sizeof(s2));
     
@@ -649,10 +649,10 @@ static inline int nibbleToInt(const char a)
 
 
 /* this is used to clean names. They are all returned in lowercase
-  only lowercase is allowed. Uppercase is converted
-  . is not allowed in first place
-  Allowed punctioations are - _ + , = %
-*/
+ only lowercase is allowed. Uppercase is converted
+ . is not allowed in first place
+ Allowed punctioations are - _ + , = %
+ */
 - (NSString *)filterNameWithMaxLength:(int)maxlen
 {
     UMAssert(maxlen>0,@"maximum length must be bigger than zero");
@@ -752,8 +752,19 @@ static inline int nibbleToInt(const char a)
         }
     }
     return YES;
-
+    
 }
+
+- (NSString *)allowOnlyHexDigits;
+{
+    static NSCharacterSet *hexdigitsOnly;
+    if(hexdigitsOnly == NULL)
+    {
+        hexdigitsOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFabcdef"];
+    }
+    return [self stringByTrimmingCharactersInSet:hexdigitsOnly];
+}
+
 @end
 
 NSString *sqlEscapeNSString(NSString *input)

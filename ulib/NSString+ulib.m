@@ -757,12 +757,25 @@ static inline int nibbleToInt(const char a)
 
 - (NSString *)allowOnlyHexDigits;
 {
-    static NSCharacterSet *hexdigitsOnly;
-    if(hexdigitsOnly == NULL)
+    NSMutableString *result = [[NSMutableString alloc]init];
+    for(NSInteger i=0;i<self.length;i++)
     {
-        hexdigitsOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFabcdef"];
+        unichar c;
+        c = [self characterAtIndex:i];
+        if((c>='0') && (c<='9'))
+        {
+            [result appendFormat:@"%c",c];
+        }
+        else if((c>='a') && (c<='f'))
+        {
+            [result appendFormat:@"%c",c-'a'+'A'];
+        }
+        else if((c>='A') && (c<='F'))
+        {
+            [result appendFormat:@"%c",c];
+        }
     }
-    return [self stringByTrimmingCharactersInSet:hexdigitsOnly];
+    return result;
 }
 
 @end

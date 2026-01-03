@@ -259,4 +259,5 @@ typedef enum SocketBlockingMode
 
 @end
 
-
+#define UMSOCKET_ERROR_STRING(e)        [UMSocket getSocketErrorString:e]
+#define UMSOCKET_ERROR_STRING_LONG(e)   [NSString stringWithFormat:@"%@ (%d)", [UMSocket getSocketErrorString:e],e]

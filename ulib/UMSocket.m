@@ -2108,11 +2108,6 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
     
     NSMutableData *tmp = [[_receiveBuffer subdataWithRange:NSMakeRange(_receivebufpos, pos.location - _receivebufpos)]mutableCopy];
-    if([tmp length]==0)
-    {
-        *toData = NULL;
-        return UMSocketError_no_error;
-    }
     *toData = tmp;
     [self deleteFromReceiveBuffer:pos.location+pos.length];
     _receivebufpos = 0;

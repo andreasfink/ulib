@@ -224,6 +224,19 @@ static int SSL_smart_shutdown(SSL *ssl)
     return _connectedRemoteAddress;
 }
 
+- (NSString *)connectedRemoteReverseDnsName
+{
+    if(_connectedRemoteReverseDnsName==NULL)
+    {
+        NSString *s = [UMHost reveseDnsName:_connectedRemoteAddress];
+        if(s.length > 0)
+        {
+            _connectedRemoteReverseDnsName = s;
+        }
+    }
+    return _connectedRemoteReverseDnsName;
+}
+
 - (void)setConnectedRemoteAddress:(NSString *)s
 {
     _connectedRemoteAddress = s;

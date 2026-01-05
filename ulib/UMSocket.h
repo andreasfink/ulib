@@ -46,7 +46,8 @@ typedef enum SocketBlockingMode
 	in_port_t			_connectedLocalPort;
 	in_port_t			_connectedRemotePort;
 	NSString			*_connectedLocalAddress;
-	NSString			*_connectedRemoteAddress;
+    NSString            *_connectedRemoteAddress;
+    NSString            *_connectedRemoteReverseDnsName;
     NSString            *_requestedLocalAddress;
 	int					_sock;
     int                 _socketDomain;
@@ -256,6 +257,7 @@ typedef enum SocketBlockingMode
 
 - (void)setDscpString:(NSString *)dscp;
 - (NSString *)dscpString;
+- (NSString *)connectedRemoteReverseDnsName;
 
 @end
 

@@ -38,4 +38,5 @@
 - (int)resolving;
 + (NSString *)localHostName;
 - (NSString *)address;
++ (NSString *)reveseDnsName:(NSString *)addr;
 @end

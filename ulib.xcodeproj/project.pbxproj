@@ -690,7 +690,6 @@
 		A69BA47D2ABD854B00C34D40 /* dmi_decode_path.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dmi_decode_path.h.in; sourceTree = "<group>"; };
 		A69BA4812ABD854B00C34D40 /* dmi_decode_path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dmi_decode_path.h; sourceTree = "<group>"; };
 		A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dmi_decode_path.h; sourceTree = "<group>"; };
-		A6D02D9B2D76BFF900F2C1C4 /* UMUUID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UMUUID.h; path = ulib/UMUUID.h; sourceTree = "<group>"; };
 		A6D02D9C2D76C57F00F2C1C4 /* UMDirtyObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyObject.h; sourceTree = "<group>"; };
 		A6D02D9D2D76C57F00F2C1C4 /* UMDirtyObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDirtyObject.m; sourceTree = "<group>"; };
 		A6D02DA02D76C58B00F2C1C4 /* UMDirtyString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyString.h; sourceTree = "<group>"; };
@@ -742,7 +741,6 @@
 		A69BA44B2ABD850000C34D40 = {
 			isa = PBXGroup;
 			children = (
-				A6D02D9B2D76BFF900F2C1C4 /* UMUUID.h */,
 				A66EB0E62ABDDCD000C34D40 /* VERSION */,
 				A66EB0E72ABDDCD000C34D40 /* version.h */,
 				A66EB0E22ABDDCC200C34D40 /* ulib.pc */,

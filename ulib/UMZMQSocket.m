@@ -1,6 +1,7 @@
 //
 //  UMZMQSocket.m
-//  smpprelay
+//  ulib
+
 //
 //  Created by Andreas Fink on 12.07.22.
 //

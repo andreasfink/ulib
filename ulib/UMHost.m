@@ -405,8 +405,9 @@
     if([addr isIPv4])
     {
         addr = [UMSocket deunifyIp:addr];
-        
+#ifdef    HAS_SOCKADDR_LEN
         sa_in4.sin_len = sizeof(struct sockaddr_in);
+#endif
         sa_in4.sin_family = AF_INET;
         result = inet_pton(AF_INET,addr.UTF8String,&sa_in4.sin_addr);
         sa = (struct sockaddr *)&sa_in4;
@@ -414,7 +415,9 @@
     }
     else if([addr isIPv6])
     {
+#ifdef    HAS_SOCKADDR_LEN
         sa_in6.sin6_len = sizeof(struct sockaddr_in6);
+#endif
         sa_in6.sin6_family = AF_INET6;
         addr = [UMSocket deunifyIp:addr];
         result = inet_pton(AF_INET6,addr.UTF8String,  &sa_in6.sin6_addr);

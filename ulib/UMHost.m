@@ -11,6 +11,7 @@
 #include <netdb.h>
 
 #import <ulib/UMHost.h>
+#import <ulib/NSString+ulib.h>
 
 #include <sys/types.h>
 #include <ifaddrs.h>
@@ -23,6 +24,8 @@
 #import <ulib/UMThreadHelpers.h>
 
 #include <netinet/in.h>
+#include <sys/socket.h>
+#include <netdb.h>
 
 @implementation UMHost
 
@@ -240,10 +243,65 @@
         }
         else
         {
-            addr = [_addresses objectAtIndex:0];
+            if (UMSOCKET_IS_IPV4_ONLY_TYPE(type))
+            {
+                /* returning the first IPv4 address */
+                for(NSString *s in _addresses)
+                {
+                    if([s hasPrefix:@"ipv4:"])
+                    {
+                        addr = s;
+                        break;
+                    }
+                }
+                return NULL;
+            }
+            else if (UMSOCKET_IS_IPV6_ONLY_TYPE(type))
+            {
+                /* returning the first IPv6 address */
+                for(NSString *s in _addresses)
+                {
+                    if([s hasPrefix:@"ipv6:"])
+                    {
+                        addr = s;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                /* returning the last IPv6 address if found. otherwise the last IPv4 */
+                NSString *ipv4 = NULL;
+                NSString *ipv6 = NULL;
+                    /* returning the first IPv4 address */
+                for(NSString *s in _addresses)
+                {
+                    if([s hasPrefix:@"ipv4:"])
+                    {
+                        ipv4 = s;
+                    }
+                    if([s hasPrefix:@"ipv6:"])
+                    {
+                        ipv6 = s;
+                    }
+                    if(ipv6)
+                    {
+                        break;
+                    }
+                }
+                if(ipv6)
+                {
+                    addr = ipv6;
+                }
+                else
+                {
+                    addr = ipv4;
+                }
+            }
         }
     }
     ummutex_unlock(_hostLock);
+    addr = [UMSocket deunifyIp:addr];
     return addr;
 }
 
@@ -333,6 +391,51 @@
         return _addresses[0];
     }
     return @"";
+}
+
++ (NSString *)reveseDnsName:(NSString *)addr
+{
+    struct sockaddr_in  sa_in4;
+    struct sockaddr_in6 sa_in6;
+    struct sockaddr     *sa;
+    memset(&sa_in4,0,sizeof(sa_in4));
+    memset(&sa_in6,0,sizeof(sa_in6));
+    int result = 0;
+    socklen_t salen;
+    if([addr isIPv4])
+    {
+        addr = [UMSocket deunifyIp:addr];
+#ifdef    HAS_SOCKADDR_LEN
+        sa_in4.sin_len = sizeof(struct sockaddr_in);
+#endif
+        sa_in4.sin_family = AF_INET;
+        result = inet_pton(AF_INET,addr.UTF8String,&sa_in4.sin_addr);
+        sa = (struct sockaddr *)&sa_in4;
+        salen = sizeof(struct sockaddr_in);
+    }
+    else if([addr isIPv6])
+    {
+#ifdef    HAS_SOCKADDR_LEN
+        sa_in6.sin6_len = sizeof(struct sockaddr_in6);
+#endif
+        sa_in6.sin6_family = AF_INET6;
+        addr = [UMSocket deunifyIp:addr];
+        result = inet_pton(AF_INET6,addr.UTF8String,  &sa_in6.sin6_addr);
+        sa = (struct sockaddr *)&sa_in6;
+        salen = sizeof(sa_in6);
+    }
+    else
+    {
+        return NULL;
+    }
+    char hostBuffer[NI_MAXHOST];
+    memset(hostBuffer,0,sizeof(hostBuffer));
+    int err = getnameinfo(sa,salen,&hostBuffer[0],sizeof(hostBuffer),NULL,0,NI_NAMEREQD);
+    if(err == 0)
+    {
+        return @(hostBuffer);
+    }
+    return NULL;
 }
 
 @end

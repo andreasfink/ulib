@@ -6,10 +6,11 @@
 //  Copyright © 2018 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-/*
- 
-UMCommandLine is a helper object for a command line parsing
-It can be used independently of ulib if needed.
+
+/*!
+ @class UMCommandLine
+ @brief UMCommandLine is a helper object for a command line parsing
+ It can be used independently of ulib if needed.
  
  Here is an example on how to use it:
  
@@ -92,7 +93,7 @@ It can be used independently of ulib if needed.
       you would have @{ "verbose" : 4 }
       cmd.mainArguments would contain all parameters you pass without options.
       if you pass -- then all following strings are considered mainArugments.
- */
+*/
 
 
 #import <ulib/framework.h>

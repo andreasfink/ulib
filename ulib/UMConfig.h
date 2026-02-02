@@ -15,12 +15,12 @@
 
 /*!
  @class UMConfig
- @brief  UMConfig is an object to hold the data of config files.
+ @brief UMConfig is an object to hold the data of config files.
  
  config files are having the following syntax:
  
- # commented out lines are starting with a hash
- # a group starts with a group statement and ends with a empty line
+ commented out lines are starting with a hash (#)
+ a group starts with a group statement and ends with a empty line
  
  include "some-other-config-file"
 

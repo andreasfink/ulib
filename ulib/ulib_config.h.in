@@ -163,6 +163,9 @@
 /* define if we have common crypto installed */
 #undef HAVE_COMMONCRYPTO
 
+/* define if we have timegm() */
+#undef HAVE_TIMEGM
+
 /* if sockadd.sin_len is existing */
 #undef HAVE_SOCKADDR_SIN_LEN
 #ifdef	HAVE_SOCKADDR_SIN_LEN

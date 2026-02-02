@@ -224,6 +224,19 @@ static int SSL_smart_shutdown(SSL *ssl)
     return _connectedRemoteAddress;
 }
 
+- (NSString *)connectedRemoteReverseDnsName
+{
+    if(_connectedRemoteReverseDnsName==NULL)
+    {
+        NSString *s = [UMHost reveseDnsName:_connectedRemoteAddress];
+        if(s.length > 0)
+        {
+            _connectedRemoteReverseDnsName = s;
+        }
+    }
+    return _connectedRemoteReverseDnsName;
+}
+
 - (void)setConnectedRemoteAddress:(NSString *)s
 {
     _connectedRemoteAddress = s;
@@ -2108,11 +2121,6 @@ static int SSL_smart_shutdown(SSL *ssl)
     }
     
     NSMutableData *tmp = [[_receiveBuffer subdataWithRange:NSMakeRange(_receivebufpos, pos.location - _receivebufpos)]mutableCopy];
-    if([tmp length]==0)
-    {
-        *toData = NULL;
-        return UMSocketError_no_error;
-    }
     *toData = tmp;
     [self deleteFromReceiveBuffer:pos.location+pos.length];
     _receivebufpos = 0;
@@ -3348,3 +3356,4 @@ int send_usrsctp_cb(struct usocket *sock, uint32_t sb_free)
 }
 
 @end
+

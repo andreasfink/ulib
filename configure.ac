@@ -400,7 +400,7 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[char *func = __func__;]])],[AC_DEFINE
 
 
 dnl Checks for library functions.
-AC_CHECK_FUNCS(gettimeofday select socket strdup getopt_long localtime_r gmtime_r backtrace srandom getline)
+AC_CHECK_FUNCS(gettimeofday select socket strdup getopt_long localtime_r gmtime_r backtrace srandom getline timegm)
 dnl AC_CHECK_FUNC(getopt, , AC_LIBOBJS="$AC_LIBOBJS utils/attgetopt.o")
 dnl AC_SUBST(LIBOBJS)
 

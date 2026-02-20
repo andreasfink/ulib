@@ -5806,6 +5806,12 @@ then :
   printf "%s\n" "#define HAVE_GETLINE 1" >>confdefs.h
 
 fi
+ac_fn_c_check_func "$LINENO" "timegm" "ac_cv_func_timegm"
+if test "x$ac_cv_func_timegm" = xyes
+then :
+  printf "%s\n" "#define HAVE_TIMEGM 1" >>confdefs.h
+
+fi
 
 
 ac_fn_c_check_func "$LINENO" "TLS_method" "ac_cv_func_TLS_method"

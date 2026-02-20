@@ -23,27 +23,27 @@
 
 @interface UMTaskQueueTask : UMObject
 {
-    NSString        *_name;
-    BOOL            _enableLogging;
-    BOOL            _sync;
-    id              _synchronizeObject; /* DEPRECIATED */
-    UMMutex         *_synchronizeMutex; /* preferred */
-    id              _retainObject; /* object to hold until task ends */
-    UMMutex         *_runMutex;
+    NSString            *_name;
+    BOOL                _enableLogging;
+    BOOL                _sync;
+    id                  _synchronizeObject; /* DEPRECIATED */
+    UMMutex             *_synchronizeMutex; /* preferred */
+    id                  _retainObject; /* object to hold until task ends */
+    UMMutex             *_runMutex;
     UMTaskQueue         __weak *_taskQueue;
     UMTaskQueueMulti    __weak *_taskQueueMulti;
     int                 _taskQueueMultiSubqueueIndex;
 }
-@property(strong)           NSString *name;
-@property(assign,atomic)    BOOL enableLogging;
-@property(assign)           BOOL sync;
-@property(strong)           id synchronizeObject;   /* DEPRECIATED */
-@property(readwrite,strong) UMMutex   *synchronizeMutex; /* preferred */
-@property(strong)           id retainObject;
-@property(readwrite,strong) UMMutex   *runMutex; /* preferred */
-@property(readwrite,weak)   UMTaskQueue *taskQueue;
-@property(readwrite,weak)   UMTaskQueueMulti *taskQueueMulti;
-@property(assign,atomic)    int taskQueueMultiSubqueueIndex;
+@property(strong)           NSString            *name;
+@property(assign,atomic)    BOOL                enableLogging;
+@property(assign)           BOOL                sync;
+@property(strong)           id                  synchronizeObject;   /* DEPRECIATED */
+@property(readwrite,strong) UMMutex             *synchronizeMutex; /* preferred */
+@property(strong)           id                  retainObject;
+@property(readwrite,strong) UMMutex             *runMutex; /* preferred */
+@property(readwrite,weak)   UMTaskQueue         *taskQueue;
+@property(readwrite,weak)   UMTaskQueueMulti    *taskQueueMulti;
+@property(assign,atomic)    int                 taskQueueMultiSubqueueIndex;
 
 - (UMTaskQueueTask *)initWithName:(NSString *)name;
 - (void)runOnBackgrounder:(UMBackgrounder *)bg;

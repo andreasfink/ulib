@@ -25,8 +25,8 @@ static NSDateFormatter *_standardDateFormatter = NULL;
     {
         NSTimeZone *tz = [NSTimeZone timeZoneWithName:@"UTC"];
         NSDateFormatter *sf= [[NSDateFormatter alloc]init];
-        NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-        [sf setLocale:usLocale];
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+        [sf setLocale:locale];
         [sf setDateFormat:STANDARD_DATE_STRING_FORMAT];
         [sf setTimeZone:tz];
         _standardDateFormatter = sf;
@@ -43,6 +43,8 @@ static NSDateFormatter *_standardDateFormatter = NULL;
        ([str isEqualToString:@"0000-00-00 00:00:00.000000"]) ||
        ([str isEqualToString:@"0000-00-00 00:00:00.000"]) ||
        ([str isEqualToString:@"0000-00-00 00:00:00"]) ||
+       ([str isEqualToString:@"0000-00-00 00:00"]) ||
+       ([str isEqualToString:@"0000-00-00"]) ||
        ([str isEqualToString:@""]) ||
        [str isEqualToString:[NSDate zeroDateString]])
     {
@@ -155,14 +157,18 @@ static NSDate *dateFromStringMktime(NSString *str)
         return NULL;
     }
     tm.tm_zone = (char *)ctimezone_str;
+    time_t t;
     
-    
+#ifdef HAVE_TIMEGM
+    t = timegm(&tm);
+#else
     const char *tzstring = getenv("TZ");
     if((tzstring==NULL) || (strncmp("UTC",tzstring,3)!=0))
     {
         setenv("TZ","UTC",1);
     }
-    time_t t = mktime(&tm);
+    t = mktime(&tm);
+#endif
     if(t==-1)
     {
         return NULL;

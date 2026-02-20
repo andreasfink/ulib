@@ -10,13 +10,14 @@ What ulib includes today is
 * Dealing with Layers of communication protocols (UMLayer) and their asynchronous tasks (UMLayerTask)
 * Dealing with Background tasks (UMBackgrounder)
 * Dealing with logging (UMLogHandler)
-* Objects with a history of what changed (UM)
-* Synchronized Array and Dictionaries, Dictionaries with sorted keys
+* Objects with a history of what changed (UMDirty..)
+* Synchronized Array and Dictionaries, Dictionaries with sorted keys (UMSynchronizedArray,UMSynchronizedDictionary,UMSynchronizedSortedDictionary)
 * Task Queues and generic Queues
-* Network Sockets (TCP, UDP, SCTP) including SSL (using openSSL)
+* Network Sockets (TCP, UDP, SCTP) including SSL (using openSSL) (UMSocket)
 * Micosecond timers, Locks, Timers, Througput counters
 * Json parsing and encoding
 * RedisDB Access
+* ZeroMQ support
 
 # Related #
 

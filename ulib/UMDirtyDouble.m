@@ -98,4 +98,14 @@
 {
     return [[UMDirtyDouble allocWithZone:zone]initWithDouble:self.doubleValue];
 }
+
+- (void)increaseByDouble:(double *)d
+{
+    
+}
+- (void)decreaseByDouble:(double *)d
+{
+    
+}
+
 @end

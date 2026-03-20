@@ -11,6 +11,10 @@
 		A6059F052D77706200911CEF /* UMDirtyBoolean.m in Sources */ = {isa = PBXBuildFile; fileRef = A6059F032D77706200911CEF /* UMDirtyBoolean.m */; };
 		A64994C22E0BCD99006873AC /* framework.h in Headers */ = {isa = PBXBuildFile; fileRef = A64994C12E0BCD91006873AC /* framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A654167A2EB8834F00763E9A /* UMDeprecatedMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A65416792EB8834F00763E9A /* UMDeprecatedMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A66E91EC2F6147D9006A4ED3 /* UMIPAddressList.h in Headers */ = {isa = PBXBuildFile; fileRef = A66E91EA2F6147D9006A4ED3 /* UMIPAddressList.h */; };
+		A66E91ED2F6147D9006A4ED3 /* UMIPAddressList.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E91EB2F6147D9006A4ED3 /* UMIPAddressList.m */; };
+		A66E91F02F6147F9006A4ED3 /* UMIPAddressListEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A66E91EE2F6147F9006A4ED3 /* UMIPAddressListEntry.h */; };
+		A66E91F12F6147F9006A4ED3 /* UMIPAddressListEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E91EF2F6147F9006A4ED3 /* UMIPAddressListEntry.m */; };
 		A66EB0B52ABDDC0600C34D40 /* buildnumber.c in Sources */ = {isa = PBXBuildFile; fileRef = A66EB0B42ABDDC0600C34D40 /* buildnumber.c */; };
 		A66EB0C02ABDDC3D00C34D40 /* distro.sh in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0BA2ABDDC2E00C34D40 /* distro.sh */; };
 		A66EB0C12ABDDC3D00C34D40 /* configure in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0BB2ABDDC2E00C34D40 /* configure */; };
@@ -350,6 +354,10 @@
 		A6059F032D77706200911CEF /* UMDirtyBoolean.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDirtyBoolean.m; sourceTree = "<group>"; };
 		A64994C12E0BCD91006873AC /* framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = framework.h; sourceTree = "<group>"; };
 		A65416792EB8834F00763E9A /* UMDeprecatedMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDeprecatedMacros.h; sourceTree = "<group>"; };
+		A66E91EA2F6147D9006A4ED3 /* UMIPAddressList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMIPAddressList.h; sourceTree = "<group>"; };
+		A66E91EB2F6147D9006A4ED3 /* UMIPAddressList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMIPAddressList.m; sourceTree = "<group>"; };
+		A66E91EE2F6147F9006A4ED3 /* UMIPAddressListEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMIPAddressListEntry.h; sourceTree = "<group>"; };
+		A66E91EF2F6147F9006A4ED3 /* UMIPAddressListEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMIPAddressListEntry.m; sourceTree = "<group>"; };
 		A66EB0B32ABDDC0600C34D40 /* buildnumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buildnumber.h; sourceTree = SOURCE_ROOT; };
 		A66EB0B42ABDDC0600C34D40 /* buildnumber.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buildnumber.c; sourceTree = SOURCE_ROOT; };
 		A66EB0B62ABDDC1800C34D40 /* BUILDNR */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILDNR; sourceTree = "<group>"; };
@@ -1094,6 +1102,10 @@
 				A683D8D02ABD980B00C34D40 /* UMUUID.m */,
 				A683D91E2ABD980C00C34D40 /* UMZMQSocket.h */,
 				A683D88A2ABD980A00C34D40 /* UMZMQSocket.m */,
+				A66E91EA2F6147D9006A4ED3 /* UMIPAddressList.h */,
+				A66E91EB2F6147D9006A4ED3 /* UMIPAddressList.m */,
+				A66E91EE2F6147F9006A4ED3 /* UMIPAddressListEntry.h */,
+				A66E91EF2F6147F9006A4ED3 /* UMIPAddressListEntry.m */,
 				A69BA4812ABD854B00C34D40 /* dmi_decode_path.h */,
 				A69BA47D2ABD854B00C34D40 /* dmi_decode_path.h.in */,
 				A6D02D9C2D76C57F00F2C1C4 /* UMDirtyObject.h */,
@@ -1134,6 +1146,7 @@
 				A683DAAD2ABD980F00C34D40 /* UMIntegerWithHistory.h in Headers */,
 				A683DA7E2ABD980F00C34D40 /* UMLayerUserProtocol.h in Headers */,
 				A683DA052ABD980E00C34D40 /* UMQueueMulti.h in Headers */,
+				A66E91F02F6147F9006A4ED3 /* UMIPAddressListEntry.h in Headers */,
 				A683DA1B2ABD980E00C34D40 /* NSString+ulib.h in Headers */,
 				A683DA242ABD980E00C34D40 /* UMSyntaxToken.h in Headers */,
 				A683D9FA2ABD980E00C34D40 /* UMHTTP2Connection.h in Headers */,
@@ -1164,6 +1177,7 @@
 				A683DA702ABD980E00C34D40 /* UMSerialPort.h in Headers */,
 				A683DAB72ABD980F00C34D40 /* UMObjectStatistic.h in Headers */,
 				A683D9CA2ABD980E00C34D40 /* NSObject+ulib.h in Headers */,
+				A66E91EC2F6147D9006A4ED3 /* UMIPAddressList.h in Headers */,
 				A683DA902ABD980F00C34D40 /* UMHTTPPageCache.h in Headers */,
 				A683DAC52ABD980F00C34D40 /* UMPrometheus.h in Headers */,
 				A683DAA12ABD980F00C34D40 /* UMStatistic.h in Headers */,
@@ -1419,6 +1433,7 @@
 				A683DA2A2ABD980E00C34D40 /* UMHTTP2Frame.m in Sources */,
 				A683DAAE2ABD980F00C34D40 /* UMJsonStreamParserAdapter.m in Sources */,
 				A69BA45A2ABD850000C34D40 /* ulib.docc in Sources */,
+				A66E91F12F6147F9006A4ED3 /* UMIPAddressListEntry.m in Sources */,
 				A683DA562ABD980E00C34D40 /* UMTimer.m in Sources */,
 				A683DA572ABD980E00C34D40 /* UMPrometheusThroughputMetric.m in Sources */,
 				A683DA3C2ABD980E00C34D40 /* UMSynchronizedDictionary.m in Sources */,
@@ -1443,6 +1458,7 @@
 				A683D9E02ABD980E00C34D40 /* UMIntegerWithHistory.m in Sources */,
 				A683D9AF2ABD980E00C34D40 /* UMCommandLine.m in Sources */,
 				A683DA802ABD980F00C34D40 /* UMHTTPCookie.m in Sources */,
+				A66E91ED2F6147D9006A4ED3 /* UMIPAddressList.m in Sources */,
 				A683DAC82ABD980F00C34D40 /* UMCountryDigitTree.m in Sources */,
 				A683DA692ABD980E00C34D40 /* UMTaskQueueTask.m in Sources */,
 				A683DA372ABD980E00C34D40 /* UMTimerBackgrounder.m in Sources */,

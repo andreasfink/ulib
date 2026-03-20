@@ -344,6 +344,7 @@
     if(bio)
     {
         BIO_write(bio, (unsigned char *)key.bytes, (int)key.length);
+        
         rsa = PEM_read_bio_RSA_PUBKEY(bio, &rsa, NULL, NULL);
         if(rsa==NULL)
         {

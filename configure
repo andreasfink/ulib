@@ -2905,7 +2905,7 @@ case "$host" in
     #
     UR="`uname -r | cut -f1 -d.`"
     DONE=0
-    ARCH="-arch x86_64"
+    ARCH="-arch arm64"
     CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security"
     BUILD_DIR="build/osx"

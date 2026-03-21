@@ -1,22 +1,20 @@
 cmake_minimum_required(VERSION 3.26)
 
-#list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
-
 project(ulib
   VERSION 6.0
   LANGUAGES C OBJC)
 
+set(CMAKE_OSX_ARCHITECTURES arm64 x86_64)
+set(CMAKE_OSX_DEPLOYMENT_TARGET 10.15)
 set(CMAKE_POSITION_INDEPENDENT_CODE YES)
-
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED YES)
-
 set(CMAKE_CXX_STANDARD 11)
 
 macro( target_link_framework TARGET NAME )
     find_library( FRAMEWORK_${NAME}
         NAMES ${NAME}
-        PATHS ${CMAKE_OSX_SYSROOT}/System/Library
+        PATHS ${CMAKE_OSX_SYSROOT}/System/Library /Library/Application\ Support/FinkTelecomServices/frameworks
         PATH_SUFFIXES Frameworks PrivateFrameworks
         CMAKE_FIND_FRAMEWORK only
         NO_DEFAULT_PATH )
@@ -29,55 +27,34 @@ macro( target_link_framework TARGET NAME )
 endmacro( target_link_framework )
 
 
-set_source_files_properties(foo.cpp PROPERTIES COMPILE_OPTIONS "-Wno-unused-parameter;-Wno-missing-field-initializer")
-#find_package(Threads REQUIRED)
-
-#include(CheckCCompilerFlag)
-#include(CheckCSourceCompiles)
-#include(CheckFunctionExists)
-#include(CheckIncludeFiles)
-#include(CheckLibraryExists)
-#include(CheckLinkerFlag)
-#include(CheckSymbolExists)
-#include(GNUInstallDirs)
-#include(CTest)
-
-#include(DispatchAppleOptions)
-#include(DispatchSanitization)
-#include(DispatchCompilerWarnings)
-#include(DTrace)
-#include(EnableFramePointers)
-
-# NOTE(abdulras) this is the CMake supported way to control whether we generate
-# shared or static libraries.  This impacts the behaviour of `add_library` in
-# what type of library it generates.
 option(BUILD_SHARED_LIBS "build shared libraries" ON)
-option(DISPATCH_ENABLE_ASSERTS "enable debug assertions" FALSE)
-
+option(BUILD_STATIC_LIBS "build static libraries" ON)
 option(INSTALL_PRIVATE_HEADERS "installs private headers in the same location as the public ones" OFF)
 
 add_subdirectory(ulib)
-#set_property (TARGET ulib APPEND_STRING PROPERTY COMPILE_FLAGS "-fobjc-arc")
-
-set_target_properties(ulib PROPERTIES LINK_FLAGS "-Wl,-F/Library/Frameworks")
-
 target_compile_options(ulib PUBLIC "-fobjc-arc")
-
-#add_library(bingitup STATIC bingitup.cpp)
+set_target_properties(ulib PROPERTIES LINK_FLAGS "-Wl,-F/Library/Frameworks")
 
 target_include_directories(ulib PRIVATE .)
 target_include_directories(ulib PRIVATE /usr/local/include)
-target_include_directories(ulib PRIVATE /opt/homebrew/include)
+
+if(MACOS)
+	target_include_directories(ulib PRIVATE /opt/homebrew/include)
+endif()
 
 target_link_libraries(ulib PRIVATE -L/usr/local/lib/)
-target_link_libraries(ulib PRIVATE -L/opt/homebrew/lib/)
+if(MACOS)
+	target_link_libraries(ulib PRIVATE -L/opt/homebrew/lib/)
+endif()
 
 target_link_framework(ulib Foundation)
 if(MACOS)
 	target_link_framework(ulib IOKit)
 endif()
-target_link_libraries(ulib PRIVATE /opt/homebrew/lib/libzmq.a)
-target_link_libraries(ulib PRIVATE /opt/homebrew/lib/libssl.a)
-target_link_libraries(ulib PRIVATE /opt/homebrew/lib/libcrypto.a)
-target_link_libraries(ulib PRIVATE libc++.1.tbd)
+if(MACOS)
+	target_link_libraries(ulib PRIVATE /opt/homebrew/lib/libzmq.a)
+	target_link_libraries(ulib PRIVATE /opt/homebrew/lib/libssl.a)
+	target_link_libraries(ulib PRIVATE /opt/homebrew/lib/libcrypto.a)
+	target_link_libraries(ulib PRIVATE libc++.1.tbd)
+endif()
 

@@ -58,6 +58,7 @@ typedef enum UMSocketError
     UMSocketError_no_such_process           = -46, /* ESRCH */
     UMSocketError_host_down                 = -47,  /* EHOSTDOWN*/
     UMSocketError_connection_aborted        = -53,  /* ECONNABORTED */
+    UMSocketError_is_not_a_stream           = -99,  /* ENOSTR */
     UMSocketError_is_already_connected      = -106, /* EISCONN & EALREADY */
     UMSocketError_not_connected             = -107, /* ENOTCONN */
     UMSocketError_in_progress               = -115, /* EINPROGRESS */

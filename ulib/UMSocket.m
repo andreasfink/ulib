@@ -1228,6 +1228,11 @@ static int SSL_smart_shutdown(SSL *ssl)
 
 - (UMSocketError)sendBytes:(void *)bytes length:(ssize_t)length
 {
+    return [self sendBytes:bytes length:length blocking:YES];
+}
+
+- (UMSocketError)sendBytes:(void *)bytes length:(ssize_t)length blocking:(BOOL)doBlock
+{
     ssize_t i;
     int eno = 0;
     
@@ -1259,21 +1264,28 @@ static int SSL_smart_shutdown(SSL *ssl)
                 return [UMSocket umerrFromErrno:ECONNREFUSED];
             }
             
-            
-            UMSocketError err = [self switchToBlocking];
-            if(err!= UMSocketError_no_error)
+            UMSocketError err = UMSocketError_no_error;
+            if(doBlock)
             {
-                NSLog(@"can not switch to blocking mode ");
+                err = [self switchToBlocking];
+                if(err!= UMSocketError_no_error)
+                {
+                    NSLog(@"can not switch to blocking mode ");
+                }
             }
             ummutex_lock(_dataLock);
             i = [_cryptoStream writeBytes:bytes length:length errorCode:&eno];
             ummutex_unlock(_dataLock);
-            err = [self switchToNonBlocking];
-            if(err!= UMSocketError_no_error)
+            
+            err = UMSocketError_no_error;
+            if(doBlock)
             {
-                NSLog(@"can not switch to non blocking mode ");
+                err = [self switchToNonBlocking];
+                if(err!= UMSocketError_no_error)
+                {
+                    NSLog(@"can not switch to non blocking mode ");
+                }
             }
-
             if (i != length)
             {
                 NSString *msg = [NSString stringWithFormat:@"[UMSocket: sendBytes] socket %d (status %d) returns %d errno = %d",_sock,_status, [UMSocket umerrFromErrno:eno],eno];
@@ -1333,7 +1345,16 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
         return UMSocketError_no_error;
     }
-    return [self sendBytes:(void *)[data bytes] length:[data length]];
+    return [self sendBytes:(void *)[data bytes] length:[data length] blocking:YES];
+}
+
+-(UMSocketError) sendUnblockedData: (NSData *)data
+{
+    if([data length] == 0)
+    {
+        return UMSocketError_no_error;
+    }
+    return [self sendBytes:(void *)[data bytes] length:[data length] blocking:NO];
 }
 
 - (UMSocketError) sendCString:(char *)str
@@ -1342,7 +1363,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     {
         return UMSocketError_no_error;
     }
-    return [self sendBytes:(void *)str length:strlen(str)];
+    return [self sendBytes:(void *)str length:strlen(str) blocking:YES];
 }
 
 - (UMSocketError) sendString:(NSString *)str
@@ -1352,7 +1373,7 @@ static int SSL_smart_shutdown(SSL *ssl)
     @autoreleasepool
     {
         data = [str dataUsingEncoding:NSUTF8StringEncoding];
-        ret =  [self sendBytes:(void *)[data bytes] length:[data length]];
+        ret =  [self sendBytes:(void *)data.bytes length:(ssize_t)data.length blocking:YES];
         return ret;
     }
 }

@@ -799,6 +799,53 @@ static NSArray *        _machineCPUIDs = NULL;
     return NULL;
 #endif
 }
+
++ (NSArray<NSString *>*)readableFilesInDirectory:(NSString *)directory
+{
+    @autoreleasepool
+    {
+        NSMutableArray *theArray=[NSMutableArray array];
+
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSDirectoryEnumerator *dirEnumerator = [fm enumeratorAtPath:directory];
+        for (NSString *path in dirEnumerator)
+        {
+            NSString *fullPath = [NSString stringWithFormat:@"%@/%@",directory,path];
+            BOOL isDirectory = YES;
+            BOOL hasFile = [fm fileExistsAtPath:fullPath isDirectory:&isDirectory];
+            if((isDirectory==NO) && (hasFile))
+            {
+                if([fm isReadableFileAtPath:fullPath])
+                {
+                    [theArray addObject:fullPath];
+                }
+            }
+        }
+        return theArray;
+    }
+}
+
++ (NSArray<NSString *>*)filesInDirectory:(NSString *)directory
+{
+    @autoreleasepool
+    {
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSDirectoryEnumerator *dirEnumerator = [fm enumeratorAtPath:directory];
+        NSMutableArray *theArray=[NSMutableArray array];
+        for (NSString *path in dirEnumerator)
+        {
+            NSString *fullPath = [NSString stringWithFormat:@"%@/%@",directory,path];
+            BOOL isDirectory = YES;
+            BOOL hasFile = [fm fileExistsAtPath:fullPath isDirectory:&isDirectory];
+            if((isDirectory==NO) && (hasFile))
+            {
+                [theArray addObject:fullPath];
+            }
+        }
+        return theArray;
+    }
+}
+
 @end
 
 

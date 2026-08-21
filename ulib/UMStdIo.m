@@ -52,7 +52,7 @@
 }
 
 
-- (unsigned long)readShortLine:(NSString **)out
+- (int)readShortLine:(NSString **)out
 {
     char buffer[1024];
     memset (buffer,0x00,sizeof(buffer));
@@ -73,7 +73,7 @@
         {
             *out = [d stringValue];
         }
-        return len;
+        return 0;
     }
     return errno;
 }

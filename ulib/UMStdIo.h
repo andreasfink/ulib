@@ -26,6 +26,6 @@
 - (int)writeStringNL:(NSString *)s;
 - (int)writeErrorString:(NSString *)s;
 - (int)writeErrorStringNL:(NSString *)s;
-- (unsigned long)readShortLine:(NSString **)out;
+- (int)readShortLine:(NSString **)out;
 @end
 

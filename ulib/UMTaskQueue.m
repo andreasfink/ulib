@@ -48,13 +48,13 @@
                            enableLogging:(BOOL)enableLog
 {
     UMAssert(n.length > 0,@"UMTaskQueue initWithNumberOfThreads:name:enableLogging: has no name being passed");
-    if(workerThreadCount > 8)
+    if(workerThreadCount > 16)
     {
         NSLog(@"UMTaskQueue initWithNumberOfThreads=%lu (%@) really want that many?",workerThreadCount,n);
         if(workerThreadCount > 64)
         {
-            NSLog(@"UMTaskQueue initWithNumberOfThreads=%lu (%@) limiting to 8?",workerThreadCount,n);
-            workerThreadCount = 8;
+            NSLog(@"UMTaskQueue initWithNumberOfThreads=%lu (%@) limiting to 64?",workerThreadCount,n);
+            workerThreadCount = 64;
         }
     }
     self = [super init];

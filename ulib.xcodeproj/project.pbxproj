@@ -10,7 +10,6 @@
 		A6059F042D77706200911CEF /* UMDirtyBoolean.h in Headers */ = {isa = PBXBuildFile; fileRef = A6059F022D77706200911CEF /* UMDirtyBoolean.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6059F052D77706200911CEF /* UMDirtyBoolean.m in Sources */ = {isa = PBXBuildFile; fileRef = A6059F032D77706200911CEF /* UMDirtyBoolean.m */; };
 		A64994C22E0BCD99006873AC /* framework.h in Headers */ = {isa = PBXBuildFile; fileRef = A64994C12E0BCD91006873AC /* framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A654167A2EB8834F00763E9A /* UMDeprecatedMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A65416792EB8834F00763E9A /* UMDeprecatedMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A66B83363036EE9200F8B8DA /* UMStdIo.m in Sources */ = {isa = PBXBuildFile; fileRef = A66B83353036EE9200F8B8DA /* UMStdIo.m */; };
 		A66B83373036EE9200F8B8DA /* UMStdIo.h in Headers */ = {isa = PBXBuildFile; fileRef = A66B83343036EE9200F8B8DA /* UMStdIo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A66EB0B52ABDDC0600C34D40 /* buildnumber.c in Sources */ = {isa = PBXBuildFile; fileRef = A66EB0B42ABDDC0600C34D40 /* buildnumber.c */; };
@@ -351,7 +350,6 @@
 		A6059F022D77706200911CEF /* UMDirtyBoolean.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyBoolean.h; sourceTree = "<group>"; };
 		A6059F032D77706200911CEF /* UMDirtyBoolean.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDirtyBoolean.m; sourceTree = "<group>"; };
 		A64994C12E0BCD91006873AC /* framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = framework.h; sourceTree = "<group>"; };
-		A65416792EB8834F00763E9A /* UMDeprecatedMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDeprecatedMacros.h; sourceTree = "<group>"; };
 		A66B83343036EE9200F8B8DA /* UMStdIo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMStdIo.h; sourceTree = "<group>"; };
 		A66B83353036EE9200F8B8DA /* UMStdIo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMStdIo.m; sourceTree = "<group>"; };
 		A66EB0B32ABDDC0600C34D40 /* buildnumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buildnumber.h; sourceTree = SOURCE_ROOT; };
@@ -393,7 +391,6 @@
 		A66EB0E72ABDDCD000C34D40 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		A66EB0E92ABDDCF500C34D40 /* debian */ = {isa = PBXFileReference; lastKnownFileType = folder; path = debian; sourceTree = "<group>"; };
 		A66EB0EA2ABDDEB300C34D40 /* SupportingFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SupportingFiles; sourceTree = "<group>"; };
-		A67502B12EC62A340027A592 /* UMDeprecatedMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDeprecatedMacros.h; sourceTree = "<group>"; };
 		A683D83A2ABD905E00C34D40 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = /usr/local/lib/libcrypto.a; sourceTree = "<absolute>"; };
 		A683D83E2ABD906900C34D40 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = /usr/local/lib/libssl.a; sourceTree = "<absolute>"; };
 		A683D8402ABD906E00C34D40 /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = /usr/local/lib/libzmq.a; sourceTree = "<absolute>"; };
@@ -803,7 +800,6 @@
 		A69BA4572ABD850000C34D40 /* ulib */ = {
 			isa = PBXGroup;
 			children = (
-				A67502B12EC62A340027A592 /* UMDeprecatedMacros.h */,
 				A64994C12E0BCD91006873AC /* framework.h */,
 				A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */,
 				A683D8922ABD980A00C34D40 /* dmi_decode_path.h.in */,
@@ -833,7 +829,6 @@
 				A683D8C82ABD980B00C34D40 /* ulib.h */,
 				A69BA4702ABD854B00C34D40 /* ulib.m */,
 				A683D8E42ABD980B00C34D40 /* UMAssert.h */,
-				A65416792EB8834F00763E9A /* UMDeprecatedMacros.h */,
 				A683D85D2ABD980900C34D40 /* UMAtomicCounter.h */,
 				A683D98B2ABD980E00C34D40 /* UMAtomicCounter.m */,
 				A683D9982ABD980E00C34D40 /* UMAtomicDate.h */,
@@ -1176,7 +1171,6 @@
 				A683DAA12ABD980F00C34D40 /* UMStatistic.h in Headers */,
 				A683DA8C2ABD980F00C34D40 /* UMQueueNull.h in Headers */,
 				A683DA682ABD980E00C34D40 /* UMHTTPResponseCode.h in Headers */,
-				A654167A2EB8834F00763E9A /* UMDeprecatedMacros.h in Headers */,
 				A683D9C62ABD980E00C34D40 /* UMHTTPAuthenticationStatus.h in Headers */,
 				A683DA592ABD980E00C34D40 /* UMLayerTask.h in Headers */,
 				A683DA932ABD980F00C34D40 /* UMTokenizerWord.h in Headers */,
@@ -1738,7 +1732,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.1.1;
 				DEAD_CODE_STRIPPING = YES;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DEPLOYMENT_LOCATION = YES;
 				DEVELOPMENT_TEAM = HG8655K94F;
 				DSTROOT = "/Library/Application Support/";
@@ -1783,7 +1777,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.1.1;
 				DEAD_CODE_STRIPPING = YES;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DEPLOYMENT_LOCATION = YES;
 				DEVELOPMENT_TEAM = HG8655K94F;
 				DSTROOT = "/Library/Application Support/";

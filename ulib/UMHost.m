@@ -428,6 +428,10 @@
     {
         return NULL;
     }
+    if(result!=1)
+    {
+        return NULL;
+    }
     char hostBuffer[NI_MAXHOST];
     memset(hostBuffer,0,sizeof(hostBuffer));
     int err = getnameinfo(sa,salen,&hostBuffer[0],sizeof(hostBuffer),NULL,0,NI_NAMEREQD);

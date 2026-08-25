@@ -18,6 +18,24 @@
         _currentValue = s;
         _previousValue = NULL;
         _isDirty = YES;
+        _sizeLimit = 0;
+    }
+    return self;
+}
+
+- (UMDirtyString *)initWithString:(NSString *)s limit:(int)limit
+{
+    self = [super init];
+    if(self)
+    {
+        if(limit>0)
+        {
+            _sizeLimit = limit;
+            s = [s substringToIndex:_sizeLimit];
+        }
+        _currentValue = s;
+        _previousValue = NULL;
+        _isDirty = YES;
     }
     return self;
 }
@@ -30,6 +48,10 @@
 
 - (void)setStringValue:(NSString *)s
 {
+    if(_sizeLimit)
+    {
+        s = [s substringToIndex:_sizeLimit];
+    }
     _previousValue = _currentValue;
     _currentValue = s;
     if(![s isEqualToString:_previousValue])

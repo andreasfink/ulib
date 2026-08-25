@@ -36,7 +36,7 @@
 @property(readwrite,strong) id reference;
 @property(readwrite,strong) NSURLConnection *urlCon;
 @property(readwrite,assign) NSInteger responseStatusCode;
-@property(readonly,copy) NSData *responseData;
+@property(readwrite,strong) NSData *responseData;
 
 
 - (UMHTTPClientRequest *)initWithURLString:(NSString *)urls

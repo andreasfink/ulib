@@ -31,7 +31,10 @@
         if(limit>0)
         {
             _sizeLimit = limit;
-            s = [s substringToIndex:_sizeLimit];
+            if(s.length > _sizeLimit)
+            {
+                s = [s substringToIndex:_sizeLimit];
+            }
         }
         _currentValue = s;
         _previousValue = NULL;

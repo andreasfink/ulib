@@ -84,7 +84,7 @@
 {
     UMHTTPClientRequest *creq = (UMHTTPClientRequest *)ref;
     creq.reference = NULL;
-    creq.responseData = data;
+    creq.responseData = [data mutableCopy];
     creq.responseStatusCode = statusCode;
 }
 

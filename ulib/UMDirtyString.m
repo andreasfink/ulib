@@ -6,6 +6,7 @@
 //
 
 #import "UMDirtyString.h"
+#import <ulib/NSString+ulib.h>
 
 @implementation UMDirtyString
 
@@ -28,17 +29,10 @@
     self = [super init];
     if(self)
     {
-        if(limit>0)
-        {
-            _sizeLimit = limit;
-            if(s.length > _sizeLimit)
-            {
-                s = [s substringToIndex:_sizeLimit];
-            }
-        }
-        _currentValue = s;
+        _currentValue = [s limitToLength:limit];
         _previousValue = NULL;
         _isDirty = YES;
+        _sizeLimit = limit;
     }
     return self;
 }

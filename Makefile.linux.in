@@ -25,7 +25,7 @@ MOFILES  = $(MFILES:.m=.m.o)
 COFILES  = $(CFILES:.m=.c.o)
 OFILES = $(MOFILES) $(COFILES)
 
-INCLUDEDIRS=-I/usr/include/postgresql -I/usr/include/mysql-I/usr/include/libxml2 -I Classes/UniversalConfig -I Classes/UniversalHTTP -I Classes/UniversalJson -I Classes/UniversalLayers -I Classes/UniversalLog -I Classes/UniversalObject -I Classes/UniversalQueue -I Classes/UniversalRedis -I Classes/UniversalSocket -I Classes/UniversalUtilities -I Classes/UniversalTokenizer -I Classes/UniversalPlugin -I Classes/UniversalSerial -I Classes 
+INCLUDEDIRS=-I. -I/usr/include/postgresql -I/usr/include/mysql-I/usr/include/libxml2 -I Classes/UniversalConfig -I Classes/UniversalHTTP -I Classes/UniversalJson -I Classes/UniversalLayers -I Classes/UniversalLog -I Classes/UniversalObject -I Classes/UniversalQueue -I Classes/UniversalRedis -I Classes/UniversalSocket -I Classes/UniversalUtilities -I Classes/UniversalTokenizer -I Classes/UniversalPlugin -I Classes/UniversalSerial -I Classes 
 
 
 ${LIB}: ${OFILES}

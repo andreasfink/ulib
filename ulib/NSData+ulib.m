@@ -197,22 +197,26 @@
 
 - (NSData *)hex
 {
-    NSMutableData *r;
-    NSData *result;
-    int i;
-    NSUInteger n;
-    const unsigned char *src;
-    char *dst;
-    
-    r = [[NSMutableData alloc] initWithCapacity: 2 * [self length]];
-    n = [self length];
-    src = [self bytes];
-    dst = [r mutableBytes];
-    for(i=0;i<n;i++)
+	const char hexchar[] = "0123456789ABCDEF";
+	const unsigned char *inbytes 		= (const unsigned char *)self.bytes;
+	NSUInteger inlen 	= self.length;
+    int outlen 			= inlen * 2;
+	char *outbytes = calloc(1,outlen);
+	if(outbytes==NULL)
+	{
+		return NULL;
+	}
+	int outindex = 0;
+    for(int inindex=0;inindex<inlen;inindex++)
     {
-        snprintf(&dst[i*2],2,"%02X",src[i]);
+    	const unsigned char byte = inbytes[inindex];
+    	const unsigned char high = (byte & 0xF0)>> 4;
+    	const unsigned char low = (byte & 0x0F)>> 0;
+    	outbytes[outindex++] = hexchar[high];
+    	outbytes[outindex++] = hexchar[low];    	
     }
-    result = [NSData dataWithData: r];
+    NSData *result = [NSData dataWithBytes:outbytes length:outindex];
+    free(outbytes);
     return result;
 }
 

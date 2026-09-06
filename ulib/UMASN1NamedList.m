@@ -1,0 +1,229 @@
+//
+//  UMASN1NamedList.m
+//  ulibasn1
+//
+//  Created by Andreas Fink on 19.05.2025.
+//  Copyright © 2025 Andreas Fink (andreas@fink.org). All rights reserved.
+//
+
+#import <ulib/ulib.h>
+#import <ulibasn1/UMASN1NamedList.h>
+
+@implementation UMASN1NamedList
+
+
+//#define DEBUG   1
+
+- (UMASN1NamedList *)initWithDirectory:(NSString *)dir name:(NSString *)name
+{
+    NSString *path = [NSString stringWithFormat:@"%@/%@",dir,name.urlencode];
+    return [self initWithPath:path name:name];
+
+}
+
+- (UMASN1NamedList *)initWithPath:(NSString *)path name:(NSString *)name
+{
+    self = [super init];
+    if(self)
+    {
+        _namedlistEntries = [[UMSynchronizedSortedDictionary alloc]init];
+        _namedListLock  = [[UMMutex alloc]initWithName:@"UMASN1NamedList-lock"];
+        _path = path;
+        _name = name;
+    }
+    return self;
+}
+
+- (UMASN1NamedList *)init
+{
+    return [self initWithPath:NULL name:NULL];
+}
+
+- (void)addEntry:(NSString *)str
+{
+    UMAssert(_namedlistEntries!=NULL,@"_entries can not be NULL");
+    UMAssert(_namedListLock!=NULL,@"_lock should not be NULL");
+    if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
+    {
+
+        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class", _namedlistEntries.description);
+        return;
+    }
+    if(![str isKindOfClass:[NSString class]])
+    {
+        NSLog(@"you can not add anything else than a string");
+        return;
+    }
+    if(str.length == 0)
+    {
+        NSLog(@"you can not add empty string");
+        return;
+    }
+    UMAssert(_namedListLock!=NULL,@"_lock is NULL");
+    
+        ummutex_lock(_namedListLock);
+    _namedlistEntries[str] = str;
+    _dirty=YES;
+        ummutex_unlock(_namedListLock);
+#ifdef DEBUG
+    NSLog(@"UMASN1NamedList addEntry:%@",str);
+    [self dump];
+#endif
+}
+
+- (void)removeEntry:(NSString *)str
+{
+    UMAssert(_namedlistEntries!=NULL,@"_entries can not be NULL");
+    UMAssert(_namedListLock!=NULL,@"_lock should not be NULL");
+    if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
+    {
+        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@", [_namedlistEntries description]);
+        return;
+    }
+
+    if(![str isKindOfClass:[NSString class]])
+    {
+        NSLog(@"you can not remove anything else than a string");
+        return;
+    }
+    if(str.length == 0)
+    {
+        NSLog(@"you can not remove empty string");
+        return;
+    }
+        ummutex_lock(_namedListLock);
+    [_namedlistEntries removeObjectForKey:str];
+    _dirty=YES;
+        ummutex_unlock(_namedListLock);
+#ifdef DEBUG
+    NSLog(@"UMASN1NamedList removeEntry:%@",str);
+    [self dump];
+#endif
+}
+
+- (BOOL)containsEntry:(NSString *)str
+{
+    BOOL found = NO;
+        ummutex_lock(_namedListLock);
+    NSString *s =  _namedlistEntries[str];
+    if(s!=NULL)
+    {
+        found = YES;
+    }
+        ummutex_unlock(_namedListLock);
+    return found;
+}
+
+
+- (NSArray *)allEntries
+{
+    NSArray *a;
+        ummutex_lock(_namedListLock);
+    a = [_namedlistEntries allKeys];
+        ummutex_unlock(_namedListLock);
+    return a;
+}
+
+- (void)flush
+{
+        ummutex_lock(_namedListLock);
+    if(_dirty)
+    {
+        NSArray *keys = [_namedlistEntries allKeys];
+        NSString *output = [keys componentsJoinedByString:@"\n"];
+        NSError *err = NULL;
+        [output writeToFile:_path atomically:YES encoding:NSUTF8StringEncoding error:&err];
+        if(err)
+        {
+            NSLog(@"Error while writing namedlist %@ to %@: %@",_name,_path,err);
+        }
+#ifdef DEBUG
+        else
+        {
+            NSLog(@"Written namedlist '%@ to file '%@'\nContent:\n%@",_name,_path,output);
+        }
+#endif
+        _dirty = NO;
+    }
+        ummutex_unlock(_namedListLock);
+#ifdef DEBUG
+//    NSLog(@"UMASN1NamedList flush");
+//    [self dump];
+#endif
+}
+
+- (void)reload
+{
+    [self loadFromFile];
+}
+
+- (void)loadFromFile
+{
+    NSError *err = NULL;
+    NSString *s = [NSString stringWithContentsOfFile:_path encoding:NSUTF8StringEncoding error:&err];
+    if(err)
+    {
+        NSLog(@"Error while opening file %@: %@",_path,err);
+        return;
+    }
+    NSArray *lines = [s componentsSeparatedByString:@"\n"];
+    UMSynchronizedSortedDictionary *list = [[UMSynchronizedSortedDictionary alloc]init];
+    for(NSString *line in lines)
+    {
+        NSString *value = [line stringByTrimmingCharactersInSet:[UMObject whitespaceAndNewlineCharacterSet]];
+        if(value.length > 0) /* we skip empty lines */
+        {
+            list[value]=value;
+        }
+    }
+    ummutex_lock(_namedListLock);
+    _namedlistEntries = list;
+    _dirty = NO;
+    ummutex_unlock(_namedListLock);
+#ifdef DEBUG
+    [self dump];
+#endif
+}
+
+- (void)dump
+{
+    NSLog(@"UMASN1NamedList dump:");
+    NSLog(@"_name: %@",_name);
+    NSLog(@"_path: %@",_path);
+    NSLog(@"_dirty: %@",@(_dirty));
+    NSLog(@"_name: %@",_name);
+    NSLog(@"_namedlistEntries: %@",_namedlistEntries);
+
+//    NSLog(@"[UMASN1NamedList %p dump] %@",self,[self description]);
+}
+
+- (NSString *)description
+{
+    UMSynchronizedSortedDictionary *dict = [[UMSynchronizedSortedDictionary alloc]init];
+    dict[@"_name"] = (_name ? _name : @"(null)");
+    dict[@"_path"] = (_path ? _path : @"(null)");
+    dict[@"_dirty"] = (_dirty ? @"YES" : @"NO");
+    if(![_namedlistEntries isKindOfClass:[UMSynchronizedSortedDictionary class]])
+    {
+        NSObject *o = _namedlistEntries;
+        NSString *s = o.description;
+        NSLog(@"_namedlistEntries is not UMSynchronizedSortedDictionary but %@ class",s);
+    }
+    else
+    {
+        dict[@"_namedlistEntries"] = (_namedlistEntries ? _namedlistEntries : @"(null)");
+    }
+    return [dict jsonString];
+}
+
+- (UMASN1NamedList *)copyWithZone:(NSZone *)zone
+{
+    UMASN1NamedList *n = [[UMASN1NamedList allocWithZone:zone]init];
+    n->_name = _name;
+    n->_path = _path;
+    n->_dirty = _dirty;
+    n->_namedlistEntries = [_namedlistEntries copyWithZone:zone];
+    return n;
+}
+
+@end

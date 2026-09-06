@@ -8,7 +8,7 @@
 // Version 3 from 29 June 2007 and other commercial licenses available by
 // the author.
 
-#import <ulibasn1/UMASN1Choice.h>
+#import <ulib/UMASN1Choice.h>
 
 @implementation UMASN1Choice
 

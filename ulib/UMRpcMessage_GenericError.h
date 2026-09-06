@@ -6,7 +6,7 @@
 //
 
 
-#import <ulibasn1/UMRpcMessage.h>
+#import <ulib/UMRpcMessage.h>
 
 typedef enum UMRpcMessageGenericErrorTAG
 {

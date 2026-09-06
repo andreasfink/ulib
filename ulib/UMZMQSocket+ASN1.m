@@ -8,7 +8,7 @@
 
 #import "UMZMQSocket+ASN1.h"
 
-#import <ulibasn1/UMASN1Object.h>
+#import <ulib/UMASN1Object.h>
 
 @implementation UMZMQSocket(ASN1)
 

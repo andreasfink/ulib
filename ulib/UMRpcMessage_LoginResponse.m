@@ -5,11 +5,11 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
-#import <ulibasn1/UMRpcMessage_LoginResponse.h>
-#import <ulibasn1/UMRpcMessageType.h>
-#import <ulibasn1/UMASN1UTF8String.h>
-#import <ulibasn1/UMASN1Integer.h>
-#import <ulibasn1/UMRpcMacros.h>
+#import <ulib/UMRpcMessage_LoginResponse.h>
+#import <ulib/UMRpcMessageType.h>
+#import <ulib/UMASN1UTF8String.h>
+#import <ulib/UMASN1Integer.h>
+#import <ulib/UMRpcMacros.h>
 
 @implementation UMRpcMessage_LoginResponse
 

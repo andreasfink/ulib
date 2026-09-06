@@ -9,7 +9,7 @@
 // the author.
 
 
-#import <ulibasn1/UMASN1EndOfContents.h>
+#import <ulib/UMASN1EndOfContents.h>
 
 @implementation UMASN1EndOfContents
 

@@ -5,13 +5,13 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
-#import <ulibasn1/UMRpcHandler.h>
-#import <ulibasn1/UMRpcSession.h>
-#import <ulibasn1/UMRpcServer.h>
-#import <ulibasn1/UMRpcClient.h>
-#import <ulibasn1/UMRpcMessage.h>
-#import <ulibasn1/UMRpcFlag.h>
-#import <ulibasn1/UMRpcMessageDecoder.h>
+#import <ulib/UMRpcHandler.h>
+#import <ulib/UMRpcSession.h>
+#import <ulib/UMRpcServer.h>
+#import <ulib/UMRpcClient.h>
+#import <ulib/UMRpcMessage.h>
+#import <ulib/UMRpcFlag.h>
+#import <ulib/UMRpcMessageDecoder.h>
 
 @implementation UMRpcHandler
 

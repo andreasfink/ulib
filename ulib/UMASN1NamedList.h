@@ -6,7 +6,7 @@
 //  Copyright © 2025 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulibasn1/UMASN1Sequence.h>
+#import <ulib/UMASN1Sequence.h>
 
 @interface UMASN1NamedList : UMASN1Sequence
 {

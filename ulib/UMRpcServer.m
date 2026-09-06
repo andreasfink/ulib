@@ -5,16 +5,17 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
-#import <ulibasn1/UMRpcServer.h>
-#import <ulibasn1/UMRpcCommandHandler.h>
-#import <ulibasn1/UMRpcHandler.h>
-#import <ulibasn1/UMRpcMessageType.h>
-#import <ulibasn1/UMRpcMessage.h>
-#import <ulibasn1/UMRpcMessage_GenericError.h>
-#import <ulibasn1/UMRpcSession.h>
-#import <ulibasn1/UMRpcSessionHandler.h>
-#import <ulibasn1/UMASN1UTF8String.h>
-#import <ulibasn1/UMRpcMessageDecoder.h>
+#import <ulib/UMRpcServer.h>
+#import <ulib/UMRpcCommandHandler.h>
+#import <ulib/UMRpcHandler.h>
+#import <ulib/UMRpcMessageType.h>
+#import <ulib/UMRpcMessage.h>
+#import <ulib/UMRpcMessage_GenericError.h>
+#import <ulib/UMRpcSession.h>
+#import <ulib/UMRpcSessionHandler.h>
+#import <ulib/UMRpcMessageDecoder.h>
+#import <ulib/UMASN1UTF8String.h>
+#import <ulib/UMLogFeed.h>
 
 @implementation UMRpcServer
 

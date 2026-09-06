@@ -10,7 +10,7 @@
 
 
 
-#import <ulibasn1/UMASN1Object.h>
+#import <ulib/UMASN1Object.h>
 
 @interface UMASN1OctetString : UMASN1Object
 

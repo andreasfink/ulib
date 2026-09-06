@@ -5,7 +5,7 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
-#import <ulibasn1/UMASN1Sequence.h>
+#import <ulib/UMASN1Sequence.h>
 
 /* callbacks should have the syntax
 - (NSNumber *)someselectorname:(UMRpcMessage *)msg session:(UMRpcSession *)session

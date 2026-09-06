@@ -5,10 +5,10 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
-#import <ulibasn1/UMRpcMessage_GenericError.h>
-#import <ulibasn1/UMRpcMessageType.h>
+#import <ulib/UMRpcMessage_GenericError.h>
+#import <ulib/UMRpcMessageType.h>
 
-#import <ulibasn1/UMRpcMacros.h>
+#import <ulib/UMRpcMacros.h>
 
 @implementation UMRpcMessage_GenericError
 

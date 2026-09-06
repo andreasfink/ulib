@@ -6,8 +6,7 @@
 //  Copyright © 2025 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/ulib.h>
-#import <ulibasn1/UMASN1NamedList.h>
+#import <ulib/UMASN1NamedList.h>
 
 @implementation UMASN1NamedList
 

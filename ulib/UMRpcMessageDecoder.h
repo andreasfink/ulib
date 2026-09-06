@@ -5,7 +5,7 @@
 //  Created by Andreas Fink on 22.08.2026.
 //
 
-#import <ulibasn1/UMRpcMessage.h>
+#import <ulib/UMRpcMessage.h>
 
 
 @interface UMRpcMessageDecoder : UMObject

@@ -5,10 +5,13 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
-#import <ulibasn1/UMASN1Sequence.h>
-#import <ulibasn1/UMRpcError.h>
-#import <ulibasn1/UMRpcMessage.h>
-#import <ulibasn1/UMRpcSessionHandler.h>
+#import <ulib/UMASN1Sequence.h>
+#import <ulib/UMRpcError.h>
+#import <ulib/UMRpcMessage.h>
+#import <ulib/UMRpcSessionHandler.h>
+#import <ulib/UMSocket.h>
+#import <ulib/UMLogLevel.h>
+#import <ulib/UMLogFeed.h>
 
 @class UMRpcHandler;
 @class UMRpcSession;

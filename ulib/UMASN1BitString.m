@@ -9,7 +9,16 @@
 // the author.
 
 
-#import <ulibasn1/UMASN1BitString.h>
+#import <ulib/UMASN1BitString.h>
+#import <ulib/UMUtil.h>
+#import <ulib/UMAssert.h>
+#import <ulib/UMSynchronizedArray.h>
+#import <ulib/UMSynchronizedDictionary.h>
+#import <ulib/UMSynchronizedSortedDictionary.h>
+#import <ulib/NSData+ulib.h>
+#import <ulib/NSMutableData+ulib.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSMutableString+ulib.h>
 
 @implementation UMASN1BitString
 

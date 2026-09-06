@@ -5,9 +5,9 @@
 //  Created by Andreas Fink on 21.08.2026.
 //
 
-#import <ulibasn1/UMRpcMessage_TestResponse.h>
-#import <ulibasn1/UMRpcMessageType.h>
-#import <ulibasn1/UMRpcMacros.h>
+#import <ulib/UMRpcMessage_TestResponse.h>
+#import <ulib/UMRpcMessageType.h>
+#import <ulib/UMRpcMacros.h>
 
 
 @implementation UMRpcMessage_TestResponse

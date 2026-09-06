@@ -6,8 +6,8 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulibasn1/UMASN1UTF8String.h>
-#import <ulibasn1/UMASN1Tag.h>
+#import <ulib/UMASN1UTF8String.h>
+#import <ulib/UMASN1Tag.h>
 
 @implementation UMASN1UTF8String
 

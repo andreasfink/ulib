@@ -5,9 +5,9 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
-#import <ulibasn1/UMRpcMessage.h>
-#import <ulibasn1/UMRpcMessageType.h>
-#import <ulibasn1/UMRpcError.h>
+#import <ulib/UMRpcMessage.h>
+#import <ulib/UMRpcMessageType.h>
+#import <ulib/UMRpcError.h>
 
 @implementation UMRpcMessage
 

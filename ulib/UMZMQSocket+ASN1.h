@@ -6,7 +6,7 @@
 //  Copyright © 2022 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/ulib.h>
+#import <ulib/UMZMQSocket.h>
 
 @class UMASN1Object;
 

@@ -9,8 +9,8 @@
 // the author.
 
 
-#import <ulibasn1/UMASN1Object.h>
-#import <ulibasn1/UMASN1Tag.h>
+#import <ulib/UMASN1Object.h>
+#import <ulib/UMASN1Tag.h>
 
 #define NIBBLE_TO_HEX(b)    (((b)<0x0A) ? ('0'+(b)) : ('A'+(b)-0x0A))
 

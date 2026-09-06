@@ -5,12 +5,12 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
-#import <ulibasn1/UMASN1Object.h>
-#import <ulibasn1/UMASN1Sequence.h>
-#import <ulibasn1/UMASN1UTF8String.h>
-#import <ulibasn1/UMASN1Integer.h>
-
-#import <ulibasn1/UMRpcFlag.h>
+#import <ulib/UMASN1Object.h>
+#import <ulib/UMASN1Sequence.h>
+#import <ulib/UMASN1UTF8String.h>
+#import <ulib/UMASN1Integer.h>
+#import <ulib/UMSynchronizedSortedDictionary.h>
+#import <ulib/UMRpcFlag.h>
 
 typedef enum UMRpcMessageTAG
 {

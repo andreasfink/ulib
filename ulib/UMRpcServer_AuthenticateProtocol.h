@@ -5,7 +5,7 @@
 //  Created by Andreas Fink on 21.08.2026.
 //
 
-#import <ulibasn1/UMRpcError.h>
+#import <ulib/UMRpcError.h>
 @class UMRpcSession;
 
 @protocol UMRpcServer_AuthenticateProtocol<NSObject>

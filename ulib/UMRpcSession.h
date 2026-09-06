@@ -5,8 +5,15 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
-#import <ulibasn1/UMASN1Sequence.h>
-#import <ulibasn1/UMRpcError.h>
+#import <ulib/UMASN1Sequence.h>
+#import <ulib/UMRpcError.h>
+#import <ulib/UMTimer.h>
+#import <ulib/UMSynchronizedDictionary.h>
+#import <ulib/UMSocket.h>
+#import <ulib/UMLogFeed.h>
+#import <ulib/UMLogLevel.h>
+#import <ulib/UMUtil.h>
+#import <ulib/UMAssert.h>
 
 @class UMRpcServer;
 @class UMRpcClient;

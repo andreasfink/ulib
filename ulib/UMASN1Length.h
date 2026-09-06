@@ -9,7 +9,7 @@
 // the author.
 
 
-#import <ulib/ulib.h>
+#import <ulib/UMObject.h>
 
 @interface UMASN1Length : UMObject
 {

@@ -5,20 +5,21 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
-#import <ulibasn1/UMRpcClient.h>
-#import <ulibasn1/UMRpcError.h>
-#import <ulibasn1/UMRpcClient.h>
-#import <ulibasn1/UMRpcHandler.h>
-#import <ulibasn1/UMRpcSession.h>
-#import <ulibasn1/UMRpcMessage_LoginRequest.h>
-#import <ulibasn1/UMRpcMessage_LoginResponse.h>
-#import <ulibasn1/UMRpcMessage_LogoutRequest.h>
-#import <ulibasn1/UMRpcMessage_LogoutResponse.h>
-#import <ulibasn1/UMRpcMessage_HeartbeatRequest.h>
-#import <ulibasn1/UMRpcMessage_HeartbeatResponse.h>
-#import <ulibasn1/UMRpcSessionHandler.h>
-#import <ulibasn1/UMRpcMessageType.h>
-#import <ulibasn1/UMRpcMessageDecoder.h>
+#import <ulib/UMRpcClient.h>
+#import <ulib/UMRpcError.h>
+#import <ulib/UMRpcClient.h>
+#import <ulib/UMRpcHandler.h>
+#import <ulib/UMRpcSession.h>
+#import <ulib/UMRpcMessage_LoginRequest.h>
+#import <ulib/UMRpcMessage_LoginResponse.h>
+#import <ulib/UMRpcMessage_LogoutRequest.h>
+#import <ulib/UMRpcMessage_LogoutResponse.h>
+#import <ulib/UMRpcMessage_HeartbeatRequest.h>
+#import <ulib/UMRpcMessage_HeartbeatResponse.h>
+#import <ulib/UMRpcSessionHandler.h>
+#import <ulib/UMRpcMessageType.h>
+#import <ulib/UMRpcMessageDecoder.h>
+#import <ulib/UMHost.h>
 
 @implementation UMRpcClient
 

@@ -9,8 +9,8 @@
 // the author.
 
 
-#import <ulibasn1/UMASN1Length.h>
-
+#import <ulib/UMASN1Length.h>
+#import <ulib/UMUtil.h>
 
 static inline uint8_t grab_byte(NSData *data,NSUInteger *pos, id obj);
 

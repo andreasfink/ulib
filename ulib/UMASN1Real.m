@@ -6,7 +6,10 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulibasn1/UMASN1Real.h>
+#import <ulib/UMASN1Real.h>
+#import <ulib/UMUtil.h>
+#import <ulib/NSData+ulib.h>
+#import <ulib/NSMutableData+ulib.h>
 
 #include <math.h>
 

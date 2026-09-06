@@ -5,7 +5,7 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
-#import <ulibasn1/UMRpcMessage.h>
+#import <ulib/UMRpcMessage.h>
 
 
 @interface UMRpcMessage_HeartbeatRequest : UMRpcMessage

@@ -9,7 +9,9 @@
 // the author.
 
 
-#import <ulibasn1/UMASN1OctetString.h>
+#import <ulib/UMASN1OctetString.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSMutableString+ulib.h>
 
 @implementation UMASN1OctetString
 

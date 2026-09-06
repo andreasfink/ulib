@@ -9,9 +9,9 @@
 // the author.
 
 
-#import <ulibasn1/UMASN1Integer.h>
-#import <ulibasn1/UMASN1Tag.h>
-#import <ulibasn1/UMASN1Length.h>
+#import <ulib/UMASN1Integer.h>
+#import <ulib/UMASN1Tag.h>
+#import <ulib/UMASN1Length.h>
 
 @implementation UMASN1Integer
 

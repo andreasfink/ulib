@@ -5,9 +5,9 @@
 //  Created by Andreas Fink on 21.08.2026.
 //
 
-#import <ulibasn1/UMRpcMessage_LogoutRequest.h>
-#import <ulibasn1/UMRpcMessageType.h>
-#import <ulibasn1/UMRpcMacros.h>
+#import <ulib/UMRpcMessage_LogoutRequest.h>
+#import <ulib/UMRpcMessageType.h>
+#import <ulib/UMRpcMacros.h>
 
 @implementation UMRpcMessage_LogoutRequest
 

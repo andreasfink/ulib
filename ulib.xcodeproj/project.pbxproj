@@ -354,16 +354,13 @@
 		A6059F022D77706200911CEF /* UMDirtyBoolean.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyBoolean.h; sourceTree = "<group>"; };
 		A6059F032D77706200911CEF /* UMDirtyBoolean.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDirtyBoolean.m; sourceTree = "<group>"; };
 		A64994C12E0BCD91006873AC /* framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = framework.h; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		A65416792EB8834F00763E9A /* UMDeprecatedMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDeprecatedMacros.h; sourceTree = "<group>"; };
 		A66E91EA2F6147D9006A4ED3 /* UMIPAddressList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMIPAddressList.h; sourceTree = "<group>"; };
 		A66E91EB2F6147D9006A4ED3 /* UMIPAddressList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMIPAddressList.m; sourceTree = "<group>"; };
 		A66E91EE2F6147F9006A4ED3 /* UMIPAddressListEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMIPAddressListEntry.h; sourceTree = "<group>"; };
 		A66E91EF2F6147F9006A4ED3 /* UMIPAddressListEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMIPAddressListEntry.m; sourceTree = "<group>"; };
-=======
 		A66B83343036EE9200F8B8DA /* UMStdIo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMStdIo.h; sourceTree = "<group>"; };
 		A66B83353036EE9200F8B8DA /* UMStdIo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMStdIo.m; sourceTree = "<group>"; };
->>>>>>> release-6.0
 		A66EB0B32ABDDC0600C34D40 /* buildnumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buildnumber.h; sourceTree = SOURCE_ROOT; };
 		A66EB0B42ABDDC0600C34D40 /* buildnumber.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buildnumber.c; sourceTree = SOURCE_ROOT; };
 		A66EB0B62ABDDC1800C34D40 /* BUILDNR */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUILDNR; sourceTree = "<group>"; };
@@ -1185,11 +1182,8 @@
 				A683DA702ABD980E00C34D40 /* UMSerialPort.h in Headers */,
 				A683DAB72ABD980F00C34D40 /* UMObjectStatistic.h in Headers */,
 				A683D9CA2ABD980E00C34D40 /* NSObject+ulib.h in Headers */,
-<<<<<<< HEAD
 				A66E91EC2F6147D9006A4ED3 /* UMIPAddressList.h in Headers */,
-=======
 				A66B83373036EE9200F8B8DA /* UMStdIo.h in Headers */,
->>>>>>> release-6.0
 				A683DA902ABD980F00C34D40 /* UMHTTPPageCache.h in Headers */,
 				A683DAC52ABD980F00C34D40 /* UMPrometheus.h in Headers */,
 				A683DAA12ABD980F00C34D40 /* UMStatistic.h in Headers */,
@@ -1785,13 +1779,8 @@
 				MARKETING_VERSION = 2.1.1;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-<<<<<<< HEAD
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.ulib";
-=======
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = org.fink.ulib;
->>>>>>> release-2.1
 				PRODUCT_MODULE_NAME = ulib;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1834,13 +1823,8 @@
 				MARKETING_VERSION = 2.1.1;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-<<<<<<< HEAD
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.ulib";
-=======
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = org.fink.ulib;
->>>>>>> release-2.1
 				PRODUCT_MODULE_NAME = ulib;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

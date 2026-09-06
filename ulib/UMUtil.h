@@ -41,6 +41,8 @@
 + (NSDictionary<NSString *,NSString *>*)getMacAddrs; /*!< returns a NSDictionary with interface name as key and mac-address as value */
 + (NSDictionary<NSString *,NSString *>*)getMacAddrsWithCaching:(BOOL)useCache;
 + (NSArray *)getNonLocalIPs;
++ (NSArray<NSString *>*)readableFilesInDirectory:(NSString *)directory;
++ (NSArray<NSString *>*)filesInDirectory:(NSString *)path;
 
 /* this returns a dictionary of array of dictionaries.
  It is a dictionary with the interface name being the key and content being an array of IP address properties.

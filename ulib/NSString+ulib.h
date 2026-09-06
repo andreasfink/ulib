@@ -48,7 +48,7 @@ NSString *sqlEscapeNSString(NSString *input);
 - (NSInteger)intergerValueSupportingHex;
 - (BOOL)isEqualToStringSupportingX:(NSString *)str;
 - (NSString *)allowOnlyHexDigits;
-
+- (NSString *)limitToLength:(int)maxlen;
 /* this is used to clean names. They are all returned in lowercase
   only lowercase is allowed. Uppercase is converted
   . is not allowed in first place

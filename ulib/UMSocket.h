@@ -179,9 +179,11 @@ typedef enum SocketBlockingMode
 + (NSArray *)dataIsAvailableOnSockets:(NSArray *)inputSockets timeoutMs:(int)timeoutMs err:(UMSocketError *) err;
 - (void) updateName;
 - (UMSocketError)  sendBytes:(void *)bytes length:(ssize_t)length;
+- (UMSocketError)  sendBytes:(void *)bytes length:(ssize_t)length blocking:(BOOL)doBlock;
 - (UMSocketError)  sendCString:(char *)str;
 - (UMSocketError)  sendString:(NSString *)str;
 - (UMSocketError)  sendData:(NSData *)data;
+- (UMSocketError)  sendUnblockedData:(NSData *)data;
 - (UMSocketError)  sendMutableData:(NSMutableData *)data;
 - (void) sendNow;
 - (int) sendSctp:(void *)bytes length:(ssize_t)len  stream:(NSUInteger) streamID protocol:(NSUInteger) protocolID;

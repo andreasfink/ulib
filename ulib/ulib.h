@@ -188,7 +188,7 @@ typedef enum
 #import <ulib/UMSSLCertificate.h>
 #import <ulib/UMSerialPort.h>
 #import <ulib/dmi_decode_path.h>
-
+#import <ulib/UMStdIo.h>
 @interface ulib : NSObject
 {
 }

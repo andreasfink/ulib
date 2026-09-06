@@ -516,33 +516,36 @@ static NSArray *        _machineCPUIDs = NULL;
         for (ifap = ifaphead; ifap && !found; ifap = ifap->ifa_next)
         {
             NSString *ifname = @(ifap->ifa_name);
-            if ((ifap->ifa_addr->sa_family == AF_INET) || (ifap->ifa_addr->sa_family == AF_INET6))
+            if(ifap->ifa_addr!=NULL) /* might be NULL for a wireguard interface */
             {
-                struct sockaddr *sa = (struct sockaddr *)ifap->ifa_addr;
-                struct sockaddr *mask = (struct sockaddr *)ifap->ifa_netmask;
-                NSString *addr = [UMSocket addressOfSockAddr:sa];
-                NSString *netmask = [UMSocket addressOfSockAddr:mask];
-                if(netmask.length==0)
+                if ((ifap->ifa_addr->sa_family == AF_INET) || (ifap->ifa_addr->sa_family == AF_INET6))
                 {
-                    if(ifap->ifa_addr->sa_family == AF_INET)
+                    struct sockaddr *sa = (struct sockaddr *)ifap->ifa_addr;
+                    struct sockaddr *mask = (struct sockaddr *)ifap->ifa_netmask;
+                    NSString *addr = [UMSocket addressOfSockAddr:sa];
+                    NSString *netmask = [UMSocket addressOfSockAddr:mask];
+                    if(netmask.length==0)
                     {
-                        netmask = @"255.255.255.255";
+                        if(ifap->ifa_addr->sa_family == AF_INET)
+                        {
+                            netmask = @"255.255.255.255";
+                        }
+                        else
+                        {
+                            netmask = @"ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff";
+                        }
                     }
-                    else
+                    NSDictionary *dict2 = @{ @"address" : addr, @"netmask" : netmask};
+                    
+                    a = dict[ifname];
+                    if(a==0)
                     {
-                        netmask = @"ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff";
+                        a = [[NSMutableArray alloc]init];
                     }
+                    [a addObject:dict2];
+                    dict[ifname] = a;
+                    
                 }
-                NSDictionary *dict2 = @{ @"address" : addr, @"netmask" : netmask};
-
-                a = dict[ifname];
-                if(a==0)
-                {
-                    a = [[NSMutableArray alloc]init];
-                }
-                [a addObject:dict2];
-                dict[ifname] = a;
-
             }
         }
         freeifaddrs(ifaphead);
@@ -799,6 +802,53 @@ static NSArray *        _machineCPUIDs = NULL;
     return NULL;
 #endif
 }
+
++ (NSArray<NSString *>*)readableFilesInDirectory:(NSString *)directory
+{
+    @autoreleasepool
+    {
+        NSMutableArray *theArray=[NSMutableArray array];
+
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSDirectoryEnumerator *dirEnumerator = [fm enumeratorAtPath:directory];
+        for (NSString *path in dirEnumerator)
+        {
+            NSString *fullPath = [NSString stringWithFormat:@"%@/%@",directory,path];
+            BOOL isDirectory = YES;
+            BOOL hasFile = [fm fileExistsAtPath:fullPath isDirectory:&isDirectory];
+            if((isDirectory==NO) && (hasFile))
+            {
+                if([fm isReadableFileAtPath:fullPath])
+                {
+                    [theArray addObject:fullPath];
+                }
+            }
+        }
+        return theArray;
+    }
+}
+
++ (NSArray<NSString *>*)filesInDirectory:(NSString *)directory
+{
+    @autoreleasepool
+    {
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSDirectoryEnumerator *dirEnumerator = [fm enumeratorAtPath:directory];
+        NSMutableArray *theArray=[NSMutableArray array];
+        for (NSString *path in dirEnumerator)
+        {
+            NSString *fullPath = [NSString stringWithFormat:@"%@/%@",directory,path];
+            BOOL isDirectory = YES;
+            BOOL hasFile = [fm fileExistsAtPath:fullPath isDirectory:&isDirectory];
+            if((isDirectory==NO) && (hasFile))
+            {
+                [theArray addObject:fullPath];
+            }
+        }
+        return theArray;
+    }
+}
+
 @end
 
 

@@ -23,4 +23,6 @@
 - (void)removePendingSession:(UMHTTPClientRequest *)creq;
 - (void)startRequest:(UMHTTPClientRequest *)creq;
 - (NSString *)simpleSynchronousRequest:(UMHTTPClientRequest *)creq;
+- (void)quickWebFetch:(UMHTTPClientRequest *)req;
+
 @end

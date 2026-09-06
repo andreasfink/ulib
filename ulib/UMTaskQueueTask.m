@@ -100,7 +100,7 @@
 {
     @autoreleasepool
     {
-        NSLog(@"empty task");
+        NSLog(@"empty task %@",[self className]);
     }
 }
 

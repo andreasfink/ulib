@@ -276,11 +276,11 @@
                     /* returning the first IPv4 address */
                 for(NSString *s in _addresses)
                 {
-                    if([s hasPrefix:@"ipv4:"])
+                    if([s isIPv4])
                     {
                         ipv4 = s;
                     }
-                    if([s hasPrefix:@"ipv6:"])
+                    else if([s isIPv6])
                     {
                         ipv6 = s;
                     }
@@ -425,6 +425,10 @@
         salen = sizeof(sa_in6);
     }
     else
+    {
+        return NULL;
+    }
+    if(result!=1)
     {
         return NULL;
     }

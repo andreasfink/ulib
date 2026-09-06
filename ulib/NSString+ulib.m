@@ -778,6 +778,15 @@ static inline int nibbleToInt(const char a)
     return result;
 }
 
+- (NSString *)limitToLength:(int)maxlen
+{
+    if((maxlen==0) || (self.length < maxlen))
+    {
+        return self;
+    }
+    return [self substringToIndex:maxlen];
+}
+
 @end
 
 NSString *sqlEscapeNSString(NSString *input)

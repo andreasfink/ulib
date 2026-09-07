@@ -19,7 +19,7 @@ AC_SUBST(SHELL)
 AC_CONFIG_AUX_DIR(.)
 AC_SET_TERMINAL_SEQUENCES()
 
-COPYRIGHT="Copyright © 2025 Andreas Fink (andreas@fink.org). All rights reserved."
+COPYRIGHT="Copyright © 2026 Andreas Fink (andreas@fink.org). All rights reserved."
 PROJECT_NAME="ulib"
 CONFIG_DEFINE="ULIB_CONFIG"
 
@@ -29,7 +29,6 @@ MAJORVER=`echo $VERSION | cut -f1 -d.`
 MINORVER=`echo $VERSION | cut -f2 -d.`
 REVISION=`echo $VERSION | cut -f3 -d.`
 
-dnl  Load GNUStep config stuff
 dnl Set user who runs ./configure
 CUSER=`id -un`
 AC_SUBST(VERSION)
@@ -41,13 +40,11 @@ dnl Checks system type.
 AC_CONFIG_SECTION([Running system checks])
 AC_CANONICAL_HOST
 
-dnl Apply system specific rules.
-dnl Executable extension for systems that need one, i.e. Cygwin
 dnl Set the LIBTOOL to be used to create libs
 EXE_EXT=""
 LIBTOOL="ar rc"
 RANLIB="ranlib"
-LIBS="-ldl"
+LIBS=
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
 DEPENDENT_PKGCONFIGS="openssl"
@@ -56,7 +53,7 @@ PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export PKG_CONFIG_PATH
 
 #
-# we prefer clang over gcc
+# we require clang over gcc
 #
 if [[ "$CC" == "" ]]
 then
@@ -76,18 +73,20 @@ case "$host" in
     # the standard location /usr/include and /usr/lib are not good enough
     # it wouldnt build i386 architecture on a ppc system
     #
+    AC_DEFINE(HAVE_COMMONCRYPTO)
+    AC_DEFINE(HAVE_OPENSSL)
+   	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
+	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
     UR="`uname -r | cut -f1 -d.`"
     DONE=0
-    ARCH="-arch arm64"
+    ARCH="-arch arm64 -arch x86_64"
     CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
-    LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security"
+    LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit"
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"
     LIBTOOL="libtool -static -o"
     INSTALL_NAME_TOOL="install_name_tool"
     SHARED_FLAGS="-dynamiclib -Wl,-dylib"
-    AC_DEFINE(HAVE_COMMONCRYPTO)
-    AC_DEFINE(HAVE_OPENSSL)
     LDFLAGS="$LDFLAGS ${ARCH}"
     ;;
 
@@ -559,9 +558,7 @@ AC_SUBST(ARCH)
 AC_SUBST(TIMESTAMP)
 
 AC_CONFIG_SECTION([Generating output files])
-AC_CONFIG_FILES([Makefile.osx])
-AC_CONFIG_FILES([Makefile.linux])
-AC_CONFIG_FILES([Makefile.freebsd])
+AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([ulib.pc])
 AC_CONFIG_FILES([make_buildnr.sh])
 AC_CONFIG_FILES([ulib/dmi_decode_path.h])
@@ -578,18 +575,6 @@ else
 	echo "Buildnumber: 1"
 	./make_buildnr.sh
 fi
-
-case "$host" in
-  *apple-darwin*) 
-    cp Makefile.osx Makefile
-    ;;
-  *-linux-*)
-    cp Makefile.linux Makefile
-    ;;
-  *-freebsd*)
-    cp Makefile.freebsd Makefile
-    ;;
-esac
 
 dnl LICENSE notice
 

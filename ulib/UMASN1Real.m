@@ -1,4 +1,3 @@
-//
 //  UMASN1Real.m
 //  ulibasn1
 //
@@ -602,11 +601,11 @@
     }
     
     uint8_t firstByte  = *buf;
-    uint8_t secondByte = 0;
-    if(_asn1_data.length > 1)
-    {
-        secondByte = buf[1];
-    }
+    //uint8_t secondByte = 0;
+    //if(_asn1_data.length > 1)
+    //{
+    //    secondByte = buf[1];
+    //}
     
     switch(firstByte & 0xC0)
     {

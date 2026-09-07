@@ -85,7 +85,6 @@ case "$host" in
 	CFLAGS="${CFLAGS} -fobjc-arc -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_DEFAULT_SOURCE"
 	CFLAGS="$CFLAGS `gnustep-config  --objc-flags`"
     LDFLAGS="$LDFLAGS `gnustep-config --base-libs --objc-libs`"
-	#LIBS="$LIBS -ldl"
 	LIBRARIES="-lsctp -luuid"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
@@ -168,9 +167,9 @@ AC_CHECK_LIB(resolv, inet_ntop)
 AC_CHECK_LIB(bind, inet_ntop)
 AC_CHECK_LIB(zmq,zmq_new_ctx)
 
-if test -z "$zmq"; then
-   LIBS="$LIBS -lstdc++ -lzmq"
-fi
+#if test -z "$zmq"; then
+#   LIBS="$LIBS -lstdc++ -lzmq"
+#fi
 
 if test -f "/usr/local/include/zmq.h"; then
     AC_DEFINE(HAVE_ZMQ_H_USR_LOCAL)

@@ -28,7 +28,7 @@ OFILES = $(MOFILES) $(COFILES)
 INCLUDEDIRS= -I. -I ulib -I/usr/local/include
 
 ${LIB}: ${OFILES}
-	${CC} -shared -o ${LIB}  ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
+	${CC} -shared -o ${LIB} ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
 
 ${SLIB}: ${OFILES}
 	ar rcs ${SLIB} ${OFILES}

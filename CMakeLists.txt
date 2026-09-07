@@ -28,7 +28,10 @@ endmacro( target_link_framework )
 
 
 option(BUILD_SHARED_LIBS "build shared libraries" ON)
+option(BUILD_SHARED_LIBS "build shared libraries" ON)
 option(BUILD_STATIC_LIBS "build static libraries" ON)
+option(CMAKE_OSX_DEPLOYMENT_TARGET 12.5)
+option(CMAKE_OSX_ARCHITECTURES "arm64,x86_64")
 option(INSTALL_PRIVATE_HEADERS "installs private headers in the same location as the public ones" OFF)
 
 add_subdirectory(ulib)
@@ -37,24 +40,16 @@ set_target_properties(ulib PROPERTIES LINK_FLAGS "-Wl,-F/Library/Frameworks")
 
 target_include_directories(ulib PRIVATE .)
 target_include_directories(ulib PRIVATE /usr/local/include)
-
-if(MACOS)
-	target_include_directories(ulib PRIVATE /opt/homebrew/include)
-endif()
-
 target_link_libraries(ulib PRIVATE -L/usr/local/lib/)
-if(MACOS)
-	target_link_libraries(ulib PRIVATE -L/opt/homebrew/lib/)
-endif()
 
 target_link_framework(ulib Foundation)
 if(MACOS)
 	target_link_framework(ulib IOKit)
 endif()
 if(MACOS)
-	target_link_libraries(ulib PRIVATE /opt/homebrew/lib/libzmq.a)
-	target_link_libraries(ulib PRIVATE /opt/homebrew/lib/libssl.a)
-	target_link_libraries(ulib PRIVATE /opt/homebrew/lib/libcrypto.a)
+	target_link_libraries(ulib PRIVATE /usr/local/lib/libzmq.a)
+	target_link_libraries(ulib PRIVATE /usr/local/lib/libssl.a)
+	target_link_libraries(ulib PRIVATE /usr/local/lib/libcrypto.a)
 	target_link_libraries(ulib PRIVATE libc++.1.tbd)
 endif()
 

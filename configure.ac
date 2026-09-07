@@ -1,6 +1,6 @@
 dnl /* ==================================================================== 
 dnl  * Project "ulib"
-dnl  * Copyright: © 2025 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
+dnl  * Copyright: © 2026 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
 dnl  * ====================================================================
 dnl  */ 
 
@@ -13,7 +13,7 @@ dnl
 dnl initialization
 
 AC_PREREQ([2.68])
-AC_INIT([ulib],[2.0],[andreas@fink.org])
+AC_INIT([ulib],[6.0],[andreas@fink.org])
 AC_CONFIG_HEADERS([ulib/ulib_config.h])
 AC_SUBST(SHELL)
 AC_CONFIG_AUX_DIR(.)

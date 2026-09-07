@@ -1,7 +1,7 @@
-dnl /* ==================================================================== 
+dnl /* ================================================================================== 
 dnl  * Project "ulib"
-dnl  * Copyright: © 2026 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
-dnl  * ====================================================================
+dnl  * Copyright: © 2026 Andreas Fink (andreas@fink.org), Basel, Switzerland.
+dnl  * ==================================================================================
 dnl  */ 
 
 dnl
@@ -47,10 +47,7 @@ RANLIB="ranlib"
 LIBS=
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
-DEPENDENT_PKGCONFIGS="openssl"
-
-PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-export PKG_CONFIG_PATH
+DEPENDENT_PKGCONFIGS="openssl libzmq"
 
 #
 # we require clang over gcc
@@ -63,23 +60,16 @@ if [[ "$CXX" == "" ]]
 then 
 	CXX=clang++
 fi
-	
+
 case "$host" in
   *apple-darwin*) 
-    #
-    # MacOS X
-    # lets try to find the newest installed SDK for compilation
-    # so we know how to link against it
-    # the standard location /usr/include and /usr/lib are not good enough
-    # it wouldnt build i386 architecture on a ppc system
-    #
+    ARCH="-arch arm64 -arch x86_64"
     AC_DEFINE(HAVE_COMMONCRYPTO)
     AC_DEFINE(HAVE_OPENSSL)
    	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
     UR="`uname -r | cut -f1 -d.`"
     DONE=0
-    ARCH="-arch arm64 -arch x86_64"
     CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit"
     BUILD_DIR="build/osx"
@@ -91,38 +81,12 @@ case "$host" in
     ;;
 
   *-linux-*)
-	CFLAGS="$CFLAGS -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_POSIX_SOURCE"
-	DEBIAN_VERSION=`cat /etc/debian_version | cut -f1 -d.`
-	if [[ "$DEBIAN_VERSION" == "8" ]]
-	then
-        CFLAGS="$CFLAGS -D_BSD_SOURCE"
-    else
-        CFLAGS="$CFLAGS -D_DEFAULT_SOURCE"
-	fi
-	#CFLAGS="$CFLAGS -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties"
-	#CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
-	#CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"
-	#CFLAGS="$CFLAGS -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion"
-	#CFLAGS="$CFLAGS -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector"
-	#CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
-	CFLAGS="${CFLAGS} -fobjc-arc"
-	#source /etc/GNUstep2/GNUstep2.conf
-	if [[ -x /usr/GNUstep2/System/Tools/gnustep-config ]]
-	then
-		GNUSTEP_CONFIG=/usr/GNUstep2/System/Tools/gnustep-config
-		CFLAGS="${CFLAGS} -I/usr/GNUstep2/System/Library/Headers/"
-	else
-		if [[ -x /usr/local/bin/gnustep-config ]]
-		then
-			GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
-		else
-			GNUSTEP_CONFIG=/usr/bin/gnustep-config
-		fi
-	fi
-	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG}  --objc-flags`"
-    LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG}  --base-libs --objc-libs`"
-	LIBS="$LIBS -ldl"
-	LIBRARIES="-lsctp -lbsd -luuid"
+  	DEPENDENT_PKGCONFIGS="${DEPENDENT_PKGCONFIGS} uuid"
+	CFLAGS="${CFLAGS} -fobjc-arc -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_POSIX_SOURCE"
+	CFLAGS="$CFLAGS `gnustep-config  --objc-flags`"
+    LDFLAGS="$LDFLAGS `gnustep-config --base-libs --objc-libs`"
+	#LIBS="$LIBS -ldl"
+	LIBRARIES="-lsctp -luuid"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
     CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
@@ -132,15 +96,9 @@ case "$host" in
 	;;
 
   *-freebsd*)
+	DEPENDENT_PKGCONFIGS="openssl libzmq"
 	CFLAGS="$CFLAGS -std=c99 -fPIC -DFREEBSD"
 	FREEBSD_VERSION=`uname -r`
-	#CFLAGS="$CFLAGS -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties"
-	#CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
-	#CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"
-	#CFLAGS="$CFLAGS -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion"
-	#CFLAGS="$CFLAGS -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector"
-	#CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
-	#CFLAGS="$CFLAGS -fobjc-arc"
 	SHARED_LIBRARY_EXTENSION="so"
 	if [[ -x /usr/GNUstep/System/Tools/gnustep-config ]]
 	then

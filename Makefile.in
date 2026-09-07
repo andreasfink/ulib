@@ -52,7 +52,7 @@ install_bin: ${LIB} ${SLIB}
 	ln -s "${LIB}.${MAJORVER}.${MINORVER}.${REVISION}" "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}"
 	ln -s "${LIB}.${MAJORVER}.${MINORVER}"             "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
 	ln -s "${LIB}.${MAJORVER}"                         "${DESTDIR}/usr/local/lib/${LIB}"
-	ldconfig
+	if [ -x /usr/sbin/ldconfig ] ; then ldconfig; fi
 
 clean:
 	rm -f $(LIB) $(OFILES) $(SLIB)

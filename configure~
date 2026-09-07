@@ -2877,7 +2877,7 @@ RANLIB="ranlib"
 LIBS="-ldl"
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
-DEPENDENT_PKGCONFIGS="openssl uuid"
+DEPENDENT_PKGCONFIGS="openssl uuid libzmq"
 
 PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export PKG_CONFIG_PATH

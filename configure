@@ -2768,7 +2768,7 @@ ac_config_headers="$ac_config_headers ulib/ulib_config.h"
   esac
 
 
-COPYRIGHT="Copyright © 2025 Andreas Fink (andreas@fink.org). All rights reserved."
+COPYRIGHT="Copyright © 2026 Andreas Fink (andreas@fink.org). All rights reserved."
 PROJECT_NAME="ulib"
 CONFIG_DEFINE="ULIB_CONFIG"
 
@@ -2776,6 +2776,7 @@ VERSION=`head -n 1 VERSION`
 MAJORVER=`echo $VERSION | cut -f1 -d.`
 MINORVER=`echo $VERSION | cut -f2 -d.`
 REVISION=`echo $VERSION | cut -f3 -d.`
+
 
 CUSER=`id -un`
 
@@ -2878,10 +2879,6 @@ LIBS="-ldl"
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
 DEPENDENT_PKGCONFIGS="openssl uuid libzmq"
-
-PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-export PKG_CONFIG_PATH
-
 #
 # we prefer clang over gcc
 #
@@ -2925,34 +2922,21 @@ case "$host" in
 	DEBIAN_VERSION=`cat /etc/debian_version | cut -f1 -d.`
 	if [ "$DEBIAN_VERSION" == "8" ]
 	then
-        CFLAGS="$CFLAGS -D_BSD_SOURCE"
-    else
+            CFLAGS="$CFLAGS -D_BSD_SOURCE"
+        else
         CFLAGS="$CFLAGS -D_DEFAULT_SOURCE"
 	fi
-	#CFLAGS="$CFLAGS -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties"
-	#CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
-	#CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"
-	#CFLAGS="$CFLAGS -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion"
-	#CFLAGS="$CFLAGS -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector"
-	#CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
 	CFLAGS="${CFLAGS} -fobjc-arc"
-	#source /etc/GNUstep2/GNUstep2.conf
-	if [ -x /usr/GNUstep2/System/Tools/gnustep-config ]
+	if [ -x "${GNUSTEP_CONFIG}" ]
 	then
-		GNUSTEP_CONFIG=/usr/GNUstep2/System/Tools/gnustep-config
-		CFLAGS="${CFLAGS} -I/usr/GNUstep2/System/Library/Headers/"
+		echo GNUSTEP_CONFIG=$GNUSTEP_CONFIG
 	else
-		if [ -x /usr/local/bin/gnustep-config ]
-		then
-			GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
-		else
-			GNUSTEP_CONFIG=/usr/bin/gnustep-config
-		fi
+		GNUSTEP_CONFIG=gnustep-config
 	fi
 	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG}  --objc-flags`"
     LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG}  --base-libs --objc-libs`"
 	LIBS="$LIBS -ldl"
-	LIBRARIES="-lsctp -lbsd -luuid"
+	LIBRARIES="-lsctp -luuid"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
     CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"

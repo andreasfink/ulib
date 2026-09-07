@@ -82,7 +82,7 @@ case "$host" in
 
   *-linux-*)
   	DEPENDENT_PKGCONFIGS="${DEPENDENT_PKGCONFIGS} uuid"
-	CFLAGS="${CFLAGS} -fobjc-arc -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_POSIX_SOURCE"
+	CFLAGS="${CFLAGS} -fobjc-arc -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_DEFAULT_SOURCE"
 	CFLAGS="$CFLAGS `gnustep-config  --objc-flags`"
     LDFLAGS="$LDFLAGS `gnustep-config --base-libs --objc-libs`"
 	#LIBS="$LIBS -ldl"

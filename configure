@@ -6096,7 +6096,29 @@ fi
 
 
 
+---
 
+
+ac_fn_c_check_header_compile "$LINENO" "netinet/sctp.h" "ac_cv_header_netinet_sctp_h" "$ac_includes_default"
+if test "x$ac_cv_header_netinet_sctp_h" = xyes
+then :
+  printf "%s\n" "#define HAVE_NETINET_SCTP_H 1" >>confdefs.h
+
+fi
+
+ac_fn_c_check_header_compile "$LINENO" "sctp/sctp.h" "ac_cv_header_sctp_sctp_h" "$ac_includes_default"
+if test "x$ac_cv_header_sctp_sctp_h" = xyes
+then :
+  printf "%s\n" "#define HAVE_SCTP_SCTP_H 1" >>confdefs.h
+
+fi
+
+
+if [ -f "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework/Headers/sctp.h" ]
+then
+	printf "%s\n" "#define HAVE_SCTP_SCTP_H 1" >>confdefs.h
+
+fi
 
 # Check whether --enable-profiling was given.
 if test ${enable_profiling+y}

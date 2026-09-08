@@ -929,7 +929,7 @@ uint64_t ulib_get_thread_id(void)
     pthread_threadid_np(me,&tid);
 #else
     #if(HAVE_PTHREAD_GETTHREADID_NP)
-        pthread_getthreadid_np(me,&tid);
+        tid = pthread_getthreadid_np();
     #else
         #error please implement ulib_get_thread_id(void) for this platform
     #endif

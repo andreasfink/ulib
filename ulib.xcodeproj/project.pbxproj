@@ -439,7 +439,7 @@
 		A6915FE2304FDFB000B15E34 /* UMLayerSctpUser.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915FD7304FDFB000B15E34 /* UMLayerSctpUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915FE3304FDFB000B15E34 /* UMLayerSctpApplicationContextProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915FD5304FDFB000B15E34 /* UMLayerSctpApplicationContextProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915FE4304FDFB000B15E34 /* UMLayerSctpUserProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915FD9304FDFB000B15E34 /* UMLayerSctpUserProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6915FE6304FE18A00B15E34 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6915FE5304FE18A00B15E34 /* sctp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A6915FE6304FE18A00B15E34 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6915FE5304FE18A00B15E34 /* sctp.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A69BA45A2ABD850000C34D40 /* ulib.docc in Sources */ = {isa = PBXBuildFile; fileRef = A69BA4592ABD850000C34D40 /* ulib.docc */; };
 		A69BA4602ABD850000C34D40 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69BA4552ABD850000C34D40 /* ulib.framework */; };
 		A69BA4872ABD854B00C34D40 /* ulib.m in Sources */ = {isa = PBXBuildFile; fileRef = A69BA4702ABD854B00C34D40 /* ulib.m */; };

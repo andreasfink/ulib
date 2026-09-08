@@ -6,8 +6,6 @@
 //  Copyright © 2018 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#if defined(HAVE_SCTP_SCTP_H) || defined(HAVE_NETINET_SCTP_H)
-
 #import <ulib/UMSocketSCTPReceivedPacket.h>
 #import <ulib/UMSctpOverTcp.h>
 #import <ulib/NSMutableData+ulib.h>
@@ -29,7 +27,6 @@
 #include <netinet/tcp.h>
 #include <netdb.h>
 
-#import "ulibsctp_config.h"
 
 #ifdef HAVE_SCTP_SCTP_H
 #include <sctp/sctp.h>
@@ -163,4 +160,3 @@
 }
 
 @end
-#endif

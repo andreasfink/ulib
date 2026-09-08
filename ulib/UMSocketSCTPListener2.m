@@ -6,11 +6,12 @@
 //  Copyright © 2022 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#if defined(HAVE_SCTP_SCTP_H) || defined(HAVE_NETINET_SCTP_H)
 
 #import <ulib/UMSocketSCTPListener2.h>
 #import <ulib/UMSocketSCTPRegistry.h>
 #import <ulib/UMLayerSctp.h>
+#import <ulib/UMThreadHelpers.h>
+#import <ulib/UMHistoryLog.h>
 
 @implementation UMSocketSCTPListener2
 
@@ -410,4 +411,3 @@
 }
 
 @end
-#endif

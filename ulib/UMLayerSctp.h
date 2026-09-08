@@ -6,13 +6,14 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#if defined(HAVE_SCTP_SCTP_H) || defined(HAVE_NETINET_SCTP_H)
-
-#import <ulib/ulib.h>
+#import <ulib/UMLayer.h>
+#import <ulib/UMSCTPListener.h>
+#import <ulib/UMLayerTask.h>
 #import <ulib/UMLayerSctpUserProtocol.h>
 #import <ulib/UMLayerSctpApplicationContextProtocol.h>
 #import <ulib/UMSocketSCTP.h>
-#import <ulib/UMSCTPListener.h>
+#import <ulib/UMSynchronizedArray.h>
+#import <ulib/UMTimer.h>
 @class UMSctpTask_AdminInit;
 @class UMSctpTask_AdminSetConfig;
 @class UMSctpTask_AdminAttach;
@@ -26,8 +27,11 @@
 @class UMLayerSctpUserProfile;
 @class UMSocketSCTPRegistry;
 @class UMSocketSCTPListener2;
+@class UMSCTPListener;
 
-@interface UMLayerSctp : UMLayer<UMSCTPListenerProcessEventsDelegate,UMSCTPListenerReadPacketDelegate,UMSCTPListenerProcessDataDelegate>
+@interface UMLayerSctp : UMLayer /*  <UMSCTPListenerProcessEventsDelegate,
+                                    UMSCTPListenerReadPacketDelegate,
+                                    UMSCTPListenerProcessDataDelegate>*/
 {
     UMSynchronizedArray *_users;
     UMMutex             *_linkLock;
@@ -117,7 +121,7 @@
 @property(readwrite,strong,atomic)      UMSocketSCTPRegistry *registry;
 @property(readwrite,strong,atomic)      UMSocketSCTPListener2 *listener;
 
-@property(readwrite,strong) NSNumber    *assocId;
+@property(readwrite,strong,atomic)      NSNumber *assocId;
 @property(readwrite,assign) int         mtu;
 @property(readwrite,assign) BOOL        newDestination;
 @property(readwrite,strong,atomic)      UMSocketSCTP        *directSocket;
@@ -223,4 +227,3 @@
 - (UMSynchronizedSortedDictionary *)sctpStatusDict;
 
 @end
-#endif

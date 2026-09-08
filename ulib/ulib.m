@@ -9,27 +9,23 @@
 #import <ulib/ulib.h>
 #include "../version.h"
 
-@implementation ulib
-
-
-+ (NSString *) ulib_version
+NSString *ulib_version(void)
 {
-    return @VERSION;
+    return @(VERSION);
 }
 
-+ (NSString *) ulib_build
+NSString *ulib_build(void)
 {
-    return @BUILD;
+    return @(BUILD);
 }
 
-+ (NSString *) ulib_builddate
+NSString *ulib_builddate(void)
 {
-    return @BUILDDATE;
+    return @(BUILDDATE);
 }
 
-+ (NSString *) ulib_compiledate
+NSString *ulib_compiledate(void)
 {
-    return @COMPILEDATE;
+    return @(COMPILEDATE);
 }
 
-@end

@@ -6,11 +6,14 @@
 //  Copyright © 2022 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#if defined(HAVE_SCTP_SCTP_H) || defined(HAVE_NETINET_SCTP_H)
 
-#import <ulib/UMSocketSCTP.h>
+#import <ulib/UMBackgrounder.h>
+#import <ulib/UMLogLevel.h>
+#import <ulib/UMSynchronizedDictionary.h>
+#import <ulib/UMSocket.h>
+#import <ulib/UMLayer.h>
+#import <ulib/UMLayerSctp.h>
 
-@class UMLayerSctp;
 @class UMSocketSCTPReceivedPacket;
 @class UMSocketSCTP;
 
@@ -33,6 +36,9 @@
  * It terminates if the socket receives a hangup or if an error condition forces the delegate to send a terminate command.
  *
  */
+
+@class UMLayerSctp;
+@class UMSocketSCTP;
 
 @interface UMSCTPListener : UMBackgrounder
 {
@@ -62,4 +68,3 @@
 
 @end
 
-#endif

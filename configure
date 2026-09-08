@@ -2872,7 +2872,7 @@ case $host_os in *\ *) host_os=`echo "$host_os" | sed 's/ /-/g'`;; esac
 
 
 EXE_EXT=""
-LIBTOOL="ar rc"
+LIBTOOL="ar -rcs"
 RANLIB="ranlib"
 LIBS=
 LIBRARY_NAME=$PROJECT_NAME
@@ -2906,11 +2906,10 @@ case "$host" in
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit"
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"
-    LIBTOOL="libtool -static -o"
     INSTALL_NAME_TOOL="install_name_tool"
     SHARED_FLAGS="-dynamiclib -Wl,-dylib"
     LDFLAGS="$LDFLAGS ${ARCH}"
-    LIBTOOL=libtool
+    LIBTOOL="libtool -static -o"
     ;;
 
   *-linux-*)

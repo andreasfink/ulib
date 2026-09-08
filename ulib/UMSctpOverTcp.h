@@ -6,7 +6,6 @@
 //  Copyright © 2020 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#if defined(HAVE_SCTP_SCTP_H) || defined(HAVE_NETINET_SCTP_H)
 
 /*
  sctp over tcp is a encapsulation used to transport the features of sctp over a tcp link
@@ -60,4 +59,3 @@ typedef struct sctp_over_tcp_header
 
 
 */
-#endif

@@ -42,7 +42,7 @@ AC_CANONICAL_HOST
 
 dnl Set the LIBTOOL to be used to create libs
 EXE_EXT=""
-LIBTOOL="ar rc"
+LIBTOOL="ar -rcs"
 RANLIB="ranlib"
 LIBS=
 LIBRARY_NAME=$PROJECT_NAME
@@ -74,11 +74,10 @@ case "$host" in
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit"
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"
-    LIBTOOL="libtool -static -o"
     INSTALL_NAME_TOOL="install_name_tool"
     SHARED_FLAGS="-dynamiclib -Wl,-dylib"
     LDFLAGS="$LDFLAGS ${ARCH}"
-    LIBTOOL=libtool
+    LIBTOOL="libtool -static -o"
     ;;
 
   *-linux-*)

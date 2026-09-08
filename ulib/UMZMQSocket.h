@@ -9,8 +9,6 @@
 #import <ulib/UMObject.h>
 #import <ulib/UMLogLevel.h>
 
-
-
 @interface UMZMQSocket : UMObject
 {
     NSString        *_socketName;
@@ -35,18 +33,14 @@
 - (int)sendData:(NSData *)d;
 - (NSData *)receiveData;
 - (NSData *)receiveDataAndMore:(BOOL *)more;
-
-
 - (int)sendString:(NSString *)d more:(BOOL)hasMore;
 - (int)sendString:(NSString *)s;
 - (NSString *)receiveString;
 - (NSString *)receiveStringAndMore:(BOOL *)more;
-
 - (int)sendUInt32:(uint32_t)i more:(BOOL)hasMore;
 - (int)sendUInt32:(uint32_t)i;
 - (uint32_t)receiveUInt32;
 - (uint32_t)receiveUInt32AndMore:(BOOL *)more;
-
 - (void)close;
 @end
 

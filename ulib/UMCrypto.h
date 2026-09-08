@@ -8,6 +8,7 @@
 #include <ulib/ulib_config.h>
 
 #import <ulib/UMObject.h>
+#import <ulib/UMSocket.h>
 
 #define DES_BLOCK_SIZE 64
 #define DES_SALT_LEN 56
@@ -23,9 +24,7 @@
 #define RSA_EXPONENT 65537
 #define RSA_PADDING_LEN 41
 
-
 @class UMSocket;
-
 @interface UMCrypto : UMObject
 {
 	NSInteger	        _enable;

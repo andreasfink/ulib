@@ -440,9 +440,9 @@
 		A6915FE3304FDFB000B15E34 /* UMLayerSctpApplicationContextProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915FD5304FDFB000B15E34 /* UMLayerSctpApplicationContextProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915FE4304FDFB000B15E34 /* UMLayerSctpUserProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915FD9304FDFB000B15E34 /* UMLayerSctpUserProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915FE6304FE18A00B15E34 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6915FE5304FE18A00B15E34 /* sctp.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		A6915FEA3050147700B15E34 /* ulib.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915FE93050147700B15E34 /* ulib.m */; };
 		A69BA45A2ABD850000C34D40 /* ulib.docc in Sources */ = {isa = PBXBuildFile; fileRef = A69BA4592ABD850000C34D40 /* ulib.docc */; };
 		A69BA4602ABD850000C34D40 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69BA4552ABD850000C34D40 /* ulib.framework */; };
-		A69BA4872ABD854B00C34D40 /* ulib.m in Sources */ = {isa = PBXBuildFile; fileRef = A69BA4702ABD854B00C34D40 /* ulib.m */; };
 		A6A1EB932ABD9D5A00C34D40 /* ulib.h in Headers */ = {isa = PBXBuildFile; fileRef = A683D8C82ABD980B00C34D40 /* ulib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6A1EB942ABD9D9E00C34D40 /* dmi_decode_path.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6B1B0B82F6C45820015E83B /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B1B0B72F6C45820015E83B /* libssl.a */; };
@@ -933,10 +933,10 @@
 		A6915FDA304FDFB000B15E34 /* UMLayerSctpUserProfile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMLayerSctpUserProfile.m; sourceTree = "<group>"; };
 		A6915FDB304FDFB000B15E34 /* UMLayerSctpUserProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMLayerSctpUserProtocol.h; sourceTree = "<group>"; };
 		A6915FE5304FE18A00B15E34 /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework"; sourceTree = "<absolute>"; };
+		A6915FE93050147700B15E34 /* ulib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ulib.m; sourceTree = "<group>"; };
 		A69BA4552ABD850000C34D40 /* ulib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ulib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69BA4592ABD850000C34D40 /* ulib.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = ulib.docc; sourceTree = "<group>"; };
 		A69BA45F2ABD850000C34D40 /* ulibTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ulibTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A69BA4702ABD854B00C34D40 /* ulib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ulib.m; sourceTree = "<group>"; };
 		A69BA47D2ABD854B00C34D40 /* dmi_decode_path.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dmi_decode_path.h.in; sourceTree = "<group>"; };
 		A69BA4812ABD854B00C34D40 /* dmi_decode_path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dmi_decode_path.h; sourceTree = "<group>"; };
 		A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dmi_decode_path.h; sourceTree = "<group>"; };
@@ -1117,7 +1117,7 @@
 				A683D9142ABD980C00C34D40 /* ulib_config.h.in */,
 				A69BA4592ABD850000C34D40 /* ulib.docc */,
 				A683D8C82ABD980B00C34D40 /* ulib.h */,
-				A69BA4702ABD854B00C34D40 /* ulib.m */,
+				A6915FE93050147700B15E34 /* ulib.m */,
 				A683D8E42ABD980B00C34D40 /* UMAssert.h */,
 				A683D85D2ABD980900C34D40 /* UMAtomicCounter.h */,
 				A683D98B2ABD980E00C34D40 /* UMAtomicCounter.m */,
@@ -1992,6 +1992,7 @@
 				A683D9F52ABD980E00C34D40 /* UMCountryCodePrefixDigitTree.m in Sources */,
 				A683DA0A2ABD980E00C34D40 /* UMBackgrounderWithQueues.m in Sources */,
 				A683DA3F2ABD980E00C34D40 /* UMConstantStringsDict.m in Sources */,
+				A6915FEA3050147700B15E34 /* ulib.m in Sources */,
 				A683DA452ABD980E00C34D40 /* UMJsonWriter.m in Sources */,
 				A683DAA72ABD980F00C34D40 /* UMSynchronizedSortedDictionary.m in Sources */,
 				A683DAA82ABD980F00C34D40 /* UMThroughputCounter.m in Sources */,
@@ -2001,7 +2002,6 @@
 				A683DA9D2ABD980F00C34D40 /* UMQueueMulti.m in Sources */,
 				A683DA872ABD980F00C34D40 /* UMStringWithHistory.m in Sources */,
 				A683DA822ABD980F00C34D40 /* NSObject+ulib.m in Sources */,
-				A69BA4872ABD854B00C34D40 /* ulib.m in Sources */,
 				A683D9B62ABD980E00C34D40 /* UMJsonStreamParserAccumulator.m in Sources */,
 				A683DA942ABD980F00C34D40 /* UMDoubleWithHistory.m in Sources */,
 				A683DAC72ABD980F00C34D40 /* UMJsonStreamWriter.m in Sources */,

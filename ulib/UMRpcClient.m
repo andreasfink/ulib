@@ -5,6 +5,7 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
+#import <ulib/UMSocket.h>
 #import <ulib/UMRpcClient.h>
 #import <ulib/UMRpcError.h>
 #import <ulib/UMRpcClient.h>

@@ -6,9 +6,7 @@
 //  Copyright © 2018 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#if defined(HAVE_SCTP_SCTP_H) || defined(HAVE_NETINET_SCTP_H)
-
-#import <ulib/ulib.h>
+#import <ulib/UMLayerTask.h>
 #import <ulib/UMLayerSctpUserProtocol.h>
 #import <ulib/UMLayerSctpApplicationContextProtocol.h>
 #import <ulib/UMSocketSCTPReceivedPacket.h>
@@ -155,4 +153,3 @@ typedef enum SCTP_SocketType_enum
 
 
 @end
-#endif

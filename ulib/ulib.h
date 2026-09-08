@@ -236,13 +236,25 @@ typedef enum
 #import <ulib/UMRpcSessionHandler.h>
 #import <ulib/UMRpcMessageDecoder.h>
 
-@interface ulib : NSObject
-{
-}
+#import <ulib/UMLayerSctp.h>
+#import <ulib/UMLayerSctpUserProtocol.h>
+#import <ulib/UMSctpTask_AdminAttach.h>
+#import <ulib/UMSctpTask_AdminDetach.h>
+#import <ulib/UMSctpTask_AdminSetConfig.h>
+#import <ulib/UMSctpTask_AdminInit.h>
+#import <ulib/UMSctpTask_Close.h>
+#import <ulib/UMSctpTask_Data.h>
+#import <ulib/UMSctpTask_Manual_ForceOutOfService.h>
+#import <ulib/UMSctpTask_Manual_InService.h>
+#import <ulib/UMSctpTask_Open.h>
+#import <ulib/UMLayerSctpUser.h>
+#import <ulib/UMLayerSctpUserProfile.h>
+#import <ulib/UMLayerSctpApplicationContextProtocol.h>
+#import <ulib/UMSocketSCTPRegistry.h>
+#import <ulib/UMSocketSCTPListener2.h>
 
-+ (NSString *) ulib_version;
-+ (NSString *) ulib_build;
-+ (NSString *) ulib_builddate;
-+ (NSString *) ulib_compiledate;
+NSString *ulib_version(void);
+NSString *ulib_build(void);
+NSString *ulib_builddate(void);
+NSString *ulib_compiledate(void);
 
-@end

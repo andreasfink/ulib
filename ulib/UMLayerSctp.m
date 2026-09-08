@@ -5,7 +5,6 @@
 //  Created by Andreas Fink on 29.11.14.
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
-#if defined(HAVE_SCTP_SCTP_H) || defined(HAVE_NETINET_SCTP_H)
 
 #import <ulib/UMLayerSctp.h>
 #import <ulib/ulib_config.h>
@@ -48,6 +47,10 @@
 #import <ulib/UMSocketSCTPRegistry.h>
 #import <ulib/UMSocketSCTPListener2.h>
 #import <ulib/UMLayerSctpUserProfile.h>
+#import <ulib/UMThroughputCounter.h>
+#import <ulib/UMLogFeed.h>
+#import <ulib/UMHistoryLog.h>
+#import <ulib/UMSleeper.h>
 
 @implementation UMLayerSctp
 
@@ -1022,6 +1025,9 @@
          protocolId:(NSNumber *)protocolId
              socket:(NSNumber *)socketNumber
 {
+#if !defined(HAVE_SCTP)
+    return;
+#else
     @autoreleasepool
     {
         ummutex_lock(_linkLock);
@@ -1080,6 +1086,7 @@
             ummutex_unlock(_linkLock);
         }
     }
+#endif
 }
 
 -(void) handleAssocChange:(NSData *)event
@@ -1087,6 +1094,9 @@
                protocolId:(NSNumber *)protocolId
                    socket:(NSNumber *)socketNumber
 {
+#if !defined(HAVE_SCTP)
+    return;
+#else
     ummutex_lock(_linkLock);
     @try
     {
@@ -1249,6 +1259,7 @@
     {
         ummutex_unlock(_linkLock);
     }
+#endif
 }
 
 -(void) handleLinkUpTcpEcnap
@@ -1282,6 +1293,9 @@
                   protocolId:(NSNumber *)protocolId
                       socket:(NSNumber *)socketNumber
 {
+#if !defined(HAVE_SCTP)
+    return;
+#else
     const union sctp_notification *snp;
 
     char addrbuf[INET6_ADDRSTRLEN];
@@ -1344,6 +1358,7 @@
         }
     }
 #endif
+#endif
 }
 
 -(void) handleRemoteError:(NSData *)event
@@ -1352,6 +1367,10 @@
                    socket:(NSNumber *)socketNumber
 
 {
+#if !defined(HAVE_SCTP)
+    return;
+#else
+
 #if defined(ULIBSCTP_CONFIG_DEBUG)
     const union sctp_notification *snp;
     snp = event.bytes;
@@ -1384,6 +1403,7 @@
                         (int)snp->sn_remote_error.sre_data[3]]];
     }
 #endif
+#endif
 }
 
 
@@ -1392,6 +1412,10 @@
              protocolId:(NSNumber *)protocolId
                  socket:(NSNumber *)socketNumber
 {
+#if !defined(HAVE_SCTP)
+    return -1;
+#else
+
     const union sctp_notification *snp;
     snp = event.bytes;
     NSUInteger len = event.length;
@@ -1441,6 +1465,7 @@
     [self powerdownInReceiverThread:@"SCTP_SEND_FAILED"];
     [self reportStatusWithReason:@"SCTP_SEND_FAILED"];
     return -1;
+#endif
 }
 
 
@@ -1449,6 +1474,10 @@
                 protocolId:(NSNumber *)protocolId
                     socket:(NSNumber *)socketNumber
 {
+#if !defined(HAVE_SCTP)
+    return -1;
+#else
+
 #if defined(ULIBSCTP_CONFIG_DEBUG)
     const union sctp_notification *snp;
     snp = event.bytes;
@@ -1488,6 +1517,7 @@
     [self powerdownInReceiverThread:@"SCTP_SHUTDOWN_EVENT"];
     [self reportStatusWithReason:@"SCTP_SHUTDOWN_EVENT"];
     return -1;
+#endif
 }
 
 
@@ -1496,6 +1526,10 @@
                      protocolId:(NSNumber *)protocolId
                          socket:(NSNumber *)socketNumber
 {
+#if !defined(HAVE_SCTP)
+    return -1;
+#else
+
 #if defined(ULIBSCTP_CONFIG_DEBUG)
     const union sctp_notification *snp;
     snp = event.bytes;
@@ -1529,6 +1563,7 @@
     }
 #endif
     return 0;
+#endif
 }
 
 -(int) handlePartialDeliveryEvent:(NSData *)event
@@ -1536,6 +1571,10 @@
                        protocolId:(uint16_t)protocolId
                            socket:(NSNumber *)socketNumber
 {
+#if !defined(HAVE_SCTP)
+    return -1;
+#else
+
 #if defined(ULIBSCTP_CONFIG_DEBUG)
     const union sctp_notification *snp;
     snp = event.bytes;
@@ -1574,6 +1613,7 @@
     }
 #endif
     return UMSocketError_no_error;
+#endif
 }
 
 -(int) handleAuthenticationEvent:(NSData *)event
@@ -1581,6 +1621,10 @@
                       protocolId:(NSNumber *)protocolId
                           socket:(NSNumber *)socketNumber
 {
+#if !defined(HAVE_SCTP)
+    return -1;
+#else
+
 #if defined(ULIBSCTP_CONFIG_DEBUG)
     const union sctp_notification *snp;
     snp = event.bytes;
@@ -1628,6 +1672,7 @@
     }
 #endif
     return UMSocketError_no_error;
+#endif
 }
 
 #if defined(SCTP_STREAM_RESET_EVENT)
@@ -1636,6 +1681,10 @@
                    protocolId:(NSNumber *)protocolId
                        socket:(NSNumber *)socketNumber
 {
+#if !defined(HAVE_SCTP)
+    return UMSocketError_not_implemented;
+#else
+
 #if defined(ULIBSCTP_CONFIG_DEBUG)
     const union sctp_notification *snp;
     snp = event.bytes;
@@ -1674,6 +1723,7 @@
 #endif
     [self reportStatusWithReason:@"SCTP_STREAM_RESET_EVENT"];
     return UMSocketError_no_error;
+#endif
 }
 #endif
 
@@ -1682,12 +1732,16 @@
                  protocolId:(NSNumber *)protocolId
                      socket:(NSNumber *)socketNumber
 {
+#if !defined(HAVE_SCTP)
+    return -1;
+#else
+    
 #if defined(ULIBSCTP_CONFIG_DEBUG)
     const union sctp_notification *snp;
     snp = event.bytes;
 #endif
     NSUInteger len = event.length;
-
+    
 #if defined(ULIBSCTP_CONFIG_DEBUG)
     if(self.logLevel <= UMLOG_DEBUG)
     {
@@ -1698,7 +1752,7 @@
     {
         [self.logFeed majorErrorText:@" Size Mismatch in SCTP_SENDER_DRY_EVENT"];
 #if defined(POWER_DEBUG)
-    NSLog(@"%@ Size Mismatch in SCTP_SENDER_DRY_EVENT",_layerName);
+        NSLog(@"%@ Size Mismatch in SCTP_SENDER_DRY_EVENT",_layerName);
 #endif
         [self powerdownInReceiverThread:@"Size mismatch in SCTP_SENDER_DRY_EVENT"];
         [self reportStatusWithReason:@"Size mismatch in SCTP_SENDER_DRY_EVENT"];
@@ -1714,6 +1768,7 @@
     }
 #endif
     return UMSocketError_no_error;
+#endif
 }
 
 
@@ -1722,6 +1777,10 @@
                         protocolId:(NSNumber *)protocolId
                             socket:(NSNumber *)socketNumber
 {
+#if !defined(HAVE_SCTP)
+    return -1;
+#else
+
     if(data.length == 0)
     {
         [self addToLayerHistoryLog:@"sctpReceiveData with data==NULL. Ignored"];
@@ -1801,6 +1860,7 @@
         }
         return UMSocketError_no_error;
     }
+#endif
 }
 
 #pragma mark -
@@ -2410,4 +2470,3 @@
 }
 
 @end
-#endif

@@ -33,7 +33,7 @@ ${LIB}: ${OFILES}
 	${CC} -shared -o ${LIB} ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
 
 ${SLIB}: ${OFILES}
-	ar rcs ${SLIB} ${OFILES}
+	@LIBTOOL@ ${SLIB} ${OFILES}
 	ranlib ${SLIB}
 
 install: install_dev install_bin

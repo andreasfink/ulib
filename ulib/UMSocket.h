@@ -5,6 +5,7 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
+#include <ulib/ulib_config.h>
 #import <ulib/UMObject.h>
 #import <ulib/UMCrypto.h>
 #import <ulib/UMSocketDefs.h>
@@ -13,7 +14,6 @@
 
 #include <sys/types.h>
 #include <sys/socket.h>
-//#include <ulib/ulib_config.h>
 
 #ifndef in_port_t   
 #define in_port_t   uint16_t
@@ -22,6 +22,7 @@
 
 @class UMHost;
 @class UMHistoryLog;
+@class UMCrypto;
 
 typedef enum SocketBlockingMode
 {

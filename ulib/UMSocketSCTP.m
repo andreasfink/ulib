@@ -6,8 +6,6 @@
 //  Copyright © 2018 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#if defined(HAVE_SCTP_SCTP_H) || defined(HAVE_NETINET_SCTP_H)
-
 /* Define if you have netinet/sctp.h. */
 /* #undef HAVE_NETINET_SCTP_H */
 #define ULIBSCTP_INTERNAL   1
@@ -15,8 +13,14 @@
 #include <ulib/ulib_config.h>
 
 #import <ulib/UMSocketSCTP.h>
-
 #import <ulib/UMSocketSCTPListener2.h>
+#import <ulib/UMHistoryLog.h>
+#import <ulib/UMFileTrackingMacros.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSMutableString+ulib.h>
+#import <ulib/NSData+ulib.h>
+#import <ulib/NSMutableData+ulib.h>
+#import <ulib/UMAssert.h>
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -349,6 +353,9 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
 
 - (UMSocketError) enableEvents
 {
+#if !defined(HAS_SCTP)
+    return UMSocketError_not_supported_operation;
+#else
     struct sctp_event_subscribe event;
     
     /**********************/
@@ -374,6 +381,7 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
         return [UMSocket umerrFromErrno:errno];
     }
     return UMSocketError_no_error;
+#endif
 }
 
 - (int)mtu
@@ -384,7 +392,10 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
 
 - (int)currentMtu
 {
-    int readMtu = 0;
+#if !defined(HAS_SCTP)
+    return 0;
+#else
+   int readMtu = 0;
     struct sctp_paddrparams params;
     socklen_t len = sizeof(params);
     memset((void *)&params,0x00, sizeof(struct sctp_paddrparams));
@@ -394,6 +405,7 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
         readMtu = params.spp_pathmtu;
     }
     return readMtu;
+#endif
 }
 
 - (void)setMtu:(int)newMtu
@@ -403,6 +415,10 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
 
 - (UMSocketError)configureMtu:(int)newMtu
 {
+#if !defined(HAS_SCTP)
+    return UMSocketError_not_supported_operation;
+#else
+
     UMSocketError err = UMSocketError_no_error;
     [_historyLog addLogEntry:[NSString stringWithFormat:@"setMtu:%d",newMtu]];
     _mtu = newMtu;
@@ -444,10 +460,15 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
         }
     }
     return err;
+#endif
 }
 
 - (UMSocketError)setPathMtuDiscovery:(BOOL)enable
 {
+#if !defined(HAS_SCTP)
+    return UMSocketError_not_supported_operation;
+#else
+
     [_historyLog addLogEntry:[NSString stringWithFormat:@"setPathMtuDiscovery:%@",enable ? @"YES" : @"NO"]];
     struct sctp_paddrparams params;
     socklen_t len = sizeof(params);
@@ -477,10 +498,15 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
         }
     }
     return err;
+#endif
 }
 
 - (BOOL) isPathMtuDiscoveryEnabled
 {
+#if !defined(HAS_SCTP)
+    return NO;
+#else
+
     struct sctp_paddrparams params;
     socklen_t len = sizeof(params);
     memset((void *)&params,0x00, sizeof(struct sctp_paddrparams));
@@ -496,10 +522,16 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
         }
     }
     return _pathMtuDiscovery;
+#endif
+    
 }
 
 - (UMSocketError)setHeartbeat:(BOOL)enable
 {
+#if !defined(HAS_SCTP)
+    return UMSocketError_not_supported_operation;
+#else
+
     if(enable)
     {
         [_historyLog addLogEntry:@"enable heartbeat"];
@@ -557,6 +589,7 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
         [_historyLog addLogEntry:[NSString stringWithFormat:@"errno=%d %s",errno,strerror(errno)]];
     }
     return [UMSocket umerrFromErrno:errno];
+#endif
 }
 
 
@@ -567,6 +600,10 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
 
 - (void)setMaxSegment:(int)newMaxSeg
 {
+#if !defined(HAS_SCTP)
+    return;
+#else
+
     int disableFragments = 0;
     if(newMaxSeg > 0)
     {
@@ -578,10 +615,12 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
     [_historyLog addLogEntry:[NSString stringWithFormat:@"setMaxSegment %d errno=%d %s",newMaxSeg,errno,strerror(errno)]];
 
     _maxSeg = newMaxSeg;
+#endif
 }
 
 - (UMSocketError)updateMtu:(int)newMtu
 {
+
 /* to mitigate kernel panic in some versions
      https://www.spinics.net/lists/netdev/msg534371.html
 */
@@ -601,6 +640,10 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
 
 - (UMSocketError) enableFutureAssoc
 {
+#if !defined(HAS_SCTP)
+    return UMSocketError_not_supported_operation;
+#else
+
     UMSocketError r = UMSocketError_no_error;
 
 #if defined(SCTP_FUTURE_ASSOC) && defined(SCTP_ADAPTATION_INDICATION)
@@ -617,7 +660,7 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
     [_historyLog addLogEntry:[NSString stringWithFormat:@"enableFutureAssoc: errno=%d %s",errno,strerror(errno)]];
 #endif
     return r;
-
+#endif
 }
 
 
@@ -765,7 +808,10 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
                                layer:(UMLayer *)layer
 {
 	UMAssert(assocptr!=NULL,@"assocptr can not be NULL");
-    
+#if !defined(HAS_SCTP)
+    return UMSocketError_not_supported_operation;
+#else
+
     sctp_assoc_t tmp_assoc = -2;
 
     int count = 0;
@@ -832,6 +878,7 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
                            *assocptr,
                            [UMSocket getSocketErrorString:returnValue]]];
     return returnValue;
+#endif
 }
 
 /* overloading accept */
@@ -953,6 +1000,14 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
                           error:(UMSocketError *)errptr
                     errorNumber:(int *)e
 {
+#if !defined(HAS_SCTP)
+    if(errptr)
+    {
+        *errptr = UMSocketError_not_supported_operation;
+    }
+    return NULL;
+#else
+
     if(assoc==NULL)
     {
         if(errptr)
@@ -1142,6 +1197,7 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
     NSLog(@"   returning nil/err = %@ (errno=%d)",[UMSocket getSocketErrorString:e],errno);
 #endif
     return nil;
+#endif
 }
 
 - (ssize_t) sendToAddresses:(NSArray *)addrs
@@ -1152,6 +1208,14 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
                    protocol:(NSNumber *)protocolId
                       error:(UMSocketError *)err2
 {
+#if !defined(HAS_SCTP)
+    if(err2)
+    {
+        *err2 = UMSocketError_not_supported_operation;
+    }
+    return 0;
+#else
+
     int flags = 0;
     int timetolive = 0;
     int context = 0;
@@ -1250,6 +1314,7 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
         *err2 = err;
     }
     return sp;
+#endif
 }
 
 
@@ -1260,6 +1325,10 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
                           stream:(NSNumber *)streamId
                         protocol:(NSNumber *)protocolId
 {
+#if !defined(HAS_SCTP)
+    return UMSocketError_not_supported_operation;
+#else
+
     UMSocketError err = UMSocketError_no_error;
     ssize_t sp = 0;
     int count = 0;
@@ -1306,6 +1375,7 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
         err = UMSocketError_no_error;
     }
     return err;
+#endif
 }
 
 
@@ -1313,6 +1383,10 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
 
 - (UMSocketSCTPReceivedPacket *)receiveSCTP
 {
+#if !defined(HAS_SCTP)
+    return NULL;
+#else
+
     struct sockaddr_in6     remote_address6;
     struct sockaddr_in      remote_address4;
     struct sockaddr *       remote_address_ptr;
@@ -1379,6 +1453,8 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
         rx.socket = @(_sock);
     }
     return rx;
+#endif
+    
 }
 
 - (UMSocketError)close
@@ -1514,7 +1590,7 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
     }
     return    UMSocketError_no_error;
 #else
-    return UMSocketError_not_supported_operation
+    return UMSocketError_not_supported_operation;
 #endif
 }
 
@@ -1553,7 +1629,7 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
     }
     return    UMSocketError_no_error;
 #else
-    return UMSocketError_not_supported_operation
+    return UMSocketError_not_supported_operation;
 #endif
 }
 
@@ -1596,6 +1672,10 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
 
 - (NSArray *)getRemoteIpAddressesForAssoc:(uint32_t)assoc
 {
+#if !defined(HAS_SCTP)
+    return NULL;
+#else
+    
     NSMutableArray *arr = [[NSMutableArray alloc]init];
     struct sockaddr *addrs=NULL;
     int e = sctp_getpaddrs(_sock, (sctp_assoc_t)assoc, &addrs);
@@ -1616,13 +1696,18 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
         }
     }
     return arr;
+#endif
 }
 
 -(int)bindx:(struct sockaddr *)localAddress
 {
+#if !defined(HAS_SCTP)
+    return -1;
+#else
+
     int err = sctp_bindx(_sock, localAddress,1,SCTP_BINDX_ADD_ADDR);
     return err;
+#endif
 }
 
 @end
-#endif

@@ -12,6 +12,7 @@
 #import <ulib/UMSocket.h>
 #import <ulib/UMLogLevel.h>
 #import <ulib/UMLogFeed.h>
+#import <ulib/UMSocket.h>
 
 @class UMRpcHandler;
 @class UMRpcSession;

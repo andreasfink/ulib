@@ -6,9 +6,8 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#if defined(HAVE_SCTP_SCTP_H) || defined(HAVE_NETINET_SCTP_H)
 
-#import <ulib/ulib.h>
+#import <ulib/UMLayerTask.h>
 @class UMLayerSctp;
 #import <ulib/UMLayerSctpUserProtocol.h>
 
@@ -25,4 +24,3 @@
 - (void)main;
 
 @end
-#endif

@@ -6,9 +6,8 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#if defined(HAVE_SCTP_SCTP_H) || defined(HAVE_NETINET_SCTP_H)
 
-#import <ulib/ulib.h>
+#import <ulib/UMLayerTask.h>
 #import <ulib/UMLayerSctpUserProtocol.h>
 @class UMLayerSctp;
 
@@ -33,4 +32,4 @@
                            protocolId:(NSNumber *)pid
                            ackRequest:(NSDictionary *)ack;
 @end
-#endif
+#

@@ -2326,8 +2326,10 @@ static int SSL_smart_shutdown(SSL *ssl)
 #endif
         case EISCONN:
             return UMSocketError_is_already_connected;
+#if defined ENOSTR
         case ENOSTR:
             return UMSocketError_is_not_a_stream;
+#endif
         default:
             fprintf(stderr,"Unknown errno code %d %s\n",e,strerror(e));
             return UMSocketError_not_known;

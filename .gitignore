@@ -28,6 +28,8 @@ version.h
 ulib.pc
 install_root
 debian/ulib.control
+libulib.dylib
+libulib.a
 
 
 #########################

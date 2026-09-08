@@ -10,6 +10,19 @@
 #include "ulib_config.h"
 #include "dmi_decode_path.h"
 
+#if defined(LINUX)
+
+#include <sys/types.h>
+#include "unistd.h"
+#include <sys/syscall.h>
+#include <sys/prctl.h>
+#endif
+
+#if defined(HAVE_PTHREAD_NP_H)
+#include <pthread_np.h>
+#endif
+
+
 /* byte order stuff: we use macros under MacOS X */
 
 #if defined __APPLE__
@@ -896,42 +909,35 @@ NSString *UMBacktrace(void **stack_frames, size_t size)
 */
 
 
+
+//extern int pthread_setname_np (pthread_t __target_thread, __const char *__name);
+
 #if defined(LINUX)
-
-#include <sys/types.h>
-#include "unistd.h"
-#include <sys/syscall.h>
-#include <sys/prctl.h>
-
-extern int pthread_setname_np (pthread_t __target_thread, __const char *__name);
-
 uint64_t ulib_get_thread_id(void)
 {
     uint64_t tid = (uint64_t)syscall (SYS_gettid);
     return tid;
 }
 
-
-#elif defined(__APPLE__) || defined(FREEBSD)
+#else
 
 uint64_t ulib_get_thread_id(void)
 {
     uint64_t tid = 0;
     pthread_t me = pthread_self();
+#if defined(HAVE_PTHREAD_THREADID_NP)
     pthread_threadid_np(me,&tid);
+#else
+    #if(HAVE_PTHREAD_GETTHREADID_NP)
+        pthread_getthreadid_np(me,&tid);
+    #else
+        #error please implement ulib_get_thread_id(void) for this platform
+    #endif
+#endif
     return tid;
 }
 
-
-#else
-
-#error please implement ulib_get_thread_id(void) for this platform
-
 #endif
-
-
-
-
 /*
  * NSString * uint64_t ulib_get_thread_name(pthread_t thread)
  */

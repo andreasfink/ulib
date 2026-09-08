@@ -372,8 +372,14 @@ AC_CHECK_FUNC(BIO_s_secmem, [AC_DEFINE(HAVE_BIO_S_SECMEM)],[])
 
 
 
+dnl Macro to find out which function to use for getting the thread_id 
+dnl
+AC_CHECK_FUNC(pthread_getthreadid_np, [AC_DEFINE(HAVE_PTHREAD_GETTHREADID_NP)],[])
+AC_CHECK_FUNC(pthread_threadid_np, [AC_DEFINE(HAVE_PTHREAD_THREADID_NP)],[])
 
-dnl Macro to find out which pthread_setname_np variant can be used if any 
+
+
+dnl Macro to find out which pthread_getthreadid_np variant can be used if any 
 dnl
 
 AC_DEFUN(AC_FUNC_WHICH_PTHREAD_SETNAME_NP,
@@ -408,7 +414,6 @@ AC_DEFUN(AC_FUNC_WHICH_PTHREAD_SETNAME_NP,
 		fi
 	]
 )
-
 
 
 dnl Extra feature checks
@@ -472,6 +477,7 @@ dnl Checks for headers
 dnl -------------------------------------
 AC_CHECK_HEADERS(netinet/sctp.h)
 AC_CHECK_HEADERS(sctp/sctp.h)
+AC_CHECK_HEADERS(pthread_np.h)
 
 #if [[ -f "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework/Headers/sctp.h" ]]
 #then

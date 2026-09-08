@@ -5800,6 +5800,21 @@ fi
 
 
 
+ac_fn_c_check_func "$LINENO" "pthread_getthreadid_np" "ac_cv_func_pthread_getthreadid_np"
+if test "x$ac_cv_func_pthread_getthreadid_np" = xyes
+then :
+  printf "%s\n" "#define HAVE_PTHREAD_GETTHREADID_NP 1" >>confdefs.h
+
+fi
+
+ac_fn_c_check_func "$LINENO" "pthread_threadid_np" "ac_cv_func_pthread_threadid_np"
+if test "x$ac_cv_func_pthread_threadid_np" = xyes
+then :
+  printf "%s\n" "#define HAVE_PTHREAD_THREADID_NP 1" >>confdefs.h
+
+fi
+
+
 
 
 
@@ -5967,6 +5982,13 @@ ac_fn_c_check_header_compile "$LINENO" "sctp/sctp.h" "ac_cv_header_sctp_sctp_h" 
 if test "x$ac_cv_header_sctp_sctp_h" = xyes
 then :
   printf "%s\n" "#define HAVE_SCTP_SCTP_H 1" >>confdefs.h
+
+fi
+
+ac_fn_c_check_header_compile "$LINENO" "pthread_np.h" "ac_cv_header_pthread_np_h" "$ac_includes_default"
+if test "x$ac_cv_header_pthread_np_h" = xyes
+then :
+  printf "%s\n" "#define HAVE_PTHREAD_NP_H 1" >>confdefs.h
 
 fi
 

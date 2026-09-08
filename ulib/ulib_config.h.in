@@ -71,6 +71,15 @@
 /* Define if you have the <pthread.h> header file.  */
 #undef HAVE_PTHREAD_H
 
+/* Define if you have the <pthread_np.h> header file.  */
+#undef HAVE_PTHREAD_NP_H
+
+/* Define if you have the pthread_getthread_id() function.  */
+#undef HAVE_PTHREAD_GETTHREADID_NP
+
+/* Define if you have the pthread#_thread_id() function.  */
+#undef HAVE_PTHREAD_THREADID_NP
+
 /* Define if you have the <sys/sysctl.h> header file.  */
 #undef HAVE_SYS_SYSCTL_H
 

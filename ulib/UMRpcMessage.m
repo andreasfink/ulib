@@ -223,7 +223,7 @@
             return @"INVALID_INSTANCE";
         case UMRpcError_NOT_AUTHORIZED:
             return @"NOT_AUTHORIZED";
-        caseUMRpcError_API_VERSION_MISMATCH:
+        case UMRpcError_API_VERSION_MISMATCH:
             return @"API_VERSION_MISMATCH";
         case UMRpcError_CONNECTION_ERROR:
             return @"CONNECTION_ERROR";

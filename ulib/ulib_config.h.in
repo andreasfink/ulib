@@ -179,6 +179,16 @@
 /* define if we have timegm() */
 #undef HAVE_TIMEGM
 
+/* define if you have MYSQL Support */
+#undef HAVE_MYSQL
+
+/* define if you have postgres Support */
+#undef HAVE_PGSQL
+
+/* define if you have SQLite support */
+#undef HAVE_SQLITE
+
+
 /* if sockadd.sin_len is existing */
 #undef HAVE_SOCKADDR_SIN_LEN
 #ifdef	HAVE_SOCKADDR_SIN_LEN

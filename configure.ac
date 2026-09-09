@@ -47,7 +47,7 @@ RANLIB="ranlib"
 LIBS=
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
-DEPENDENT_PKGCONFIGS="openssl libzmq"
+DEPENDENT_PKGCONFIGS="openssl libzmq mariadb libpq"
 
 #
 # we require clang over gcc
@@ -72,6 +72,13 @@ case "$host" in
     DONE=0
     CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit"
+    if [[ -d "/usr/local/frameworks" ]]
+    then
+		LDFLAGS="${LDFLAGS} -framework sctp"
+	    CFLAGS="${CFLAGS} -F/usr/local/frameworks"
+	    LDFLAGS="${CFLAGS} -F/usr/local/frameworks -framework sctp"
+    fi
+    
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"
     INSTALL_NAME_TOOL="install_name_tool"
@@ -479,10 +486,10 @@ AC_CHECK_HEADERS(netinet/sctp.h)
 AC_CHECK_HEADERS(sctp/sctp.h)
 AC_CHECK_HEADERS(pthread_np.h)
 
-#if [[ -f "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework/Headers/sctp.h" ]]
-#then
-#	AC_DEFINE(HAVE_SCTP_SCTP_H)
-#fi
+if [[ -f "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework/Headers/sctp.h" ]]
+then
+	AC_DEFINE(HAVE_SCTP_SCTP_H)
+fi
 
 dnl Implement --enable-debug --enable-profiling options.
 dnl -------------------------------------

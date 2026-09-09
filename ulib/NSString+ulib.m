@@ -787,7 +787,23 @@ static inline int nibbleToInt(const char a)
     return [self substringToIndex:maxlen];
 }
 
+
+#import <ulib/UMDbSession.h>
+
+- (NSString *)sqlEscaped:(UMDbSession *)session
+{
+    if(session)
+    {
+        return [session sqlEscapeString:self];
+    }
+    else
+    {
+        return [self sqlEscaped];
+    }
+}
+
 @end
+
 
 NSString *sqlEscapeNSString(NSString *input)
 {

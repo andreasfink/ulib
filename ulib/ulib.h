@@ -253,6 +253,29 @@ typedef enum
 #import <ulib/UMSocketSCTPRegistry.h>
 #import <ulib/UMSocketSCTPListener2.h>
 
+#import <ulib/UMDbDriverType.h>
+#import <ulib/UMDbQueryType.h>
+#import <ulib/UMDbTable.h>
+#import <ulib/UMDbPool.h>
+#import <ulib/UMDbQuery.h>
+#import <ulib/UMDbQueryCondition.h>
+#import <ulib/UMDbQueryPlaceholder.h>
+#import <ulib/UMDbResult.h>
+#import <ulib/UMDbSession.h>
+#import <ulib/UMDbTableDefinition.h>
+#import <ulib/UMDbFieldDefinition.h>
+#import <ulib/UMDbFileSession.h>
+#import <ulib/UMMySQLSession.h>
+#import <ulib/UMPgSQLSession.h>
+#import <ulib/UMSqLiteSession.h>
+#import <ulib/UMDbRedisSession.h>
+#import <ulib/UMDbMySqlInProgress.h>
+
+void ulibdb_startup(void);
+void ulibdb_shutdown(void);
+void ulibdb_thread_init(void);
+void ulibdb_thread_exit(void);
+
 NSString *ulib_version(void);
 NSString *ulib_build(void);
 NSString *ulib_builddate(void);

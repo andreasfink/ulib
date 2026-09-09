@@ -7,6 +7,7 @@
 
 #import <ulib/framework.h>
 
+@class UMDbSession;
 NSString *sqlEscapeNSString(NSString *input);
 
 @interface NSString (ulib)
@@ -56,5 +57,8 @@ NSString *sqlEscapeNSString(NSString *input);
 */
 - (NSString *)filterNameWithMaxLength:(int)maxlen;
 - (NSString *)randomizeX;
+- (NSString *)sqlEscaped:(UMDbSession *)session;   /*!< escape characters for SQL */
 
 @end
+
+NSString *sqlEscapeNSString(NSString *input);

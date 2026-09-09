@@ -47,7 +47,7 @@ RANLIB="ranlib"
 LIBS=
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
-DEPENDENT_PKGCONFIGS="openssl libzmq mariadb libpq"
+DEPENDENT_PKGCONFIGS="openssl libzmq libmariadb libpq"
 
 #
 # we require clang over gcc
@@ -72,11 +72,10 @@ case "$host" in
     DONE=0
     CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit"
-    if [[ -d "/usr/local/frameworks" ]]
+    if [[ -d "/usr/local/frameworks/sctp.framework" ]]
     then
-		LDFLAGS="${LDFLAGS} -framework sctp"
 	    CFLAGS="${CFLAGS} -F/usr/local/frameworks"
-	    LDFLAGS="${CFLAGS} -F/usr/local/frameworks -framework sctp"
+	    LDFLAGS="${LDFLAGS} -F/usr/local/frameworks -framework sctp"
     fi
     
     BUILD_DIR="build/osx"

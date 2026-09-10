@@ -10,12 +10,15 @@
 #import <ulib/ulib_config.h>
 
 #include <netinet/in.h>
-#ifdef HAVE_SCTP_SCTP_H
-#include <sctp/sctp.h>
-#endif
+#if defined(__APPLE__)
+
+#include <ulib/sctp.h>
+
+#else
 
 #ifdef HAVE_NETINET_SCTP_H
 #include <netinet/sctp.h>
+#endif
 #endif
 
 #define ULIBSCTP_INTERNAL 1
@@ -1978,11 +1981,6 @@
         {
             _dscp = [cfg[@"dscp"] stringValue];
         }
-
-        int                 _maxInStreams;
-        int                 _numOStreams;
-        int                 _maxInitAttempts;
-       // int                 _initTimeout;
 
         if (cfg[@"max-init-timeout"])
         {

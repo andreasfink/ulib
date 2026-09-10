@@ -3023,12 +3023,6 @@ case "$host" in
     DONE=0
     CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit"
-    if [ -d "/usr/local/frameworks/sctp.framework" ]
-    then
-	    CFLAGS="${CFLAGS} -F/usr/local/frameworks"
-	    LDFLAGS="${LDFLAGS} -F/usr/local/frameworks -framework sctp"
-    fi
-
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"
     INSTALL_NAME_TOOL="install_name_tool"

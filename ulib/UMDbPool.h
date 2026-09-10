@@ -6,9 +6,14 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
 #import <ulib/UMObject.h>
+#import <ulib/UMDbQueryType.h>
+#import <ulib/UMQueueSingle.h>
 #import <ulib/UMDbDriverType.h>
 #import <ulib/UMDbStorageType.h>
-#import <ulib/UMDbQueryType.h>
+#import <ulib/UMThroughputCounter.h>
+#import <ulib/UMAverageDelay.h>
+#import <ulib/UMSleeper.h>
+#import <ulib/UMMutex.h>
 
 void umdbpool_out_of_sessions(void);
 void umdbpool_null_session_returned(void);

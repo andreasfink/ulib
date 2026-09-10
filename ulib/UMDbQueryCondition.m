@@ -5,10 +5,9 @@
 //  Created by Andreas Fink on 27.10.11.
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
-#import <ulib/ulib.h>
-#import <ulib/ulib_config.h>
 #import <ulib/UMDbQueryCondition.h>
 #import <ulib/UMDbQueryPlaceholder.h>
+#import <ulib/ulib_config.h>
 
 @implementation UMDbQueryCondition
 

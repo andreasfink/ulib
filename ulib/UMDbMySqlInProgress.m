@@ -6,8 +6,8 @@
 //
 //
 
-#import "UMDbMySqlInProgress.h"
-
+#import <ulib/UMDbMySqlInProgress.h>
+#import <ulib/UMUtil.h>
 
 NSMutableArray *queriesInProgress;
 

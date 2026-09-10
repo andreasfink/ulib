@@ -476,12 +476,17 @@
 		A6915FE2304FDFB000B15E34 /* UMLayerSctpUser.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915FD7304FDFB000B15E34 /* UMLayerSctpUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915FE3304FDFB000B15E34 /* UMLayerSctpApplicationContextProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915FD5304FDFB000B15E34 /* UMLayerSctpApplicationContextProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915FE4304FDFB000B15E34 /* UMLayerSctpUserProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915FD9304FDFB000B15E34 /* UMLayerSctpUserProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6915FE6304FE18A00B15E34 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6915FE5304FE18A00B15E34 /* sctp.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A6915FEA3050147700B15E34 /* ulib.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915FE93050147700B15E34 /* ulib.m */; };
 		A69BA45A2ABD850000C34D40 /* ulib.docc in Sources */ = {isa = PBXBuildFile; fileRef = A69BA4592ABD850000C34D40 /* ulib.docc */; };
 		A69BA4602ABD850000C34D40 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69BA4552ABD850000C34D40 /* ulib.framework */; };
 		A6A1EB932ABD9D5A00C34D40 /* ulib.h in Headers */ = {isa = PBXBuildFile; fileRef = A683D8C82ABD980B00C34D40 /* ulib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6A1EB942ABD9D9E00C34D40 /* dmi_decode_path.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6B06C9C3051A5290076234A /* sctp.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B06C9B3051A5290076234A /* sctp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6B06C9E3051A5330076234A /* sctp_uio.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B06C9D3051A5330076234A /* sctp_uio.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6B06CA23051A5470076234A /* sctp_sys_calls.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B06CA03051A5470076234A /* sctp_sys_calls.m */; };
+		A6B06CA63051BC0C0076234A /* libmariadbclient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B06CA53051BC0C0076234A /* libmariadbclient.a */; };
+		A6B06CA83051BC370076234A /* libpq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B06CA73051BC370076234A /* libpq.a */; };
+		A6B06CAA3051BDC50076234A /* libmariadb.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B06CA93051BDC50076234A /* libmariadb.3.dylib */; };
 		A6B1B0B82F6C45820015E83B /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B1B0B72F6C45820015E83B /* libssl.a */; };
 		A6B1B0BA2F6C45950015E83B /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B1B0B92F6C45950015E83B /* libcrypto.a */; };
 		A6B1B0BC2F6C45AB0015E83B /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B1B0BB2F6C45AB0015E83B /* libzmq.a */; };
@@ -1006,7 +1011,6 @@
 		A6915FD9304FDFB000B15E34 /* UMLayerSctpUserProfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMLayerSctpUserProfile.h; sourceTree = "<group>"; };
 		A6915FDA304FDFB000B15E34 /* UMLayerSctpUserProfile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMLayerSctpUserProfile.m; sourceTree = "<group>"; };
 		A6915FDB304FDFB000B15E34 /* UMLayerSctpUserProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMLayerSctpUserProtocol.h; sourceTree = "<group>"; };
-		A6915FE5304FE18A00B15E34 /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework"; sourceTree = "<absolute>"; };
 		A6915FE93050147700B15E34 /* ulib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ulib.m; sourceTree = "<group>"; };
 		A69BA4552ABD850000C34D40 /* ulib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ulib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69BA4592ABD850000C34D40 /* ulib.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = ulib.docc; sourceTree = "<group>"; };
@@ -1014,6 +1018,12 @@
 		A69BA47D2ABD854B00C34D40 /* dmi_decode_path.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dmi_decode_path.h.in; sourceTree = "<group>"; };
 		A69BA4812ABD854B00C34D40 /* dmi_decode_path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dmi_decode_path.h; sourceTree = "<group>"; };
 		A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dmi_decode_path.h; sourceTree = "<group>"; };
+		A6B06C9B3051A5290076234A /* sctp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sctp.h; sourceTree = "<group>"; };
+		A6B06C9D3051A5330076234A /* sctp_uio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sctp_uio.h; sourceTree = "<group>"; };
+		A6B06CA03051A5470076234A /* sctp_sys_calls.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sctp_sys_calls.m; sourceTree = "<group>"; };
+		A6B06CA53051BC0C0076234A /* libmariadbclient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmariadbclient.a; path = /usr/local/lib/mariadb/libmariadbclient.a; sourceTree = "<absolute>"; };
+		A6B06CA73051BC370076234A /* libpq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpq.a; path = /usr/local/pgsql/lib/libpq.a; sourceTree = "<absolute>"; };
+		A6B06CA93051BDC50076234A /* libmariadb.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmariadb.3.dylib; path = /usr/local/lib/mariadb/libmariadb.3.dylib; sourceTree = "<absolute>"; };
 		A6B1B0B72F6C45820015E83B /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = /opt/homebrew/lib/libssl.a; sourceTree = "<absolute>"; };
 		A6B1B0B92F6C45950015E83B /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = /opt/homebrew/lib/libcrypto.a; sourceTree = "<absolute>"; };
 		A6B1B0BB2F6C45AB0015E83B /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = /opt/homebrew/lib/libzmq.a; sourceTree = "<absolute>"; };
@@ -1036,10 +1046,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6915FE6304FE18A00B15E34 /* sctp.framework in Frameworks */,
 				A6B1B0B82F6C45820015E83B /* libssl.a in Frameworks */,
 				A6B1B0BA2F6C45950015E83B /* libcrypto.a in Frameworks */,
 				A6B1B0BC2F6C45AB0015E83B /* libzmq.a in Frameworks */,
+				A6B06CA83051BC370076234A /* libpq.a in Frameworks */,
+				A6B06CAA3051BDC50076234A /* libmariadb.3.dylib in Frameworks */,
+				A6B06CA63051BC0C0076234A /* libmariadbclient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,7 +1072,9 @@
 				A6B1B0BB2F6C45AB0015E83B /* libzmq.a */,
 				A6B1B0B92F6C45950015E83B /* libcrypto.a */,
 				A6B1B0B72F6C45820015E83B /* libssl.a */,
-				A6915FE5304FE18A00B15E34 /* sctp.framework */,
+				A6B06CA53051BC0C0076234A /* libmariadbclient.a */,
+				A6B06CA73051BC370076234A /* libpq.a */,
+				A6B06CA93051BDC50076234A /* libmariadb.3.dylib */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -1127,6 +1141,9 @@
 			isa = PBXGroup;
 			children = (
 				A64994C12E0BCD91006873AC /* framework.h */,
+				A6B06C9B3051A5290076234A /* sctp.h */,
+				A6B06C9D3051A5330076234A /* sctp_uio.h */,
+				A6B06CA03051A5470076234A /* sctp_sys_calls.m */,
 				A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */,
 				A683D8922ABD980A00C34D40 /* dmi_decode_path.h.in */,
 				A6915F99304FDDD600B15E34 /* UMSCTPListener.h */,
@@ -1670,6 +1687,7 @@
 				A683DA8C2ABD980F00C34D40 /* UMQueueNull.h in Headers */,
 				A683DA682ABD980E00C34D40 /* UMHTTPResponseCode.h in Headers */,
 				A683D9C62ABD980E00C34D40 /* UMHTTPAuthenticationStatus.h in Headers */,
+				A6B06C9C3051A5290076234A /* sctp.h in Headers */,
 				A683DA592ABD980E00C34D40 /* UMLayerTask.h in Headers */,
 				A683DA932ABD980F00C34D40 /* UMTokenizerWord.h in Headers */,
 				A683D9E92ABD980E00C34D40 /* UMObjectStatisticEntry.h in Headers */,
@@ -1823,6 +1841,7 @@
 				A683DA9B2ABD980F00C34D40 /* UMDigitTree.h in Headers */,
 				A683DAB22ABD980F00C34D40 /* UMHTTPSServer.h in Headers */,
 				A6915FB8304FDDD600B15E34 /* UMSctpTask_AdminSetConfig.h in Headers */,
+				A6B06C9E3051A5330076234A /* sctp_uio.h in Headers */,
 				A6915FB9304FDDD600B15E34 /* UMSctpTask_Close.h in Headers */,
 				A6915FBA304FDDD600B15E34 /* UMSctpTask_Manual_InService.h in Headers */,
 				A6915FBB304FDDD600B15E34 /* UMSCTPListener.h in Headers */,
@@ -2033,6 +2052,7 @@
 				A6915F11304D664400B15E34 /* UMASN1Real.m in Sources */,
 				A6915F12304D664400B15E34 /* UMASN1Length.m in Sources */,
 				A6915FDC304FDFB000B15E34 /* UMLayerSctpUserProfile.m in Sources */,
+				A6B06CA23051A5470076234A /* sctp_sys_calls.m in Sources */,
 				A6915FDD304FDFB000B15E34 /* UMLayerSctpUser.m in Sources */,
 				A6915FDE304FDFB000B15E34 /* UMLayerSctp.m in Sources */,
 				A6915F13304D664400B15E34 /* UMASN1Enumerated.m in Sources */,
@@ -2291,7 +2311,11 @@
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				INSTALL_PATH = /FinkTelecomServices/frameworks;
 				LD_RUNPATH_SEARCH_PATHS = "\"/Library/Application Support/\"";
-				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/lib/mariadb,
+					/usr/local/pgsql/lib,
+				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 4.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -2367,7 +2391,11 @@
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				INSTALL_PATH = /FinkTelecomServices/frameworks;
 				LD_RUNPATH_SEARCH_PATHS = "\"/Library/Application Support/\"";
-				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/lib/mariadb,
+					/usr/local/pgsql/lib,
+				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 4.0.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

@@ -40,15 +40,16 @@
 #include <netdb.h>
 
 
-
-#ifdef HAVE_SCTP_SCTP_H
-#include <sctp/sctp.h>
-#include <sctp/sctp_uio.h>
-#endif
+#if defined (__APPLE__)
+#include <ulib/sctp.h>
+#include <ulib/sctp_uio.h>
+#else
 
 #if defined(HAVE_NETINET_SCTP_H)
 #include <netinet/sctp.h>
 #endif
+#endif
+
 
 #if defined(__APPLE__)
 #include <sys/utsname.h>

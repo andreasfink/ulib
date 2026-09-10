@@ -6,13 +6,15 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/ulib.h>
+#import <ulib/UMObject.h>
 #import <ulib/ulib_config.h>
 #import <ulib/UMDbTable.h>
 #import <ulib/UMDbQueryType.h>
 #import <ulib/UMDbQuery.h>
 #import <ulib/UMDbSession.h>
 #import <ulib/UMMySQLSession.h>
+#import <ulib/UMAssert.h>
+#import <ulib/NSString+ulib.h>
 
 @implementation UMDbTable
 

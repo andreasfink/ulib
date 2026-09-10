@@ -6,8 +6,10 @@
 //
 //
 
-#import "UMDbTableDefinition.h"
-#import "UMDbFieldDefinition.h"
+#import <ulib/UMDbTableDefinition.h>
+#import <ulib/UMDbFieldDefinition.h>
+#import <ulib/UMJsonWriter.h>
+#import <ulib/UMJsonParser.h>
 
 @implementation UMDbTableDefinition
 

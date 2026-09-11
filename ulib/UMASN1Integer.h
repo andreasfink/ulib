@@ -23,4 +23,6 @@
 - (UMASN1Integer *)initWithString:(NSString *)s;
 - (NSNumber *)number;
 
++(NSData *)packedInteger:(int64_t)val;
+
 @end

@@ -47,7 +47,7 @@ RANLIB="ranlib"
 LIBS=
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
-DEPENDENT_PKGCONFIGS="openssl libzmq libmariadb libpq"
+DEPENDENT_PKGCONFIGS="openssl libzmq libpq"
 
 #
 # we require clang over gcc
@@ -67,7 +67,7 @@ case "$host" in
     AC_DEFINE(HAVE_COMMONCRYPTO)
     AC_DEFINE(HAVE_OPENSSL)
    	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
-	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
+	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}` -l/usr/local/lib/mariadb/libmariadbclient.a"
     UR="`uname -r | cut -f1 -d.`"
     DONE=0
     CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
@@ -78,6 +78,8 @@ case "$host" in
     SHARED_FLAGS="-dynamiclib -Wl,-dylib"
     LDFLAGS="$LDFLAGS ${ARCH}"
     LIBTOOL="libtool -static -o"
+   	echo CFLAGS=$CFLAGS
+   	echo LDFLAGS=$LDFLAGS
     ;;
 
   *-linux-*)

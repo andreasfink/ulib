@@ -47,6 +47,7 @@
 		A609F7E930517FF000B6E5B0 /* UMSqLiteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A609F7E830517FF000B6E5B0 /* UMSqLiteSession.m */; };
 		A609F7EA30517FF000B6E5B0 /* UMSqLiteSession.h in Headers */ = {isa = PBXBuildFile; fileRef = A609F7E730517FF000B6E5B0 /* UMSqLiteSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A64994C22E0BCD99006873AC /* framework.h in Headers */ = {isa = PBXBuildFile; fileRef = A64994C12E0BCD91006873AC /* framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64C6AF9305C04A700AAA74A /* libmariadb.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = A6B06CA93051BDC50076234A /* libmariadb.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		A66B83363036EE9200F8B8DA /* UMStdIo.m in Sources */ = {isa = PBXBuildFile; fileRef = A66B83353036EE9200F8B8DA /* UMStdIo.m */; };
 		A66B83373036EE9200F8B8DA /* UMStdIo.h in Headers */ = {isa = PBXBuildFile; fileRef = A66B83343036EE9200F8B8DA /* UMStdIo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A66E91EC2F6147D9006A4ED3 /* UMIPAddressList.h in Headers */ = {isa = PBXBuildFile; fileRef = A66E91EA2F6147D9006A4ED3 /* UMIPAddressList.h */; };
@@ -434,10 +435,8 @@
 		A6915F84304D665900B15E34 /* UMRpcMessage_HeartbeatResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F48304D665900B15E34 /* UMRpcMessage_HeartbeatResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915F85304D665900B15E34 /* UMRpcMessage_GenericError.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F44304D665900B15E34 /* UMRpcMessage_GenericError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915F86304D665900B15E34 /* UMRpcMessage_TestRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F52304D665900B15E34 /* UMRpcMessage_TestRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6915F8B304D666700B15E34 /* UMZMQSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915F88304D666700B15E34 /* UMZMQSocket.m */; };
 		A6915F8C304D666700B15E34 /* UMZMQSocket+ASN1.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915F8A304D666700B15E34 /* UMZMQSocket+ASN1.m */; };
 		A6915F8D304D666700B15E34 /* UMZMQSocket+ASN1.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F89304D666700B15E34 /* UMZMQSocket+ASN1.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6915F8E304D666700B15E34 /* UMZMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F87304D666700B15E34 /* UMZMQSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915FAE304FDDD600B15E34 /* UMSctpTask_Open.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915FAD304FDDD600B15E34 /* UMSctpTask_Open.m */; };
 		A6915FAF304FDDD600B15E34 /* UMSctpTask_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915FA7304FDDD600B15E34 /* UMSctpTask_Data.m */; };
 		A6915FB0304FDDD600B15E34 /* UMSctpTask_Manual_InService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915FAB304FDDD600B15E34 /* UMSctpTask_Manual_InService.m */; };
@@ -514,6 +513,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A64C6AFA305C04A700AAA74A /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A64C6AF9305C04A700AAA74A /* libmariadb.3.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		A6059F022D77706200911CEF /* UMDirtyBoolean.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyBoolean.h; sourceTree = "<group>"; };
 		A6059F032D77706200911CEF /* UMDirtyBoolean.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDirtyBoolean.m; sourceTree = "<group>"; };
@@ -576,7 +589,6 @@
 		A66EB0C62ABDDC4900C34D40 /* doc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = doc; sourceTree = "<group>"; };
 		A66EB0C72ABDDC5300C34D40 /* Doxyfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Doxyfile; sourceTree = "<group>"; };
 		A66EB0C82ABDDC5300C34D40 /* lib_symlink_tool.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = lib_symlink_tool.sh; sourceTree = "<group>"; };
-		A66EB0C92ABDDC5300C34D40 /* installer_requirements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = installer_requirements.plist; sourceTree = "<group>"; };
 		A66EB0CA2ABDDC5300C34D40 /* install.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = install.sh; sourceTree = "<group>"; };
 		A66EB0CB2ABDDC6200C34D40 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		A66EB0CC2ABDDC6C00C34D40 /* make_documentation.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = make_documentation.sh; sourceTree = "<group>"; };
@@ -1117,7 +1129,6 @@
 				A66EB0BA2ABDDC2E00C34D40 /* distro.sh */,
 				A66EB0C72ABDDC5300C34D40 /* Doxyfile */,
 				A66EB0CA2ABDDC5300C34D40 /* install.sh */,
-				A66EB0C92ABDDC5300C34D40 /* installer_requirements.plist */,
 				A66EB0C82ABDDC5300C34D40 /* lib_symlink_tool.sh */,
 				A66EB0EA2ABDDEB300C34D40 /* SupportingFiles */,
 				A66EB0C62ABDDC4900C34D40 /* doc */,
@@ -1693,7 +1704,6 @@
 				A683D9E92ABD980E00C34D40 /* UMObjectStatisticEntry.h in Headers */,
 				A683D9E72ABD980E00C34D40 /* UMHTTPPageHandler.h in Headers */,
 				A6915F8D304D666700B15E34 /* UMZMQSocket+ASN1.h in Headers */,
-				A6915F8E304D666700B15E34 /* UMZMQSocket.h in Headers */,
 				A683DA0F2ABD980E00C34D40 /* UMHTTPPageRef.h in Headers */,
 				A683DA4C2ABD980E00C34D40 /* UMHTTP2Server.h in Headers */,
 				A683DA282ABD980E00C34D40 /* UMSocketDefs.h in Headers */,
@@ -1897,6 +1907,7 @@
 				A69BA4502ABD850000C34D40 /* Headers */,
 				A69BA4522ABD850000C34D40 /* Frameworks */,
 				A69BA4532ABD850000C34D40 /* Resources */,
+				A64C6AFA305C04A700AAA74A /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -1933,7 +1944,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 2700;
 				TargetAttributes = {
 					A69BA4542ABD850000C34D40 = {
 						CreatedOnToolsVersion = 15.0;
@@ -2115,7 +2126,6 @@
 				A6915F64304D665900B15E34 /* UMRpcCommandHandler.m in Sources */,
 				A6915F65304D665900B15E34 /* UMRpcServer.m in Sources */,
 				A6915F66304D665900B15E34 /* UMRpcMessage_GenericError.m in Sources */,
-				A6915F8B304D666700B15E34 /* UMZMQSocket.m in Sources */,
 				A6915F8C304D666700B15E34 /* UMZMQSocket+ASN1.m in Sources */,
 				A6915F67304D665900B15E34 /* UMRpcHandler.m in Sources */,
 				A6915F68304D665900B15E34 /* UMRpcMessage.m in Sources */,
@@ -2250,10 +2260,6 @@
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					arm64,
-					x86_64,
-				);
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -2324,6 +2330,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.ulib";
 				PRODUCT_DEFINITION_PLIST = "SupportingFiles/ulib-macos-info.plist";
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_MACCATALYST = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2336,10 +2343,6 @@
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					arm64,
-					x86_64,
-				);
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -2404,6 +2407,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.ulib";
 				PRODUCT_DEFINITION_PLIST = "SupportingFiles/ulib-macos-info.plist";
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_MACCATALYST = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2442,7 +2446,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 2.1.1;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -2487,7 +2491,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 2.1.1;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -2511,7 +2515,7 @@
 				DEVELOPMENT_TEAM = HG8655K94F;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.--PRODUCT-NAME-rfc1034identifier-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2532,7 +2536,7 @@
 				DEVELOPMENT_TEAM = HG8655K94F;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.--PRODUCT-NAME-rfc1034identifier-";
 				PRODUCT_NAME = "$(TARGET_NAME)";

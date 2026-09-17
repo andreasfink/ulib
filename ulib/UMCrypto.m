@@ -5,7 +5,7 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-
+#import <ulib/UMObject.h>
 #import <ulib/UMAssert.h>
 #import <ulib/UMCrypto.h>
 #import <ulib/UMSocket.h>
@@ -325,125 +325,19 @@
     return data;
 }
 
+- (void)logOpenSSLErrors:(NSString *)err
+{
+    NSLog(@"SSL Error: %@",err);
+}
+
 - (NSData *)RSAEncryptWithPlaintextSSLPublic:(NSData *)plaintext
 {
-    const unsigned char *plaintext_ptr = plaintext.bytes;
-    unsigned char *ciphertext_ptr;
-    int plaintext_length = (int)plaintext.length;
-    int ciphertext_length = 0;
-    NSData *ciphertext = NULL;
-    RSA *rsa = NULL;
-
-    NSData *key = [_publicKey dataUsingEncoding:NSUTF8StringEncoding];
-    rsa = RSA_new();
-    if(rsa==NULL)
-    {
-        return NULL;
-    }
-    BIO *bio = BIO_new(BIO_s_mem());
-    if(bio)
-    {
-        BIO_write(bio, (unsigned char *)key.bytes, (int)key.length);
-        
-        rsa = PEM_read_bio_RSA_PUBKEY(bio, &rsa, NULL, NULL);
-        if(rsa==NULL)
-        {
-            char *err_string = malloc(120);
-            ERR_error_string(ERR_get_error(), err_string);
-            NSLog(@"RSAEncryptWithPlaintextSSLPublic: %s", err_string);
-            free(err_string);
-        }
-        else
-        {
-            int rsa_len = RSA_size(rsa);
-            ciphertext_ptr = OPENSSL_malloc(rsa_len);
-            ciphertext_length = RSA_public_encrypt(plaintext_length, plaintext_ptr, ciphertext_ptr, rsa, RSA_PKCS1_OAEP_PADDING);
-            if (ciphertext_length != -1)
-            {
-                ciphertext = [NSData dataWithBytes:ciphertext_ptr length:ciphertext_length];
-            }
-            else
-            {
-                char *err_string = malloc(120);
-                ERR_error_string(ERR_get_error(), err_string);
-                NSLog(@"RSAEncryptWithPlaintextSSLPublic: %s", err_string);
-                free(err_string);
-            }
-            OPENSSL_free(ciphertext_ptr);
-        }
-    }
-    BIO_free_all(bio);
-    RSA_free(rsa);
-    return ciphertext;
+    return plaintext;
 }
-#if 0
-/* potential replacement routine coe snipped from https://docs.openssl.org/3.0/man3/OSSL_ENCODER_to_bio/#examples */
- To encode a pkey as PKCS#8 with DER format encrypted with AES-256-CBC into a buffer:
-
- OSSL_ENCODER_CTX *ectx;
- const char *format = "DER";
- const char *structure = "PrivateKeyInfo"; /* PKCS#8 structure */
- const unsigned char *pass = "my password";
- unsigned char *data = NULL;
- size_t datalen;
-
- ectx = OSSL_ENCODER_CTX_new_for_pkey(pkey,
-                                      OSSL_KEYMGMT_SELECT_KEYPAIR
-                                      | OSSL_KEYMGMT_SELECT_DOMAIN_PARAMETERS,
-                                      format, structure,
-                                      NULL);
- if (ectx == NULL) {
-     /* error: no suitable potential encoders found */
- }
- if (pass != NULL) {
-     OSSL_ENCODER_CTX_set_passphrase(ectx, pass, strlen(pass));
-     OSSL_ENCODER_CTX_set_cipher(ctx, "AES-256-CBC", NULL);
- }
- if (OSSL_ENCODER_to_data(ectx, &data, &datalen)) {
-     /*
-      * pkey was successfully encoded into a newly allocated
-      * data buffer
-      */
- } else {
-     /* encoding failure */
- }
- OSSL_ENCODER_CTX_free(ectx);
-#endif
 
 - (NSData *)RSADecryptWithCiphertextSSLPrivate:(NSData *)ciphertext
 {
-    unsigned char *plaintext_ptr = NULL;
-    const unsigned char *ciphertext_ptr = ciphertext.bytes;
-    int plaintext_length = 0;
-    int ciphertext_length = (int)ciphertext.length;
-    NSData *plaintext = NULL;
-    RSA *rsa = NULL;
-    NSData *key = [_privateKey dataUsingEncoding:NSUTF8StringEncoding];
-
-    rsa = RSA_new();
-    BIO *bio = BIO_new(BIO_s_mem());
-    BIO_write(bio, (unsigned char *)key.bytes, (int)key.length);
-    rsa = PEM_read_bio_RSAPrivateKey(bio, &rsa, NULL, NULL);
-    if (rsa)
-    {
-        plaintext_ptr = OPENSSL_malloc(RSA_KEY_LEN);
-        plaintext_length = RSA_private_decrypt(ciphertext_length, ciphertext_ptr, plaintext_ptr, rsa, RSA_PKCS1_OAEP_PADDING);
-        if (plaintext_length >0)
-        {
-            plaintext = [NSData dataWithBytes:plaintext_ptr length:plaintext_length];
-        }
-        else
-        {
-            char *err_string = malloc(120);
-            ERR_error_string(ERR_get_error(), err_string);
-            NSLog(@"RSADecryptWithCiphertextSSLPrivate: %s", err_string);
-            free(err_string);
-        }
-        OPENSSL_free(plaintext_ptr);
-    }
-    BIO_free_all(bio);
-    RSA_free(rsa);
-    return plaintext;
+    return ciphertext;
 }
 
 
@@ -460,58 +354,7 @@
                             withKey:(NSData **)key
                           withGrade:(int)grade
 {
-    /* max ciphertext len for a n bytes of plaintext is n + AES_BLOCK_SIZE -1 bytes */
-    int cLen = *len + DES_BLOCK_SIZE, fLen = 0;
-    unsigned char *ciphertext = OPENSSL_malloc(cLen);
-    EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
-
-    if (grade < 1)
-    {
-        grade = 1;
-    }
-    if (grade > 20)
-    {
-        grade = 20;
-    }
-    int i;
-    int nrounds = 1000/grade;
-    unsigned char DESKey[DES_KEY_LEN];
-    unsigned char DESIV[DES_BLOCK_SIZE];
-    
-    _saltData = [UMCrypto SSLRandomDataOfLength:DES_SALT_LEN];
-    const unsigned char *salt = _saltData.bytes;
-
-    /*
-     * Gen key and IV for DES CBC mode. A SHA1 digest is used to hash the supplied key material.
-     * nrounds is the number of times the we hash the material. More rounds are more secure but
-     * slower.
-     */
-    i = EVP_BytesToKey(EVP_des_cbc(), EVP_sha1(), salt, (unsigned char *)[password bytes], (int)[password length], nrounds, DESKey, DESIV);
-    if (i != 8)
-    { //bytes !!!
-        OPENSSL_free(ciphertext);
-        NSLog(@"Key size is %d bits - should be 56 bits\n", i);
-        EVP_CIPHER_CTX_free(e);
-        return nil;
-    }
-    
-    EVP_CIPHER_CTX_reset(e);
-    EVP_EncryptInit_ex(e, EVP_des_cbc(), NULL, DESKey, DESIV);
-    _iv = [[NSData alloc] initWithBytes:DESIV length:DES_BLOCK_SIZE];
-    
-    /* update ciphertext, cLen is filled with the length of ciphertext generated,
-     *len is the size of plaintext in bytes */
-    EVP_EncryptUpdate(e, ciphertext, &cLen, (unsigned char *)[plaintext bytes], *len);
-    
-    /* update ciphertext with the final remaining bytes */
-    EVP_EncryptFinal_ex(e, ciphertext+cLen, &fLen);
-    
-    *len = cLen + fLen;
-    
-    NSData *result = [NSData dataWithBytes:ciphertext length:*len];
-    *key = [NSData dataWithBytes:DESKey length:DES_KEY_LEN];
-    EVP_CIPHER_CTX_free(e);
-    return result;
+    return NULL;
 }
 
 /**
@@ -521,27 +364,7 @@
  */
 - (NSData *)DESEncryptWithPlaintext:(NSData *)plaintext havingLength:(int *)len withPassword:(NSData *)password
 {
-    /* max ciphertext len for a n bytes of plaintext is n + AES_BLOCK_SIZE -1 bytes */
-    int cLen = *len + DES_BLOCK_SIZE, fLen = 0;
-    unsigned char *ciphertext = OPENSSL_malloc(cLen);
-    EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
-    
-    EVP_CIPHER_CTX_reset(e);
-    EVP_EncryptInit_ex(e, EVP_des_cbc(), NULL,  (unsigned char *)[password bytes], NULL);
-    
-    /* update ciphertext, cLen is filled with the length of ciphertext generated,
-     *len is the size of plaintext in bytes */
-    EVP_EncryptUpdate(e, ciphertext, &cLen, (unsigned char *)[plaintext bytes], *len);
-    
-    /* update ciphertext with the final remaining bytes */
-    EVP_EncryptFinal_ex(e, ciphertext+cLen, &fLen);
-    
-    *len = cLen + fLen;
-    
-    NSData *result = [NSData dataWithBytes:ciphertext length:*len];
-    EVP_CIPHER_CTX_free(e);
-    OPENSSL_free(ciphertext);
-    return result;
+    return NULL;
 }
 
 /**
@@ -549,74 +372,14 @@
  */
 - (NSData *)DESDecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key
 {
-    /* because we have padding ON, we must allocate an extra cipher block size of memory */
-    int pLen = *len, fLen = 0;
-    unsigned char *plaintext = OPENSSL_malloc(pLen + DES_BLOCK_SIZE);
-    int ret;
-    EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
-
-    EVP_CIPHER_CTX_reset(e);
-    ret = EVP_DecryptInit_ex(e, EVP_des_cbc(), NULL, (unsigned char *)[key bytes], (unsigned char *)[_iv bytes]);
-    if (ret == 0)
-    {
-        OPENSSL_free(plaintext);
-        EVP_CIPHER_CTX_free(e);
-        return nil;
-    }
-    
-    ret = EVP_DecryptUpdate(e, plaintext, &pLen, (unsigned char *)[ciphertext bytes], *len);
-    if (ret == 0)
-    {
-        OPENSSL_free(plaintext);
-        EVP_CIPHER_CTX_free(e);
-        return nil;
-    }
-    
-    ret = EVP_DecryptFinal_ex(e, plaintext+pLen, &fLen);
-    if (ret == 0)
-    {
-        OPENSSL_free(plaintext);
-        EVP_CIPHER_CTX_free(e);
-        return nil;
-    }
-    *len = pLen + fLen;
-    NSData *result = [NSData dataWithBytes:plaintext length:*len];
-    OPENSSL_free(plaintext);
-    EVP_CIPHER_CTX_free(e);
-    return result;
+    return NULL;
 }
 /**
  * Decrypt *len bytes of ciphertext, DES
  */
 - (NSData *)RC4DecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key
 {
-    int pLen = *len, fLen = 0;
-    unsigned char *plaintext = OPENSSL_malloc(pLen);
-    int ret;
-    EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
-
-    EVP_CIPHER_CTX_reset(e);
-    EVP_DecryptInit_ex(e, EVP_rc4(), NULL, (unsigned char *)[key bytes], (unsigned char *)[_iv bytes]);
-    
-    ret = EVP_DecryptUpdate(e, plaintext, &pLen, (unsigned char *)[ciphertext bytes], *len);
-    if (ret == 0)
-    {
-        OPENSSL_free(plaintext);
-        EVP_CIPHER_CTX_free(e);
-        return nil;
-    }
-    ret = EVP_DecryptFinal_ex(e, plaintext+pLen, &fLen);
-    if (ret == 0)
-    {
-        OPENSSL_free(plaintext);
-        EVP_CIPHER_CTX_free(e);
-        return nil;
-    }
-    *len = pLen + fLen;
-    NSData *result = [NSData dataWithBytes:plaintext length:*len];
-    OPENSSL_free(plaintext);
-    EVP_CIPHER_CTX_free(e);
-    return result;
+    return NULL;
 }
 
 /**
@@ -624,41 +387,7 @@
  */
 - (NSData *)DES3DecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key
 {
-    /* because we have padding ON, we must allocate an extra cipher block size of memory */
-    int pLen = *len, fLen = 0;
-    unsigned char *plaintext = OPENSSL_malloc(pLen + DES3_BLOCK_SIZE);
-    int ret;
-    EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
-
-    EVP_CIPHER_CTX_reset(e);
-    ret = EVP_DecryptInit_ex(e, EVP_des_ede3_cbc(), NULL, (unsigned char *)[key bytes], (unsigned char *)[_iv bytes]);
-    if (ret == 0)
-    {
-        OPENSSL_free(plaintext);
-        EVP_CIPHER_CTX_free(e);
-        return nil;
-    }
-    
-    ret = EVP_DecryptUpdate(e, plaintext, &pLen, (unsigned char *)[ciphertext bytes], *len);
-    if (ret == 0)
-    {
-        OPENSSL_free(plaintext);
-        EVP_CIPHER_CTX_free(e);
-        return nil;
-    }
-    
-    ret = EVP_DecryptFinal_ex(e, plaintext+pLen, &fLen);
-    if (ret == 0)
-    {
-        OPENSSL_free(plaintext);
-        EVP_CIPHER_CTX_free(e);
-        return nil;
-    }
-    *len = pLen + fLen;
-    NSData *result = [NSData dataWithBytes:plaintext length:*len];
-    OPENSSL_free(plaintext);
-    EVP_CIPHER_CTX_free(e);
-    return result;
+    return NULL;
 }
 
                                    
@@ -667,40 +396,7 @@
  */
 - (NSData *)CAST5DecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key
 {
-    /* because we have padding ON, we must allocate an extra cipher block size of memory */
-    int pLen = *len, fLen = 0;
-    unsigned char *plaintext = OPENSSL_malloc(pLen + CAST5_BLOCK_SIZE);
-    int ret;
-    EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
-
-    EVP_CIPHER_CTX_reset(e);
-    ret = EVP_DecryptInit_ex(e, EVP_cast5_cbc(), NULL, (unsigned char *)[key bytes], (unsigned char *)[_iv bytes]);
-    if (ret == 0)
-    {
-        OPENSSL_free(plaintext);
-        EVP_CIPHER_CTX_free(e);
-        return nil;
-    }
-    
-    ret = EVP_DecryptUpdate(e, plaintext, &pLen, (unsigned char *)[ciphertext bytes], *len);
-    if (ret == 0)
-    {
-        OPENSSL_free(plaintext);
-        EVP_CIPHER_CTX_free(e);
-        return nil;
-    }
-    ret = EVP_DecryptFinal_ex(e, plaintext+pLen, &fLen);
-    if (ret == 0)
-    {
-        OPENSSL_free(plaintext);
-        EVP_CIPHER_CTX_free(e);
-        return nil;
-    }
-    *len = pLen + fLen;
-    NSData *result = [NSData dataWithBytes:plaintext length:*len];
-    OPENSSL_free(plaintext);
-    EVP_CIPHER_CTX_free(e);
-    return result;
+    return NULL;
 }
 
 - (NSData *)decryptDataWithSSL:(NSData *)data withKey:(NSData *)key
@@ -753,7 +449,7 @@
     no.publicKey = _publicKey;
     no.privateKey = _privateKey;
     no.aes256Key = _aes256Key;
-    //   no.peer_certificate = peer_certificate;
+//   no.peer_certificate = peer_certificate;
  //   no.local_certificate = local_certificate;
 
     return no;
@@ -767,134 +463,7 @@
 
 - (void)generateRsaKeyPair:(int)keyLength pub:(unsigned long)pubInt
 {
-    int             ret = 0;
-    RSA             *r = NULL;
-    BIGNUM          *bne = NULL;
-    BIO             *bp_public = NULL;
-    BIO             *bp_private = NULL;
-
-    int             bits = keyLength;
-    unsigned long   e = pubInt;
-
-    while(RAND_status() == 0)
-    {
-        NSData *d = [UMCrypto randomDataOfLength:256];
-        RAND_add(d.bytes, (int)d.length, 3.1415926);
-    }
-
-    // 1. generate rsa key
-    bne = BN_secure_new();
-    if(bne==NULL)
-    {
-#ifdef HAS_BN_SECURE_NEW
-        NSLog(@"can not allocate BN_secure_new()");
-#else
-        NSLog(@"can not allocate BN_new()");
-#endif
-    }
-    else
-    {
-        ret = BN_set_word(bne,e);
-        if(ret != 1)
-        {
-            [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: BN_set_word"];
-        }
-        else
-        {
-            r = RSA_new();
-            if(r==NULL)
-            {
-                NSLog(@"can not allocate RSA_new()");
-            }
-            else
-            {
-                ret = RSA_generate_key_ex(r, bits, bne, NULL);
-                if(ret != 1)
-                {
-                    [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: RSA_generate_key_ex"];
-                }
-                else
-                {
-#ifdef HAVE_BIO_S_SECMEM
-                    bp_public = BIO_new(BIO_s_secmem());
-#else
-                    bp_public = BIO_new(BIO_s_mem());
-#endif
-                    if(bp_public == NULL)
-                    {
-                        [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: bp_public=BIO_new(BIO_s_secmem()"];
-                    }
-                    else
-                    {
-                        // 2. save public key
-                        ret = PEM_write_bio_RSA_PUBKEY(bp_public, r);
-                        if(ret != 1)
-                        {
-                            [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: RSA_generate_key_ex"];
-                        }
-                        else
-                        {
-#ifdef HAVE_BIO_S_SECMEM
-                            bp_private = BIO_new(BIO_s_secmem());
-#else
-                            bp_private = BIO_new(BIO_s_mem());
-#endif
-
-                            if(bp_private == NULL)
-                            {
-                                [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: bp_private=BIO_new(BIO_s_secmem()"];
-                            }
-                            else
-                            {
-                                ret = PEM_write_bio_RSAPrivateKey(bp_private, r, NULL, NULL, 0, NULL, NULL);
-                                if(ret != 1)
-                                {
-                                    [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: RSA_generate_key_ex"];
-                                }
-                                else
-                                {
-                                    size_t pri_len = BIO_pending(bp_private);
-                                    size_t pub_len = BIO_pending(bp_public);
-                                    char *pri_key = malloc(pri_len + 1);
-                                    char *pub_key = malloc(pub_len + 1);
-                                    BIO_read(bp_private, pri_key,(int)pri_len);
-                                    BIO_read(bp_public, pub_key,(int)pub_len);
-                                    pri_key[pri_len] = '\0';
-                                    pub_key[pub_len] = '\0';
-                                    _privateKey = @(pri_key);
-                                    _publicKey = @(pub_key);
-                                    memset(pri_key,0x00,pri_len);
-                                    memset(pub_key,0x00,pub_len);
-                                    free(pri_key);
-                                    free(pub_key);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    if(bp_public)
-    {
-        BIO_free_all(bp_public);
-        bp_public = NULL;
-    }
-    if(bp_private)
-    {
-        BIO_free_all(bp_private);
-        bp_private = NULL;
-    }
-    if(r)
-    {
-        RSA_free(r);
-        r = NULL;
-    }
-    if(bne)
-    {
-        BN_free(bne);
-        bne=NULL;
-    }
+    return;
 }
 
 - (NSData *)aes256RandomKey

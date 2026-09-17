@@ -2444,9 +2444,9 @@
     NSString *name = [NSString stringWithFormat:@"RX:%@",_layerName];
     _directReceiver = [[UMSCTPListener alloc]initWithName:name
                                              socket:_directSocket
-                                      eventDelegate:self
-                                       readDelegate:self
-                                    processDelegate:self];
+                                      eventDelegate:(id<UMSCTPListenerProcessEventsDelegate>)self
+                                       readDelegate:(id<UMSCTPListenerReadPacketDelegate>)self
+                                    processDelegate:(id<UMSCTPListenerProcessDataDelegate>)self];
     _directReceiver.logFeed = self.logFeed;
     _directReceiver.logLevel = self.logLevel;
 

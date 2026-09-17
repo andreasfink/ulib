@@ -248,7 +248,6 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
 {
     if((_localAddressesSockaddr==NULL) || ( _localAddressesSockaddrCount==0))
     {
-        int  _localAddressesSockaddrCount;
         _localAddressesSockaddr = [UMSocketSCTP sockaddrFromAddresses:_requestedLocalAddresses
                                                                  port:self.requestedLocalPort
                                                                 count:&_localAddressesSockaddrCount /* returns struct sockaddr data in NSData */

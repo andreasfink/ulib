@@ -32,7 +32,7 @@ all: ${LIB} ${SLIB}
 ${LIB}: ${OFILES}
 	${CC} -shared -o ${LIB} ${LDFLAGS} ${OFILES} ${LIBS} ${STATIC_LIBS}
 
-${SLIB}: ${OFILES} ${LIBS}
+${SLIB}: ${OFILES}
 	@LIBTOOL@ ${SLIB} ${OFILES}
 	ranlib ${SLIB}
 

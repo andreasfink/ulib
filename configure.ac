@@ -63,14 +63,22 @@ fi
 
 case "$host" in
   *apple-darwin*) 
+	#  set(CMAKE_CXX_FLAGS "--sysroot ${CMAKE_OSX_SYSROOT} ${CMAKE_CXX_FLAGS}")
+
+	SDK=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/
     ARCH="-arch arm64 -arch x86_64"
     AC_DEFINE(HAVE_COMMONCRYPTO)
     AC_DEFINE(HAVE_OPENSSL)
    	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
-	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}` -l/usr/local/lib/mariadb/libmariadbclient.a"
+	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}` -L/usr/local/lib/mariadb -lmariadbclient"
     UR="`uname -r | cut -f1 -d.`"
     DONE=0
-    CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
+    if [[ -d "${SDK}" ]]
+    then
+		CFLAGS="--sysroot ${SDK} ${CFLAGS}"
+		LDFLAGS="${LDFLAGS} -L ${SDK}/usr/lib"
+	fi
+    CFLAGS="$CFLAGS -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit"
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"

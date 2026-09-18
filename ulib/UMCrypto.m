@@ -44,6 +44,12 @@
 #define HAVE_TLS_METHOD 1
 #endif
 
+/* RSA_* is deprecated since openssl 3.0, EVP_PKEY used below.
+   shim for 1.1.1 */
+#if OPENSSL_VERSION_NUMBER < 0x30000000L
+#define EVP_PKEY_get_size(k) EVP_PKEY_size(k)
+#endif
+
 #endif
 
 #include <string.h>
@@ -332,12 +338,133 @@
 
 - (NSData *)RSAEncryptWithPlaintextSSLPublic:(NSData *)plaintext
 {
-    return plaintext;
+    const unsigned char *plaintext_ptr = plaintext.bytes;
+    size_t plaintext_length = plaintext.length;
+    unsigned char *ciphertext_ptr = NULL;
+    size_t ciphertext_length = 0;
+    NSData *ciphertext = NULL;
+    EVP_PKEY *pkey = NULL;
+    EVP_PKEY_CTX *ctx = NULL;
+
+    NSData *key = [_publicKey dataUsingEncoding:NSUTF8StringEncoding];
+    BIO *bio = BIO_new(BIO_s_mem());
+    if(bio)
+    {
+        BIO_write(bio, (unsigned char *)key.bytes, (int)key.length);
+
+        /* same PEM as PEM_read_bio_RSA_PUBKEY, yields an EVP_PKEY */
+        pkey = PEM_read_bio_PUBKEY(bio, NULL, NULL, NULL);
+        if(pkey==NULL)
+        {
+            [self logOpenSSLErrorsForSection:@"RSAEncryptWithPlaintextSSLPublic: PEM_read_bio_PUBKEY"];
+        }
+        else
+        {
+            ctx = EVP_PKEY_CTX_new(pkey, NULL);
+            if(ctx == NULL)
+            {
+                [self logOpenSSLErrorsForSection:@"RSAEncryptWithPlaintextSSLPublic: EVP_PKEY_CTX_new"];
+            }
+            else if(EVP_PKEY_encrypt_init(ctx) != 1)
+            {
+                [self logOpenSSLErrorsForSection:@"RSAEncryptWithPlaintextSSLPublic: EVP_PKEY_encrypt_init"];
+            }
+            /* OAEP defaults to SHA-1 as RSA_public_encrypt did, ciphertext unchanged */
+            else if(EVP_PKEY_CTX_set_rsa_padding(ctx, RSA_PKCS1_OAEP_PADDING) != 1)
+            {
+                [self logOpenSSLErrorsForSection:@"RSAEncryptWithPlaintextSSLPublic: EVP_PKEY_CTX_set_rsa_padding"];
+            }
+            else
+            {
+                ciphertext_length = (size_t)EVP_PKEY_get_size(pkey);
+                ciphertext_ptr = OPENSSL_malloc(ciphertext_length);
+                if(ciphertext_ptr == NULL)
+                {
+                    [self logOpenSSLErrorsForSection:@"RSAEncryptWithPlaintextSSLPublic: OPENSSL_malloc"];
+                }
+                else if(EVP_PKEY_encrypt(ctx, ciphertext_ptr, &ciphertext_length, plaintext_ptr, plaintext_length) != 1)
+                {
+                    [self logOpenSSLErrorsForSection:@"RSAEncryptWithPlaintextSSLPublic: EVP_PKEY_encrypt"];
+                }
+                else
+                {
+                    ciphertext = [NSData dataWithBytes:ciphertext_ptr length:ciphertext_length];
+                }
+                OPENSSL_free(ciphertext_ptr);
+            }
+        }
+    }
+    EVP_PKEY_CTX_free(ctx);
+    EVP_PKEY_free(pkey);
+    BIO_free_all(bio);
+    return ciphertext;
 }
 
 - (NSData *)RSADecryptWithCiphertextSSLPrivate:(NSData *)ciphertext
 {
-    return ciphertext;
+    unsigned char *plaintext_ptr = NULL;
+    const unsigned char *ciphertext_ptr = ciphertext.bytes;
+    size_t plaintext_length = 0;
+    size_t ciphertext_length = ciphertext.length;
+    NSData *plaintext = NULL;
+    EVP_PKEY *pkey = NULL;
+    EVP_PKEY_CTX *ctx = NULL;
+    NSData *key = [_privateKey dataUsingEncoding:NSUTF8StringEncoding];
+
+    BIO *bio = BIO_new(BIO_s_mem());
+    if(bio)
+    {
+        BIO_write(bio, (unsigned char *)key.bytes, (int)key.length);
+
+        /* accepts PKCS#1 and PKCS#8 */
+        pkey = PEM_read_bio_PrivateKey(bio, NULL, NULL, NULL);
+        if(pkey == NULL)
+        {
+            [self logOpenSSLErrorsForSection:@"RSADecryptWithCiphertextSSLPrivate: PEM_read_bio_PrivateKey"];
+        }
+        else
+        {
+            ctx = EVP_PKEY_CTX_new(pkey, NULL);
+            if(ctx == NULL)
+            {
+                [self logOpenSSLErrorsForSection:@"RSADecryptWithCiphertextSSLPrivate: EVP_PKEY_CTX_new"];
+            }
+            else if(EVP_PKEY_decrypt_init(ctx) != 1)
+            {
+                [self logOpenSSLErrorsForSection:@"RSADecryptWithCiphertextSSLPrivate: EVP_PKEY_decrypt_init"];
+            }
+            else if(EVP_PKEY_CTX_set_rsa_padding(ctx, RSA_PKCS1_OAEP_PADDING) != 1)
+            {
+                [self logOpenSSLErrorsForSection:@"RSADecryptWithCiphertextSSLPrivate: EVP_PKEY_CTX_set_rsa_padding"];
+            }
+            /* NULL buffer asks for the size */
+            else if(EVP_PKEY_decrypt(ctx, NULL, &plaintext_length, ciphertext_ptr, ciphertext_length) != 1)
+            {
+                [self logOpenSSLErrorsForSection:@"RSADecryptWithCiphertextSSLPrivate: EVP_PKEY_decrypt (length)"];
+            }
+            else
+            {
+                plaintext_ptr = OPENSSL_malloc(plaintext_length);
+                if(plaintext_ptr == NULL)
+                {
+                    [self logOpenSSLErrorsForSection:@"RSADecryptWithCiphertextSSLPrivate: OPENSSL_malloc"];
+                }
+                else if(EVP_PKEY_decrypt(ctx, plaintext_ptr, &plaintext_length, ciphertext_ptr, ciphertext_length) != 1)
+                {
+                    [self logOpenSSLErrorsForSection:@"RSADecryptWithCiphertextSSLPrivate: EVP_PKEY_decrypt"];
+                }
+                else
+                {
+                    plaintext = [NSData dataWithBytes:plaintext_ptr length:plaintext_length];
+                }
+                OPENSSL_clear_free(plaintext_ptr, plaintext_length);
+            }
+        }
+    }
+    EVP_PKEY_CTX_free(ctx);
+    EVP_PKEY_free(pkey);
+    BIO_free_all(bio);
+    return plaintext;
 }
 
 
@@ -463,7 +590,146 @@
 
 - (void)generateRsaKeyPair:(int)keyLength pub:(unsigned long)pubInt
 {
-    return;
+    int             ret = 0;
+    EVP_PKEY        *pkey = NULL;
+    EVP_PKEY_CTX    *kctx = NULL;
+    BIGNUM          *bne = NULL;
+    BIO             *bp_public = NULL;
+    BIO             *bp_private = NULL;
+
+    int             bits = keyLength;
+    unsigned long   e = pubInt;
+
+    while(RAND_status() == 0)
+    {
+        NSData *d = [UMCrypto randomDataOfLength:256];
+        RAND_add(d.bytes, (int)d.length, 3.1415926);
+    }
+
+    bne = BN_secure_new();
+    if(bne==NULL)
+    {
+        NSLog(@"can not allocate BN_secure_new()");
+    }
+    else
+    {
+        ret = BN_set_word(bne,e);
+        if(ret != 1)
+        {
+            [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: BN_set_word"];
+        }
+        else
+        {
+            /* replaces RSA_new() / RSA_generate_key_ex() */
+            kctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, NULL);
+            if(kctx==NULL)
+            {
+                [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: EVP_PKEY_CTX_new_id"];
+            }
+            else if(EVP_PKEY_keygen_init(kctx) != 1)
+            {
+                [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: EVP_PKEY_keygen_init"];
+            }
+            else if(EVP_PKEY_CTX_set_rsa_keygen_bits(kctx, bits) != 1)
+            {
+                [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: EVP_PKEY_CTX_set_rsa_keygen_bits"];
+            }
+#if OPENSSL_VERSION_NUMBER >= 0x30000000L
+            /* set1_ copies bne, we free it below */
+            else if(EVP_PKEY_CTX_set1_rsa_keygen_pubexp(kctx, bne) != 1)
+#else
+            /* pre-3.0 call takes ownership, hence the dup */
+            else if(EVP_PKEY_CTX_set_rsa_keygen_pubexp(kctx, BN_dup(bne)) != 1)
+#endif
+            {
+                [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: EVP_PKEY_CTX_set_rsa_keygen_pubexp"];
+            }
+            else
+            {
+                ret = EVP_PKEY_keygen(kctx, &pkey);
+                if(ret != 1)
+                {
+                    [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: EVP_PKEY_keygen"];
+                }
+                else
+                {
+                    bp_public = BIO_new(BIO_s_mem());
+                    if(bp_public == NULL)
+                    {
+                        [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: bp_public=BIO_new"];
+                    }
+                    else
+                    {
+                        /* same PEM as PEM_write_bio_RSA_PUBKEY */
+                        ret = PEM_write_bio_PUBKEY(bp_public, pkey);
+                        if(ret != 1)
+                        {
+                            [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: PEM_write_bio_PUBKEY"];
+                        }
+                        else
+                        {
+                            bp_private = BIO_new(BIO_s_mem());
+                            if(bp_private == NULL)
+                            {
+                                [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: bp_private=BIO_new"];
+                            }
+                            else
+                            {
+                                /* _traditional keeps PKCS#1, as PEM_write_bio_RSAPrivateKey wrote */
+                                ret = PEM_write_bio_PrivateKey_traditional(bp_private, pkey, NULL, NULL, 0, NULL, NULL);
+                                if(ret != 1)
+                                {
+                                    [self logOpenSSLErrorsForSection:@"generateRsaKeyPair:pub: PEM_write_bio_PrivateKey_traditional"];
+                                }
+                                else
+                                {
+                                    size_t pri_len = BIO_pending(bp_private);
+                                    size_t pub_len = BIO_pending(bp_public);
+                                    char *pri_key = malloc(pri_len + 1);
+                                    char *pub_key = malloc(pub_len + 1);
+                                    BIO_read(bp_private, pri_key,(int)pri_len);
+                                    BIO_read(bp_public, pub_key,(int)pub_len);
+                                    pri_key[pri_len] = '\0';
+                                    pub_key[pub_len] = '\0';
+                                    _privateKey = @(pri_key);
+                                    _publicKey = @(pub_key);
+                                    memset(pri_key,0x00,pri_len);
+                                    memset(pub_key,0x00,pub_len);
+                                    free(pri_key);
+                                    free(pub_key);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if(bp_public)
+    {
+        BIO_free_all(bp_public);
+        bp_public = NULL;
+    }
+    if(bp_private)
+    {
+        BIO_free_all(bp_private);
+        bp_private = NULL;
+    }
+    if(pkey)
+    {
+        EVP_PKEY_free(pkey);
+        pkey = NULL;
+    }
+    if(kctx)
+    {
+        EVP_PKEY_CTX_free(kctx);
+        kctx = NULL;
+    }
+    if(bne)
+    {
+        BN_free(bne);
+        bne=NULL;
+    }
 }
 
 - (NSData *)aes256RandomKey
@@ -508,9 +774,9 @@
     return [self aes256Encrypt:plaintext key:key iv:NULL];
 }
 
-- (NSData *)aes256Decrypt:(NSData *)plaintext key:(NSData *)key
+- (NSData *)aes256Decrypt:(NSData *)ciphertext key:(NSData *)key
 {
-    return [self aes256Encrypt:plaintext key:key iv:NULL];
+    return [self aes256Decrypt:ciphertext key:key iv:NULL];
 }
 
 - (NSData *)aes256Encrypt:(NSData *)plaintext

@@ -254,6 +254,7 @@
 #pragma mark -
 #pragma mark DES
 
+// probably unused
 - (UMCrypto *)initDESInitWithSaltAndIV
 {
     self = [super init];
@@ -273,6 +274,7 @@
 
 /*     int RAND_bytes(unsigned char *buf, int num); */
 
+// probably unused
 - (UMCrypto *)initDESInitWithKeyWithEntropySource:(NSString *)file withGrade:(int)grade;
 {
     char *entropy;
@@ -330,11 +332,15 @@
     NSLog(@"SSL Error: %@",err);
 }
 
+
+// unused
 - (NSData *)RSAEncryptWithPlaintextSSLPublic:(NSData *)plaintext
 {
     return plaintext;
 }
 
+
+// unused
 - (NSData *)RSADecryptWithCiphertextSSLPrivate:(NSData *)ciphertext
 {
     return ciphertext;
@@ -394,10 +400,6 @@
 /**
  * Decrypt *len bytes of ciphertext, CSAT3
  */
-- (NSData *)CAST5DecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key
-{
-    return NULL;
-}
 
 - (NSData *)decryptDataWithSSL:(NSData *)data withKey:(NSData *)key
 {    
@@ -423,11 +425,6 @@
         return plaintext;
     }
     
-    plaintext = [self CAST5DecryptWithCiphertext:data havingLength:&len withKey:key];
-    if (plaintext)
-    {
-        return plaintext;
-    }
     return nil;
 }
 
@@ -510,7 +507,7 @@
 
 - (NSData *)aes256Decrypt:(NSData *)plaintext key:(NSData *)key
 {
-    return [self aes256Encrypt:plaintext key:key iv:NULL];
+    return [self aes256Decrypt:plaintext key:key iv:NULL];
 }
 
 - (NSData *)aes256Encrypt:(NSData *)plaintext

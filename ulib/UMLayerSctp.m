@@ -1685,7 +1685,7 @@
                        socket:(NSNumber *)socketNumber
 {
 #if !defined(HAVE_SCTP)
-    return UMSocketError_not_implemented;
+    return UMSocketError_not_supported_operation;
 #else
 
 #if defined(ULIBSCTP_CONFIG_DEBUG)

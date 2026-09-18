@@ -65,7 +65,6 @@
 		A66EB0D12ABDDC6C00C34D40 /* make_buildnr.sh in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0CD2ABDDC6C00C34D40 /* make_buildnr.sh */; };
 		A66EB0D22ABDDC6C00C34D40 /* make_buildnr.sh.in in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0CE2ABDDC6C00C34D40 /* make_buildnr.sh.in */; };
 		A66EB0D32ABDDC6C00C34D40 /* make_pkg.sh in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0CF2ABDDC6C00C34D40 /* make_pkg.sh */; };
-		A66EB0DF2ABDDC9600C34D40 /* redhat in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0DE2ABDDC9600C34D40 /* redhat */; };
 		A66EB0E42ABDDCC200C34D40 /* ulib.pc in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0E22ABDDCC200C34D40 /* ulib.pc */; };
 		A66EB0E52ABDDCC200C34D40 /* ulib.pc.in in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0E32ABDDCC200C34D40 /* ulib.pc.in */; };
 		A66EB0E82ABDDCD000C34D40 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0E62ABDDCD000C34D40 /* VERSION */; };
@@ -605,7 +604,6 @@
 		A66EB0DB2ABDDC7800C34D40 /* README.macosx.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.macosx.txt; sourceTree = "<group>"; };
 		A66EB0DC2ABDDC7800C34D40 /* Makefile.osx */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx; sourceTree = "<group>"; };
 		A66EB0DD2ABDDC7800C34D40 /* Makefile.osx.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx.in; sourceTree = "<group>"; };
-		A66EB0DE2ABDDC9600C34D40 /* redhat */ = {isa = PBXFileReference; lastKnownFileType = folder; path = redhat; sourceTree = "<group>"; };
 		A66EB0E22ABDDCC200C34D40 /* ulib.pc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ulib.pc; sourceTree = "<group>"; };
 		A66EB0E32ABDDCC200C34D40 /* ulib.pc.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ulib.pc.in; sourceTree = "<group>"; };
 		A66EB0E62ABDDCD000C34D40 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
@@ -1099,7 +1097,6 @@
 				A66EB0E22ABDDCC200C34D40 /* ulib.pc */,
 				A66EB0E32ABDDCC200C34D40 /* ulib.pc.in */,
 				A66EB0E92ABDDCF500C34D40 /* debian */,
-				A66EB0DE2ABDDC9600C34D40 /* redhat */,
 				A66EB0D82ABDDC7800C34D40 /* make_version */,
 				A66EB0D42ABDDC7800C34D40 /* Makefile */,
 				A66EB0D72ABDDC7800C34D40 /* Makefile.freebsd */,
@@ -1998,7 +1995,6 @@
 				A66EB0D22ABDDC6C00C34D40 /* make_buildnr.sh.in in Resources */,
 				A66EB0D02ABDDC6C00C34D40 /* make_documentation.sh in Resources */,
 				A66EB0D32ABDDC6C00C34D40 /* make_pkg.sh in Resources */,
-				A66EB0DF2ABDDC9600C34D40 /* redhat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

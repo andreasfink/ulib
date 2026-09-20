@@ -10,8 +10,8 @@
 #include <unistd.h>
 
 #if defined(FREEBSD)
-#include <uuid.h>
-#include <sys/uuid.h>
+/* as we might prefer /usr/local/include before /usr/include, this might pickup the wrong include file so we force an absolute path here */
+#include "/usr/include/uuid.h"
 #else
 #include <uuid/uuid.h>
 #endif
@@ -25,7 +25,7 @@
 +(NSString *)UUID
 { 
     char uuid_string2[40];
-    char *uuid_string = & uuid_string2;
+    char *uuid_string = uuid_string2;
     memset(uuid_string2,0x00,40);
     uuid_t uu;
     uint32_t status;

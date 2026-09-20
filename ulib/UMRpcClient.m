@@ -21,6 +21,7 @@
 #import <ulib/UMRpcMessageType.h>
 #import <ulib/UMRpcMessageDecoder.h>
 #import <ulib/UMHost.h>
+#include <unistd.h>
 
 @implementation UMRpcClient
 

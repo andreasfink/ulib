@@ -2944,8 +2944,8 @@ case "$host" in
 	CFLAGS="$CFLAGS -std=c99 -fPIC -DFREEBSD"
 	FREEBSD_VERSION=`uname -r`
 	SHARED_LIBRARY_EXTENSION="so"
-	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG}  --objc-flags`"
-    LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG}  --base-libs --objc-libs`"
+	CFLAGS="$CFLAGS `gnustep-config  --objc-flags`"
+    LDFLAGS="$LDFLAGS `gnustep-config  --base-libs --objc-libs`"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
 	CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"

@@ -10,8 +10,8 @@
 #include <unistd.h>
 
 #if defined(FREEBSD)
-//#undef uuid_t
 #include <uuid.h>
+#include <sys/uuid.h>
 #else
 #include <uuid/uuid.h>
 #endif

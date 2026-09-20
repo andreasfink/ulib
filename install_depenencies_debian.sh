@@ -91,7 +91,7 @@ case "$host" in
     ;;
 
   *-linux-*)
-  	DEPENDENT_PKGCONFIGS="openssl libzmq uuid libmariadb libpq"
+  	DEPENDENT_PKGCONFIGS="${DEPENDENT_PKGCONFIGS} uuid"
 	CFLAGS="${CFLAGS} -fobjc-arc -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_DEFAULT_SOURCE"
 	CFLAGS="$CFLAGS `gnustep-config  --objc-flags`"
     LDFLAGS="$LDFLAGS `gnustep-config --base-libs --objc-libs`"
@@ -105,20 +105,30 @@ case "$host" in
 	;;
 
   *-freebsd*)
-   	DEPENDENT_PKGCONFIGS="openssl libzmq uuid libmariadb libpq"
-  	PATH=/opt/buildtools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/GNUstep/System/Tools
-	PKG_CONFIG_PATH=/usr/local/lib/pkg-config:/usr/libdata/pkgconfig:/usr/local/libdata/pkgconfig/
+	DEPENDENT_PKGCONFIGS="openssl libzmq"
 	CFLAGS="$CFLAGS -std=c99 -fPIC -DFREEBSD"
 	FREEBSD_VERSION=`uname -r`
 	SHARED_LIBRARY_EXTENSION="so"
+	if [[ -x /usr/GNUstep/System/Tools/gnustep-config ]]
+	then
+		GNUSTEP_CONFIG=/usr/GNUstep/System/Tools/gnustep-config
+		CFLAGS="${CFLAGS} -I/usr/GNUstep/System/Library/Headers/"
+	else
+		if [[ -x /usr/local/bin/gnustep-config ]]
+		then
+			GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
+		else
+			GNUSTEP_CONFIG=/usr/bin/gnustep-config
+		fi
+	fi
 	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG}  --objc-flags`"
     LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG}  --base-libs --objc-libs`"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
 	CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
 	AC_DEFINE(HAVE_OPENSSL)
-	LIBRARIES=""
-	DMIDECODE="/usr/local/sbin/dmidecode"
+        LIBRARIES=""
+    	DMIDECODE="/usr/local/sbin/dmidecode"
 	;;
 esac
 

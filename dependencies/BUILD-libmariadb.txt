@@ -1,0 +1,52 @@
+how to build libmariadb
+
+
+on a x86_64 system, do
+
+	export MACOSX_DEPLOYMENT_TARGET=12.4
+	git clone https://github.com/mariadb-corporation/mariadb-connector-c.git
+	cd  mariadb-connector-c
+	mkdir build
+	cd build
+	cmake .. -DCMAKE_OSX_ARCHITECTURES="x86_64"
+	make -j20
+	sudo make DESTDIR=~/REPO/libmariadb-x86_64 install
+
+then go to ~/REPO
+
+    cd ~/REPO
+    tar -cvzf libmariadb-x86_64.tar.gz libmariadb-x86_64
+
+copy the file to your arm64 system and untar it in ~/REPO/
+
+	cd ~/REPO
+    tar -xvzf  libmariadb-x86_64.tar.gz
+    
+
+Now build the arm64 version
+
+	export MACOSX_DEPLOYMENT_TARGET=12.4
+	git clone https://github.com/mariadb-corporation/mariadb-connector-c.git
+	cd  mariadb-connector-c
+	mkdir build
+	cd build
+	cmake .. -DCMAKE_OSX_ARCHITECTURES="arm64"
+	make -j20
+	sudo make DESTDIR=~/REPO/libmariadb-x86_64 install
+	sudo make DESTDIR=~/REPO/libmariadb install
+ 
+ Now merge the files
+ 
+ 	cd ~/REPO/libmariadb/usr/local/lib/mariadb
+ 	
+for X in auth_gssapi_client.so caching_sha2_password.so client_ed25519.so dialog.so mysql_clear_password.so parsec.so remote_io.so sha256_password.so
+do
+	sudo lipo -arch x86_64 ~/REPO/libmariadb-x86_64/usr/local/lib/mariadb/plugin/${X}  -arch arm64 ~/REPO/libmariadb-arm64/usr/local/lib/mariadb/plugin/${X} -create -output ~/REPO/libmariadb/usr/local/lib/mariadb/plugin/${X}
+done
+
+for X in libmariadb.3.dylib libmariadb.a
+do
+	sudo lipo -arch x86_64 ~/REPO/libmariadb-x86_64/usr/local/lib/mariadb/${X}  -arch arm64 ~/REPO/libmariadb-arm64/usr/local/lib/mariadb/plugin/${X} -create -output ~/REPO/libmariadb/usr/local/lib/mariadb/plugin/${X}
+done
+
+ 

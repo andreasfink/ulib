@@ -478,11 +478,8 @@ dnl -------------------------------------
 AC_CHECK_HEADERS(netinet/sctp.h)
 AC_CHECK_HEADERS(sctp/sctp.h)
 AC_CHECK_HEADERS(pthread_np.h)
+AC_CHECK_HEADERS(mariadb/mysql.h)
 
-if [[ -f "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework/Headers/sctp.h" ]]
-then
-	AC_DEFINE(HAVE_SCTP_SCTP_H)
-fi
 
 dnl Implement --enable-debug --enable-profiling options.
 dnl -------------------------------------

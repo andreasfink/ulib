@@ -2,15 +2,16 @@ how to build libmariadb
 
 
 on a x86_64 system, do
-
-	export MACOSX_DEPLOYMENT_TARGET=12.4
-	git clone https://github.com/mariadb-corporation/mariadb-connector-c.git
-	cd  mariadb-connector-c
-	mkdir build
-	cd build
-	cmake .. -DCMAKE_OSX_ARCHITECTURES="x86_64"
-	make -j20
-	sudo make DESTDIR=~/REPO/libmariadb-x86_64 install
+    mkdir -p ~/REPO
+    cd ~
+    export MACOSX_DEPLOYMENT_TARGET=12.4
+    git clone https://github.com/mariadb-corporation/mariadb-connector-c.git
+    cd  mariadb-connector-c
+    mkdir build
+    cd build
+    cmake .. -DCMAKE_OSX_ARCHITECTURES="x86_64"
+    make -j20
+    sudo make DESTDIR=~/REPO/libmariadb-x86_64 install
 
 then go to ~/REPO
 
@@ -19,34 +20,37 @@ then go to ~/REPO
 
 copy the file to your arm64 system and untar it in ~/REPO/
 
-	cd ~/REPO
-    tar -xvzf  libmariadb-x86_64.tar.gz
+    cd ~/REPO
+    sudo tar -xvzf  libmariadb-x86_64.tar.gz
     
 
 Now build the arm64 version
 
-	export MACOSX_DEPLOYMENT_TARGET=12.4
-	git clone https://github.com/mariadb-corporation/mariadb-connector-c.git
-	cd  mariadb-connector-c
-	mkdir build
-	cd build
-	cmake .. -DCMAKE_OSX_ARCHITECTURES="arm64"
-	make -j20
-	sudo make DESTDIR=~/REPO/libmariadb-x86_64 install
-	sudo make DESTDIR=~/REPO/libmariadb install
+    cd ~
+    export MACOSX_DEPLOYMENT_TARGET=12.4
+    git clone https://github.com/mariadb-corporation/mariadb-connector-c.git
+    cd  mariadb-connector-c
+    mkdir build
+    cd build
+    cmake .. -DCMAKE_OSX_ARCHITECTURES="arm64"
+    make -j20
+    sudo make DESTDIR=~/REPO/libmariadb-arm64 install
+    sudo make DESTDIR=~/REPO/libmariadb install
  
  Now merge the files
  
- 	cd ~/REPO/libmariadb/usr/local/lib/mariadb
- 	
-for X in auth_gssapi_client.so caching_sha2_password.so client_ed25519.so dialog.so mysql_clear_password.so parsec.so remote_io.so sha256_password.so
-do
-	sudo lipo -arch x86_64 ~/REPO/libmariadb-x86_64/usr/local/lib/mariadb/plugin/${X}  -arch arm64 ~/REPO/libmariadb-arm64/usr/local/lib/mariadb/plugin/${X} -create -output ~/REPO/libmariadb/usr/local/lib/mariadb/plugin/${X}
-done
+    cd ~/REPO/libmariadb/usr/local/lib/mariadb
+    
+    for X in auth_gssapi_client.so caching_sha2_password.so client_ed25519.so dialog.so mysql_clear_password.so parsec.so remote_io.so sha256_password.so
+    do
+        sudo lipo -arch x86_64 ~/REPO/libmariadb-x86_64/usr/local/lib/mariadb/plugin/${X}  -arch arm64 ~/REPO/libmariadb-arm64/usr/local/lib/mariadb/plugin/${X} -create -output ~/REPO/libmariadb/usr/local/lib/mariadb/plugin/${X}
+    done
+    sudo lipo -arch x86_64 ~/REPO/libmariadb-x86_64/usr/local/lib/mariadb/libmariadbclient.a  -arch arm64 ~/REPO/libmariadb-arm64/usr/local/lib/mariadb/libmariadbclient.a -create -output ~/REPO/libmariadb/usr/local/lib/mariadb/libmariadbclient.a
+    sudo lipo -arch x86_64 ~/REPO/libmariadb-x86_64/usr/local/lib/mariadb/libmariadb.3.dylib  -arch arm64 ~/REPO/libmariadb-arm64/usr/local/lib/mariadb/libmariadb.3.dylib -create -output ~/REPO/libmariadb/usr/local/lib/mariadb/libmariadb.3.dylib
+    sudo lipo -arch x86_64 ~/REPO/libmariadb-x86_64/usr/local/bin/mariadb_config  -arch arm64 ~/REPO/libmariadb-arm64/usr/local/bin/mariadb_config -create -output ~/REPO/libmariadb/usr/local/bin/mariadb_config
 
-for X in libmariadb.3.dylib libmariadb.a
-do
-	sudo lipo -arch x86_64 ~/REPO/libmariadb-x86_64/usr/local/lib/mariadb/${X}  -arch arm64 ~/REPO/libmariadb-arm64/usr/local/lib/mariadb/plugin/${X} -create -output ~/REPO/libmariadb/usr/local/lib/mariadb/plugin/${X}
-done
+Now build a package
 
- 
+    cd ~/REPO/
+    pkgbuild --root libmariadb  --ownership recommended --install-location / --version "3.4.11" --identifier <identifier>  "libmariadb-3.4.11.pkg"
+    codesign -s <signature>  libmariadb-3.4.11.pkg

@@ -38,14 +38,12 @@ MAJORVER=`echo $VERSION | cut -f1 -d.`
 MINORVER=`echo $VERSION | cut -f2 -d.`
 REVISION=`echo $VERSION | cut -f3 -d.`
 ULIB_VERSION=`head -n 1 VERSION`
+./make_version
 
 dnl -----------------------------------------
 dnl Set user who runs ./configure
 dnl -----------------------------------------
 CUSER=`id -un`
-
-
-
 
 dnl -----------------------------------------
 dnl tools
@@ -72,7 +70,7 @@ dnl -----------------------------------------
 dnl setting up dependencies
 dnl -----------------------------------------
 
-DEPENDENT_PKGCONFIGS="openssl libzmq libpq"
+DEPENDENT_PKGCONFIGS="openssl libzmq libpq libiconv"
 
 
 dnl -----------------------------------------
@@ -102,7 +100,7 @@ case "$host" in
 	then
 		MACOSX_DEPLOYMENT_TARGET=12.4
 	fi
-    AC_DEFINE(HAVE_COMMONCRYPTO)
+	AC_DEFINE(HAVE_COMMONCRYPTO)
     AC_DEFINE(HAVE_OPENSSL)
    	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}` -L/usr/local/lib/mariadb -lmariadbclient"
@@ -219,7 +217,6 @@ fi
 if test -z "$pthread"; then
     AC_CHECK_LIB(pthread, pthread_exit, [LIBS="$LIBS -lpthread"])
 fi
-AC_CHECK_LIB(iconv, libiconv, [LIBS="$LIBS -liconv"])   
 
 dnl Checks for header files.
 

@@ -627,22 +627,22 @@ ac_includes_default="\
 ac_header_c_list=
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+DMIDECODE
+HAVE_COMMON_CRYPTO
+HAVE_OPENSSL
+HAVE_OPENSSL_AS_FRAMEWORK
 CUSER
-VERSION
 TIMESTAMP
 ARCH
-DMIDECODE
 LIBRARIES
 SHARED_LIBRARY_EXTENSION
 STATIC_LIBS
 REVISION
 MINORVER
 MAJORVER
-HAVE_COMMON_CRYPTO
-HAVE_OPENSSL
-HAVE_OPENSSL_AS_FRAMEWORK
-PROJECT_NAME
+VERSION
 AUTHOR
+PROJECT_NAME
 COPYRIGHT
 CONFIGURATION
 EGREP
@@ -3028,11 +3028,13 @@ case "$host" in
   	then
 		SDK=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/
 	fi
-
-	SDK=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/
 	if [ "${ARCH}" == "" ]
 	then
 	    ARCH="-arch arm64 -arch x86_64"
+	fi
+	if [ "${MACOSX_DEPLOYMENT_TARGET}" == "" ]
+	then
+		MACOSX_DEPLOYMENT_TARGET=12.4
 	fi
     printf '%s\n' "#define HAVE_COMMONCRYPTO 1" >>confdefs.h
 
@@ -3046,6 +3048,10 @@ case "$host" in
     then
 		CFLAGS="--sysroot ${SDK} ${CFLAGS}"
 		LDFLAGS="${LDFLAGS} -L ${SDK}/usr/lib"
+	fi
+	if [ "${MACOSX_DEPLOYMENT_TARGET}" != "" ]
+	then
+		CFLAGS="-mmacos-version-min=${MACOSX_DEPLOYMENT_TARGET}"
 	fi
     CFLAGS="$CFLAGS -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit"
@@ -6207,6 +6213,9 @@ fi
 
 
 TIMESTAMP=`date -u +%Y%m%d%H%M%S`
+
+
+
 
 
 

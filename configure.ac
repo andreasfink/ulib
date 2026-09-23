@@ -93,12 +93,14 @@ case "$host" in
 	if [[ "${SDK}" == "" ]]
   	then
 		SDK=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/
-	fi
-	
-	SDK=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/
+	fi	
 	if [[ "${ARCH}" == "" ]]
 	then
 	    ARCH="-arch arm64 -arch x86_64"
+	fi
+	if [[ "${MACOSX_DEPLOYMENT_TARGET}" == "" ]]
+	then
+		MACOSX_DEPLOYMENT_TARGET=12.4
 	fi
     AC_DEFINE(HAVE_COMMONCRYPTO)
     AC_DEFINE(HAVE_OPENSSL)
@@ -110,6 +112,11 @@ case "$host" in
     then
 		CFLAGS="--sysroot ${SDK} ${CFLAGS}"
 		LDFLAGS="${LDFLAGS} -L ${SDK}/usr/lib"
+	fi
+	if [[ "${MACOSX_DEPLOYMENT_TARGET}" != "" ]]
+	then
+		CFLAGS="-mmacos-version-min=${MACOSX_DEPLOYMENT_TARGET}"
+		LDFLAGS="-mmacos-version-min=${MACOSX_DEPLOYMENT_TARGET}"
 	fi
     CFLAGS="$CFLAGS -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit"

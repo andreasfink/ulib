@@ -3046,12 +3046,13 @@ case "$host" in
     DONE=0
     if [ -d "${SDK}" ]
     then
-		CFLAGS="--sysroot ${SDK} ${CFLAGS}"
-		LDFLAGS="${LDFLAGS} -L ${SDK}/usr/lib"
+		CFLAGS="${CFLAGS} --sysroot ${SDK} ${CFLAGS}"
+		LDFLAGS="${LDFLAGS} -L${SDK}/usr/lib"
 	fi
 	if [ "${MACOSX_DEPLOYMENT_TARGET}" != "" ]
 	then
-		CFLAGS="-mmacos-version-min=${MACOSX_DEPLOYMENT_TARGET}"
+		CFLAGS="${CFLAGS} -mmacos-version-min=${MACOSX_DEPLOYMENT_TARGET}"
+		LDFLAGS="${LDFLAGS} -mmacos-version-min=${MACOSX_DEPLOYMENT_TARGET}"
 	fi
     CFLAGS="$CFLAGS -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
     LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit"

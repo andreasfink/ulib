@@ -627,6 +627,8 @@ ac_includes_default="\
 ac_header_c_list=
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+CUSER
+VERSION
 TIMESTAMP
 ARCH
 DMIDECODE
@@ -640,6 +642,8 @@ HAVE_COMMON_CRYPTO
 HAVE_OPENSSL
 HAVE_OPENSSL_AS_FRAMEWORK
 PROJECT_NAME
+AUTHOR
+COPYRIGHT
 CONFIGURATION
 EGREP
 GREP
@@ -668,8 +672,6 @@ build_os
 build_vendor
 build_cpu
 build
-CUSER
-VERSION
 ECHO_T
 ECHO_N
 ECHO_C
@@ -2887,16 +2889,43 @@ ac_config_headers="$ac_config_headers ulib/ulib_config.h"
   esac
 
 
+
 COPYRIGHT="Copyright © 2026 Andreas Fink (andreas@fink.org). All rights reserved."
 PROJECT_NAME="ulib"
+AUTHOR="Andreas Fink <andreas@fink.org>"
 CONFIG_DEFINE="ULIB_CONFIG"
 
 VERSION=`head -n 1 VERSION`
 MAJORVER=`echo $VERSION | cut -f1 -d.`
 MINORVER=`echo $VERSION | cut -f2 -d.`
 REVISION=`echo $VERSION | cut -f3 -d.`
+ULIB_VERSION=`head -n 1 VERSION`
 
 CUSER=`id -un`
+
+
+
+
+EXE_EXT=""
+LIBTOOL="ar -rcs"
+RANLIB="ranlib"
+LIBS=
+LIBRARY_NAME=$PROJECT_NAME
+BUILD_DIR=.
+#
+# we require clang over gcc
+#
+if [ "$CC" == "" ]
+then
+	CC=clang
+fi
+if [ "$CXX" == "" ]
+then
+	CXX=clang++
+fi
+
+
+DEPENDENT_PKGCONFIGS="openssl libzmq libpq"
 
 
 
@@ -2990,32 +3019,21 @@ case $host_os in *\ *) host_os=`printf '%s\n' "$host_os" | sed 's/ /-/g'`;; esac
 
 
 
-EXE_EXT=""
-LIBTOOL="ar -rcs"
-RANLIB="ranlib"
-LIBS=
-LIBRARY_NAME=$PROJECT_NAME
-BUILD_DIR=.
-DEPENDENT_PKGCONFIGS="openssl libzmq libpq"
 
-#
-# we require clang over gcc
-#
-if [ "$CC" == "" ]
-then
-	CC=clang
-fi
-if [ "$CXX" == "" ]
-then
-	CXX=clang++
-fi
 
 case "$host" in
   *apple-darwin*)
 	#  set(CMAKE_CXX_FLAGS "--sysroot ${CMAKE_OSX_SYSROOT} ${CMAKE_CXX_FLAGS}")
+	if [ "${SDK}" == "" ]
+  	then
+		SDK=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/
+	fi
 
 	SDK=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/
-    ARCH="-arch arm64 -arch x86_64"
+	if [ "${ARCH}" == "" ]
+	then
+	    ARCH="-arch arm64 -arch x86_64"
+	fi
     printf '%s\n' "#define HAVE_COMMONCRYPTO 1" >>confdefs.h
 
     printf '%s\n' "#define HAVE_OPENSSL 1" >>confdefs.h
@@ -3039,6 +3057,7 @@ case "$host" in
     LIBTOOL="libtool -static -o"
    	echo CFLAGS=$CFLAGS
    	echo LDFLAGS=$LDFLAGS
+   	echo ARCH=$ARCH
     ;;
 
   *-linux-*)
@@ -3071,7 +3090,6 @@ case "$host" in
 	printf '%s\n' "#define HAVE_OPENSSL 1" >>confdefs.h
 
 	LIBRARIES=""
-	DMIDECODE="/usr/local/sbin/dmidecode"
 	;;
 esac
 
@@ -3092,7 +3110,6 @@ if test ${with_libs+y}
 then :
   withval=$with_libs; LIBS="$LIBS $withval"
 fi
-
 
 
 
@@ -5969,7 +5986,6 @@ fi
 
 
 
-
 	{ printf '%s\n' "$as_me:${as_lineno-$LINENO}: checking for socklen_t in <sys/socket.h>" >&5
 printf %s "checking for socklen_t in <sys/socket.h>... " >&6; }
 if test ${gw_cv_type_HAVE_SOCKLEN_T+y}
@@ -6184,9 +6200,15 @@ esac
 fi
 
 
-./make_version
+
+  nl='
+'
+  echo "${nl}${T_MD}Generating output files ...${T_ME}"
+
 
 TIMESTAMP=`date -u +%Y%m%d%H%M%S`
+
+
 
 
 

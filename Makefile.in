@@ -15,6 +15,7 @@ REVISION=@REVISION@
 
 LIB=lib@PROJECT_NAME@.@SHARED_LIBRARY_EXTENSION@
 SLIB=lib@PROJECT_NAME@.a
+INSTALL_NAMETOOL_COMMAND=@@
 
 PKGCONFIGFILE=@PROJECT_NAME@.pc
 
@@ -55,6 +56,7 @@ install_bin: ${LIB} ${SLIB}
 	ln -s "${LIB}.${MAJORVER}.${MINORVER}"             "${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}"
 	ln -s "${LIB}.${MAJORVER}"                         "${DESTDIR}/usr/local/lib/${LIB}"
 	if [ -x /usr/sbin/ldconfig ] ; then ldconfig; fi
+	if [ -x /usr/bin/install_name_tool ]; then install_name_tool -id /usr/local/lib/${LIB}.${MAJORVER}.${MINORVER} ${DESTDIR}/usr/local/lib/${LIB}.${MAJORVER}.${MINORVER}.${REVISION}; fi
 
 clean:
 	rm -f $(LIB) $(OFILES) $(SLIB)

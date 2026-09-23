@@ -5,50 +5,57 @@ dnl  * =========================================================================
 dnl  */ 
 
 dnl
-dnl configure.in -- main autoconf macro definition file
+dnl configure.ac -- main autoconf macro definition file
 dnl
 dnl Process this file with autoconf to produce a configure script.
 dnl
 
+dnl -----------------------------------------
 dnl initialization
+dnl -----------------------------------------
 
-AC_PREREQ([2.68])
+AC_PREREQ([2.69])
 AC_INIT([ulib],[6.0],[andreas@fink.org])
 AC_CONFIG_HEADERS([ulib/ulib_config.h])
 AC_SUBST(SHELL)
 AC_CONFIG_AUX_DIR(.)
 AC_SET_TERMINAL_SEQUENCES()
 
+dnl -----------------------------------------
+dnl generic parameters
+dnl -----------------------------------------
+
 COPYRIGHT="Copyright © 2026 Andreas Fink (andreas@fink.org). All rights reserved."
 PROJECT_NAME="ulib"
+AUTHOR="Andreas Fink <andreas@fink.org>"
 CONFIG_DEFINE="ULIB_CONFIG"
 
+dnl -----------------------------------------
 dnl Check version number.
+dnl -----------------------------------------
 VERSION=`head -n 1 VERSION`
 MAJORVER=`echo $VERSION | cut -f1 -d.`
 MINORVER=`echo $VERSION | cut -f2 -d.`
 REVISION=`echo $VERSION | cut -f3 -d.`
+ULIB_VERSION=`head -n 1 VERSION`
 
+dnl -----------------------------------------
 dnl Set user who runs ./configure
+dnl -----------------------------------------
 CUSER=`id -un`
-AC_SUBST(VERSION)
-AC_SUBST(CUSER)
 
-AC_CONFIG_SECTION([Configuring for $PROJECT_NAME version $VERSION])
 
-dnl Checks system type.
-AC_CONFIG_SECTION([Running system checks])
-AC_CANONICAL_HOST
 
-dnl Set the LIBTOOL to be used to create libs
+
+dnl -----------------------------------------
+dnl tools
+dnl -----------------------------------------
 EXE_EXT=""
 LIBTOOL="ar -rcs"
 RANLIB="ranlib"
 LIBS=
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
-DEPENDENT_PKGCONFIGS="openssl libzmq libpq"
-
 #
 # we require clang over gcc
 #
@@ -61,12 +68,38 @@ then
 	CXX=clang++
 fi
 
+dnl -----------------------------------------
+dnl setting up dependencies
+dnl -----------------------------------------
+
+DEPENDENT_PKGCONFIGS="openssl libzmq libpq"
+
+
+dnl -----------------------------------------
+dnl main work
+dnl -----------------------------------------
+
+AC_CONFIG_SECTION([Configuring for $PROJECT_NAME version $VERSION])
+
+dnl Checks system type.
+AC_CONFIG_SECTION([Running system checks])
+AC_CANONICAL_HOST
+
+
+
 case "$host" in
   *apple-darwin*) 
 	#  set(CMAKE_CXX_FLAGS "--sysroot ${CMAKE_OSX_SYSROOT} ${CMAKE_CXX_FLAGS}")
-
+	if [[ "${SDK}" == "" ]]
+  	then
+		SDK=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/
+	fi
+	
 	SDK=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/
-    ARCH="-arch arm64 -arch x86_64"
+	if [[ "${ARCH}" == "" ]]
+	then
+	    ARCH="-arch arm64 -arch x86_64"
+	fi
     AC_DEFINE(HAVE_COMMONCRYPTO)
     AC_DEFINE(HAVE_OPENSSL)
    	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
@@ -88,6 +121,7 @@ case "$host" in
     LIBTOOL="libtool -static -o"
    	echo CFLAGS=$CFLAGS
    	echo LDFLAGS=$LDFLAGS
+   	echo ARCH=$ARCH
     ;;
 
   *-linux-*)
@@ -118,7 +152,6 @@ case "$host" in
 	CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
 	AC_DEFINE(HAVE_OPENSSL)
 	LIBRARIES=""
-	DMIDECODE="/usr/local/sbin/dmidecode"
 	;;
 esac
 
@@ -133,8 +166,9 @@ AC_ARG_WITH(libs,
 [  --with-libs=FLAGS       use FLAGS for extra libraries],
 LIBS="$LIBS $withval")
 
-
+dnl -----------------------------------------
 dnl Checks for programs.
+dnl -----------------------------------------
 
 AC_PROG_CC
 AC_PROG_INSTALL
@@ -415,8 +449,9 @@ AC_DEFUN(AC_FUNC_WHICH_PTHREAD_SETNAME_NP,
 	]
 )
 
-
+dnl -----------------------------------------
 dnl Extra feature checks
+dnl -----------------------------------------
 
 dnl GW_HAVE_TYPE_FROM(HDRNAME, TYPE, HAVENAME, DESCRIPTION)
 AC_DEFUN(GW_HAVE_TYPE_FROM, [
@@ -481,8 +516,9 @@ AC_CHECK_HEADERS(pthread_np.h)
 AC_CHECK_HEADERS(mariadb/mysql.h)
 
 
+dnl -----------------------------------------
 dnl Implement --enable-debug --enable-profiling options.
-dnl -------------------------------------
+dnl -----------------------------------------
 AC_ARG_ENABLE(profiling,
 [  --enable-profiling	  enable profiling  [[disabled]]], [
 	echo Using Debuging+profiling target
@@ -509,12 +545,15 @@ AC_ARG_ENABLE(debug,
 	CONFIGURATION="-configuration Release"
 ])])
 
-./make_version
+dnl -----------------------------------------
+dnl Outputing
+dnl -----------------------------------------
+AC_CONFIG_SECTION([Generating output files]) 
 
 TIMESTAMP=`date -u +%Y%m%d%H%M%S`
-
-dnl Final Output
 AC_SUBST(CONFIGURATION)
+AC_SUBST(COPYRIGHT)
+AC_SUBST(AUTHOR)
 AC_SUBST(PROJECT_NAME)
 AC_SUBST(HAVE_OPENSSL_AS_FRAMEWORK)
 AC_SUBST(HAVE_OPENSSL)
@@ -529,7 +568,8 @@ AC_SUBST(LIBRARIES)
 AC_SUBST(DMIDECODE)
 AC_SUBST(ARCH)
 AC_SUBST(TIMESTAMP)
-
+AC_SUBST(VERSION)
+AC_SUBST(CUSER)
 AC_CONFIG_SECTION([Generating output files])
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([ulib.pc])

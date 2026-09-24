@@ -1,0 +1,27 @@
+# You should build libpcap under MacOS X as following
+
+1. download the source
+
+wget https://www.tcpdump.org/release/libpcap-1.11.0.tar.xz
+tar xvf libpcap-1.11.0.tar.xz
+cd libpcap-1.11.0
+export MACOSX_DEPLOYMENT_TARGET=12.4
+export CFLAGS=-mmacos-version-min=12.4
+
+2. Configure and build 
+
+./configure
+make
+sudo make install
+make DESTDIR=~/REPO/libpcap-1.11.0 install
+
+libpcap builds multiarch by default. so your /usr/local/lib/libpcap.a should be f
+built for amd64 and x86_64. You can check with 
+	file /usr/local/lib/libpcap.a
+
+
+3. Package it
+
+cd ~/REPO
+pkgbuild --root libpcap-1.11.0  --ownership recommended --install-location / --version "1.11.0" --identifier <identifier>  "libpcap-1.11.0.pkg"
+codesign -s <key> -    

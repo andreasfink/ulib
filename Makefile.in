@@ -23,7 +23,7 @@ MFILES = $(wildcard @PROJECT_NAME@/*.m) $(wildcard @PROJECT_NAME@/*/*.m)
 HFILES = version.h $(wildcard @PROJECT_NAME@/*.h) $(wildcard @PROJECT_NAME@/*/*.h)
 MOFILES  = $(MFILES:.m=.m.o)
 OFILES = $(MOFILES)
-STATIC_LIBFILES = @STATIC_LIBFILES@
+STATIC_LIBS = @STATIC_LIBS@
 
 INCLUDEDIRS= -I. -I @PROJECT_NAME@ -I/usr/local/include
 

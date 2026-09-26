@@ -70,7 +70,7 @@ dnl -----------------------------------------
 dnl setting up dependencies
 dnl -----------------------------------------
 
-DEPENDENT_PKGCONFIGS="openssl libzmq libpq libiconv"
+DEPENDENT_PKGCONFIGS="openssl libzmq libpq libmariadb libiconv"
 
 
 dnl -----------------------------------------
@@ -115,21 +115,9 @@ function append_static_libs_of_packages()
 	LDFLAGS="${LDFLAGS} ${STATIC_LIBS}"
 }
 
-function_append_static_libs_of_packages "${DEPENDENT_PKGCONFIGS}"
+append_static_libs_of_packages "${DEPENDENT_PKGCONFIGS}"
 
-
-ICONV_LOCATION=`pkg-config --libs-only-L libiconv | sed 's/^-L//g' | sed 's/\/$//g'`
-ICONV_LIB_NAMES=`pkg-config --libs-only-l libiconv`
-STATIC_ICONV=""
-for L in $ICONV_LIB_NAMES
-do
-    STATIC_ICONV="${STATIC_ICONV} ${ICONV_LOCATION}/`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`"
-done
-echo "Found iconv: ${STATIC_ICONV}"
-
-STATIC_LIBFILES="${STATIC_OPENSSL} ${STATIC_MARIADB} ${STATIC_ZMQ} ${STATIC_ICONV}"
-
-echo STATIC_LIBFILES="${STATIC_LIBFILES}"
+echo STATIC_LIBS="${STATIC_LIBS}"
 
 case "$host" in
   *apple-darwin*) 
@@ -618,7 +606,6 @@ AC_SUBST(ARCH)
 AC_SUBST(TIMESTAMP)
 AC_SUBST(VERSION)
 AC_SUBST(CUSER)
-AC_SUBST(STATIC_LIBFILES)
 AC_SUBST(HAVE_OPENSSL_AS_FRAMEWORK)
 AC_SUBST(HAVE_OPENSSL)
 AC_SUBST(HAVE_COMMON_CRYPTO)

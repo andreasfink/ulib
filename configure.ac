@@ -92,12 +92,12 @@ function append_static_libs_of()
     PKG_STATIC=""
     for L in ${PKG_LIB_NAMES}
     do
-    	FILENAME=`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'
+    	FILENAME=`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`
       	if [[ "${PKG_LOCATION}" == ""]]
     	then
     		PKG_STATIC="${PKG_STATIC} -l:${FILENAME}"
     	else
-            PKG_STATIC="${PKG_STATIC} ${PKG_LOCATION}/${FILENAME}`"
+            PKG_STATIC="${PKG_STATIC} ${PKG_LOCATION}/${FILENAME}"
         fi
     done
     echo "Found static libs of ${PKGNAME}: ${PKG_STATIC}"

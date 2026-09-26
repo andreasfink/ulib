@@ -12,6 +12,5 @@ Libs:   -L${libdir} -lulib
 Name: ulib
 Description: universal library
 Version: @VERSION@
-Requires: openssl libzmq
 
 

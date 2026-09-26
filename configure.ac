@@ -152,9 +152,7 @@ case "$host" in
 	AC_DEFINE(HAVE_COMMONCRYPTO)
     AC_DEFINE(HAVE_OPENSSL)
    	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
-	LDFLAGS="$LDFLAGS ${STATIC_LIBFILES}"
-	
-	
+	LDFLAGS="${LDFLAGS} ${STATIC_LIBFILES}"
     UR="`uname -r | cut -f1 -d.`"
     DONE=0
     if [[ -d "${SDK}" ]]
@@ -168,7 +166,8 @@ case "$host" in
 		LDFLAGS="${LDFLAGS} -mmacos-version-min=${MACOSX_DEPLOYMENT_TARGET}"
 	fi
     CFLAGS="$CFLAGS -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
-    LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit"
+    #libmariadb needs c++ library on MacOS
+    LDFLAGS="${LDFLAGS} -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit -lc++"
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"
     INSTALL_NAME_TOOL="install_name_tool"

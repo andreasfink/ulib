@@ -29,10 +29,10 @@ INCLUDEDIRS= -I. -I @PROJECT_NAME@ -I/usr/local/include
 
 ${LIB}: ${OFILES}
 	./make_version
-	${CC} -shared -o ${LIB} ${LDFLAGS}  ${OFILES} ${LIBS} ${STATIC_LIBS}
+	${CC} -shared ${STATIC_LIBS} ${OFILES} -o ${LIB} ${LIBS} ${LDFLAGS}  
 
 ${SLIB}: ${OFILES}
-	@LIBTOOL@ ${SLIB} ${OFILES} ${STATIC_LIBFILES}
+	@LIBTOOL@ ${SLIB} ${STATIC_LIBS} ${OFILES}
 	@RANLIB@ ${SLIB}
 	
 install: install_dev install_bin

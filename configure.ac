@@ -83,42 +83,39 @@ dnl Checks system type.
 AC_CONFIG_SECTION([Running system checks])
 AC_CANONICAL_HOST
 
-MARIADB_LIB_LOCATION=`pkg-config --libs-only-L libmariadb | sed 's/^-L//g' | sed 's/\/$//g'`
-MARIADB_LIB_NAMES=`pkg-config --libs-only-l libmariadb`
-STATIC_MARIADB=""
-for L in $MARIADB_LIB_NAMES
-do
-    STATIC_MARIADB="${STATIC_MARIADB} ${MARIADB_LIB_LOCATION}/`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`"
-done
-echo "Found mariadb: ${STATIC_MARIADB}"
 
-OPENSSL_LOCATION=`pkg-config --libs-only-L openssl | sed 's/^-L//g' | sed 's/\/$//g'`
-OPENSSL_LIB_NAMES=`pkg-config --libs-only-l openssl`
-STATIC_OPENSSL=""
-for L in $OPENSSL_LIB_NAMES
-do
-    STATIC_OPENSSL="${STATIC_OPENSSL} ${OPENSSL_LOCATION}/`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`"
-done
-echo "Found openssl: ${STATIC_OPENSSL}"
+function append_static_libs_of()
+{
+    PKGNAME=$1
+    PKG_LOCATION=`pkg-config --libs-only-L ${PKGNAME} | sed 's/^-L//g' | sed 's/\/$//g'`
+    PKG_LIB_NAMES=`pkg-config --libs-only-l ${PKGNAME}`
+    PKG_STATIC=""
+    for L in ${PKG_LIB_NAMES}
+    do
+    	FILENAME=`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'
+      	if [[ "${PKG_LOCATION}" == ""]]
+    	then
+    		PKG_STATIC="${PKG_STATIC} -l:${FILENAME}"
+    	else
+            PKG_STATIC="${PKG_STATIC} ${PKG_LOCATION}/${FILENAME}`"
+        fi
+    done
+    echo "Found static libs of ${PKGNAME}: ${PKG_STATIC}"
+    STATIC_LIBS="${STATIC_LIBS} ${PKG_STATIC}"
+}
 
-ZMQ_LOCATION=`pkg-config --libs-only-L libzmq | sed 's/^-L//g' | sed 's/\/$//g'`
-ZMQ_LIB_NAMES=`pkg-config --libs-only-l libzmq`
-STATIC_ZMQ=""
-for L in $ZMQ_LIB_NAMES
-do
-    STATIC_ZMQ="${STATIC_ZMQ} ${ZMQ_LOCATION}/`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`"
-done
-echo "Found zmq: ${STATIC_ZMQ}"
+function append_static_libs_of_packages()
+{
+	STATIC_LIBS=""
+	for p in $1
+	do
+        append_static_libs_of $p
+    done
+	STATIC_LIBS=`echo $STATIC_LIBS | sort -u`
+	LDFLAGS="${LDFLAGS} ${STATIC_LIBS}"
+}
 
-
-PQ_LOCATION=`pkg-config --libs-only-L libpq | sed 's/^-L//g' | sed 's/\/$//g'`
-PQ_LIB_NAMES=`pkg-config --libs-only-l libpq`
-STATIC_PQ=""
-for L in $PQ_LIB_NAMES
-do
-     STATIC_PQ="${STATIC_PQ} ${PQ_LOCATION}/`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`"
-done
-echo "Found libpq: ${STATIC_PQ}"
+function_append_static_libs_of_packages "${DEPENDENT_PKGCONFIGS}"
 
 
 ICONV_LOCATION=`pkg-config --libs-only-L libiconv | sed 's/^-L//g' | sed 's/\/$//g'`

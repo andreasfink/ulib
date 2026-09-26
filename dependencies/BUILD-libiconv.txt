@@ -8,10 +8,10 @@ on a x86_64 system, do
 	wget https://mirror.init7.net/gnu/libiconv/libiconv-1.19.tar.gz
 	tar xvzf libiconv-1.19.tar.gz 
 	cd libiconv-1.19
-	CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./configure
-	CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./make -j20
-	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./make install
-	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./make DESTDIR=~/REPO/libiconv-1.19-x86_64 install
+	CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./configure --enable-static
+	CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make -j20
+	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make install
+	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make DESTDIR=~/REPO/libiconv-1.19-x86_64 install
 	
 
 then go to ~/REPO
@@ -32,11 +32,11 @@ Now build the arm64 version
 	wget https://mirror.init7.net/gnu/libiconv/libiconv-1.19.tar.gz
 	tar xvzf libiconv-1.19.tar.gz 
 	cd libiconv-1.19
-	CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./configure
-	CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./make -j20
-	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./make install
-	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./make DESTDIR=~/REPO/libiconv-1.19-arm64 install
-	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./make DESTDIR=~/REPO/libiconv-1.19 install
+	CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./configure --enable-static
+	CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make -j20
+	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make install
+	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make DESTDIR=~/REPO/libiconv-1.19-arm64 install
+	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make DESTDIR=~/REPO/libiconv-1.19 install
 
  
  Now merge the files

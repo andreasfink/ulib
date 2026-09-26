@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A6059F042D77706200911CEF /* UMDirtyBoolean.h in Headers */ = {isa = PBXBuildFile; fileRef = A6059F022D77706200911CEF /* UMDirtyBoolean.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6059F052D77706200911CEF /* UMDirtyBoolean.m in Sources */ = {isa = PBXBuildFile; fileRef = A6059F032D77706200911CEF /* UMDirtyBoolean.m */; };
+		A6061D133067CF060037CFFA /* mysql_ssl_glue.m in Sources */ = {isa = PBXBuildFile; fileRef = A6061D123067CF060037CFFA /* mysql_ssl_glue.m */; };
 		A609F7C030517D9D00B6E5B0 /* UMDbMySqlInProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = A609F7A930517D9D00B6E5B0 /* UMDbMySqlInProgress.m */; };
 		A609F7C130517D9D00B6E5B0 /* UMDbQueryCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = A609F7AF30517D9D00B6E5B0 /* UMDbQueryCondition.m */; };
 		A609F7C230517D9D00B6E5B0 /* UMDbResult.m in Sources */ = {isa = PBXBuildFile; fileRef = A609F7B730517D9D00B6E5B0 /* UMDbResult.m */; };
@@ -529,6 +530,7 @@
 /* Begin PBXFileReference section */
 		A6059F022D77706200911CEF /* UMDirtyBoolean.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyBoolean.h; sourceTree = "<group>"; };
 		A6059F032D77706200911CEF /* UMDirtyBoolean.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDirtyBoolean.m; sourceTree = "<group>"; };
+		A6061D123067CF060037CFFA /* mysql_ssl_glue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mysql_ssl_glue.m; sourceTree = "<group>"; };
 		A609F7A130517D9D00B6E5B0 /* UMDbDriverType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDbDriverType.h; sourceTree = "<group>"; };
 		A609F7A230517D9D00B6E5B0 /* UMDbDriverType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDbDriverType.m; sourceTree = "<group>"; };
 		A609F7A330517D9D00B6E5B0 /* UMDbFieldDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDbFieldDefinition.h; sourceTree = "<group>"; };
@@ -595,15 +597,9 @@
 		A66EB0CE2ABDDC6C00C34D40 /* make_buildnr.sh.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = make_buildnr.sh.in; sourceTree = "<group>"; };
 		A66EB0CF2ABDDC6C00C34D40 /* make_pkg.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = make_pkg.sh; sourceTree = "<group>"; };
 		A66EB0D42ABDDC7800C34D40 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		A66EB0D52ABDDC7800C34D40 /* Makefile.linux */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux; sourceTree = "<group>"; };
-		A66EB0D62ABDDC7800C34D40 /* Makefile.freebsd.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.freebsd.in; sourceTree = "<group>"; };
-		A66EB0D72ABDDC7800C34D40 /* Makefile.freebsd */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.freebsd; sourceTree = "<group>"; };
 		A66EB0D82ABDDC7800C34D40 /* make_version */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make_version; sourceTree = "<group>"; };
 		A66EB0D92ABDDC7800C34D40 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		A66EB0DA2ABDDC7800C34D40 /* Makefile.linux.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux.in; sourceTree = "<group>"; };
 		A66EB0DB2ABDDC7800C34D40 /* README.macosx.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.macosx.txt; sourceTree = "<group>"; };
-		A66EB0DC2ABDDC7800C34D40 /* Makefile.osx */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx; sourceTree = "<group>"; };
-		A66EB0DD2ABDDC7800C34D40 /* Makefile.osx.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx.in; sourceTree = "<group>"; };
 		A66EB0E22ABDDCC200C34D40 /* ulib.pc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ulib.pc; sourceTree = "<group>"; };
 		A66EB0E32ABDDCC200C34D40 /* ulib.pc.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ulib.pc.in; sourceTree = "<group>"; };
 		A66EB0E62ABDDCD000C34D40 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
@@ -1099,12 +1095,6 @@
 				A66EB0E92ABDDCF500C34D40 /* debian */,
 				A66EB0D82ABDDC7800C34D40 /* make_version */,
 				A66EB0D42ABDDC7800C34D40 /* Makefile */,
-				A66EB0D72ABDDC7800C34D40 /* Makefile.freebsd */,
-				A66EB0D62ABDDC7800C34D40 /* Makefile.freebsd.in */,
-				A66EB0D52ABDDC7800C34D40 /* Makefile.linux */,
-				A66EB0DA2ABDDC7800C34D40 /* Makefile.linux.in */,
-				A66EB0DC2ABDDC7800C34D40 /* Makefile.osx */,
-				A66EB0DD2ABDDC7800C34D40 /* Makefile.osx.in */,
 				A66EB0DB2ABDDC7800C34D40 /* README.macosx.txt */,
 				A66EB0D92ABDDC7800C34D40 /* README.md */,
 				A66EB0CD2ABDDC6C00C34D40 /* make_buildnr.sh */,
@@ -1152,6 +1142,7 @@
 				A6B06C9B3051A5290076234A /* sctp.h */,
 				A6B06C9D3051A5330076234A /* sctp_uio.h */,
 				A6B06CA03051A5470076234A /* sctp_sys_calls.m */,
+				A6061D123067CF060037CFFA /* mysql_ssl_glue.m */,
 				A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */,
 				A683D8922ABD980A00C34D40 /* dmi_decode_path.h.in */,
 				A6915F99304FDDD600B15E34 /* UMSCTPListener.h */,
@@ -2057,6 +2048,7 @@
 				A683DA762ABD980F00C34D40 /* UMLogConsole.m in Sources */,
 				A6915F10304D664400B15E34 /* UMASN1UTF8String.m in Sources */,
 				A6915F11304D664400B15E34 /* UMASN1Real.m in Sources */,
+				A6061D133067CF060037CFFA /* mysql_ssl_glue.m in Sources */,
 				A6915F12304D664400B15E34 /* UMASN1Length.m in Sources */,
 				A6915FDC304FDFB000B15E34 /* UMLayerSctpUserProfile.m in Sources */,
 				A6B06CA23051A5470076234A /* sctp_sys_calls.m in Sources */,

@@ -23,15 +23,16 @@ MFILES = $(wildcard @PROJECT_NAME@/*.m) $(wildcard @PROJECT_NAME@/*/*.m)
 HFILES = version.h $(wildcard @PROJECT_NAME@/*.h) $(wildcard @PROJECT_NAME@/*/*.h)
 MOFILES  = $(MFILES:.m=.m.o)
 OFILES = $(MOFILES)
+STATIC_LIBFILES = @STATIC_LIBFILES@
 
 INCLUDEDIRS= -I. -I @PROJECT_NAME@ -I/usr/local/include
 
 ${LIB}: ${OFILES}
 	./make_version
-	${CC} -shared -o ${LIB} ${LDFLAGS}  ${OFILES} ${LIBS} ${STATIC_LIBS}
+	${CC} -shared -o ${LIB} ${LDFLAGS}  ${OFILES} ${LIBS} ${STATIC_LIBS} ${STATIC_LIBFILES}
 
 ${SLIB}: ${OFILES}
-	@LIBTOOL@ ${SLIB} ${OFILES}
+	@LIBTOOL@ ${SLIB} ${OFILES} ${STATIC_LIBFILES}
 	@RANLIB@ ${SLIB}
 	
 install: install_dev install_bin

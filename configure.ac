@@ -83,7 +83,56 @@ dnl Checks system type.
 AC_CONFIG_SECTION([Running system checks])
 AC_CANONICAL_HOST
 
+MARIADB_LIB_LOCATION=`pkg-config --libs-only-L libmariadb | sed 's/^-L//g' | sed 's/\/$//g'`
+MARIADB_LIB_NAMES=`pkg-config --libs-only-l libmariadb`
+STATIC_MARIADB=""
+for L in $MARIADB_LIB_NAMES
+do
+    STATIC_MARIADB="${STATIC_MARIADB} ${MARIADB_LIB_LOCATION}/`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`"
+done
+echo "Found mariadb: ${STATIC_MARIADB}"
 
+OPENSSL_LOCATION=`pkg-config --libs-only-L openssl | sed 's/^-L//g' | sed 's/\/$//g'`
+OPENSSL_LIB_NAMES=`pkg-config --libs-only-l openssl`
+STATIC_OPENSSL=""
+for L in $OPENSSL_LIB_NAMES
+do
+    STATIC_OPENSSL="${STATIC_OPENSSL} ${OPENSSL_LOCATION}/`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`"
+done
+echo "Found openssl: ${STATIC_OPENSSL}"
+
+ZMQ_LOCATION=`pkg-config --libs-only-L libzmq | sed 's/^-L//g' | sed 's/\/$//g'`
+ZMQ_LIB_NAMES=`pkg-config --libs-only-l libzmq`
+STATIC_ZMQ=""
+for L in $ZMQ_LIB_NAMES
+do
+    STATIC_ZMQ="${STATIC_ZMQ} ${ZMQ_LOCATION}/`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`"
+done
+echo "Found zmq: ${STATIC_ZMQ}"
+
+
+PQ_LOCATION=`pkg-config --libs-only-L libpq | sed 's/^-L//g' | sed 's/\/$//g'`
+PQ_LIB_NAMES=`pkg-config --libs-only-l libpq`
+STATIC_PQ=""
+for L in $PQ_LIB_NAMES
+do
+     STATIC_PQ="${STATIC_PQ} ${PQ_LOCATION}/`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`"
+done
+echo "Found libpq: ${STATIC_PQ}"
+
+
+ICONV_LOCATION=`pkg-config --libs-only-L libiconv | sed 's/^-L//g' | sed 's/\/$//g'`
+ICONV_LIB_NAMES=`pkg-config --libs-only-l libiconv`
+STATIC_ICONV=""
+for L in $ICONV_LIB_NAMES
+do
+    STATIC_ICONV="${STATIC_ICONV} ${ICONV_LOCATION}/`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`"
+done
+echo "Found iconv: ${STATIC_ICONV}"
+
+STATIC_LIBFILES="${STATIC_OPENSSL} ${STATIC_MARIADB} ${STATIC_ZMQ} ${STATIC_ICONV}"
+
+echo STATIC_LIBFILES="${STATIC_LIBFILES}"
 
 case "$host" in
   *apple-darwin*) 
@@ -103,7 +152,9 @@ case "$host" in
 	AC_DEFINE(HAVE_COMMONCRYPTO)
     AC_DEFINE(HAVE_OPENSSL)
    	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
-	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}` -L/usr/local/lib/mariadb -lmariadbclient"
+	LDFLAGS="$LDFLAGS ${STATIC_LIBFILES}"
+	
+	
     UR="`uname -r | cut -f1 -d.`"
     DONE=0
     if [[ -d "${SDK}" ]]
@@ -571,7 +622,7 @@ AC_SUBST(ARCH)
 AC_SUBST(TIMESTAMP)
 AC_SUBST(VERSION)
 AC_SUBST(CUSER)
-
+AC_SUBST(STATIC_LIBFILES)
 AC_SUBST(HAVE_OPENSSL_AS_FRAMEWORK)
 AC_SUBST(HAVE_OPENSSL)
 AC_SUBST(HAVE_COMMON_CRYPTO)

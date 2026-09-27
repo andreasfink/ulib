@@ -42,8 +42,8 @@
 
 
 #ifdef HAVE_SCTP_SCTP_H
-#include <sctp/sctp.h>
-#include <sctp/sctp_uio.h>
+#include <ulib/sctp.h>
+#include <ulib/sctp_uio.h>
 #endif
 
 #if defined(HAVE_NETINET_SCTP_H)

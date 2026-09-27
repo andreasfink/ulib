@@ -5,15 +5,17 @@
 //  Created by Andreas Fink on 24.10.11.
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
-#import <ulib/ulib.h>
-#import "ulibdb_defines.h"
-#import "UMDbSession.h"
-#import "UMDbPool.h"
-#import "UMDbResult.h"
-#import "UMDbQuery.h"
-#import "UMDbDriverType.h"
+#import <ulib/UMObject.h>
 #import <ulib/ulib_config.h>
-
+#import <ulib/UMDbSession.h>
+#import <ulib/UMDbPool.h>
+#import <ulib/UMDbResult.h>
+#import <ulib/UMDbQuery.h>
+#import <ulib/UMDbDriverType.h>
+#import <ulib/UMAssert.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSDate+ulib.h>
+#import <ulib/UMUtil.h>
 
 @implementation UMDbSession
 

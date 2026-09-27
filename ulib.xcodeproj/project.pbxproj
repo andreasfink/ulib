@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A6059F042D77706200911CEF /* UMDirtyBoolean.h in Headers */ = {isa = PBXBuildFile; fileRef = A6059F022D77706200911CEF /* UMDirtyBoolean.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6059F052D77706200911CEF /* UMDirtyBoolean.m in Sources */ = {isa = PBXBuildFile; fileRef = A6059F032D77706200911CEF /* UMDirtyBoolean.m */; };
+		A6061D133067CF060037CFFA /* mysql_ssl_glue.m in Sources */ = {isa = PBXBuildFile; fileRef = A6061D123067CF060037CFFA /* mysql_ssl_glue.m */; };
 		A609F7C030517D9D00B6E5B0 /* UMDbMySqlInProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = A609F7A930517D9D00B6E5B0 /* UMDbMySqlInProgress.m */; };
 		A609F7C130517D9D00B6E5B0 /* UMDbQueryCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = A609F7AF30517D9D00B6E5B0 /* UMDbQueryCondition.m */; };
 		A609F7C230517D9D00B6E5B0 /* UMDbResult.m in Sources */ = {isa = PBXBuildFile; fileRef = A609F7B730517D9D00B6E5B0 /* UMDbResult.m */; };
@@ -47,6 +48,7 @@
 		A609F7E930517FF000B6E5B0 /* UMSqLiteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A609F7E830517FF000B6E5B0 /* UMSqLiteSession.m */; };
 		A609F7EA30517FF000B6E5B0 /* UMSqLiteSession.h in Headers */ = {isa = PBXBuildFile; fileRef = A609F7E730517FF000B6E5B0 /* UMSqLiteSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A64994C22E0BCD99006873AC /* framework.h in Headers */ = {isa = PBXBuildFile; fileRef = A64994C12E0BCD91006873AC /* framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A64C6AF9305C04A700AAA74A /* libmariadb.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = A6B06CA93051BDC50076234A /* libmariadb.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		A66B83363036EE9200F8B8DA /* UMStdIo.m in Sources */ = {isa = PBXBuildFile; fileRef = A66B83353036EE9200F8B8DA /* UMStdIo.m */; };
 		A66B83373036EE9200F8B8DA /* UMStdIo.h in Headers */ = {isa = PBXBuildFile; fileRef = A66B83343036EE9200F8B8DA /* UMStdIo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A66E91EC2F6147D9006A4ED3 /* UMIPAddressList.h in Headers */ = {isa = PBXBuildFile; fileRef = A66E91EA2F6147D9006A4ED3 /* UMIPAddressList.h */; };
@@ -64,7 +66,6 @@
 		A66EB0D12ABDDC6C00C34D40 /* make_buildnr.sh in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0CD2ABDDC6C00C34D40 /* make_buildnr.sh */; };
 		A66EB0D22ABDDC6C00C34D40 /* make_buildnr.sh.in in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0CE2ABDDC6C00C34D40 /* make_buildnr.sh.in */; };
 		A66EB0D32ABDDC6C00C34D40 /* make_pkg.sh in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0CF2ABDDC6C00C34D40 /* make_pkg.sh */; };
-		A66EB0DF2ABDDC9600C34D40 /* redhat in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0DE2ABDDC9600C34D40 /* redhat */; };
 		A66EB0E42ABDDCC200C34D40 /* ulib.pc in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0E22ABDDCC200C34D40 /* ulib.pc */; };
 		A66EB0E52ABDDCC200C34D40 /* ulib.pc.in in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0E32ABDDCC200C34D40 /* ulib.pc.in */; };
 		A66EB0E82ABDDCD000C34D40 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0E62ABDDCD000C34D40 /* VERSION */; };
@@ -412,7 +413,7 @@
 		A6915F6E304D665900B15E34 /* UMRpcMessage_TestResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915F55304D665900B15E34 /* UMRpcMessage_TestResponse.m */; };
 		A6915F6F304D665900B15E34 /* UMRpcMessage_LoginResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915F4D304D665900B15E34 /* UMRpcMessage_LoginResponse.m */; };
 		A6915F70304D665900B15E34 /* UMRpcClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915F3A304D665900B15E34 /* UMRpcClient.m */; };
-		A6915F71304D665900B15E34 /* UMRpcServer_AuthenticateProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F5B304D665900B15E34 /* UMRpcServer_AuthenticateProtocol.h */; };
+		A6915F71304D665900B15E34 /* UMRpcServer_AuthenticateProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F5B304D665900B15E34 /* UMRpcServer_AuthenticateProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915F72304D665900B15E34 /* UMRpcServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F59304D665900B15E34 /* UMRpcServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915F73304D665900B15E34 /* UMRpcMessage_TestResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F54304D665900B15E34 /* UMRpcMessage_TestResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915F74304D665900B15E34 /* UMRpcMessage_LogoutRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F4E304D665900B15E34 /* UMRpcMessage_LogoutRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -434,10 +435,8 @@
 		A6915F84304D665900B15E34 /* UMRpcMessage_HeartbeatResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F48304D665900B15E34 /* UMRpcMessage_HeartbeatResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915F85304D665900B15E34 /* UMRpcMessage_GenericError.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F44304D665900B15E34 /* UMRpcMessage_GenericError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915F86304D665900B15E34 /* UMRpcMessage_TestRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F52304D665900B15E34 /* UMRpcMessage_TestRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6915F8B304D666700B15E34 /* UMZMQSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915F88304D666700B15E34 /* UMZMQSocket.m */; };
 		A6915F8C304D666700B15E34 /* UMZMQSocket+ASN1.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915F8A304D666700B15E34 /* UMZMQSocket+ASN1.m */; };
 		A6915F8D304D666700B15E34 /* UMZMQSocket+ASN1.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F89304D666700B15E34 /* UMZMQSocket+ASN1.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6915F8E304D666700B15E34 /* UMZMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915F87304D666700B15E34 /* UMZMQSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915FAE304FDDD600B15E34 /* UMSctpTask_Open.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915FAD304FDDD600B15E34 /* UMSctpTask_Open.m */; };
 		A6915FAF304FDDD600B15E34 /* UMSctpTask_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915FA7304FDDD600B15E34 /* UMSctpTask_Data.m */; };
 		A6915FB0304FDDD600B15E34 /* UMSctpTask_Manual_InService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915FAB304FDDD600B15E34 /* UMSctpTask_Manual_InService.m */; };
@@ -476,12 +475,17 @@
 		A6915FE2304FDFB000B15E34 /* UMLayerSctpUser.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915FD7304FDFB000B15E34 /* UMLayerSctpUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915FE3304FDFB000B15E34 /* UMLayerSctpApplicationContextProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915FD5304FDFB000B15E34 /* UMLayerSctpApplicationContextProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6915FE4304FDFB000B15E34 /* UMLayerSctpUserProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = A6915FD9304FDFB000B15E34 /* UMLayerSctpUserProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6915FE6304FE18A00B15E34 /* sctp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6915FE5304FE18A00B15E34 /* sctp.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A6915FEA3050147700B15E34 /* ulib.m in Sources */ = {isa = PBXBuildFile; fileRef = A6915FE93050147700B15E34 /* ulib.m */; };
 		A69BA45A2ABD850000C34D40 /* ulib.docc in Sources */ = {isa = PBXBuildFile; fileRef = A69BA4592ABD850000C34D40 /* ulib.docc */; };
 		A69BA4602ABD850000C34D40 /* ulib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69BA4552ABD850000C34D40 /* ulib.framework */; };
 		A6A1EB932ABD9D5A00C34D40 /* ulib.h in Headers */ = {isa = PBXBuildFile; fileRef = A683D8C82ABD980B00C34D40 /* ulib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6A1EB942ABD9D9E00C34D40 /* dmi_decode_path.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6B06C9C3051A5290076234A /* sctp.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B06C9B3051A5290076234A /* sctp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6B06C9E3051A5330076234A /* sctp_uio.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B06C9D3051A5330076234A /* sctp_uio.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6B06CA23051A5470076234A /* sctp_sys_calls.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B06CA03051A5470076234A /* sctp_sys_calls.m */; };
+		A6B06CA63051BC0C0076234A /* libmariadbclient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B06CA53051BC0C0076234A /* libmariadbclient.a */; };
+		A6B06CA83051BC370076234A /* libpq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B06CA73051BC370076234A /* libpq.a */; };
+		A6B06CAA3051BDC50076234A /* libmariadb.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B06CA93051BDC50076234A /* libmariadb.3.dylib */; };
 		A6B1B0B82F6C45820015E83B /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B1B0B72F6C45820015E83B /* libssl.a */; };
 		A6B1B0BA2F6C45950015E83B /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B1B0B92F6C45950015E83B /* libcrypto.a */; };
 		A6B1B0BC2F6C45AB0015E83B /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B1B0BB2F6C45AB0015E83B /* libzmq.a */; };
@@ -509,9 +513,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A64C6AFA305C04A700AAA74A /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A64C6AF9305C04A700AAA74A /* libmariadb.3.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		A6059F022D77706200911CEF /* UMDirtyBoolean.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDirtyBoolean.h; sourceTree = "<group>"; };
 		A6059F032D77706200911CEF /* UMDirtyBoolean.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDirtyBoolean.m; sourceTree = "<group>"; };
+		A6061D123067CF060037CFFA /* mysql_ssl_glue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mysql_ssl_glue.m; sourceTree = "<group>"; };
 		A609F7A130517D9D00B6E5B0 /* UMDbDriverType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDbDriverType.h; sourceTree = "<group>"; };
 		A609F7A230517D9D00B6E5B0 /* UMDbDriverType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMDbDriverType.m; sourceTree = "<group>"; };
 		A609F7A330517D9D00B6E5B0 /* UMDbFieldDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMDbFieldDefinition.h; sourceTree = "<group>"; };
@@ -571,7 +590,6 @@
 		A66EB0C62ABDDC4900C34D40 /* doc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = doc; sourceTree = "<group>"; };
 		A66EB0C72ABDDC5300C34D40 /* Doxyfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Doxyfile; sourceTree = "<group>"; };
 		A66EB0C82ABDDC5300C34D40 /* lib_symlink_tool.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = lib_symlink_tool.sh; sourceTree = "<group>"; };
-		A66EB0C92ABDDC5300C34D40 /* installer_requirements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = installer_requirements.plist; sourceTree = "<group>"; };
 		A66EB0CA2ABDDC5300C34D40 /* install.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = install.sh; sourceTree = "<group>"; };
 		A66EB0CB2ABDDC6200C34D40 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		A66EB0CC2ABDDC6C00C34D40 /* make_documentation.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = make_documentation.sh; sourceTree = "<group>"; };
@@ -579,16 +597,9 @@
 		A66EB0CE2ABDDC6C00C34D40 /* make_buildnr.sh.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = make_buildnr.sh.in; sourceTree = "<group>"; };
 		A66EB0CF2ABDDC6C00C34D40 /* make_pkg.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = make_pkg.sh; sourceTree = "<group>"; };
 		A66EB0D42ABDDC7800C34D40 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		A66EB0D52ABDDC7800C34D40 /* Makefile.linux */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux; sourceTree = "<group>"; };
-		A66EB0D62ABDDC7800C34D40 /* Makefile.freebsd.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.freebsd.in; sourceTree = "<group>"; };
-		A66EB0D72ABDDC7800C34D40 /* Makefile.freebsd */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.freebsd; sourceTree = "<group>"; };
 		A66EB0D82ABDDC7800C34D40 /* make_version */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make_version; sourceTree = "<group>"; };
 		A66EB0D92ABDDC7800C34D40 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		A66EB0DA2ABDDC7800C34D40 /* Makefile.linux.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.linux.in; sourceTree = "<group>"; };
 		A66EB0DB2ABDDC7800C34D40 /* README.macosx.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.macosx.txt; sourceTree = "<group>"; };
-		A66EB0DC2ABDDC7800C34D40 /* Makefile.osx */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx; sourceTree = "<group>"; };
-		A66EB0DD2ABDDC7800C34D40 /* Makefile.osx.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.osx.in; sourceTree = "<group>"; };
-		A66EB0DE2ABDDC9600C34D40 /* redhat */ = {isa = PBXFileReference; lastKnownFileType = folder; path = redhat; sourceTree = "<group>"; };
 		A66EB0E22ABDDCC200C34D40 /* ulib.pc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ulib.pc; sourceTree = "<group>"; };
 		A66EB0E32ABDDCC200C34D40 /* ulib.pc.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ulib.pc.in; sourceTree = "<group>"; };
 		A66EB0E62ABDDCD000C34D40 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
@@ -1006,7 +1017,6 @@
 		A6915FD9304FDFB000B15E34 /* UMLayerSctpUserProfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMLayerSctpUserProfile.h; sourceTree = "<group>"; };
 		A6915FDA304FDFB000B15E34 /* UMLayerSctpUserProfile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMLayerSctpUserProfile.m; sourceTree = "<group>"; };
 		A6915FDB304FDFB000B15E34 /* UMLayerSctpUserProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMLayerSctpUserProtocol.h; sourceTree = "<group>"; };
-		A6915FE5304FE18A00B15E34 /* sctp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sctp.framework; path = "/Library/Application Support/FinkTelecomServices/frameworks/sctp.framework"; sourceTree = "<absolute>"; };
 		A6915FE93050147700B15E34 /* ulib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ulib.m; sourceTree = "<group>"; };
 		A69BA4552ABD850000C34D40 /* ulib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ulib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69BA4592ABD850000C34D40 /* ulib.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = ulib.docc; sourceTree = "<group>"; };
@@ -1014,6 +1024,12 @@
 		A69BA47D2ABD854B00C34D40 /* dmi_decode_path.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dmi_decode_path.h.in; sourceTree = "<group>"; };
 		A69BA4812ABD854B00C34D40 /* dmi_decode_path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dmi_decode_path.h; sourceTree = "<group>"; };
 		A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dmi_decode_path.h; sourceTree = "<group>"; };
+		A6B06C9B3051A5290076234A /* sctp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sctp.h; sourceTree = "<group>"; };
+		A6B06C9D3051A5330076234A /* sctp_uio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sctp_uio.h; sourceTree = "<group>"; };
+		A6B06CA03051A5470076234A /* sctp_sys_calls.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sctp_sys_calls.m; sourceTree = "<group>"; };
+		A6B06CA53051BC0C0076234A /* libmariadbclient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmariadbclient.a; path = /usr/local/lib/mariadb/libmariadbclient.a; sourceTree = "<absolute>"; };
+		A6B06CA73051BC370076234A /* libpq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpq.a; path = /usr/local/pgsql/lib/libpq.a; sourceTree = "<absolute>"; };
+		A6B06CA93051BDC50076234A /* libmariadb.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmariadb.3.dylib; path = /usr/local/lib/mariadb/libmariadb.3.dylib; sourceTree = "<absolute>"; };
 		A6B1B0B72F6C45820015E83B /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = /opt/homebrew/lib/libssl.a; sourceTree = "<absolute>"; };
 		A6B1B0B92F6C45950015E83B /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = /opt/homebrew/lib/libcrypto.a; sourceTree = "<absolute>"; };
 		A6B1B0BB2F6C45AB0015E83B /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzmq.a; path = /opt/homebrew/lib/libzmq.a; sourceTree = "<absolute>"; };
@@ -1036,10 +1052,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6915FE6304FE18A00B15E34 /* sctp.framework in Frameworks */,
 				A6B1B0B82F6C45820015E83B /* libssl.a in Frameworks */,
 				A6B1B0BA2F6C45950015E83B /* libcrypto.a in Frameworks */,
 				A6B1B0BC2F6C45AB0015E83B /* libzmq.a in Frameworks */,
+				A6B06CA83051BC370076234A /* libpq.a in Frameworks */,
+				A6B06CAA3051BDC50076234A /* libmariadb.3.dylib in Frameworks */,
+				A6B06CA63051BC0C0076234A /* libmariadbclient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,7 +1078,9 @@
 				A6B1B0BB2F6C45AB0015E83B /* libzmq.a */,
 				A6B1B0B92F6C45950015E83B /* libcrypto.a */,
 				A6B1B0B72F6C45820015E83B /* libssl.a */,
-				A6915FE5304FE18A00B15E34 /* sctp.framework */,
+				A6B06CA53051BC0C0076234A /* libmariadbclient.a */,
+				A6B06CA73051BC370076234A /* libpq.a */,
+				A6B06CA93051BDC50076234A /* libmariadb.3.dylib */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -1073,15 +1093,8 @@
 				A66EB0E22ABDDCC200C34D40 /* ulib.pc */,
 				A66EB0E32ABDDCC200C34D40 /* ulib.pc.in */,
 				A66EB0E92ABDDCF500C34D40 /* debian */,
-				A66EB0DE2ABDDC9600C34D40 /* redhat */,
 				A66EB0D82ABDDC7800C34D40 /* make_version */,
 				A66EB0D42ABDDC7800C34D40 /* Makefile */,
-				A66EB0D72ABDDC7800C34D40 /* Makefile.freebsd */,
-				A66EB0D62ABDDC7800C34D40 /* Makefile.freebsd.in */,
-				A66EB0D52ABDDC7800C34D40 /* Makefile.linux */,
-				A66EB0DA2ABDDC7800C34D40 /* Makefile.linux.in */,
-				A66EB0DC2ABDDC7800C34D40 /* Makefile.osx */,
-				A66EB0DD2ABDDC7800C34D40 /* Makefile.osx.in */,
 				A66EB0DB2ABDDC7800C34D40 /* README.macosx.txt */,
 				A66EB0D92ABDDC7800C34D40 /* README.md */,
 				A66EB0CD2ABDDC6C00C34D40 /* make_buildnr.sh */,
@@ -1103,7 +1116,6 @@
 				A66EB0BA2ABDDC2E00C34D40 /* distro.sh */,
 				A66EB0C72ABDDC5300C34D40 /* Doxyfile */,
 				A66EB0CA2ABDDC5300C34D40 /* install.sh */,
-				A66EB0C92ABDDC5300C34D40 /* installer_requirements.plist */,
 				A66EB0C82ABDDC5300C34D40 /* lib_symlink_tool.sh */,
 				A66EB0EA2ABDDEB300C34D40 /* SupportingFiles */,
 				A66EB0C62ABDDC4900C34D40 /* doc */,
@@ -1127,6 +1139,10 @@
 			isa = PBXGroup;
 			children = (
 				A64994C12E0BCD91006873AC /* framework.h */,
+				A6B06C9B3051A5290076234A /* sctp.h */,
+				A6B06C9D3051A5330076234A /* sctp_uio.h */,
+				A6B06CA03051A5470076234A /* sctp_sys_calls.m */,
+				A6061D123067CF060037CFFA /* mysql_ssl_glue.m */,
 				A6A1EB902ABD9CC500C34D40 /* dmi_decode_path.h */,
 				A683D8922ABD980A00C34D40 /* dmi_decode_path.h.in */,
 				A6915F99304FDDD600B15E34 /* UMSCTPListener.h */,
@@ -1670,12 +1686,12 @@
 				A683DA8C2ABD980F00C34D40 /* UMQueueNull.h in Headers */,
 				A683DA682ABD980E00C34D40 /* UMHTTPResponseCode.h in Headers */,
 				A683D9C62ABD980E00C34D40 /* UMHTTPAuthenticationStatus.h in Headers */,
+				A6B06C9C3051A5290076234A /* sctp.h in Headers */,
 				A683DA592ABD980E00C34D40 /* UMLayerTask.h in Headers */,
 				A683DA932ABD980F00C34D40 /* UMTokenizerWord.h in Headers */,
 				A683D9E92ABD980E00C34D40 /* UMObjectStatisticEntry.h in Headers */,
 				A683D9E72ABD980E00C34D40 /* UMHTTPPageHandler.h in Headers */,
 				A6915F8D304D666700B15E34 /* UMZMQSocket+ASN1.h in Headers */,
-				A6915F8E304D666700B15E34 /* UMZMQSocket.h in Headers */,
 				A683DA0F2ABD980E00C34D40 /* UMHTTPPageRef.h in Headers */,
 				A683DA4C2ABD980E00C34D40 /* UMHTTP2Server.h in Headers */,
 				A683DA282ABD980E00C34D40 /* UMSocketDefs.h in Headers */,
@@ -1823,6 +1839,7 @@
 				A683DA9B2ABD980F00C34D40 /* UMDigitTree.h in Headers */,
 				A683DAB22ABD980F00C34D40 /* UMHTTPSServer.h in Headers */,
 				A6915FB8304FDDD600B15E34 /* UMSctpTask_AdminSetConfig.h in Headers */,
+				A6B06C9E3051A5330076234A /* sctp_uio.h in Headers */,
 				A6915FB9304FDDD600B15E34 /* UMSctpTask_Close.h in Headers */,
 				A6915FBA304FDDD600B15E34 /* UMSctpTask_Manual_InService.h in Headers */,
 				A6915FBB304FDDD600B15E34 /* UMSCTPListener.h in Headers */,
@@ -1878,6 +1895,7 @@
 				A69BA4502ABD850000C34D40 /* Headers */,
 				A69BA4522ABD850000C34D40 /* Frameworks */,
 				A69BA4532ABD850000C34D40 /* Resources */,
+				A64C6AFA305C04A700AAA74A /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -1914,7 +1932,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 2700;
 				TargetAttributes = {
 					A69BA4542ABD850000C34D40 = {
 						CreatedOnToolsVersion = 15.0;
@@ -1968,7 +1986,6 @@
 				A66EB0D22ABDDC6C00C34D40 /* make_buildnr.sh.in in Resources */,
 				A66EB0D02ABDDC6C00C34D40 /* make_documentation.sh in Resources */,
 				A66EB0D32ABDDC6C00C34D40 /* make_pkg.sh in Resources */,
-				A66EB0DF2ABDDC9600C34D40 /* redhat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2031,8 +2048,10 @@
 				A683DA762ABD980F00C34D40 /* UMLogConsole.m in Sources */,
 				A6915F10304D664400B15E34 /* UMASN1UTF8String.m in Sources */,
 				A6915F11304D664400B15E34 /* UMASN1Real.m in Sources */,
+				A6061D133067CF060037CFFA /* mysql_ssl_glue.m in Sources */,
 				A6915F12304D664400B15E34 /* UMASN1Length.m in Sources */,
 				A6915FDC304FDFB000B15E34 /* UMLayerSctpUserProfile.m in Sources */,
+				A6B06CA23051A5470076234A /* sctp_sys_calls.m in Sources */,
 				A6915FDD304FDFB000B15E34 /* UMLayerSctpUser.m in Sources */,
 				A6915FDE304FDFB000B15E34 /* UMLayerSctp.m in Sources */,
 				A6915F13304D664400B15E34 /* UMASN1Enumerated.m in Sources */,
@@ -2095,7 +2114,6 @@
 				A6915F64304D665900B15E34 /* UMRpcCommandHandler.m in Sources */,
 				A6915F65304D665900B15E34 /* UMRpcServer.m in Sources */,
 				A6915F66304D665900B15E34 /* UMRpcMessage_GenericError.m in Sources */,
-				A6915F8B304D666700B15E34 /* UMZMQSocket.m in Sources */,
 				A6915F8C304D666700B15E34 /* UMZMQSocket+ASN1.m in Sources */,
 				A6915F67304D665900B15E34 /* UMRpcHandler.m in Sources */,
 				A6915F68304D665900B15E34 /* UMRpcMessage.m in Sources */,
@@ -2230,10 +2248,6 @@
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					arm64,
-					x86_64,
-				);
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -2291,7 +2305,11 @@
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				INSTALL_PATH = /FinkTelecomServices/frameworks;
 				LD_RUNPATH_SEARCH_PATHS = "\"/Library/Application Support/\"";
-				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/lib/mariadb,
+					/usr/local/pgsql/lib,
+				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 4.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -2300,6 +2318,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.ulib";
 				PRODUCT_DEFINITION_PLIST = "SupportingFiles/ulib-macos-info.plist";
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_MACCATALYST = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2312,10 +2331,6 @@
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					arm64,
-					x86_64,
-				);
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -2367,7 +2382,11 @@
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				INSTALL_PATH = /FinkTelecomServices/frameworks;
 				LD_RUNPATH_SEARCH_PATHS = "\"/Library/Application Support/\"";
-				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/lib/mariadb,
+					/usr/local/pgsql/lib,
+				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 4.0.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -2376,6 +2395,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fink-telecom.ulib";
 				PRODUCT_DEFINITION_PLIST = "SupportingFiles/ulib-macos-info.plist";
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_MACCATALYST = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2414,7 +2434,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 2.1.1;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -2459,7 +2479,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 2.1.1;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -2483,7 +2503,7 @@
 				DEVELOPMENT_TEAM = HG8655K94F;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.--PRODUCT-NAME-rfc1034identifier-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2504,7 +2524,7 @@
 				DEVELOPMENT_TEAM = HG8655K94F;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MACOSX_DEPLOYMENT_TARGET = 13.5;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.fink.--PRODUCT-NAME-rfc1034identifier-";
 				PRODUCT_NAME = "$(TARGET_NAME)";

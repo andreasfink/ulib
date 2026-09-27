@@ -5,8 +5,8 @@
 //  Created by Andreas Fink on 25.10.11.
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
-#import <ulib/ulib.h>
-#import "UMDbQueryType.h"
+#import <ulib/UMObject.h>
+#import <ulib/UMDbQueryType.h>
 #import <ulib/ulib_config.h>
 
 NSString *StringFromQueryType(UMDbQueryType d)

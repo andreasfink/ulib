@@ -181,6 +181,12 @@
 
 /* define if you have MYSQL Support */
 #undef HAVE_MYSQL
+#undef HAVE_MYSQL_H
+#undef HAVE_MARIADB_MYSQL_H
+
+#ifdef HAVE_MARIADB_MYSQL_H
+#define HAVE_MYSQL 1
+#endif
 
 /* define if you have postgres Support */
 #undef HAVE_PGSQL

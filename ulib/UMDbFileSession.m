@@ -6,10 +6,13 @@
 //
 //
 
-#import "UMDbFileSession.h"
-#import "UMDbQuery.h"
-#import "UMDbResult.h"
+#import <ulib/UMDbFileSession.h>
+#import <ulib/UMDbQuery.h>
+#import <ulib/UMDbResult.h>
 #import <ulib/ulib_config.h>
+#import <ulib/UMJsonWriter.h>
+#import <ulib/UMJsonParser.h>
+#import <ulib/UMLogFeed.h>
 
 @implementation UMDbFileSession
 

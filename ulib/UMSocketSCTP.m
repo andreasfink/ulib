@@ -41,14 +41,15 @@
 
 
 
-#ifdef HAVE_SCTP_SCTP_H
+#if defined (__APPLE__)
 #include <ulib/sctp.h>
 #include <ulib/sctp_uio.h>
-#endif
-
+#else
 #if defined(HAVE_NETINET_SCTP_H)
 #include <netinet/sctp.h>
 #endif
+#endif
+
 
 #if defined(__APPLE__)
 #include <sys/utsname.h>
@@ -247,7 +248,6 @@ int sctp_recvv(int s, const struct iovec *iov, int iovlen,
 {
     if((_localAddressesSockaddr==NULL) || ( _localAddressesSockaddrCount==0))
     {
-        int  _localAddressesSockaddrCount;
         _localAddressesSockaddr = [UMSocketSCTP sockaddrFromAddresses:_requestedLocalAddresses
                                                                  port:self.requestedLocalPort
                                                                 count:&_localAddressesSockaddrCount /* returns struct sockaddr data in NSData */

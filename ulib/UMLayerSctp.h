@@ -6,8 +6,8 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
-#import <ulib/UMLayer.h>
 #import <ulib/UMSCTPListener.h>
+#import <ulib/UMLayer.h>
 #import <ulib/UMLayerTask.h>
 #import <ulib/UMLayerSctpUserProtocol.h>
 #import <ulib/UMLayerSctpApplicationContextProtocol.h>
@@ -29,9 +29,7 @@
 @class UMSocketSCTPListener2;
 @class UMSCTPListener;
 
-@interface UMLayerSctp : UMLayer /*  <UMSCTPListenerProcessEventsDelegate,
-                                    UMSCTPListenerReadPacketDelegate,
-                                    UMSCTPListenerProcessDataDelegate>*/
+@interface UMLayerSctp : UMLayer 
 {
     UMSynchronizedArray *_users;
     UMMutex             *_linkLock;
@@ -207,8 +205,10 @@
              socket:(NSNumber *)socketNumber;
 
 - (void)processReceivedData:(UMSocketSCTPReceivedPacket *)rx;
+- (void)processError:(UMSocketError)err;
 - (void)processError:(UMSocketError)err socket:(UMSocket *)s inArea:(NSString *)area;
 - (void)processHangup;
+- (UMSocketSCTPReceivedPacket *)receiveSCTP;
 
 -(void) handleLinkUpTcpEcnap;
 -(void) handleLinkDownTcpEcnap;
@@ -225,5 +225,7 @@
 - (int)currentMtu;
 
 - (UMSynchronizedSortedDictionary *)sctpStatusDict;
+
+
 
 @end

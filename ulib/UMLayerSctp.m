@@ -10,12 +10,15 @@
 #import <ulib/ulib_config.h>
 
 #include <netinet/in.h>
-#ifdef HAVE_SCTP_SCTP_H
-#include <sctp/sctp.h>
-#endif
+#if defined(__APPLE__)
+
+#include <ulib/sctp.h>
+
+#else
 
 #ifdef HAVE_NETINET_SCTP_H
 #include <netinet/sctp.h>
+#endif
 #endif
 
 #define ULIBSCTP_INTERNAL 1
@@ -1682,7 +1685,7 @@
                        socket:(NSNumber *)socketNumber
 {
 #if !defined(HAVE_SCTP)
-    return UMSocketError_not_implemented;
+    return UMSocketError_not_supported_operation;
 #else
 
 #if defined(ULIBSCTP_CONFIG_DEBUG)
@@ -1978,11 +1981,6 @@
         {
             _dscp = [cfg[@"dscp"] stringValue];
         }
-
-        int                 _maxInStreams;
-        int                 _numOStreams;
-        int                 _maxInitAttempts;
-       // int                 _initTimeout;
 
         if (cfg[@"max-init-timeout"])
         {
@@ -2446,9 +2444,9 @@
     NSString *name = [NSString stringWithFormat:@"RX:%@",_layerName];
     _directReceiver = [[UMSCTPListener alloc]initWithName:name
                                              socket:_directSocket
-                                      eventDelegate:self
-                                       readDelegate:self
-                                    processDelegate:self];
+                                      eventDelegate:(id<UMSCTPListenerProcessEventsDelegate>)self
+                                       readDelegate:(id<UMSCTPListenerReadPacketDelegate>)self
+                                    processDelegate:(id<UMSCTPListenerProcessDataDelegate>)self];
     _directReceiver.logFeed = self.logFeed;
     _directReceiver.logLevel = self.logLevel;
 

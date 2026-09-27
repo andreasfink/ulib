@@ -6,6 +6,12 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
 #import <ulib/UMObject.h>
+#import <ulib/UMDbStorageType.h>
+#import <ulib/UMDbQueryCondition.h>
+#import <ulib/UMDbFieldDefinitions.h>
+#import <ulib/UMDbFieldDefinition.h>
+#import <ulib/UMDbTableDefinition.h>
+
 #import <ulib/ulib_config.h>
 
 #import <ulib/UMDbQueryType.h>
@@ -13,9 +19,6 @@
 #import <ulib/UMDbQueryCondition.h>
 #import <ulib/UMDbQueryPlaceholder.h>
 #import <ulib/UMDbTable.h>
-#import <ulib/UMDbFieldDefinitions.h>
-#import <ulib/UMDbFieldDefinition.h>
-#import <ulib/UMDbTableDefinition.h>
 
 #define NEW_OR_CACHED_UMDB_QUERY()  [UMDbQuery queryForFile:__FILE__ line: __LINE__]
 

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
 
-#import <ulib/ulib.h>
+#import <ulib/UMObject.h>
 #import <ulib/ulib_config.h>
 #import <ulib/UMDbPool.h>
 #import <ulib/UMDbSession.h>

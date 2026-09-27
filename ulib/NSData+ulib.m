@@ -200,7 +200,7 @@
 	const char hexchar[] = "0123456789ABCDEF";
 	const unsigned char *inbytes 		= (const unsigned char *)self.bytes;
 	NSUInteger inlen 	= self.length;
-    int outlen 			= inlen * 2;
+    NSUInteger outlen 			= inlen * 2;
 	char *outbytes = calloc(1,outlen);
 	if(outbytes==NULL)
 	{

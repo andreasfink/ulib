@@ -115,54 +115,7 @@
 
 - (void)setValue:(int64_t)val
 {
-    uint64_t v = (uint64_t)val;
-    uint8_t buf[8];
-    buf[0] = 0xFF & (v >> 56);
-    buf[1] = 0xFF & (v >> 48);
-    buf[2] = 0xFF & (v >> 40);
-    buf[3] = 0xFF & (v >> 32);
-    buf[4] = 0xFF & (v >> 24);
-    buf[5] = 0xFF & (v >> 16);
-    buf[6] = 0xFF & (v >> 8);
-    buf[7] = 0xFF & (v >> 0);
-
-    uint8_t *start = &buf[0];
-    uint8_t *end = start + sizeof(buf);
-    if(val == 0)
-    {
-        uint8_t byte = 0;
-        self.asn1_data = [NSData dataWithBytes:&byte length:1];
-        return;
-    }
-    else if(val == -1)
-    {
-        uint8_t byte = 0xFF;
-        self.asn1_data = [NSData dataWithBytes:&byte length:1];
-        return;
-    }
-    /* Compute the number of superfluous leading bytes */
-    for(;start<end;start++)
-    {
-        /*
-         * If the contents octets of an integer value encoding
-         * consist of more than one octet, then the bits of the
-         * first octet and bit 8 of the second octet:
-         * a) shall not all be ones; and
-         * b) shall not all be zero.
-         */
-        switch(*start)
-        {
-            case 0x00: if((start[1] & 0x80) == 0)
-                continue;
-                break;
-            case 0xff: if((start[1] & 0x80))
-                continue;
-                break;
-        }
-        break;
-    }
-    /* Remove leading superfluous bytes from the integer */
-    self.asn1_data = [NSData dataWithBytes:start length:end-start];
+    self.asn1_data = [UMASN1Integer packedInteger:val];
 }
 
 - (void)processBeforeEncode
@@ -200,4 +153,54 @@
     return NO;
 }
 
++(NSData *)packedInteger:(int64_t)val
+{
+    uint64_t v = (uint64_t)val;
+    uint8_t buf[8];
+    buf[0] = 0xFF & (v >> 56);
+    buf[1] = 0xFF & (v >> 48);
+    buf[2] = 0xFF & (v >> 40);
+    buf[3] = 0xFF & (v >> 32);
+    buf[4] = 0xFF & (v >> 24);
+    buf[5] = 0xFF & (v >> 16);
+    buf[6] = 0xFF & (v >> 8);
+    buf[7] = 0xFF & (v >> 0);
+
+    uint8_t *start = &buf[0];
+    uint8_t *end = start + sizeof(buf);
+    if(val == 0)
+    {
+        uint8_t byte = 0;
+        return [NSData dataWithBytes:&byte length:1];
+    }
+    else if(val == -1)
+    {
+        uint8_t byte = 0xFF;
+        return [NSData dataWithBytes:&byte length:1];
+    }
+    /* Compute the number of superfluous leading bytes */
+    for(;start<end;start++)
+    {
+        /*
+         * If the contents octets of an integer value encoding
+         * consist of more than one octet, then the bits of the
+         * first octet and bit 8 of the second octet:
+         * a) shall not all be ones; and
+         * b) shall not all be zero.
+         */
+        switch(*start)
+        {
+            case 0x00: if((start[1] & 0x80) == 0)
+                continue;
+                break;
+            case 0xff: if((start[1] & 0x80))
+                continue;
+                break;
+        }
+        break;
+    }
+    /* Remove leading superfluous bytes from the integer */
+    NSData *d = [NSData dataWithBytes:start length:end-start];
+    return d;
+}
 @end

@@ -10,6 +10,7 @@
 #import <ulib/UMDbQueryType.h>
 #import <ulib/UMDbFieldDefinitions.h>
 #import <ulib/UMDbPool.h>
+#import <ulib/UMSynchronizedDictionary.h>
 
 #define FLF  __FILE__ line:__LINE__ func:__func__
 @class UMDbSession;

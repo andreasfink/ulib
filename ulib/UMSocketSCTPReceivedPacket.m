@@ -28,13 +28,13 @@
 #include <netdb.h>
 
 
-#ifdef HAVE_SCTP_SCTP_H
+#if defined(__APPLE__)
 #include <ulib/sctp.h>
 #include <ulib/sctp_uio.h>
-#endif
-
+#else
 #ifdef HAVE_NETINET_SCTP_H
 #include <netinet/sctp.h>
+#endif
 #endif
 
 #if defined(LINUX)

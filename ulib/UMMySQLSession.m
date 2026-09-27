@@ -200,7 +200,7 @@
 
 - (int)errorCheck:(int) state forSql:(NSString *)sql;
 {
-    NSString *s = NULL;
+    NSString *s;
     
 #if !defined(HAVE_MYSQL)
     s = @"CR_UNKNOWN_ERROR";
@@ -208,7 +208,7 @@
 #else
     
 #if defined(CR_ERROR_FIRST)
-	if(state < CR_ERROR_FIRST)
+    if(state < CR_ERROR_FIRST)
     {
         return state;
     }

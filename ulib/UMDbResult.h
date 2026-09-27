@@ -5,7 +5,7 @@
 //  Created by Andreas Fink on 24.10.11.
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
-#import <ulib/ulib.h>
+#import <ulib/UMObject.h>
 
 @interface UMDbResult : UMObject
 {

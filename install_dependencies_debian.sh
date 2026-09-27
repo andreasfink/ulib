@@ -44,5 +44,5 @@ then
         sudo cp $F $PCFILE
     fi
 	apt update
-	apt install openssl libssl-dev libpq-dev libpq5 libmariadb-dev libmariadb-dev-compat mariadb-client libzmq3-dev libzmq5 uuid-dev libuuid1
+	apt install openssl libssl-dev libpq-dev libpq5 libmariadb-dev libmariadb-dev-compat mariadb-client libzmq3-dev libzmq5 uuid-dev libuuid1 autoconf clang
 fi

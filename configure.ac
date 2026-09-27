@@ -70,7 +70,7 @@ dnl -----------------------------------------
 dnl setting up dependencies
 dnl -----------------------------------------
 
-DEPENDENT_PKGCONFIGS="openssl libzmq libpq libmariadb libiconv"
+DEPENDENT_PKGCONFIGS="openssl libzmq libpq libmariadb libiconv uuid"
 
 
 dnl -----------------------------------------
@@ -87,13 +87,13 @@ AC_CANONICAL_HOST
 function append_static_libs_of()
 {
     PKGNAME=$1
-    PKG_LOCATION=`pkg-config --libs-only-L ${PKGNAME} | sed 's/^-L//g' | sed 's/\/$//g'`
+    PKG_LOCATION=`pkg-config --libs-only-L ${PKGNAME} | sed 's/^-L//g' | sed 's/ //g' | sed 's/\/$//g'`
     PKG_LIB_NAMES=`pkg-config --libs-only-l ${PKGNAME}`
     PKG_STATIC=""
     for L in ${PKG_LIB_NAMES}
     do
     	FILENAME=`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`
-      	if [[ "${PKG_LOCATION}" == ""]]
+      	if [[ "${PKG_LOCATION}" == "" ]]
     	then
     		PKG_STATIC="${PKG_STATIC} -l:${FILENAME}"
     	else
@@ -169,9 +169,9 @@ case "$host" in
 	CFLAGS="${CFLAGS} -fobjc-arc -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_DEFAULT_SOURCE"
 	CFLAGS="$CFLAGS `gnustep-config  --objc-flags`"
     LDFLAGS="$LDFLAGS `gnustep-config --base-libs --objc-libs`"
-	LIBRARIES="-lsctp -luuid"
-	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
-	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
+	LIBRARIES="-lsctp"
+	#CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
+	#LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
     CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
     AC_DEFINE(HAVE_OPENSSL)
 	SHARED_LIBRARY_EXTENSION="so"

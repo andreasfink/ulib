@@ -3,6 +3,9 @@
 SYSTEM_TYPE=`uname -s`
 if [ "${SYSTEM_TYPE}" == "Linux" ]
 then
+
+	apt update
+	apt install openssl libssl-dev libpq-dev libpq5 libmariadb-dev libmariadb-dev-compat mariadb-client uuid-dev libuuid1 autoconf clang libtool
 	if [ ! -f /usr/local/lib/libiconv.a ]
 	then
 	
@@ -43,6 +46,17 @@ then
         echo 'Version: 1.19.0' >> ${F}
         sudo cp $F $PCFILE
     fi
-	apt update
-	apt install openssl libssl-dev libpq-dev libpq5 libmariadb-dev libmariadb-dev-compat mariadb-client libzmq3-dev libzmq5 uuid-dev libuuid1 autoconf clang
+    if [ ! -f /usr/local/lib/libzmq.a ]
+    then
+		mkdir -p build/
+		pushd build
+        git clone https://github.com/zeromq/libzmq.git
+        cd libzmq
+        ./autogen.sh
+        ./confiugre --enable-static --enable-shared
+        make -j20
+        sudo make install
+        popd
+    fi
+    cd ..
 fi

@@ -61,7 +61,7 @@
     return NULL;
 }
 
-- (void)linuxWebFetch:(UMHTTPClientRequest *)req
+- (void)quickWebFetch:(UMHTTPClientRequest *)req
 {
     req.url = [[NSURL alloc]initWithString:req.urlString];
     if(req.url==NULL)
@@ -84,6 +84,8 @@
 {
     UMHTTPClientRequest *creq = (UMHTTPClientRequest *)ref;
     creq.reference = NULL;
+    creq.responseData = [data mutableCopy];
+    creq.responseStatusCode = statusCode;
 }
 
 @end

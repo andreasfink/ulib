@@ -8,6 +8,7 @@
 #include <ulib/ulib_config.h>
 
 #import <ulib/UMObject.h>
+#import <ulib/UMSocket.h>
 
 #define DES_BLOCK_SIZE 64
 #define DES_SALT_LEN 56
@@ -17,15 +18,11 @@
 #define DES3_KEY_LEN 168
 #define DES3_SALT_LEN 56
 
-#define CAST5_BLOCK_SIZE 64
-
 #define RSA_KEY_LEN 4096
 #define RSA_EXPONENT 65537
 #define RSA_PADDING_LEN 41
 
-
 @class UMSocket;
-
 @interface UMCrypto : UMObject
 {
 	NSInteger	        _enable;
@@ -92,7 +89,6 @@
 - (UMCrypto *)initWithFileDescriptor:(int)fileDescriptor;
 - (UMCrypto *)initWithRelatedSocket:(UMSocket *)s;
 - (UMCrypto *)initPublicCrypto;
-
 - (void)setSeed:(NSInteger)seed;
 
 
@@ -114,7 +110,6 @@
 
 - (NSData *)RC4DecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key;
 - (NSData *)DES3DecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key;
-- (NSData *)CAST5DecryptWithCiphertext:(NSData *)ciphertext havingLength:(int *)len withKey:(NSData *)key;
 - (NSData *)decryptDataWithSSL:(NSData *)data withKey:(NSData *)key;
 
 - (void)generateRsaKeyPair;

@@ -8,7 +8,10 @@
 #import <ulib/framework.h>
 #import <ulib/UMMutex.h>
 
-@class UMHistoryLog, UMConfig, UMLogFeed, UMLogHandler;
+@class UMHistoryLog;
+@class UMConfig;
+@class UMLogFeed;
+@class UMLogHandler;
 
 
 int umobject_enable_alloc_logging(const char *f);

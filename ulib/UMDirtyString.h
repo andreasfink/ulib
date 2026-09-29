@@ -21,6 +21,7 @@ else\
 @interface UMDirtyString : UMDirtyObject
 
 - (UMDirtyString *)initWithString:(NSString *)s;
+- (UMDirtyString *)initWithString:(NSString *)s limit:(int)limit;
 - (NSString *)stringValue;
 - (void)setStringValue:(NSString *)s;
 

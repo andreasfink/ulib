@@ -32,6 +32,10 @@
 /* Define if you have netinet/sctp.h. */
 #undef HAVE_NETINET_SCTP_H
 
+#if defined(HAVE_SCTP_SCTP_H) || defined(HAVE_NETINET_SCTP_H)
+#define HAVE_SCTP
+#endif
+
 /* Define if you have getopt.h. */
 #undef HAVE_GETOPT_H
 
@@ -70,6 +74,15 @@
 
 /* Define if you have the <pthread.h> header file.  */
 #undef HAVE_PTHREAD_H
+
+/* Define if you have the <pthread_np.h> header file.  */
+#undef HAVE_PTHREAD_NP_H
+
+/* Define if you have the pthread_getthread_id() function.  */
+#undef HAVE_PTHREAD_GETTHREADID_NP
+
+/* Define if you have the pthread#_thread_id() function.  */
+#undef HAVE_PTHREAD_THREADID_NP
 
 /* Define if you have the <sys/sysctl.h> header file.  */
 #undef HAVE_SYS_SYSCTL_H
@@ -165,6 +178,22 @@
 
 /* define if we have timegm() */
 #undef HAVE_TIMEGM
+
+/* define if you have MYSQL Support */
+#undef HAVE_MYSQL
+#undef HAVE_MYSQL_H
+#undef HAVE_MARIADB_MYSQL_H
+
+#ifdef HAVE_MARIADB_MYSQL_H
+#define HAVE_MYSQL 1
+#endif
+
+/* define if you have postgres Support */
+#undef HAVE_PGSQL
+
+/* define if you have SQLite support */
+#undef HAVE_SQLITE
+
 
 /* if sockadd.sin_len is existing */
 #undef HAVE_SOCKADDR_SIN_LEN

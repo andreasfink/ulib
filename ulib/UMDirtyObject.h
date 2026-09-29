@@ -12,11 +12,13 @@
     BOOL    _isDirty;
     id      _currentValue;
     id      _previousValue;
+    int     _sizeLimit;
 }
 
 @property(readwrite,assign,atomic) BOOL    isDirty;
 @property(readwrite,strong,atomic) id      currentValue;
 @property(readwrite,strong,atomic) id      previousValue;
+@property(readwrite,assign,atomic) int     sizeLimit;
 - (void)clearDirty;  /*!< same as isDirty=NO flag but the new value is now the old value */
 - (id)proxyForJson;
 

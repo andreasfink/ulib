@@ -188,14 +188,96 @@ typedef enum
 #import <ulib/UMSSLCertificate.h>
 #import <ulib/UMSerialPort.h>
 #import <ulib/dmi_decode_path.h>
+#import <ulib/UMStdIo.h>
 
-@interface ulib : NSObject
-{
-}
+#import <ulib/UMASN1Object.h>
+#import <ulib/UMASN1ObjectConstructed.h>
+#import <ulib/UMASN1ObjectPrimitive.h>
+#import <ulib/UMASN1ObjectDescriptor.h>
+#import <ulib/UMASN1ObjectIdentifier.h>
+#import <ulib/UMASN1Tag.h>
+#import <ulib/UMASN1Length.h>
+#import <ulib/UMASN1BitString.h>
+#import <ulib/UMASN1Boolean.h>
+#import <ulib/UMASN1Choice.h>
+#import <ulib/UMASN1EndOfContents.h>
+#import <ulib/UMASN1Integer.h>
+#import <ulib/UMASN1Null.h>
+#import <ulib/UMASN1OctetString.h>
+#import <ulib/UMASN1Sequence.h>
+#import <ulib/UMASN1Set.h>
+#import <ulib/UMASN1UTF8String.h>
+#import <ulib/UMASN1Enumerated.h>
+#import <ulib/UMASN1Real.h>
+#import <ulib/UMZMQSocket+ASN1.h>
+#import <ulib/UMASN1NamedList.h>
 
-+ (NSString *) ulib_version;
-+ (NSString *) ulib_build;
-+ (NSString *) ulib_builddate;
-+ (NSString *) ulib_compiledate;
+#import <ulib/UMRpcServer_AuthenticateProtocol.h>
+#import <ulib/UMRpcClient.h>
+#import <ulib/UMRpcServer.h>
+#import <ulib/UMRpcError.h>
+#import <ulib/UMRpcFlag.h>
+#import <ulib/UMRpcMessageType.h>
+#import <ulib/UMRpcMessage.h>
+#import <ulib/UMRpcHandler.h>
+#import <ulib/UMRpcClient.h>
+#import <ulib/UMRpcMessage_GenericError.h>
+#import <ulib/UMRpcMessage_HeartbeatRequest.h>
+#import <ulib/UMRpcMessage_HeartbeatResponse.h>
+#import <ulib/UMRpcMessage_LoginRequest.h>
+#import <ulib/UMRpcMessage_LoginResponse.h>
+#import <ulib/UMRpcMessage_LogoutRequest.h>
+#import <ulib/UMRpcMessage_LogoutResponse.h>
+#import <ulib/UMRpcMessage_TestRequest.h>
+#import <ulib/UMRpcMessage_TestResponse.h>
+#import <ulib/UMRpcServer.h>
+#import <ulib/UMRpcSession.h>
+#import <ulib/UMRpcCommandHandler.h>
+#import <ulib/UMRpcSessionHandler.h>
+#import <ulib/UMRpcMessageDecoder.h>
 
-@end
+#import <ulib/UMLayerSctp.h>
+#import <ulib/UMLayerSctpUserProtocol.h>
+#import <ulib/UMSctpTask_AdminAttach.h>
+#import <ulib/UMSctpTask_AdminDetach.h>
+#import <ulib/UMSctpTask_AdminSetConfig.h>
+#import <ulib/UMSctpTask_AdminInit.h>
+#import <ulib/UMSctpTask_Close.h>
+#import <ulib/UMSctpTask_Data.h>
+#import <ulib/UMSctpTask_Manual_ForceOutOfService.h>
+#import <ulib/UMSctpTask_Manual_InService.h>
+#import <ulib/UMSctpTask_Open.h>
+#import <ulib/UMLayerSctpUser.h>
+#import <ulib/UMLayerSctpUserProfile.h>
+#import <ulib/UMLayerSctpApplicationContextProtocol.h>
+#import <ulib/UMSocketSCTPRegistry.h>
+#import <ulib/UMSocketSCTPListener2.h>
+
+#import <ulib/UMDbDriverType.h>
+#import <ulib/UMDbQueryType.h>
+#import <ulib/UMDbTable.h>
+#import <ulib/UMDbPool.h>
+#import <ulib/UMDbQuery.h>
+#import <ulib/UMDbQueryCondition.h>
+#import <ulib/UMDbQueryPlaceholder.h>
+#import <ulib/UMDbResult.h>
+#import <ulib/UMDbSession.h>
+#import <ulib/UMDbTableDefinition.h>
+#import <ulib/UMDbFieldDefinition.h>
+#import <ulib/UMDbFileSession.h>
+#import <ulib/UMMySQLSession.h>
+#import <ulib/UMPgSQLSession.h>
+#import <ulib/UMSqLiteSession.h>
+#import <ulib/UMDbRedisSession.h>
+#import <ulib/UMDbMySqlInProgress.h>
+
+void ulibdb_startup(void);
+void ulibdb_shutdown(void);
+void ulibdb_thread_init(void);
+void ulibdb_thread_exit(void);
+
+NSString *ulib_version(void);
+NSString *ulib_build(void);
+NSString *ulib_builddate(void);
+NSString *ulib_compiledate(void);
+

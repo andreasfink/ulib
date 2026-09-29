@@ -7,6 +7,7 @@
 
 #import <ulib/framework.h>
 
+@class UMDbSession;
 NSString *sqlEscapeNSString(NSString *input);
 
 @interface NSString (ulib)
@@ -48,7 +49,7 @@ NSString *sqlEscapeNSString(NSString *input);
 - (NSInteger)intergerValueSupportingHex;
 - (BOOL)isEqualToStringSupportingX:(NSString *)str;
 - (NSString *)allowOnlyHexDigits;
-
+- (NSString *)limitToLength:(int)maxlen;
 /* this is used to clean names. They are all returned in lowercase
   only lowercase is allowed. Uppercase is converted
   . is not allowed in first place
@@ -56,5 +57,8 @@ NSString *sqlEscapeNSString(NSString *input);
 */
 - (NSString *)filterNameWithMaxLength:(int)maxlen;
 - (NSString *)randomizeX;
+- (NSString *)sqlEscaped:(UMDbSession *)session;   /*!< escape characters for SQL */
 
 @end
+
+NSString *sqlEscapeNSString(NSString *input);

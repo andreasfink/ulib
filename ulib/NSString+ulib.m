@@ -5,6 +5,8 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
+
+#import <ulib/UMDbSession.h>
 #import <ulib/NSString+ulib.h>
 #import <ulib/UMAssert.h>
 #import <ulib/NSData+ulib.h>
@@ -778,7 +780,31 @@ static inline int nibbleToInt(const char a)
     return result;
 }
 
+- (NSString *)limitToLength:(int)maxlen
+{
+    if((maxlen==0) || (self.length < maxlen))
+    {
+        return self;
+    }
+    return [self substringToIndex:maxlen];
+}
+
+
+
+- (NSString *)sqlEscaped:(UMDbSession *)session
+{
+    if(session)
+    {
+        return [session sqlEscapeString:self];
+    }
+    else
+    {
+        return [self sqlEscaped];
+    }
+}
+
 @end
+
 
 NSString *sqlEscapeNSString(NSString *input)
 {

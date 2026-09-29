@@ -1,17 +1,16 @@
 #ulib pkg-config source file
-#  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
+#  Copyright © 2026 Andreas Fink (andreas@fink.org). All rights reserved.
 
 prefix=/usr/local
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 
-Cflags: -I${includedir}  -I/usr/GNUstep/System/Library/Headers/ -DHAVE_OPENSSL=1
-Libs: -L${libdir} -l:libulib.@SHARED_LIBRARY_EXTENSION@.@MAJORVER@.@MINORVER@ -l:libobjc.so.4.6 -lavahi-client -lavahi-core -lavahi-common -lgnustep-base -ldl @LIBRARIES@
+Cflags: -I${includedir}
+Libs:   -L${libdir} -lulib
 
 Name: ulib
 Description: universal library
 Version: @VERSION@
-Requires: openssl 
 
 

@@ -5,6 +5,7 @@
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 //
 
+#include <ulib/ulib_config.h>
 #import <ulib/UMObject.h>
 #import <ulib/UMCrypto.h>
 #import <ulib/UMSocketDefs.h>
@@ -13,7 +14,6 @@
 
 #include <sys/types.h>
 #include <sys/socket.h>
-//#include <ulib/ulib_config.h>
 
 #ifndef in_port_t   
 #define in_port_t   uint16_t
@@ -22,6 +22,7 @@
 
 @class UMHost;
 @class UMHistoryLog;
+@class UMCrypto;
 
 typedef enum SocketBlockingMode
 {
@@ -179,9 +180,11 @@ typedef enum SocketBlockingMode
 + (NSArray *)dataIsAvailableOnSockets:(NSArray *)inputSockets timeoutMs:(int)timeoutMs err:(UMSocketError *) err;
 - (void) updateName;
 - (UMSocketError)  sendBytes:(void *)bytes length:(ssize_t)length;
+- (UMSocketError)  sendBytes:(void *)bytes length:(ssize_t)length blocking:(BOOL)doBlock;
 - (UMSocketError)  sendCString:(char *)str;
 - (UMSocketError)  sendString:(NSString *)str;
 - (UMSocketError)  sendData:(NSData *)data;
+- (UMSocketError)  sendUnblockedData:(NSData *)data;
 - (UMSocketError)  sendMutableData:(NSMutableData *)data;
 - (void) sendNow;
 - (int) sendSctp:(void *)bytes length:(ssize_t)len  stream:(NSUInteger) streamID protocol:(NSUInteger) protocolID;

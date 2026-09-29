@@ -1,62 +1,61 @@
-dnl /* ==================================================================== 
+dnl /* ================================================================================== 
 dnl  * Project "ulib"
-dnl  * Copyright: © 2025 Andreas Fink (andreas@fink.org), Basel, Switzerland. All rights reserved.
-dnl  * ====================================================================
+dnl  * Copyright: © 2026 Andreas Fink (andreas@fink.org), Basel, Switzerland.
+dnl  * ==================================================================================
 dnl  */ 
 
 dnl
-dnl configure.in -- main autoconf macro definition file
+dnl configure.ac -- main autoconf macro definition file
 dnl
 dnl Process this file with autoconf to produce a configure script.
 dnl
 
+dnl -----------------------------------------
 dnl initialization
+dnl -----------------------------------------
 
-AC_PREREQ([2.68])
-AC_INIT([ulib],[2.0],[andreas@fink.org])
+AC_PREREQ([2.69])
+AC_INIT([ulib],[6.0],[andreas@fink.org])
 AC_CONFIG_HEADERS([ulib/ulib_config.h])
 AC_SUBST(SHELL)
 AC_CONFIG_AUX_DIR(.)
 AC_SET_TERMINAL_SEQUENCES()
 
-COPYRIGHT="Copyright © 2025 Andreas Fink (andreas@fink.org). All rights reserved."
+dnl -----------------------------------------
+dnl generic parameters
+dnl -----------------------------------------
+
+COPYRIGHT="Copyright © 2026 Andreas Fink (andreas@fink.org). All rights reserved."
 PROJECT_NAME="ulib"
+AUTHOR="Andreas Fink <andreas@fink.org>"
 CONFIG_DEFINE="ULIB_CONFIG"
 
+dnl -----------------------------------------
 dnl Check version number.
+dnl -----------------------------------------
 VERSION=`head -n 1 VERSION`
 MAJORVER=`echo $VERSION | cut -f1 -d.`
 MINORVER=`echo $VERSION | cut -f2 -d.`
 REVISION=`echo $VERSION | cut -f3 -d.`
+ULIB_VERSION=`head -n 1 VERSION`
+./make_version
 
-dnl  Load GNUStep config stuff
+dnl -----------------------------------------
 dnl Set user who runs ./configure
+dnl -----------------------------------------
 CUSER=`id -un`
-AC_SUBST(VERSION)
-AC_SUBST(CUSER)
 
-AC_CONFIG_SECTION([Configuring for $PROJECT_NAME version $VERSION])
-
-dnl Checks system type.
-AC_CONFIG_SECTION([Running system checks])
-AC_CANONICAL_HOST
-
-dnl Apply system specific rules.
-dnl Executable extension for systems that need one, i.e. Cygwin
-dnl Set the LIBTOOL to be used to create libs
+dnl -----------------------------------------
+dnl tools
+dnl -----------------------------------------
 EXE_EXT=""
-LIBTOOL="ar rc"
+LIBTOOL="ar -rcs"
 RANLIB="ranlib"
-LIBS="-ldl"
+LIBS=
 LIBRARY_NAME=$PROJECT_NAME
 BUILD_DIR=.
-DEPENDENT_PKGCONFIGS="openssl"
-
-PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-export PKG_CONFIG_PATH
-
 #
-# we prefer clang over gcc
+# we require clang over gcc
 #
 if [[ "$CC" == "" ]]
 then
@@ -66,66 +65,113 @@ if [[ "$CXX" == "" ]]
 then 
 	CXX=clang++
 fi
-	
+
+dnl -----------------------------------------
+dnl setting up dependencies
+dnl -----------------------------------------
+
+DEPENDENT_PKGCONFIGS="openssl libzmq libpq libmariadb libiconv uuid"
+
+
+dnl -----------------------------------------
+dnl main work
+dnl -----------------------------------------
+
+AC_CONFIG_SECTION([Configuring for $PROJECT_NAME version $VERSION])
+
+dnl Checks system type.
+AC_CONFIG_SECTION([Running system checks])
+AC_CANONICAL_HOST
+
+
+function append_static_libs_of()
+{
+    PKGNAME=$1
+    PKG_LOCATION=`pkg-config --libs-only-L ${PKGNAME} | sed 's/^-L//g' | sed 's/ //g' | sed 's/\/$//g'`
+    PKG_LIB_NAMES=`pkg-config --libs-only-l ${PKGNAME}`
+    PKG_STATIC=""
+    for L in ${PKG_LIB_NAMES}
+    do
+    	FILENAME=`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`
+      	if [[ "${PKG_LOCATION}" == "" ]]
+    	then
+    		PKG_STATIC="${PKG_STATIC} -l:${FILENAME}"
+    	else
+            PKG_STATIC="${PKG_STATIC} ${PKG_LOCATION}/${FILENAME}"
+        fi
+    done
+    echo "Found static libs of ${PKGNAME}: ${PKG_STATIC}"
+    STATIC_LIBS="${STATIC_LIBS} ${PKG_STATIC}"
+}
+
+function append_static_libs_of_packages()
+{
+	STATIC_LIBS=""
+	for p in $1
+	do
+        append_static_libs_of $p
+    done
+	STATIC_LIBS=`echo $STATIC_LIBS | sort -u`
+	LDFLAGS="${LDFLAGS} ${STATIC_LIBS}"
+}
+
+append_static_libs_of_packages "${DEPENDENT_PKGCONFIGS}"
+
+echo STATIC_LIBS="${STATIC_LIBS}"
+
 case "$host" in
   *apple-darwin*) 
-    #
-    # MacOS X
-    # lets try to find the newest installed SDK for compilation
-    # so we know how to link against it
-    # the standard location /usr/include and /usr/lib are not good enough
-    # it wouldnt build i386 architecture on a ppc system
-    #
+	#  set(CMAKE_CXX_FLAGS "--sysroot ${CMAKE_OSX_SYSROOT} ${CMAKE_CXX_FLAGS}")
+	if [[ "${SDK}" == "" ]]
+  	then
+		SDK=/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/
+	fi	
+	if [[ "${ARCH}" == "" ]]
+	then
+	    ARCH="-arch arm64 -arch x86_64"
+	fi
+	if [[ "${MACOSX_DEPLOYMENT_TARGET}" == "" ]]
+	then
+		MACOSX_DEPLOYMENT_TARGET=12.4
+	fi
+	AC_DEFINE(HAVE_COMMONCRYPTO)
+    AC_DEFINE(HAVE_OPENSSL)
+   	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
+	LDFLAGS="${LDFLAGS} ${STATIC_LIBFILES}"
     UR="`uname -r | cut -f1 -d.`"
     DONE=0
-    ARCH="-arch x86_64"
-    CFLAGS="$CFLAGS  -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
-    LDFLAGS="$LDFLAGS -F/Library/Frameworks -framework Foundation -framework Security"
+    if [[ -d "${SDK}" ]]
+    then
+		CFLAGS="${CFLAGS} --sysroot ${SDK} ${CFLAGS}"
+		LDFLAGS="${LDFLAGS} -L${SDK}/usr/lib"
+	fi
+	if [[ "${MACOSX_DEPLOYMENT_TARGET}" != "" ]]
+	then
+		CFLAGS="${CFLAGS} -mmacos-version-min=${MACOSX_DEPLOYMENT_TARGET}"
+		LDFLAGS="${LDFLAGS} -mmacos-version-min=${MACOSX_DEPLOYMENT_TARGET}"
+	fi
+    CFLAGS="$CFLAGS -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
+    #libmariadb needs c++ library on MacOS
+    LDFLAGS="${LDFLAGS} -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit -lc++"
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"
-    LIBTOOL="libtool -static -o"
     INSTALL_NAME_TOOL="install_name_tool"
     SHARED_FLAGS="-dynamiclib -Wl,-dylib"
-    AC_DEFINE(HAVE_COMMONCRYPTO)
-    AC_DEFINE(HAVE_OPENSSL)
     LDFLAGS="$LDFLAGS ${ARCH}"
+    LIBTOOL="libtool -static -o"
+   	echo CFLAGS=$CFLAGS
+   	echo LDFLAGS=$LDFLAGS
+   	echo ARCH=$ARCH
     ;;
 
   *-linux-*)
-	CFLAGS="$CFLAGS -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_POSIX_SOURCE"
-	DEBIAN_VERSION=`cat /etc/debian_version | cut -f1 -d.`
-	if [[ "$DEBIAN_VERSION" == "8" ]]
-	then
-        CFLAGS="$CFLAGS -D_BSD_SOURCE"
-    else
-        CFLAGS="$CFLAGS -D_DEFAULT_SOURCE"
-	fi
-	#CFLAGS="$CFLAGS -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties"
-	#CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
-	#CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"
-	#CFLAGS="$CFLAGS -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion"
-	#CFLAGS="$CFLAGS -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector"
-	#CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
-	CFLAGS="${CFLAGS} -fobjc-arc"
-	#source /etc/GNUstep2/GNUstep2.conf
-	if [[ -x /usr/GNUstep2/System/Tools/gnustep-config ]]
-	then
-		GNUSTEP_CONFIG=/usr/GNUstep2/System/Tools/gnustep-config
-		CFLAGS="${CFLAGS} -I/usr/GNUstep2/System/Library/Headers/"
-	else
-		if [[ -x /usr/local/bin/gnustep-config ]]
-		then
-			GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
-		else
-			GNUSTEP_CONFIG=/usr/bin/gnustep-config
-		fi
-	fi
-	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG}  --objc-flags`"
-    LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG}  --base-libs --objc-libs`"
-	LIBS="$LIBS -ldl"
-	LIBRARIES="-lsctp -lbsd -luuid"
-	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
-	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
+  	DEPENDENT_PKGCONFIGS="openssl libzmq uuid libmariadb libpq"
+	CFLAGS="${CFLAGS} -fobjc-arc -fPIC -DLINUX -D_XOPEN_SOURCE=700 -D_DEFAULT_SOURCE"
+	CFLAGS="$CFLAGS `gnustep-config  --objc-flags`"
+    LDFLAGS="$LDFLAGS `gnustep-config --base-libs --objc-libs`"
+	LIBRARIES="-lsctp"
+	#CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
+	#LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
     CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
     AC_DEFINE(HAVE_OPENSSL)
 	SHARED_LIBRARY_EXTENSION="so"
@@ -133,36 +179,19 @@ case "$host" in
 	;;
 
   *-freebsd*)
+   	DEPENDENT_PKGCONFIGS="openssl libzmq uuid libmariadb libpq"
+  	PATH=/opt/buildtools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/GNUstep/System/Tools
+	PKG_CONFIG_PATH=/usr/local/lib/pkg-config:/usr/libdata/pkgconfig:/usr/local/libdata/pkgconfig/
 	CFLAGS="$CFLAGS -std=c99 -fPIC -DFREEBSD"
 	FREEBSD_VERSION=`uname -r`
-	#CFLAGS="$CFLAGS -Wno-trigraphs  -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties"
-	#CFLAGS="$CFLAGS -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label"
-	#CFLAGS="$CFLAGS -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow"
-	#CFLAGS="$CFLAGS -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion"
-	#CFLAGS="$CFLAGS -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector"
-	#CFLAGS="$CFLAGS -Wno-deprecated-implementations -Wprotocol -Wdeprecated-declarations -Wno-sign-conversion "
-	#CFLAGS="$CFLAGS -fobjc-arc"
 	SHARED_LIBRARY_EXTENSION="so"
-	if [[ -x /usr/GNUstep/System/Tools/gnustep-config ]]
-	then
-		GNUSTEP_CONFIG=/usr/GNUstep/System/Tools/gnustep-config
-		CFLAGS="${CFLAGS} -I/usr/GNUstep/System/Library/Headers/"
-	else
-		if [[ -x /usr/local/bin/gnustep-config ]]
-		then
-			GNUSTEP_CONFIG=/usr/local/bin/gnustep-config
-		else
-			GNUSTEP_CONFIG=/usr/bin/gnustep-config
-		fi
-	fi
-	CFLAGS="$CFLAGS `${GNUSTEP_CONFIG}  --objc-flags`"
-    LDFLAGS="$LDFLAGS `${GNUSTEP_CONFIG}  --base-libs --objc-libs`"
+	CFLAGS="$CFLAGS `gnustep-config  --objc-flags`"
+    LDFLAGS="$LDFLAGS `gnustep-config  --base-libs --objc-libs`"
 	CFLAGS="$CFLAGS `pkg-config  --cflags ${DEPENDENT_PKGCONFIGS}`"
 	LDFLAGS="$LDFLAGS `pkg-config --libs ${DEPENDENT_PKGCONFIGS}`"
 	CFLAGS="$CFLAGS -DHAVE_OPENSSL=1"
 	AC_DEFINE(HAVE_OPENSSL)
-        LIBRARIES=""
-    	DMIDECODE="/usr/local/sbin/dmidecode"
+	LIBRARIES=""
 	;;
 esac
 
@@ -177,8 +206,9 @@ AC_ARG_WITH(libs,
 [  --with-libs=FLAGS       use FLAGS for extra libraries],
 LIBS="$LIBS $withval")
 
-
+dnl -----------------------------------------
 dnl Checks for programs.
+dnl -----------------------------------------
 
 AC_PROG_CC
 AC_PROG_INSTALL
@@ -211,9 +241,9 @@ AC_CHECK_LIB(resolv, inet_ntop)
 AC_CHECK_LIB(bind, inet_ntop)
 AC_CHECK_LIB(zmq,zmq_new_ctx)
 
-if test -z "$zmq"; then
-   LIBS="$LIBS -lstdc++ -lzmq"
-fi
+#if test -z "$zmq"; then
+#   LIBS="$LIBS -lstdc++ -lzmq"
+#fi
 
 if test -f "/usr/local/include/zmq.h"; then
     AC_DEFINE(HAVE_ZMQ_H_USR_LOCAL)
@@ -222,7 +252,6 @@ fi
 if test -z "$pthread"; then
     AC_CHECK_LIB(pthread, pthread_exit, [LIBS="$LIBS -lpthread"])
 fi
-AC_CHECK_LIB(iconv, libiconv, [LIBS="$LIBS -liconv"])   
 
 dnl Checks for header files.
 
@@ -416,8 +445,14 @@ AC_CHECK_FUNC(BIO_s_secmem, [AC_DEFINE(HAVE_BIO_S_SECMEM)],[])
 
 
 
+dnl Macro to find out which function to use for getting the thread_id 
+dnl
+AC_CHECK_FUNC(pthread_getthreadid_np, [AC_DEFINE(HAVE_PTHREAD_GETTHREADID_NP)],[])
+AC_CHECK_FUNC(pthread_threadid_np, [AC_DEFINE(HAVE_PTHREAD_THREADID_NP)],[])
 
-dnl Macro to find out which pthread_setname_np variant can be used if any 
+
+
+dnl Macro to find out which pthread_getthreadid_np variant can be used if any 
 dnl
 
 AC_DEFUN(AC_FUNC_WHICH_PTHREAD_SETNAME_NP,
@@ -453,9 +488,9 @@ AC_DEFUN(AC_FUNC_WHICH_PTHREAD_SETNAME_NP,
 	]
 )
 
-
-
+dnl -----------------------------------------
 dnl Extra feature checks
+dnl -----------------------------------------
 
 dnl GW_HAVE_TYPE_FROM(HDRNAME, TYPE, HAVENAME, DESCRIPTION)
 AC_DEFUN(GW_HAVE_TYPE_FROM, [
@@ -507,10 +542,22 @@ AC_CHECK_MEMBER([struct sockaddr_in.sin_len],
 ])
 
 
+---
+dnl AC_CHECK_LIB(sctp, sctp_sendv, [AC_DEFINE(ULIBSCTP_SCTP_SENDV_SUPPORTED)]);
+dnl AC_CHECK_LIB(sctp, sctp_recvv, [AC_DEFINE(ULIBSCTP_SCTP_RECVV_SUPPORTED)]);
 
 
-dnl Implement --enable-debug --enable-profiling options.
+dnl Checks for headers
 dnl -------------------------------------
+AC_CHECK_HEADERS(netinet/sctp.h)
+AC_CHECK_HEADERS(sctp/sctp.h)
+AC_CHECK_HEADERS(pthread_np.h)
+AC_CHECK_HEADERS(mariadb/mysql.h)
+
+
+dnl -----------------------------------------
+dnl Implement --enable-debug --enable-profiling options.
+dnl -----------------------------------------
 AC_ARG_ENABLE(profiling,
 [  --enable-profiling	  enable profiling  [[disabled]]], [
 	echo Using Debuging+profiling target
@@ -537,16 +584,17 @@ AC_ARG_ENABLE(debug,
 	CONFIGURATION="-configuration Release"
 ])])
 
-./make_version
+dnl -----------------------------------------
+dnl Outputing
+dnl -----------------------------------------
+AC_CONFIG_SECTION([Generating output files]) 
 
 TIMESTAMP=`date -u +%Y%m%d%H%M%S`
-
-dnl Final Output
 AC_SUBST(CONFIGURATION)
+AC_SUBST(COPYRIGHT)
 AC_SUBST(PROJECT_NAME)
-AC_SUBST(HAVE_OPENSSL_AS_FRAMEWORK)
-AC_SUBST(HAVE_OPENSSL)
-AC_SUBST(HAVE_COMMON_CRYPTO)
+AC_SUBST(AUTHOR)
+AC_SUBST(VERSION)
 AC_SUBST(MAJORVER)
 AC_SUBST(MINORVER)
 AC_SUBST(REVISION)
@@ -554,14 +602,17 @@ AC_SUBST(STATIC_LIBS)
 AC_SUBST(LIBS)
 AC_SUBST(SHARED_LIBRARY_EXTENSION)
 AC_SUBST(LIBRARIES)
-AC_SUBST(DMIDECODE)
 AC_SUBST(ARCH)
 AC_SUBST(TIMESTAMP)
+AC_SUBST(VERSION)
+AC_SUBST(CUSER)
+AC_SUBST(HAVE_OPENSSL_AS_FRAMEWORK)
+AC_SUBST(HAVE_OPENSSL)
+AC_SUBST(HAVE_COMMON_CRYPTO)
+AC_SUBST(DMIDECODE)
 
 AC_CONFIG_SECTION([Generating output files])
-AC_CONFIG_FILES([Makefile.osx])
-AC_CONFIG_FILES([Makefile.linux])
-AC_CONFIG_FILES([Makefile.freebsd])
+AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([ulib.pc])
 AC_CONFIG_FILES([make_buildnr.sh])
 AC_CONFIG_FILES([ulib/dmi_decode_path.h])
@@ -578,18 +629,6 @@ else
 	echo "Buildnumber: 1"
 	./make_buildnr.sh
 fi
-
-case "$host" in
-  *apple-darwin*) 
-    cp Makefile.osx Makefile
-    ;;
-  *-linux-*)
-    cp Makefile.linux Makefile
-    ;;
-  *-freebsd*)
-    cp Makefile.freebsd Makefile
-    ;;
-esac
 
 dnl LICENSE notice
 

@@ -6,8 +6,8 @@
 //
 //
 
-#import <ulib/UMDateTimeStuff.h>
 #include <time.h>
+#import <ulib/UMDateTimeStuff.h>
 
 
 NSString *UMTimeStampDTfromTime(time_t current)
@@ -58,7 +58,7 @@ time_t UMTimeFromTimestampDT(NSString *timestamp)
            &trec.tm_sec);
     trec.tm_year = trec.tm_year -1900;
     trec.tm_mon = trec.tm_mon -1;
-    time_t t = timegm(&trec);
+    time_t t = mktime(&trec);
     return t;
 }
 

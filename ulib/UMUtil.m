@@ -10,6 +10,19 @@
 #include "ulib_config.h"
 #include "dmi_decode_path.h"
 
+#if defined(LINUX)
+
+#include <sys/types.h>
+#include "unistd.h"
+#include <sys/syscall.h>
+#include <sys/prctl.h>
+#endif
+
+#if defined(HAVE_PTHREAD_NP_H)
+#include <pthread_np.h>
+#endif
+
+
 /* byte order stuff: we use macros under MacOS X */
 
 #if defined __APPLE__
@@ -516,33 +529,36 @@ static NSArray *        _machineCPUIDs = NULL;
         for (ifap = ifaphead; ifap && !found; ifap = ifap->ifa_next)
         {
             NSString *ifname = @(ifap->ifa_name);
-            if ((ifap->ifa_addr->sa_family == AF_INET) || (ifap->ifa_addr->sa_family == AF_INET6))
+            if(ifap->ifa_addr!=NULL) /* might be NULL for a wireguard interface */
             {
-                struct sockaddr *sa = (struct sockaddr *)ifap->ifa_addr;
-                struct sockaddr *mask = (struct sockaddr *)ifap->ifa_netmask;
-                NSString *addr = [UMSocket addressOfSockAddr:sa];
-                NSString *netmask = [UMSocket addressOfSockAddr:mask];
-                if(netmask.length==0)
+                if ((ifap->ifa_addr->sa_family == AF_INET) || (ifap->ifa_addr->sa_family == AF_INET6))
                 {
-                    if(ifap->ifa_addr->sa_family == AF_INET)
+                    struct sockaddr *sa = (struct sockaddr *)ifap->ifa_addr;
+                    struct sockaddr *mask = (struct sockaddr *)ifap->ifa_netmask;
+                    NSString *addr = [UMSocket addressOfSockAddr:sa];
+                    NSString *netmask = [UMSocket addressOfSockAddr:mask];
+                    if(netmask.length==0)
                     {
-                        netmask = @"255.255.255.255";
+                        if(ifap->ifa_addr->sa_family == AF_INET)
+                        {
+                            netmask = @"255.255.255.255";
+                        }
+                        else
+                        {
+                            netmask = @"ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff";
+                        }
                     }
-                    else
+                    NSDictionary *dict2 = @{ @"address" : addr, @"netmask" : netmask};
+                    
+                    a = dict[ifname];
+                    if(a==0)
                     {
-                        netmask = @"ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff";
+                        a = [[NSMutableArray alloc]init];
                     }
+                    [a addObject:dict2];
+                    dict[ifname] = a;
+                    
                 }
-                NSDictionary *dict2 = @{ @"address" : addr, @"netmask" : netmask};
-
-                a = dict[ifname];
-                if(a==0)
-                {
-                    a = [[NSMutableArray alloc]init];
-                }
-                [a addObject:dict2];
-                dict[ifname] = a;
-
             }
         }
         freeifaddrs(ifaphead);
@@ -799,6 +815,53 @@ static NSArray *        _machineCPUIDs = NULL;
     return NULL;
 #endif
 }
+
++ (NSArray<NSString *>*)readableFilesInDirectory:(NSString *)directory
+{
+    @autoreleasepool
+    {
+        NSMutableArray *theArray=[NSMutableArray array];
+
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSDirectoryEnumerator *dirEnumerator = [fm enumeratorAtPath:directory];
+        for (NSString *path in dirEnumerator)
+        {
+            NSString *fullPath = [NSString stringWithFormat:@"%@/%@",directory,path];
+            BOOL isDirectory = YES;
+            BOOL hasFile = [fm fileExistsAtPath:fullPath isDirectory:&isDirectory];
+            if((isDirectory==NO) && (hasFile))
+            {
+                if([fm isReadableFileAtPath:fullPath])
+                {
+                    [theArray addObject:fullPath];
+                }
+            }
+        }
+        return theArray;
+    }
+}
+
++ (NSArray<NSString *>*)filesInDirectory:(NSString *)directory
+{
+    @autoreleasepool
+    {
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSDirectoryEnumerator *dirEnumerator = [fm enumeratorAtPath:directory];
+        NSMutableArray *theArray=[NSMutableArray array];
+        for (NSString *path in dirEnumerator)
+        {
+            NSString *fullPath = [NSString stringWithFormat:@"%@/%@",directory,path];
+            BOOL isDirectory = YES;
+            BOOL hasFile = [fm fileExistsAtPath:fullPath isDirectory:&isDirectory];
+            if((isDirectory==NO) && (hasFile))
+            {
+                [theArray addObject:fullPath];
+            }
+        }
+        return theArray;
+    }
+}
+
 @end
 
 
@@ -846,42 +909,35 @@ NSString *UMBacktrace(void **stack_frames, size_t size)
 */
 
 
+
+//extern int pthread_setname_np (pthread_t __target_thread, __const char *__name);
+
 #if defined(LINUX)
-
-#include <sys/types.h>
-#include "unistd.h"
-#include <sys/syscall.h>
-#include <sys/prctl.h>
-
-extern int pthread_setname_np (pthread_t __target_thread, __const char *__name);
-
 uint64_t ulib_get_thread_id(void)
 {
     uint64_t tid = (uint64_t)syscall (SYS_gettid);
     return tid;
 }
 
-
-#elif defined(__APPLE__) || defined(FREEBSD)
+#else
 
 uint64_t ulib_get_thread_id(void)
 {
     uint64_t tid = 0;
     pthread_t me = pthread_self();
+#if defined(HAVE_PTHREAD_THREADID_NP)
     pthread_threadid_np(me,&tid);
+#else
+    #if(HAVE_PTHREAD_GETTHREADID_NP)
+        tid = pthread_getthreadid_np();
+    #else
+        #error please implement ulib_get_thread_id(void) for this platform
+    #endif
+#endif
     return tid;
 }
 
-
-#else
-
-#error please implement ulib_get_thread_id(void) for this platform
-
 #endif
-
-
-
-
 /*
  * NSString * uint64_t ulib_get_thread_name(pthread_t thread)
  */

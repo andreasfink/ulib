@@ -97,7 +97,7 @@ function append_static_libs_of()
       	if [[ "${PKG_LOCATION}" == "" ]]
     	then
 			echo "checking for file in /usr/lib/*-linux-gnu/$FILENAME for ${LIBNAME}"
-			if [[ -f "/usr/lib/*-linux-gnu/${FILENAME}" ]]
+			if [[ -f /usr/lib/*-linux-gnu/"${FILENAME}" ]]
 			then
 				LDFLAGS="$LDFLAGS -l${LIBNAME}"
 			else		

@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <openssl/sha.h>
 #include <stdint.h>
+#include <arpa/inet.h>
 
 @implementation NSData(ulib)
 
@@ -439,6 +440,30 @@ static inline int nibbleToInt(const char a)
     return data;
 }
 
+#define INET6_ADDRSTRLEN        46
+
+- (NSString *)ipv6AddressFromBinary
+{
+    char buf[INET6_ADDRSTRLEN];
+    
+    const char *addrStr = inet_ntop(AF_INET6, (struct in_addr *)self.bytes, (char *)buf,(socklen_t)self.length);
+    if(addrStr)
+    {
+        return @(addrStr);
+    }
+    return NULL;
+}
+
+- (NSString *)ipv4AddressFromBinary
+{
+    char buf[INET6_ADDRSTRLEN];
+    const char *addrStr = inet_ntop(AF_INET, (struct in_addr *)self.bytes, (char *)buf,(socklen_t)self.length);
+    if(addrStr)
+    {
+        return @(addrStr);
+    }
+    return NULL;
+}
 
 @end
 

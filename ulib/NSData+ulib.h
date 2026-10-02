@@ -41,6 +41,9 @@ typedef NSUInteger NSDataSearchOptions;
 - (NSNumber *)grabNetworkOrderUINT8atPosition:(NSInteger)pos;
 - (NSData *)grabNDatatPosition:(NSInteger)pos withLength:(NSInteger)len;
 
+- (NSString *)ipv4AddressFromBinary;
+- (NSString *)ipv6AddressFromBinary;
+
 @end
 
 

@@ -96,12 +96,12 @@ function append_static_libs_of()
 		LIBNAME=`echo $L | sed s/^-l//g | sed 's/ //g'`
       	if [[ "${PKG_LOCATION}" == "" ]]
     	then
-			echo "checking for file in /usr/lib/x86_64-linux-gnu/$FILENAME for ${LIBNAME}"
-			if [[ -f "/usr/lib/x86_64-linux-gnu/$FILENAME" ]]
+			echo "checking for file in /usr/lib/*-linux-gnu/$FILENAME for ${LIBNAME}"
+			if [[ -f "/usr/lib/*-linux-gnu/${FILENAME}" ]]
 			then
 				LDFLAGS="$LDFLAGS -l${LIBNAME}"
-			else
-    			PKG_STATIC="${PKG_STATIC} -l:${FILENAME}"
+			else		
+   				PKG_STATIC="${PKG_STATIC} -l:${FILENAME}"
 			fi
     	else
             PKG_STATIC="${PKG_STATIC} ${PKG_LOCATION}/${FILENAME}"

@@ -8,12 +8,16 @@
 
 
 #include <ulib/ulib_config.h>
-#if defined(HAVE_ZMQ_H)
+
+#if defined(HAVE_ZEROMQ)
+
+
 #if defined(HAVE_ZMQ_H_USR_LOCAL)
 #include "/usr/local/include/zmq.h"
-#else
-#include "zmq.h"
 #endif
+
+#if defined(HAVE_ZMQ_H)
+#include "zmq.h"
 #endif
 
 
@@ -364,3 +368,4 @@ if(_logLevel <= UMLOG_DEBUG) \
 @end
 
 
+#endif /* HAVE_ZEROMQ */

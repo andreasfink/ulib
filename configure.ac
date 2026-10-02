@@ -158,7 +158,7 @@ case "$host" in
     INSTALL_NAME_TOOL="install_name_tool"
     SHARED_FLAGS="-dynamiclib -Wl,-dylib"
     LDFLAGS="$LDFLAGS ${ARCH}"
-    LIBTOOL="libtool -static -o"
+    LIBTOOL="libtool -static -no_warning_for_no_symbols -o"
    	echo CFLAGS=$CFLAGS
    	echo LDFLAGS=$LDFLAGS
    	echo ARCH=$ARCH
@@ -318,6 +318,7 @@ AC_CHECK_HEADERS(netinet/sctp.h)
 AC_CHECK_HEADERS(sctp/sctp.h)
 AC_CHECK_HEADERS(netinet/in.h)
 AC_CHECK_HEADERS(net/if_dl.h)
+AC_CHECK_HEADERS(/usr/local/include/zmq.h)
 AC_CHECK_HEADERS(zmq.h)
 
 AC_CHECK_HEADERS(sys/socket.h sys/sockio.h net/if.h netinet/in.h,,,

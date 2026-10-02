@@ -643,6 +643,7 @@ ac_includes_default="\
 ac_header_c_list=
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+SPECIAL_PC_LIBS
 DMIDECODE
 HAVE_COMMON_CRYPTO
 HAVE_OPENSSL
@@ -2976,6 +2977,7 @@ case "$host" in
 	fi
     CFLAGS="$CFLAGS -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
     #libmariadb needs c++ library on MacOS
+	SPECIAL_PC_LIBS="-lc++"
     LDFLAGS="${LDFLAGS} -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit -lc++"
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"
@@ -3001,6 +3003,7 @@ case "$host" in
 
 	SHARED_LIBRARY_EXTENSION="so"
     DMIDECODE="/usr/sbin/dmidecode"
+	SPECIAL_PC_LIBS=""
 	;;
 
   *-freebsd*)
@@ -6070,6 +6073,7 @@ fi
 
 
 TIMESTAMP=`date -u +%Y%m%d%H%M%S`
+
 
 
 

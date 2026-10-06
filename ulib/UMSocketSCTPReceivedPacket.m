@@ -31,13 +31,10 @@
 #if defined(__APPLE__)
 #include <ulib/sctp.h>
 #include <ulib/sctp_uio.h>
-
 #else
-
 #ifdef HAVE_NETINET_SCTP_H
 #include <netinet/sctp.h>
 #endif
-
 #endif
 
 #if defined(LINUX)

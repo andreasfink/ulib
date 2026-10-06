@@ -468,7 +468,7 @@
 
 - (NSString *)sqlEscapeString:(NSString *)in
 {
-    return [in sqlEscaped];
+    return [UMUtil sqlEscaped:in];
 }
 
 @end

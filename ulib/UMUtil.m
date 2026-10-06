@@ -9,6 +9,8 @@
 #import <pthread.h>
 #include "ulib_config.h"
 #include "dmi_decode_path.h"
+#import <NSString+ulib.h>
+#import <NSData+ulib.h>
 
 #if defined(LINUX)
 
@@ -861,6 +863,80 @@ static NSArray *        _machineCPUIDs = NULL;
         return theArray;
     }
 }
+
++ (NSInteger)intergerValueSupportingHexFromString:(NSString *)str
+{
+    if(([str hasPrefix:@"0x"]) || ([str hasPrefix:@"0X"]))
+    {
+        NSString *d = [str substringFromIndex:2];
+        NSData *d2 = [d unhexedData];
+        const uint8_t *bytes = d2.bytes;
+        NSInteger n = 0;
+        for(NSInteger i=0; i<d2.length;i++)
+        {
+            n = (n << 8) | bytes[i];
+        }
+        return n;
+    }
+    else
+    {
+        return [str integerValue];
+    }
+}
+
++ (NSString *)sqlEscaped:(NSString *)in
+{
+    if(self == NULL)
+    {
+        return @"";
+    }
+    
+    
+    NSString *s = in;
+    /* we always escape the lower 32 chars */
+    s = [s stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
+    
+    s = [s stringByReplacingOccurrencesOfString:@"\x00" withString:@"\\x00"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x01" withString:@"\\x01"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x02" withString:@"\\x02"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x03" withString:@"\\x03"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x04" withString:@"\\x04"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x05" withString:@"\\x05"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x06" withString:@"\\x06"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x07" withString:@"\\x07"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x08" withString:@"\\x08"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x09" withString:@"\\x09"];
+    s = [s stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x0b" withString:@"\\x0b"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x0c" withString:@"\\x0c"];
+    s = [s stringByReplacingOccurrencesOfString:@"\r" withString:@"\\r"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x0e" withString:@"\\x0e"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x0f" withString:@"\\x0f"];
+    
+    s = [s stringByReplacingOccurrencesOfString:@"\x10" withString:@"\\x10"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x11" withString:@"\\x11"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x12" withString:@"\\x12"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x13" withString:@"\\x13"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x14" withString:@"\\x14"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x15" withString:@"\\x15"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x16" withString:@"\\x16"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x17" withString:@"\\x17"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x18" withString:@"\\x18"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x19" withString:@"\\x19"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x1a" withString:@"\\x1a"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x1b" withString:@"\\x1b"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x1c" withString:@"\\x1c"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x1d" withString:@"\\x1d"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x1e" withString:@"\\x1e"];
+    s = [s stringByReplacingOccurrencesOfString:@"\x1f" withString:@"\\x1f"];
+    
+    s = [s stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
+    s = [s stringByReplacingOccurrencesOfString:@"`" withString:@"\\`"];
+    s = [s stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    return s;
+}
+
+
 
 @end
 

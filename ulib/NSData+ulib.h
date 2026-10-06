@@ -7,9 +7,8 @@
 
 #import <ulib/framework.h>
 
-#if defined(LINUX) || defined(FREEBSD)
+#if defined(LINUX)
 /* this stuff is not in Gnustep but in OSX so we emulate it here */
-#import <ulib/framework.h>
 typedef NSUInteger NSDataSearchOptions;
 #define  NSDataSearchBackwards (1UL << 0)
 #define  NSDataSearchAnchored (1UL << 1)
@@ -41,6 +40,9 @@ typedef NSUInteger NSDataSearchOptions;
 - (NSNumber *)grabNetworkOrderUINT16atPosition:(NSInteger)pos;
 - (NSNumber *)grabNetworkOrderUINT8atPosition:(NSInteger)pos;
 - (NSData *)grabNDatatPosition:(NSInteger)pos withLength:(NSInteger)len;
+
+- (NSString *)ipv4AddressFromBinary;
+- (NSString *)ipv6AddressFromBinary;
 
 @end
 

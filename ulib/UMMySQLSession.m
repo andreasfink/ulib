@@ -5,8 +5,14 @@
 //  Created by Andreas Fink on 24.10.11.
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
-#import <ulib/ulib.h>
-
+#import <ulib/UMObject.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSMutableString+ulib.h>
+#import <ulib/NSData+ulib.h>
+#import <ulib/NSMutableData+ulib.h>
+#import <ulib/UMAssert.h>
+#import <ulib/UMLogFeed.h>
+#import <ulib/ulib_config.h>
 
 #import <ulib/UMMySQLSession.h>
 
@@ -200,7 +206,7 @@
 
 - (int)errorCheck:(int) state forSql:(NSString *)sql;
 {
-    NSString *s = NULL;
+    NSString *s;
     
 #if !defined(HAVE_MYSQL)
     s = @"CR_UNKNOWN_ERROR";
@@ -208,7 +214,7 @@
 #else
     
 #if defined(CR_ERROR_FIRST)
-	if(state < CR_ERROR_FIRST)
+    if(state < CR_ERROR_FIRST)
     {
         return state;
     }

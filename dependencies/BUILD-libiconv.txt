@@ -1,0 +1,74 @@
+how to build libiconv
+
+
+on a x86_64 system, do
+    mkdir -p ~/REPO
+    cd ~
+    export MACOSX_DEPLOYMENT_TARGET=12.4
+	wget https://mirror.init7.net/gnu/libiconv/libiconv-1.19.tar.gz
+	tar xvzf libiconv-1.19.tar.gz 
+	cd libiconv-1.19
+	CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./configure --enable-static
+	CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make -j20
+	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make install
+	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make DESTDIR=~/REPO/libiconv-1.19-x86_64 install
+	
+
+then go to ~/REPO
+
+    cd ~/REPO
+    tar -cvzf libiconv-x86_64.tar.gz libiconv-x86_64
+
+copy the file to your arm64 system and untar it in ~/REPO/
+
+    cd ~/REPO
+    sudo tar -xvzf  libiconv-x86_64.tar.gz
+    
+
+Now build the arm64 version
+
+    cd ~
+    export MACOSX_DEPLOYMENT_TARGET=12.4
+	wget https://mirror.init7.net/gnu/libiconv/libiconv-1.19.tar.gz
+	tar xvzf libiconv-1.19.tar.gz 
+	cd libiconv-1.19
+	CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 ./configure --enable-static
+	CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make -j20
+	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make install
+	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make DESTDIR=~/REPO/libiconv-1.19-arm64 install
+	sudo CC=clang CXX=clang++ MACOSX_DEPLOYMENT_TARGET=12.4 make DESTDIR=~/REPO/libiconv-1.19 install
+
+ 
+ Now merge the files
+ 
+    cd ~/REPO/libiconv/usr/local/lib/
+    
+    for X in libiconv.2.dylib libcharset.1.dylib
+    do
+        sudo lipo -arch x86_64 ~/REPO/libiconv-x86_64/usr/local/lib/${X}  \
+                  -arch arm64 ~/REPO/libiconv-arm64/usr/local/lib/${X} \
+                  -create -output ~/REPO/libiconv/usr/local/lib/${X}
+    done
+
+Now add a pkgconfig file manually
+
+	mkdir -p ~/REPO/libiconv-1.19/usr/local/lib/pkgconfig
+	F=~/REPO/libiconv-1.19/usr/local/lib/pkgconfig/libiconv.pc 
+	echo '# pkg-config source file' > $F
+	echo 'prefix=/usr/local' >> $F
+	echo 'exec_prefix=${prefix}' >> $F
+	echo 'libdir=${exec_prefix}/lib' >> $F
+	echo 'includedir=${prefix}/include' >> $F
+	echo '' >> $F
+	echo 'Cflags: -I${includedir}' >> $F
+	echo 'Libs: -L${libdir} -liconv' >> $F
+	echo '' >> $F
+	echo 'Name: libiconv' >> $F
+	echo 'Description: libiconv' >> $F
+	echo 'Version: 1.19.0' >> $F
+
+Now build a package
+
+    cd ~/REPO/
+    pkgbuild --root libiconv-1.19  --ownership recommended --install-location / --version "1.19" --identifier <identifier>  "libiconv-1.19.pkg"
+    codesign -s <signature>  libiconv-1.19.0.pkg

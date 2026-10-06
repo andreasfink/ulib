@@ -27,6 +27,7 @@
 #import <ulib/UMRpcMessageType.h>
 #import <ulib/UMRpcFlag.h>
 #import <ulib/UMRpcMessageDecoder.h>
+#include <unistd.h>
 
 @implementation UMRpcSession
 

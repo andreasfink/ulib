@@ -62,6 +62,8 @@
 + (uint32_t) random;
 
 + (NSInteger)intergerValueSupportingHexFromString:(NSString *)str;
++ (NSString *)sqlEscaped:(NSString *)in;
+
 @end
 
 NSString *UMBacktrace(void **stack_frames, size_t size);

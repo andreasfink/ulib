@@ -32,52 +32,52 @@ typedef enum idle_status_T
 
 @interface UMDbPool : UMObject
 {
-    NSString        *version;
-    NSString        *poolName;
-    UMQueueSingle         *sessionsAvailable;
-    UMQueueSingle         *sessionsDisconnected;
-    UMQueueSingle         *sessionsInUse;
+    NSString        *_version;
+    NSString        *_poolName;
+    UMQueueSingle   *_sessionsAvailable;
+    UMQueueSingle   *_sessionsDisconnected;
+    UMQueueSingle   *_sessionsInUse;
 
-    NSString        *hostName;
-    NSString        *hostAddr;
-    int             port;
-    NSString        *dbName;
-    NSString        *user;
-    NSString        *pass;
-    NSString        *options;
-    NSString        *socket;
-    UMDbDriverType  dbDriverType;
-    UMDbStorageType dbStorageType;
-    int             minSessions;
-    int             maxSessions;
-    int             waitTimeout1;
-    int             waitTimeout2;
-    int             wait1count;
-    int             wait2count;
+    NSString        *_hostName;
+    NSString        *_hostAddr;
+    int             _port;
+    NSString        *_dbName;
+    NSString        *_user;
+    NSString        *_pass;
+    NSString        *_options;
+    NSString        *_socket;
+    UMDbDriverType  _dbDriverType;
+    UMDbStorageType _dbStorageType;
+    int             _minSessions;
+    int             _maxSessions;
+    int             _waitTimeout1;
+    int             _waitTimeout2;
+    int             _wait1count;
+    int             _wait2count;
  
-    UMThroughputCounter   *tcAllQueries;
-    UMThroughputCounter  *tcSelects;
-    UMThroughputCounter  *tcInserts;
-    UMThroughputCounter  *tcUpdates;
-    UMThroughputCounter  *tcDeletes;
-    UMThroughputCounter  *tcGets;
-    UMThroughputCounter  *tcSets;
-    UMThroughputCounter  *tcRedisUpdates;
-    UMThroughputCounter  *tcDels;
+    UMThroughputCounter   *_tcAllQueries;
+    UMThroughputCounter  *_tcSelects;
+    UMThroughputCounter  *_tcInserts;
+    UMThroughputCounter  *_tcUpdates;
+    UMThroughputCounter  *_tcDeletes;
+    UMThroughputCounter  *_tcGets;
+    UMThroughputCounter  *_tcSets;
+    UMThroughputCounter  *_tcRedisUpdates;
+    UMThroughputCounter  *_tcDels;
 
-    UMAverageDelay      *delayAllQueries;
-    UMAverageDelay      *delaySelects;
-    UMAverageDelay      *delayInserts;
-    UMAverageDelay      *delayUpdates;
-    UMAverageDelay      *delayDeletes;
-    UMAverageDelay      *delayGets;
-    UMAverageDelay      *delaySets;
-    UMAverageDelay      *delayRedisUpdates;
-    UMAverageDelay      *delayDels;
+    UMAverageDelay      *_delayAllQueries;
+    UMAverageDelay      *_delaySelects;
+    UMAverageDelay      *_delayInserts;
+    UMAverageDelay      *_delayUpdates;
+    UMAverageDelay      *_delayDeletes;
+    UMAverageDelay      *_delayGets;
+    UMAverageDelay      *_delaySets;
+    UMAverageDelay      *_delayRedisUpdates;
+    UMAverageDelay      *_delayDels;
 
-    idleStatus           idleTaskStatus;
-    UMSleeper           *poolSleeper;
-    UMMutex *_poolLock;
+    idleStatus          _idleTaskStatus;
+    UMSleeper           *_poolSleeper;
+    UMMutex             *_poolLock;
 }
 
 @property(readwrite,strong)    UMThroughputCounter   *tcAllQueries;

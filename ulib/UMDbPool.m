@@ -5,7 +5,15 @@
 //  Created by Andreas Fink on 24.10.11.
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
-#import <ulib/ulib.h>
+#import <ulib/UMObject.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSMutableString+ulib.h>
+#import <ulib/NSData+ulib.h>
+#import <ulib/NSMutableData+ulib.h>
+#import <ulib/UMAssert.h>
+#import <ulib/UMLogFeed.h>
+#import <ulib/UMThreadHelpers.h>
+
 #import <ulib/ulib_config.h>
 #import <ulib/UMDbSession.h>
 #import <ulib/UMDbPool.h>
@@ -36,46 +44,6 @@ void umdbpool_null_session_returned(void)
 
 
 @implementation UMDbPool
-//@synthesize poolLock;
-@synthesize version;
-@synthesize poolName;
-@synthesize hostName;
-@synthesize hostAddr;
-@synthesize port;
-@synthesize dbName;
-@synthesize user;
-@synthesize pass;
-@synthesize options;
-@synthesize dbDriverType;
-@synthesize dbStorageType;
-@synthesize minSessions;
-@synthesize maxSessions;
-@synthesize waitTimeout1;
-@synthesize waitTimeout2;
-@synthesize wait1count;
-@synthesize wait2count;
-@synthesize socket;
-
-@synthesize tcAllQueries;
-@synthesize tcSelects;
-@synthesize tcInserts;
-@synthesize tcUpdates;
-@synthesize tcDeletes;
-@synthesize tcGets;
-@synthesize tcSets;
-@synthesize tcRedisUpdates;
-@synthesize tcDels;
-
-@synthesize delayAllQueries;
-@synthesize delaySelects;
-@synthesize delayInserts;
-@synthesize delayUpdates;
-@synthesize delayDeletes;
-@synthesize delayGets;
-@synthesize delaySets;
-@synthesize delayRedisUpdates;
-@synthesize delayDels;
-@synthesize poolSleeper;
 
 - (UMDbPool *) init
 {
@@ -84,17 +52,17 @@ void umdbpool_null_session_returned(void)
 
 - (NSUInteger)sessionsAvailableCount
 {
-    return [sessionsAvailable count];
+    return [_sessionsAvailable count];
 }
 
 - (NSUInteger)sessionsInUseCount
 {
-    return [sessionsInUse count];
+    return [_sessionsInUse count];
 }
 
 - (NSUInteger)sessionsDisconnectedCount
 {
-    return [sessionsDisconnected count];
+    return [_sessionsDisconnected count];
 }
 
 
@@ -109,38 +77,38 @@ void umdbpool_null_session_returned(void)
     if(self)
     {
         _logFeed = logFeed;
-        sessionsAvailable       = [[UMQueueSingle alloc]init];
-        sessionsInUse           = [[UMQueueSingle alloc]init];
-        sessionsDisconnected    = [[UMQueueSingle alloc]init];
-        waitTimeout1            = 2;
-        idleTaskStatus          = idleStatus_stopped;
+        _sessionsAvailable       = [[UMQueueSingle alloc]init];
+        _sessionsInUse           = [[UMQueueSingle alloc]init];
+        _sessionsDisconnected    = [[UMQueueSingle alloc]init];
+        _waitTimeout1            = 2;
+        _idleTaskStatus          = idleStatus_stopped;
         _poolLock = [[UMMutex alloc]initWithName:@"db-pool-lock"];
 
-        self.tcAllQueries = [[UMThroughputCounter alloc]init];
-        self.tcSelects = [[UMThroughputCounter alloc]init];
-        self.tcInserts = [[UMThroughputCounter alloc]init];
-        self.tcUpdates = [[UMThroughputCounter alloc]init];
-        self.tcDeletes = [[UMThroughputCounter alloc]init];
-        self.tcGets    = [[UMThroughputCounter alloc]init];
-        self.tcSets    = [[UMThroughputCounter alloc]init];
-        self.tcRedisUpdates = [[UMThroughputCounter alloc]init];
-        self.tcDels = [[UMThroughputCounter alloc]init];
+        _tcAllQueries = [[UMThroughputCounter alloc]init];
+        _tcSelects = [[UMThroughputCounter alloc]init];
+        _tcInserts = [[UMThroughputCounter alloc]init];
+        _tcUpdates = [[UMThroughputCounter alloc]init];
+        _tcDeletes = [[UMThroughputCounter alloc]init];
+        _tcGets    = [[UMThroughputCounter alloc]init];
+        _tcSets    = [[UMThroughputCounter alloc]init];
+        _tcRedisUpdates = [[UMThroughputCounter alloc]init];
+        _tcDels = [[UMThroughputCounter alloc]init];
         
-        self.delayAllQueries = [[UMAverageDelay alloc]init];
-        self.delaySelects = [[UMAverageDelay alloc]init];
-        self.delayInserts = [[UMAverageDelay alloc]init];
-        self.delayUpdates = [[UMAverageDelay alloc]init];
-        self.delayDeletes = [[UMAverageDelay alloc]init];
-        self.delayGets = [[UMAverageDelay alloc]init];
-        self.delaySets = [[UMAverageDelay alloc]init];
-        self.delayRedisUpdates = [[UMAverageDelay alloc]init];
-        self.delayDels = [[UMAverageDelay alloc]init];
-        self.poolSleeper =[[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
-        [self.poolSleeper prepare];
-        self.waitTimeout2 = 30;
-        self.waitTimeout1 = 3;
-        self.minSessions = 3;
-        self.maxSessions = 20;
+        _delayAllQueries = [[UMAverageDelay alloc]init];
+        _delaySelects = [[UMAverageDelay alloc]init];
+        _delayInserts = [[UMAverageDelay alloc]init];
+        _delayUpdates = [[UMAverageDelay alloc]init];
+        _delayDeletes = [[UMAverageDelay alloc]init];
+        _delayGets = [[UMAverageDelay alloc]init];
+        _delaySets = [[UMAverageDelay alloc]init];
+        _delayRedisUpdates = [[UMAverageDelay alloc]init];
+        _delayDels = [[UMAverageDelay alloc]init];
+        _poolSleeper =[[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
+        [_poolSleeper prepare];
+        _waitTimeout2 = 30;
+        _waitTimeout1 = 3;
+        _minSessions = 3;
+        _maxSessions = 20;
 
         if(config!=NULL)
         {
@@ -151,127 +119,102 @@ void umdbpool_null_session_returned(void)
                     return NULL;
                 }
             }
-            
-            if(config[@"version"])
-            {
-                self.version = [config[@"version"] stringValue];
+#define SET_STRING(config,var,name) \
+            if(config[name]) \
+            { \
+                id val = config[name]; \
+                if([val isKindOfClass:[NSString class]]) \
+                { \
+                    var = val; \
+                } \
+                else \
+                { \
+                    var = [val stringValue]; \
+                } \
             }
-            if(config[@"name"])
-            {
-                self.poolName = [config[@"name"] stringValue];
+#define SET_INTEGER(config,var,name) \
+            if(config[name]) \
+            { \
+                id val = config[name]; \
+                if([val isKindOfClass:[NSString class]]) \
+                { \
+                    var = (int)[val integerValue]; \
+                } \
+                if([val isKindOfClass:[NSNumber class]]) \
+                { \
+                    var = (int)[val integerValue]; \
+                } \
             }
+
+            SET_STRING(config,_version,@"version");
+            SET_STRING(config,_poolName,@"name");
+            SET_STRING(config,_hostName,@"host");
+            SET_STRING(config,_dbName,@"database-name");
             
-            if(config[@"host"])
-            {
-                self.hostName = [config[@"host"] stringValue];
-            }
+            NSString *driverTypeString;
+            SET_STRING(config,driverTypeString,@"driver");
             
-            if(config[@"database-name"])
-            {
-                self.dbName = [config[@"database-name"] stringValue];
-            }
-            
-            NSString *driverTypeString = [config[@"driver"] stringValue];
             if([driverTypeString caseInsensitiveCompare:@"mysql"]==NSOrderedSame)
             {
-                self.dbDriverType = UMDBDRIVER_MYSQL;
+                _dbDriverType = UMDBDRIVER_MYSQL;
             }
             else  if([driverTypeString caseInsensitiveCompare:@"pgsql"]==NSOrderedSame)
             {
-                self.dbDriverType = UMDBDRIVER_PGSQL;
+                _dbDriverType = UMDBDRIVER_PGSQL;
             }
             else  if([driverTypeString caseInsensitiveCompare:@"sqlite"]==NSOrderedSame)
             {
-                self.dbDriverType = UMDBDRIVER_SQLITE;
+                _dbDriverType = UMDBDRIVER_SQLITE;
             }
             else  if([driverTypeString caseInsensitiveCompare:@"redis"]==NSOrderedSame)
             {
-                self.dbDriverType = UMDBDRIVER_REDIS;
+                _dbDriverType = UMDBDRIVER_REDIS;
             }
             else  if([driverTypeString caseInsensitiveCompare:@"file"]==NSOrderedSame)
             {
-                self.dbDriverType = UMDBDRIVER_FILE;
+                _dbDriverType = UMDBDRIVER_FILE;
             }
             else
             {
                 UMAssert(0,@"Unknown driver type %@",driverTypeString);
             }
-            
-            NSString *storageTypeString = [config[@"storage-type"] stringValue];
+                        
+            NSString *storageTypeString;
+            SET_STRING(config,storageTypeString,@"storage-type");
             if([storageTypeString isEqualToString:@"json"])
             {
-                self.dbStorageType = UMDBSTORAGE_JSON;
+                _dbStorageType = UMDBSTORAGE_JSON;
             }
             else  if([storageTypeString isEqualToString:@"hash"])
             {
-                self.dbStorageType = UMDBSTORAGE_HASH;
+                _dbStorageType = UMDBSTORAGE_HASH;
             }
             else
             {
-                self.dbStorageType = UMDBSTORAGE_JSON;
+                _dbStorageType = UMDBSTORAGE_JSON;
             }
             
-            NSString *u = config[@"user"];
-            if(u!= NULL)
-            {
-                self.user = u;
-            }
+            SET_STRING(config,_user,@"user");
+            SET_STRING(config,_pass,@"pass");
+            SET_INTEGER(config,_port,@"port");
+            SET_INTEGER(config,_minSessions,@"min-sessions");
+            SET_INTEGER(config,_maxSessions,@"max-sessions");
+            SET_STRING(config,_socket,@"socket");
+
+            NSString *pingString;
             
-            NSString *p = [config[@"pass"] stringValue];
-            if(p!= NULL)
-            {
-                self.pass = p;
-            }
-            NSString *portString = [config[@"port"] stringValue];
-            if(portString !=NULL)
-            {
-                self.port = (int)[portString integerValue];
-            }
-            id min = config[@"min-sessions"];
-            if(min !=NULL)
-            {
-                if([min isKindOfClass:[NSString class]])
-                {
-                    NSString *s = (NSString *)min;
-                    self.minSessions = (int)[s intValue];
-                }
-                else if ([min isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *n = (NSNumber *)min;
-                    self.minSessions = (int)[n intValue];
-                }
-            }
-            id max = config[@"max-sessions"];
-            if(max !=NULL)
-            {
-                if([max isKindOfClass:[NSString class]])
-                {
-                    NSString *s = (NSString *)max;
-                    self.maxSessions = (int)[s intValue];
-                }
-                else if ([max isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *n = (NSNumber *)max;
-                    self.maxSessions = (int)[n intValue];
-                }
-            }
-            NSString *s = [config[@"socket"] stringValue];
-            if(s!= NULL)
-            {
-                self.socket = s;
-            }
-            NSString *pingString = [config[@"ping-interval"] stringValue];
+            SET_STRING(config,pingString,@"ping-interval");
             if([pingString length]>0)
             {
-                self.waitTimeout2 = (int)[pingString integerValue];
+                _waitTimeout2 = (int)[pingString integerValue];
                 if(self.waitTimeout2 < 15)
                 {
-                    self.waitTimeout2 = 15;
+                    _waitTimeout2 = 15;
                 }
             }
             else
             {
-                self.waitTimeout2 = 30;
+                _waitTimeout2 = 30;
             }
             [self startSessions];
             [self startIdler];
@@ -282,25 +225,25 @@ void umdbpool_null_session_returned(void)
 
 - (void)dealloc
 {
-    dbDriverType = UMDBDRIVER_NULL;
+    _dbDriverType = UMDBDRIVER_NULL;
     [self stopIdler];
-    poolSleeper = NULL;
+    _poolSleeper = NULL;
 }
 
 - (void)startIdler
 {
-    if(idleTaskStatus == idleStatus_stopped)
+    if(_idleTaskStatus == idleStatus_stopped)
     {
-        idleTaskStatus = idleStatus_starting;
+        _idleTaskStatus = idleStatus_starting;
         [self performSelectorInBackground:@selector(idler:) withObject:self];
         int i=0;
-        while((idleTaskStatus != idleStatus_running) && (i++ <2000))
+        while((_idleTaskStatus != idleStatus_running) && (i++ <2000))
         {
             usleep(1000);
         }
         if(i>=2000)
         {
-            idleTaskStatus = idleStatus_stopped;
+            _idleTaskStatus = idleStatus_stopped;
         }
     }
 }
@@ -308,16 +251,16 @@ void umdbpool_null_session_returned(void)
 
 - (void)stopIdler
 {
-    if(idleTaskStatus != idleStatus_stopped)
+    if(_idleTaskStatus != idleStatus_stopped)
     {
-        idleTaskStatus = idleStatus_terminating;
+        _idleTaskStatus = idleStatus_terminating;
         int i = 0;
-        [poolSleeper wakeUp];
-        while ((idleTaskStatus != idleStatus_stopped) && (i++ <2000))
+        [_poolSleeper wakeUp];
+        while ((_idleTaskStatus != idleStatus_stopped) && (i++ <2000))
         {
             usleep(1000);
         }
-        idleTaskStatus = idleStatus_stopped;
+        _idleTaskStatus = idleStatus_stopped;
     }
 }
 
@@ -329,13 +272,13 @@ void umdbpool_null_session_returned(void)
 
     @autoreleasepool
     {
-        NSString *msg = [NSString stringWithFormat:@"starting idle task for database pool %@", poolName];
+        NSString *msg = [NSString stringWithFormat:@"starting idle task for database pool %@", _poolName];
         [self.logFeed info:0 inSubsection:@"database" withText:msg];
-        idleTaskStatus = idleStatus_running;
+        _idleTaskStatus = idleStatus_running;
         
-        while(idleTaskStatus==idleStatus_running)
+        while(_idleTaskStatus==idleStatus_running)
         {
-            UMSleeper_Signal ret = [poolSleeper sleep:(1000000 * self.waitTimeout2)];
+            UMSleeper_Signal ret = [_poolSleeper sleep:(1000000 * self.waitTimeout2)];
             if(ret == 0)
             {
                 [self idleTask];
@@ -345,9 +288,9 @@ void umdbpool_null_session_returned(void)
                 break;
             }
         }
-        msg = [NSString stringWithFormat:@"terminating idle task for database pool %@", poolName];
+        msg = [NSString stringWithFormat:@"terminating idle task for database pool %@", _poolName];
         [self.logFeed info:0 inSubsection:@"database" withText:msg];
-        idleTaskStatus = idleStatus_stopped;
+        _idleTaskStatus = idleStatus_stopped;
     }
 }
 
@@ -371,18 +314,18 @@ void umdbpool_null_session_returned(void)
         UMDbSession *result = nil;
         BOOL isConnected = NO;
         
-        long len = [sessionsDisconnected count];
+        long len = [_sessionsDisconnected count];
         while(len--)
         {
-            result = [sessionsDisconnected getFirst];
+            result = [_sessionsDisconnected getFirst];
             isConnected = [result isConnected];
             if (isConnected)
             {
-                [sessionsInUse append:result];
+                [_sessionsInUse append:result];
             }
             else
             {
-                [sessionsDisconnected append:result];
+                [_sessionsDisconnected append:result];
             }
         }
     }
@@ -401,21 +344,21 @@ void umdbpool_null_session_returned(void)
         UMDbSession *result = nil;
         BOOL isConnected = NO;
         
-        long len = [sessionsAvailable count];
+        long len = [_sessionsAvailable count];
         
         while (len--)
         {
-            result = [sessionsAvailable getFirst];
+            result = [_sessionsAvailable getFirst];
             if(result)
             {
                 isConnected = [result isConnected];
                 if (!isConnected)
                 {
-                    [sessionsDisconnected append:result];
+                    [_sessionsDisconnected append:result];
                 }
                 else
                 {
-                    [sessionsAvailable append:result];
+                    [_sessionsAvailable append:result];
                 }
             }
         }
@@ -434,18 +377,18 @@ void umdbpool_null_session_returned(void)
     {
         UMDbSession *s = nil;
 
-        long len = [sessionsAvailable count];
+        long len = [_sessionsAvailable count];
         while (len-- > 0)
         {
-            s = [sessionsAvailable getFirst];
+            s = [_sessionsAvailable getFirst];
             BOOL success = [s ping];
             if (!success)
             {
-                [sessionsDisconnected append:s];
+                [_sessionsDisconnected append:s];
             }
             else
             {
-                [sessionsAvailable append:s];
+                [_sessionsAvailable append:s];
             }
         }
     }
@@ -464,19 +407,19 @@ void umdbpool_null_session_returned(void)
     {
         
         UMDbSession *s = nil;
-        long len = [sessionsDisconnected count];
+        long len = [_sessionsDisconnected count];
         
         while (len-- > 0)
         {
-            s = [sessionsDisconnected getFirst];
+            s = [_sessionsDisconnected getFirst];
             BOOL success = [s ping];
             if (success)
             {
-                [sessionsAvailable append:s];
+                [_sessionsAvailable append:s];
             }
             else
             {
-                [sessionsDisconnected append:s];
+                [_sessionsDisconnected append:s];
             }
         }
     }
@@ -493,7 +436,7 @@ void umdbpool_null_session_returned(void)
     @try
     {
         UMDbSession *session = NULL;
-        switch (dbDriverType)
+        switch (_dbDriverType)
         {
 #ifdef HAVE_MYSQL
             case UMDBDRIVER_MYSQL:
@@ -551,8 +494,8 @@ void umdbpool_null_session_returned(void)
         ummutex_lock(_poolLock);
         if(self.sessionsAvailableCount>0)
         {
-            result = [sessionsAvailable getFirst];
-            [sessionsInUse append:result];
+            result = [_sessionsAvailable getFirst];
+            [_sessionsInUse append:result];
             endNow = YES;
         }
         else
@@ -564,7 +507,7 @@ void umdbpool_null_session_returned(void)
                 if(result)
                 {
                     NSAssert(result.pool==self,@"Ouch session without proper assigned pool");
-                    [sessionsInUse append:result];
+                    [_sessionsInUse append:result];
                     endNow = YES;
                 }
             }
@@ -580,7 +523,7 @@ void umdbpool_null_session_returned(void)
         {
             time(&now);
             /* waitTimeout2 is abslute timeout */
-            if( (now - start) > waitTimeout2)
+            if( (now - start) > _waitTimeout2)
             {
                 wait2hit=YES;
                 endNow = YES;
@@ -589,7 +532,7 @@ void umdbpool_null_session_returned(void)
             {
                 UMSleeper   *sleeper = [[UMSleeper alloc]initFromFile:__FILE__ line:__LINE__ function:__func__];
                 [sleeper prepare];
-                if((now - start) <= waitTimeout1)
+                if((now - start) <= _waitTimeout1)
                 {
                     long long msdelay = random() % 50000 + 100000;/* sleep something like 100ms */
                     UMSleeper_Signal ret = [sleeper sleep:msdelay];
@@ -618,11 +561,11 @@ void umdbpool_null_session_returned(void)
         [self timeoutWaitingForSessions];
         if(wait2hit)
         {
-            wait2count++;
+            _wait2count++;
         }
         else if(wait1hit)
         {
-            wait1count++;
+            _wait1count++;
         }
         umdbpool_null_session_returned();
     }
@@ -653,9 +596,9 @@ void umdbpool_null_session_returned(void)
     if(session)
     {
         ummutex_lock(_poolLock);
-        [sessionsInUse removeObject:session];
+        [_sessionsInUse removeObject:session];
         [session setUsedFrom:file line:line func:func];
-        [sessionsAvailable append:session];
+        [_sessionsAvailable append:session];
         ummutex_unlock(_poolLock);
 
     }
@@ -676,11 +619,11 @@ void umdbpool_null_session_returned(void)
 - (void) startSessions
 {
     ummutex_lock(_poolLock);
-    for (int i=0;i<minSessions;i++)
+    for (int i=0;i<_minSessions;i++)
     {
         UMDbSession *session = [self newSession];
         session.logFeed = _logFeed;
-        [sessionsAvailable append:session];
+        [_sessionsAvailable append:session];
     }
     ummutex_unlock(_poolLock);
 }
@@ -688,74 +631,74 @@ void umdbpool_null_session_returned(void)
 - (void) stopSessions
 {
     ummutex_lock(_poolLock);
-    UMDbSession *session = [sessionsInUse getFirst];
+    UMDbSession *session = [_sessionsInUse getFirst];
     while(session)
     {
         [session disconnect];
-        session = [sessionsInUse getFirst];
+        session = [_sessionsInUse getFirst];
     }
 
-    session = [sessionsAvailable getFirst];
+    session = [_sessionsAvailable getFirst];
     while(session)
     {
         [session disconnect];
-        session = [sessionsAvailable getFirst];
+        session = [_sessionsAvailable getFirst];
     }
     ummutex_unlock(_poolLock);
 }
 
 - (void) removeSessions
 {
-    sessionsInUse = [[UMQueueSingle alloc]init];
-    sessionsAvailable = [[UMQueueSingle alloc]init];
+    _sessionsInUse = [[UMQueueSingle alloc]init];
+    _sessionsAvailable = [[UMQueueSingle alloc]init];
 }
 
 
 - (NSUInteger)inUseSessionsCount
 {
-    return [sessionsInUse count];
+    return [_sessionsInUse count];
 }
 
 - (NSUInteger)availableSessionsCount
 {
-    return  [sessionsAvailable count];
+    return  [_sessionsAvailable count];
 }
 
 - (NSUInteger)disconnectedSessionsCount
 {
-    return [sessionsDisconnected count];
+    return [_sessionsDisconnected count];
 }
 
 
 - (double) queriesPerSec:(int)timespan
 {
-    return [tcAllQueries getSpeedForSeconds:timespan];
+    return [_tcAllQueries getSpeedForSeconds:timespan];
 }
 
 - (double) selectQueriesPerSec:(int)timespan
 {
-    return [tcSelects getSpeedForSeconds:timespan];
+    return [_tcSelects getSpeedForSeconds:timespan];
 }
 
 - (double) insertQueriesPerSec:(int)timespan
 {
-    return [tcInserts getSpeedForSeconds:timespan];
+    return [_tcInserts getSpeedForSeconds:timespan];
 }
 
 - (double) updateQueriesPerSec:(int)timespan
 {
-    return [tcUpdates getSpeedForSeconds:timespan];
+    return [_tcUpdates getSpeedForSeconds:timespan];
 }
 
 - (double) deleteQueriesPerSec:(int)timespan
 {
-    return [tcDeletes getSpeedForSeconds:timespan];
+    return [_tcDeletes getSpeedForSeconds:timespan];
 }
 
 - (void) addStatDelay:(double)delay query:(UMDbQueryType)type table:(UMDbTable *)table
 {
     NSNumber *nr = @(delay);
-    [delayAllQueries appendNumber:nr];
+    [_delayAllQueries appendNumber:nr];
     switch(type)
     {
         case    UMDBQUERYTYPE_SELECT:
@@ -763,38 +706,38 @@ void umdbpool_null_session_returned(void)
         case    UMDBQUERYTYPE_SELECT_BY_KEY_LIKE:
         case    UMDBQUERYTYPE_SELECT_BY_KEY_FROM_LIST:
         case    UMDBQUERYTYPE_SELECT_LIST_BY_KEY_LIKE:
-            [delaySelects appendNumber:nr];
+            [_delaySelects appendNumber:nr];
             break;
         case    UMDBQUERYTYPE_INSERT:
         case    UMDBQUERYTYPE_INSERT_BY_KEY:
         case    UMDBQUERYTYPE_INSERT_BY_KEY_TO_LIST:
-            [delayInserts appendNumber:nr];
+            [_delayInserts appendNumber:nr];
             break;
         case    UMDBQUERYTYPE_UPDATE:
         case    UMDBQUERYTYPE_UPDATE_BY_KEY:
         case    UMDBQUERYTYPE_INCREASE:
         case    UMDBQUERYTYPE_INCREASE_BY_KEY:
-            [delayUpdates appendNumber:nr];
+            [_delayUpdates appendNumber:nr];
             break;
         case    UMDBQUERYTYPE_DELETE:
         case    UMDBQUERYTYPE_DELETE_BY_KEY:
         case    UMDBQUERYTYPE_DELETE_IN_LIST_BY_KEY_AND_VALUE:
         case    UMDBQUERYTYPE_EXPIRE_KEY:
-            [delayDeletes appendNumber:nr];
+            [_delayDeletes appendNumber:nr];
             break;
         case    UMREDISTYPE_GET:
         case    UMREDISTYPE_HGET:
-            [delayGets appendNumber:nr];
+            [_delayGets appendNumber:nr];
             break;
         case    UMREDISTYPE_SET:
         case    UMREDISTYPE_HSET:
-            [delaySets appendNumber:nr];
+            [_delaySets appendNumber:nr];
             break;
         case    UMREDISTYPE_UPDATE:
-            [delayRedisUpdates appendNumber:nr];
+            [_delayRedisUpdates appendNumber:nr];
             break;
         case    UMREDISTYPE_DEL:
-            [delayDels appendNumber:nr];
+            [_delayDels appendNumber:nr];
             break;
         default:
             break;
@@ -808,43 +751,43 @@ void umdbpool_null_session_returned(void)
 
 - (void)increaseCountersForType:(UMDbQueryType)type table:(UMDbTable *)table
 {
-    [tcAllQueries increase];
+    [_tcAllQueries increase];
     switch(type)
     {
         case    UMDBQUERYTYPE_SELECT:
         case    UMDBQUERYTYPE_SELECT_BY_KEY:
-            [tcSelects increase];
+            [_tcSelects increase];
             break;
         case    UMDBQUERYTYPE_INSERT:
         case    UMDBQUERYTYPE_INSERT_BY_KEY:
         case    UMDBQUERYTYPE_INSERT_BY_KEY_TO_LIST:
-            [tcInserts increase];
+            [_tcInserts increase];
             break;
         case    UMDBQUERYTYPE_UPDATE:
         case    UMDBQUERYTYPE_UPDATE_BY_KEY:
         case    UMDBQUERYTYPE_INCREASE:
         case    UMDBQUERYTYPE_INCREASE_BY_KEY:
-            [tcUpdates increase];
+            [_tcUpdates increase];
             break;
         case    UMDBQUERYTYPE_DELETE:
         case    UMDBQUERYTYPE_DELETE_BY_KEY:
         case    UMDBQUERYTYPE_DELETE_IN_LIST_BY_KEY_AND_VALUE:
         case    UMDBQUERYTYPE_EXPIRE_KEY:
-            [tcDeletes increase];
+            [_tcDeletes increase];
             break;
         case    UMREDISTYPE_GET:
         case    UMREDISTYPE_HGET:
-            [tcGets increase];
+            [_tcGets increase];
             break;
         case    UMREDISTYPE_SET:
         case    UMREDISTYPE_HSET:
-            [tcSets increase];
+            [_tcSets increase];
             break;
         case    UMREDISTYPE_UPDATE:
-            [tcRedisUpdates increase];
+            [_tcRedisUpdates increase];
             break;
         case    UMREDISTYPE_DEL:
-            [tcDels increase];
+            [_tcDels increase];
             break;
         default:
             break;
@@ -858,43 +801,45 @@ void umdbpool_null_session_returned(void)
 - (NSString *)description
 {
     NSMutableString *s = [NSMutableString stringWithString:[super description]];
-    if (version)
-        [s appendFormat:@"server version for redis hash: %@\n",version];
-    [s appendFormat:@"PoolName: %@\n",poolName];
-    [s appendFormat:@" dbName: %@\n",dbName];
-    [s appendFormat:@" host: %@\n",hostName];
-    [s appendFormat:@" addr: %@\n",hostAddr];
-    [s appendFormat:@" port: %d\n",port];
-    [s appendFormat:@" minSessions: %d\n",minSessions];
-    [s appendFormat:@" maxSessions: %d\n",maxSessions];
-    [s appendFormat:@" waitTimeout1: %d\n",waitTimeout1];
-    [s appendFormat:@" waitTimeout2: %d\n",waitTimeout2];
-    [s appendFormat:@" options: %@\n",options];
-    [s appendFormat:@" socket: %@\n",socket];
-    [s appendFormat:@" driverType: %s\n",dbdrivertype_to_string(dbDriverType)];
-    [s appendFormat:@" storageType: %s\n",dbstoragetype_to_string(dbStorageType)];
-    
-    if(sessionsAvailable)
+    if (_version)
     {
-        [s appendFormat:@" sessionsAvailable: %d items\n",(int)[sessionsAvailable count]];
+        [s appendFormat:@"server version for redis hash: %@\n",_version];
+    }
+    [s appendFormat:@"PoolName: %@\n",_poolName];
+    [s appendFormat:@" dbName: %@\n",_dbName];
+    [s appendFormat:@" host: %@\n",_hostName];
+    [s appendFormat:@" addr: %@\n",_hostAddr];
+    [s appendFormat:@" port: %d\n",_port];
+    [s appendFormat:@" minSessions: %d\n",_minSessions];
+    [s appendFormat:@" maxSessions: %d\n",_maxSessions];
+    [s appendFormat:@" waitTimeout1: %d\n",_waitTimeout1];
+    [s appendFormat:@" waitTimeout2: %d\n",_waitTimeout2];
+    [s appendFormat:@" options: %@\n",_options];
+    [s appendFormat:@" socket: %@\n",_socket];
+    [s appendFormat:@" driverType: %s\n",dbdrivertype_to_string(_dbDriverType)];
+    [s appendFormat:@" storageType: %s\n",dbstoragetype_to_string(_dbStorageType)];
+    
+    if(_sessionsAvailable)
+    {
+        [s appendFormat:@" sessionsAvailable: %d items\n",(int)[_sessionsAvailable count]];
     }
     else
     {
         [s appendFormat:@" sessionsAvailable: NULL\n"];
     }
     
-    if(sessionsInUse)
+    if(_sessionsInUse)
     {
-        [s appendFormat:@" sessionsInUse: %d items\n",(int)[sessionsInUse count]];
+        [s appendFormat:@" sessionsInUse: %d items\n",(int)[_sessionsInUse count]];
     }
     else
     {
         [s appendFormat:@" sessionsInUse: NULL\n"];
     }
     
-    if(sessionsDisconnected)
+    if(_sessionsDisconnected)
     {
-        [s appendFormat:@" sessionsDisconnected: %d items\n",(int)[sessionsDisconnected count]];
+        [s appendFormat:@" sessionsDisconnected: %d items\n",(int)[_sessionsDisconnected count]];
     }
     else
     {
@@ -907,11 +852,11 @@ void umdbpool_null_session_returned(void)
 {
     NSMutableString *s = [NSMutableString stringWithString:[super description]];
     ummutex_lock(_poolLock);
-    UMDbSession *session = [sessionsInUse getFirst];
+    UMDbSession *session = [_sessionsInUse getFirst];
     while(session)
     {
         [s appendFormat:@"%@\n",[session inUseDescription]];
-        [sessionsInUse append:session];
+        [_sessionsInUse append:session];
     }
     ummutex_unlock(_poolLock);
     return s;

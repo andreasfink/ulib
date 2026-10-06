@@ -29,7 +29,7 @@ INCLUDEDIRS= -I. -I @PROJECT_NAME@ -I/usr/local/include
 
 ${LIB}: ${OFILES}
 	./make_version
-	${CC} -shared ${STATIC_LIBS} ${OFILES} -o ${LIB} ${LIBS} ${LDFLAGS}  
+	${CC} -OjbC -shared ${STATIC_LIBS} ${OFILES} -o ${LIB} ${LIBS} ${LDFLAGS}  
 
 ${SLIB}: ${OFILES}
 	@LIBTOOL@ ${SLIB} ${STATIC_LIBS} ${OFILES}

@@ -9,6 +9,8 @@
 #import <pthread.h>
 #include "ulib_config.h"
 #include "dmi_decode_path.h"
+#import <NSString+ulib.h>
+#import <NSData+ulib.h>
 
 #if defined(LINUX)
 
@@ -859,6 +861,26 @@ static NSArray *        _machineCPUIDs = NULL;
             }
         }
         return theArray;
+    }
+}
+
++ (NSInteger)intergerValueSupportingHexFromString:(NSString *)str
+{
+    if(([str hasPrefix:@"0x"]) || ([str hasPrefix:@"0X"]))
+    {
+        NSString *d = [str substringFromIndex:2];
+        NSData *d2 = [d unhexedData];
+        const uint8_t *bytes = d2.bytes;
+        NSInteger n = 0;
+        for(NSInteger i=0; i<d2.length;i++)
+        {
+            n = (n << 8) | bytes[i];
+        }
+        return n;
+    }
+    else
+    {
+        return [str integerValue];
     }
 }
 

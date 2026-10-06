@@ -93,9 +93,16 @@ function append_static_libs_of()
     for L in ${PKG_LIB_NAMES}
     do
     	FILENAME=`echo $L | sed s/$/.a/g | sed s/^-l/lib/g | sed 's/ //g'`
+		LIBNAME=`echo $L | sed s/^-l//g | sed 's/ //g'`
       	if [[ "${PKG_LOCATION}" == "" ]]
     	then
-    		PKG_STATIC="${PKG_STATIC} -l:${FILENAME}"
+			echo "checking for file in /usr/lib/*-linux-gnu/$FILENAME for ${LIBNAME}"
+			if [[ -f /usr/lib/*-linux-gnu/"${FILENAME}" ]]
+			then
+				LDFLAGS="$LDFLAGS -l${LIBNAME}"
+			else		
+   				PKG_STATIC="${PKG_STATIC} -l:${FILENAME}"
+			fi
     	else
             PKG_STATIC="${PKG_STATIC} ${PKG_LOCATION}/${FILENAME}"
         fi
@@ -152,6 +159,7 @@ case "$host" in
 	fi
     CFLAGS="$CFLAGS -fobjc-arc -D_REENTRANT=1 -DDARWIN=1 -Iinclude ${ARCH}"
     #libmariadb needs c++ library on MacOS
+	SPECIAL_PC_LIBS="-lc++"
     LDFLAGS="${LDFLAGS} -F/Library/Frameworks -framework Foundation -framework Security -framework IOKit -lc++"
     BUILD_DIR="build/osx"
     SHARED_LIBRARY_EXTENSION="dylib"
@@ -176,6 +184,7 @@ case "$host" in
     AC_DEFINE(HAVE_OPENSSL)
 	SHARED_LIBRARY_EXTENSION="so"
     DMIDECODE="/usr/sbin/dmidecode"
+	SPECIAL_PC_LIBS=""
 	;;
 
   *-freebsd*)
@@ -611,6 +620,7 @@ AC_SUBST(HAVE_OPENSSL_AS_FRAMEWORK)
 AC_SUBST(HAVE_OPENSSL)
 AC_SUBST(HAVE_COMMON_CRYPTO)
 AC_SUBST(DMIDECODE)
+AC_SUBST(SPECIAL_PC_LIBS)
 
 AC_CONFIG_SECTION([Generating output files])
 AC_CONFIG_FILES([Makefile])

@@ -13,6 +13,7 @@
 #import <ulib/NSDate+ulib.h>
 #import <ulib/UMJsonWriter.h>
 #import <ulib/UMJsonParser.h>
+#import <ulib/UMUtil.h>
 
 #include <openssl/bio.h>
 #include <openssl/evp.h>
@@ -799,7 +800,7 @@ static inline int nibbleToInt(const char a)
     }
     else
     {
-        return [self sqlEscaped];
+        return [UMUtil sqlEscaped:self];
     }
 }
 
@@ -810,7 +811,7 @@ NSString *sqlEscapeNSString(NSString *input)
 {
     if(input)
     {
-        return [input sqlEscaped];
+        return [UMUtil sqlEscaped:input];
     }
     return @"";
 }

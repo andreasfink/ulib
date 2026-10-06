@@ -5,8 +5,14 @@
 //  Created by Andreas Fink on 24.10.11.
 //  Copyright © 2017 Andreas Fink (andreas@fink.org). All rights reserved.
 
-#import <ulib/ulib.h>
-
+#import <ulib/UMObject.h>
+#import <ulib/NSString+ulib.h>
+#import <ulib/NSMutableString+ulib.h>
+#import <ulib/NSData+ulib.h>
+#import <ulib/NSMutableData+ulib.h>
+#import <ulib/UMAssert.h>
+#import <ulib/UMLogFeed.h>
+#import <ulib/ulib_config.h>
 
 #import <ulib/UMMySQLSession.h>
 

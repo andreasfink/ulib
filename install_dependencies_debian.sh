@@ -53,7 +53,7 @@ then
         git clone https://github.com/zeromq/libzmq.git
         cd libzmq
         ./autogen.sh
-        ./confiugre --enable-static --enable-shared
+        CFLAGS=-fPIC ./configure --enable-static --enable-shared
         make -j20
         sudo make install
         popd

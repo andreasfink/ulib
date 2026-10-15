@@ -84,7 +84,7 @@ AC_CONFIG_SECTION([Running system checks])
 AC_CANONICAL_HOST
 
 
-function append_static_libs_of()
+append_static_libs_of()
 {
     PKGNAME=$1
     PKG_LOCATION=`pkg-config --libs-only-L ${PKGNAME} | sed 's/^-L//g' | sed 's/ //g' | sed 's/\/$//g'`
@@ -111,7 +111,7 @@ function append_static_libs_of()
     STATIC_LIBS="${STATIC_LIBS} ${PKG_STATIC}"
 }
 
-function append_static_libs_of_packages()
+append_static_libs_of_packages()
 {
 	STATIC_LIBS=""
 	for p in $1

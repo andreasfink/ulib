@@ -9,4 +9,14 @@
 
 @implementation UMWebObjectTABLE
 
+- (UMWebObjectTABLE *)init
+{
+    self = [super init];
+    if(self)
+    {
+        self.tag = @"table";
+    }
+    return self;
+}
+
 @end

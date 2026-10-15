@@ -170,7 +170,7 @@
 
 - (void)setTag:(NSString *)tag
 {
-    _tag = [tag uppercaseString];
+    _tag = [tag lowercaseString];
 }
 
 - (NSString *)tag

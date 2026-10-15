@@ -9,6 +9,4 @@
 
 @interface UMWebObjectP : UMWebObject
 
-- (UMWebObjectP *)initWithText:(NSString *)text children:(NSArray *)children
-
 @end

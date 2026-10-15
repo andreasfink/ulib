@@ -14,7 +14,7 @@
     self = [super init];
     if(self)
     {
-        self.tag = @"HEAD";
+        self.tag = @"head";
     }
     return self;
 }

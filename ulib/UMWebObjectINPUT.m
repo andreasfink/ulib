@@ -9,4 +9,15 @@
 
 @implementation UMWebObjectINPUT
 
+
+- (UMWebObjectINPUT *)init
+{
+    self = [super init];
+    if(self)
+    {
+        self.tag = @"input";
+    }
+    return self;
+}
+
 @end

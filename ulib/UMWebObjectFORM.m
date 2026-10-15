@@ -9,4 +9,14 @@
 
 @implementation UMWebObjectFORM
 
+- (UMWebObjectFORM *)init
+{
+    self = [super init];
+    if(self)
+    {
+        self.tag = @"form";
+    }
+    return self;
+}
+
 @end

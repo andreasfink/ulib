@@ -10,13 +10,5 @@
 
 @interface UMWebObjectTITLE : UMWebObject
 
-- (UMWebObjectTITLE *)init
-{
-    self = [super init];
-    if(self)
-    {
-        self.tag = @"TITLE";
-    }
-    return self;
-}
+@end
 

@@ -9,4 +9,14 @@
 
 @implementation UMWebObjectA
 
+- (UMWebObjectA *)init
+{
+    self = [super init];
+    if(self)
+    {
+        self.tag = @"a";
+    }
+    return self;
+}
+
 @end

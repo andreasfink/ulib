@@ -9,4 +9,14 @@
 
 @implementation UMWebObjectTD
 
+- (UMWebObjectTD *)init
+{
+    self = [super init];
+    if(self)
+    {
+        self.tag = @"td";
+    }
+    return self;
+}
+
 @end

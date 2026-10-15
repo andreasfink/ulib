@@ -9,4 +9,15 @@
 
 @implementation UMWebObjectIMG
 
+
+- (UMWebObjectIMG *)init
+{
+    self = [super init];
+    if(self)
+    {
+        self.tag = @"img";
+    }
+    return self;
+}
+
 @end

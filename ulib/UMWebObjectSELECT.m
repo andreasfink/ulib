@@ -9,4 +9,14 @@
 
 @implementation UMWebObjectSELECT
 
+- (UMWebObjectSELECT *)init
+{
+    self = [super init];
+    if(self)
+    {
+        self.tag = @"select";
+    }
+    return self;
+}
+
 @end

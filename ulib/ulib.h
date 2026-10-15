@@ -271,7 +271,7 @@ typedef enum
 #import <ulib/UMDbRedisSession.h>
 #import <ulib/UMDbMySqlInProgress.h>
 
-#import <ulib/UMWebObjects.h>
+#import <ulib/UMWebObject_all.h>
 
 
 void ulibdb_startup(void);

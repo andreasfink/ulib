@@ -5,7 +5,7 @@
 //  Created by Andreas Fink on 20.08.2026.
 //
 
-#import <Foundation/Foundation.h>
+#import <ulib/framework.h>
 
 
 @interface UMStdIo : NSObject

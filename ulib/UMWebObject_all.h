@@ -41,7 +41,6 @@
 #import <ulib/UMWebObjectFIGCAPTION.h>
 #import <ulib/UMWebObjectFOOTER.h>
 #import <ulib/UMWebObjectFORM.h>
-#import <ulib/UMWebObjectH.h>
 #import <ulib/UMWebObjectH1.h>
 #import <ulib/UMWebObjectH2.h>
 #import <ulib/UMWebObjectH3.h>
@@ -93,10 +92,12 @@
 #import <ulib/UMWebObjectSECTION.h>
 #import <ulib/UMWebObjectSELECT.h>
 #import <ulib/UMWebObjectSMALL.h>
+#import <ulib/UMWebObjectSOURCE.h>
 #import <ulib/UMWebObjectSPAN.h>
+#import <ulib/UMWebObjectSTRIKE.h>
 #import <ulib/UMWebObjectSTRONG.h>
 #import <ulib/UMWebObjectSTYLE.h>
-#import <ulib/UMWebObjectSUP.h>
+#import <ulib/UMWebObjectSUB.h>
 #import <ulib/UMWebObjectSVG.h>
 #import <ulib/UMWebObjectTABLE.h>
 #import <ulib/UMWebObjectTBODY.h>

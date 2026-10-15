@@ -1,20 +1,20 @@
 //
-//  UMWebObjectSUP.m
+//  UMWebObjectSUB.m
 //  ulib
 //
 //  Created by Andreas Fink on 15.10.2026.
 //
 
-#import "UMWebObjectSUP.h"
+#import "UMWebObjectSUB.h"
 
-@implementation UMWebObjectSUP
+@implementation UMWebObjectSUB
 
-- (UMWebObjectSUP *)init
+- (UMWebObjectSUB *)init
 {
     self = [super init];
     if(self)
     {
-        self.tag = @"sup";
+        self.tag = @"sub";
     }
     return self;
 }

@@ -9,6 +9,11 @@
 
 
 @interface UMWebObjectA : UMWebObject
+{
+    NSString *_href;
+}
+
+@property(readwrite,strong) NSString *href;
 
 @end
 

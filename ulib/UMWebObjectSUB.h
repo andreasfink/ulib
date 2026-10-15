@@ -1,5 +1,5 @@
 //
-//  UMWebObjectSUP.h
+//  UMWebObjectSUB.h
 //  ulib
 //
 //  Created by Andreas Fink on 15.10.2026.
@@ -8,9 +8,7 @@
 #import <ulib/UMWebObject.h>
 
 
-
-@interface UMWebObjectSUP : UMWebObject
+@interface UMWebObjectSUB : UMWebObject
 
 @end
-
 

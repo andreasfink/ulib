@@ -32,6 +32,11 @@
 
 - (NSString *)htmlString:(BOOL)humanReadable ident:(int)ident flags:(UMWebObjectFlags)flags;
 - (void)addChild:(id<UMWebObjectProtocol>)c;
+- (NSArray *)allowedAttributes;
++ (NSArray *)globalAttributes;
+- (UMWebObject *)initWithWebObject:(UMWebObject *)obj;
+
+- (UMWebObject *)parse:(UMWebObject *)object;
 
 @end
 

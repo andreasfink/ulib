@@ -38,6 +38,7 @@
 - (void)addChild:(UMWebObject *)c;
 - (NSArray *)allowedAttributes;
 + (NSArray *)globalAttributes;
+- (void)setAttributeWithoutValue:(NSString *)attribute;
 - (void)setAttribute:(NSString *) attribute value:(NSString *)value;
 - (void)clearAttribute:(NSString *)attribute;
 

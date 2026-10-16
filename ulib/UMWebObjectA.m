@@ -68,7 +68,11 @@
 
 - (void)postprocessAttributes
 {
-    _href = _attributes[@"href"];
+    id var = _attributes[@"href"];
+    if([var isKindOfClass:[NSString class]])
+    {
+        _href = (NSString *)var;
+    }
 }
 
 @end

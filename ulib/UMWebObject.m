@@ -255,6 +255,18 @@
     ];
 }
 
+- (void)setAttributeWithoutValue:(NSString *)attribute
+{
+    if(attribute.length>0)
+    {
+        if(_attributes == NULL)
+        {
+            _attributes = [[UMSynchronizedSortedDictionary alloc]init];
+        }
+        _attributes[attribute] = [NSNull null];
+    }
+}
+
 - (void)setAttribute:(NSString *) attribute value:(NSString *)value
 {
     if(attribute==NULL)

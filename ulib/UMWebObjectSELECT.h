@@ -11,6 +11,10 @@
 
 @interface UMWebObjectSELECT : UMWebObject
 
+- (void)select:(NSString *)value;
+
+- (void)addOptionWithValue:(NSString *)value text:(NSString *)text;
+
 @end
 
 

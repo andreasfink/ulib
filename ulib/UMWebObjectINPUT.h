@@ -13,6 +13,9 @@
 {
     NSString *_name;
 }
+
+- (UMWebObjectINPUT *)initTypeTextWithName:(NSString *)name;
+
 @end
 
 

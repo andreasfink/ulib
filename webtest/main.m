@@ -31,17 +31,43 @@ int main(int argc, const char * argv[]) {
         [p addText:@"more text"];
 
         [body addChild:p];
-
+        UMWebObjectPlaintext *crlf = [[UMWebObjectPlaintext alloc]initWithString:@"\r\n"];
+        
+        UMWebObjectPRE *pre = [[UMWebObjectPRE alloc]init];
+        [body addChild:pre];
+        
         UMWebObjectFORM *f = [[UMWebObjectFORM alloc]init];
-        UMWebObjectINPUT *i1 = [[UMWebObjectINPUT alloc]init];
+        [pre addChild:f];
+
+        [f addChild:crlf];
+
+        UMWebObjectINPUT *i1 = [[UMWebObjectINPUT alloc]initTypeTextWithName:@"textfield1"];
         [f addChild:i1];
+        [f addChild:crlf];
+
+        UMWebObjectINPUT *i2 = [[UMWebObjectINPUT alloc]init];
+        [i2 setAttribute:@"type" value:@"text"];
+        [i2 setAttribute:@"name" value:@"textfield2"];
+        [i2 setAttribute:@"placeholder" value:@"blabla"];
+        [i2 setAttribute:@"value" value:@"default"];
+        [f addChild:i2];
+        [f addChild:crlf];
+
+        
         UMWebObjectSELECT *select = [[UMWebObjectSELECT alloc]init];
+        [select setAttribute:@"name" value:@"selector1"];
         [select addOptionWithValue:@"option1" text:@"OPTION#1"];
         [select addOptionWithValue:@"option2" text:@"OPTION#2"];
         [select addOptionWithValue:@"option3" text:@"OPTION#3"];
         [select select:@"option2"];
         [f addChild:select];
-        [body addChild:f];
+        [f addChild:crlf];
+
+        UMWebObjectINPUT *i3 = [[UMWebObjectINPUT alloc]init];
+        [i3 setAttribute:@"name" value:@"submit"];
+        [i3 setAttribute:@"value" value:@"Submit"];
+        [f addChild:i3];
+        [f addChild:crlf];
 
         UMWebObjectA *a = [[UMWebObjectA alloc]initWithURL:@"https://example.com"
                                                       text:@"a link"];

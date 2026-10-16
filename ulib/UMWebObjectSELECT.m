@@ -45,4 +45,17 @@
     [self addChild:o];
 }
 
+- (NSString *)htmlString:(BOOL)humanReadable
+                   ident:(int)ident
+                   flags:(UMWebObjectFlags)flags
+{
+    int oldflags = flags;
+    
+    flags = flags & ~UMWebObjectFlag_PRE;
+    NSString *s = [super htmlString:humanReadable
+                              ident:0
+                              flags:flags];
+    flags = oldflags;
+    return s;
+}
 @end

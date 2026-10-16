@@ -17,6 +17,18 @@
     {
         self.tag = @"input";
         _noWrap=YES;
+        _noEndTag=YES;
+    }
+    return self;
+}
+
+- (UMWebObjectINPUT *)initTypeTextWithName:(NSString *)name
+{
+    self = [self init];
+    if(self)
+    {
+        [self setAttribute:@"type" value:@"text"];
+        [self setAttribute:@"name" value:name];
     }
     return self;
 }

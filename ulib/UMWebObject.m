@@ -185,15 +185,18 @@
             flags = flags & ~UMWebObjectFlag_PRE;
         }
     }
-    if((_tag) && (_noEndTag==NO))
+    if(_tag)
     {
-      if((doIdent) && (_noWrap==NO))
+        if((doIdent) && (_noWrap==NO))
         {
             [s appendString:identString];
         }
-        [s appendString:@"</"];
-        [s appendString:_tag];
-        [s appendString:@">"];
+        if(_noEndTag==NO)
+        {
+            [s appendString:@"</"];
+            [s appendString:_tag];
+            [s appendString:@">"];
+        }
         if(doNL)
         {
             [UMWebObject appendLineEndingToMutableString:s];

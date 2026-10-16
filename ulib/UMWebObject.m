@@ -583,6 +583,10 @@
     {
         return [[UMWebObjectSPAN alloc]initWithWebObject:object];
     }
+    else if([tag isEqualToString:@"source"])
+    {
+        return [[UMWebObjectSOURCE alloc]initWithWebObject:object];
+    }
     else if([tag isEqualToString:@"strike"])
     {
         return [[UMWebObjectSTRIKE alloc]initWithWebObject:object];

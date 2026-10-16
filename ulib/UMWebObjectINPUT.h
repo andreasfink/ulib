@@ -10,7 +10,9 @@
 
 
 @interface UMWebObjectINPUT : UMWebObject
-
+{
+    NSString *_name;
+}
 @end
 
 

@@ -32,6 +32,16 @@ int main(int argc, const char * argv[]) {
 
         [body addChild:p];
 
+        UMWebObjectFORM *f = [[UMWebObjectFORM alloc]init];
+        UMWebObjectINPUT *i1 = [[UMWebObjectINPUT alloc]init];
+        [f addChild:i1];
+        UMWebObjectSELECT *select = [[UMWebObjectSELECT alloc]init];
+        [select addOptionWithValue:@"option1" text:@"OPTION#1"];
+        [select addOptionWithValue:@"option2" text:@"OPTION#2"];
+        [select addOptionWithValue:@"option3" text:@"OPTION#3"];
+        [select select:@"option2"];
+        [f addChild:select];
+        [body addChild:f];
 
         UMWebObjectA *a = [[UMWebObjectA alloc]initWithURL:@"https://example.com"
                                                       text:@"a link"];
@@ -44,9 +54,9 @@ int main(int argc, const char * argv[]) {
         
 
         NSString *html = [document htmlString:YES ident:0 flags:0];
-        NSString *html2 = [document htmlString:NO ident:0 flags:0];
+        // NSString *html2 = [document htmlString:NO ident:0 flags:0];
         NSLog(@"HMTL Code:\n%@\n",html);
-        NSLog(@"HMTL Code2:\n%@\n",html2);
+        // NSLog(@"HMTL Code2:\n%@\n",html2);
     }
     return EXIT_SUCCESS;
 }

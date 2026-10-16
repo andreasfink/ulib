@@ -16,6 +16,7 @@
     if(self)
     {
         self.tag = @"input";
+        _noWrap=YES;
     }
     return self;
 }

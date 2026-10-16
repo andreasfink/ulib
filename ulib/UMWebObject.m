@@ -14,16 +14,16 @@
 
 - (UMWebObject *)initWithString:(NSString *)s tag:(NSString *)t children:(NSArray *)c
 {
-    self = [super init];
+    self = [self init];
     if(self)
     {
-        if(s)
-        {
-            _content = s;
-        }
         if(c)
         {
             self.children = c;
+        }
+        if(s)
+        {
+            [self addText:s];
         }
         if(t)
         {
@@ -49,18 +49,21 @@
     return [self initWithString:NULL tag:NULL children:children];
 }
 
-- (void)addChild:(id<UMWebObjectProtocol>)c
+- (void)addChild:(UMWebObject *)c
 {
     if(_children==NULL)
     {
         _children =[[UMSynchronizedArray alloc]init];
     }
     [_children addObject:c];
+    c.rootObject = _rootObject;
+    c.parentObject = _parentObject;
 }
 
-+ (NSString *)identOfSize:(int)size
++ (NSString *)identOfLevel:(int)level
 {
     NSMutableString *s = [[NSMutableString alloc]init];
+    int size = level * 4;
     while(size-- > 0)
     {
         [s appendString:@" "];
@@ -68,9 +71,24 @@
     return s;
 }
 
-- (NSString *)htmlString:(BOOL)humanReadable ident:(int)ident flags:(UMWebObjectFlags)flags
+- (void)prepareAttributes
 {
-    NSString *identString = [UMWebObject identOfSize:ident];
+    /* overload */
+}
+
+- (void)postprocessAttributes
+{
+    /* overload */
+}
+
+
+- (NSString *)htmlString:(BOOL)humanReadable
+                   ident:(int)ident
+                   flags:(UMWebObjectFlags)flags
+{
+    [self prepareAttributes];
+
+    NSString *identString = [UMWebObject identOfLevel:ident];
     NSMutableString *s = [[NSMutableString alloc]init];
     BOOL doIdent = humanReadable;
     BOOL doNL;
@@ -109,14 +127,14 @@
                 [s appendFormat:@" %@",key];
                 if(![value isKindOfClass:[NSNull class]])
                 {
-                    [s appendFormat:@"=%@",value];
+                    [s appendFormat:@"=\"%@\"",value];
                 }
             }
         }
         [s appendString:@">"];
         if((doNL) && (_noWrap==NO))
         {
-            [s appendString:@"\n"];
+            [UMWebObject appendLineEndingToMutableString:s];
         }
     }
     if(_children)
@@ -128,33 +146,48 @@
             preFlagSet=YES;
             flags = flags | UMWebObjectFlag_PRE;
         }
-        for(id<UMWebObjectProtocol> child in _children)
+        BOOL previousPlaintext=NO;
+        for(UMWebObject *child in _children)
         {
-            NSString *childString = [child htmlString:humanReadable ident:ident+4 flags:flags];
+            BOOL isPlaintext = NO;
+            BOOL isBR = NO;
+            /* plaintext objects never end with \n so <br> can be added on the end of the line */
+            /* hence we add it here when the previous object was a plaintext object */
+            if([child isKindOfClass:[UMWebObjectPlaintext class]])
+            {
+                isPlaintext=YES;
+            }
+            if([child isKindOfClass:[UMWebObjectBR class]])
+            {
+                isBR=YES;
+            }
+            NSString *childString = [child htmlString:humanReadable ident:ident+1 flags:flags];
+            if((previousPlaintext) && (humanReadable) && !isBR)
+            {
+                [UMWebObject appendLineEndingToMutableString:s];
+            }
             [s appendString:childString];
+            if(isPlaintext)
+            {
+                previousPlaintext=YES;
+            }
+            else
+            {
+                previousPlaintext = NO;
+            }
+        }
+        if((previousPlaintext) && (humanReadable) && _noWrap==NO)
+        {
+            [UMWebObject appendLineEndingToMutableString:s];
         }
         if(preFlagSet)
         {
             flags = flags & ~UMWebObjectFlag_PRE;
         }
     }
-    if(_content)
+    if((_tag) && (_noEndTag==NO))
     {
-        if((doIdent) && (_noWrap==NO))
-        {
-            NSString *identString2 = [UMWebObject identOfSize:ident+4];
-            [s appendString:identString2];
-        }
-        [s appendString:_content];
-        if((doNL)&& (_noWrap==NO))
-        {
-            [s appendString:@"\n"];
-        }
-
-    }
-    if(_tag)
-    {
-        if((doIdent) && (_noWrap==NO))
+      if((doIdent) && (_noWrap==NO))
         {
             [s appendString:identString];
         }
@@ -163,7 +196,7 @@
         [s appendString:@">"];
         if(doNL)
         {
-            [s appendString:@"\n"];
+            [UMWebObject appendLineEndingToMutableString:s];
         }
     }
     return s;
@@ -188,6 +221,11 @@
 - (void)setChildren:(NSArray *)a
 {
     _children = [[UMSynchronizedArray alloc]initWithArray:a];
+    for(UMWebObject *child in _children)
+    {
+        child.rootObject = _rootObject;
+        child.parentObject = self;
+    }
 }
 
 
@@ -217,13 +255,36 @@
     ];
 }
 
+- (void)setAttribute:(NSString *) attribute value:(NSString *)value
+{
+    if(attribute==NULL)
+    {
+        return;
+    }
+    
+    if(value==NULL)
+    {
+        [self clearAttribute:attribute];
+        return;
+    }
+    if(_attributes == NULL)
+    {
+        _attributes = [[UMSynchronizedSortedDictionary alloc]init];
+    }
+    _attributes[attribute] = value;
+}
+
+- (void)clearAttribute:(NSString *)attribute
+{
+    [_attributes removeObjectForKey:attribute];
+}
+
 - (UMWebObject *)initWithWebObject:(UMWebObject *)obj
 {
     self = [super init];
     if(self)
     {
         self.children   = obj.children;
-        _content        = obj.content;
         _tag            = obj.tag;
         _attributes     = obj.attributes;
         _noWrap         = obj.noWrap;
@@ -676,6 +737,34 @@
         return [[UMWebObjectWBR alloc]initWithWebObject:object];
     }
     return self;
+}
+
+- (NSString *)getAllText
+{
+    NSMutableString *s = [[NSMutableString alloc]init];
+    for(UMWebObject *o in _children)
+    {
+        if([o isKindOfClass:[UMWebObjectPlaintext class]])
+        {
+            UMWebObjectPlaintext *pt = (UMWebObjectPlaintext *)o;
+            [s appendString:pt.text];
+        }
+    }
+    return s;
+}
+
+- (void)addText:(NSString *)str
+{
+    UMWebObjectPlaintext *pt = [[UMWebObjectPlaintext alloc]init];
+    pt.noWrap = _noWrap;
+    pt.text = str;
+    [self addChild:pt];
+}
+
+
++ (void)appendLineEndingToMutableString:(NSMutableString *)s
+{
+    [s appendString:@"\r\n"];
 }
 
 @end

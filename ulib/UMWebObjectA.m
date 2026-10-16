@@ -15,6 +15,18 @@
     if(self)
     {
         self.tag = @"a";
+        _noWrap = YES;
+    }
+    return self;
+}
+
+- (UMWebObjectA *)initWithURL:(NSString *)url text:(NSString *)text;
+{
+    self = [self init];
+    if(self)
+    {
+        _href = url;
+        [self addText:text];
     }
     return self;
 }
@@ -44,6 +56,19 @@
     [a addObject:@"framename"]; // Defines a target to open the linked resource specified in the href attribute.
     [a addObject:@"type"];      // content-type
     return a;
+}
+
+- (void)prepareAttributes
+{
+    if(_href.length > 0)
+    {
+        [self setAttribute:@"href" value:_href];
+    }
+}
+
+- (void)postprocessAttributes
+{
+    _href = _attributes[@"href"];
 }
 
 @end

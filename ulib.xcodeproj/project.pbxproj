@@ -724,6 +724,10 @@
 		A6DEFA0C308109FC00EAC887 /* UMWebObjectTD.h in Headers */ = {isa = PBXBuildFile; fileRef = A6DEFA09308109FC00EAC887 /* UMWebObjectTD.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6DEFA0F30810A0300EAC887 /* UMWebObjectTR.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DEFA0E30810A0300EAC887 /* UMWebObjectTR.m */; };
 		A6DEFA1030810A0300EAC887 /* UMWebObjectTR.h in Headers */ = {isa = PBXBuildFile; fileRef = A6DEFA0D30810A0300EAC887 /* UMWebObjectTR.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6DEFA173081FEDC00EAC887 /* UMWebObjectHTML.h in Headers */ = {isa = PBXBuildFile; fileRef = A6DEFA153081FEDC00EAC887 /* UMWebObjectHTML.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6DEFA183081FEDC00EAC887 /* UMWebObjectHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DEFA163081FEDC00EAC887 /* UMWebObjectHTML.m */; };
+		A6DEFA1B308207DB00EAC887 /* UMWebObjectPlaintext.h in Headers */ = {isa = PBXBuildFile; fileRef = A6DEFA19308207DB00EAC887 /* UMWebObjectPlaintext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6DEFA1C308207DB00EAC887 /* UMWebObjectPlaintext.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DEFA1A308207DB00EAC887 /* UMWebObjectPlaintext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1501,6 +1505,10 @@
 		A6DEFA0A308109FC00EAC887 /* UMWebObjectTD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMWebObjectTD.m; sourceTree = "<group>"; };
 		A6DEFA0D30810A0300EAC887 /* UMWebObjectTR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMWebObjectTR.h; sourceTree = "<group>"; };
 		A6DEFA0E30810A0300EAC887 /* UMWebObjectTR.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMWebObjectTR.m; sourceTree = "<group>"; };
+		A6DEFA153081FEDC00EAC887 /* UMWebObjectHTML.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMWebObjectHTML.h; sourceTree = "<group>"; };
+		A6DEFA163081FEDC00EAC887 /* UMWebObjectHTML.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMWebObjectHTML.m; sourceTree = "<group>"; };
+		A6DEFA19308207DB00EAC887 /* UMWebObjectPlaintext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMWebObjectPlaintext.h; sourceTree = "<group>"; };
+		A6DEFA1A308207DB00EAC887 /* UMWebObjectPlaintext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMWebObjectPlaintext.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -2081,8 +2089,8 @@
 				A683D9732ABD980D00C34D40 /* UMUtil.m */,
 				A683D8562ABD980900C34D40 /* UMUUID.h */,
 				A683D8D02ABD980B00C34D40 /* UMUUID.m */,
-				A6DEF9B03080C75500EAC887 /* UMWebObject.h */,
 				A6C0F88530811C2300D4BC05 /* UMWebObject_all.h */,
+				A6DEF9B03080C75500EAC887 /* UMWebObject.h */,
 				A6DEF9B13080C75500EAC887 /* UMWebObject.m */,
 				A6DEF9F1308109C000EAC887 /* UMWebObjectA.h */,
 				A6DEF9F2308109C000EAC887 /* UMWebObjectA.m */,
@@ -2170,6 +2178,8 @@
 				A6DEF9DA308106E100EAC887 /* UMWebObjectHEAD.m */,
 				A6C0F793308112C000D4BC05 /* UMWebObjectHEADER.h */,
 				A6C0F794308112C000D4BC05 /* UMWebObjectHEADER.m */,
+				A6DEFA153081FEDC00EAC887 /* UMWebObjectHTML.h */,
+				A6DEFA163081FEDC00EAC887 /* UMWebObjectHTML.m */,
 				A6C0F797308112CC00D4BC05 /* UMWebObjectHGROUP.h */,
 				A6C0F798308112CC00D4BC05 /* UMWebObjectHGROUP.m */,
 				A6C0F79B308112DC00D4BC05 /* UMWebObjectHR.h */,
@@ -2303,6 +2313,8 @@
 				A6C0F87E308115AE00D4BC05 /* UMWebObjectVIDEO.m */,
 				A6C0F881308115BB00D4BC05 /* UMWebObjectWBR.h */,
 				A6C0F882308115BB00D4BC05 /* UMWebObjectWBR.m */,
+				A6DEFA19308207DB00EAC887 /* UMWebObjectPlaintext.h */,
+				A6DEFA1A308207DB00EAC887 /* UMWebObjectPlaintext.m */,
 				A683D91E2ABD980C00C34D40 /* UMZMQSocket.h */,
 				A6915F87304D666700B15E34 /* UMZMQSocket.h */,
 				A683D88A2ABD980A00C34D40 /* UMZMQSocket.m */,
@@ -2455,6 +2467,7 @@
 				A6915F7F304D665900B15E34 /* UMRpcCommandHandler.h in Headers */,
 				A6915F80304D665900B15E34 /* UMRpcHandler.h in Headers */,
 				A6915F81304D665900B15E34 /* UMRpcMessage_LoginRequest.h in Headers */,
+				A6DEFA1B308207DB00EAC887 /* UMWebObjectPlaintext.h in Headers */,
 				A6915F82304D665900B15E34 /* UMRpcMessageType.h in Headers */,
 				A6915F83304D665900B15E34 /* UMRpcFlag.h in Headers */,
 				A6DEF9E83081099300EAC887 /* UMWebObjectFORM.h in Headers */,
@@ -2562,6 +2575,7 @@
 				A683D9F32ABD980E00C34D40 /* UMObject.h in Headers */,
 				A6D02DAE2D76C5C100F2C1C4 /* UMDirtyInteger.h in Headers */,
 				A683DA522ABD980E00C34D40 /* UMBackgrounder.h in Headers */,
+				A6DEFA173081FEDC00EAC887 /* UMWebObjectHTML.h in Headers */,
 				A683DAC12ABD980F00C34D40 /* NSMutableData+ulib.h in Headers */,
 				A683DAE02ABD980F00C34D40 /* UMAtomicDate.h in Headers */,
 				A683D9C82ABD980E00C34D40 /* NSData+ulib.h in Headers */,
@@ -2982,6 +2996,7 @@
 				A6C0F7ED308113D900D4BC05 /* UMWebObjectMETA.m in Sources */,
 				A609F7C930517D9D00B6E5B0 /* UMDbStorageType.m in Sources */,
 				A609F7CA30517D9D00B6E5B0 /* UMDbRedisSession.m in Sources */,
+				A6DEFA1C308207DB00EAC887 /* UMWebObjectPlaintext.m in Sources */,
 				A6C0F739308111BB00D4BC05 /* UMWebObjectBUTTON.m in Sources */,
 				A609F7CB30517D9D00B6E5B0 /* UMDbFieldDefinition.m in Sources */,
 				A6C0F7593081120600D4BC05 /* UMWebObjectDATALIST.m in Sources */,
@@ -3131,6 +3146,7 @@
 				A6915FCD304FDE9900B15E34 /* UMSocketSCTPRegistry.m in Sources */,
 				A6915FCE304FDE9900B15E34 /* UMSocketSCTPListener2.m in Sources */,
 				A683DA1F2ABD980E00C34D40 /* UMFileTracker.m in Sources */,
+				A6DEFA183081FEDC00EAC887 /* UMWebObjectHTML.m in Sources */,
 				A6DEF9F7308109C600EAC887 /* UMWebObjectIMG.m in Sources */,
 				A683DAC62ABD980F00C34D40 /* UMObjectStatisticEntry.m in Sources */,
 				A683DA5F2ABD980E00C34D40 /* UMDigitTree.m in Sources */,

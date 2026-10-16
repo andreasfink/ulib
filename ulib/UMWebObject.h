@@ -10,24 +10,24 @@
 #import <ulib/UMSynchronizedSortedDictionary.h>
 #import <ulib/UMSynchronizedArray.h>
 
-@interface UMWebObject : UMObject<UMWebObjectProtocol>
+@interface UMWebObject : UMObject
 {
     UMSynchronizedArray             *_children;
-    NSString                        *_content;
     NSString                        *_tag;
     UMSynchronizedSortedDictionary  *_attributes;
     BOOL                            _noWrap; /* if set, out put is <text>text</tag> instead of <tag>\ntext\n</tag> */
-    id<UMWebObjectProtocol>          _parentObject;
-    id<UMWebObjectProtocol>          _rootObject;
+    __weak UMWebObject              *_parentObject;
+    __weak UMWebObject              *_rootObject;
+    BOOL                            _noEndTag;
 }
 
 @property(readwrite,strong) NSArray                         *children;
-@property(readwrite,strong) NSString                        *content;
 @property(readwrite,strong) NSString                        *tag;
 @property(readwrite,strong) UMSynchronizedSortedDictionary  *attributes;
 @property(readwrite,assign) BOOL                            noWrap;
-@property(readwrite,weak) id<UMWebObjectProtocol>         parentObject;
-@property(readwrite,weak) id<UMWebObjectProtocol>         rootObject;
+@property(readwrite,assign) BOOL                            noEndTag;
+@property(readwrite,weak) UMWebObject                       *parentObject;
+@property(readwrite,weak) UMWebObject                       *rootObject;
 
 - (UMWebObject *)initWithString:(NSString *)s tag:(NSString *)t children:(NSArray *)c;
 - (UMWebObject *)initWithString:(NSString *)s;
@@ -35,12 +35,25 @@
 - (UMWebObject *)initWithChildren:(NSArray *)children;
 
 - (NSString *)htmlString:(BOOL)humanReadable ident:(int)ident flags:(UMWebObjectFlags)flags;
-- (void)addChild:(id<UMWebObjectProtocol>)c;
+- (void)addChild:(UMWebObject *)c;
 - (NSArray *)allowedAttributes;
 + (NSArray *)globalAttributes;
+- (void)setAttribute:(NSString *) attribute value:(NSString *)value;
+- (void)clearAttribute:(NSString *)attribute;
+
+- (void)prepareAttributes; /* prepare attributes from custom fields */
+- (void)postprocessAttributes; /* set custom fields from attributes */
+
 
 - (UMWebObject *)initWithWebObject:(UMWebObject *)obj;
 - (UMWebObject *)parse:(UMWebObject *)object; /* converts from a generic webobject to a specific web object */
+
+- (NSString *)getAllText;
+- (void)addText:(NSString *)c;
++ (NSString *)identOfLevel:(int)size;
+
++ (void)appendLineEndingToMutableString:(NSMutableString *)s;
+
 
 @end
 

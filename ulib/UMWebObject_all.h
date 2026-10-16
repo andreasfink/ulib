@@ -51,6 +51,7 @@
 #import <ulib/UMWebObjectHEADER.h>
 #import <ulib/UMWebObjectHGROUP.h>
 #import <ulib/UMWebObjectHR.h>
+#import <ulib/UMWebObjectHTML.h>
 #import <ulib/UMWebObjectI.h>
 #import <ulib/UMWebObjectIFRAME.h>
 #import <ulib/UMWebObjectIMG.h>
@@ -116,3 +117,4 @@
 #import <ulib/UMWebObjectVAR.h>
 #import <ulib/UMWebObjectVIDEO.h>
 #import <ulib/UMWebObjectWBR.h>
+#import <ulib/UMWebObjectPlaintext.h>

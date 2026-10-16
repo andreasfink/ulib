@@ -12,7 +12,7 @@ typedef enum UMWebObjectFlags
     UMWebObjectFlag_PRE = 1,
 } UMWebObjectFlags;
 
-
+/*
 @protocol UMWebObjectProtocol<NSObject>
 
 - (NSString *)htmlString:(BOOL)humanReadable ident:(int)ident flags:(UMWebObjectFlags)flags;
@@ -20,3 +20,4 @@ typedef enum UMWebObjectFlags
 
 @end
 
+*/

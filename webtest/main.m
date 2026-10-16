@@ -13,22 +13,40 @@ int main(int argc, const char * argv[]) {
     {
         UMWebObjectHTML *document = [[UMWebObjectHTML alloc]init];
         UMWebObjectHEAD *head = [[UMWebObjectHEAD alloc]init];
-        head.tag = @"head";
-        
-        UMWebObject *body = [[UMWebObjectBODY alloc]init];
-        body.tag = @"body";
-        
-        UMWebObject *title = [[UMWebObjectTITLE alloc]init];
-        title.tag = @"title";
-        title.content = @"this is the title";
-        title.noWrap=YES;
+        [document addChild:head];
+        UMWebObjectTITLE *title = [[UMWebObjectTITLE alloc]initWithString:@"Welcome"];
         [head addChild:title];
-        
-        UMWebObjectP *title = [[UMWebObjectP alloc]init];
 
-        document.children = @[head,body];
+        UMWebObject *body = [[UMWebObjectBODY alloc]init];
+        [document addChild:body];
+        
+        UMWebObjectH1 *h1 = [[UMWebObjectH1 alloc]initWithString:@"A Title"];
+        [h1 setAttribute:@"class" value:@"myclass"];
+        [body addChild:h1];
+        
+        UMWebObjectP *p = [[UMWebObjectP alloc]initWithString:@"this is the content"];
+        UMWebObjectBR *br = [[UMWebObjectBR alloc]init];
+        
+        [p addChild:br];
+        [p addText:@"more text"];
+
+        [body addChild:p];
+
+
+        UMWebObjectA *a = [[UMWebObjectA alloc]initWithURL:@"https://example.com"
+                                                      text:@"a link"];
+        
+        [body addChild:a];
+
+        UMWebObjectP *p2 = [[UMWebObjectP alloc]initWithString:@"Another paragraph"];
+        [body addChild:p2];
+
+        
+
         NSString *html = [document htmlString:YES ident:0 flags:0];
+        NSString *html2 = [document htmlString:NO ident:0 flags:0];
         NSLog(@"HMTL Code:\n%@\n",html);
+        NSLog(@"HMTL Code2:\n%@\n",html2);
     }
     return EXIT_SUCCESS;
 }

@@ -15,6 +15,7 @@
     if(self)
     {
         self.tag = @"h1";
+        self.noWrap = YES;
     }
     return self;
 }

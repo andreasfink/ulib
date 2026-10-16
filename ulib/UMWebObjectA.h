@@ -15,5 +15,7 @@
 
 @property(readwrite,strong) NSString *href;
 
+- (UMWebObjectA *)initWithURL:(NSString *)url text:(NSString *)text;
+
 @end
 

@@ -6,28 +6,25 @@
 //
 
 #import <ulib/ulib.h>
-#import <ulib/UMWebObject.h>
-#import <ulib/UMWebObjectP.h>
+#import <ulib/UMWebObject_all.h>
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool
     {
-        UMWebObject *document = [[UMWebObject alloc]init];
-        document.tag = @"html";
-
-        UMWebObject *head = [[UMWebObject alloc]init];
+        UMWebObjectHTML *document = [[UMWebObjectHTML alloc]init];
+        UMWebObjectHEAD *head = [[UMWebObjectHEAD alloc]init];
         head.tag = @"head";
         
-        UMWebObject *body = [[UMWebObject alloc]init];
+        UMWebObject *body = [[UMWebObjectBODY alloc]init];
         body.tag = @"body";
         
-        UMWebObject *title = [[UMWebObject alloc]init];
+        UMWebObject *title = [[UMWebObjectTITLE alloc]init];
         title.tag = @"title";
         title.content = @"this is the title";
         title.noWrap=YES;
         [head addChild:title];
         
-        UMWebObjectP *title = [[UMWebObject alloc]init];
+        UMWebObjectP *title = [[UMWebObjectP alloc]init];
 
         document.children = @[head,body];
         NSString *html = [document htmlString:YES ident:0 flags:0];

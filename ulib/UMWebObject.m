@@ -222,11 +222,11 @@
     self = [super init];
     if(self)
     {
-        self.children = obj.children;
-        _content = obj.content;
-        _tag = obj.tag;
-        _attributes = obj.attributes;
-        _noWrap = obj.noWrap;
+        self.children   = obj.children;
+        _content        = obj.content;
+        _tag            = obj.tag;
+        _attributes     = obj.attributes;
+        _noWrap         = obj.noWrap;
     }
     return self;
 }

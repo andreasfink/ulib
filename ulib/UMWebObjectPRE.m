@@ -23,13 +23,10 @@
                    ident:(int)ident
                    flags:(UMWebObjectFlags)flags
 {
-    flags = flags | UMWebObjectFlag_PRE;
     NSString *s = [super htmlString:humanReadable
-                              ident:ident
-                              flags:flags];
-    flags = flags & ~UMWebObjectFlag_PRE;
+                              ident:0
+                              flags:UMWebObjectFlag_PRE];
     return s;
 }
-
 
 @end

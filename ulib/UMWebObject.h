@@ -54,7 +54,7 @@
 + (NSString *)identOfLevel:(int)size;
 
 + (void)appendLineEndingToMutableString:(NSMutableString *)s;
-
++ (void)appendLineEndingToMutableString:(NSMutableString *)s line:(long)lineno tag:(NSString *)tag;
 
 @end
 

@@ -10,6 +10,8 @@
 #import <ulib/UMSynchronizedSortedDictionary.h>
 #import <ulib/UMSynchronizedArray.h>
 
+@class UMWebObjectHTML;
+
 @interface UMWebObject : UMObject
 {
     UMSynchronizedArray             *_children;
@@ -20,6 +22,7 @@
     __weak UMWebObject              *_rootObject;
     BOOL                            _noEndTag;
 }
+
 
 @property(readwrite,strong) NSArray                         *children;
 @property(readwrite,strong) NSString                        *tag;
@@ -55,6 +58,9 @@
 
 + (void)appendLineEndingToMutableString:(NSMutableString *)s;
 
++ (UMWebObjectHTML *)webDocumentWithTitle:(NSString *)t
+                                      css:(NSString *)css
+                                  charset:(NSString *)charset;
 
 @end
 

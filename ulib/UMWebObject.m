@@ -8,7 +8,6 @@
 #import <ulib/UMWebObject.h>
 #import <ulib/UMWebObject_all.h>
 
-
 @implementation UMWebObject
 
 
@@ -778,6 +777,41 @@
 {
     [s appendString:@"\r\n"];
 }
+
++ (UMWebObjectHTML *)webDocumentWithTitle:(NSString *)t
+                                      css:(NSString *)css
+                                  charset:(NSString *)charset
+{
+    if(charset==NULL)
+    {
+        charset=@"UTF-8";
+    }
+    UMWebObjectHTML *html = [[UMWebObjectHTML alloc]init];
+    
+    UMWebObjectHEAD *head = [[UMWebObjectHEAD alloc]init];
+    [html addChild:head];
+
+    if(css.length > 0)
+    {
+        UMWebObjectLINK *link = [[UMWebObjectLINK alloc]init];
+        [link setAttribute:@"rel" value:@"stylesheet"];
+        [link setAttribute:@"href" value:css];
+        [link setAttribute:@"type" value:@"text/css"];
+        [head addChild:link];
+    }
+    
+    UMWebObjectMETA *meta = [[UMWebObjectMETA alloc]init];
+    [meta setAttribute:@"charset" value:charset];
+    [head addChild:meta];
+
+    UMWebObjectTITLE *title = [[UMWebObjectTITLE alloc]initWithString:t];
+    [head addChild:title];
+    
+    UMWebObjectBODY *body = [[UMWebObjectBODY alloc]init];
+    [html addChild:body];
+    return html;
+}
+
 
 @end
 

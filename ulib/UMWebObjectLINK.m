@@ -16,8 +16,11 @@
     if(self)
     {
         self.tag = @"link";
+        _noWrap = YES;
+
     }
     return self;
 }
+
 
 @end

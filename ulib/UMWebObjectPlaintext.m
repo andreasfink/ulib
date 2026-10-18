@@ -36,11 +36,14 @@
     {
         if(!first)
         {
-            [out appendFormat:@"\n%@%@",identString,line];
+            [UMWebObject appendLineEndingToMutableString:out];
+            [out appendString:identString];
+            [out appendString:line];
         }
         else
         {
-            [out appendFormat:@"%@%@",identString,line];
+            [out appendString:identString];
+            [out appendString:line];
             first=NO;
         }
     }

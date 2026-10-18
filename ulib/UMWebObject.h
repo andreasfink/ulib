@@ -57,10 +57,11 @@
 + (NSString *)identOfLevel:(int)size;
 
 + (void)appendLineEndingToMutableString:(NSMutableString *)s;
-
++ (void)appendLineEndingToMutableString:(NSMutableString *)s line:(long)lineno tag:(NSString *)tag;
 + (UMWebObjectHTML *)webDocumentWithTitle:(NSString *)t
                                       css:(NSString *)css
                                   charset:(NSString *)charset;
+
 
 @end
 

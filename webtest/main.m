@@ -8,7 +8,8 @@
 #import <ulib/ulib.h>
 #import <ulib/UMWebObject_all.h>
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char * argv[])
+{
     @autoreleasepool
     {
         UMWebObjectHTML *document = [[UMWebObjectHTML alloc]init];
@@ -31,17 +32,35 @@ int main(int argc, const char * argv[]) {
         [p addText:@"more text"];
 
         [body addChild:p];
-
+        
+        UMWebObjectP *pre = [[UMWebObjectP alloc]init];
+        [body addChild:pre];
+        
         UMWebObjectFORM *f = [[UMWebObjectFORM alloc]init];
-        UMWebObjectINPUT *i1 = [[UMWebObjectINPUT alloc]init];
+        [pre addChild:f];
+
+        UMWebObjectINPUT *i1 = [[UMWebObjectINPUT alloc]initTypeTextWithName:@"textfield1"];
         [f addChild:i1];
+
+        UMWebObjectINPUT *i2 = [[UMWebObjectINPUT alloc]init];
+        [i2 setAttribute:@"type" value:@"text"];
+        [i2 setAttribute:@"name" value:@"textfield2"];
+        [i2 setAttribute:@"placeholder" value:@"blabla"];
+        [i2 setAttribute:@"value" value:@"default"];
+        [f addChild:i2];
+
+        
         UMWebObjectSELECT *select = [[UMWebObjectSELECT alloc]init];
+        [select setAttribute:@"name" value:@"selector1"];
         [select addOptionWithValue:@"option1" text:@"OPTION#1"];
         [select addOptionWithValue:@"option2" text:@"OPTION#2"];
         [select addOptionWithValue:@"option3" text:@"OPTION#3"];
         [select select:@"option2"];
         [f addChild:select];
-        [body addChild:f];
+        UMWebObjectINPUT *i3 = [[UMWebObjectINPUT alloc]init];
+        [i3 setAttribute:@"name" value:@"submit"];
+        [i3 setAttribute:@"value" value:@"Submit"];
+        [f addChild:i3];
 
         UMWebObjectA *a = [[UMWebObjectA alloc]initWithURL:@"https://example.com"
                                                       text:@"a link"];
@@ -52,7 +71,6 @@ int main(int argc, const char * argv[]) {
         [body addChild:p2];
 
         
-
         NSString *html = [document htmlString:YES ident:0 flags:0];
         // NSString *html2 = [document htmlString:NO ident:0 flags:0];
         NSLog(@"HMTL Code:\n%@\n",html);

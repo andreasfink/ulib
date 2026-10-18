@@ -10,6 +10,8 @@
 typedef enum UMWebObjectFlags
 {
     UMWebObjectFlag_PRE = 1,
+    UMWebObjectFlag_LINE_ENDING_DEBUG = 2,
+    UMWebObjectFlag_IDENT_DEBUG = 4,
 } UMWebObjectFlags;
 
 /*

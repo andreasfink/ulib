@@ -19,4 +19,14 @@
     return self;
 }
 
+- (NSString *)htmlString:(BOOL)humanReadable
+                   ident:(int)ident
+                   flags:(UMWebObjectFlags)flags
+{
+    NSString *s = [super htmlString:humanReadable
+                              ident:0
+                              flags:UMWebObjectFlag_PRE];
+    return s;
+}
+
 @end

@@ -8,6 +8,36 @@
 #import <ulib/UMWebObject.h>
 #import <ulib/UMWebObject_all.h>
 
+static inline void AddNL(NSMutableString *s,long line, NSString *tag, BOOL doDebug);
+static inline void AddIdent(NSMutableString *s,long line, NSString *tag, BOOL doDebug,NSString *identString);
+
+static inline void AddNL(NSMutableString *s,long line, NSString *tag, BOOL doDebug)
+{
+    if(doDebug)
+    {
+        [UMWebObject appendLineEndingToMutableString:s line:line tag:tag];
+    }
+    else
+    {
+        [UMWebObject appendLineEndingToMutableString:s];
+    }
+}
+
+static inline void AddIdent(NSMutableString *s,long line, NSString *tag, BOOL doDebug,NSString *identString)
+{
+    if(doDebug)
+    {
+        [s appendFormat:@"{%lu:%@}%@",line,tag,identString];
+    }
+    else
+    {
+        [s appendString:identString];
+    }
+}
+
+#define ADD_IDENT(s,t,doDebug,identString)      AddIdent(s,__LINE__,t,doDebug,identString)
+#define  ADD_NL(s,t,doDebug)                    AddNL(s,__LINE__,t,doDebug)
+
 @implementation UMWebObject
 
 
@@ -85,6 +115,16 @@
                    ident:(int)ident
                    flags:(UMWebObjectFlags)flags
 {
+    BOOL CRLFDebug = NO;
+    BOOL IdentDebug = NO;
+    if(flags & UMWebObjectFlag_LINE_ENDING_DEBUG)
+    {
+        CRLFDebug = YES;
+    }
+    if(flags & UMWebObjectFlag_IDENT_DEBUG)
+    {
+        IdentDebug = YES;
+    }
     [self prepareAttributes];
 
     NSString *identString = [UMWebObject identOfLevel:ident];
@@ -102,18 +142,19 @@
         if(humanReadable)
         {
             doNL=YES;
+            doIdent=YES;
         }
         else
         {
             doNL=NO;
+            doIdent=NO;
         }
     }
-    
     if(_tag)
     {
         if(doIdent)
         {
-            [s appendString:identString];
+            ADD_IDENT(s,_tag,IdentDebug,identString);
         }
         [s appendString:@"<"];
         [s appendString:_tag];
@@ -133,69 +174,71 @@
         [s appendString:@">"];
         if((doNL) && (_noWrap==NO))
         {
-            [UMWebObject appendLineEndingToMutableString:s];
+            ADD_NL(s,_tag,CRLFDebug);
         }
     }
+    BOOL lastWasPlaintext=NO;
     if(_children)
     {
-        BOOL preFlagSet = NO;
-        BOOL hasPreFlag = (flags & UMWebObjectFlag_PRE);
-        if(([_tag isEqualToString:@"PRE"]) && !hasPreFlag)
-        {
-            preFlagSet=YES;
-            flags = flags | UMWebObjectFlag_PRE;
-        }
-        BOOL previousPlaintext=NO;
         for(UMWebObject *child in _children)
         {
-            BOOL isPlaintext = NO;
-            BOOL isBR = NO;
-            /* plaintext objects never end with \n so <br> can be added on the end of the line */
-            /* hence we add it here when the previous object was a plaintext object */
-            if([child isKindOfClass:[UMWebObjectPlaintext class]])
-            {
-                isPlaintext=YES;
-            }
-            if([child isKindOfClass:[UMWebObjectBR class]])
-            {
-                isBR=YES;
-            }
             NSString *childString = [child htmlString:humanReadable ident:ident+1 flags:flags];
-            if((previousPlaintext) && (humanReadable) && !isBR)
-            {
-                [UMWebObject appendLineEndingToMutableString:s];
-            }
             [s appendString:childString];
-            if(isPlaintext)
+            if([child isKindOfClass:[UMWebObjectPlaintext class] ])
             {
-                previousPlaintext=YES;
+                lastWasPlaintext = YES;
             }
             else
             {
-                previousPlaintext = NO;
+                lastWasPlaintext = NO;
             }
         }
-        if((previousPlaintext) && (humanReadable) && _noWrap==NO)
+    }
+    if(_noEndTag==YES)
+    {
+        if((humanReadable==YES) && ((flags & UMWebObjectFlag_PRE)==0))
         {
-            [UMWebObject appendLineEndingToMutableString:s];
-        }
-        if(preFlagSet)
-        {
-            flags = flags & ~UMWebObjectFlag_PRE;
+            ADD_NL(s,_tag,CRLFDebug);
         }
     }
-    if((_tag) && (_noEndTag==NO))
+    else
     {
-      if((doIdent) && (_noWrap==NO))
+        if(humanReadable==NO)
         {
-            [s appendString:identString];
+            [s appendString:@"</"];
+            [s appendString:_tag];
+            [s appendString:@">"];
         }
-        [s appendString:@"</"];
-        [s appendString:_tag];
-        [s appendString:@">"];
-        if(doNL)
+        else
         {
-            [UMWebObject appendLineEndingToMutableString:s];
+            if(_noWrap==YES)
+            {
+                [s appendString:@"</"];
+                [s appendString:_tag];
+                [s appendString:@">"];
+                if((flags & UMWebObjectFlag_PRE)==0)
+                {
+                    ADD_NL(s,_tag,CRLFDebug);
+                }
+            }
+            else
+            {
+                if((lastWasPlaintext) && ((flags & UMWebObjectFlag_PRE)==0))
+                {
+                    ADD_NL(s,_tag,CRLFDebug);
+                }
+                if((flags & UMWebObjectFlag_PRE)==0)
+                {
+                    ADD_IDENT(s,_tag,IdentDebug,identString);
+                }
+                [s appendString:@"</"];
+                [s appendString:_tag];
+                [s appendString:@">"];
+                if((flags && UMWebObjectFlag_PRE)==0)
+                {
+                    ADD_NL(s,_tag,CRLFDebug);
+                }
+            }
         }
     }
     return s;
@@ -778,6 +821,12 @@
     [s appendString:@"\r\n"];
 }
 
+
++ (void)appendLineEndingToMutableString:(NSMutableString *)s line:(long)lineno tag:(NSString *)tag
+{
+    [s appendFormat:@"{%lu:%@}\r\n",lineno,tag];
+}
+
 + (UMWebObjectHTML *)webDocumentWithTitle:(NSString *)t
                                       css:(NSString *)css
                                   charset:(NSString *)charset
@@ -787,7 +836,7 @@
         charset=@"UTF-8";
     }
     UMWebObjectHTML *html = [[UMWebObjectHTML alloc]init];
-    
+
     UMWebObjectHEAD *head = [[UMWebObjectHEAD alloc]init];
     [html addChild:head];
 
@@ -799,19 +848,18 @@
         [link setAttribute:@"type" value:@"text/css"];
         [head addChild:link];
     }
-    
+
     UMWebObjectMETA *meta = [[UMWebObjectMETA alloc]init];
     [meta setAttribute:@"charset" value:charset];
     [head addChild:meta];
 
     UMWebObjectTITLE *title = [[UMWebObjectTITLE alloc]initWithString:t];
     [head addChild:title];
-    
+
     UMWebObjectBODY *body = [[UMWebObjectBODY alloc]init];
     [html addChild:body];
     return html;
 }
-
 
 @end
 

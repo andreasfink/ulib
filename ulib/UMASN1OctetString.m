@@ -34,6 +34,19 @@
     return self;
 }
 
+- (UMASN1OctetString *)initWithValue:(NSData *)d contentSpecificTag:(int)tag
+{
+    self = [super init];
+    if(self)
+    {
+        [self.asn1_tag setTagIsPrimitive];
+        self.asn1_tag.tagClass = UMASN1Class_ContextSpecific;
+        self.asn1_tag.tagNumber = tag;
+        self.asn1_data = d;
+    }
+    return self;
+}
+
 - (UMASN1OctetString *)initWithString:(NSString *)s
 {
     return [self initWithValue:[s unhexedData]];

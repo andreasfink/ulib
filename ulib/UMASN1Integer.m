@@ -41,6 +41,19 @@
     return self;
 }
 
+- (UMASN1Integer *)initWithValue:(int64_t)i contentSpecificTag:(uint64_t)tag
+{
+    self = [super init];
+    if(self)
+    {
+        self.asn1_tag.tagClass = UMASN1Class_ContextSpecific;
+        [self.asn1_tag setTagIsPrimitive];
+        self.asn1_tag.tagNumber = tag;
+        [self setValue:i];
+    }
+    return self;
+}
+
 - (UMASN1Integer *)initWithNumber:(NSNumber *)num
 {
     if(num == NULL)

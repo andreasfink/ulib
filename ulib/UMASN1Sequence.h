@@ -16,4 +16,12 @@
 - (void)setValues:(NSArray *)arr;
 - (void)appendValue:(UMASN1Object *)o;
 
+
+- (void)addObject:(UMASN1Object *)o;
+- (void)addObject:(NSObject *)o1 withContentSpecificTag:(uint64_t)tag;
+- (void)addNSString:(NSString *)s withContentSpecificTag:(uint64_t)tag;
+- (void)addIntegerNumber:(NSNumber *)n withContentSpecificTag:(int64_t)tag;
+- (void)addRealNumber:(NSNumber *)n withContentSpecificTag:(int64_t)tag;
+- (void)addBooleanNull:(BOOL)b withContentSpecificTag:(int64_t)tag;
+
 @end

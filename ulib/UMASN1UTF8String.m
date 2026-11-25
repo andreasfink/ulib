@@ -43,6 +43,21 @@
     return self;
 }
 
+- (UMASN1UTF8String *)initWithString:(NSString *)s contentSpecificTag:(uint64_t)tag
+{
+    self = [super init];
+    if(self)
+    {
+        self.asn1_tag.tagClass = UMASN1Class_ContextSpecific;
+        [self.asn1_tag setTagIsPrimitive];
+        self.asn1_tag.tagNumber = tag;
+        self.value =s;
+    }
+    return self;
+}
+
+
+
 - (NSString *) value
 {
     NSString *s = [[NSString alloc] initWithData:self.asn1_data encoding:NSUTF8StringEncoding];
@@ -97,5 +112,6 @@
     }
     return NO;
 }
+
 
 @end

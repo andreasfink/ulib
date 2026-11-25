@@ -23,6 +23,7 @@
 - (UMASN1Integer *)initWithString:(NSString *)s;
 - (NSNumber *)number;
 
-+(NSData *)packedInteger:(int64_t)val;
++ (NSData *)packedInteger:(int64_t)val;
+- (UMASN1Integer *)initWithValue:(int64_t)i contentSpecificTag:(uint64_t)tag;
 
 @end

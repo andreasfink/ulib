@@ -16,4 +16,6 @@
 - (NSString *)stringValue;
 - (void) setValue:(NSString *)v;
 
+- (UMASN1UTF8String *)initWithString:(NSString *)s contentSpecificTag:(uint64_t)tag;
+
 @end

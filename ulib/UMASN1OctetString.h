@@ -17,6 +17,7 @@
 - (UMASN1OctetString *)init;
 - (UMASN1OctetString *)initWithValue:(NSData *)d;
 - (UMASN1OctetString *)initWithString:(NSString *)s;
+- (UMASN1OctetString *)initWithValue:(NSData *)s contentSpecificTag:(int)tag;
 
 - (NSData *) value;
 - (void) setValue:(NSData *)s;

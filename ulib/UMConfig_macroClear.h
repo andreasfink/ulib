@@ -1,0 +1,18 @@
+//
+//  UMConfig_macroClear.h
+//  ulib
+//
+//  Created by Andreas Fink on 26.11.2026.
+//
+
+
+#undef ULIBCONFIG_BOOLEAN
+#undef ULIBCONFIG_REAL
+#undef ULIBCONFIG_INTEGER
+#undef ULIBCONFIG_STRING
+#undef ULIBCONFIG_FILTERED_STRING
+#undef ULIBCONFIG_DATE
+#undef ULIBCONFIG_ARRAY_VERBOSE
+#undef ULIBCONFIG_ARRAY_COMPACT
+#undef ULIBCONFIG_HEXDATA
+

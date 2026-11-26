@@ -69,6 +69,17 @@
 		A66EB0E42ABDDCC200C34D40 /* ulib.pc in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0E22ABDDCC200C34D40 /* ulib.pc */; };
 		A66EB0E52ABDDCC200C34D40 /* ulib.pc.in in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0E32ABDDCC200C34D40 /* ulib.pc.in */; };
 		A66EB0E82ABDDCD000C34D40 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = A66EB0E62ABDDCD000C34D40 /* VERSION */; };
+		A678325830B8311D00D20BBD /* UMConfigObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A678325730B8311D00D20BBD /* UMConfigObject.m */; };
+		A678325930B8311D00D20BBD /* UMConfigObject.h in Headers */ = {isa = PBXBuildFile; fileRef = A678325630B8311D00D20BBD /* UMConfigObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A678325B30B832EF00D20BBD /* UMConfig_macroSetConfigFromDict.h in Headers */ = {isa = PBXBuildFile; fileRef = A678325A30B832EF00D20BBD /* UMConfig_macroSetConfigFromDict.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A678325D30B832F900D20BBD /* UMConfig_macroClear.h in Headers */ = {isa = PBXBuildFile; fileRef = A678325C30B832F900D20BBD /* UMConfig_macroClear.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A678325F30B8330600D20BBD /* UMConfig_macroAppendDict.h in Headers */ = {isa = PBXBuildFile; fileRef = A678325E30B8330600D20BBD /* UMConfig_macroAppendDict.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A678326E30B8342000D20BBD /* UMConfigMacroHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = A678326D30B8342000D20BBD /* UMConfigMacroHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A678327130B8343600D20BBD /* UMConfigMacroHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A678327030B8343600D20BBD /* UMConfigMacroHelper.m */; };
+		A67832A230B83C5500D20BBD /* UMConfigDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = A67832A130B83C5500D20BBD /* UMConfigDatabasePool.m */; };
+		A67832A330B83C5500D20BBD /* UMConfigDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = A67832A030B83C5500D20BBD /* UMConfigDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A67832A530B83D2500D20BBD /* UMConfigDatabasePool.def.h in Headers */ = {isa = PBXBuildFile; fileRef = A67832A430B83D2500D20BBD /* UMConfigDatabasePool.def.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A67832A730B8624500D20BBD /* UMConfig_macroAppendConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = A67832A630B8624500D20BBD /* UMConfig_macroAppendConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A683D99A2ABD980E00C34D40 /* UMSyntaxToken_Const.m in Sources */ = {isa = PBXBuildFile; fileRef = A683D8522ABD980900C34D40 /* UMSyntaxToken_Const.m */; };
 		A683D99B2ABD980E00C34D40 /* UMSyslogClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A683D8532ABD980900C34D40 /* UMSyslogClient.m */; };
 		A683D99D2ABD980E00C34D40 /* UMThroughputCounter.h in Headers */ = {isa = PBXBuildFile; fileRef = A683D8552ABD980900C34D40 /* UMThroughputCounter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -842,6 +853,17 @@
 		A66EB0E72ABDDCD000C34D40 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		A66EB0E92ABDDCF500C34D40 /* debian */ = {isa = PBXFileReference; lastKnownFileType = folder; path = debian; sourceTree = "<group>"; };
 		A66EB0EA2ABDDEB300C34D40 /* SupportingFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SupportingFiles; sourceTree = "<group>"; };
+		A678325630B8311D00D20BBD /* UMConfigObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMConfigObject.h; sourceTree = "<group>"; };
+		A678325730B8311D00D20BBD /* UMConfigObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMConfigObject.m; sourceTree = "<group>"; };
+		A678325A30B832EF00D20BBD /* UMConfig_macroSetConfigFromDict.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMConfig_macroSetConfigFromDict.h; sourceTree = "<group>"; };
+		A678325C30B832F900D20BBD /* UMConfig_macroClear.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMConfig_macroClear.h; sourceTree = "<group>"; };
+		A678325E30B8330600D20BBD /* UMConfig_macroAppendDict.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMConfig_macroAppendDict.h; sourceTree = "<group>"; };
+		A678326D30B8342000D20BBD /* UMConfigMacroHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMConfigMacroHelper.h; sourceTree = "<group>"; };
+		A678327030B8343600D20BBD /* UMConfigMacroHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMConfigMacroHelper.m; sourceTree = "<group>"; };
+		A67832A030B83C5500D20BBD /* UMConfigDatabasePool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMConfigDatabasePool.h; sourceTree = "<group>"; };
+		A67832A130B83C5500D20BBD /* UMConfigDatabasePool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMConfigDatabasePool.m; sourceTree = "<group>"; };
+		A67832A430B83D2500D20BBD /* UMConfigDatabasePool.def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMConfigDatabasePool.def.h; sourceTree = "<group>"; };
+		A67832A630B8624500D20BBD /* UMConfig_macroAppendConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMConfig_macroAppendConfig.h; sourceTree = "<group>"; };
 		A683D8522ABD980900C34D40 /* UMSyntaxToken_Const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSyntaxToken_Const.m; sourceTree = "<group>"; };
 		A683D8532ABD980900C34D40 /* UMSyslogClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSyslogClient.m; sourceTree = "<group>"; };
 		A683D8552ABD980900C34D40 /* UMThroughputCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMThroughputCounter.h; sourceTree = "<group>"; };
@@ -1714,6 +1736,14 @@
 				A683D8C42ABD980B00C34D40 /* UMConfigGroup.m */,
 				A683D8F52ABD980B00C34D40 /* UMConfigParsedLine.h */,
 				A683D9092ABD980C00C34D40 /* UMConfigParsedLine.m */,
+				A678325630B8311D00D20BBD /* UMConfigObject.h */,
+				A678325730B8311D00D20BBD /* UMConfigObject.m */,
+				A678325A30B832EF00D20BBD /* UMConfig_macroSetConfigFromDict.h */,
+				A67832A630B8624500D20BBD /* UMConfig_macroAppendConfig.h */,
+				A678325E30B8330600D20BBD /* UMConfig_macroAppendDict.h */,
+				A678325C30B832F900D20BBD /* UMConfig_macroClear.h */,
+				A678326D30B8342000D20BBD /* UMConfigMacroHelper.h */,
+				A678327030B8343600D20BBD /* UMConfigMacroHelper.m */,
 				A683D9842ABD980E00C34D40 /* UMConstantStringsDict.h */,
 				A683D8F72ABD980B00C34D40 /* UMConstantStringsDict.m */,
 				A683D9302ABD980C00C34D40 /* UMCountryCodePrefixDigitTree.h */,
@@ -1738,6 +1768,9 @@
 				A609F7A830517D9D00B6E5B0 /* UMDbMySqlInProgress.h */,
 				A609F7A930517D9D00B6E5B0 /* UMDbMySqlInProgress.m */,
 				A609F7AA30517D9D00B6E5B0 /* UMDbPool.h */,
+				A67832A030B83C5500D20BBD /* UMConfigDatabasePool.h */,
+				A67832A130B83C5500D20BBD /* UMConfigDatabasePool.m */,
+				A67832A430B83D2500D20BBD /* UMConfigDatabasePool.def.h */,
 				A609F7AB30517D9D00B6E5B0 /* UMDbPool.m */,
 				A609F7AC30517D9D00B6E5B0 /* UMDbQuery.h */,
 				A609F7AD30517D9D00B6E5B0 /* UMDbQuery.m */,
@@ -2394,6 +2427,7 @@
 				A6915FE4304FDFB000B15E34 /* UMLayerSctpUserProfile.h in Headers */,
 				A683D9CE2ABD980E00C34D40 /* UMCommandActionProtocol.h in Headers */,
 				A683DACE2ABD980F00C34D40 /* NSDictionary+ulib.h in Headers */,
+				A67832A330B83C5500D20BBD /* UMConfigDatabasePool.h in Headers */,
 				A6A1EB942ABD9D9E00C34D40 /* dmi_decode_path.h in Headers */,
 				A683DA032ABD980E00C34D40 /* UMLogHandler.h in Headers */,
 				A683DA702ABD980E00C34D40 /* UMSerialPort.h in Headers */,
@@ -2482,6 +2516,7 @@
 				A683D9FB2ABD980E00C34D40 /* UMSocket.h in Headers */,
 				A683DA422ABD980E00C34D40 /* UMFileTracker.h in Headers */,
 				A683DAA62ABD980F00C34D40 /* UMJsonStreamParserAccumulator.h in Headers */,
+				A678325930B8311D00D20BBD /* UMConfigObject.h in Headers */,
 				A6DEFA08308109F600EAC887 /* UMWebObjectTABLE.h in Headers */,
 				A683DACF2ABD980F00C34D40 /* UMPrometheusThroughputMetric.h in Headers */,
 				A683DA132ABD980E00C34D40 /* UMJsonWriter.h in Headers */,
@@ -2539,6 +2574,7 @@
 				A683DA442ABD980E00C34D40 /* UMSynchronizedArray.h in Headers */,
 				A683DA322ABD980E00C34D40 /* UMHistoryLog.h in Headers */,
 				A6C0F8783081159500D4BC05 /* UMWebObjectU.h in Headers */,
+				A67832A730B8624500D20BBD /* UMConfig_macroAppendConfig.h in Headers */,
 				A683DA352ABD980E00C34D40 /* NSDate+ulib.h in Headers */,
 				A683DA952ABD980F00C34D40 /* UMQueueSingle.h in Headers */,
 				A6C0F81E3081146E00D4BC05 /* UMWebObjectQ.h in Headers */,
@@ -2605,6 +2641,7 @@
 				A683DAA42ABD980F00C34D40 /* UMCommandLine.h in Headers */,
 				A683D9A62ABD980E00C34D40 /* UMKeypair.h in Headers */,
 				A683D9B32ABD980E00C34D40 /* UMLogFile.h in Headers */,
+				A67832A530B83D2500D20BBD /* UMConfigDatabasePool.def.h in Headers */,
 				A683DAAA2ABD980F00C34D40 /* UMLogLevel.h in Headers */,
 				A6C0F87C308115A500D4BC05 /* UMWebObjectVAR.h in Headers */,
 				A6C0F844308114DE00D4BC05 /* UMWebObjectSTRONG.h in Headers */,
@@ -2620,6 +2657,7 @@
 				A683D9A52ABD980E00C34D40 /* UMAtomicCounter.h in Headers */,
 				A683DA5E2ABD980E00C34D40 /* UMHTTPWebSocketDelegateProtocol.h in Headers */,
 				A683DA2C2ABD980E00C34D40 /* UMAssert.h in Headers */,
+				A678325F30B8330600D20BBD /* UMConfig_macroAppendDict.h in Headers */,
 				A6D02DAA2D76C59A00F2C1C4 /* UMDirtyDouble.h in Headers */,
 				A683D9A72ABD980E00C34D40 /* UMDateWithHistory.h in Headers */,
 				A683DAB02ABD980F00C34D40 /* UMHTTPURLHandler.h in Headers */,
@@ -2659,8 +2697,10 @@
 				A683DAC32ABD980F00C34D40 /* UMSyntaxToken_Number.h in Headers */,
 				A683D9F62ABD980E00C34D40 /* UMHTTPRequest.h in Headers */,
 				A683D9C72ABD980E00C34D40 /* UMPrometheusMetricUptime.h in Headers */,
+				A678325B30B832EF00D20BBD /* UMConfig_macroSetConfigFromDict.h in Headers */,
 				A683DA772ABD980F00C34D40 /* UMLogConsole.h in Headers */,
 				A683DA432ABD980E00C34D40 /* UMBackgrounderWithQueues.h in Headers */,
+				A678326E30B8342000D20BBD /* UMConfigMacroHelper.h in Headers */,
 				A683D9C42ABD980E00C34D40 /* UMPublicKey.h in Headers */,
 				A6C0F796308112C000D4BC05 /* UMWebObjectHEADER.h in Headers */,
 				A683DA402ABD980E00C34D40 /* UMTaskQueueMulti.h in Headers */,
@@ -2676,6 +2716,7 @@
 				A609F7D330517D9D00B6E5B0 /* UMDbResult.h in Headers */,
 				A6C0F77A3081126600D4BC05 /* UMWebObjectDL.h in Headers */,
 				A6C0F7C23081135100D4BC05 /* UMWebObjectINS.h in Headers */,
+				A678325D30B832F900D20BBD /* UMConfig_macroClear.h in Headers */,
 				A609F7D430517D9D00B6E5B0 /* UMDbDriverType.h in Headers */,
 				A609F7D530517D9D00B6E5B0 /* UMDbQuery.h in Headers */,
 				A609F7D630517D9D00B6E5B0 /* UMDbStorageType.h in Headers */,
@@ -3007,6 +3048,7 @@
 				A6C0F87F308115AE00D4BC05 /* UMWebObjectVIDEO.m in Sources */,
 				A6C0F8973081336500D4BC05 /* UMWebObjectSUB.m in Sources */,
 				A609F7CE30517D9D00B6E5B0 /* UMDbTableDefinition.m in Sources */,
+				A678325830B8311D00D20BBD /* UMConfigObject.m in Sources */,
 				A683D9E82ABD980E00C34D40 /* UMHTTPURLHandler.m in Sources */,
 				A6C0F8773081159500D4BC05 /* UMWebObjectU.m in Sources */,
 				A683DA6E2ABD980E00C34D40 /* UMLogFeed.m in Sources */,
@@ -3116,6 +3158,7 @@
 				A683DA222ABD980E00C34D40 /* UMPrometheus.m in Sources */,
 				A683DABB2ABD980F00C34D40 /* UMUtil.m in Sources */,
 				A683DAC22ABD980F00C34D40 /* UMRedisCommand.m in Sources */,
+				A678327130B8343600D20BBD /* UMConfigMacroHelper.m in Sources */,
 				A6C0F7653081122A00D4BC05 /* UMWebObjectDETAILS.m in Sources */,
 				A683DA4D2ABD980E00C34D40 /* UMPool.m in Sources */,
 				A6C0F7C93081136600D4BC05 /* UMWebObjectKEYGEN.m in Sources */,
@@ -3142,6 +3185,7 @@
 				A683DA542ABD980E00C34D40 /* UMKeypair.m in Sources */,
 				A683DA9E2ABD980F00C34D40 /* UMDateTimeStuff.m in Sources */,
 				A6915FCB304FDE9900B15E34 /* UMSocketSCTPReceivedPacket.m in Sources */,
+				A67832A230B83C5500D20BBD /* UMConfigDatabasePool.m in Sources */,
 				A6915FCC304FDE9900B15E34 /* UMSocketSCTP.m in Sources */,
 				A6915FCD304FDE9900B15E34 /* UMSocketSCTPRegistry.m in Sources */,
 				A6915FCE304FDE9900B15E34 /* UMSocketSCTPListener2.m in Sources */,

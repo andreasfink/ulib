@@ -23,5 +23,7 @@
 - (void)addIntegerNumber:(NSNumber *)n withContentSpecificTag:(int64_t)tag;
 - (void)addRealNumber:(NSNumber *)n withContentSpecificTag:(int64_t)tag;
 - (void)addBooleanNull:(BOOL)b withContentSpecificTag:(int64_t)tag;
+- (void)addNSDateAsString:(NSDate *)d withContentSpecificTag:(uint64_t)tag;
+- (void)addNSData:(NSData *)d withContentSpecificTag:(uint64_t)tag;
 
 @end

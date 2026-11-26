@@ -13,6 +13,7 @@
 #import <ulib/UMASN1Null.h>
 #import <ulib/UMASN1Real.h>
 #import <ulib/UMASN1Boolean.h>
+#import <ulib/NSDate+ulib.h>
 
 @implementation UMASN1Sequence
 
@@ -167,4 +168,24 @@
         [self addObject:n withContentSpecificTag:tag];
     }
 }
+
+- (void)addNSDateAsString:(NSDate *)d withContentSpecificTag:(uint64_t)tag
+{
+    if(d)
+    {
+        NSString *s = [d stringValue];
+        [self addNSString:s withContentSpecificTag:tag];
+    }
+}
+
+- (void)addNSData:(NSData *)d withContentSpecificTag:(uint64_t)tag
+{
+    if(d)
+    {
+        UMASN1OctetString *o = [[UMASN1OctetString alloc]initWithValue:d];
+        [self addObject:o withContentSpecificTag:tag];
+    }
+
+}
+
 @end

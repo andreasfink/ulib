@@ -272,6 +272,7 @@ typedef enum
 #import <ulib/UMDbMySqlInProgress.h>
 #import <ulib/UMConfigObject.h>
 #import <ulib/UMConfigMacroHelper.h>
+#import <ulib/UMConfigDatabasePool.h>
 
 #import <ulib/UMWebObject_all.h>
 

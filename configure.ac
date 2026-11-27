@@ -165,7 +165,7 @@ case "$host" in
     SHARED_LIBRARY_EXTENSION="dylib"
     INSTALL_NAME_TOOL="install_name_tool"
     SHARED_FLAGS="-dynamiclib -Wl,-dylib"
-    LDFLAGS="$LDFLAGS ${ARCH}"
+    LDFLAGS="$LDFLAGS ${ARCH} -ObjC"
     LIBTOOL="/usr/bin/libtool -static -no_warning_for_no_symbols -o"
    	echo CFLAGS=$CFLAGS
    	echo LDFLAGS=$LDFLAGS

@@ -230,6 +230,8 @@ typedef enum
 #import <ulib/UMRpcMessage_LogoutResponse.h>
 #import <ulib/UMRpcMessage_TestRequest.h>
 #import <ulib/UMRpcMessage_TestResponse.h>
+#import <ulib/UMRpcMessage_InsertCommentRequest.h>
+#import <ulib/UMRpcMessage_InsertCommentResponse.h>
 #import <ulib/UMRpcServer.h>
 #import <ulib/UMRpcSession.h>
 #import <ulib/UMRpcCommandHandler.h>

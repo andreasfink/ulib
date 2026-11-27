@@ -739,6 +739,10 @@
 		A6DEFA183081FEDC00EAC887 /* UMWebObjectHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DEFA163081FEDC00EAC887 /* UMWebObjectHTML.m */; };
 		A6DEFA1B308207DB00EAC887 /* UMWebObjectPlaintext.h in Headers */ = {isa = PBXBuildFile; fileRef = A6DEFA19308207DB00EAC887 /* UMWebObjectPlaintext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6DEFA1C308207DB00EAC887 /* UMWebObjectPlaintext.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DEFA1A308207DB00EAC887 /* UMWebObjectPlaintext.m */; };
+		A6E3230430B9733D000C482A /* UMRpcMessage_InsertCommentRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E3230230B9733D000C482A /* UMRpcMessage_InsertCommentRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6E3230530B9733D000C482A /* UMRpcMessage_InsertCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3230330B9733D000C482A /* UMRpcMessage_InsertCommentRequest.m */; };
+		A6E3230830B9745C000C482A /* UMRpcMessage_InsertCommentResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = A6E3230630B9745C000C482A /* UMRpcMessage_InsertCommentResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6E3230930B9745C000C482A /* UMRpcMessage_InsertCommentResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E3230730B9745C000C482A /* UMRpcMessage_InsertCommentResponse.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1531,6 +1535,10 @@
 		A6DEFA163081FEDC00EAC887 /* UMWebObjectHTML.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMWebObjectHTML.m; sourceTree = "<group>"; };
 		A6DEFA19308207DB00EAC887 /* UMWebObjectPlaintext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMWebObjectPlaintext.h; sourceTree = "<group>"; };
 		A6DEFA1A308207DB00EAC887 /* UMWebObjectPlaintext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMWebObjectPlaintext.m; sourceTree = "<group>"; };
+		A6E3230230B9733D000C482A /* UMRpcMessage_InsertCommentRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMRpcMessage_InsertCommentRequest.h; sourceTree = "<group>"; };
+		A6E3230330B9733D000C482A /* UMRpcMessage_InsertCommentRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMRpcMessage_InsertCommentRequest.m; sourceTree = "<group>"; };
+		A6E3230630B9745C000C482A /* UMRpcMessage_InsertCommentResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMRpcMessage_InsertCommentResponse.h; sourceTree = "<group>"; };
+		A6E3230730B9745C000C482A /* UMRpcMessage_InsertCommentResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMRpcMessage_InsertCommentResponse.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -2016,6 +2024,10 @@
 				A6915F53304D665900B15E34 /* UMRpcMessage_TestRequest.m */,
 				A6915F54304D665900B15E34 /* UMRpcMessage_TestResponse.h */,
 				A6915F55304D665900B15E34 /* UMRpcMessage_TestResponse.m */,
+				A6E3230230B9733D000C482A /* UMRpcMessage_InsertCommentRequest.h */,
+				A6E3230330B9733D000C482A /* UMRpcMessage_InsertCommentRequest.m */,
+				A6E3230630B9745C000C482A /* UMRpcMessage_InsertCommentResponse.h */,
+				A6E3230730B9745C000C482A /* UMRpcMessage_InsertCommentResponse.m */,
 				A6915F56304D665900B15E34 /* UMRpcMessageDecoder.h */,
 				A6915F57304D665900B15E34 /* UMRpcMessageDecoder.m */,
 				A6915F58304D665900B15E34 /* UMRpcMessageType.h */,
@@ -2630,6 +2642,7 @@
 				A683DA612ABD980E00C34D40 /* UMPrometheusMetric.h in Headers */,
 				A683DA012ABD980E00C34D40 /* UMJsonTokeniser.h in Headers */,
 				A683DA742ABD980F00C34D40 /* UMObjectTree.h in Headers */,
+				A6E3230830B9745C000C482A /* UMRpcMessage_InsertCommentResponse.h in Headers */,
 				A6DEF9B33080C75500EAC887 /* UMWebObject.h in Headers */,
 				A683D99D2ABD980E00C34D40 /* UMThroughputCounter.h in Headers */,
 				A6C0F71A3081116600D4BC05 /* UMWebObjectAREA.h in Headers */,
@@ -2731,6 +2744,7 @@
 				A6C0F8943081334D00D4BC05 /* UMWebObjectSTRIKE.h in Headers */,
 				A6C0F840308114D000D4BC05 /* UMWebObjectSPAN.h in Headers */,
 				A609F7DA30517D9D00B6E5B0 /* UMDbQueryType.h in Headers */,
+				A6E3230430B9733D000C482A /* UMRpcMessage_InsertCommentRequest.h in Headers */,
 				A6C0F880308115AE00D4BC05 /* UMWebObjectVIDEO.h in Headers */,
 				A609F7DB30517D9D00B6E5B0 /* UMDbTable.h in Headers */,
 				A6DEF9F4308109C000EAC887 /* UMWebObjectA.h in Headers */,
@@ -2977,6 +2991,7 @@
 				A6915F16304D664400B15E34 /* UMASN1Boolean.m in Sources */,
 				A6915F17304D664400B15E34 /* UMASN1BitString.m in Sources */,
 				A6C0F7113081114B00D4BC05 /* UMWebObjectABBR.m in Sources */,
+				A6E3230930B9745C000C482A /* UMRpcMessage_InsertCommentResponse.m in Sources */,
 				A6915F18304D664400B15E34 /* UMASN1ObjectPrimitive.m in Sources */,
 				A6915F19304D664400B15E34 /* UMASN1Set.m in Sources */,
 				A6915F1A304D664400B15E34 /* UMASN1Integer.m in Sources */,
@@ -3111,6 +3126,7 @@
 				A683DA112ABD980E00C34D40 /* UMHistoryLog.m in Sources */,
 				A683DAD52ABD980F00C34D40 /* UMHTTPTask_ReadRequest.m in Sources */,
 				A6C0F833308114B300D4BC05 /* UMWebObjectSCRIPT.m in Sources */,
+				A6E3230530B9733D000C482A /* UMRpcMessage_InsertCommentRequest.m in Sources */,
 				A683DAB42ABD980F00C34D40 /* UMSyntaxToken_Name.m in Sources */,
 				A6C0F7B13081132100D4BC05 /* UMWebObjectH4.m in Sources */,
 				A683D9AD2ABD980E00C34D40 /* UMPrivateKey.m in Sources */,

@@ -7,12 +7,10 @@ libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 
 Cflags: -I${includedir}
-Libs:  @SPECIAL_PC_LIBS@  -L${libdir} -lulib 
+Libs:         ${libdir}/libulib.a
+Libs.private: @SPECIAL_PC_LIBS@
 
 Name: ulib
 Description: universal library
 Version: @VERSION@
-
-
-
 

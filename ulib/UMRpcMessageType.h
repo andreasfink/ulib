@@ -1,6 +1,6 @@
 //
 //  UMRpcMessageType.h
-//  ulibrpc
+//  ulib
 //
 //  Created by Andreas Fink on 20.08.2026.
 //
@@ -17,4 +17,6 @@ typedef enum UMRpcMessageType
     UMRpcMessageType_HEARTBEAT_RESPONSE = 6,
     UMRpcMessageType_TEST_REQUEST       = 7,
     UMRpcMessageType_TEST_RESPONSE      = 8,
+    UMRpcMessageType_INSERT_COMMENT_REQUEST     = 9,
+    UMRpcMessageType_INSERT_COMMENT_RESPONSE    = 10,
 } UMRpcMessageType;

@@ -1539,6 +1539,7 @@
 		A6E3230330B9733D000C482A /* UMRpcMessage_InsertCommentRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMRpcMessage_InsertCommentRequest.m; sourceTree = "<group>"; };
 		A6E3230630B9745C000C482A /* UMRpcMessage_InsertCommentResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMRpcMessage_InsertCommentResponse.h; sourceTree = "<group>"; };
 		A6E3230730B9745C000C482A /* UMRpcMessage_InsertCommentResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMRpcMessage_InsertCommentResponse.m; sourceTree = "<group>"; };
+		A6E3230B30B977F9000C482A /* Makefile.in */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -1601,6 +1602,7 @@
 				A66EB0E92ABDDCF500C34D40 /* debian */,
 				A66EB0D82ABDDC7800C34D40 /* make_version */,
 				A66EB0D42ABDDC7800C34D40 /* Makefile */,
+				A6E3230B30B977F9000C482A /* Makefile.in */,
 				A66EB0DB2ABDDC7800C34D40 /* README.macosx.txt */,
 				A66EB0D92ABDDC7800C34D40 /* README.md */,
 				A66EB0CD2ABDDC6C00C34D40 /* make_buildnr.sh */,
@@ -2836,7 +2838,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 2710;
+				LastUpgradeCheck = 2720;
 				TargetAttributes = {
 					A69BA4542ABD850000C34D40 = {
 						CreatedOnToolsVersion = 15.0;
